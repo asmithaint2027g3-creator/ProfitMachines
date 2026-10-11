@@ -53,9 +53,16 @@ const LEAD_CONFIGS: Record<LeadType, LeadTypeConfig> = {
         label: 'quick-lead',
         priority: 'High',
         subtasks: [
-            '1. Initial Contact & Identity Verification',
-            '2. Schedule 15-Minute Executive Discovery Call',
-            '3. Qualify Revenue Band & AI Opportunity Fit'
+            '1. Initial Contact & Identity Verification (Email & Phone Check)',
+            '2. Company Background & Firmographic Intelligence Research',
+            '3. Qualify Annual Revenue Band & AI Transformation Fit',
+            '4. Assess Primary Pain Points & Expressed Transformation Interest',
+            '5. Assign Dedicated Growth Specialist / Senior SDR',
+            '6. Rapid Inbound Outreach Call & Email Cadence Sequence',
+            '7. Schedule 15-Minute Executive Discovery Briefing',
+            '8. Prepare Pre-Discovery Dossier & Relevant Case Studies',
+            '9. Conduct Discovery Session & Capture Technical Requirements',
+            '10. Log Discovery Notes & Advance Opportunity Stage in CRM'
         ]
     },
     enterprise: {
@@ -63,10 +70,16 @@ const LEAD_CONFIGS: Record<LeadType, LeadTypeConfig> = {
         label: 'enterprise-lead',
         priority: 'Highest',
         subtasks: [
-            '1. Account & Tech Stack Intelligence Research',
-            '2. Tailor Enterprise AI Proposal & Solution Architecture',
-            '3. Schedule Briefing with Principal AI Architect',
-            '4. Finalize Commercial Scope & Pilot SOW'
+            '1. Account Intelligence & Enterprise Tech Stack Research',
+            '2. Identify Key Buying Committee & Executive Decision-Makers',
+            '3. Analyze Enterprise AI Architecture & Integration Requirements',
+            '4. Assign Principal Enterprise AI Architect & Senior Account Executive',
+            '5. Conduct Pre-Meeting Discovery & Strategic Alignment Call',
+            '6. Formulate Tailored Enterprise AI Architecture Blueprint',
+            '7. Schedule Architecture Briefing & Security / Compliance Review',
+            '8. Draft Enterprise Pilot Proposal & Scope of Work (SOW)',
+            '9. Review Commercial Terms, Enterprise SLA & Legal Requirements',
+            '10. Executive Sign-Off & Schedule Contract Kickoff Call'
         ]
     },
     demo: {
@@ -74,10 +87,16 @@ const LEAD_CONFIGS: Record<LeadType, LeadTypeConfig> = {
         label: 'demo-booking',
         priority: 'Highest',
         subtasks: [
-            '1. Provision Custom Demo Sandbox & Industry Scenario Deck',
-            '2. Send Calendar Confirmation & Pre-Meeting Brief',
-            '3. Execute Live AI Platform Walkthrough',
-            '4. Post-Demo Commercial Proposal Follow-up'
+            '1. Validate Prospect Contact & Company Booking Details',
+            '2. Provision Dedicated Demo Sandbox & Custom Industry Dataset',
+            '3. Send Calendar Invite, Video Conference Link & Pre-Meeting Brief',
+            '4. Conduct Pre-Demo Account & Vertical Market Research',
+            '5. Customize Live Demo Script to Prospect Specific Use Cases',
+            '6. Execute Live Interactive AI Platform Walkthrough',
+            '7. Address Technical, Integration & Security Q&A Live',
+            '8. Share Post-Demo Session Recording, Deck & Feature Specifications',
+            '9. Draft Tailored Commercial Pricing Proposal & Pilot Options',
+            '10. Schedule Commercial Follow-up & Pilot Decision Review Call'
         ]
     },
     consultation: {
@@ -85,10 +104,16 @@ const LEAD_CONFIGS: Record<LeadType, LeadTypeConfig> = {
         label: 'consultation-request',
         priority: 'Highest',
         subtasks: [
-            '1. Review Pre-Consultation Dossier & Pain Points',
-            '2. Assign Senior AI Growth Strategist',
-            '3. Conduct 45-Minute Strategic Architecture Session',
-            '4. Deliver Custom Profit Roadmap & ROI Projection'
+            '1. Review Pre-Consultation Submission Notes & Strategic Objectives',
+            '2. Research Target Market, Competitors & Industry Growth Benchmarks',
+            '3. Assign Senior AI Growth Strategist & Domain Expert',
+            '4. Dispatch Meeting Confirmation, Session Agenda & Prep Materials',
+            '5. Formulate Diagnostic Hypothesis & Value Leakage Assessment',
+            '6. Conduct 45-Minute Strategic Architecture Consultation Call',
+            '7. Synthesize Findings into Custom Profit Roadmap & ROI Projections',
+            '8. Deliver Comprehensive Strategic Recommendations Dossier',
+            '9. Present Tailored Implementation Plan & Milestone Phasing',
+            '10. Schedule Strategy Review & Commercial Partnership Finalization Call'
         ]
     },
     audit: {
@@ -96,9 +121,16 @@ const LEAD_CONFIGS: Record<LeadType, LeadTypeConfig> = {
         label: 'diagnostic-audit',
         priority: 'High',
         subtasks: [
-            '1. Synthesize Self-Assessment Diagnostic Responses & Leakage Metrics',
-            '2. Compile Comprehensive Executive Revenue Audit Dossier',
-            '3. Schedule Audit Review & Action Plan Briefing'
+            '1. Ingest Self-Assessment Audit Responses & Baseline Leakage Metrics',
+            '2. Perform Deep-Dive Quantitative Benchmark Analysis',
+            '3. Map Revenue Leakage Bottlenecks Across Marketing, Sales & Ops',
+            '4. Synthesize AI Optimization Opportunities & Automation Gaps',
+            '5. Assign Senior Revenue Audit Specialist & Financial Analyst',
+            '6. Compile Comprehensive Executive Revenue Diagnostic Dossier',
+            '7. Send Diagnostic Report & Executive Summary Deck to Stakeholders',
+            '8. Schedule 30-Minute Audit Review & Action Plan Briefing',
+            '9. Conduct Briefing & Review High-Impact Profit Recovery Quick-Wins',
+            '10. Transition Audit Findings to Commercial Engagement Proposal'
         ]
     },
     chatbot: {
@@ -106,9 +138,16 @@ const LEAD_CONFIGS: Record<LeadType, LeadTypeConfig> = {
         label: 'chatbot-inbound',
         priority: 'High',
         subtasks: [
-            '1. Review Chatbot Conversation Transcript & Prospect Intent Topic',
-            '2. Rapid SDR Outreach via Email / Phone',
-            '3. Transition Bot Inquiry to Scheduled Consultation'
+            '1. Extract & Review Complete Chatbot Interaction Transcript',
+            '2. Classify Prospect Intent, Urgency & Specific Solution Interest',
+            '3. Enrich Contact & Company Profile via Domain Intelligence',
+            '4. Execute Rapid 15-Minute SDR Follow-up (Email / Phone)',
+            '5. Address Unresolved Questions Raised During Chat Session',
+            '6. Qualify Budget, Authority, Need & Timeline (BANT)',
+            '7. Share Relevant Solution Collateral & Product One-Pagers',
+            '8. Transition Inbound Chat to Scheduled Strategy Session',
+            '9. Confirm Calendar Invite & Send Pre-Session Reading Materials',
+            '10. Update CRM Opportunity Record & Pipeline Attribution'
         ]
     },
     partner: {
@@ -116,9 +155,16 @@ const LEAD_CONFIGS: Record<LeadType, LeadTypeConfig> = {
         label: 'partner-ecosystem',
         priority: 'Medium',
         subtasks: [
-            '1. Review Partner Agency Capabilities & Tier Alignment',
-            '2. Internal Channel Leadership Review',
-            '3. Schedule Partnership Briefing & Joint Go-To-Market Discussion'
+            '1. Review Partner Agency Application, Capabilities & Industry Tier',
+            '2. Verify Company Credentials, Portfolio & Past Performance Track Record',
+            '3. Conduct Internal Channel Leadership Review & Synergy Assessment',
+            '4. Assign Dedicated Partner Manager / Ecosystem Lead',
+            '5. Send Welcome Package & Partnership Tier Overview',
+            '6. Schedule 30-Minute Joint Go-To-Market & Ecosystem Briefing',
+            '7. Review Joint Revenue Sharing & Commercial Commission Model',
+            '8. Prepare & Execute Mutual NDA and Partnership Agreement',
+            '9. Grant Access to Partner Portal, Marketing Assets & Enablement Deck',
+            '10. Co-Plan Joint Launch Campaign & Initial Lead Sharing Targets'
         ]
     },
     career: {
@@ -126,9 +172,16 @@ const LEAD_CONFIGS: Record<LeadType, LeadTypeConfig> = {
         label: 'career-application',
         priority: 'Medium',
         subtasks: [
-            '1. Review Resume, GitHub/Portfolio & Experience Level',
-            '2. Conduct Initial People & Culture Screening Call',
-            '3. Schedule Technical Assessment & Leadership Interview'
+            '1. Review Resume, CV & Cover Letter for Role Alignment',
+            '2. Evaluate Portfolio, GitHub Repositories & Work Samples',
+            '3. Conduct Automated Candidate Experience & Verification Check',
+            '4. Assign Talent Acquisition Partner & Hiring Manager',
+            '5. Schedule 20-Minute Initial People & Culture Screening Call',
+            '6. Dispatch Role-Specific Technical / Case Study Assessment',
+            '7. Review Technical Assessment Results with Engineering / Product Lead',
+            '8. Schedule Final Round Panel & Leadership Interview',
+            '9. Conduct Background, Reference & Credential Verifications',
+            '10. Extend Formal Offer Letter & Coordinate Onboarding Schedule'
         ]
     }
 };
