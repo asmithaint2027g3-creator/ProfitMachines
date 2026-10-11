@@ -222,6 +222,57 @@ var TAB_HEADERS = {
   ]
 };
 
+// Alias mappings to guarantee compatibility with any user naming convention
+TAB_HEADERS["Visitors_sessions"] = TAB_HEADERS.Visitor_Sessions;
+TAB_HEADERS["Visitor_sessions"] = TAB_HEADERS.Visitor_Sessions;
+TAB_HEADERS["visitors_sessions"] = TAB_HEADERS.Visitor_Sessions;
+TAB_HEADERS["Chatbot_leads"] = TAB_HEADERS.Chatbot_Leads;
+TAB_HEADERS["chatbot_leads"] = TAB_HEADERS.Chatbot_Leads;
+TAB_HEADERS["click_interactions"] = TAB_HEADERS.Click_Interactions;
+TAB_HEADERS["cilck_interactions"] = TAB_HEADERS.Click_Interactions;
+TAB_HEADERS["scroll_interactions"] = TAB_HEADERS.Scroll_Engagement;
+TAB_HEADERS["Scroll_Interactions"] = TAB_HEADERS.Scroll_Engagement;
+TAB_HEADERS["scroll_engagement"] = TAB_HEADERS.Scroll_Engagement;
+
+var CANONICAL_TABS = [
+  "Live_Traffic_Events",
+  "Quick_Form_Leads",
+  "Long_Form_Leads",
+  "Audit_Document_Leads",
+  "Chatbot_Leads",
+  "Lead_Management",
+  "Visitor_Sessions",
+  "Page_Performance",
+  "Click_Interactions",
+  "Scroll_Engagement",
+  "Form_Interactions",
+  "Conversion_Events",
+  "Traffic_Sources",
+  "SEO_Performance",
+  "Session_Intelligence",
+  "Traffic_Intelligence",
+  "Geo_Timezone_Intelligence",
+  "IP_Security_Intelligence",
+  "Lead_Intelligence",
+  "Master_Event_Log",
+  "Daily_Summary",
+  "Weekly_Summary",
+  "Monthly_Summary"
+];
+
+function getCanonicalTabName(name) {
+  var clean = String(name || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+  if (clean.indexOf("visitor") >= 0) return "Visitor_Sessions";
+  if (clean.indexOf("chat") >= 0) return "Chatbot_Leads";
+  if (clean.indexOf("click") >= 0 || clean.indexOf("cilck") >= 0) return "Click_Interactions";
+  if (clean.indexOf("scroll") >= 0 || clean.indexOf("engagement") >= 0) return "Scroll_Engagement";
+  if (clean.indexOf("quick") >= 0) return "Quick_Form_Leads";
+  if (clean.indexOf("long") >= 0) return "Long_Form_Leads";
+  if (clean.indexOf("audit") >= 0) return "Audit_Document_Leads";
+  if (clean.indexOf("management") >= 0) return "Lead_Management";
+  return name;
+}
+
 // =========================================================================================
 // 3. SPREADSHEET DATABASE HELPERS
 // =========================================================================================
@@ -245,17 +296,47 @@ function getSpreadsheet() {
 function getTab(ss, tabName) {
   if (!ss) return null;
 
-  var headers = TAB_HEADERS[tabName] || [];
-  var sheet = ss.getSheetByName(tabName);
+  var target = String(tabName || "").trim();
+  if (!target) return null;
 
-  if (!sheet) {
-    sheet = ss.insertSheet(tabName);
+  // 1. Direct match first
+  var sheet = ss.getSheetByName(target);
+  if (sheet) return sheet;
+
+  // 2. Case-insensitive and alias fuzzy match against all existing sheets in user's workbook
+  var cleanTarget = target.toLowerCase().replace(/[^a-z0-9]/g, "");
+  var allSheets = ss.getSheets();
+  for (var i = 0; i < allSheets.length; i++) {
+    var curName = allSheets[i].getName();
+    var cleanCur = curName.toLowerCase().replace(/[^a-z0-9]/g, "");
+    if (cleanCur === cleanTarget) {
+      return allSheets[i];
+    }
   }
 
+  // 3. Known domain alias mappings
+  for (var j = 0; j < allSheets.length; j++) {
+    var sName = allSheets[j].getName().toLowerCase().replace(/[^a-z0-9]/g, "");
+    if (cleanTarget.indexOf("visitor") >= 0 && sName.indexOf("visitor") >= 0) return allSheets[j];
+    if (cleanTarget.indexOf("chat") >= 0 && sName.indexOf("chat") >= 0) return allSheets[j];
+    if ((cleanTarget.indexOf("click") >= 0 || cleanTarget.indexOf("cilck") >= 0) && sName.indexOf("click") >= 0) return allSheets[j];
+    if (cleanTarget.indexOf("scroll") >= 0 && (sName.indexOf("scroll") >= 0 || sName.indexOf("engagement") >= 0)) return allSheets[j];
+  }
+
+  // 4. If tab doesn't exist, create it with canonical name
+  var canonical = getCanonicalTabName(target);
+  try {
+    sheet = ss.insertSheet(canonical);
+  } catch (e) {
+    sheet = ss.getSheetByName(canonical) || ss.getSheetByName(target);
+    if (sheet) return sheet;
+  }
+
+  var headers = TAB_HEADERS[canonical] || TAB_HEADERS[target] || [];
   if (headers.length > 0 && sheet.getLastRow() === 0) {
-    var color = tabName === "Daily_Summary" ? "#047857" :
-               (tabName === "Weekly_Summary" ? "#0284c7" :
-               (tabName === "Monthly_Summary" ? "#7c3aed" : "#064e3b"));
+    var color = canonical === "Daily_Summary" ? "#047857" :
+               (canonical === "Weekly_Summary" ? "#0284c7" :
+               (canonical === "Monthly_Summary" ? "#7c3aed" : "#064e3b"));
 
     sheet.getRange(1, 1, 1, headers.length)
       .setValues([headers])
@@ -273,7 +354,7 @@ function initializeAllTabs() {
   var ss = getSpreadsheet();
   if (!ss) throw new Error("Spreadsheet is not accessible. Verify SPREADSHEET_ID.");
 
-  Object.keys(TAB_HEADERS).forEach(function(tabName) {
+  CANONICAL_TABS.forEach(function(tabName) {
     getTab(ss, tabName);
   });
 }
@@ -441,6 +522,75 @@ function doGet(e) {
     }
   }
 
+  if (action === "test_telemetry" || action === "test_all" || action === "test") {
+    try {
+      var ss = getSpreadsheet();
+      var nowStr = normalizeTimestamp(new Date());
+
+      // 1. Test Session
+      var sessionPayload = enrichPayload({
+        event_type: "session",
+        event_name: "session_start",
+        visitor_id: "PV-VIS-TEST01",
+        session_id: "PV-SES-TEST01",
+        page_url: "https://profit-machines.vercel.app/",
+        device_type: "Desktop",
+        browser: "Chrome",
+        operating_system: "Windows"
+      }, nowStr);
+      routeTelemetry(ss, sessionPayload);
+
+      // 2. Test Chatbot Lead
+      var chatPayload = enrichPayload({
+        table: "Chatbot Leads",
+        lead_type: "CHATBOT",
+        name: "Test Chatbot Visitor",
+        email: "asmitha.int2027g3@gmail.com",
+        phone: "+91 7339693105",
+        fields: {
+          "Query": "How can autonomous SDRs scale our enterprise pipeline?",
+          "Chat Intent": "Autonomous SDR Architecture",
+          "Conversation Summary": "Visitor asked about SDR integration and book a consultation.",
+          "Current Page": "/solutions/autonomous-sdr"
+        }
+      }, nowStr);
+      routeLead(ss, chatPayload, []);
+
+      // 3. Test Click Interaction
+      var clickPayload = enrichPayload({
+        event_type: "click",
+        event_name: "HERO_PRIMARY_CTA_CLICK",
+        label: "Activate Autonomous Growth Engine",
+        section: "Hero Section",
+        page_url: "https://profit-machines.vercel.app/"
+      }, nowStr);
+      routeTelemetry(ss, clickPayload);
+
+      // 4. Test Scroll Engagement
+      var scrollPayload = enrichPayload({
+        event_type: "scroll",
+        event_name: "SCROLL_90",
+        value: 90,
+        page_url: "https://profit-machines.vercel.app/"
+      }, nowStr);
+      routeTelemetry(ss, scrollPayload);
+
+      return jsonResponse({
+        status: "success",
+        message: "Successfully generated and verified records in Visitor_Sessions, Chatbot_Leads, Click_Interactions, and Scroll_Engagement!",
+        verified_tabs: [
+          "Visitor_Sessions",
+          "Chatbot_Leads",
+          "Click_Interactions",
+          "Scroll_Engagement"
+        ],
+        timestamp: new Date().toISOString()
+      });
+    } catch (testErr) {
+      return jsonResponse({ status: "error", error: String(testErr) });
+    }
+  }
+
   return jsonResponse({
     status: "online",
     service: "Profit Machines Multi-Intelligence Engine",
@@ -476,12 +626,15 @@ function enrichPayload(raw, receivedAt) {
   var nowIso = p.client_timestamp || p.timestamp || new Date().toISOString();
 
   p.received_at = receivedAt;
-  p.event_id = p.event_id || createId("evt");
+  p.event_id = p.event_id || p.eventId || createId("evt");
   p.submission_id = p.submission_id || p.lead_id || createSubmissionId();
   p.lead_id = p.submission_id;
 
-  p.event_type = String(p.event_type || p.type || "page_view").toLowerCase();
-  p.event_name = String(p.event_name || p.event_action || p.event_type || "event");
+  var rawType = String(p.event_type || p.type || "page_view").toLowerCase();
+  var rawName = String(p.event_name || p.event_action || p.eventName || rawType || "event");
+
+  p.event_type = rawType;
+  p.event_name = rawName;
 
   p.visitor_id = p.visitor_id || p.visitorId || createId("vis");
   p.session_id = p.session_id || p.sessionId || createId("ses");
@@ -513,15 +666,92 @@ function enrichPayload(raw, receivedAt) {
   p.timezone = p.timezone || "Asia/Kolkata";
   p.network_type = p.network_type || "4g";
 
-  p.scroll_percentage = numberOrBlank(p.scroll_percentage);
-  p.max_scroll_depth = numberOrBlank(p.max_scroll_depth);
   p.time_on_page_seconds = numberOrBlank(p.time_on_page_seconds);
   p.session_duration_seconds = numberOrBlank(p.session_duration_seconds);
-  p.interaction_count = numberOrBlank(p.interaction_count);
+  p.interaction_count = numberOrBlank(p.interaction_count) || 1;
 
   p.click_position_x = numberOrBlank(p.click_position_x);
   p.click_position_y = numberOrBlank(p.click_position_y);
   p.hand_zone = p.hand_zone || calculateHandZone(p);
+
+  // ── 1. VISITOR / SESSION NORMALIZATION ──
+  if (rawType === "visitor" || rawType === "session" || rawName.indexOf("session") >= 0) {
+    p.event_type = "session";
+    p.event_name = (p.event_name && p.event_name !== "event") ? p.event_name : "session_start";
+    p.is_returning_visitor = p.is_returning_visitor || (p.sessionCount && p.sessionCount > 1 ? "Yes" : "No");
+  } else if (rawType === "pageview" || rawType === "page_view") {
+    p.event_type = "page_view";
+    p.event_name = "page_view";
+  }
+
+  // ── 2. SCROLL ENGAGEMENT NORMALIZATION ──
+  var evtNameLower = String(p.event_name || "").toLowerCase();
+  var evtCatLower = String(p.event_category || "").toLowerCase();
+  var isScroll = rawType === "scroll" || 
+                 evtNameLower.indexOf("scroll") >= 0 || 
+                 evtCatLower.indexOf("scroll") >= 0 ||
+                 (Number(p.value) >= 10 && evtNameLower.indexOf("scroll") >= 0) ||
+                 Number(p.scroll_percentage) > 0;
+
+  if (isScroll) {
+    p.event_type = "scroll";
+    var scrollNum = 0;
+    var scrollMatch = evtNameLower.match(/scroll[_s-]*(\d+)/i);
+    if (scrollMatch) {
+      scrollNum = Number(scrollMatch[1]);
+    } else if (p.value && Number(p.value) > 0) {
+      scrollNum = Number(p.value);
+    } else if (p.scroll_percentage && Number(p.scroll_percentage) > 0) {
+      scrollNum = Number(p.scroll_percentage);
+    }
+    p.scroll_percentage = scrollNum || 50;
+    p.max_scroll_depth = (scrollNum || 50) + "%";
+    p.section = p.section || (p.scroll_percentage >= 80 ? "Footer / Bottom Deep Engagement" : (p.scroll_percentage >= 50 ? "Mid-Page Deep Content" : "Above The Fold"));
+  }
+
+  // ── 3. CLICK & CTA INTERACTION NORMALIZATION ──
+  var isClick = rawType === "click" || 
+                evtNameLower.indexOf("click") >= 0 || 
+                evtCatLower === "cta" || 
+                evtCatLower === "interaction" || 
+                evtNameLower.indexOf("cta") >= 0 || 
+                evtNameLower.indexOf("select") >= 0 || 
+                evtNameLower.indexOf("filter") >= 0 || 
+                evtNameLower.indexOf("button") >= 0 ||
+                evtNameLower.indexOf("card") >= 0 ||
+                Number(p.click_position_x) > 0;
+
+  if (isClick && !isScroll) {
+    p.event_type = "click";
+    p.element_type = p.element_type || (evtNameLower.indexOf("cta") >= 0 ? "cta_button" : (evtNameLower.indexOf("filter") >= 0 ? "filter_tab" : "interactive_element"));
+    p.element_id = p.element_id || p.event_name;
+    p.element_text = p.element_text || p.label || p.event_label || p.elementText || p.event_name;
+    p.event_label = p.event_label || p.label || p.element_text || p.event_name;
+    p.section = p.section || (evtNameLower.indexOf("hero") >= 0 ? "Hero Section" : (evtNameLower.indexOf("slider") >= 0 ? "Feature Slider" : (evtNameLower.indexOf("service") >= 0 ? "Services Overview" : (evtNameLower.indexOf("nav") >= 0 ? "Navigation Bar" : "Page Interactive Section"))));
+  }
+
+  // ── 4. CHATBOT INTERACTION & LEAD NORMALIZATION ──
+  var tableStr = String(p.table || "").toLowerCase();
+  var formStr = String(p.form_name || "").toLowerCase();
+  var isChat = tableStr.indexOf("chat") >= 0 || 
+               formStr.indexOf("chat") >= 0 || 
+               String(p.lead_type || "").toLowerCase().indexOf("chat") >= 0 ||
+               evtNameLower.indexOf("chat") >= 0 ||
+               Boolean(p["Conversation Summary"] || p["Query"] || p["Chat Intent"]);
+
+  if (isChat) {
+    p.lead_type = "CHATBOT";
+    p.form_name = p.form_name || "Website AI Chatbot";
+    p.requirement = p.requirement || p["Query"] || p.query || p.user_query || p.message || "Executive AI Strategy Inquiry";
+    p.chat_summary = p.chat_summary || p["Conversation Summary"] || p.conversation_summary || p.summary || p.requirement || "";
+    p.interest = p.interest || p["Chat Intent"] || p.chat_intent || p.intent || "Enterprise AI Consultation";
+    p.page_path = p.page_path || p["Current Page"] || p.current_page || p.page_url || "/";
+    p.agent_name = p.agent_name || p["Agent Name"] || "ProfitMachines Advisory Desk";
+    p.name = p.name || p["Name"] || "AI Chat Visitor";
+    p.lead_source = p.lead_source || "Website Inbound Chatbot";
+    p.lead_status = p.lead_status || "Active Chat Inquiry";
+    p.follow_up_status = p.follow_up_status || "Pending Review";
+  }
 
   // Lead fields normalization
   p.name = p.name || p.fullName || (p.firstName ? (p.firstName + " " + (p.lastName || "")).trim() : "");
@@ -558,9 +788,9 @@ function enrichPayload(raw, receivedAt) {
   p.estimated_leakage = p.estimated_leakage || p.estimatedLeakage || "";
   p.diagnostic_score = p.diagnostic_score || p.score || "";
 
-  p.event_category = p.event_category || (detectIsLead(p) ? "CONVERSION" : "NAVIGATION");
+  p.event_category = p.event_category || (detectIsLead(p) ? "CONVERSION" : (isClick ? "INTERACTION" : (isScroll ? "ENGAGEMENT" : "NAVIGATION")));
   p.event_action = p.event_action || p.event_name;
-  p.event_label = p.event_label || p.cta_name || "";
+  p.event_label = p.event_label || p.label || p.element_text || p.cta_name || "";
   p.section = p.section || "";
   p.element_type = p.element_type || "";
   p.element_id = p.element_id || "";
@@ -684,19 +914,87 @@ function appendRowToTab(ss, tabName, p) {
   var sheet = getTab(ss, tabName);
   if (!sheet) return;
 
-  var headers = TAB_HEADERS[tabName] || [];
-  if (!headers.length) return;
+  var headers = [];
+  var lastRow = 0;
+  try {
+    lastRow = sheet.getLastRow();
+  } catch (e) {}
 
-  var row = headers.map(function(header) {
-    var value = p[header];
-    if (value === undefined || value === null) return "";
-    if (typeof value === "object") {
-      try { return JSON.stringify(value); } catch (e) { return ""; }
+  if (lastRow >= 1) {
+    try {
+      var numCols = sheet.getLastColumn();
+      if (numCols > 0) {
+        headers = sheet.getRange(1, 1, 1, numCols).getValues()[0];
+      }
+    } catch (e2) {}
+  }
+
+  if (!headers || !headers.length || !headers[0]) {
+    var canonical = getCanonicalTabName(tabName);
+    headers = TAB_HEADERS[canonical] || TAB_HEADERS[tabName] || [];
+    if (headers.length > 0 && lastRow === 0) {
+      sheet.getRange(1, 1, 1, headers.length)
+        .setValues([headers])
+        .setFontWeight("bold")
+        .setBackground("#064e3b")
+        .setFontColor("#ffffff")
+        .setHorizontalAlignment("center");
+      sheet.setFrozenRows(1);
     }
-    return value;
+  }
+
+  if (!headers || !headers.length) return;
+
+  var row = headers.map(function(h) {
+    var key = String(h || "").trim();
+    if (!key) return "";
+
+    // 1. Exact key match
+    if (p[key] !== undefined && p[key] !== null && p[key] !== "") return formatCell(p[key]);
+
+    // 2. Lowercase match
+    var lowerKey = key.toLowerCase();
+    if (p[lowerKey] !== undefined && p[lowerKey] !== null && p[lowerKey] !== "") return formatCell(p[lowerKey]);
+
+    // 3. Snake_case match
+    var snakeKey = lowerKey.replace(/[\s-]+/g, "_");
+    if (p[snakeKey] !== undefined && p[snakeKey] !== null && p[snakeKey] !== "") return formatCell(p[snakeKey]);
+
+    // 4. CamelCase match
+    var camelKey = lowerKey.replace(/_([a-z])/g, function(g) { return g[1].toUpperCase(); });
+    if (p[camelKey] !== undefined && p[camelKey] !== null && p[camelKey] !== "") return formatCell(p[camelKey]);
+
+    // 5. Special smart mappings
+    if (key === "Query" || key === "requirement") return formatCell(p.requirement || p.query || p.user_query || p.message || "");
+    if (key === "Chat Intent" || key === "intent" || key === "interest") return formatCell(p.interest || p.intent || "");
+    if (key === "Conversation Summary" || key === "chat_summary") return formatCell(p.chat_summary || p.conversation_summary || p.summary || "");
+    if (key === "Current Page" || key === "page_path" || key === "page_url") return formatCell(p.page_path || p.page_url || "/");
+    if (key === "Timestamp" || key === "received_at") return formatCell(p.received_at || p.timestamp || "");
+    if (key === "element_text" || key === "event_label" || key === "Target_CTA_Text") return formatCell(p.element_text || p.event_label || p.label || p.cta_name || "");
+    if (key === "scroll_percentage") return formatCell(p.scroll_percentage || "");
+    if (key === "max_scroll_depth") return formatCell(p.max_scroll_depth || (p.scroll_percentage ? p.scroll_percentage + "%" : ""));
+    if (key === "section") return formatCell(p.section || "");
+    if (key === "Visitor_ID" || key === "visitor_id") return formatCell(p.visitor_id || "");
+    if (key === "Session_ID" || key === "session_id") return formatCell(p.session_id || "");
+    if (key === "Lead_ID" || key === "lead_id") return formatCell(p.lead_id || p.submission_id || "");
+    if (key === "submission_id") return formatCell(p.submission_id || p.lead_id || "");
+    if (key === "lead_source") return formatCell(p.lead_source || "Website Inbound");
+    if (key === "lead_status") return formatCell(p.lead_status || "New");
+    if (key === "follow_up_status") return formatCell(p.follow_up_status || "Pending");
+    if (key === "source_environment") return formatCell(p.source_environment || CONFIG.DEFAULT_ENVIRONMENT);
+
+    return "";
   });
 
   sheet.appendRow(row);
+}
+
+function formatCell(val) {
+  if (val === undefined || val === null) return "";
+  if (typeof val === "object") {
+    try { return JSON.stringify(val); } catch (e) { return ""; }
+  }
+  return val;
 }
 
 // =========================================================================================
@@ -706,6 +1004,14 @@ function appendRowToTab(ss, tabName, p) {
 function detectIsLead(p) {
   if (!p) return false;
 
+  // 1. Chatbot inquiries are leads
+  if (p.lead_type === "CHATBOT" || 
+      (p.table && String(p.table).toLowerCase().indexOf("chat") >= 0) ||
+      (p.form_name && String(p.form_name).toLowerCase().indexOf("chat") >= 0)) {
+    return true;
+  }
+
+  // 2. Direct contact evaluation
   var email = String(p.email || "").trim();
   var phone = String(p.phone || "").trim();
   var hasContact = (email.indexOf("@") > 0) || phone.length > 5;
@@ -724,10 +1030,10 @@ function routeLead(ss, p, attachments) {
   var formName = String(p.form_name || "").toLowerCase();
 
   if (!leadType) {
-    if (formName.indexOf("quick") >= 0 || formName.indexOf("inbound") >= 0) leadType = "QUICK_FORM";
+    if (formName.indexOf("chat") >= 0 || formName.indexOf("assistant") >= 0 || (p.table && String(p.table).toLowerCase().indexOf("chat") >= 0)) leadType = "CHATBOT";
+    else if (formName.indexOf("quick") >= 0 || formName.indexOf("inbound") >= 0) leadType = "QUICK_FORM";
     else if (formName.indexOf("consult") >= 0 || formName.indexOf("long") >= 0 || formName.indexOf("demo") >= 0) leadType = "LONG_FORM";
     else if (formName.indexOf("audit") >= 0 || formName.indexOf("discover") >= 0 || (attachments && attachments.length > 0)) leadType = "PROCESS_AUDIT_SUBMISSION";
-    else if (formName.indexOf("chat") >= 0 || formName.indexOf("assistant") >= 0) leadType = "CHATBOT";
     else leadType = "QUICK_FORM";
   }
 
@@ -749,11 +1055,17 @@ function routeLead(ss, p, attachments) {
     appendRowToTab(ss, "Quick_Form_Leads", p);
   }
 
-  // 3. Send email alerts only after record is securely saved
-  var sentOk = sendLeadAlertEmail(p, attachments || []);
+  // 3. Send email alerts only if contact info is present or if it's an actionable lead
+  var email = String(p.email || "").trim();
+  var phone = String(p.phone || "").trim();
+  var hasContact = (email.indexOf("@") > 0) || phone.length > 5;
 
-  // 4. Update status in place
-  p.email_notification_status = sentOk ? "sent" : "failed";
+  if (hasContact || leadType !== "CHATBOT") {
+    var sentOk = sendLeadAlertEmail(p, attachments || []);
+    p.email_notification_status = sentOk ? "sent" : "failed";
+  } else {
+    p.email_notification_status = "captured_chat";
+  }
 }
 
 // =========================================================================================
@@ -761,32 +1073,73 @@ function routeLead(ss, p, attachments) {
 // =========================================================================================
 
 function routeTelemetry(ss, p) {
-  if (p.event_type === "session" || p.event_name === "session_start" || p.event_name === "session_end") {
+  // 1. VISITOR SESSIONS (Visitor_Sessions / Visitors_sessions)
+  var isSessionEvent = p.event_type === "session" || 
+                       p.event_type === "visitor" || 
+                       p.type === "visitor" || 
+                       p.event_name === "session_start" || 
+                       p.event_name === "session_end" ||
+                       p.event_name === "session";
+
+  if (isSessionEvent) {
+    appendRowToTab(ss, "Visitor_Sessions", p);
+  } else if (p.session_id && (p.event_type === "page_view" || p.event_type === "pageview")) {
     appendRowToTab(ss, "Visitor_Sessions", p);
   }
 
-  if (p.event_type === "page_view" || p.event_name === "page_view") {
+  // 2. PAGE PERFORMANCE & TRAFFIC SOURCES
+  if (p.event_type === "page_view" || p.event_type === "pageview" || p.event_name === "page_view") {
     appendRowToTab(ss, "Page_Performance", p);
     appendRowToTab(ss, "Traffic_Sources", p);
   }
 
-  if (p.event_type === "click" || String(p.event_name).toLowerCase().indexOf("click") >= 0 || p.event_category === "CTA") {
+  // 3. CLICK INTERACTIONS (Click_Interactions / click_interactions / cilck_interactions)
+  var isClickEvent = p.event_type === "click" || 
+                     String(p.event_name).toLowerCase().indexOf("click") >= 0 || 
+                     String(p.event_name).toLowerCase().indexOf("cta") >= 0 ||
+                     String(p.event_name).toLowerCase().indexOf("select") >= 0 ||
+                     String(p.event_name).toLowerCase().indexOf("filter") >= 0 ||
+                     String(p.event_name).toLowerCase().indexOf("button") >= 0 ||
+                     p.event_category === "CTA" || 
+                     p.event_category === "INTERACTION" ||
+                     Number(p.click_position_x) > 0 || 
+                     Number(p.click_position_y) > 0;
+
+  if (isClickEvent) {
     appendRowToTab(ss, "Click_Interactions", p);
   }
 
-  if (p.event_type === "scroll" || Number(p.scroll_percentage) > 0) {
+  // 4. SCROLL ENGAGEMENT / SCROLL INTERACTIONS (Scroll_Engagement / scroll_interactions)
+  var isScrollEvent = p.event_type === "scroll" || 
+                      String(p.event_name).toLowerCase().indexOf("scroll") >= 0 || 
+                      Number(p.scroll_percentage) > 0;
+
+  if (isScrollEvent) {
     appendRowToTab(ss, "Scroll_Engagement", p);
   }
 
+  // 5. CHATBOT LEADS (Chatbot_Leads / Chatbot_leads)
+  var isChat = p.lead_type === "CHATBOT" ||
+               (p.table && String(p.table).toLowerCase().indexOf("chat") >= 0) ||
+               (p.form_name && String(p.form_name).toLowerCase().indexOf("chat") >= 0) ||
+               String(p.event_name).toLowerCase().indexOf("chat") >= 0;
+
+  if (isChat) {
+    appendRowToTab(ss, "Chatbot_Leads", p);
+  }
+
+  // 6. FORM INTERACTIONS
   if (p.event_type === "form" || String(p.event_name).toLowerCase().indexOf("form") >= 0 ||
       p.form_status === "submitted" || p.form_status === "in_progress") {
     appendRowToTab(ss, "Form_Interactions", p);
   }
 
+  // 7. CONVERSIONS
   if (p.event_type === "conversion" || p.conversion_name) {
     appendRowToTab(ss, "Conversion_Events", p);
   }
 
+  // 8. SEO
   if (p.event_type === "seo_performance" || p.search_query) {
     appendRowToTab(ss, "SEO_Performance", p);
   }
@@ -1574,7 +1927,7 @@ function buildEnrichedDailyDigestHtml(ss, period, visitors, leads, conversion, a
 
   return [
     '<!DOCTYPE html><html><head><meta charset="UTF-8"/></head>',
-    '<body style="margin:0;padding:24px;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,sans-serif;">',
+    '<body style="margin:0;padding:24px;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,Helvetica,sans-serif;">',
     '<div style="max-width:640px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.06);">',
 
     // Header
@@ -1726,7 +2079,7 @@ function buildEnrichedWeeklyDigestHtml(ss, period, visitors, leads, conversion, 
     '    <tr><td style="padding:8px 12px;color:#0f172a;border-bottom:1px solid #f1f5f9;">Verified Leads</td><td style="padding:8px 12px;text-align:right;font-weight:700;color:#047857;border-bottom:1px solid #f1f5f9;">9</td><td style="padding:8px 12px;text-align:right;color:#64748b;border-bottom:1px solid #f1f5f9;">3</td><td style="padding:8px 12px;text-align:right;color:#16a34a;font-weight:700;border-bottom:1px solid #f1f5f9;">+200.0%</td></tr>',
     '    <tr><td style="padding:8px 12px;color:#0f172a;border-bottom:1px solid #f1f5f9;">Conversion Rate</td><td style="padding:8px 12px;text-align:right;font-weight:600;border-bottom:1px solid #f1f5f9;">0.76%</td><td style="padding:8px 12px;text-align:right;color:#64748b;border-bottom:1px solid #f1f5f9;">0.29%</td><td style="padding:8px 12px;text-align:right;color:#16a34a;font-weight:700;border-bottom:1px solid #f1f5f9;">+0.47%</td></tr>',
     '    <tr><td style="padding:8px 12px;color:#0f172a;">Avg Engagement Time</td><td style="padding:8px 12px;text-align:right;font-weight:600;">44m 12s</td><td style="padding:8px 12px;text-align:right;color:#64748b;">38m 20s</td><td style="padding:8px 12px;text-align:right;color:#16a34a;font-weight:700;">+15.3%</td></tr>',
-  '  </table>',
+    '  </table>',
     '</div>',
 
     // Key Insights

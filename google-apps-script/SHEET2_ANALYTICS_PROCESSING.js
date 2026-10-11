@@ -55,16 +55,17 @@ function PULL_DATA_AND_BUILD_ALL_DASHBOARDS() {
     return;
   }
 
-  // 1. Pull separated data & intelligence from Sheet 1 tabs
+  // 1. Pull separated data & intelligence from Sheet 1 tabs (with alias fallbacks)
   var tSheet = db.getSheetByName("Live_Traffic_Events") || db.getSheetByName("Page_Performance");
-  var clickSheet = db.getSheetByName("Click_Interactions");
-  var scrollSheet = db.getSheetByName("Scroll_Engagement");
-  var quickSheet = db.getSheetByName("Quick_Form_Leads");
-  var longSheet = db.getSheetByName("Long_Form_Leads");
-  var auditSheet = db.getSheetByName("Audit_Document_Leads");
-  var chatSheet = db.getSheetByName("Chatbot_Leads");
-  var masterLeadSheet = db.getSheetByName("Lead_Management");
-  var sessionSheet = db.getSheetByName("Session_Intelligence");
+  var clickSheet = db.getSheetByName("Click_Interactions") || db.getSheetByName("click_interactions") || db.getSheetByName("cilck_interactions");
+  var scrollSheet = db.getSheetByName("Scroll_Engagement") || db.getSheetByName("scroll_interactions") || db.getSheetByName("Scroll_Interactions");
+  var quickSheet = db.getSheetByName("Quick_Form_Leads") || db.getSheetByName("quick_form_leads");
+  var longSheet = db.getSheetByName("Long_Form_Leads") || db.getSheetByName("long_form_leads");
+  var auditSheet = db.getSheetByName("Audit_Document_Leads") || db.getSheetByName("audit_document_leads");
+  var chatSheet = db.getSheetByName("Chatbot_Leads") || db.getSheetByName("Chatbot_leads") || db.getSheetByName("chatbot_leads");
+  var masterLeadSheet = db.getSheetByName("Lead_Management") || db.getSheetByName("lead_management");
+  var visitorSessionSheet = db.getSheetByName("Visitor_Sessions") || db.getSheetByName("Visitors_sessions") || db.getSheetByName("visitors_sessions");
+  var sessionSheet = db.getSheetByName("Session_Intelligence") || visitorSessionSheet;
   var trafficIntelSheet = db.getSheetByName("Traffic_Intelligence");
   var geoSheet = db.getSheetByName("Geo_Timezone_Intelligence");
   var ipSheet = db.getSheetByName("IP_Security_Intelligence");

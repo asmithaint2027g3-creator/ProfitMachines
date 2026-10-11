@@ -360,19 +360,25 @@ export default function ChatBot() {
     // ── Track Chat Leads to Webhook ─────────────────────────────────────
     const trackChatLeadToSheet = (userQuery: string, intent: string) => {
         const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL ||
-            "https://script.google.com/macros/s/AKfycbxnpkQyIM_BYBc9mdR8SskAbzb74v8idiwUMbzLuqKlCGRExzNkwRLloL63KQ-uhRqCYA/exec";
+            "https://script.google.com/macros/s/AKfycby1iANcG2ks_wGav58ZPAKt_DqHutVzODSNHK1T3q4QcHiP888S4DYnbFLvTV2JZdxU/exec";
 
         const summary = messages.slice(-4).map(m => `[${m.role}]: ${m.content.slice(0, 80)}`).join(' -> ');
 
         const payload = {
             table: 'Chatbot Leads',
+            type: 'chatbot',
+            lead_type: 'CHATBOT',
             fields: {
                 'Chat Intent': intent,
                 'Query': userQuery,
                 'Current Page': location.pathname,
                 'Conversation Summary': summary,
                 'Agent Name': agentName,
-                'Timestamp': new Date().toISOString()
+                'Timestamp': new Date().toISOString(),
+                'requirement': userQuery,
+                'chat_summary': summary,
+                'interest': intent,
+                'page_path': location.pathname
             }
         };
 

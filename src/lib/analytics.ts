@@ -191,7 +191,7 @@ export function trackPageView(pathname?: string, title?: string) {
 
     // Sync to Google Apps Script backend
     const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || 
-        "https://script.google.com/macros/s/AKfycbxnpkQyIM_BYBc9mdR8SskAbzb74v8idiwUMbzLuqKlCGRExzNkwRLloL63KQ-uhRqCYA/exec";
+        "https://script.google.com/macros/s/AKfycby1iANcG2ks_wGav58ZPAKt_DqHutVzODSNHK1T3q4QcHiP888S4DYnbFLvTV2JZdxU/exec";
 
     if (GOOGLE_SCRIPT_URL) {
         fetch(GOOGLE_SCRIPT_URL, {
@@ -224,6 +224,9 @@ export function trackEvent(event: TrackingEvent) {
     const sessionId = getSessionId();
     const timestamp = new Date().toISOString();
 
+    const isScroll = event.eventName.toLowerCase().includes('scroll');
+    const scrollVal = isScroll ? (event.value || (event.eventName.includes('90') ? 90 : 50)) : undefined;
+
     const enrichedEvent = {
         eventId: `PV-EVT-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
         timestamp,
@@ -231,8 +234,11 @@ export function trackEvent(event: TrackingEvent) {
         session_id: sessionId,
         page_url: event.pageUrl || window.location.pathname,
         event_name: event.eventName,
-        event_category: event.category || 'INTERACTION',
+        event_category: event.category || (isScroll ? 'ENGAGEMENT' : 'INTERACTION'),
         element_text: event.elementText || event.label || '',
+        event_label: event.label || event.elementText || event.eventName,
+        label: event.label || '',
+        scroll_percentage: scrollVal,
         value: event.value || 1
     };
 
@@ -247,7 +253,7 @@ export function trackEvent(event: TrackingEvent) {
 
     // Sync event to Google Apps Script
     const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || 
-        "https://script.google.com/macros/s/AKfycbxnpkQyIM_BYBc9mdR8SskAbzb74v8idiwUMbzLuqKlCGRExzNkwRLloL63KQ-uhRqCYA/exec";
+        "https://script.google.com/macros/s/AKfycby1iANcG2ks_wGav58ZPAKt_DqHutVzODSNHK1T3q4QcHiP888S4DYnbFLvTV2JZdxU/exec";
 
     if (GOOGLE_SCRIPT_URL) {
         fetch(GOOGLE_SCRIPT_URL, {
@@ -267,7 +273,7 @@ export function trackEvent(event: TrackingEvent) {
  */
 function syncVisitorToBackend(profile: VisitorProfile) {
     const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || 
-        "https://script.google.com/macros/s/AKfycbxnpkQyIM_BYBc9mdR8SskAbzb74v8idiwUMbzLuqKlCGRExzNkwRLloL63KQ-uhRqCYA/exec";
+        "https://script.google.com/macros/s/AKfycby1iANcG2ks_wGav58ZPAKt_DqHutVzODSNHK1T3q4QcHiP888S4DYnbFLvTV2JZdxU/exec";
 
     if (GOOGLE_SCRIPT_URL && typeof window !== 'undefined') {
         fetch(GOOGLE_SCRIPT_URL, {
