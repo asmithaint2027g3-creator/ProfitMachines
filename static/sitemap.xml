@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Core Pages -->
+  <url><loc>https://profitmachines.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://profitmachines.com/company</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://profitmachines.com/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://profitmachines.com/offerings</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://profitmachines.com/industries</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://profitmachines.com/solutions</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://profitmachines.com/resources</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://profitmachines.com/partners</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://profitmachines.com/career</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://profitmachines.com/book-consultation</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://profitmachines.com/talk-to-expert</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://profitmachines.com/crypto</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://profitmachines.com/demand-pulse</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://profitmachines.com/pricing</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Consolidated Service Pages (New) -->
+  <url><loc>https://profitmachines.com/services/ai-growth-engine</loc><changefreq>monthly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://profitmachines.com/services/revenue-acceleration</loc><changefreq>monthly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://profitmachines.com/services/lead-generation</loc><changefreq>monthly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://profitmachines.com/services/demand-discovery</loc><changefreq>monthly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://profitmachines.com/services/customer-discovery</loc><changefreq>monthly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://profitmachines.com/services/competitive-discovery</loc><changefreq>monthly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://profitmachines.com/services/product-market-fit</loc><changefreq>monthly</changefreq><priority>0.95</priority></url>
+
+  <!-- Offering Discovery Pages -->
+  <url><loc>https://profitmachines.com/offerings/profit-pool-discovery</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://profitmachines.com/offerings/profit-pool-discovery/market-discovery</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://profitmachines.com/offerings/profit-pool-discovery/demand-discovery</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://profitmachines.com/offerings/profit-pool-discovery/value-discovery</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://profitmachines.com/offerings/profit-pool-discovery/channel-discovery</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://profitmachines.com/offerings/profit-pool-discovery/competitive-discovery</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://profitmachines.com/offerings/profit-pool-discovery/customer-discovery</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://profitmachines.com/offerings/profit-pool-discovery/product-market-fit-discovery</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Legal -->
+  <url><loc>https://profitmachines.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://profitmachines.com/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://profitmachines.com/security</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://profitmachines.com/cookies</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://profitmachines.com/sitemap</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+
+</urlset>

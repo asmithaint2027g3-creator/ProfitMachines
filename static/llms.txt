@@ -1,0 +1,27 @@
+# ProfitMachines
+
+ProfitMachines is an AI software development company providing Artificial Intelligence, SaaS Development, Enterprise Applications, Cloud Solutions, Automation, and Digital Transformation services.
+
+## Website
+
+https://profitmachines.vercel.app/
+
+## Important Pages
+
+- Home: https://profitmachines.vercel.app/
+- About: https://profitmachines.vercel.app/about
+- Services: https://profitmachines.vercel.app/services
+- Industries: https://profitmachines.vercel.app/industries
+- Contact: https://profitmachines.vercel.app/contact
+
+## Sitemap
+
+https://profitmachines.vercel.app/sitemap.xml
+
+## Robots
+
+https://profitmachines.vercel.app/robots.txt
+
+## Contact
+
+https://profitmachines.vercel.app/contact

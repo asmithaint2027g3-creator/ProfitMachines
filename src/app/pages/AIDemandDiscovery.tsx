@@ -1,0 +1,107 @@
+﻿
+import { useEffect } from 'react';
+import { ArrowRight, Target, CheckCircle2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Reveal } from '../components/ui/Reveal';
+
+export default function AIDemandDiscovery() {
+    useEffect(() => {
+        document.title = "AI Demand Discovery | ProfitMachines";
+        window.scrollTo(0, 0);
+    }, []);
+
+    const features = [
+        "Predictive Market Analysis",
+        "Intent Signal Detection",
+        "Competitor Gap Analysis",
+        "Ideal Customer Profiling",
+        "Total Addressable Market (TAM) Expansion",
+        "Real-time Buying Signals"
+    ];
+
+    return (
+        <div className="min-h-screen bg-white font-sans text-slate-900">
+            {/* Hero Section */}
+            <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-slate-50 border-b border-slate-200">
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.04] mix-blend-multiply" />
+                    <div className="absolute inset-0" style={{
+                        backgroundImage: 'linear-gradient(to right, #cbd5e1 1px, transparent 1px), linear-gradient(to bottom, #cbd5e1 1px, transparent 1px)',
+                        backgroundSize: '4rem 4rem', opacity: 0.2
+                    }} />
+                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-600/8 rounded-full blur-[120px]" />
+                </div>
+
+                <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                    <Reveal>
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-700 uppercase tracking-widest mb-8">
+                            <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" /><span className="relative inline-flex rounded-full h-2 w-2 bg-[#064e3b]" /></span>
+                            AI-Powered Market Intelligence
+                        </div>
+
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight leading-[1.05] text-slate-900">
+                            Uncover Hidden Demand with{' '}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#064e3b] via-emerald-700 to-teal-700">
+                                Predictive AI Discovery
+                            </span>
+                        </h1>
+
+                        <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
+                            Identify high-intent buyers before your competitors do. ProfitMachines scans millions of signals to pinpoint who is ready to buy now.
+                        </p>
+
+                        <Link
+                            to="/book-consultation"
+                            className="inline-flex items-center gap-2 px-8 py-4 bg-[#064e3b] hover:bg-[#053d2e] text-white font-bold rounded-xl transition-all duration-200 shadow-lg shadow-emerald-900/30 hover:shadow-emerald-900/45 hover:-translate-y-0.5 group"
+                        >
+                            Start Discovering Demand
+                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                    </Reveal>
+                </div>
+            </section>
+
+            {/* Features Grid */}
+            <section className="py-20 lg:py-28 bg-white">
+                <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center max-w-2xl mx-auto mb-16">
+                        <div className="text-xs font-extrabold text-[#064e3b] uppercase tracking-widest mb-4">How It Works</div>
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4 font-heading">Demand Intelligence Engine</h2>
+                        <p className="text-lg text-slate-600 font-medium">Our AI engine processes vast amounts of data to deliver actionable demand intelligence.</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-6">
+                        {features.map((feature, idx) => (
+                            <div key={idx} className="p-7 rounded-[20px] bg-slate-50 border border-slate-200 hover:border-emerald-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                                <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-5 text-[#064e3b] group-hover:bg-[#064e3b] group-hover:text-white transition-colors duration-300">
+                                    <CheckCircle2 className="w-6 h-6" />
+                                </div>
+                                <h3 className="text-base font-bold text-slate-900 mb-2">{feature}</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">Advanced algorithms analyze market patterns to identify this key indicator for your business growth.</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="py-20 lg:py-28 bg-gradient-to-br from-[#02241e] via-[#064e3b] to-[#0a5e49] text-white relative overflow-hidden">
+                <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 30% 50%, #064e3b 0%, transparent 60%), radial-gradient(circle at 70% 50%, #059669 0%, transparent 60%)' }} />
+                <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                    <div className="text-xs font-extrabold text-emerald-400 uppercase tracking-widest mb-4">Get Started</div>
+                    <h2 className="text-3xl md:text-4xl font-extrabold font-heading mb-6">Ready to Find Your Next Customer?</h2>
+                    <p className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">Stop guessing and start knowing. Let AI reveal your total addressable market's active demand.</p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <Link to="/book-consultation" className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-[#064e3b] text-white font-bold rounded-xl hover:bg-emerald-600 transition-all duration-200 shadow-lg shadow-emerald-900/40 hover:-translate-y-0.5 group">
+                            Book Consultation
+                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                        <Link to="/talk-to-expert" className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-white/10 text-white font-bold rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-200">
+                            Talk to an Expert
+                        </Link>
+                    </div>
+                </div>
+            </section>
+        </div>
+    );
+}
