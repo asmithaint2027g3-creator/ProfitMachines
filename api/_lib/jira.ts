@@ -4,9 +4,6 @@
  * Captures 7 Lead Types as Tasks with Auto-Generated Subtasks in Jira Space (Project: PROF)
  */
 
-import dotenv from 'dotenv';
-dotenv.config();
-
 export interface LeadFields {
     name?: string;
     firstName?: string;
@@ -246,12 +243,8 @@ function buildAdfDescription(config: LeadTypeConfig, fields: LeadFields) {
 export async function createJiraLeadTask(leadTypeInput: string, fields: LeadFields) {
     const host = process.env.JIRA_HOST || 'trustworkz.atlassian.net';
     const email = process.env.JIRA_EMAIL || 'asmitha.int2027g3@gmail.com';
-    const token = process.env.JIRA_API_TOKEN || '';
+    const token = process.env.JIRA_API_TOKEN || 'ATATT3xFfGF07frrB4Un9YDiLjA9stake7Be1Keae7tCQw8fWbIyFK199ScmkFs5k3ogMg-oj_dmHkHIufIXXTQMrBi3cpePnqgG0h12TJ3PM8R-p7S3n-7qw1pU7hlraxgutWKNbN1JLCFOp9mFuBCftpsWJMbBEjYkk5fEzY46uhBaDrgNMD8=F2096F95';
     const projectKey = process.env.JIRA_PROJECT_KEY || 'PROF';
-
-    if (!token) {
-        throw new Error('JIRA_API_TOKEN is not configured in environment variables');
-    }
 
     const typeKey = (leadTypeInput || 'quick').toLowerCase() as LeadType;
     const config = LEAD_CONFIGS[typeKey] || LEAD_CONFIGS.quick;

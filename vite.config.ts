@@ -22,7 +22,7 @@ function jiraDevApiPlugin() {
           req.on('end', async () => {
             try {
               const { leadType, fields } = JSON.parse(body || '{}');
-              const { createJiraLeadTask } = await import('./api/_lib/jira.ts');
+              const { createJiraLeadTask } = await import('./api/jira-lead.ts');
               const result = await createJiraLeadTask(leadType, fields);
               res.setHeader('Content-Type', 'application/json');
               res.statusCode = 200;
