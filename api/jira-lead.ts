@@ -366,6 +366,17 @@ export async function createJiraLeadTask(leadTypeInput: string, fields: LeadFiel
         }
     }
 
+    // 3. Automatically Sync Lead to Airtable CRM Base (Non-blocking)
+    let airtableRecordId: string | undefined;
+    try {
+        const airtableResult = await syncLeadToAirtable(typeKey, fields, parentKey, `https://${host}/browse/${parentKey}`);
+        if (airtableResult?.airtableId) {
+            airtableRecordId = airtableResult.airtableId;
+        }
+    } catch (atErr) {
+        console.warn('[Airtable] Non-blocking CRM sync warning:', atErr);
+    }
+
     return {
         success: true,
         taskKey: parentKey,
@@ -373,8 +384,104 @@ export async function createJiraLeadTask(leadTypeInput: string, fields: LeadFiel
         boardUrl: `https://${host}/jira/software/projects/${projectKey}/boards/101`,
         issueUrl: `https://${host}/browse/${parentKey}`,
         leadType: config.title,
-        subtasks: createdSubtasks
+        subtasks: createdSubtasks,
+        airtableRecordId
     };
+}
+
+/**
+ * Syncs inbound lead to Airtable CRM Base ("ProfitMachines CRM" / "Leads" table)
+ */
+export async function syncLeadToAirtable(
+    leadType: string,
+    fields: LeadFields,
+    jiraKey?: string,
+    jiraUrl?: string
+) {
+    const pat = process.env.AIRTABLE_PAT || '';
+    const baseId = process.env.AIRTABLE_BASE_ID || 'appFHphPzP7b2VYq1';
+    const tableName = process.env.AIRTABLE_TABLE_NAME || 'Leads';
+
+    if (!pat || !baseId) {
+        console.warn('[Airtable] AIRTABLE_PAT is not set. Skipping Airtable sync.');
+        return null;
+    }
+
+    const fullName = fields.name || `${fields.firstName || ''} ${fields.lastName || ''}`.trim() || 'Anonymous Prospect';
+    const company = fields.company ? ` (${fields.company})` : '';
+    const displayName = `${fullName}${company}`;
+
+    const notesSummary = [
+        `Lead Type: ${leadType.toUpperCase()}`,
+        `Jira Task: ${jiraKey || 'N/A'}${jiraUrl ? ` (${jiraUrl})` : ''}`,
+        `Email: ${fields.email || 'N/A'}`,
+        `Phone: ${fields.phone || 'N/A'}`,
+        `Company: ${fields.company || 'N/A'}`,
+        `Designation: ${fields.designation || fields.jobTitle || 'N/A'}`,
+        `Revenue: ${fields.revenue || fields.annual_revenue || 'N/A'}`,
+        `Interest: ${fields.interest || fields.service || 'N/A'}`,
+        fields.date ? `Date/Time: ${fields.date} ${fields.time || ''} (${fields.timezone || 'Local'})` : '',
+        `Message: ${fields.message || 'N/A'}`,
+        `Origin: ${fields.page_url || 'Direct'}`,
+        `UTM Source: ${fields.utm_source || 'direct'}`,
+        `Submitted: ${fields.timestamp || new Date().toISOString()}`
+    ].filter(Boolean).join('\n');
+
+    // 1. Attempt sending dedicated columns + Notes
+    const payloadWithColumns = {
+        fields: {
+            'Name': displayName,
+            'Email': fields.email || '',
+            'Phone': fields.phone || '',
+            'Company': fields.company || '',
+            'Lead Type': leadType,
+            'Jira Task Key': jiraKey || '',
+            'Notes': notesSummary
+        },
+        typecast: true
+    };
+
+    try {
+        const res = await fetch(`https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${pat}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payloadWithColumns)
+        });
+
+        if (res.ok) {
+            const data: any = await res.json();
+            return { success: true, airtableId: data.id };
+        }
+
+        // 2. If table doesn't have custom columns yet, fallback to default Name & Notes
+        const fallbackPayload = {
+            fields: {
+                'Name': displayName,
+                'Notes': notesSummary
+            },
+            typecast: true
+        };
+
+        const fallbackRes = await fetch(`https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${pat}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(fallbackPayload)
+        });
+
+        if (fallbackRes.ok) {
+            const fallbackData: any = await fallbackRes.json();
+            return { success: true, airtableId: fallbackData.id };
+        }
+    } catch (err) {
+        console.warn('[Airtable] Failed to sync record:', err);
+    }
+    return null;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
