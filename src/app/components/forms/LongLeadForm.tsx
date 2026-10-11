@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Send, CheckCircle2, ShieldCheck, ArrowRight, Loader2, Sparkles } from 'lucide-react';
 import { submitToSheet } from '../../../lib/sheets';
+import { captureLeadInJira } from '../../../lib/jira';
 import { validateBusinessEmail, validatePhone, FormErrorBanner, HoneypotField } from './FormFeedback';
 import { useVisitorEngagement } from '../../context/VisitorEngagementContext';
 
@@ -158,6 +159,21 @@ export default function LongLeadForm({
             setSubmitted(true);
             completeFormSubmission('long');
             if (onSuccess) onSuccess(res.submissionId);
+
+            // Capture Detailed Enterprise Lead in Jira Space (Tasks + Subtasks)
+            captureLeadInJira('enterprise', {
+                submission_id: res.submissionId,
+                name: formData.name.trim(),
+                email: formData.email.trim(),
+                phone: formData.phone.trim(),
+                company: formData.company.trim(),
+                designation: formData.jobTitle.trim(),
+                industry: formData.industry,
+                interest: formData.service,
+                requirements: `Challenge: ${formData.challenge.trim()} | Outcome: ${formData.outcome}`,
+                message: formData.message.trim(),
+                source: source || 'Detailed Assessment Form'
+            }).catch(jiraErr => console.warn('[Jira] Enterprise Lead capture notice:', jiraErr));
         } catch (error: any) {
             console.error('Long Lead submission error:', error);
             setSubmitError("We couldn't submit your detailed assessment right now. Please try again or reach out directly on WhatsApp.");

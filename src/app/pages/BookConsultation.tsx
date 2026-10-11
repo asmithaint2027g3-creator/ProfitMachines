@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import {
     Calendar,
     Building2,
@@ -17,6 +17,7 @@ import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Label } from '../components/ui/label';
 import { submitToSheet } from '../../lib/sheets';
+import { captureLeadInJira } from '../../lib/jira';
 import { trackEvent } from '../../lib/analytics';
 import { FormSuccessModal, validateBusinessEmail, validatePhone, FormErrorBanner, HoneypotField } from '../components/forms/FormFeedback';
 
@@ -92,6 +93,23 @@ export default function BookConsultation() {
             setSubmissionId(res.submissionId);
             setSubmitted(true);
             trackEvent({ eventName: 'FORM_SUBMIT_SUCCESS', category: 'LEAD', label: res.submissionId });
+
+            // Capture Strategic Consultation Lead in Jira Space (Tasks + Subtasks)
+            captureLeadInJira('consultation', {
+                submission_id: res.submissionId,
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+                phone: formData.phone,
+                company: formData.company,
+                designation: formData.jobTitle,
+                revenue: formData.revenue,
+                interest: formData.interest,
+                message: formData.message,
+                date: formData.date,
+                time: formData.time,
+                source: 'Book Consultation Page'
+            }).catch(jiraErr => console.warn('[Jira] Consultation Lead capture notice:', jiraErr));
         } catch (error: any) {
             console.error("Error submitting form:", error);
             setSubmitError("We couldn't reach our scheduling system just now. Please try again in a moment, or email us directly.");

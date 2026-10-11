@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Handshake,
     Zap,
@@ -21,6 +21,7 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Textarea } from '../components/ui/textarea';
 import { submitToSheet } from '../../lib/sheets';
+import { captureLeadInJira } from '../../lib/jira';
 import { trackEvent } from '../../lib/analytics';
 import { FormSuccessModal, validateBusinessEmail, FormErrorBanner, HoneypotField } from '../components/forms/FormFeedback';
 
@@ -101,6 +102,18 @@ export default function Partners() {
             });
             setSubmissionId(res.submissionId);
             setSubmitted(true);
+
+            // Capture Partner Application Lead in Jira Space (Tasks + Subtasks)
+            captureLeadInJira('partner', {
+                submission_id: res.submissionId,
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+                company: formData.company,
+                message: `Partner Type: ${formData.partnerType} | Website: ${formData.website}\nNotes: ${formData.message}`,
+                interest: formData.partnerType,
+                source: 'Partners Page'
+            }).catch(jiraErr => console.warn('[Jira] Partner Lead notice:', jiraErr));
         } catch (error: any) {
             console.error(error);
             setSubmitError(error.message || "We couldn't submit your application just now. Please try again.");

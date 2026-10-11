@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useDragControls } from 'motion/react';
 import logo from '../../assets/Trustgrid-logo.png';
 import { useLeadModal } from '../context/LeadModalContext';
+import { captureLeadInJira } from '../../lib/jira';
 
 type MessageRole = 'user' | 'assistant';
 
@@ -389,6 +390,26 @@ export default function ChatBot() {
                 headers: { 'Content-Type': 'text/plain' },
                 body: JSON.stringify(payload)
             }).catch(() => {});
+        } catch {}
+
+        // Capture in Jira Space for high-intent chatbot inquiries
+        try {
+            const emailMatch = userQuery.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
+            const extractedEmail = emailMatch ? emailMatch[0] : '';
+            const isHighIntent = Boolean(
+                extractedEmail || 
+                /(\b)(book|demo|price|pricing|cost|consult|call|pilot|proposal|quote|contact|hire|talk)(\b)/i.test(userQuery)
+            );
+
+            if (isHighIntent) {
+                captureLeadInJira('chatbot', {
+                    email: extractedEmail || undefined,
+                    name: extractedEmail ? extractedEmail.split('@')[0] : 'Inbound Chatbot User',
+                    message: `User Query: "${userQuery}"\nRecent Context: ${summary}`,
+                    interest: intent || currentPageContext.title,
+                    source: `AI Chatbot (${location.pathname})`
+                }).catch(jiraErr => console.warn('[Jira] Chatbot Lead notice:', jiraErr));
+            }
         } catch {}
     };
 

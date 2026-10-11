@@ -1,5 +1,6 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { submitToSheet } from '../../lib/sheets';
+import { captureLeadInJira } from '../../lib/jira';
 import { trackEvent } from '../../lib/analytics';
 import {
     CheckCircle2,
@@ -84,6 +85,20 @@ export default function TalkToExpert() {
             setSubmissionId(res.submissionId);
             setSubmitted(true);
             trackEvent({ eventName: 'FORM_SUBMIT_SUCCESS', category: 'LEAD', label: res.submissionId });
+
+            // Capture Revenue & Diagnostic Audit Lead in Jira Space (Tasks + Subtasks)
+            captureLeadInJira('audit', {
+                submission_id: res.submissionId,
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+                phone: formData.phone,
+                company: formData.company,
+                designation: formData.jobTitle,
+                interest: formData.challenge,
+                message: formData.message,
+                source: 'Talk to Expert Page'
+            }).catch(jiraErr => console.warn('[Jira] Audit Lead capture notice:', jiraErr));
         } catch (error: any) {
             console.error("Error submitting form:", error);
             setSubmitError("We couldn't reach our systems just now. Please try again in a moment.");

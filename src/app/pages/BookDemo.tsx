@@ -1,4 +1,4 @@
-﻿
+
 import React, { useState } from 'react';
 import {
     CheckCircle2,
@@ -14,6 +14,7 @@ import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Label } from '../components/ui/label';
 import { submitToSheet } from '../../lib/sheets';
+import { captureLeadInJira } from '../../lib/jira';
 import { validateBusinessEmail, validatePhone, FormErrorBanner, HoneypotField } from '../components/forms/FormFeedback';
 
 export default function BookDemo() {
@@ -66,7 +67,7 @@ export default function BookDemo() {
         setIsSubmitting(true);
 
         try {
-            await submitToSheet('Book for Consulting', {
+            const res = await submitToSheet('Book for Consulting', {
                 "First Name": formData.firstName,
                 "Last Name": formData.lastName,
                 "Email": formData.email,
@@ -81,6 +82,22 @@ export default function BookDemo() {
                 "Preferred Time": formData.time
             });
             setSubmitted(true);
+
+            // Capture Demo Lead in Jira Space (Tasks + Subtasks)
+            captureLeadInJira('demo', {
+                submission_id: res?.submissionId,
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+                phone: formData.phone,
+                company: formData.company,
+                revenue: formData.revenue,
+                interest: formData.interest,
+                message: formData.message,
+                date: formData.date,
+                time: formData.time,
+                source: 'Book Demo Page'
+            }).catch(jiraErr => console.warn('[Jira] Demo Lead capture notice:', jiraErr));
         } catch (error: any) {
             console.error("Error submitting form:", error);
             setSubmitError("We couldn't submit your request just now. Please try again in a moment, or contact us directly.");

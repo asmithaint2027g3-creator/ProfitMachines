@@ -1,5 +1,6 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { submitToSheet } from '../../lib/sheets';
+import { captureLeadInJira } from '../../lib/jira';
 import {
     Rocket,
     Heart,
@@ -84,6 +85,20 @@ export default function Career() {
             setApplicantEmail(email);
             setSubmitted(true);
             setIsApplyOpen(false);
+
+            // Capture Career Candidate in Jira Space (Tasks + Subtasks)
+            captureLeadInJira('career', {
+                submission_id: res.submissionId,
+                firstName: String(formData.get('firstName') || ''),
+                lastName: String(formData.get('lastName') || ''),
+                email: email,
+                phone: String(formData.get('phone') || ''),
+                company: String(formData.get('linkedin') || ''),
+                designation: selectedRole,
+                interest: `Engineering / ${selectedRole}`,
+                message: String(formData.get('coverLetter') || ''),
+                source: 'Careers Page'
+            }).catch(jiraErr => console.warn('[Jira] Career Lead notice:', jiraErr));
         } catch (error) {
             console.error(error);
             setSubmitError("We couldn't submit your application just now. Please try again in a moment.");

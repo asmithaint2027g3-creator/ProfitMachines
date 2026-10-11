@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Send, CheckCircle2, ShieldCheck, ArrowRight, Loader2, MessageSquare } from 'lucide-react';
 import { submitToSheet } from '../../../lib/sheets';
+import { captureLeadInJira } from '../../../lib/jira';
 import { validateBusinessEmail, FormErrorBanner, HoneypotField } from './FormFeedback';
 import { useVisitorEngagement } from '../../context/VisitorEngagementContext';
 
@@ -97,6 +98,16 @@ export default function QuickLeadForm({
             setSubmitted(true);
             completeFormSubmission('quick');
             if (onSuccess) onSuccess(res.submissionId);
+
+            // Capture Lead in Jira Space (Tasks + Subtasks)
+            captureLeadInJira('quick', {
+                submission_id: res.submissionId,
+                name: formData.name.trim(),
+                email: formData.email.trim(),
+                company: formData.company.trim(),
+                interest: formData.service,
+                source: source || 'Quick Inquiry Modal'
+            }).catch(jiraErr => console.warn('[Jira] Quick Lead capture notice:', jiraErr));
         } catch (error: any) {
             console.error('Quick Lead submission error:', error);
             setSubmitError("We couldn't submit your inquiry right now. Please check your connection or contact us on WhatsApp.");

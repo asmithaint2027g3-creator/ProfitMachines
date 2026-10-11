@@ -1,9 +1,10 @@
-﻿
+
 import React, { useState } from 'react';
 import { Send, Calendar, CheckCircle2 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { submitToSheet } from '../../lib/sheets';
+import { captureLeadInJira } from '../../lib/jira';
 import { validateBusinessEmail, validatePhone, FormErrorBanner, HoneypotField } from './forms/FormFeedback';
 import { useLeadModal } from '../context/LeadModalContext';
 
@@ -55,6 +56,17 @@ export default function LeadCaptureSection() {
 
       setSubmissionId(res.submissionId);
       setSubmitted(true);
+
+      // Capture Lead in Jira Space (Tasks + Subtasks)
+      captureLeadInJira('quick', {
+        submission_id: res.submissionId,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        interest: 'AI Sales Diagnostic Consultation',
+        source: 'Get Started Section'
+      }).catch(jiraErr => console.warn('[Jira] Section Lead capture notice:', jiraErr));
+
       setFormData({ name: '', email: '', phone: '' });
     } catch (error: any) {
       console.error("Error submitting form:", error);
