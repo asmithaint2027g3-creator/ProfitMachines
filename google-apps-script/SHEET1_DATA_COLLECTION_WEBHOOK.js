@@ -42,46 +42,46 @@
 // 1. GLOBAL CONFIGURATION & RECIPIENTS
 // =========================================================================================
 
-const CONFIG = {
+var CONFIG = {
   // Main Profit Machines Raw Data Collection & Ingestion Spreadsheet (Sheet 1)
-  MAIN_SPREADSHEET_ID: "1fdZl2it4O86OUB92DvBaeeEM75fXue1yqjcvLq51gVs",
+  MAIN_SPREADSHEET_ID: "1E6Yf0dr0QbwSnnWAZUBrndEW5dAUSNgBR5scadxyw3E",
 
   // Dedicated Analytics & Visual Dashboard Spreadsheet (Sheet 2)
-  ANALYTICS_SPREADSHEET_ID: "1NSnGji4KqVuWaM1jGEjX87mkjFsoVN9u5SG6TJ0qZoU",
+  ANALYTICS_SPREADSHEET_ID: "1ixHEGyvGHWRDlz2ZBpIY_3-53qmIy7MUfb7X6KLKYmg",
 
   // Google Drive folder used to archive candidate resumes
   CAREER_RESUMES_FOLDER_NAME: "ProfitMachines_Career_Resumes"
 };
 
-const EMAIL_CONFIG = {
+var EMAIL_CONFIG = {
   name: "Profit Machines Business Intelligence",
   companyName: "PROFIT MACHINES",
-  website: "https://profitmachines.in",
-  replyTo: "poojasri.aram@gmail.com",
-  adminEmail: "poojasri.aram@gmail.com",
-  
+  website: "https://profit-machines.vercel.app/",
+  replyTo: "asmitha.int2027g3@gmail.com",
+  adminEmail: "asmitha.int2027g3@gmail.com",
+
   // Recipients for Quick Leads & Consultation Bookings (Strictly authorized team)
   salesEmails: [
     "poojasri.aram@gmail.com",
-    "bv@trustflow.in"
+    "asmitha.int2027g3@gmail.com"
   ],
-  
+
   // Recipients for Ad Campaign Lead Generation
   adCampaignEmails: [
     "poojasri.aram@gmail.com",
-    "bv@trustflow.in"
+    "asmitha.int2027g3@gmail.com"
   ],
 
   // Recipients for Career Applications & Monthly Resumes
   careerEmails: [
     "poojasri.aram@gmail.com",
-    "bv@trustflow.in"
+    "asmitha.int2027g3@gmail.com"
   ],
 
   // Recipients for Daily, Weekly & Monthly Executive Analytics Reports
   reportEmails: [
     "poojasri.aram@gmail.com",
-    "bv@trustflow.in"
+    "asmitha.int2027g3@gmail.com"
   ],
 
   // WhatsApp line matching the website CTA
@@ -334,18 +334,23 @@ function findSheetFlexible(spreadsheet, requestedName) {
  * Computes Layer 10 (Engagement Score: 0-100) based on depth of information provided
  */
 function computeEngagementScore(data) {
+  if (!data || typeof data !== 'object') return 30;
   var score = 30; // Baseline for reaching and completing a form
-  
+
   // Depth of contact signals
-  if (data.email && data.email.indexOf("@") !== -1) score += 15;
-  if (data.phone && String(data.phone).length >= 8) score += 15;
-  if (data.company && data.company.length > 2) score += 10;
-  if (data.designation || data.jobTitle) score += 10;
-  
-  // Specificity of business need
-  if (data.challenge && String(data.challenge).length > 15) score += 10;
-  if (data.message && String(data.message).length > 20) score += 5;
-  if (data.interest && data.interest !== "General Inquiry") score += 5;
+  try {
+    if (data.email && String(data.email).indexOf('@') !== -1) score += 15;
+    if (data.phone && String(data.phone).length >= 8) score += 15;
+    if (data.company && String(data.company).length > 2) score += 10;
+    if (data.designation || data.jobTitle) score += 10;
+
+    // Specificity of business need
+    if (data.challenge && String(data.challenge).length > 15) score += 10;
+    if (data.message && String(data.message).length > 20) score += 5;
+    if (data.interest && data.interest !== 'General Inquiry') score += 5;
+  } catch (e) {
+    // Silently ignore field access errors on malformed data
+  }
 
   return Math.min(100, Math.max(10, score));
 }
@@ -354,56 +359,68 @@ function computeEngagementScore(data) {
  * Computes Layer 07 (Repeat Visitor & RFM Segmentation)
  */
 function computeRFMSegment(data) {
-  var sessions = Number(data.total_sessions || data.sessions || 1);
-  var returning = data.returning_user === true || data.returning_user === "true" || sessions > 1;
-  
-  if (!returning) return "New Prospect";
-  if (sessions >= 5) return "High-Intent Enterprise Account";
-  if (sessions >= 2) return "Returning Prospect";
-  return "Active Visitor";
+  if (!data || typeof data !== 'object') return 'New Prospect';
+  try {
+    var sessions = Number(data.total_sessions || data.sessions || 1);
+    var returning = data.returning_user === true || data.returning_user === 'true' || sessions > 1;
+    if (!returning) return 'New Prospect';
+    if (sessions >= 5) return 'High-Intent Enterprise Account';
+    if (sessions >= 2) return 'Returning Prospect';
+    return 'Active Visitor';
+  } catch (e) {
+    return 'New Prospect';
+  }
 }
 
 /**
  * Computes Layer 11 & Model 07 (Propensity Scoring Bands & Next-Best-Action)
  */
 function computePropensityScore(data, formCategory) {
-  var score = computeEngagementScore(data);
-  
-  // Long Consultation Bookings have inherently higher intent than quick forms
-  if (formCategory === "Consulting Sessions" || data.lead_type === "Detailed Inquiry") {
-    score = Math.min(100, score + 15);
+  if (!data || typeof data !== 'object') {
+    return { score: 30, band: 'Mid · 33–66 (Retarget Softly)', nextAction: 'Send Executive Briefing & Retarget with Case Studies' };
   }
-  
-  var band = "Mid · 33–66 (Retarget Softly)";
-  var nextAction = "Send Executive Briefing & Retarget with Case Studies";
-  
-  if (score >= 66) {
-    band = "High · 66–100 (Engage Now)";
-    nextAction = "Immediate Principal AI Architect Call within 24 Hours";
-  } else if (score < 33) {
-    band = "Low · 0–33 (Nurture Content)";
-    nextAction = "Enroll in Automated Weekly AI Governance Insights";
-  }
+  try {
+    var score = computeEngagementScore(data);
 
-  return {
-    score: score,
-    band: band,
-    nextAction: nextAction
-  };
+    // Long Consultation Bookings have inherently higher intent than quick forms
+    if (formCategory === 'Consulting Sessions' || data.lead_type === 'Detailed Inquiry') {
+      score = Math.min(100, score + 15);
+    }
+
+    var band = 'Mid · 33–66 (Retarget Softly)';
+    var nextAction = 'Send Executive Briefing & Retarget with Case Studies';
+
+    if (score >= 66) {
+      band = 'High · 66–100 (Engage Now)';
+      nextAction = 'Immediate Principal AI Architect Call within 24 Hours';
+    } else if (score < 33) {
+      band = 'Low · 0–33 (Nurture Content)';
+      nextAction = 'Enroll in Automated Weekly AI Governance Insights';
+    }
+
+    return { score: score, band: band, nextAction: nextAction };
+  } catch (e) {
+    return { score: 30, band: 'Mid · 33–66 (Retarget Softly)', nextAction: 'Send Executive Briefing & Retarget with Case Studies' };
+  }
 }
 
 /**
  * Resolves topic affinity (Layer 08) based on demonstrated interest
  */
 function resolveTopicAffinity(data) {
-  var interest = String(data.interest || data.service || data.focusArea || data.transformationInterest || "").toLowerCase();
-  if (interest.indexOf("sdr") !== -1 || interest.indexOf("sales") !== -1) return "Autonomous SDRs & Outbound";
-  if (interest.indexOf("radar") !== -1 || interest.indexOf("demand") !== -1) return "DemandPulse AI Intent Radar";
-  if (interest.indexOf("discovery") !== -1 || interest.indexOf("pool") !== -1) return "Profit Pool Discovery";
-  if (interest.indexOf("revops") !== -1) return "AI Revenue Operations";
-  if (interest.indexOf("crypto") !== -1 || interest.indexOf("web3") !== -1) return "Web3 Growth Architecture";
-  if (interest.indexOf("governance") !== -1 || interest.indexOf("compliance") !== -1) return "Agentic AI Governance";
-  return "Enterprise AI Transformation";
+  if (!data || typeof data !== 'object') return 'Enterprise AI Transformation';
+  try {
+    var interest = String(data.interest || data.service || data.focusArea || data.transformationInterest || '').toLowerCase();
+    if (interest.indexOf('sdr') !== -1 || interest.indexOf('sales') !== -1) return 'Autonomous SDRs & Outbound';
+    if (interest.indexOf('radar') !== -1 || interest.indexOf('demand') !== -1) return 'DemandPulse AI Intent Radar';
+    if (interest.indexOf('discovery') !== -1 || interest.indexOf('pool') !== -1) return 'Profit Pool Discovery';
+    if (interest.indexOf('revops') !== -1) return 'AI Revenue Operations';
+    if (interest.indexOf('crypto') !== -1 || interest.indexOf('web3') !== -1) return 'Web3 Growth Architecture';
+    if (interest.indexOf('governance') !== -1 || interest.indexOf('compliance') !== -1) return 'Agentic AI Governance';
+    return 'Enterprise AI Transformation';
+  } catch (e) {
+    return 'Enterprise AI Transformation';
+  }
 }
 
 // =========================================================================================
@@ -1458,8 +1475,9 @@ function aggregateExecutiveReportData(ss, periodType, startDate, endDate, prevSt
   var countryCol = findHeaderIndex(tHeaders, ["geo_country", "Country"]);
   var cityCol = findHeaderIndex(tHeaders, ["geo_city", "City", "IP Location"]);
 
-  var curVisitors = new Set();
-  var curSessions = new Set();
+  // Use plain objects instead of Set for Rhino/V8 runtime compatibility
+  var curVisitors = {};
+  var curSessions = {};
   var curNewUsers = 0;
   var curReturningUsers = 0;
   var curPageViews = 0;
@@ -1467,8 +1485,8 @@ function aggregateExecutiveReportData(ss, periodType, startDate, endDate, prevSt
   var curSources = {};
   var curGeo = {};
 
-  var prevVisitors = new Set();
-  var prevSessions = new Set();
+  var prevVisitors = {};
+  var prevSessions = {};
   var prevPageViews = 0;
 
   // 7-Day Trend Buckets
@@ -1500,14 +1518,14 @@ function aggregateExecutiveReportData(ss, periodType, startDate, endDate, prevSt
 
     if (tTime >= startMs && tTime <= endMs) {
       curPageViews++;
-      if (ip) curVisitors.add(ip);
-      if (sess) curSessions.add(sess);
+      if (ip) curVisitors[ip] = true;
+      if (sess) curSessions[sess] = true;
 
       if (isReturning) curReturningUsers++; else curNewUsers++;
 
-      if (!curPages[path]) curPages[path] = { views: 0, visitors: new Set() };
+      if (!curPages[path]) curPages[path] = { views: 0, visitors: {} };
       curPages[path].views++;
-      if (ip) curPages[path].visitors.add(ip);
+      if (ip) curPages[path].visitors[ip] = true;
 
       curSources[src] = (curSources[src] || 0) + 1;
       curGeo[city] = (curGeo[city] || 0) + 1;
@@ -1520,8 +1538,8 @@ function aggregateExecutiveReportData(ss, periodType, startDate, endDate, prevSt
       }
     } else if (tTime >= pStartMs && tTime <= pEndMs) {
       prevPageViews++;
-      if (ip) prevVisitors.add(ip);
-      if (sess) prevSessions.add(sess);
+      if (ip) prevVisitors[ip] = true;
+      if (sess) prevSessions[sess] = true;
     }
   }
 
@@ -1529,12 +1547,12 @@ function aggregateExecutiveReportData(ss, periodType, startDate, endDate, prevSt
   var curLeads = aggregateLeadsFromTabs(ss, startMs, endMs, trendLeads, trendEnquiries, endMs);
   var prevLeads = aggregateLeadsFromTabs(ss, pStartMs, pEndMs, null, null, null);
 
-  var vCount = curVisitors.size || curSessions.size || 0;
-  var sCount = curSessions.size || vCount || 0;
+  var vCount = Object.keys(curVisitors).length || Object.keys(curSessions).length || 0;
+  var sCount = Object.keys(curSessions).length || vCount || 0;
   var pvCount = curPageViews || 0;
 
   var pvCountPrev = prevPageViews || 0;
-  var vCountPrev = prevVisitors.size || prevSessions.size || 0;
+  var vCountPrev = Object.keys(prevVisitors).length || Object.keys(prevSessions).length || 0;
 
   var lCount = curLeads.totalLeads;
   var eCount = curLeads.totalEnquiries;
@@ -1560,7 +1578,7 @@ function aggregateExecutiveReportData(ss, periodType, startDate, endDate, prevSt
     return {
       path: p,
       views: curPages[p].views,
-      visitors: curPages[p].visitors.size,
+      visitors: Object.keys(curPages[p].visitors).length,
       leads: curLeads.byPage[p] || 0
     };
   }).sort(function(a, b) { return b.views - a.views; }).slice(0, 8);
