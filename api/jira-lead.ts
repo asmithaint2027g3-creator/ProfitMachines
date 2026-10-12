@@ -316,7 +316,11 @@ export async function createJiraLeadTask(leadTypeInput: string, fields: LeadFiel
     const authHeader = 'Basic ' + Buffer.from(`${email}:${token}`).toString('base64');
     const fullName = fields.name || `${fields.firstName || ''} ${fields.lastName || ''}`.trim() || 'Prospect';
     const company = fields.company ? ` (${fields.company})` : '';
-    const summary = `[ProfitMachines Lead] ${config.title} - ${fullName}${company}`;
+
+    // If from LinkedIn, explicitly tag [LinkedIn Lead] in the task title for instant recognition
+    const isLinkedIn = (fields.utm_source || '').toLowerCase().includes('linkedin') || (fields.referrer || '').toLowerCase().includes('linkedin.com');
+    const leadPrefix = isLinkedIn ? '[LinkedIn Lead]' : '[ProfitMachines Lead]';
+    const summary = `${leadPrefix} ${config.title} - ${fullName}${company}`;
     const description = buildAdfDescription(config, fields);
 
     // 1. Create Parent Task
@@ -329,6 +333,7 @@ export async function createJiraLeadTask(leadTypeInput: string, fields: LeadFiel
             labels: [
                 'profitmachines',
                 'inbound-lead',
+                isLinkedIn ? 'linkedin-lead' : 'direct-lead',
                 config.label,
                 ...(fields.utm_source ? [`src-${fields.utm_source.toLowerCase().replace(/[^a-z0-9_-]/g, '-')}`] : []),
                 ...(fields.company ? [fields.company.toLowerCase().replace(/[^a-z0-9_-]/g, '-').slice(0, 20)] : [])
