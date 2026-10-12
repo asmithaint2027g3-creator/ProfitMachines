@@ -55,6 +55,7 @@ const AIReputationAcceleration = lazy(() => import('./pages/AIReputationAccelera
 const DiscoveryPage = lazy(() => import('./pages/DiscoveryPage'));
 const CookieConsent = lazy(() => import('./components/CookieConsent'));
 const VisitorDashboard = lazy(() => import('./pages/VisitorDashboard'));
+const LinkedInStudio = lazy(() => import('./pages/LinkedInStudio'));
 
 function AnalyticsTracker() {
   useAnalytics();
@@ -181,6 +182,8 @@ export default function App() {
                   <Route path="/offerings/:slug" element={<DiscoveryPage />} />
                   <Route path="/products" element={<Navigate to="/demand-pulse" replace />} />
                   <Route path="/admin/visitors" element={<VisitorDashboard />} />
+                  <Route path="/admin/linkedin" element={<LinkedInStudio />} />
+                  <Route path="/linkedin-studio" element={<Navigate to="/admin/linkedin" replace />} />
                 </Routes>
               </Suspense>
             </main>

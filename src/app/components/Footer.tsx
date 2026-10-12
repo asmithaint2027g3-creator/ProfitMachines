@@ -12,7 +12,8 @@ export default function Footer() {
         'Case Studies': '/#case-studies',
         'Blogs': '/#blogs',
         'Careers': '/career',
-        'Contact Us': '/book-consultation'
+        'Contact Us': '/book-consultation',
+        'LinkedIn Studio': '/admin/linkedin'
     };
 
     const solutionsLinks: { [key: string]: string } = {

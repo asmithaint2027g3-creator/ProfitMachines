@@ -283,14 +283,35 @@ function buildAdfDescription(config: LeadTypeConfig, fields: LeadFields) {
     };
 }
 
+interface CachedLeadResult {
+    timestamp: number;
+    result: any;
+}
+const recentLeadsCache = new Map<string, CachedLeadResult>();
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
 export async function createJiraLeadTask(leadTypeInput: string, fields: LeadFields) {
+    const typeKey = (leadTypeInput || 'quick').toLowerCase() as LeadType;
+    const config = LEAD_CONFIGS[typeKey] || LEAD_CONFIGS.quick;
+
+    // Deduplication check: suppress duplicate task creation within 5 minutes
+    const dedupeKey = fields.submission_id || (fields.email ? `${fields.email.toLowerCase().trim()}_${typeKey}` : null);
+    if (dedupeKey && recentLeadsCache.has(dedupeKey)) {
+        const cached = recentLeadsCache.get(dedupeKey)!;
+        if (Date.now() - cached.timestamp < CACHE_TTL_MS) {
+            console.log(`[Jira Lead] Duplicate submission detected for key: ${dedupeKey}. Referencing existing task: ${cached.result.taskKey}`);
+            return {
+                ...cached.result,
+                isDuplicate: true,
+                message: 'Duplicate submission recognized; referencing existing task.'
+            };
+        }
+    }
+
     const host = process.env.JIRA_HOST || 'trustworkz.atlassian.net';
     const email = process.env.JIRA_EMAIL || 'asmitha.int2027g3@gmail.com';
     const token = process.env.JIRA_API_TOKEN || 'ATATT3xFfGF07frrB4Un9YDiLjA9stake7Be1Keae7tCQw8fWbIyFK199ScmkFs5k3ogMg-oj_dmHkHIufIXXTQMrBi3cpePnqgG0h12TJ3PM8R-p7S3n-7qw1pU7hlraxgutWKNbN1JLCFOp9mFuBCftpsWJMbBEjYkk5fEzY46uhBaDrgNMD8=F2096F95';
     const projectKey = process.env.JIRA_PROJECT_KEY || 'PROF';
-
-    const typeKey = (leadTypeInput || 'quick').toLowerCase() as LeadType;
-    const config = LEAD_CONFIGS[typeKey] || LEAD_CONFIGS.quick;
 
     const authHeader = 'Basic ' + Buffer.from(`${email}:${token}`).toString('base64');
     const fullName = fields.name || `${fields.firstName || ''} ${fields.lastName || ''}`.trim() || 'Prospect';
@@ -309,6 +330,7 @@ export async function createJiraLeadTask(leadTypeInput: string, fields: LeadFiel
                 'profitmachines',
                 'inbound-lead',
                 config.label,
+                ...(fields.utm_source ? [`src-${fields.utm_source.toLowerCase().replace(/[^a-z0-9_-]/g, '-')}`] : []),
                 ...(fields.company ? [fields.company.toLowerCase().replace(/[^a-z0-9_-]/g, '-').slice(0, 20)] : [])
             ]
         }
@@ -377,7 +399,7 @@ export async function createJiraLeadTask(leadTypeInput: string, fields: LeadFiel
         console.warn('[Airtable] Non-blocking CRM sync warning:', atErr);
     }
 
-    return {
+    const taskResult = {
         success: true,
         taskKey: parentKey,
         taskId: parentId,
@@ -387,6 +409,20 @@ export async function createJiraLeadTask(leadTypeInput: string, fields: LeadFiel
         subtasks: createdSubtasks,
         airtableRecordId
     };
+
+    // Store in sliding cache to prevent duplicate entries
+    if (dedupeKey) {
+        recentLeadsCache.set(dedupeKey, {
+            timestamp: Date.now(),
+            result: taskResult
+        });
+        if (recentLeadsCache.size > 200) {
+            const oldestKey = recentLeadsCache.keys().next().value;
+            if (oldestKey) recentLeadsCache.delete(oldestKey);
+        }
+    }
+
+    return taskResult;
 }
 
 /**
@@ -411,10 +447,18 @@ export async function syncLeadToAirtable(
 
     const fullName = fields.name || `${fields.firstName || ''} ${fields.lastName || ''}`.trim() || 'Anonymous Prospect';
     const company = fields.company ? ` (${fields.company})` : '';
-    const displayName = `${fullName}${company}`;
 
     const config = LEAD_CONFIGS[(leadType || 'quick').toLowerCase() as LeadType] || LEAD_CONFIGS.quick;
     const leadTypeTitle = config.title || leadType;
+
+    // Detect LinkedIn or social attribution
+    const isLinkedIn = (fields.utm_source || '').toLowerCase().includes('linkedin') || (fields.referrer || '').toLowerCase().includes('linkedin.com');
+    const leadSourceStr = isLinkedIn 
+        ? `LinkedIn (${fields.utm_campaign || 'Company Page'})` 
+        : (fields.lead_source || fields.utm_source || 'Website Inbound');
+
+    const attributionFooter = `\n\n[Attribution: Source=${leadSourceStr} | Campaign=${fields.utm_campaign || 'none'} | URL=${fields.page_url || 'Direct'}]`;
+    const messageWithAttribution = (fields.message || fields.requirement || '') + attributionFooter;
 
     // 1. Direct mapping to the 10 configured columns in Airtable
     const payload = {
@@ -426,7 +470,7 @@ export async function syncLeadToAirtable(
             'Lead Type': leadTypeTitle,
             'Annual Revenue': fields.revenue || fields.annual_revenue || '-',
             'Service Interest': fields.interest || fields.service || 'AI Revenue Transformation',
-            'Message': fields.message || fields.requirement || '',
+            'Message': messageWithAttribution,
             'Jira Task Key': jiraKey || '',
             'Status': 'New Inbound'
         },
