@@ -15,6 +15,7 @@ import { servicesData } from '../data/navigationContent';
 import { useAnalytics } from '../hooks/useAnalytics';
 import { useTrafficAnalysis } from '../hooks/useTrafficAnalysis';
 import { useContextAwareChat } from '../hooks/useContextAwareChat';
+import { useVisitorTracker } from '../hooks/useVisitorTracker';
 
 import Home from './pages/Home';
 
@@ -53,11 +54,13 @@ const AIBrandAcceleration = lazy(() => import('./pages/AIBrandAcceleration'));
 const AIReputationAcceleration = lazy(() => import('./pages/AIReputationAcceleration'));
 const DiscoveryPage = lazy(() => import('./pages/DiscoveryPage'));
 const CookieConsent = lazy(() => import('./components/CookieConsent'));
+const VisitorDashboard = lazy(() => import('./pages/VisitorDashboard'));
 
 function AnalyticsTracker() {
   useAnalytics();
   useTrafficAnalysis();
   useContextAwareChat();
+  useVisitorTracker(); // Auto-tracks every visitor to Airtable
   return null;
 }
 
@@ -177,6 +180,7 @@ export default function App() {
                   <Route path="/industries/:slug" element={<NavigateToIndustriesSection />} />
                   <Route path="/offerings/:slug" element={<DiscoveryPage />} />
                   <Route path="/products" element={<Navigate to="/demand-pulse" replace />} />
+                  <Route path="/admin/visitors" element={<VisitorDashboard />} />
                 </Routes>
               </Suspense>
             </main>
