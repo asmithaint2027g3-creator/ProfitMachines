@@ -275,7 +275,6 @@ function buildAdfDescription(config: LeadTypeConfig, fields: LeadFields) {
             type: 'bulletList',
             content: [
                 createRow('Origin Page URL', pageUrl),
-                createRow('Geographic Location (Vercel Edge)', fields.geo_location || 'Direct / Local'),
                 createRow('HTTP Referrer', fields.referrer || 'Direct'),
                 createRow('UTM Source / Campaign', `${fields.utm_source || 'direct'} / ${fields.utm_campaign || 'none'}`),
                 createRow('Visitor ID / Session ID', `${fields.visitor_id || 'N/A'} / ${fields.session_id || 'N/A'}`),

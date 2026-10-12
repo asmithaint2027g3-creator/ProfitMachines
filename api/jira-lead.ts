@@ -268,7 +268,6 @@ function buildAdfDescription(config: LeadTypeConfig, fields: LeadFields) {
             type: 'bulletList',
             content: [
                 createRow('Origin Page URL', pageUrl),
-                createRow('Geographic Location (Vercel Edge)', fields.geo_location || 'Direct / Local'),
                 createRow('HTTP Referrer', fields.referrer || 'Direct'),
                 createRow('UTM Source / Campaign', `${fields.utm_source || 'direct'} / ${fields.utm_campaign || 'none'}`),
                 createRow('Visitor ID / Session ID', `${fields.visitor_id || 'N/A'} / ${fields.session_id || 'N/A'}`),
@@ -378,13 +377,6 @@ export async function createJiraLeadTask(leadTypeInput: string, fields: LeadFiel
         console.warn('[Airtable] Non-blocking CRM sync warning:', atErr);
     }
 
-    // 4. Instant Lead Email Notification (Non-blocking)
-    try {
-        await sendLeadEmailNotification(config.title, fields, parentKey, `https://${host}/browse/${parentKey}`);
-    } catch (emailErr) {
-        console.warn('[Email Alert] Non-blocking email warning:', emailErr);
-    }
-
     return {
         success: true,
         taskKey: parentKey,
@@ -489,74 +481,6 @@ export async function syncLeadToAirtable(
     return null;
 }
 
-/**
- * Sends an instant lead alert email to team inbox (asmitha.int2027g3@gmail.com)
- */
-export async function sendLeadEmailNotification(
-    leadType: string,
-    fields: LeadFields,
-    jiraKey?: string,
-    jiraUrl?: string
-) {
-    const resendKey = process.env.RESEND_API_KEY;
-    const recipient = process.env.TEAM_NOTIFICATION_EMAIL || 'asmitha.int2027g3@gmail.com';
-    const fromEmail = process.env.FROM_EMAIL || 'ProfitMachines Alerts <onboarding@resend.dev>';
-
-    if (!resendKey) {
-        console.log('[Email Notification] RESEND_API_KEY is not set. Logged alert for lead:', fields.name);
-        return null;
-    }
-
-    const fullName = fields.name || `${fields.firstName || ''} ${fields.lastName || ''}`.trim() || 'Prospect';
-    const company = fields.company ? ` (${fields.company})` : '';
-
-    try {
-        const res = await fetch('https://api.resend.com/emails', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${resendKey}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                from: fromEmail,
-                to: [recipient],
-                subject: `🚀 [New Lead] ${leadType} - ${fullName}${company} [${jiraKey || 'PM'}]`,
-                html: `
-                    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
-                        <div style="background: #064e3b; padding: 24px; color: #ffffff;">
-                            <h1 style="margin: 0; font-size: 20px; font-weight: 700;">New ProfitMachines Inbound Lead</h1>
-                            <p style="margin: 6px 0 0 0; font-size: 14px; opacity: 0.9;">Lead Type: <strong>${leadType}</strong> | Jira Task: <strong>${jiraKey || 'N/A'}</strong></p>
-                        </div>
-                        <div style="padding: 24px;">
-                            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-                                <tr><td style="padding: 8px 0; font-weight: 600; color: #475569; width: 140px;">Full Name:</td><td style="color: #0f172a;">${fullName}</td></tr>
-                                <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Email:</td><td><a href="mailto:${fields.email}" style="color: #064e3b; text-decoration: none; font-weight: 600;">${fields.email || 'N/A'}</a></td></tr>
-                                <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Phone:</td><td style="color: #0f172a;">${fields.phone || 'N/A'}</td></tr>
-                                <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Company:</td><td style="color: #0f172a;">${fields.company || 'N/A'}</td></tr>
-                                <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Location (IP):</td><td style="color: #0f172a;">${fields.geo_location || 'Unknown'}</td></tr>
-                                <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Service Interest:</td><td style="color: #0f172a;">${fields.interest || fields.service || 'N/A'}</td></tr>
-                                <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Message / Notes:</td><td style="color: #0f172a;">${fields.message || 'None provided'}</td></tr>
-                            </table>
-                            ${jiraKey ? `<div style="margin-top: 24px; text-align: center;"><a href="${jiraUrl || `https://trustworkz.atlassian.net/browse/${jiraKey}`}" style="display: inline-block; background: #064e3b; color: #ffffff; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 13px;">View in Jira (${jiraKey})</a></div>` : ''}
-                        </div>
-                    </div>
-                `
-            })
-        });
-
-        if (res.ok) {
-            const data: any = await res.json();
-            console.log('[Email Notification] Sent successfully via Resend:', data.id);
-            return data;
-        } else {
-            console.warn('[Email Notification] Resend warning:', await res.text());
-        }
-    } catch (err) {
-        console.warn('[Email Notification] Failed to send email alert:', err);
-    }
-    return null;
-}
-
 export default async function handler(req: VercelRequest, res: VercelResponse) {
     // CORS headers for browser requests
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -577,25 +501,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return res.status(400).json({ error: 'Missing lead fields payload' });
     }
 
-    // Auto Geo-Tagging from Vercel Edge Headers
-    const country = (req.headers['x-vercel-ip-country'] as string) || '';
-    const city = (req.headers['x-vercel-ip-city'] as string) || '';
-    const region = (req.headers['x-vercel-ip-country-region'] as string) || '';
-    const timezone = (req.headers['x-vercel-ip-timezone'] as string) || '';
-
-    const enrichedFields: LeadFields = {
-        ...fields,
-        geo_country: country || fields.geo_country || '',
-        geo_city: city ? decodeURIComponent(city) : fields.geo_city || '',
-        geo_region: region || fields.geo_region || '',
-        geo_timezone: timezone || fields.timezone || '',
-        geo_location: [city ? decodeURIComponent(city) : '', region, country].filter(Boolean).join(', ') || fields.geo_location || 'Direct / Local'
-    };
-
-    console.log(`[Jira Lead] Processing incoming lead of type: ${leadType || 'quick'} from location: ${enrichedFields.geo_location}`);
+    console.log(`[Jira Lead] Processing incoming lead of type: ${leadType || 'quick'}`);
 
     try {
-        const result = await createJiraLeadTask(leadType || 'quick', enrichedFields);
+        const result = await createJiraLeadTask(leadType || 'quick', fields);
         console.log(`[Jira Lead] Successfully created Jira Task: ${result.taskKey} with ${result.subtasks.length} subtasks.`);
 
         return res.status(200).json(result);
