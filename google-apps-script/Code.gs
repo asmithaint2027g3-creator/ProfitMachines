@@ -1066,6 +1066,18 @@ function routeLead(ss, p, attachments) {
   } else {
     p.email_notification_status = "captured_chat";
   }
+
+  // 4. Auto-Schedule Google Calendar Event for Consultations & Demos
+  if (leadType === "LONG_FORM" || p.date || formName.indexOf("consult") >= 0 || formName.indexOf("demo") >= 0) {
+    try {
+      var calEventId = scheduleGoogleCalendarEvent(p);
+      if (calEventId) {
+        p.calendar_event_id = calEventId;
+      }
+    } catch (calErr) {
+      Logger.log("Calendar schedule warning: " + calErr.toString());
+    }
+  }
 }
 
 // =========================================================================================
@@ -1368,6 +1380,112 @@ function safeSendEmail(options) {
       return false;
     }
   }
+}
+
+/**
+ * Automatically creates a Google Calendar consultation event and dispatches calendar invites
+ * Target Calendar: Primary Calendar of asmitha.int2027g3@gmail.com
+ */
+function scheduleGoogleCalendarEvent(p) {
+  try {
+    var email = String(p.email || "").trim();
+    if (!email || email.indexOf("@") === -1) {
+      Logger.log("[Calendar] No valid email provided for calendar invite.");
+      return null;
+    }
+
+    var leadName = String(p.name || (p.first_name ? p.first_name + " " + (p.last_name || "") : "Executive Prospect")).trim();
+    var company = String(p.company || "Enterprise").trim();
+    var submissionId = String(p.submission_id || "REF-" + Date.now());
+
+    // 1. Calculate event start date and time
+    var startDate;
+    if (p.date) {
+      var timeStr = "10:00:00"; // default 10:00 AM
+      if (p.time) {
+        var t = String(p.time).toLowerCase();
+        if (t.indexOf("morning") >= 0 || t.indexOf("9:00") >= 0) timeStr = "10:00:00";
+        else if (t.indexOf("afternoon") >= 0 || t.indexOf("1:00") >= 0) timeStr = "14:00:00";
+        else if (t.indexOf("evening") >= 0 || t.indexOf("5:00") >= 0) timeStr = "17:00:00";
+        else {
+          var match = t.match(/(\d{1,2}):(\d{2})/);
+          if (match) {
+            var hours = parseInt(match[1], 10);
+            var mins = match[2];
+            if (t.indexOf("pm") >= 0 && hours < 12) hours += 12;
+            if (t.indexOf("am") >= 0 && hours === 12) hours = 0;
+            timeStr = (hours < 10 ? "0" + hours : hours) + ":" + mins + ":00";
+          }
+        }
+      }
+      startDate = new Date(p.date + "T" + timeStr);
+      if (isNaN(startDate.getTime())) {
+        startDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
+        startDate.setHours(10, 0, 0, 0);
+      }
+    } else {
+      // Default: Next business day at 10:00 AM
+      startDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
+      startDate.setHours(10, 0, 0, 0);
+    }
+
+    // 45-minute executive consultation session
+    var endDate = new Date(startDate.getTime() + (45 * 60 * 1000));
+
+    // 2. Fetch primary Google Calendar
+    var calendar = CalendarApp.getDefaultCalendar();
+    var eventTitle = "🚀 ProfitMachines AI Consultation: " + leadName + " (" + company + ")";
+    
+    var eventDescription = [
+      "Executive Consultation — ProfitMachines Autonomous Revenue Systems",
+      "==================================================================",
+      "Lead: " + leadName,
+      "Email: " + email,
+      "Phone: " + (p.phone || "N/A"),
+      "Company: " + company,
+      "Designation: " + (p.designation || p.job_title || "N/A"),
+      "ARR / Revenue: " + (p.annual_revenue || p.revenue || "N/A"),
+      "Service / Interest: " + (p.interest || p.service || "AI Revenue Operations"),
+      "Requirements / Notes: " + (p.message || p.requirement || "None provided"),
+      "Reference ID: " + submissionId,
+      "Website: " + CONFIG.WEBSITE
+    ].join("\n");
+
+    // 3. Create event and dispatch calendar invitation
+    var event = calendar.createEvent(eventTitle, startDate, endDate, {
+      description: eventDescription,
+      location: "Google Meet / Video Conference (Link shared in confirmation)",
+      guests: email,
+      sendInvites: true
+    });
+
+    Logger.log("[Calendar] Successfully scheduled event: " + event.getId() + " for " + email);
+    return event.getId();
+  } catch (err) {
+    Logger.log("[Calendar] Event creation failed: " + err.toString());
+    return null;
+  }
+}
+
+/**
+ * Test function to verify Google Calendar integration directly in Apps Script
+ */
+function testCalendarSchedule() {
+  var testLead = {
+    name: "Alex Morgan",
+    email: "asmitha.int2027g3@gmail.com", // Test with your own email
+    company: "Apex Technologies",
+    job_title: "VP of Growth",
+    interest: "Autonomous SDRs & Sales Pilot",
+    revenue: "$10M - $50M ARR",
+    message: "Interested in evaluating autonomous RevOps architecture for Q4.",
+    date: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
+    time: "Morning (9:00 AM - 12:00 PM EST)",
+    submission_id: "PV-TEST-CALENDAR-01"
+  };
+
+  var eventId = scheduleGoogleCalendarEvent(testLead);
+  Logger.log("Test Calendar Event ID: " + eventId);
 }
 
 function sendLeadAlertEmail(p, attachments) {
