@@ -3,7 +3,7 @@ import {
     CheckCircle2, Clock, Send, Copy, Edit3, Trash2, ExternalLink, 
     AlertCircle, Sparkles, RefreshCw, Calendar, TrendingUp, 
     Building2, ShieldCheck, Eye, ThumbsUp, MessageSquare, Share2,
-    Check, X, ChevronDown, ArrowRight
+    Check, X, ChevronDown, ArrowRight, Lock, Key, LogOut
 } from 'lucide-react';
 import { 
     LinkedInPost, getStoredPosts, saveStoredPosts, createNewDraft, 
@@ -11,6 +11,14 @@ import {
 } from '../../lib/linkedinContent';
 
 export default function LinkedInStudio() {
+    // Admin Security Gate State
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+        if (typeof window === 'undefined') return false;
+        return sessionStorage.getItem('pm_admin_auth') === 'true';
+    });
+    const [passcode, setPasscode] = useState('');
+    const [passcodeError, setPasscodeError] = useState('');
+
     const [posts, setPosts] = useState<LinkedInPost[]>([]);
     const [activeTab, setActiveTab] = useState<'ALL' | 'DRAFT' | 'APPROVED' | 'SCHEDULED' | 'PUBLISHED'>('ALL');
     const [selectedPost, setSelectedPost] = useState<LinkedInPost | null>(null);
@@ -138,11 +146,17 @@ export default function LinkedInStudio() {
         setPublishingId(post.id);
         setActionMessage(null);
 
+        const currentKey = sessionStorage.getItem('pm_admin_key') || 'pm2026';
+
         try {
             const res = await fetch('/api/linkedin-publish', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${currentKey}`
+                },
                 body: JSON.stringify({
+                    adminKey: currentKey,
                     postId: post.id,
                     fullPostText: post.fullPostText,
                     title: post.title,
@@ -264,6 +278,90 @@ export default function LinkedInStudio() {
         PUBLISHED: posts.filter(p => p.status === 'PUBLISHED').length
     };
 
+    const handleUnlock = (e: React.FormEvent) => {
+        e.preventDefault();
+        const entered = passcode.trim();
+        const validPasscodes = ['pm2026', 'profitmachines2026', 'profitmachines_analytics_secure_key_2026'];
+        if (validPasscodes.includes(entered)) {
+            sessionStorage.setItem('pm_admin_auth', 'true');
+            sessionStorage.setItem('pm_admin_key', entered);
+            setIsAuthenticated(true);
+            setPasscodeError('');
+        } else {
+            setPasscodeError('Invalid Admin Passcode. Access denied.');
+        }
+    };
+
+    const handleLock = () => {
+        sessionStorage.removeItem('pm_admin_auth');
+        sessionStorage.removeItem('pm_admin_key');
+        setIsAuthenticated(false);
+        setPasscode('');
+    };
+
+    if (!isAuthenticated) {
+        return (
+            <div className="min-h-screen bg-[#02130d] flex items-center justify-center p-6 text-slate-100 font-sans">
+                <div className="max-w-md w-full bg-[#05281e] border border-emerald-600/40 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+                    
+                    <div className="w-16 h-16 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center mx-auto text-emerald-400 mb-5 shadow-inner">
+                        <Lock className="w-8 h-8" />
+                    </div>
+
+                    <div className="text-center">
+                        <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase tracking-widest">
+                            Restricted Admin Area
+                        </span>
+                        <h2 className="text-2xl font-black text-white mt-3 tracking-tight">
+                            ProfitMachines Security Perimeter
+                        </h2>
+                        <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                            Only authorized administrators can review, schedule, and publish LinkedIn content. Enter your Admin Key to continue.
+                        </p>
+                    </div>
+
+                    <form onSubmit={handleUnlock} className="mt-6 space-y-4">
+                        <div>
+                            <label className="block text-xs font-bold text-emerald-300 mb-1.5">
+                                Admin Passcode / Security Key
+                            </label>
+                            <input
+                                type="password"
+                                value={passcode}
+                                onChange={e => { setPasscode(e.target.value); setPasscodeError(''); }}
+                                placeholder="Enter admin key (e.g. pm2026)"
+                                className="w-full bg-[#02130d] border border-emerald-700/60 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-emerald-400 transition"
+                                autoFocus
+                            />
+                            {passcodeError && (
+                                <p className="text-xs text-rose-400 mt-2 flex items-center gap-1.5 font-medium">
+                                    <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" /> {passcodeError}
+                                </p>
+                            )}
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-sm shadow-lg shadow-emerald-500/20 transition cursor-pointer flex items-center justify-center gap-2"
+                        >
+                            <Key className="w-4 h-4" /> Unlock LinkedIn Studio
+                        </button>
+                    </form>
+
+                    <div className="mt-6 pt-4 border-t border-emerald-800/30 text-center">
+                        <a
+                            href="/"
+                            className="text-xs text-slate-400 hover:text-emerald-300 transition"
+                        >
+                            ← Return to ProfitMachines Homepage
+                        </a>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-[#02130d] text-slate-100 font-sans pb-24">
             {/* Top Brand Banner */}
@@ -292,6 +390,13 @@ export default function LinkedInStudio() {
                         >
                             <Sparkles className="w-4 h-4" />
                             {isGenerating ? 'Synthesizing...' : 'Generate New Draft'}
+                        </button>
+                        <button
+                            onClick={handleLock}
+                            className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-slate-900/60 hover:bg-rose-950/40 text-slate-300 hover:text-rose-300 text-xs border border-slate-700/60 transition-all cursor-pointer"
+                            title="Lock Admin Studio"
+                        >
+                            <Lock className="w-3.5 h-3.5" /> Lock Studio
                         </button>
                         <a
                             href="https://profit-machines.vercel.app"

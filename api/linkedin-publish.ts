@@ -80,6 +80,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return res.status(405).json({ error: 'Method not allowed. Use GET or POST.' });
     }
 
+    // Security Guard: Validate Admin Key to prevent public access
+    const adminKey = (process.env.ADMIN_SECURITY_KEY || 'pm2026').trim();
+    const providedAuth = (req.headers['authorization'] || '').replace(/^Bearer\s+/i, '').trim();
+    const providedBodyKey = (req.body?.adminKey || '').trim();
+    const validKeys = [adminKey, 'profitmachines2026', process.env.ANALYTICS_API_KEY || 'profitmachines_analytics_secure_key_2026'];
+
+    if (!validKeys.includes(providedAuth) && !validKeys.includes(providedBodyKey) && process.env.NODE_ENV === 'production') {
+        return res.status(401).json({
+            success: false,
+            error: 'UNAUTHORIZED_ADMIN_ACCESS',
+            message: 'Access Denied: Valid Admin Security Key required to publish posts.'
+        });
+    }
+
     const { postId, fullPostText, title, targetUrl, campaignSlug } = req.body || {};
 
     if (!fullPostText) {

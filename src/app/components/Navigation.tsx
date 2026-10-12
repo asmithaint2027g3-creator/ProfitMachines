@@ -329,21 +329,8 @@ export default function Navigation() {
                         })}
                     </div>
 
-                    {/* Persistent CTA Buttons */}
+                    {/* Persistent CTA Button — GOVNICS style */}
                     <div className="hidden lg:flex items-center gap-3 relative z-50">
-                        <Link
-                            to="/admin/linkedin"
-                            title="LinkedIn Growth & Content Studio"
-                            className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl font-bold text-xs transition-all duration-200 border ${
-                                isHomeHero
-                                    ? 'bg-emerald-950/70 hover:bg-emerald-900 text-emerald-200 border-emerald-500/30'
-                                    : 'bg-emerald-50 hover:bg-emerald-100 text-[#064e3b] border-emerald-200'
-                            }`}
-                        >
-                            <Building2 className="w-3.5 h-3.5 text-emerald-500" />
-                            LinkedIn Studio
-                        </Link>
-
                         <Link
                             to="/book-consultation"
                             className="inline-flex items-center gap-2 bg-[#064e3b] hover:bg-[#053d2e] active:bg-[#042d22] text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 shadow-md shadow-emerald-900/30 hover:shadow-emerald-900/45 hover:-translate-y-px group"
@@ -434,18 +421,6 @@ export default function Navigation() {
 
                             </div>
                         ))}
-
-                        {/* Direct Admin Links in Mobile Menu */}
-                        <div className="pt-4 border-t border-slate-200 flex flex-col gap-2">
-                            <Link
-                                to="/admin/linkedin"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="flex items-center gap-2 p-2.5 rounded-xl bg-emerald-50 text-[#064e3b] font-bold text-sm"
-                            >
-                                <Building2 className="w-4 h-4 text-emerald-600" />
-                                LinkedIn Studio
-                            </Link>
-                        </div>
                     </div>
                 </div>
             </div>
