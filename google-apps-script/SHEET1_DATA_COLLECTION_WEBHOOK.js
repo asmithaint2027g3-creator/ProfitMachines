@@ -47,7 +47,7 @@ var EMAIL_CONFIG = {
     "poojasri.aram@gmail.com"
   ],
   whatsappNumber: "7339693105",
-  consultingCalendarUrl: "https://calendar.app.google/ZZF7cW8GVX8r6Bwf6"
+  consultingCalendarUrl: "https://calendar.app.google/hmdJiakbGqtP8Kaf8"
 };
 
 // =========================================================================================
