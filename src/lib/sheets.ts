@@ -95,6 +95,23 @@ export const submitToSheet = async (
     const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || 
         "https://script.google.com/macros/s/AKfycby1iANcG2ks_wGav58ZPAKt_DqHutVzODSNHK1T3q4QcHiP888S4DYnbFLvTV2JZdxU/exec";
 
+    // ── Standalone Vercel Lead Notification & Email Alert (/api/notify-lead) ─
+    // Completely standalone from Jira, Airtable, or Clarity
+    try {
+        fetch('/api/notify-lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                leadType: enrichedFields.form_name || tableOrFormName || 'Website Lead',
+                fields: enrichedFields
+            })
+        }).catch((notifyErr) => {
+            console.warn('[Vercel Lead Notification] Background alert warning:', notifyErr);
+        });
+    } catch {
+        // Non-blocking
+    }
+
     // ── Primary: Direct Google Apps Script ──────────────────────────────
     if (GOOGLE_SCRIPT_URL) {
         try {
