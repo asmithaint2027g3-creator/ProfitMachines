@@ -79,7 +79,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             commentDate: new Date().toISOString(),
             reasonFlagged: leadInput.reason || 'Direct video inquiry submitted via Admin Dashboard',
             confidenceScore: 0.98,
-            leadCategory: leadInput.category || 'High-Intent Video Viewer',
+            leadCategory: (['PRICING','DEMO','CONSULTATION','SERVICE_INQUIRY','BUSINESS_PAIN_POINT'].includes(leadInput.category) ? leadInput.category : 'SERVICE_INQUIRY') as 'PRICING' | 'DEMO' | 'CONSULTATION' | 'SERVICE_INQUIRY' | 'BUSINESS_PAIN_POINT',
             reviewStatus: 'Potential Lead - Needs Review'
         };
 

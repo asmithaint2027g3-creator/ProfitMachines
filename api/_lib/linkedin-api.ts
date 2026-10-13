@@ -18,6 +18,8 @@ export interface LinkedInPostAnalytics {
     lastSyncedAt: string;
 }
 
+export type LinkedInLeadCategory = 'PRICING' | 'DEMO' | 'CONSULTATION' | 'SERVICE_INQUIRY' | 'BUSINESS_PAIN_POINT';
+
 export interface LinkedInCommentItem {
     commentId: string;
     postUrn: string;
@@ -28,7 +30,7 @@ export interface LinkedInCommentItem {
     createdTime: string;
     likesCount: number;
     isPotentialLead: boolean;
-    leadCategory?: string;
+    leadCategory?: LinkedInLeadCategory;
     confidenceScore?: number;
     reasonFlagged?: string;
 }
@@ -228,7 +230,7 @@ function formatActorUrn(urn: string): string {
 export function detectLinkedInLeadIntent(text: string): {
     isLead: boolean;
     confidence: number;
-    category: string;
+    category: LinkedInLeadCategory;
     reason: string;
 } {
     const lower = text.toLowerCase();
@@ -237,7 +239,7 @@ export function detectLinkedInLeadIntent(text: string): {
         return {
             isLead: true,
             confidence: 94,
-            category: 'Pricing Inquiry',
+            category: 'PRICING',
             reason: 'Inquired about service pricing/fees in LinkedIn comment'
         };
     }
@@ -246,7 +248,7 @@ export function detectLinkedInLeadIntent(text: string): {
         return {
             isLead: true,
             confidence: 96,
-            category: 'Demo Request',
+            category: 'DEMO',
             reason: 'Requested product/engine demonstration in LinkedIn comment'
         };
     }
@@ -255,7 +257,7 @@ export function detectLinkedInLeadIntent(text: string): {
         return {
             isLead: true,
             confidence: 92,
-            category: 'Consultation Request',
+            category: 'CONSULTATION',
             reason: 'Requested consultation or meeting in LinkedIn comment'
         };
     }
@@ -264,7 +266,7 @@ export function detectLinkedInLeadIntent(text: string): {
         return {
             isLead: true,
             confidence: 90,
-            category: 'High-Intent Outreach',
+            category: 'SERVICE_INQUIRY',
             reason: 'Direct contact request or expressed active interest in comment'
         };
     }
@@ -273,7 +275,7 @@ export function detectLinkedInLeadIntent(text: string): {
         return {
             isLead: true,
             confidence: 88,
-            category: 'Business Pain Point',
+            category: 'BUSINESS_PAIN_POINT',
             reason: 'Stated specific business problem or workflow pain in comment'
         };
     }
@@ -281,7 +283,7 @@ export function detectLinkedInLeadIntent(text: string): {
     return {
         isLead: false,
         confidence: 0,
-        category: 'General Comment',
+        category: 'SERVICE_INQUIRY',
         reason: 'General feedback or commentary'
     };
 }

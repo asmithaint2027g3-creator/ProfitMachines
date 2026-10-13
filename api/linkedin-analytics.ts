@@ -127,7 +127,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                             commentDate: c.createdTime,
                             reasonFlagged: c.reasonFlagged || 'LinkedIn High-Intent Comment',
                             confidenceScore: c.confidenceScore || 90,
-                            leadCategory: (c.leadCategory as 'PRICING' | 'DEMO' | 'CONSULTATION' | 'SERVICE_INQUIRY' | 'BUSINESS_PAIN_POINT') || 'SERVICE_INQUIRY',
+                            leadCategory: c.leadCategory || 'SERVICE_INQUIRY',
                             reviewStatus: 'Potential Lead - Needs Review'
                         });
 
@@ -142,7 +142,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                             commentDate: c.createdTime,
                             reasonFlagged: c.reasonFlagged || 'LinkedIn High-Intent Comment',
                             confidenceScore: c.confidenceScore || 90,
-                            leadCategory: (c.leadCategory as 'PRICING' | 'DEMO' | 'CONSULTATION' | 'SERVICE_INQUIRY' | 'BUSINESS_PAIN_POINT') || 'SERVICE_INQUIRY',
+                            leadCategory: c.leadCategory || 'SERVICE_INQUIRY',
                             reviewStatus: 'Potential Lead - Needs Review'
                         }, jiraRes?.issueKey);
                     } catch (crmErr) {
