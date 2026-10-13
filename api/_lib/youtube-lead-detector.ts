@@ -8,7 +8,7 @@
 import type { YouTubeCommentData } from './youtube';
 
 export interface FlaggedPotentialLead {
-    leadRecordId: string;
+    leadRecordId?: string;
     videoId: string;
     videoTitle: string;
     commentId: string;
@@ -16,17 +16,17 @@ export interface FlaggedPotentialLead {
     authorDisplayName: string;
     authorChannelId: string;
     authorChannelUrl: string;
-    commentUrl: string;
+    commentUrl?: string;
     commentDate: string;
     reasonFlagged: string;
     leadCategory: 'PRICING' | 'DEMO' | 'CONSULTATION' | 'SERVICE_INQUIRY' | 'BUSINESS_PAIN_POINT';
     confidenceScore: number;
     reviewStatus: 'Potential Lead - Needs Review';
-    contactedStatus: 'Not Contacted' | 'Contacted' | 'Disqualified';
+    contactedStatus?: 'Not Contacted' | 'Contacted' | 'Disqualified';
     airtableRecordId?: string;
     jiraIssueKey?: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 // Intent rule categories and regex patterns
