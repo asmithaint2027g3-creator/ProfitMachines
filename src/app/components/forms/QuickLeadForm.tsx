@@ -95,7 +95,7 @@ export default function QuickLeadForm({
                     submissionId: subId,
                     timestamp: new Date().toISOString()
                 }),
-                captureLeadInJira('quick_form', {
+                captureLeadInJira('quick', {
                     name: formData.name,
                     email: formData.email,
                     company: formData.company,
@@ -169,7 +169,7 @@ export default function QuickLeadForm({
             {submitError && (
                 <FormErrorBanner
                     message={submitError}
-                    onRetry={() => setSubmitError(null)}
+                    onDismiss={() => setSubmitError(null)}
                 />
             )}
 

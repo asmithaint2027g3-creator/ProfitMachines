@@ -36,6 +36,7 @@ export default function ChatBot() {
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [agentName, setAgentName] = useState('Pooja');
+    const [agentRole] = useState('AI Revenue Strategist');
     const location = useLocation();
     const { openQuickForm, openLongForm } = useLeadModal();
     const messagesEndRef = useRef<HTMLDivElement>(null);
