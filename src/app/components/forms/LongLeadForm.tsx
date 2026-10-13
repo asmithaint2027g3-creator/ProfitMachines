@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Send, CheckCircle2, ShieldCheck, ArrowRight, Loader2, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Send, CheckCircle2, ShieldCheck, ArrowRight, Loader2, Sparkles, MessageSquare } from 'lucide-react';
 import { submitToSheet } from '../../../lib/sheets';
 import { captureLeadInJira } from '../../../lib/jira';
 import { validateBusinessEmail, validatePhone, FormErrorBanner, HoneypotField } from './FormFeedback';
@@ -198,13 +199,33 @@ export default function LongLeadForm({
                     <span className="text-slate-500 font-sans font-medium">Tracking Reference:</span>
                     <span className="font-bold text-[#064e3b]">{submissionId}</span>
                 </div>
+
+                <div className="flex flex-col sm:flex-row gap-2.5 mb-4">
+                    <Link
+                        to="/solutions"
+                        onClick={onCancel}
+                        className="flex-1 py-2.5 px-3 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-xs transition-colors flex items-center justify-center gap-1.5"
+                    >
+                        <span>Explore Solutions</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                    <Link
+                        to="/outcomes"
+                        onClick={onCancel}
+                        className="flex-1 py-2.5 px-3 rounded-lg bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 text-[#064e3b] font-bold text-xs transition-colors flex items-center justify-center gap-1.5"
+                    >
+                        <span>Verified Outcomes</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                </div>
+
                 {onCancel && (
                     <button
                         type="button"
                         onClick={onCancel}
                         className="w-full py-3 px-4 rounded-lg bg-[#064e3b] hover:bg-[#085a45] text-white font-bold text-sm transition-all shadow-md"
                     >
-                        Close
+                        Done & Return to Site
                     </button>
                 )}
             </div>

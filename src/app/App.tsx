@@ -7,7 +7,6 @@ import { LeadModalProvider } from './context/LeadModalContext';
 import { VisitorEngagementProvider } from './context/VisitorEngagementContext';
 import SmartEngagementManager from './components/engagement/SmartEngagementManager';
 import GlobalLeadModal from './components/forms/GlobalLeadModal';
-import TabExitPopup from './components/TabExitPopup';
 import StickyCtaBar from './components/StickyCtaBar';
 import WhatsAppWidget from './components/WhatsAppWidget';
 import { servicesData } from '../data/navigationContent';
@@ -196,7 +195,6 @@ export default function App() {
 
             <ChatBot />
             <CookieConsent />
-            <TabExitPopup />
             <StickyCtaBar />
             <WhatsAppWidget />
             <GlobalLeadModal />

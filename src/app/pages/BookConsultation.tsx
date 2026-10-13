@@ -20,27 +20,41 @@ import { submitToSheet } from '../../lib/sheets';
 import { captureLeadInJira } from '../../lib/jira';
 import { trackEvent } from '../../lib/analytics';
 import { FormSuccessModal, validateBusinessEmail, validatePhone, FormErrorBanner, HoneypotField } from '../components/forms/FormFeedback';
+import { useVisitorEngagement } from '../context/VisitorEngagementContext';
 
 export default function BookConsultation() {
+    const { registerFormStart, registerFormChange, completeFormSubmission, getSavedDraft } = useVisitorEngagement();
+
     React.useEffect(() => {
         window.scrollTo(0, 0);
         trackEvent({ eventName: 'PAGE_VIEW_BOOK_CONSULTATION', category: 'CONVERSION' });
-    }, []);
+        registerFormStart('long');
+    }, [registerFormStart]);
 
-    const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        company: '',
-        jobTitle: '',
-        revenue: '$10M - $50M ARR',
-        interest: 'AI Revenue Engine & Autonomous SDR',
-        message: '',
-        date: '',
-        time: 'Morning (9:00 AM - 12:00 PM EST)',
-        consent: true
+    const [formData, setFormData] = useState(() => {
+        const saved = getSavedDraft<any>('long');
+        return {
+            firstName: saved?.firstName || saved?.name?.split(' ')[0] || '',
+            lastName: saved?.lastName || saved?.name?.split(' ').slice(1).join(' ') || '',
+            email: saved?.email || '',
+            phone: saved?.phone || '',
+            company: saved?.company || '',
+            jobTitle: saved?.jobTitle || '',
+            revenue: saved?.revenue || '$10M - $50M ARR',
+            interest: saved?.service || saved?.interest || 'AI Revenue Engine & Autonomous SDR',
+            message: saved?.message || saved?.challenge || '',
+            date: saved?.date || '',
+            time: saved?.time || 'Morning (9:00 AM - 12:00 PM EST)',
+            consent: true
+        };
     });
+
+    const updateField = (field: string, value: any) => {
+        const updated = { ...formData, [field]: value };
+        setFormData(updated);
+        const hasContent = Boolean(updated.firstName.trim() || updated.email.trim() || updated.company.trim());
+        registerFormChange('long', updated, hasContent);
+    };
 
     const [emailError, setEmailError] = useState<string | null>(null);
     const [phoneError, setPhoneError] = useState<string | null>(null);
@@ -92,6 +106,7 @@ export default function BookConsultation() {
 
             setSubmissionId(res.submissionId);
             setSubmitted(true);
+            completeFormSubmission('long');
             trackEvent({ eventName: 'FORM_SUBMIT_SUCCESS', category: 'LEAD', label: res.submissionId });
 
             // Capture Strategic Consultation Lead in Jira Space (Tasks + Subtasks)
@@ -119,10 +134,13 @@ export default function BookConsultation() {
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData({
+        const updated = {
             ...formData,
             [e.target.name]: e.target.value
-        });
+        };
+        setFormData(updated);
+        const hasContent = Boolean(updated.firstName.trim() || updated.email.trim() || updated.company.trim());
+        registerFormChange('long', updated, hasContent);
     };
 
     return (

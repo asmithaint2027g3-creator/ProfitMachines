@@ -36,11 +36,16 @@ export default function ChatBot() {
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [agentName, setAgentName] = useState('Pooja');
-    const [agentRole] = useState('Digital Success Director');
     const location = useLocation();
     const { openQuickForm, openLongForm } = useLeadModal();
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const dragControls = useDragControls();
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            (window as any).__PM_CHATBOT_OPEN__ = isOpen;
+        }
+    }, [isOpen]);
 
     // ── Location / Name Mapping ─────────────────────────────────────────
     useEffect(() => {

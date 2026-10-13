@@ -236,7 +236,7 @@ export default function SmartEngagementManager() {
                             }}
                             className="py-3 px-4 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-sm transition-all"
                         >
-                            Save & Close for Now
+                            Not Now
                         </button>
                     </div>
                 </div>

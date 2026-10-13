@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { CheckCircle2, AlertCircle, Copy, Check, ArrowRight, ShieldCheck, RefreshCw } from 'lucide-react';
 
 export interface FormSuccessModalProps {
@@ -72,12 +73,22 @@ export const FormSuccessModal: React.FC<FormSuccessModalProps> = ({
                     <span>SOC2 Type II & GDPR Compliant Ingestion</span>
                 </div>
 
-                <button
-                    onClick={onClose}
-                    className="w-full py-3 px-6 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm transition-all shadow-md"
-                >
-                    Done & Return to Platform
-                </button>
+                <div className="flex flex-col sm:flex-row gap-2.5 mb-3">
+                    <Link
+                        to="/solutions"
+                        onClick={onClose}
+                        className="flex-1 py-2.5 px-3 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-xs transition-colors flex items-center justify-center gap-1.5"
+                    >
+                        <span>Explore Solutions</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                    <button
+                        onClick={onClose}
+                        className="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-md"
+                    >
+                        Done & Return
+                    </button>
+                </div>
             </div>
         </div>
     );
