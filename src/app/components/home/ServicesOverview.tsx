@@ -237,7 +237,7 @@ export default function ServicesOverview() {
 
                                         </div>
                                     </Link>
-                                motion.div>
+                                </motion.div>
                             );
                         })}
                     </AnimatePresence>
