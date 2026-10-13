@@ -2733,8 +2733,9 @@ function publishPendingLinkedInPostsFromSheet() {
   if (!ss) return;
   var sheet = getTab(ss, "LinkedIn_Posts");
   if (!sheet || sheet.getLastRow() < 2) {
-    try { SpreadsheetApp.getUi().alert("No LinkedIn posts found in LinkedIn_Posts tab."); } catch (e) {}
-    return;
+    console.log("No posts found in LinkedIn_Posts. Automatically inserting a starter sample post...");
+    createSampleLinkedInPostInSheet();
+    sheet = getTab(ss, "LinkedIn_Posts");
   }
 
   var data = sheet.getDataRange().getValues();
