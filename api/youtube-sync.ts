@@ -782,7 +782,7 @@ async function syncToSheetsAndWebhook(params: {
 
     // 2. Apps Script Webhook (dual-persistence to main spreadsheet tabs)
     try {
-        const scriptUrl = process.env.GOOGLE_SCRIPT_URL || "https://script.google.com/macros/s/AKfycby1iANcG2ks_wGav58ZPAKt_DqHutVzODSNHK1T3q4QcHiP888S4DYnbFLvTV2JZdxU/exec";
+        const scriptUrl = process.env.GOOGLE_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbxnpkQyIM_BYBc9mdR8SskAbzb74v8idiwUMbzLuqKlCGRExzNkwRLloL63KQ-uhRqCYA/exec";
 
         for (const lead of params.leads) {
             await fetch(scriptUrl, {

@@ -465,6 +465,58 @@ function doPost(e) {
     initializeAllTabs();
 
     var receivedAt = normalizeTimestamp(new Date());
+
+    // ══════════════════════════════════════════════════════════════════════
+    // EARLY EXIT: YouTube & LinkedIn sync actions bypass the full pipeline.
+    // These are automated server-side pushes — no idempotency check, no
+    // Live_Traffic_Events row, no email alerts. Just write and return.
+    // ══════════════════════════════════════════════════════════════════════
+    var earlyAction = rawPayload.action || rawPayload.event_type || "";
+
+    if (earlyAction === "sync_youtube_video" || earlyAction === "youtube_video") {
+      var ytVid = rawPayload.video || rawPayload;
+      appendRowToTab(ss, "YouTube_Videos", {
+        timestamp: receivedAt,
+        video_id: ytVid.video_id || ytVid.videoId || "",
+        title: ytVid.title || "",
+        url: ytVid.url || ("https://youtube.com/watch?v=" + (ytVid.video_id || ytVid.videoId || "")),
+        status: ytVid.status || "TRACKED",
+        views: ytVid.views || 0,
+        likes: ytVid.likes || 0,
+        comments_count: ytVid.comments_count || ytVid.commentsCount || 0,
+        watch_time_mins: ytVid.watch_time_mins || ytVid.watchTimeMinutes || 0,
+        published_at: ytVid.published_at || ytVid.publishedAt || receivedAt,
+        source: ytVid.source || "Autonomous Scheduled Scanner"
+      });
+      if (lock.hasLock()) lock.releaseLock();
+      return jsonResponse({ status: "success", action: "sync_youtube_video", video_id: ytVid.video_id || ytVid.videoId });
+    }
+
+    if (earlyAction === "sync_youtube_lead" || earlyAction === "youtube_lead") {
+      var ytLead = rawPayload.lead || rawPayload;
+      var leadRow = {
+        timestamp: receivedAt,
+        lead_id: ytLead.lead_id || ytLead.commentId || ("YT-LEAD-" + new Date().getTime()),
+        video_id: ytLead.video_id || ytLead.videoId || "",
+        video_title: ytLead.video_title || ytLead.videoTitle || "Channel Video",
+        comment_id: ytLead.comment_id || ytLead.commentId || "",
+        author_name: ytLead.author_name || ytLead.authorDisplayName || ytLead.name || "Viewer",
+        author_channel_url: ytLead.author_channel_url || ytLead.authorChannelUrl || "",
+        comment_text: ytLead.comment_text || ytLead.commentText || ytLead.notes || "",
+        reason_flagged: ytLead.reason_flagged || ytLead.reasonFlagged || "High-Intent Video Viewer",
+        confidence_score: ytLead.confidence_score || ytLead.confidenceScore || 0.95,
+        lead_category: ytLead.lead_category || ytLead.leadCategory || "SERVICE_INQUIRY",
+        airtable_record_id: ytLead.airtable_record_id || ytLead.airtableRecordId || "",
+        jira_issue_key: ytLead.jira_issue_key || ytLead.jiraIssueKey || "",
+        source: ytLead.source || "Autonomous Scheduled Scanner",
+        lead_status: ytLead.lead_status || ytLead.reviewStatus || "Potential Lead - Needs Review"
+      };
+      appendRowToTab(ss, "YouTube_Leads", leadRow);
+      console.log("YouTube lead saved: " + leadRow.lead_id + " | " + leadRow.author_name + " | " + leadRow.video_title);
+      if (lock.hasLock()) lock.releaseLock();
+      return jsonResponse({ status: "success", action: "sync_youtube_lead", lead_id: leadRow.lead_id });
+    }
+
     var p = enrichPayload(rawPayload, receivedAt);
 
     // ------------------------------------------------------------------
