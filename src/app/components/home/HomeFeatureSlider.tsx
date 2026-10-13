@@ -337,29 +337,6 @@ export default function HomeFeatureSlider() {
 
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 
-                {/* 6-Engine Interactive Selector Strip (Quick Access Pills) */}
-                <div className="mb-8 hidden lg:flex items-center justify-between gap-2 overflow-x-auto pb-2 border-b border-emerald-500/20">
-                    {homeSliders.map((slide, sIdx) => {
-                        const Icon = slide.icon;
-                        const isActive = sIdx === currentIndex;
-                        return (
-                            <button
-                                key={slide.id}
-                                onClick={() => goToSlide(sIdx)}
-                                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
-                                    isActive
-                                        ? 'bg-emerald-400 text-[#032b24] shadow-md shadow-emerald-400/20 scale-[1.02]'
-                                        : 'text-emerald-100/80 hover:text-white hover:bg-white/10 border border-emerald-400/20'
-                                }`}
-                            >
-                                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#032b24]' : 'text-emerald-400'}`} />
-                                <span>{slide.stepNumber}</span>
-                                <span className="opacity-40">|</span>
-                                <span>{slide.pillTitle}</span>
-                            </button>
-                        );
-                    })}
-                </div>
 
                 {/* Main 2-Column Hero Showcase (Balanced Desktop, Stacked Mobile) */}
                 <div className="relative">
