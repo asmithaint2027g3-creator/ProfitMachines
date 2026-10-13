@@ -134,7 +134,7 @@ export async function getLinkedInPostComments(postUrn: string, accessToken: stri
         for (const el of elements) {
             const commentText = el.message?.text || '';
             const actorUrn = el.actor || '';
-            const commentId = el.`$URN` || el.id || `li-comment-${Date.now()}`;
+            const commentId = el['$URN'] || el.id || `li-comment-${Date.now()}`;
             const createdTime = el.created?.time ? new Date(el.created.time).toISOString() : new Date().toISOString();
             const likesCount = Number(el.likesSummary?.totalLikes || 0);
 

@@ -80,7 +80,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             reasonFlagged: leadInput.reason || 'Direct video inquiry submitted via Admin Dashboard',
             confidenceScore: 0.98,
             leadCategory: leadInput.category || 'High-Intent Video Viewer',
-            reviewStatus: 'Pending Contact'
+            reviewStatus: 'Potential Lead - Needs Review'
         };
 
         let jiraKey: string | undefined;
