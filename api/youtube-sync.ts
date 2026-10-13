@@ -148,9 +148,19 @@ async function getYouTubeAccessToken(): Promise<string | null> {
     }
 }
 
-async function buildYouTubeRequest(url: string): Promise<{ url: string; headers: Record<string, string> }> {
-    const accessToken = await getYouTubeAccessToken();
+async function buildYouTubeRequest(url: string, preferApiKey = false): Promise<{ url: string; headers: Record<string, string> }> {
     const apiKey = process.env.YOUTUBE_API_KEY;
+
+    // commentThreads.list works with public API Key without requiring OAuth sensitive scopes
+    if (apiKey && (preferApiKey || url.includes('commentThreads'))) {
+        const separator = url.includes('?') ? '&' : '?';
+        return {
+            url: `${url}${separator}key=${apiKey}`,
+            headers: { 'Accept': 'application/json' }
+        };
+    }
+
+    const accessToken = await getYouTubeAccessToken();
 
     if (accessToken) {
         return {
