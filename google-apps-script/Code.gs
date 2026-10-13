@@ -2654,8 +2654,8 @@ function onOpen() {
     .addItem("📊 LinkedIn: Sync Post Views, Likes & Comments", "syncLinkedInAnalyticsFromAppsScript")
     .addItem("📢 LinkedIn: Add Sample Launch Post to Sheet", "createSampleLinkedInPostInSheet")
     .addSeparator()
-    .addItem("🎥 YouTube: Sync Channel Videos & Detect Leads", "syncYouTubePipelineFromAppsScript")
-    .addItem("🎥 YouTube: Scan Specific Video URL for Leads", "scanSpecificYouTubeVideoFromSheet")
+    .addItem("🎥 YouTube: Scan Entire Channel for Videos & Leads (All Uploads)", "syncYouTubePipelineFromAppsScript")
+    .addItem("🎥 YouTube: Add Sample Viewer Lead to Sheet & Jira", "createSampleYouTubeLeadInSheet")
     .addSeparator()
     .addItem("🧹 Purge Event/Lead Duplicates", "PURGE_DUPLICATES_FROM_ALL_TABS")
     .addItem("📁 Initialize All Tabs (Including LinkedIn & YouTube)", "INITIALIZE_ALL_TABS")
@@ -2874,9 +2874,11 @@ function syncLinkedInAnalyticsFromAppsScript() {
 
 /**
  * Triggers the YouTube video analytics & comments sync pipeline from Apps Script
+ * Scans ALL videos uploaded to the authorized YouTube channel (not single URL based)
+ * Automatically writes/upserts discovered videos to YouTube_Videos and flagged leads to YouTube_Leads
  */
-function syncYouTubePipelineFromAppsScript(optionalVideoId) {
-  var url = CONFIG.WEBSITE + "/api/youtube-sync" + (optionalVideoId ? ("?videoId=" + encodeURIComponent(optionalVideoId)) : "");
+function syncYouTubePipelineFromAppsScript() {
+  var url = CONFIG.WEBSITE + "/api/youtube-sync";
   var options = {
     method: "post",
     contentType: "application/json",
@@ -2896,35 +2898,94 @@ function syncYouTubePipelineFromAppsScript(optionalVideoId) {
 
     if (result.success) {
       var ss = getSpreadsheet();
-      if (ss && result.flaggedLeadsPreview && result.flaggedLeadsPreview.length > 0) {
-        var leadsSheet = getTab(ss, "YouTube_Leads");
-        var now = normalizeTimestamp(new Date());
-        result.flaggedLeadsPreview.forEach(function(l) {
-          leadsSheet.appendRow([
+      var now = normalizeTimestamp(new Date());
+
+      // 1. Upsert discovered channel videos to YouTube_Videos tab
+      if (ss && result.videos && result.videos.length > 0) {
+        var videosSheet = getTab(ss, "YouTube_Videos");
+        var vData = videosSheet.getDataRange().getValues();
+        var existingVidIds = [];
+        for (var vi = 1; vi < vData.length; vi++) {
+          existingVidIds.push(String(vData[vi][1] || "")); // col B is video_id
+        }
+
+        result.videos.forEach(function(v) {
+          var rowIdx = existingVidIds.indexOf(v.videoId);
+          var videoRow = [
             now,
-            l.commentId || ("YT-LEAD-" + new Date().getTime()),
-            l.videoId || "",
-            l.videoTitle || "Channel Video",
-            l.commentId || "",
-            l.author || "Viewer",
-            "",
-            l.commentText || "",
-            l.reason || "High Intent",
-            l.confidenceScore || 0.9,
-            "YouTube High-Intent Lead",
-            l.airtableRecordId || "",
-            l.jiraIssueKey || "",
-            "Channel Video Scan",
-            "Pending Review"
-          ]);
+            v.videoId,
+            v.title || "YouTube Video",
+            v.url || ("https://www.youtube.com/watch?v=" + v.videoId),
+            v.commentsDisabled ? "Comments Disabled" : "ACTIVE",
+            v.views || 0,
+            v.likes || 0,
+            v.commentsCount || 0,
+            0, // watch_time_mins
+            v.publishedAt || now,
+            "Autonomous Channel Scanner"
+          ];
+
+          if (rowIdx >= 0) {
+            // Update existing video row
+            videosSheet.getRange(rowIdx + 2, 1, 1, videoRow.length).setValues([videoRow]);
+          } else {
+            // Append new video row
+            videosSheet.appendRow(videoRow);
+            existingVidIds.push(v.videoId);
+          }
         });
       }
 
-      var successMsg = "✅ YouTube Sync Complete: " + (result.videosProcessed || 0) + " videos scanned, " + (result.potentialLeadsFlagged || 0) + " leads flagged in Airtable, Jira, and Sheets!";
+      // 2. Upsert flagged leads to YouTube_Leads tab
+      if (ss && result.flaggedLeadsPreview && result.flaggedLeadsPreview.length > 0) {
+        var leadsSheet = getTab(ss, "YouTube_Leads");
+        var lData = leadsSheet.getDataRange().getValues();
+        var existingCommentIds = [];
+        for (var li = 1; li < lData.length; li++) {
+          existingCommentIds.push(String(lData[li][4] || "")); // col E is comment_id
+        }
+
+        result.flaggedLeadsPreview.forEach(function(l) {
+          var cid = l.commentId || ("YT-LEAD-" + new Date().getTime());
+          var cRowIdx = existingCommentIds.indexOf(cid);
+          var leadRow = [
+            now,
+            "YT-LEAD-" + cid.slice(0, 16),
+            l.videoId || "",
+            l.videoTitle || "Channel Video",
+            cid,
+            l.author || "Viewer",
+            "",
+            l.commentText || "",
+            l.reason || "Commercial Intent Identified",
+            l.confidence || 0.95,
+            l.category || "PRICING",
+            l.airtableRecordId || "",
+            l.jiraIssueKey || "",
+            "Channel Upload Scan",
+            "Pending Review"
+          ];
+
+          if (cRowIdx >= 0) {
+            leadsSheet.getRange(cRowIdx + 2, 1, 1, leadRow.length).setValues([leadRow]);
+          } else {
+            leadsSheet.appendRow(leadRow);
+            existingCommentIds.push(cid);
+          }
+        });
+      }
+
+      var vCount = (result.videos ? result.videos.length : (result.metrics ? result.metrics.videosDiscovered : 0));
+      var lCount = (result.flaggedLeadsPreview ? result.flaggedLeadsPreview.length : (result.metrics ? result.metrics.leadsDetected : 0));
+      var successMsg = "✅ YouTube Channel Scan Complete!\n\n" +
+                       "📺 Channel Videos Discovered: " + vCount + "\n" +
+                       "💬 Comments Scanned: " + (result.metrics?.commentsScanned || 0) + "\n" +
+                       "🎯 Commercial Leads Flagged: " + lCount + "\n\n" +
+                       "Tabs Updated: YouTube_Videos, YouTube_Leads, Jira (PROF), and Airtable!";
       console.log(successMsg);
       try { SpreadsheetApp.getUi().alert(successMsg); } catch (e) {}
     } else {
-      var errMsg = "⚠️ YouTube Sync Notice: " + (result.error || result.errors?.[0] || "Check YouTube credentials in .env");
+      var errMsg = "⚠️ YouTube Sync Notice: " + (result.error || result.errors?.[0] || "Verify YouTube credentials");
       try { SpreadsheetApp.getUi().alert(errMsg); } catch (e) {}
     }
   } catch (err) {
@@ -2934,19 +2995,72 @@ function syncYouTubePipelineFromAppsScript(optionalVideoId) {
 }
 
 /**
- * Prompts admin in Google Sheets to enter a video ID and extract leads
+ * Inserts a starter/simulation viewer lead into YouTube_Leads and synchronizes to Jira and Airtable
  */
-function scanSpecificYouTubeVideoFromSheet() {
-  try {
-    var ui = SpreadsheetApp.getUi();
-    var response = ui.prompt("🎥 Scan YouTube Video for Leads", "Enter YouTube Video URL or Video ID:", ui.ButtonSet.OK_CANCEL);
-    if (response.getSelectedButton() === ui.Button.OK) {
-      var input = response.getResponseText().trim();
-      if (input) {
-        syncYouTubePipelineFromAppsScript(input);
+function createSampleYouTubeLeadInSheet() {
+  var url = CONFIG.WEBSITE + "/api/youtube-sync";
+  var options = {
+    method: "post",
+    contentType: "application/json",
+    headers: {
+      "Authorization": "Bearer pm2026"
+    },
+    payload: JSON.stringify({
+      action: "manual_lead",
+      adminKey: "pm2026",
+      lead: {
+        videoId: "YauYvZtPmuU",
+        videoTitle: "AI Revenue Transformation & B2B Pipeline Growth | ProfitMachines",
+        name: "Director of Demand Gen [Sample Lead]",
+        channelUrl: "https://youtube.com/@demandgen-leader",
+        category: "PRICING",
+        reason: "Inquired about enterprise pricing, package cost, and live demo booking",
+        notes: "What is your pricing model for an enterprise B2B sales team of 50 reps? Can we schedule a walkthrough demo this week?"
       }
+    }),
+    muteHttpExceptions: true
+  };
+
+  try {
+    var response = UrlFetchApp.fetch(url, options);
+    var res = JSON.parse(response.getContentText());
+
+    if (res.success) {
+      var ss = getSpreadsheet();
+      if (ss) {
+        var leadsSheet = getTab(ss, "YouTube_Leads");
+        var now = normalizeTimestamp(new Date());
+        leadsSheet.appendRow([
+          now,
+          res.lead?.leadRecordId || ("YT-LEAD-" + new Date().getTime()),
+          "YauYvZtPmuU",
+          "AI Revenue Transformation & B2B Pipeline Growth | ProfitMachines",
+          "sample-comment-" + new Date().getTime(),
+          "Director of Demand Gen [Sample Lead]",
+          "https://youtube.com/@demandgen-leader",
+          "What is your pricing model for an enterprise B2B sales team of 50 reps? Can we schedule a walkthrough demo this week?",
+          "Inquired about enterprise pricing, package cost, and live demo booking",
+          0.98,
+          "PRICING",
+          res.airtableId || "",
+          res.jiraKey || "",
+          "Channel Video Inquiry",
+          "Potential Lead - Needs Review"
+        ]);
+      }
+
+      var msg = "✅ Sample Viewer Lead Registered!\n\n" +
+                "🎯 Lead: Director of Demand Gen\n" +
+                "🏷️ Category: PRICING (Enterprise sales team)\n" +
+                "📋 Jira Issue: " + (res.jiraKey || "Created") + "\n" +
+                "🗂️ Airtable Record: " + (res.airtableId || "Created") + "\n\n" +
+                "Recorded in YouTube_Leads tab in this spreadsheet!";
+      console.log(msg);
+      try { SpreadsheetApp.getUi().alert(msg); } catch (e) {}
+    } else {
+      try { SpreadsheetApp.getUi().alert("Error: " + (res.error || res.message)); } catch (e) {}
     }
-  } catch (e) {
-    syncYouTubePipelineFromAppsScript();
+  } catch (err) {
+    console.error("Error creating sample YouTube lead: " + err);
   }
 }

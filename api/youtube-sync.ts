@@ -1073,6 +1073,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             scheduledBy: isCronExecution ? 'vercel-cron' : 'manual-trigger',
             status: syncStatus,
             completedAt,
+            videos: videos.map(v => ({
+                videoId: v.videoId,
+                title: v.title,
+                url: v.url,
+                views: v.views,
+                likes: v.likes,
+                commentsCount: v.commentsCount,
+                publishedAt: v.publishedAt,
+                commentsDisabled: v.commentsDisabled || false
+            })),
             metrics: {
                 videosDiscovered: videosProcessed,
                 commentsScanned: commentsProcessed,
