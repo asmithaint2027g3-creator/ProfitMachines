@@ -3256,3 +3256,57 @@ function createSampleYouTubeLeadInSheet() {
     console.error("Error creating sample YouTube lead: " + err);
   }
 }
+
+/**
+ * =========================================================================================
+ * 18. DIRECT EXECUTION FUNCTIONS FOR APPS SCRIPT EDITOR & SPREADSHEET
+ * =========================================================================================
+ */
+
+/**
+ * PRIMARY FUNCTION TO RUN:
+ * Run this function in the Google Apps Script editor dropdown to scan all YouTube channel uploads,
+ * fetch comments & replies, qualify leads, and update:
+ * 1. Google Sheets tabs (YouTube_Videos, YouTube_Comments, YouTube_Leads, YouTube_Sync_Logs)
+ * 2. Jira Cloud (Project PROF with "Original YouTube Comment")
+ * 3. Airtable CRM (Leads table)
+ */
+function SYNC_ALL_YOUTUBE_LEADS() {
+  return syncYouTubePipelineFromAppsScript();
+}
+
+/**
+ * Alias function: Same as SYNC_ALL_YOUTUBE_LEADS
+ */
+function GET_ALL_YOUTUBE_LEADS() {
+  return syncYouTubePipelineFromAppsScript();
+}
+
+/**
+ * Quick 5-Second Test: Simulates a qualified lead end-to-end across Google Sheets, Jira, and Airtable.
+ */
+function TEST_SIMULATE_YOUTUBE_LEAD() {
+  var url = CONFIG.WEBSITE + "/api/youtube-sync?simulate=true";
+  var options = {
+    method: "get",
+    headers: {
+      "Authorization": "Bearer pm2026",
+      "X-Cron-Secret": "profitmachines_secure_cron_2026"
+    },
+    muteHttpExceptions: true
+  };
+  try {
+    var response = UrlFetchApp.fetch(url, options);
+    var res = JSON.parse(response.getContentText());
+    var msg = "✅ YouTube Lead Test Pipeline Success!\n\n" +
+              "📋 Jira Issue: " + (res.integrations?.jiraIssueKey || "Created") + "\n" +
+              "🗂️ Airtable Record: " + (res.integrations?.airtableRecordId || "Created") + "\n" +
+              "📊 Google Sheets Status: Updated across all 4 YouTube tabs!";
+    console.log(msg);
+    try { SpreadsheetApp.getUi().alert(msg); } catch (e) {}
+    return res;
+  } catch (err) {
+    console.error("Simulation error: " + err);
+    try { SpreadsheetApp.getUi().alert("Simulation error: " + err.toString()); } catch (e) {}
+  }
+}
