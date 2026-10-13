@@ -67,7 +67,7 @@ export function recordLocalSyncLog(entry: SyncLogEntry) {
  * Gets the configured spreadsheet ID
  */
 export function getYouTubeSpreadsheetId(): string | null {
-    return process.env.YOUTUBE_SPREADSHEET_ID || null;
+    return process.env.YOUTUBE_SPREADSHEET_ID || process.env.GOOGLE_SHEET_ID || '1E6Yf0dr0QbwSnnWAZUBrndEW5dAUSNgBR5scadxyw3E';
 }
 
 /**

@@ -138,13 +138,21 @@ export async function getChannelUploadPlaylistId(channelId?: string, config?: Yo
 
     const data: any = await res.json();
     if (!data.items || data.items.length === 0) {
+        if (targetChannelId && targetChannelId.startsWith('UC')) {
+            const fallbackPlaylistId = 'UU' + targetChannelId.slice(2);
+            console.log(`[YouTube] Fallback uploads playlist for ${targetChannelId}: ${fallbackPlaylistId}`);
+            return {
+                playlistId: fallbackPlaylistId,
+                channelTitle: 'ProfitMachines YouTube Channel'
+            };
+        }
         return null;
     }
 
     const item = data.items[0];
-    const playlistId = item.contentDetails?.relatedPlaylists?.uploads;
+    const playlistId = item.contentDetails?.relatedPlaylists?.uploads || (targetChannelId?.startsWith('UC') ? 'UU' + targetChannelId.slice(2) : null);
     return {
-        playlistId,
+        playlistId: playlistId || (targetChannelId?.startsWith('UC') ? 'UU' + targetChannelId.slice(2) : ''),
         channelTitle: item.snippet?.title || 'ProfitMachines'
     };
 }
