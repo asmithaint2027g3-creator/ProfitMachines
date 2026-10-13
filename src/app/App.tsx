@@ -56,6 +56,7 @@ const DiscoveryPage = lazy(() => import('./pages/DiscoveryPage'));
 const CookieConsent = lazy(() => import('./components/CookieConsent'));
 const VisitorDashboard = lazy(() => import('./pages/VisitorDashboard'));
 const LinkedInStudio = lazy(() => import('./pages/LinkedInStudio'));
+const YouTubeDashboard = lazy(() => import('./pages/YouTubeDashboard'));
 
 function AnalyticsTracker() {
   useAnalytics();
@@ -156,7 +157,14 @@ export default function App() {
                   <Route path="/ai-revenue-operations" element={<Navigate to="/solutions#ai-revenue-operations" replace />} />
                   <Route path="/ai-revenue-acceleration" element={<Navigate to="/solutions#ai-revenue-acceleration" replace />} />
                   <Route path="/behaviour-analytics" element={<BehaviourAnalytics />} />
-                  <Route path="/analytics" element={<AnalyticsDashboard />} />
+                  <Route path="/admin/visitors" element={<VisitorDashboard />} />
+                  <Route path="/admin/linkedin" element={<LinkedInStudio />} />
+                  <Route path="/admin/analytics" element={<AnalyticsDashboard />} />
+                  <Route path="/admin/youtube" element={<YouTubeDashboard />} />
+                  {/* Legacy route redirects */}
+                  <Route path="/analytics" element={<Navigate to="/admin/analytics" replace />} />
+                  <Route path="/linkedin-studio" element={<Navigate to="/admin/linkedin" replace />} />
+                  <Route path="/youtube" element={<Navigate to="/admin/youtube" replace />} />
                   <Route path="/pricing" element={<Pricing />} />
                   <Route path="/ai-brand-acceleration" element={<Navigate to="/solutions#ai-brand-acceleration" replace />} />
                   <Route path="/ai-reputation-acceleration" element={<Navigate to="/solutions#ai-reputation-acceleration" replace />} />
@@ -181,9 +189,7 @@ export default function App() {
                   <Route path="/industries/:slug" element={<NavigateToIndustriesSection />} />
                   <Route path="/offerings/:slug" element={<DiscoveryPage />} />
                   <Route path="/products" element={<Navigate to="/demand-pulse" replace />} />
-                  <Route path="/admin/visitors" element={<VisitorDashboard />} />
-                  <Route path="/admin/linkedin" element={<LinkedInStudio />} />
-                  <Route path="/linkedin-studio" element={<Navigate to="/admin/linkedin" replace />} />
+
                 </Routes>
               </Suspense>
             </main>

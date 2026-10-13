@@ -1,9 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 /**
  * VisitorDashboard
  * Admin page at /admin/visitors
  * Reads visitor records directly from Airtable and renders a live table.
+ * Secured behind PIN-based admin authentication gate.
  */
 
 interface Visitor {
@@ -63,6 +64,15 @@ function StatCard({ label, value, icon, color }: { label: string; value: string 
 }
 
 export default function VisitorDashboard() {
+  // ── Admin Security Gate ──
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return sessionStorage.getItem('pm_admin_auth') === 'true';
+  });
+  const [passcode, setPasscode] = useState('');
+  const [passcodeError, setPasscodeError] = useState('');
+
+  // ── Dashboard State ──
   const [visitors, setVisitors] = useState<Visitor[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -88,8 +98,161 @@ export default function VisitorDashboard() {
   }, []);
 
   useEffect(() => {
+    if (!isAuthenticated) return;
     fetchVisitors();
-  }, [fetchVisitors]);
+  }, [fetchVisitors, isAuthenticated]);
+
+  // ── Security Gate Handlers ──
+  const handleUnlock = (e: React.FormEvent) => {
+    e.preventDefault();
+    const entered = passcode.trim();
+    const validPasscodes = ['pm2026', 'profitmachines2026', 'profitmachines_analytics_secure_key_2026'];
+    if (validPasscodes.includes(entered)) {
+      sessionStorage.setItem('pm_admin_auth', 'true');
+      sessionStorage.setItem('pm_admin_key', entered);
+      setIsAuthenticated(true);
+      setPasscodeError('');
+    } else {
+      setPasscodeError('Invalid Admin Passcode. Access denied.');
+    }
+  };
+
+  const handleLock = () => {
+    sessionStorage.removeItem('pm_admin_auth');
+    sessionStorage.removeItem('pm_admin_key');
+    setIsAuthenticated(false);
+    setPasscode('');
+  };
+
+  // ── Security Gate UI ──
+  if (!isAuthenticated) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #0a0f1e 0%, #0d1b2a 50%, #091a0f 100%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '24px',
+        fontFamily: "'Inter', 'Segoe UI', sans-serif",
+        color: '#e2e8f0',
+      }}>
+        <div style={{
+          maxWidth: '440px',
+          width: '100%',
+          background: 'rgba(255,255,255,0.04)',
+          border: '1px solid rgba(52,211,153,0.3)',
+          borderRadius: '24px',
+          padding: '40px 32px',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+          position: 'relative',
+          overflow: 'hidden',
+        }}>
+          <div style={{
+            position: 'absolute', top: 0, right: 0,
+            width: '120px', height: '120px',
+            background: 'rgba(52,211,153,0.08)',
+            borderRadius: '50%',
+            filter: 'blur(30px)',
+            pointerEvents: 'none',
+          }} />
+
+          <div style={{
+            width: '64px', height: '64px',
+            borderRadius: '16px',
+            background: 'rgba(52,211,153,0.15)',
+            border: '1px solid rgba(52,211,153,0.3)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            margin: '0 auto 20px',
+            fontSize: '28px',
+          }}>🔒</div>
+
+          <div style={{ textAlign: 'center' }}>
+            <span style={{
+              padding: '4px 12px',
+              borderRadius: '100px',
+              fontSize: '11px',
+              fontWeight: 700,
+              background: 'rgba(52,211,153,0.15)',
+              color: '#6ee7b7',
+              border: '1px solid rgba(52,211,153,0.25)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+            }}>Restricted Admin Area</span>
+            <h2 style={{
+              fontSize: '22px', fontWeight: 900, color: 'white',
+              marginTop: '12px', letterSpacing: '-0.02em',
+            }}>Visitor Intelligence Perimeter</h2>
+            <p style={{
+              fontSize: '12px', color: '#94a3b8',
+              marginTop: '8px', lineHeight: 1.6,
+            }}>
+              Real-time visitor tracking data is restricted to authorized administrators only. Enter your Admin Key to continue.
+            </p>
+          </div>
+
+          <form onSubmit={handleUnlock} style={{ marginTop: '24px' }}>
+            <label style={{
+              display: 'block', fontSize: '12px', fontWeight: 700,
+              color: '#6ee7b7', marginBottom: '6px',
+            }}>Admin Passcode / Security Key</label>
+            <input
+              type="password"
+              value={passcode}
+              onChange={e => { setPasscode(e.target.value); setPasscodeError(''); }}
+              placeholder="Enter admin key"
+              style={{
+                width: '100%',
+                background: 'rgba(0,0,0,0.3)',
+                border: '1px solid rgba(52,211,153,0.4)',
+                borderRadius: '12px',
+                padding: '12px 16px',
+                fontSize: '14px',
+                color: 'white',
+                outline: 'none',
+                boxSizing: 'border-box',
+              }}
+              autoFocus
+            />
+            {passcodeError && (
+              <p style={{
+                fontSize: '12px', color: '#f87171',
+                marginTop: '8px', fontWeight: 500,
+              }}>⚠️ {passcodeError}</p>
+            )}
+
+            <button
+              type="submit"
+              style={{
+                width: '100%',
+                marginTop: '16px',
+                padding: '12px',
+                borderRadius: '12px',
+                background: '#34d399',
+                color: '#0a0f1e',
+                fontWeight: 800,
+                fontSize: '14px',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '0 4px 20px rgba(52,211,153,0.2)',
+              }}
+            >🔑 Unlock Visitor Dashboard</button>
+          </form>
+
+          <div style={{
+            marginTop: '24px', paddingTop: '16px',
+            borderTop: '1px solid rgba(52,211,153,0.15)',
+            textAlign: 'center',
+          }}>
+            <a href="/" style={{
+              fontSize: '12px', color: '#64748b',
+              textDecoration: 'none',
+            }}>← Return to ProfitMachines Homepage</a>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const filtered = visitors.filter(v => {
     const matchSearch =
@@ -207,16 +370,17 @@ export default function VisitorDashboard() {
       borderBottom: '1px solid rgba(255,255,255,0.04)',
       whiteSpace: 'nowrap' as const,
     },
-    badge: (color: string) => ({
-      background: `${color}20`,
-      color,
-      border: `1px solid ${color}40`,
-      borderRadius: '6px',
-      padding: '2px 8px',
-      fontSize: '11px',
-      fontWeight: 600,
-    }),
   };
+
+  const badge = (color: string): React.CSSProperties => ({
+    background: `${color}20`,
+    color,
+    border: `1px solid ${color}40`,
+    borderRadius: '6px',
+    padding: '2px 8px',
+    fontSize: '11px',
+    fontWeight: 600,
+  });
 
   const formatTime = (iso: string) => {
     try {
@@ -245,6 +409,17 @@ export default function VisitorDashboard() {
         </div>
         <button style={styles.refreshBtn} onClick={fetchVisitors}>
           🔄 Refresh
+        </button>
+        <button
+          style={{
+            ...styles.refreshBtn,
+            background: 'rgba(239,68,68,0.1)',
+            color: '#f87171',
+            border: '1px solid rgba(239,68,68,0.2)',
+          }}
+          onClick={handleLock}
+        >
+          🔒 Lock
         </button>
       </div>
 
@@ -343,7 +518,7 @@ export default function VisitorDashboard() {
                     </span>
                   </td>
                   <td style={styles.td}>
-                    <span style={styles.badge(v.device === 'Mobile' ? '#a78bfa' : v.device === 'Tablet' ? '#f59e0b' : '#60a5fa')}>
+                    <span style={badge(v.device === 'Mobile' ? '#a78bfa' : v.device === 'Tablet' ? '#f59e0b' : '#60a5fa')}>
                       {DEVICE_ICONS[v.device] || '💻'} {v.device}
                     </span>
                   </td>

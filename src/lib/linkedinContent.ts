@@ -193,13 +193,13 @@ ProfitMachines offers an Executive Profit & Revenue Diagnostic to uncover bottle
         hashtags: ['#ExecutiveLeadership', '#ProfitOptimization', '#B2BAudit', '#ProfitMachines'],
         utmUrl: buildUtmUrl('/talk-to-expert', 'diagnostic-audit', 'pm-li-006'),
         fullPostText: '',
-        status: 'DRAFT',
+        status: 'DRAFT' as const,
         createdAt: new Date().toISOString()
     }
 ].map(post => ({
     ...post,
     fullPostText: formatFullPostText(post)
-}));
+})) as LinkedInPost[];
 
 const POSTS_STORAGE_KEY = 'pm_linkedin_posts_v1';
 

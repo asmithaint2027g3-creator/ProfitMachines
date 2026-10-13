@@ -219,6 +219,49 @@ var TAB_HEADERS = {
   Master_Event_Log: [
     "Timestamp", "Event_Name", "Event_Type", "Event_Category", "Page_Path",
     "Visitor_ID", "Session_ID", "Target_CTA_Text", "Predictive_Synergy_Score", "Traffic_Source"
+  ],
+
+  // 17. LinkedIn Dual-Publishing Post Queue & Archives
+  LinkedIn_Posts: [
+    "timestamp", "post_id", "title", "status", "hook", "body", "cta_text", "target_url",
+    "linkedin_urn", "published_at", "last_error", "author"
+  ],
+
+  // 18. LinkedIn Post Analytics & Who Saw (Impressions, Reach, Engagement)
+  LinkedIn_Post_Analytics: [
+    "timestamp", "post_id", "title", "linkedin_urn", "impressions", "unique_reach",
+    "clicks", "likes_count", "comments_count", "shares_count", "engagement_rate", "last_synced_at"
+  ],
+
+  // 19. LinkedIn Comments & Commenter Details
+  LinkedIn_Comments: [
+    "timestamp", "comment_id", "post_urn", "post_title", "commenter_name", "commenter_urn",
+    "comment_text", "comment_date", "likes_count", "lead_status", "airtable_id", "jira_key"
+  ],
+
+  // 20. LinkedIn Reactions & Who Liked
+  LinkedIn_Reactions: [
+    "timestamp", "reaction_id", "post_urn", "post_title", "actor_name", "actor_urn",
+    "reaction_type", "reaction_date"
+  ],
+
+  // 21. LinkedIn High-Intent Leads
+  LinkedIn_Leads: [
+    "timestamp", "lead_id", "post_urn", "post_title", "commenter_name", "comment_text",
+    "reason_flagged", "confidence_score", "review_status", "airtable_id", "jira_key"
+  ],
+
+  // 22. YouTube Published & Tracked Videos
+  YouTube_Videos: [
+    "timestamp", "video_id", "title", "url", "status", "views", "likes", "comments_count",
+    "watch_time_mins", "published_at", "source"
+  ],
+
+  // 23. YouTube Potential Leads (Channel Scans + Dashboard Submissions)
+  YouTube_Leads: [
+    "timestamp", "lead_id", "video_id", "video_title", "comment_id", "author_name",
+    "author_channel_url", "comment_text", "reason_flagged", "confidence_score",
+    "lead_category", "airtable_record_id", "jira_issue_key", "source", "lead_status"
   ]
 };
 
@@ -233,6 +276,14 @@ TAB_HEADERS["cilck_interactions"] = TAB_HEADERS.Click_Interactions;
 TAB_HEADERS["scroll_interactions"] = TAB_HEADERS.Scroll_Engagement;
 TAB_HEADERS["Scroll_Interactions"] = TAB_HEADERS.Scroll_Engagement;
 TAB_HEADERS["scroll_engagement"] = TAB_HEADERS.Scroll_Engagement;
+TAB_HEADERS["linkedin_posts"] = TAB_HEADERS.LinkedIn_Posts;
+TAB_HEADERS["linkedin_post_analytics"] = TAB_HEADERS.LinkedIn_Post_Analytics;
+TAB_HEADERS["linkedin_analytics"] = TAB_HEADERS.LinkedIn_Post_Analytics;
+TAB_HEADERS["linkedin_comments"] = TAB_HEADERS.LinkedIn_Comments;
+TAB_HEADERS["linkedin_reactions"] = TAB_HEADERS.LinkedIn_Reactions;
+TAB_HEADERS["linkedin_leads"] = TAB_HEADERS.LinkedIn_Leads;
+TAB_HEADERS["youtube_videos"] = TAB_HEADERS.YouTube_Videos;
+TAB_HEADERS["youtube_leads"] = TAB_HEADERS.YouTube_Leads;
 
 var CANONICAL_TABS = [
   "Live_Traffic_Events",
@@ -255,6 +306,13 @@ var CANONICAL_TABS = [
   "IP_Security_Intelligence",
   "Lead_Intelligence",
   "Master_Event_Log",
+  "LinkedIn_Posts",
+  "LinkedIn_Post_Analytics",
+  "LinkedIn_Comments",
+  "LinkedIn_Reactions",
+  "LinkedIn_Leads",
+  "YouTube_Videos",
+  "YouTube_Leads",
   "Daily_Summary",
   "Weekly_Summary",
   "Monthly_Summary"
@@ -270,6 +328,13 @@ function getCanonicalTabName(name) {
   if (clean.indexOf("long") >= 0) return "Long_Form_Leads";
   if (clean.indexOf("audit") >= 0) return "Audit_Document_Leads";
   if (clean.indexOf("management") >= 0) return "Lead_Management";
+  if (clean.indexOf("linkedinanalytic") >= 0 || clean.indexOf("linkedinpostanalytic") >= 0) return "LinkedIn_Post_Analytics";
+  if (clean.indexOf("linkedincomment") >= 0) return "LinkedIn_Comments";
+  if (clean.indexOf("linkedinreact") >= 0) return "LinkedIn_Reactions";
+  if (clean.indexOf("linkedinlead") >= 0) return "LinkedIn_Leads";
+  if (clean.indexOf("linkedin") >= 0) return "LinkedIn_Posts";
+  if (clean.indexOf("youtubelead") >= 0) return "YouTube_Leads";
+  if (clean.indexOf("youtubevid") >= 0 || clean.indexOf("youtube") >= 0) return "YouTube_Videos";
   return name;
 }
 
@@ -431,6 +496,135 @@ function doPost(e) {
     // 2. SAVE FIRST: Append to Master Telemetry Firehose
     // ------------------------------------------------------------------
     appendRowToTab(ss, "Live_Traffic_Events", p);
+
+    // ------------------------------------------------------------------
+    // 2b. DUAL-CHANNEL ROUTING: LinkedIn Posts & YouTube Intelligence
+    // ------------------------------------------------------------------
+    if (rawPayload.action === "sync_linkedin_post" || p.event_type === "linkedin_post") {
+      var liData = rawPayload.post || p;
+      appendRowToTab(ss, "LinkedIn_Posts", {
+        timestamp: receivedAt,
+        post_id: liData.post_id || liData.id || ("pm-li-" + new Date().getTime()),
+        title: liData.title || "ProfitMachines Strategy Post",
+        status: liData.status || "PUBLISHED",
+        hook: liData.hook || "",
+        body: liData.body || liData.fullPostText || "",
+        cta_text: liData.cta_text || liData.ctaText || "",
+        target_url: liData.target_url || liData.targetUrl || liData.utmUrl || CONFIG.WEBSITE,
+        linkedin_urn: liData.linkedin_urn || liData.postUrn || "",
+        published_at: liData.published_at || liData.publishedAt || receivedAt,
+        last_error: liData.last_error || "",
+        author: liData.author || "Admin Studio"
+      });
+    }
+
+    if (rawPayload.action === "sync_linkedin_analytics_batch" || p.event_type === "linkedin_analytics_batch") {
+      var analyticsList = rawPayload.analytics || [];
+      var commentsList = rawPayload.comments || [];
+      var reactionsList = rawPayload.reactions || [];
+      var leadsList = rawPayload.leads || [];
+
+      analyticsList.forEach(function(item) {
+        appendRowToTab(ss, "LinkedIn_Post_Analytics", {
+          timestamp: receivedAt,
+          post_id: item.postId || item.postUrn || ("li-" + new Date().getTime()),
+          title: item.title || "LinkedIn Post",
+          linkedin_urn: item.postUrn || "",
+          impressions: item.impressions || 0,
+          unique_reach: item.uniqueImpressions || 0,
+          clicks: item.clicks || 0,
+          likes_count: item.likesCount || 0,
+          comments_count: item.commentsCount || 0,
+          shares_count: item.sharesCount || 0,
+          engagement_rate: (item.engagementRate || 0) + "%",
+          last_synced_at: item.lastSyncedAt || receivedAt
+        });
+      });
+
+      commentsList.forEach(function(c) {
+        appendRowToTab(ss, "LinkedIn_Comments", {
+          timestamp: receivedAt,
+          comment_id: c.commentId || ("li-com-" + new Date().getTime()),
+          post_urn: c.postUrn || "",
+          post_title: c.postTitle || "LinkedIn Post",
+          commenter_name: c.actorName || "LinkedIn Member",
+          commenter_urn: c.actorUrn || "",
+          comment_text: c.commentText || "",
+          comment_date: c.createdTime || receivedAt,
+          likes_count: c.likesCount || 0,
+          lead_status: c.isPotentialLead ? "POTENTIAL_LEAD" : "STANDARD_COMMENT",
+          airtable_id: "",
+          jira_key: ""
+        });
+      });
+
+      reactionsList.forEach(function(r) {
+        appendRowToTab(ss, "LinkedIn_Reactions", {
+          timestamp: receivedAt,
+          reaction_id: r.reactionId || ("li-react-" + new Date().getTime()),
+          post_urn: r.postUrn || "",
+          post_title: r.postTitle || "LinkedIn Post",
+          actor_name: r.actorName || "LinkedIn Member",
+          actor_urn: r.actorUrn || "",
+          reaction_type: r.reactionType || "LIKE",
+          reaction_date: r.createdTime || receivedAt
+        });
+      });
+
+      leadsList.forEach(function(l) {
+        appendRowToTab(ss, "LinkedIn_Leads", {
+          timestamp: receivedAt,
+          lead_id: l.commentId || ("li-lead-" + new Date().getTime()),
+          post_urn: l.postUrn || "",
+          post_title: l.postTitle || "LinkedIn Post",
+          commenter_name: l.actorName || "LinkedIn Member",
+          comment_text: l.commentText || "",
+          reason_flagged: l.reasonFlagged || "High-Intent LinkedIn Comment",
+          confidence_score: l.confidenceScore || 90,
+          review_status: "Pending Review",
+          airtable_id: "",
+          jira_key: ""
+        });
+      });
+    }
+
+    if (rawPayload.action === "sync_youtube_video" || p.event_type === "youtube_video") {
+      var ytVid = rawPayload.video || p;
+      appendRowToTab(ss, "YouTube_Videos", {
+        timestamp: receivedAt,
+        video_id: ytVid.video_id || ytVid.videoId || "",
+        title: ytVid.title || "",
+        url: ytVid.url || ("https://youtube.com/watch?v=" + (ytVid.video_id || ytVid.videoId || "")),
+        status: ytVid.status || "TRACKED",
+        views: ytVid.views || 0,
+        likes: ytVid.likes || 0,
+        comments_count: ytVid.comments_count || ytVid.commentsCount || 0,
+        watch_time_mins: ytVid.watch_time_mins || ytVid.watchTimeMinutes || 0,
+        published_at: ytVid.published_at || ytVid.publishedAt || receivedAt,
+        source: ytVid.source || "ProfitMachines YouTube Admin"
+      });
+    }
+
+    if (rawPayload.action === "sync_youtube_lead" || p.event_type === "youtube_lead") {
+      var ytLead = rawPayload.lead || p;
+      appendRowToTab(ss, "YouTube_Leads", {
+        timestamp: receivedAt,
+        lead_id: ytLead.lead_id || ytLead.commentId || ("YT-LEAD-" + new Date().getTime()),
+        video_id: ytLead.video_id || ytLead.videoId || "",
+        video_title: ytLead.video_title || ytLead.videoTitle || "Channel Video",
+        comment_id: ytLead.comment_id || ytLead.commentId || "",
+        author_name: ytLead.author_name || ytLead.authorDisplayName || ytLead.name || "Viewer",
+        author_channel_url: ytLead.author_channel_url || ytLead.authorChannelUrl || "",
+        comment_text: ytLead.comment_text || ytLead.commentText || ytLead.notes || "",
+        reason_flagged: ytLead.reason_flagged || ytLead.reasonFlagged || "High-Intent Video Viewer",
+        confidence_score: ytLead.confidence_score || ytLead.confidenceScore || 0.95,
+        lead_category: ytLead.lead_category || ytLead.leadCategory || "YouTube High-Intent Lead",
+        airtable_record_id: ytLead.airtable_record_id || ytLead.airtableRecordId || "",
+        jira_issue_key: ytLead.jira_issue_key || ytLead.jiraIssueKey || "",
+        source: ytLead.source || "YouTube Pipeline",
+        lead_status: ytLead.lead_status || "Pending Contact"
+      });
+    }
 
     // ------------------------------------------------------------------
     // 3. ROUTE LEAD & SEND EMAIL ALERTS ONLY AFTER SUCCESSFUL SAVE
@@ -2456,8 +2650,15 @@ function onOpen() {
     .addItem("📊 Refresh & Recalculate Analytics Summaries", "BUILD_AGGREGATED_INTERVAL_SUMMARIES")
     .addItem("🔄 Master Refresh & Send All Reports", "MASTER_REFRESH_AND_SEND_REPORTS")
     .addSeparator()
+    .addItem("📢 LinkedIn: Publish Pending Posts to Company Page", "publishPendingLinkedInPostsFromSheet")
+    .addItem("📊 LinkedIn: Sync Post Views, Likes & Comments", "syncLinkedInAnalyticsFromAppsScript")
+    .addItem("📢 LinkedIn: Add Sample Launch Post to Sheet", "createSampleLinkedInPostInSheet")
+    .addSeparator()
+    .addItem("🎥 YouTube: Sync Channel Videos & Detect Leads", "syncYouTubePipelineFromAppsScript")
+    .addItem("🎥 YouTube: Scan Specific Video URL for Leads", "scanSpecificYouTubeVideoFromSheet")
+    .addSeparator()
     .addItem("🧹 Purge Event/Lead Duplicates", "PURGE_DUPLICATES_FROM_ALL_TABS")
-    .addItem("📁 Initialize All Tabs", "INITIALIZE_ALL_TABS")
+    .addItem("📁 Initialize All Tabs (Including LinkedIn & YouTube)", "INITIALIZE_ALL_TABS")
     .addSeparator()
     .addItem("⏰ Enable Automated Daily/Weekly/Monthly Reports", "setupAllProfitMachinesTriggers")
     .addToUi();
@@ -2470,4 +2671,265 @@ function escapeHtml(value) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+// =========================================================================================
+// 16. LINKEDIN DUAL-PUBLISHING ENGINE (ADMIN STUDIO + APPS SCRIPT)
+// =========================================================================================
+
+/**
+ * Publishes a single post payload to LinkedIn via ProfitMachines backend API
+ */
+function publishLinkedInPost(post) {
+  var url = CONFIG.WEBSITE + "/api/linkedin-publish";
+  var payload = {
+    postId: post.post_id || post.id || ("pm-li-" + new Date().getTime()),
+    title: post.title || "ProfitMachines B2B AI Insight",
+    fullPostText: post.fullPostText || (post.hook ? (post.hook + "\n\n" + post.body + "\n\n👉 " + post.cta_text + "\n" + (post.target_url || CONFIG.WEBSITE)) : post.body),
+    targetUrl: post.target_url || CONFIG.WEBSITE,
+    campaignSlug: post.campaign_slug || "apps_script_dispatch",
+    adminKey: "pm2026"
+  };
+
+  var options = {
+    method: "post",
+    contentType: "application/json",
+    headers: {
+      "Authorization": "Bearer pm2026"
+    },
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  };
+
+  try {
+    var response = UrlFetchApp.fetch(url, options);
+    var status = response.getResponseCode();
+    var result = JSON.parse(response.getContentText());
+    return {
+      status: status,
+      success: result.success === true,
+      postUrn: result.postUrn || "",
+      publishedAt: result.publishedAt || new Date().toISOString(),
+      error: result.error || result.message || ""
+    };
+  } catch (err) {
+    console.error("LinkedIn publish error from Apps Script: " + err);
+    return {
+      status: 500,
+      success: false,
+      error: err.toString()
+    };
+  }
+}
+
+/**
+ * Iterates over LinkedIn_Posts tab and publishes any row with status 'PENDING', 'APPROVED', or 'SCHEDULED'
+ */
+function publishPendingLinkedInPostsFromSheet() {
+  var ss = getSpreadsheet();
+  if (!ss) return;
+  var sheet = getTab(ss, "LinkedIn_Posts");
+  if (!sheet || sheet.getLastRow() < 2) {
+    try { SpreadsheetApp.getUi().alert("No LinkedIn posts found in LinkedIn_Posts tab."); } catch (e) {}
+    return;
+  }
+
+  var data = sheet.getDataRange().getValues();
+  var headers = data[0];
+  var statusIdx = headers.indexOf("status");
+  var titleIdx = headers.indexOf("title");
+  var hookIdx = headers.indexOf("hook");
+  var bodyIdx = headers.indexOf("body");
+  var ctaIdx = headers.indexOf("cta_text");
+  var urlIdx = headers.indexOf("target_url");
+  var urnIdx = headers.indexOf("linkedin_urn");
+  var pubAtIdx = headers.indexOf("published_at");
+  var errIdx = headers.indexOf("last_error");
+
+  var publishedCount = 0;
+
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i];
+    var currentStatus = String(row[statusIdx] || "").toUpperCase().trim();
+
+    if (currentStatus === "PENDING" || currentStatus === "APPROVED" || currentStatus === "SCHEDULED") {
+      var postPayload = {
+        post_id: "li-row-" + (i + 1),
+        title: row[titleIdx] || "ProfitMachines Strategy Insight",
+        hook: row[hookIdx] || "",
+        body: row[bodyIdx] || "",
+        cta_text: row[ctaIdx] || "Schedule a strategic consultation:",
+        target_url: row[urlIdx] || CONFIG.WEBSITE
+      };
+
+      var res = publishLinkedInPost(postPayload);
+      if (res.success) {
+        sheet.getRange(i + 1, statusIdx + 1).setValue("PUBLISHED");
+        if (urnIdx >= 0) sheet.getRange(i + 1, urnIdx + 1).setValue(res.postUrn);
+        if (pubAtIdx >= 0) sheet.getRange(i + 1, pubAtIdx + 1).setValue(res.publishedAt);
+        if (errIdx >= 0) sheet.getRange(i + 1, errIdx + 1).setValue("");
+        publishedCount++;
+      } else {
+        sheet.getRange(i + 1, statusIdx + 1).setValue("FAILED");
+        if (errIdx >= 0) sheet.getRange(i + 1, errIdx + 1).setValue(res.error || "Publishing rejected");
+      }
+    }
+  }
+
+  var msg = "✅ LinkedIn Batch Publishing Complete: " + publishedCount + " posts published to LinkedIn Company Page.";
+  console.log(msg);
+  try { SpreadsheetApp.getUi().alert(msg); } catch (e) {}
+}
+
+/**
+ * Inserts a starter launch post into the LinkedIn_Posts tab
+ */
+function createSampleLinkedInPostInSheet() {
+  var ss = getSpreadsheet();
+  if (!ss) return;
+  var sheet = getTab(ss, "LinkedIn_Posts");
+  var timestamp = normalizeTimestamp(new Date());
+
+  var sampleRow = [
+    timestamp,
+    "pm-li-" + new Date().getTime(),
+    "Stop Chasing Cold Leads — Capture Active Buyer Intent",
+    "PENDING",
+    "95% of your target B2B buyers are NOT in-market today. But 5% are actively researching solutions right now.",
+    "Most enterprise sales teams waste $100K+ monthly cold outreach to the 95% who don't care.\n\nProfitMachines detects the 5% in active evaluation before your competitors even know they exist. Our Autonomous AI Growth Engine monitors account-level intent spikes across 12 intelligence layers.",
+    "Book a zero-commitment AI Pipeline Diagnostic:",
+    CONFIG.WEBSITE + "/offerings/profit-pool-discovery/demand-discovery?utm_source=linkedin&utm_medium=appscript",
+    "",
+    "",
+    "",
+    "ProfitMachines Executive Bot"
+  ];
+
+  sheet.appendRow(sampleRow);
+  try { SpreadsheetApp.getUi().alert("✅ Sample post added with status 'PENDING'. Click 'Publish Pending Posts' when ready to post to LinkedIn!"); } catch (e) {}
+}
+
+/**
+ * Synchronizes LinkedIn post impressions (who saw), likes/reactions, and comments to Google Sheets
+ */
+function syncLinkedInAnalyticsFromAppsScript() {
+  var url = CONFIG.WEBSITE + "/api/linkedin-analytics";
+  var options = {
+    method: "post",
+    contentType: "application/json",
+    headers: {
+      "Authorization": "Bearer pm2026"
+    },
+    payload: JSON.stringify({
+      adminKey: "pm2026",
+      source: "google_apps_script_runner"
+    }),
+    muteHttpExceptions: true
+  };
+
+  try {
+    var response = UrlFetchApp.fetch(url, options);
+    var result = JSON.parse(response.getContentText());
+
+    if (result.success) {
+      var summary = result.summary || {};
+      var msg = "✅ LinkedIn Analytics Synchronized to Google Sheets!\n\n" +
+                "👀 Impressions (Who Saw): " + (summary.totalImpressions || 0) + "\n" +
+                "👍 Likes & Reactions: " + (summary.totalLikes || 0) + "\n" +
+                "💬 Comments: " + (summary.totalComments || 0) + "\n" +
+                "🎯 High-Intent Leads Discovered: " + (summary.leadsDiscovered || 0) + "\n\n" +
+                "Tables Updated: LinkedIn_Post_Analytics, LinkedIn_Comments, LinkedIn_Reactions, and LinkedIn_Leads.";
+      console.log(msg);
+      try { SpreadsheetApp.getUi().alert(msg); } catch (e) {}
+    } else {
+      var errMsg = "⚠️ LinkedIn Analytics Notice: " + (result.message || result.error || "Verify LinkedIn credentials");
+      try { SpreadsheetApp.getUi().alert(errMsg); } catch (e) {}
+    }
+  } catch (err) {
+    console.error("LinkedIn analytics sync error from Apps Script: " + err);
+    try { SpreadsheetApp.getUi().alert("Error running LinkedIn sync: " + err.toString()); } catch (e) {}
+  }
+}
+
+// =========================================================================================
+// 17. YOUTUBE DUAL-PIPELINE & LEAD GENERATION (CHANNEL + ADMIN DASHBOARD)
+// =========================================================================================
+
+/**
+ * Triggers the YouTube video analytics & comments sync pipeline from Apps Script
+ */
+function syncYouTubePipelineFromAppsScript(optionalVideoId) {
+  var url = CONFIG.WEBSITE + "/api/youtube-sync" + (optionalVideoId ? ("?videoId=" + encodeURIComponent(optionalVideoId)) : "");
+  var options = {
+    method: "post",
+    contentType: "application/json",
+    headers: {
+      "Authorization": "Bearer pm2026"
+    },
+    payload: JSON.stringify({
+      adminKey: "pm2026",
+      source: "google_apps_script_runner"
+    }),
+    muteHttpExceptions: true
+  };
+
+  try {
+    var response = UrlFetchApp.fetch(url, options);
+    var result = JSON.parse(response.getContentText());
+
+    if (result.success) {
+      var ss = getSpreadsheet();
+      if (ss && result.flaggedLeadsPreview && result.flaggedLeadsPreview.length > 0) {
+        var leadsSheet = getTab(ss, "YouTube_Leads");
+        var now = normalizeTimestamp(new Date());
+        result.flaggedLeadsPreview.forEach(function(l) {
+          leadsSheet.appendRow([
+            now,
+            l.commentId || ("YT-LEAD-" + new Date().getTime()),
+            l.videoId || "",
+            l.videoTitle || "Channel Video",
+            l.commentId || "",
+            l.author || "Viewer",
+            "",
+            l.commentText || "",
+            l.reason || "High Intent",
+            l.confidenceScore || 0.9,
+            "YouTube High-Intent Lead",
+            l.airtableRecordId || "",
+            l.jiraIssueKey || "",
+            "Channel Video Scan",
+            "Pending Review"
+          ]);
+        });
+      }
+
+      var successMsg = "✅ YouTube Sync Complete: " + (result.videosProcessed || 0) + " videos scanned, " + (result.potentialLeadsFlagged || 0) + " leads flagged in Airtable, Jira, and Sheets!";
+      console.log(successMsg);
+      try { SpreadsheetApp.getUi().alert(successMsg); } catch (e) {}
+    } else {
+      var errMsg = "⚠️ YouTube Sync Notice: " + (result.error || result.errors?.[0] || "Check YouTube credentials in .env");
+      try { SpreadsheetApp.getUi().alert(errMsg); } catch (e) {}
+    }
+  } catch (err) {
+    console.error("YouTube sync error from Apps Script: " + err);
+    try { SpreadsheetApp.getUi().alert("Error running YouTube sync: " + err.toString()); } catch (e) {}
+  }
+}
+
+/**
+ * Prompts admin in Google Sheets to enter a video ID and extract leads
+ */
+function scanSpecificYouTubeVideoFromSheet() {
+  try {
+    var ui = SpreadsheetApp.getUi();
+    var response = ui.prompt("🎥 Scan YouTube Video for Leads", "Enter YouTube Video URL or Video ID:", ui.ButtonSet.OK_CANCEL);
+    if (response.getSelectedButton() === ui.Button.OK) {
+      var input = response.getResponseText().trim();
+      if (input) {
+        syncYouTubePipelineFromAppsScript(input);
+      }
+    }
+  } catch (e) {
+    syncYouTubePipelineFromAppsScript();
+  }
 }

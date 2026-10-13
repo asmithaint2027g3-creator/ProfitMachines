@@ -42,6 +42,16 @@ export default function LinkedInStudio() {
     const [schedulingPost, setSchedulingPost] = useState<LinkedInPost | null>(null);
     const [scheduleDateTime, setScheduleDateTime] = useState('');
 
+    // LinkedIn Post Analytics & Engagement State
+    const [isSyncingAnalytics, setIsSyncingAnalytics] = useState(false);
+    const [analyticsSummary, setAnalyticsSummary] = useState<{
+        totalImpressions: number;
+        totalLikes: number;
+        totalComments: number;
+        leadsDiscovered: number;
+        lastSyncedAt?: string;
+    } | null>(null);
+
     useEffect(() => {
         const loaded = getStoredPosts();
         setPosts(loaded);
@@ -68,6 +78,45 @@ export default function LinkedInStudio() {
             });
         } finally {
             setIsCheckingApi(false);
+        }
+    };
+
+    const handleSyncAnalytics = async () => {
+        setIsSyncingAnalytics(true);
+        const adminKey = sessionStorage.getItem('pm_admin_key') || 'pm2026';
+        try {
+            const res = await fetch('/api/linkedin-analytics', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${adminKey}`
+                },
+                body: JSON.stringify({ adminKey })
+            });
+
+            const data = await res.json();
+            if (res.ok && data.success) {
+                setAnalyticsSummary({
+                    ...data.summary,
+                    lastSyncedAt: new Date().toLocaleTimeString()
+                });
+                setActionMessage({
+                    type: 'success',
+                    text: `✅ LinkedIn Analytics Synced: ${data.summary.totalImpressions} views/impressions, ${data.summary.totalLikes} likes/reactions, ${data.summary.totalComments} comments, and ${data.summary.leadsDiscovered} leads recorded into Google Sheets!`
+                });
+            } else {
+                setActionMessage({
+                    type: 'error',
+                    text: data.message || 'LinkedIn analytics sync returned a warning.'
+                });
+            }
+        } catch (err: any) {
+            setActionMessage({
+                type: 'error',
+                text: `Network failure syncing LinkedIn analytics: ${err.message}`
+            });
+        } finally {
+            setIsSyncingAnalytics(false);
         }
     };
 
@@ -428,12 +477,17 @@ export default function LinkedInStudio() {
                                 <p className="text-xs text-slate-300 mt-1">
                                     Publishing Target: <strong className="text-emerald-300">ProfitMachines Company Page</strong> &nbsp;•&nbsp; 
                                     Personal Profiles: <strong className="text-slate-400">Blocked by policy</strong> &nbsp;•&nbsp; 
-                                    Airtable & Jira Attribution: <strong className="text-emerald-300">Active</strong>
+                                    Airtable & Jira Attribution: <strong className="text-emerald-300">Active</strong> &nbsp;•&nbsp; 
+                                    Google Apps Script Publishing: <strong className="text-emerald-300">Enabled (LinkedIn_Posts Tab)</strong>
                                 </p>
                             </div>
                         </div>
 
                         <div className="flex items-center gap-3">
+                            <span className="text-[11px] px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5">
+                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                Apps Script Dual-Publish Ready
+                            </span>
                             <button
                                 onClick={checkApiDiagnostics}
                                 disabled={isCheckingApi}
@@ -481,7 +535,95 @@ export default function LinkedInStudio() {
             )}
 
             {/* Main Content Area */}
-            <div className="max-w-7xl mx-auto px-6 sm:px-12 mt-8">
+            <div className="max-w-7xl mx-auto px-6 sm:px-12 mt-8 space-y-6">
+                {/* LinkedIn Analytics & Engagement Grid */}
+                <div className="bg-[#052319] border border-emerald-700/40 rounded-2xl p-6 shadow-xl">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-emerald-800/40">
+                        <div>
+                            <div className="flex items-center gap-2">
+                                <h3 className="font-bold text-white text-base flex items-center gap-2">
+                                    <Eye className="w-4 h-4 text-emerald-400" /> LinkedIn Post Analytics & Google Sheets Sync
+                                </h3>
+                                <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                    AUTO SYNC
+                                </span>
+                            </div>
+                            <p className="text-xs text-slate-300 mt-1">
+                                Tracks who saw your posts, who liked/reacted, who commented, and identifies buyer leads into Google Sheets, Airtable, & Jira.
+                            </p>
+                        </div>
+
+                        <button
+                            onClick={handleSyncAnalytics}
+                            disabled={isSyncingAnalytics}
+                            className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
+                                isSyncingAnalytics
+                                    ? 'bg-emerald-700/50 text-slate-300 cursor-not-allowed'
+                                    : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-md shadow-emerald-500/20'
+                            }`}
+                        >
+                            <RefreshCw className={`w-3.5 h-3.5 ${isSyncingAnalytics ? 'animate-spin' : ''}`} />
+                            {isSyncingAnalytics ? 'Syncing with LinkedIn & Sheet...' : 'Sync Views, Likes & Comments to Sheet'}
+                        </button>
+                    </div>
+
+                    {/* Metric Cards */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
+                        <div className="bg-[#02130d] border border-emerald-900/50 rounded-xl p-4">
+                            <div className="text-xs text-slate-400 flex items-center gap-1.5">
+                                <Eye className="w-3.5 h-3.5 text-sky-400" /> Impressions (Who Saw)
+                            </div>
+                            <div className="text-2xl font-black text-white mt-1">
+                                {analyticsSummary ? analyticsSummary.totalImpressions.toLocaleString() : 'Live on Sync'}
+                            </div>
+                            <div className="text-[11px] text-slate-400 mt-0.5">
+                                Total viewers reached across posts
+                            </div>
+                        </div>
+
+                        <div className="bg-[#02130d] border border-emerald-900/50 rounded-xl p-4">
+                            <div className="text-xs text-slate-400 flex items-center gap-1.5">
+                                <ThumbsUp className="w-3.5 h-3.5 text-emerald-400" /> Likes & Reactions
+                            </div>
+                            <div className="text-2xl font-black text-white mt-1">
+                                {analyticsSummary ? analyticsSummary.totalLikes.toLocaleString() : 'Live on Sync'}
+                            </div>
+                            <div className="text-[11px] text-slate-400 mt-0.5">
+                                Reacters logged in <code className="text-emerald-300">LinkedIn_Reactions</code>
+                            </div>
+                        </div>
+
+                        <div className="bg-[#02130d] border border-emerald-900/50 rounded-xl p-4">
+                            <div className="text-xs text-slate-400 flex items-center gap-1.5">
+                                <MessageSquare className="w-3.5 h-3.5 text-teal-400" /> Post Comments
+                            </div>
+                            <div className="text-2xl font-black text-white mt-1">
+                                {analyticsSummary ? analyticsSummary.totalComments.toLocaleString() : 'Live on Sync'}
+                            </div>
+                            <div className="text-[11px] text-slate-400 mt-0.5">
+                                Stored in <code className="text-emerald-300">LinkedIn_Comments</code>
+                            </div>
+                        </div>
+
+                        <div className="bg-[#02130d] border border-emerald-900/50 rounded-xl p-4">
+                            <div className="text-xs text-slate-400 flex items-center gap-1.5">
+                                <Sparkles className="w-3.5 h-3.5 text-amber-400" /> Buyer Leads Flagged
+                            </div>
+                            <div className="text-2xl font-black text-amber-300 mt-1">
+                                {analyticsSummary ? analyticsSummary.leadsDiscovered : '0'}
+                            </div>
+                            <div className="text-[11px] text-slate-400 mt-0.5">
+                                Synced to Airtable CRM & Jira PROF
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-emerald-900/30 text-[11px] text-slate-400 flex items-center justify-between">
+                        <span>Google Sheet Tabs: <strong className="text-emerald-300">LinkedIn_Post_Analytics, LinkedIn_Comments, LinkedIn_Reactions, LinkedIn_Leads</strong></span>
+                        <span>{analyticsSummary?.lastSyncedAt ? `Last Synced: ${analyticsSummary.lastSyncedAt}` : 'Click button above to run sync'}</span>
+                    </div>
+                </div>
+
                 {/* Status Tabs */}
                 <div className="flex items-center gap-2 border-b border-emerald-900/40 pb-4 overflow-x-auto">
                     {(['ALL', 'DRAFT', 'APPROVED', 'SCHEDULED', 'PUBLISHED'] as const).map(tab => (

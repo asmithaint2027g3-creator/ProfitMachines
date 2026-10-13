@@ -170,8 +170,34 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         if (response.ok || status === 201) {
             const data: any = await response.json().catch(() => ({}));
             const postUrn = data.id || `urn:li:share:${Date.now()}`;
+            const publishedAt = new Date().toISOString();
 
             console.log(`[LinkedIn Publisher] Post successfully published! URN: ${postUrn}`);
+
+            // Dual Sync: Automatically push to Google Sheets via Apps Script Webhook
+            try {
+                const scriptUrl = process.env.GOOGLE_SCRIPT_URL || "https://script.google.com/macros/s/AKfycbxnpkQyIM_BYBc9mdR8SskAbzb74v8idiwUMbzLuqKlCGRExzNkwRLloL63KQ-uhRqCYA/exec";
+                await fetch(scriptUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'sync_linkedin_post',
+                        event_type: 'linkedin_post',
+                        post: {
+                            post_id: postId,
+                            title: title || 'LinkedIn Post',
+                            status: 'PUBLISHED',
+                            body: fullPostText,
+                            target_url: targetUrl || 'https://profit-machines.vercel.app',
+                            linkedin_urn: postUrn,
+                            published_at: publishedAt,
+                            author: authorUrn
+                        }
+                    })
+                }).catch(() => {});
+            } catch (sheetSyncErr) {
+                console.warn('[LinkedIn Publisher] Notice syncing to Google Sheet:', sheetSyncErr);
+            }
 
             return res.status(200).json({
                 success: true,
@@ -179,9 +205,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 postId,
                 postUrn,
                 companyPageUrl: `https://www.linkedin.com/company/${orgId}/`,
-                publishedAt: new Date().toISOString(),
+                publishedAt,
                 author: authorUrn,
-                message: 'Successfully published post to ProfitMachines LinkedIn Company Page!'
+                message: 'Successfully published post to ProfitMachines LinkedIn Company Page and synced to Google Sheets!'
             });
         }
 
