@@ -348,11 +348,11 @@ export default function HomeFeatureSlider() {
                                 onClick={() => goToSlide(sIdx)}
                                 className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                                     isActive
-                                        ? 'bg-white text-[#064e3b] shadow-md scale-102'
-                                        : 'text-emerald-100/80 hover:text-white hover:bg-emerald-900/50'
+                                        ? 'bg-emerald-400 text-[#032b24] shadow-md shadow-emerald-400/20 scale-[1.02]'
+                                        : 'text-emerald-100/80 hover:text-white hover:bg-white/10 border border-emerald-400/20'
                                 }`}
                             >
-                                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#064e3b]' : 'text-emerald-400'}`} />
+                                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#032b24]' : 'text-emerald-400'}`} />
                                 <span>{slide.stepNumber}</span>
                                 <span className="opacity-40">|</span>
                                 <span>{slide.pillTitle}</span>
@@ -374,30 +374,26 @@ export default function HomeFeatureSlider() {
                         >
                             {/* Left Content Column */}
                             <div className="lg:col-span-6 flex flex-col justify-center">
-                                
-                                {/* Step Tag Pill */}
+                                                              {/* Step Tag Pill / Eyebrow with glowing mint pulse dot */}
                                 <div className="flex items-center gap-2.5 mb-4">
-                                    <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/70 border border-emerald-400/40 text-emerald-300 text-xs font-bold tracking-wide uppercase shadow-xs">
-                                        <span className="relative flex h-2 w-2">
-                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
-                                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-                                        </span>
+                                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-400/40 text-emerald-300 text-xs font-semibold tracking-wide uppercase shadow-xs backdrop-blur-md">
+                                        <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] inline-block animate-pulse"></span>
                                         <span className="font-mono text-emerald-300 font-extrabold">{activeSlide.stepNumber}</span>
-                                        <span className="text-emerald-400/60 font-normal">//</span>
+                                        <span className="text-emerald-400/60 font-normal">·</span>
                                         <span>{activeSlide.tag}</span>
-                                    </span>
+                                    </div>
                                 </div>
 
-                                {/* Main Headline (High Contrast White & Mint Highlight) */}
+                                {/* Main Headline (High Contrast White & Mint Highlight with GreenData-style leading) */}
                                 <h1 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-extrabold text-white leading-[1.12] tracking-tight mb-4 font-heading">
                                     {activeSlide.title}{' '}
-                                    <span className="text-emerald-300">
+                                    <span className="text-emerald-300 italic">
                                         {activeSlide.highlightTitle}
                                     </span>
                                 </h1>
 
                                 {/* Supporting Paragraph */}
-                                <p className="text-base sm:text-lg text-emerald-100/90 leading-relaxed mb-6 font-normal">
+                                <p className="text-base sm:text-lg text-emerald-100/90 leading-relaxed mb-6 font-normal max-w-xl">
                                     {activeSlide.description}
                                 </p>
 
@@ -416,8 +412,8 @@ export default function HomeFeatureSlider() {
                                 </div>
 
                                 {/* Action Buttons Group */}
-                                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-8">
-                                    {/* Primary CTA (Opens Quick Inquiry Form Modal) */}
+                                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6">
+                                    {/* Primary CTA (Mint Accent Button with Arrow - GreenData style) */}
                                     <button
                                         onClick={() => {
                                             trackEvent({ eventName: 'SLIDER_PRIMARY_CTA_CLICK', label: activeSlide.primaryCta.text });
@@ -427,18 +423,18 @@ export default function HomeFeatureSlider() {
                                                 title: activeSlide.primaryCta.text
                                             });
                                         }}
-                                        className="w-full sm:w-auto bg-white hover:bg-emerald-50 text-[#064e3b] font-bold px-7 py-3.5 rounded-lg shadow-lg hover:shadow-xl text-sm sm:text-base transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer"
+                                        className="w-full sm:w-auto bg-emerald-400 hover:bg-emerald-300 text-[#032b24] font-bold px-7 py-3.5 rounded-lg shadow-[0_4px_14px_rgba(52,211,153,0.3)] hover:shadow-[0_6px_20px_rgba(52,211,153,0.45)] text-sm sm:text-base transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer hover:-translate-y-0.5"
                                     >
-                                        <Zap className="w-4 h-4 text-[#064e3b]" />
+                                        <Zap className="w-4 h-4 text-[#032b24]" />
                                         <span>{activeSlide.primaryCta.text}</span>
                                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </button>
 
-                                    {/* Secondary CTA (Navigates to Existing Vertical Destination) */}
+                                    {/* Secondary CTA (Dark Glass Secondary - GreenData style) */}
                                     <Link 
                                         to={activeSlide.secondaryCta.link}
                                         onClick={() => trackEvent({ eventName: 'SLIDER_SECONDARY_CTA_CLICK', label: activeSlide.secondaryCta.text })}
-                                        className="w-full sm:w-auto border-2 border-emerald-400/50 hover:border-emerald-300 bg-emerald-900/30 hover:bg-emerald-800/50 text-white font-semibold px-6 py-3.5 rounded-lg text-sm sm:text-base transition-all duration-200 flex items-center justify-center gap-2 text-center"
+                                        className="w-full sm:w-auto border border-emerald-400/40 hover:border-emerald-300 bg-white/10 hover:bg-white/15 backdrop-blur-md text-white hover:text-emerald-200 font-semibold px-6 py-3.5 rounded-lg text-sm sm:text-base transition-all duration-200 flex items-center justify-center gap-2 text-center hover:-translate-y-0.5"
                                     >
                                         <span>{activeSlide.secondaryCta.text}</span>
                                     </Link>
@@ -451,11 +447,16 @@ export default function HomeFeatureSlider() {
                                                 source: `Hero Slider Detailed Assessment (${activeSlide.tag})`
                                             });
                                         }}
-                                        className="text-xs text-emerald-200/90 hover:text-white underline font-semibold flex items-center justify-center gap-1 sm:ml-2 py-2"
+                                        className="text-xs text-emerald-300/90 hover:text-white underline font-semibold flex items-center justify-center gap-1 sm:ml-2 py-2"
                                     >
                                         <FileText className="w-3.5 h-3.5" />
                                         <span>Detailed Assessment</span>
                                     </button>
+                                </div>
+
+                                {/* Hero Meta Strip (Reference Spec - GreenData style) */}
+                                <div className="font-mono text-[11px] text-emerald-300/80 flex items-center gap-2 mb-6">
+                                    <span>Ref: PM-AI-REV/2026/0{currentIndex + 1} · Autonomous Revenue OS · Verified Enterprise Outcomes</span>
                                 </div>
 
                                 {/* Key Metrics Strip (Underneath CTAs, Exactly Like Reference Screenshot) */}

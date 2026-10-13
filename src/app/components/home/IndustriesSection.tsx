@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { 
     Briefcase, Factory, ShoppingBag, Landmark, Code, Rocket, Building2, 
     HeartPulse, GraduationCap, ShoppingCart, Home, Zap, ArrowRight, CheckCircle2,
@@ -121,9 +121,9 @@ export default function IndustriesSection() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        <div className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-[#053d2e] font-bold text-xs uppercase tracking-wider mb-4 border border-emerald-100 shadow-sm">
-                            <Sparkles className="w-3.5 h-3.5" />
-                            Sector Expertise
+                        <div className="eyebrow mb-3">
+                            <span className="dot"></span>
+                            <span>Sector Expertise · Domain Models</span>
                         </div>
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight font-heading">
                             Tailored For <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#064e3b] via-emerald-700 to-teal-700">Your Industry's Growth Model</span>
@@ -133,8 +133,8 @@ export default function IndustriesSection() {
                         </p>
                     </motion.div>
 
-                    {/* Sector Filter Tabs */}
-                    <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
+                    {/* Sector Filter Tabs - GreenData Style */}
+                    <div className="inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-[#DDEBE4]/60 border border-emerald-900/10 mt-8 shadow-xs">
                         {sectorFilters.map((filter) => (
                             <button
                                 key={filter}
@@ -142,10 +142,10 @@ export default function IndustriesSection() {
                                     setSelectedSector(filter);
                                     trackEvent({ eventName: 'FILTER_INDUSTRIES_CLICK', label: filter });
                                 }}
-                                className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
+                                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 ${
                                     selectedSector === filter
-                                        ? 'bg-slate-900 text-white shadow-md'
-                                        : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
+                                        ? 'bg-[#064e3b] text-white shadow-sm'
+                                        : 'text-slate-700 hover:text-[#064e3b] hover:bg-white/80'
                                 }`}
                             >
                                 {filter === 'all' ? 'All Sectors (09)' : filter}

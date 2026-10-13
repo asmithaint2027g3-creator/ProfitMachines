@@ -42,26 +42,30 @@ export default function Footer() {
     };
 
     return (
-        <footer className="bg-slate-900 pt-16 pb-8 border-t border-slate-800 font-sans text-slate-400 relative overflow-hidden">
+        <footer className="bg-[#021a15] pt-16 pb-8 border-t border-emerald-900/40 font-sans text-slate-300 relative overflow-hidden">
             {/* Background Decoration */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-emerald-900/15 rounded-full blur-[140px] opacity-60"></div>
-                <div className="absolute bottom-[-20%] left-[-10%] w-[800px] h-[800px] bg-teal-900/15 rounded-full blur-[140px] opacity-50"></div>
+                <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-emerald-900/20 rounded-full blur-[140px] opacity-60"></div>
+                <div className="absolute bottom-[-20%] left-[-10%] w-[800px] h-[800px] bg-teal-900/20 rounded-full blur-[140px] opacity-50"></div>
             </div>
 
             <div className="max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-                {/* Footer CTA Section */}
-                <div className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 mb-16 text-center lg:text-left flex flex-col lg:flex-row items-center justify-between gap-8">
+                {/* Footer CTA Section - GreenData Architecture Banner */}
+                <div className="bg-[#032b24] border border-emerald-400/25 rounded-3xl p-8 md:p-12 mb-16 text-center lg:text-left flex flex-col lg:flex-row items-center justify-between gap-8 shadow-xl">
                     <div className="max-w-2xl">
-                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Ready to Build Your Next AI Product?</h2>
-                        <p className="text-slate-400 text-lg">Let's discuss your requirements and recommend the right AI solution.</p>
+                        <div className="eyebrow text-emerald-300 mb-2">
+                            <span className="dot"></span>
+                            <span>Executive Advisory Desk</span>
+                        </div>
+                        <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-2 font-heading">Ready to Build Your Next AI Product?</h2>
+                        <p className="text-emerald-100/80 text-base md:text-lg">Let's discuss your requirements and recommend the right AI solution.</p>
                     </div>
                     <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full lg:w-auto">
-                        <Link to="/book-consultation" className="btn-cta-primary w-full sm:w-auto">
-                            Book Free Consultation
+                        <Link to="/book-consultation" className="btn-accent w-full sm:w-auto">
+                            <span>Book Free Consultation</span>
                         </Link>
-                        <a href="mailto:connect@profitmachines.com" className="btn-cta-secondary text-slate-300 border-white/20 hover:bg-white/10 hover:border-white/30 hover:text-white w-full sm:w-auto">
+                        <a href="mailto:connect@profitmachines.com" className="btn-dark-secondary w-full sm:w-auto">
                             Email Us Directly
                         </a>
                     </div>
@@ -74,28 +78,34 @@ export default function Footer() {
                     <div className="lg:col-span-4 space-y-6 lg:pr-8">
                         {/* Brand */}
                         <div>
-                            <Link to="/" className="inline-block mb-1">
-                                <div className="flex items-center gap-2">
-                                    <div className="text-xl md:text-2xl font-extrabold tracking-tight text-white flex items-center gap-0.5 font-heading">
-                                        <span>Profit</span>
-                                        <span className="text-emerald-600">Machines</span>
+                            <Link to="/" className="inline-block mb-3">
+                                <div className="flex items-center gap-2.5">
+                                    <div className="w-9 h-9 rounded-xl bg-emerald-950 border border-emerald-400/40 flex items-center justify-center font-extrabold text-[12px] text-emerald-300 shadow-sm">PM</div>
+                                    <div className="flex flex-col">
+                                        <div className="text-xl md:text-2xl font-extrabold tracking-tight text-white flex items-center gap-0.5 font-heading">
+                                            <span>Profit</span>
+                                            <span className="text-emerald-400">Machines</span>
+                                        </div>
+                                        <span className="text-[9px] font-mono font-bold tracking-[0.16em] uppercase text-emerald-400/70">
+                                            Autonomous Revenue OS
+                                        </span>
                                     </div>
                                 </div>
                             </Link>
-                            <p className="text-slate-400 leading-relaxed mb-8 font-medium text-sm max-w-sm">
+                            <p className="text-emerald-100/70 leading-relaxed mb-8 font-normal text-sm max-w-sm">
                                 Building Enterprise AI Solutions for the Future. AI. Cloud. Automation. Software. Delivered End-to-End.
                             </p>
 
                             <div className="space-y-4 mb-8">
-                                <a href="mailto:connect@profitmachines.com" className="group flex items-center gap-4 text-slate-400 hover:text-white transition-colors duration-300">
-                                    <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-emerald-600 group-hover:bg-[#064e3b] transition-all">
-                                        <Mail className="w-4 h-4" />
+                                <a href="mailto:connect@profitmachines.com" className="group flex items-center gap-4 text-emerald-100/80 hover:text-white transition-colors duration-200">
+                                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-emerald-500/20 flex items-center justify-center group-hover:border-emerald-400 group-hover:bg-[#064e3b] transition-all">
+                                        <Mail className="w-4 h-4 text-emerald-300" />
                                     </div>
                                     <span className="font-medium text-sm tracking-wide">connect@profitmachines.com</span>
                                 </a>
-                                <a href="tel:+919513288612" className="group flex items-center gap-4 text-slate-400 hover:text-white transition-colors duration-300">
-                                    <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-emerald-600 group-hover:bg-[#064e3b] transition-all">
-                                        <Phone className="w-4 h-4" />
+                                <a href="tel:+919513288612" className="group flex items-center gap-4 text-emerald-100/80 hover:text-white transition-colors duration-200">
+                                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-emerald-500/20 flex items-center justify-center group-hover:border-emerald-400 group-hover:bg-[#064e3b] transition-all">
+                                        <Phone className="w-4 h-4 text-emerald-300" />
                                     </div>
                                     <span className="font-medium text-sm tracking-wide">+91 9513288612</span>
                                 </a>
@@ -103,7 +113,7 @@ export default function Footer() {
 
                             <div className="flex gap-4">
                                 {[Linkedin, Twitter, Facebook].map((Icon, i) => (
-                                    <a key={i} href="#" aria-label={['LinkedIn', 'Twitter', 'Facebook'][i]} title={['LinkedIn', 'Twitter', 'Facebook'][i]} className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-[#064e3b] hover:border-emerald-500 transition-all hover:shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:-translate-y-1">
+                                    <a key={i} href="#" aria-label={['LinkedIn', 'Twitter', 'Facebook'][i]} title={['LinkedIn', 'Twitter', 'Facebook'][i]} className="w-10 h-10 rounded-xl bg-white/5 border border-emerald-500/20 flex items-center justify-center text-emerald-200 hover:text-white hover:bg-[#064e3b] hover:border-emerald-400 transition-all hover:shadow-[0_0_15px_rgba(52,211,153,0.35)] hover:-translate-y-1">
                                         <Icon className="w-4 h-4" />
                                         <span className="sr-only">{['LinkedIn', 'Twitter', 'Facebook'][i]}</span>
                                     </a>
@@ -112,16 +122,16 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Navigation Grid - 4 Columns */}
+                    {/* Navigation Grid - 4 Columns with GreenData Mono Mint Headings */}
                     <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
 
                         {/* Column 1: Quick Links */}
                         <div className="space-y-4">
-                            <h3 className="text-[11px] font-bold text-slate-300 uppercase tracking-widest border-b border-white/10 pb-3">Quick Links</h3>
+                            <h3 className="text-xs font-mono font-bold text-emerald-300 uppercase tracking-[0.14em] border-b border-white/10 pb-3">Quick Links</h3>
                             <ul className="space-y-3 text-[13px]">
                                 {Object.keys(quickLinks).map((item, i) => (
                                     <li key={i}>
-                                        <Link to={quickLinks[item]} className="text-slate-400 hover:text-emerald-400 transition-all duration-300 block hover:translate-x-1 font-medium">
+                                        <Link to={quickLinks[item]} className="text-emerald-100/70 hover:text-emerald-300 transition-colors block hover:translate-x-1 font-medium">
                                             {item}
                                         </Link>
                                     </li>
@@ -131,11 +141,11 @@ export default function Footer() {
 
                         {/* Column 2: Solutions */}
                         <div className="space-y-4">
-                            <h3 className="text-[11px] font-bold text-slate-300 uppercase tracking-widest border-b border-white/10 pb-3">Solutions</h3>
+                            <h3 className="text-xs font-mono font-bold text-emerald-300 uppercase tracking-[0.14em] border-b border-white/10 pb-3">Solutions</h3>
                             <ul className="space-y-3 text-[13px]">
                                 {Object.keys(solutionsLinks).map((item, i) => (
                                     <li key={i}>
-                                        <Link to={solutionsLinks[item]} className="text-slate-400 hover:text-emerald-400 transition-all duration-300 block hover:translate-x-1 font-medium">
+                                        <Link to={solutionsLinks[item]} className="text-emerald-100/70 hover:text-emerald-300 transition-colors block hover:translate-x-1 font-medium">
                                             {item}
                                         </Link>
                                     </li>
@@ -145,11 +155,11 @@ export default function Footer() {
 
                         {/* Column 3: Industries */}
                         <div className="space-y-4">
-                            <h3 className="text-[11px] font-bold text-slate-300 uppercase tracking-widest border-b border-white/10 pb-3">Industries</h3>
+                            <h3 className="text-xs font-mono font-bold text-emerald-300 uppercase tracking-[0.14em] border-b border-white/10 pb-3">Industries</h3>
                             <ul className="space-y-3 text-[13px]">
                                 {Object.keys(industriesLinks).map((item, i) => (
                                     <li key={i}>
-                                        <Link to={industriesLinks[item]} className="text-slate-400 hover:text-emerald-400 transition-all duration-300 block hover:translate-x-1 font-medium">
+                                        <Link to={industriesLinks[item]} className="text-emerald-100/70 hover:text-emerald-300 transition-colors block hover:translate-x-1 font-medium">
                                             {item}
                                         </Link>
                                     </li>
@@ -159,11 +169,11 @@ export default function Footer() {
 
                         {/* Column 4: Technologies */}
                         <div className="space-y-4">
-                            <h3 className="text-[11px] font-bold text-slate-300 uppercase tracking-widest border-b border-white/10 pb-3">Technologies</h3>
+                            <h3 className="text-xs font-mono font-bold text-emerald-300 uppercase tracking-[0.14em] border-b border-white/10 pb-3">Technologies</h3>
                             <ul className="space-y-3 text-[13px]">
                                 {Object.keys(techLinks).map((item, i) => (
                                     <li key={i}>
-                                        <Link to={techLinks[item]} className="text-slate-400 hover:text-emerald-400 transition-all duration-300 block hover:translate-x-1 font-medium">
+                                        <Link to={techLinks[item]} className="text-emerald-100/70 hover:text-emerald-300 transition-colors block hover:translate-x-1 font-medium">
                                             {item}
                                         </Link>
                                     </li>

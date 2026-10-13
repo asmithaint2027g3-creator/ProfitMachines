@@ -47,6 +47,34 @@
     --teal-mint: #34d399;
     --teal-mint-light: #6ee7b7;
 
+    /* GreenData Design Reference Tokens - Adapted with ProfitMachines Emerald Brand */
+    --c-evergreen: #064e3b;
+    --c-dark-green: #032b24;
+    --c-deep-green: #021a15;
+    --c-forest: #0b4d42;
+    --c-soft-sage: #DDEBE4;
+    --c-muted-mint: #BFDCD0;
+    --c-accent-mint: #34D399;
+    --c-accent-glow: rgba(52, 211, 153, 0.22);
+    --c-warm-offwhite: #F7F8F5;
+    --c-paper-surface: #FFFFFF;
+    --c-charcoal: #18211F;
+    --c-slate-text: #2D3A37;
+    --c-muted-grey: #66736E;
+    --c-light-grey: #8A9994;
+    --c-border-light: #E2E8E4;
+    --c-border-medium: #CBD7D1;
+    --c-border-strong: #9CB2A9;
+    --c-dark-bg: #032b24;
+    --c-dark-surface: #06392f;
+    --c-dark-card: #084337;
+    --c-dark-card-hover: #0c5244;
+    --c-dark-border: rgba(221, 235, 228, 0.14);
+    --c-dark-border-hover: rgba(52, 211, 153, 0.4);
+    --c-dark-text-primary: #F7F8F5;
+    --c-dark-text-secondary: #BFDCD0;
+    --c-dark-text-muted: #8A9994;
+
     /* Data Visualization / Charts - Harmonious Palette */
     --chart-1: #064e3b;
     --chart-2: #059669;
@@ -68,7 +96,7 @@
     --sidebar-ring: #064e3b;
 
     /* Typography */
-    --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-sans: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
     --font-heading: 'Plus Jakarta Sans', 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 }

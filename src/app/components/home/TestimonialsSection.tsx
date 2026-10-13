@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -66,7 +66,10 @@ export default function TestimonialsSection() {
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
                     <div>
-                        <div className="text-xs font-extrabold text-[#064e3b] uppercase tracking-widest mb-3">Client Success</div>
+                        <div className="eyebrow mb-3">
+                            <span className="dot"></span>
+                            <span>Client Success &amp; Executive Validation</span>
+                        </div>
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-heading">
                             Proven by{' '}
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#064e3b] to-emerald-600">
@@ -75,24 +78,24 @@ export default function TestimonialsSection() {
                         </h2>
                     </div>
 
-                    {/* Pagination controls */}
+                    {/* Pagination controls - GreenData Style */}
                     <div className="flex items-center gap-3 shrink-0">
-                        <span className="text-sm font-medium text-slate-500">{page + 1} / {totalPages}</span>
+                        <span className="text-xs font-mono font-bold text-slate-400">0{page + 1} / 0{totalPages}</span>
                         <button
                             onClick={() => setPage(p => Math.max(0, p - 1))}
                             disabled={page === 0}
-                            className="w-10 h-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-emerald-50 hover:border-emerald-200 hover:text-[#064e3b] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                            className="w-10 h-10 rounded-full border border-slate-200/90 bg-white flex items-center justify-center text-slate-600 hover:bg-[#064e3b] hover:border-[#064e3b] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-xs"
                             aria-label="Previous testimonials"
                         >
-                            <ChevronLeft className="w-5 h-5" />
+                            <ChevronLeft className="w-4 h-4" />
                         </button>
                         <button
                             onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
                             disabled={page === totalPages - 1}
-                            className="w-10 h-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-emerald-50 hover:border-emerald-200 hover:text-[#064e3b] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                            className="w-10 h-10 rounded-full border border-slate-200/90 bg-white flex items-center justify-center text-slate-600 hover:bg-[#064e3b] hover:border-[#064e3b] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-xs"
                             aria-label="Next testimonials"
                         >
-                            <ChevronRight className="w-5 h-5" />
+                            <ChevronRight className="w-4 h-4" />
                         </button>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Search, Stethoscope, Layout, Code2, Rocket, TrendingUp, CheckCircle2, ArrowRight, Sparkles, Layers } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -77,9 +77,9 @@ export default function ProcessTimeline() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        <div className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-[#053d2e] font-bold text-xs uppercase tracking-wider mb-4 border border-emerald-100 shadow-sm">
-                            <Sparkles className="w-3.5 h-3.5" />
-                            Engineering Methodology
+                        <div className="eyebrow mb-3">
+                            <span className="dot"></span>
+                            <span>Engineering Methodology · Systematic Execution</span>
                         </div>
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight font-heading">
                             The 6-Stage <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#064e3b] via-emerald-700 to-teal-700">Enterprise Transformation Journey</span>
@@ -90,7 +90,7 @@ export default function ProcessTimeline() {
                     </motion.div>
                 </div>
 
-                {/* Horizontal Step Navigation Bar for Quick Selection */}
+                {/* Horizontal Step Navigation Bar for Quick Selection - GreenData Style */}
                 <div className="hidden lg:grid grid-cols-6 gap-3 mb-16 max-w-5xl mx-auto">
                     {methodologySteps.map((step, idx) => {
                         const Icon = step.icon;
@@ -99,17 +99,17 @@ export default function ProcessTimeline() {
                             <button
                                 key={step.phase}
                                 onClick={() => setActiveStep(idx)}
-                                className={`p-4 rounded-2xl text-left transition-all relative overflow-hidden ${
+                                className={`p-4 rounded-2xl text-left transition-all duration-200 relative overflow-hidden ${
                                     isActive 
-                                        ? 'bg-slate-900 text-white shadow-xl shadow-slate-900/10 scale-105' 
-                                        : 'bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700'
+                                        ? 'bg-[#064e3b] text-white shadow-lg shadow-emerald-950/20 scale-[1.03] border-t-2 border-emerald-300' 
+                                        : 'bg-[#F7F8F5] hover:bg-white hover:border-emerald-300 border border-slate-200/90 text-slate-700'
                                 }`}
                             >
                                 <div className="flex items-center justify-between mb-2">
-                                    <span className={`text-[11px] font-mono font-bold ${isActive ? 'text-emerald-400' : 'text-slate-400'}`}>
+                                    <span className={`text-[11px] font-mono font-bold ${isActive ? 'text-emerald-300' : 'text-slate-400'}`}>
                                         {step.phase}
                                     </span>
-                                    <Icon className={`w-4 h-4 ${isActive ? 'text-emerald-400' : 'text-slate-400'}`} />
+                                    <Icon className={`w-4 h-4 ${isActive ? 'text-emerald-300' : 'text-slate-400'}`} />
                                 </div>
                                 <div className="text-sm font-bold truncate">
                                     {step.label}

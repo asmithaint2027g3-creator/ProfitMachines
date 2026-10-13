@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Cpu, Cloud, Code2, Cpu as AutomationIcon, Server, ShieldCheck, Database, Network, Sparkles } from 'lucide-react';
 
@@ -21,9 +21,9 @@ export default function TechStack() {
             
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-                    <div className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-[#053d2e] font-bold text-xs tracking-wider uppercase mb-4 shadow-sm">
-                        <Sparkles className="w-3.5 h-3.5" />
-                        Technology Infrastructure
+                    <div className="eyebrow mb-3">
+                        <span className="dot"></span>
+                        <span>Technology Infrastructure · High-Load Scalability</span>
                     </div>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight font-heading">
                         Enterprise-Grade <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#064e3b] to-emerald-600">Technology Architecture</span>
@@ -44,7 +44,7 @@ export default function TechStack() {
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.4, delay: index * 0.05 }}
                                 whileHover={{ y: -4 }}
-                                className="group bg-slate-50/80 p-5 sm:p-6 rounded-2xl border border-slate-200/90 hover:border-emerald-300 hover:bg-white transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-xl hover:shadow-blue-600/5"
+                                className="group bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/90 hover:border-[#064e3b]/30 hover:bg-[#F7F8F5] transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-lg"
                             >
                                 <div className="flex items-center justify-between mb-4">
                                     <div className={`w-10 h-10 rounded-xl ${tech.bg} border ${tech.border} flex items-center justify-center ${tech.color} shadow-xs`}>

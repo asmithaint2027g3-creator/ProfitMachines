@@ -22,16 +22,16 @@ export default function FinalCTASection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="p-8 sm:p-14 lg:p-16 rounded-3xl bg-emerald-950/70 border border-emerald-400/30 shadow-2xl backdrop-blur-xl"
+                    className="p-8 sm:p-14 lg:p-16 rounded-3xl bg-gradient-to-br from-[#021a15] via-[#032b24] to-[#064e3b] border border-emerald-400/30 shadow-2xl backdrop-blur-xl relative overflow-hidden"
                 >
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/80 border border-emerald-400/40 mb-6">
-                        <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                        <span className="text-xs font-bold text-emerald-300 tracking-wider uppercase">Enterprise Ingestion Ready</span>
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-400/40 mb-6 backdrop-blur-md">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] inline-block animate-pulse" />
+                        <span className="text-xs font-mono font-bold text-emerald-300 tracking-wider uppercase">Enterprise Ingestion Ready</span>
                     </div>
 
                     <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight leading-[1.1] font-heading">
                         Ready to Deploy Your <br />
-                        <span className="text-emerald-300">
+                        <span className="text-emerald-300 italic">
                             Autonomous Revenue OS?
                         </span>
                     </h2>
@@ -46,7 +46,7 @@ export default function FinalCTASection() {
                                 trackEvent({ eventName: 'FINAL_CTA_BOOK_CLICK' });
                                 openLongForm({ source: 'Final CTA Section', title: 'Schedule Executive Consultation' });
                             }}
-                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-emerald-50 text-[#064e3b] font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 group"
+                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-400 hover:bg-emerald-300 text-[#032b24] font-bold px-8 py-4 rounded-xl shadow-[0_4px_14px_rgba(52,211,153,0.3)] hover:shadow-[0_8px_24px_rgba(52,211,153,0.45)] transition-all duration-200 group hover:-translate-y-0.5"
                         >
                             <span>Schedule Executive Consultation</span>
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -57,7 +57,7 @@ export default function FinalCTASection() {
                                 trackEvent({ eventName: 'FINAL_CTA_QUICK_CLICK' });
                                 openQuickForm({ source: 'Final CTA Section', title: 'Quick Architecture Inquiry' });
                             }}
-                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-900/60 hover:bg-emerald-800/80 text-white font-bold px-8 py-4 rounded-xl border border-emerald-400/50 transition-all"
+                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white hover:text-emerald-200 font-bold px-8 py-4 rounded-xl border border-emerald-400/40 backdrop-blur-md transition-all hover:-translate-y-0.5"
                         >
                             <Zap className="w-4 h-4 text-emerald-300" />
                             <span>Quick Inquiry (60s)</span>
@@ -67,7 +67,7 @@ export default function FinalCTASection() {
                             href="https://wa.me/919513088611?text=Hi%20ProfitMachines%2C%20I'd%20like%20to%20discuss%20deploying%20Autonomous%20Revenue%20OS."
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold px-6 py-4 rounded-xl shadow-md transition-all shrink-0"
+                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold px-6 py-4 rounded-xl shadow-md transition-all shrink-0 hover:-translate-y-0.5"
                         >
                             <MessageSquare className="w-4 h-4" />
                             <span>WhatsApp Sales</span>

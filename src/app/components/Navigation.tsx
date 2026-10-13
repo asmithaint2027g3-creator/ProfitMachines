@@ -108,15 +108,22 @@ export default function Navigation() {
 
                     {/* Logo */}
                     <div className="flex-shrink-0 relative z-50">
-                        <Link to="/" className="flex items-center gap-2 group" aria-label="ProfitMachines home">
-                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-extrabold text-[11px] shadow-sm flex-shrink-0 ${
-                                isHomeHero ? 'bg-white/15 text-emerald-200 border border-emerald-400/30' : 'bg-[#064e3b] text-white'
+                        <Link to="/" className="flex items-center gap-2.5 group" aria-label="ProfitMachines home">
+                            <div className={`w-9 h-9 rounded-xl flex items-center justify-center font-extrabold text-[12px] shadow-sm flex-shrink-0 transition-transform group-hover:scale-105 ${
+                                isHomeHero ? 'bg-white/15 text-emerald-200 border border-emerald-400/30' : 'bg-[#064e3b] text-white shadow-emerald-900/20'
                             }`}>PM</div>
-                            <div className={`text-xl md:text-2xl font-extrabold tracking-tight font-heading transition-colors ${
-                                isHomeHero ? 'text-white' : 'text-slate-900'
-                            }`}>
-                                <span>Profit</span>
-                                <span className={isHomeHero ? 'text-emerald-300' : 'text-[#064e3b]'}>Machines</span>
+                            <div className="flex flex-col">
+                                <div className={`text-lg md:text-xl font-extrabold tracking-tight font-heading leading-tight transition-colors ${
+                                    isHomeHero ? 'text-white' : 'text-slate-900'
+                                }`}>
+                                    <span>Profit</span>
+                                    <span className={isHomeHero ? 'text-emerald-300' : 'text-[#064e3b]'}>Machines</span>
+                                </div>
+                                <span className={`text-[9px] font-mono font-bold tracking-[0.16em] uppercase leading-none mt-0.5 ${
+                                    isHomeHero ? 'text-emerald-300/80' : 'text-slate-400'
+                                }`}>
+                                    Autonomous Revenue OS
+                                </span>
                             </div>
                         </Link>
                     </div>
@@ -323,10 +330,20 @@ export default function Navigation() {
                     {/* Desktop CTA */}
                     <div className="hidden lg:flex items-center gap-2.5 relative z-50 flex-shrink-0">
                         <Link to="/book-consultation" id="nav-cta-consultation"
-                            className="inline-flex items-center gap-2 bg-[#064e3b] hover:bg-[#053d2e] active:bg-[#042d22] text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 shadow-md shadow-emerald-900/25 hover:shadow-emerald-900/40 hover:-translate-y-px group">
-                            Book Consultation
+                            className="inline-flex items-center gap-2 bg-[#064e3b] hover:bg-[#053d2e] active:bg-[#042d22] text-white px-4 xl:px-5 py-2.5 rounded-xl font-bold text-xs xl:text-sm transition-all duration-200 shadow-md shadow-emerald-900/25 hover:shadow-emerald-900/40 hover:-translate-y-px group">
+                            <span>Book Consultation</span>
                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                         </Link>
+                        <a 
+                            href="https://wa.me/919513088611?text=Hi%20ProfitMachines%2C%20I'd%20like%20to%20consult%20on%20AI%20solutions."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-whatsapp px-3.5 py-2 text-xs flex items-center gap-1.5"
+                            aria-label="Chat with ProfitMachines on WhatsApp"
+                        >
+                            <MessageSquare className="w-3.5 h-3.5" />
+                            <span>WhatsApp</span>
+                        </a>
                     </div>
 
                     {/* Mobile Toggle */}

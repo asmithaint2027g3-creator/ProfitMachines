@@ -1,4 +1,4 @@
-﻿import { ShieldCheck, Award, Zap, Server } from 'lucide-react';
+import { ShieldCheck, Award, Zap, Server } from 'lucide-react';
 
 const partners = [
     "Salesforce", "Snowflake", "AWS", "HubSpot", "Microsoft",
@@ -20,8 +20,9 @@ export default function TrustedBySection() {
     return (
         <section id="partners" className="py-12 md:py-16 border-b border-slate-200/80 bg-white relative z-10 overflow-hidden">
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-                <p className="text-center text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-8">
-                    Trusted by 100+ companies · Strategic Partners &amp; Enterprise Integrations
+                <p className="text-center font-mono text-xs font-bold text-slate-400 uppercase tracking-[0.16em] mb-8 flex items-center justify-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]"></span>
+                    <span>Trusted by 100+ Companies · Strategic Partners &amp; Enterprise Integrations</span>
                 </p>
             </div>
 
@@ -42,7 +43,7 @@ export default function TrustedBySection() {
                         {loopPartners.map((partner, idx) => (
                             <div
                                 key={idx}
-                                className="h-11 px-6 bg-slate-50 border border-slate-200/80 rounded-xl flex items-center justify-center text-slate-700 font-bold tracking-wide text-sm shrink-0 hover:bg-emerald-50 hover:border-emerald-300 hover:text-[#064e3b] transition-all duration-300 cursor-default shadow-xs"
+                                className="h-11 px-6 bg-slate-50/80 border border-slate-200/90 rounded-xl flex items-center justify-center text-slate-700 font-bold tracking-wide text-sm shrink-0 hover:bg-emerald-50 hover:border-emerald-300 hover:text-[#064e3b] transition-all duration-300 cursor-default shadow-xs"
                             >
                                 {partner}
                             </div>
@@ -51,11 +52,11 @@ export default function TrustedBySection() {
                 </div>
             </div>
 
-            {/* Trust Badges */}
+            {/* Trust Badges - GreenData Trust Pill Style */}
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
                     {trustBadges.map(({ icon: Icon, color, label }, i) => (
-                        <div key={i} className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-slate-600 bg-slate-50 border border-slate-100 rounded-xl py-3 px-4">
+                        <div key={i} className="flex items-center justify-center gap-2.5 text-xs sm:text-sm font-bold text-slate-700 bg-[#F7F8F5] border border-slate-200/90 rounded-xl py-3 px-4 shadow-xs hover:border-emerald-300 transition-colors">
                             <Icon className={`w-4 h-4 shrink-0 ${color}`} />
                             <span>{label}</span>
                         </div>

@@ -1,4 +1,4 @@
-﻿import { motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
 const stats = [
@@ -44,32 +44,31 @@ function StatCard({ value, suffix, label, delay }: { value: number; suffix: stri
     return (
         <motion.div
             ref={ref}
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay }}
-            className="text-center px-6 py-8 group"
+            className="text-center px-4 py-6 sm:py-8 group flex flex-col justify-center items-center"
         >
-            <div className="text-4xl md:text-5xl font-extrabold text-white mb-2 font-heading tabular-nums">
+            <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#064e3b] mb-1 font-mono tabular-nums tracking-tight">
                 {count}{suffix}
             </div>
-            <div className="text-sm font-bold text-emerald-300 uppercase tracking-widest">{label}</div>
+            <div className="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider">{label}</div>
         </motion.div>
     );
 }
 
 export default function TrustSection() {
     return (
-        <section className="bg-gradient-to-r from-blue-700 via-emerald-700 to-indigo-700 relative overflow-hidden">
-            {/* Background pattern */}
-            <div className="absolute inset-0 opacity-10" style={{
-                backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
+        <section className="bg-[#F7F8F5] border-y border-slate-200/90 py-10 md:py-14 relative overflow-hidden">
+            {/* Subtle architectural grid pattern */}
+            <div className="absolute inset-0 opacity-[0.03]" style={{
+                backgroundImage: 'linear-gradient(to right, #064e3b 1px, transparent 1px), linear-gradient(to bottom, #064e3b 1px, transparent 1px)',
                 backgroundSize: '3rem 3rem'
             }} />
-            <div className="absolute top-0 left-1/3 w-96 h-96 bg-emerald-500/30 rounded-full blur-3xl -translate-y-1/2" />
 
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-y sm:divide-y-0 divide-white/10 sm:divide-x sm:divide-white/20">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-y sm:divide-y-0 divide-slate-200 sm:divide-x sm:divide-slate-200">
                     {stats.map((stat, i) => (
                         <StatCard key={i} {...stat} delay={i * 0.08} />
                     ))}

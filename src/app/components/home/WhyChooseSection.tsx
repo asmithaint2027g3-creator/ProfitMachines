@@ -1,4 +1,4 @@
-﻿import { CheckCircle2, ArrowRight } from 'lucide-react';
+import { CheckCircle2, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../ui/button';
@@ -68,10 +68,14 @@ export default function WhyChooseSection() {
                         transition={{ duration: 0.8 }}
                         id="about-us"
                     >
+                        <div className="eyebrow mb-3">
+                            <span className="dot"></span>
+                            <span>Platform Overview · Institutional Scale</span>
+                        </div>
                         <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight font-heading">
-                            Pioneering Enterprise AI & Digital Transformation
+                            Pioneering Enterprise AI &amp; Digital Transformation
                         </h2>
-                        <p className="text-lg text-slate-600 mb-10 leading-relaxed font-medium">
+                        <p className="text-lg text-slate-600 mb-10 leading-relaxed font-normal">
                             <strong className="text-slate-900 font-bold">Our Mission:</strong> To empower global enterprises with scalable AI solutions, secure cloud architectures, and bespoke software that drives continuous growth and operational efficiency.
                         </p>
 

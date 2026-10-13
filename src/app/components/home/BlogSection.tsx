@@ -1,4 +1,4 @@
-﻿import { ArrowRight, Calendar, User, FileText } from 'lucide-react';
+import { ArrowRight, Calendar, User, FileText } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -34,19 +34,20 @@ const blogs = [
 
 export default function BlogSection() {
     return (
-        <section className="py-20 md:py-24 lg:py-32 bg-slate-50 relative overflow-hidden" id="blogs">
+        <section className="py-20 md:py-24 lg:py-32 bg-[#F7F8F5] relative overflow-hidden border-b border-slate-200" id="blogs">
             <div className="absolute inset-0 bg-grid-slate-200 opacity-40 pointer-events-none"></div>
             
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 lg:mb-20">
                     <div className="max-w-2xl">
-                        <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-[#064e3b] font-semibold text-xs tracking-widest uppercase mb-6 shadow-sm border border-emerald-100">
-                            Knowledge Base
+                        <div className="eyebrow mb-3">
+                            <span className="dot"></span>
+                            <span>Knowledge Base · Research &amp; Field Intelligence</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight drop-shadow-sm">
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight drop-shadow-sm font-heading">
                             Latest from ProfitMachines
                         </h2>
-                        <p className="text-xl text-slate-600 font-medium">
+                        <p className="text-lg text-slate-600 font-normal">
                             Insights, trends, and thought leadership on enterprise AI and digital transformation.
                         </p>
                     </div>
