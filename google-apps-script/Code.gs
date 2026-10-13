@@ -224,7 +224,7 @@ var TAB_HEADERS = {
   // 17. LinkedIn Dual-Publishing Post Queue & Archives
   LinkedIn_Posts: [
     "timestamp", "post_id", "title", "status", "hook", "body", "cta_text", "target_url",
-    "linkedin_urn", "published_at", "last_error", "author"
+    "image_url", "linkedin_urn", "published_at", "last_error", "author"
   ],
 
   // 18. LinkedIn Post Analytics & Who Saw (Impressions, Reach, Engagement)
@@ -2677,9 +2677,6 @@ function escapeHtml(value) {
 // 16. LINKEDIN DUAL-PUBLISHING ENGINE (ADMIN STUDIO + APPS SCRIPT)
 // =========================================================================================
 
-/**
- * Publishes a single post payload to LinkedIn via ProfitMachines backend API
- */
 function publishLinkedInPost(post) {
   if (!post || typeof post !== "object") {
     return publishPendingLinkedInPostsFromSheet();
@@ -2688,9 +2685,11 @@ function publishLinkedInPost(post) {
   var payload = {
     postId: post.post_id || post.id || ("pm-li-" + new Date().getTime()),
     title: post.title || "ProfitMachines B2B AI Insight",
-    fullPostText: post.fullPostText || (post.hook ? (post.hook + "\n\n" + post.body + "\n\n👉 " + post.cta_text + "\n" + (post.target_url || CONFIG.WEBSITE)) : post.body),
-    targetUrl: post.target_url || CONFIG.WEBSITE,
-    campaignSlug: post.campaign_slug || "apps_script_dispatch",
+    fullPostText: post.fullPostText || (post.hook ? (post.hook + "\n\n" + post.body + (post.cta_text ? ("\n\n👉 " + post.cta_text) : "") + (post.target_url ? ("\n" + post.target_url) : "")) : (post.body || "")),
+    targetUrl: post.target_url || "",
+    imageUrl: post.image_url || "",
+    author: post.author || "",
+    campaignSlug: post.campaign_slug || "google_sheet_pipeline",
     adminKey: "pm2026"
   };
 
@@ -2727,6 +2726,7 @@ function publishLinkedInPost(post) {
 
 /**
  * Iterates over LinkedIn_Posts tab and publishes any row with status 'PENDING', 'APPROVED', or 'SCHEDULED'
+ * Supports text, links, and image_url. Then automatically syncs analytics and leads to Jira.
  */
 function publishPendingLinkedInPostsFromSheet() {
   var ss = getSpreadsheet();
@@ -2746,9 +2746,11 @@ function publishPendingLinkedInPostsFromSheet() {
   var bodyIdx = headers.indexOf("body");
   var ctaIdx = headers.indexOf("cta_text");
   var urlIdx = headers.indexOf("target_url");
+  var imgIdx = headers.indexOf("image_url");
   var urnIdx = headers.indexOf("linkedin_urn");
   var pubAtIdx = headers.indexOf("published_at");
   var errIdx = headers.indexOf("last_error");
+  var authorIdx = headers.indexOf("author");
 
   var publishedCount = 0;
 
@@ -2762,8 +2764,10 @@ function publishPendingLinkedInPostsFromSheet() {
         title: row[titleIdx] || "ProfitMachines Strategy Insight",
         hook: row[hookIdx] || "",
         body: row[bodyIdx] || "",
-        cta_text: row[ctaIdx] || "Schedule a strategic consultation:",
-        target_url: row[urlIdx] || CONFIG.WEBSITE
+        cta_text: row[ctaIdx] || "",
+        target_url: row[urlIdx] || "",
+        image_url: imgIdx >= 0 ? (row[imgIdx] || "") : "",
+        author: authorIdx >= 0 ? (row[authorIdx] || "") : ""
       };
 
       var res = publishLinkedInPost(postPayload);
@@ -2780,8 +2784,16 @@ function publishPendingLinkedInPostsFromSheet() {
     }
   }
 
-  var msg = "✅ LinkedIn Batch Publishing Complete: " + publishedCount + " posts published to LinkedIn Company Page.";
+  var msg = "✅ LinkedIn Batch Publishing Complete: " + publishedCount + " post(s) published to LinkedIn.";
   console.log(msg);
+
+  // Automatically trigger analytics & lead synchronization (updates views, reactions, and pushes leads to Jira)
+  try {
+    syncLinkedInAnalyticsFromAppsScript();
+  } catch (syncErr) {
+    console.warn("Analytics sync notice:", syncErr);
+  }
+
   try { SpreadsheetApp.getUi().alert(msg); } catch (e) {}
 }
 
@@ -2803,9 +2815,10 @@ function createSampleLinkedInPostInSheet() {
     "Most enterprise sales teams waste $100K+ monthly cold outreach to the 95% who don't care.\n\nProfitMachines detects the 5% in active evaluation before your competitors even know they exist. Our Autonomous AI Growth Engine monitors account-level intent spikes across 12 intelligence layers.",
     "Book a zero-commitment AI Pipeline Diagnostic:",
     CONFIG.WEBSITE + "/offerings/profit-pool-discovery/demand-discovery?utm_source=linkedin&utm_medium=appscript",
-    "",
-    "",
-    "",
+    "", // image_url
+    "", // linkedin_urn
+    "", // published_at
+    "", // last_error
     "ProfitMachines Executive Bot"
   ];
 
