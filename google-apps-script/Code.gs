@@ -2681,6 +2681,9 @@ function escapeHtml(value) {
  * Publishes a single post payload to LinkedIn via ProfitMachines backend API
  */
 function publishLinkedInPost(post) {
+  if (!post || typeof post !== "object") {
+    return publishPendingLinkedInPostsFromSheet();
+  }
   var url = CONFIG.WEBSITE + "/api/linkedin-publish";
   var payload = {
     postId: post.post_id || post.id || ("pm-li-" + new Date().getTime()),
