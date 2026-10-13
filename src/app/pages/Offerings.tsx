@@ -1,4 +1,4 @@
-ï»¿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
     Check,
@@ -673,7 +673,7 @@ export default function Offerings() {
         {
             title: "AI-Powered Sales Intelligence & Execution",
             subtitle: "Close more deals with predictive precision",
-            icon: <Zap className="h-6 w-6 text-[#064e3b]" />,
+            icon: <Zap className="h-6 w-6 text-[#0066FF]" />,
             challenges: [
                 { title: "Deal Stagnation", desc: "Sales teams waste 65% of their time on low-probability deals" },
                 { title: "Pipeline Bloat", desc: "Average sales teams have 40% stalled opportunities that never progress" },
@@ -688,17 +688,17 @@ export default function Offerings() {
                 "Low quota attainment (<60%)"
             ],
             solutions: [
-                "Predictive Deal Scoring & Opportunity Prioritization â€“ AI identifies winnable deals",
-                "Autonomous Sales Orchestration â€“ Automated workflows that adapt in real-time",
-                "Conversational AI for Sales â€“ Intelligent engagement across outbound & inbound channels",
-                "Quote-to-Cash Automation â€“ Streamlined CPQ, proposals, and contract management",
-                "Account Intelligence & Expansion Insights â€“ Data-driven growth strategies for existing customers",
-                "Revenue Forecasting & Risk Intelligence â€“ Real-time predictions with actionable insights"
+                "Predictive Deal Scoring & Opportunity Prioritization – AI identifies winnable deals",
+                "Autonomous Sales Orchestration – Automated workflows that adapt in real-time",
+                "Conversational AI for Sales – Intelligent engagement across outbound & inbound channels",
+                "Quote-to-Cash Automation – Streamlined CPQ, proposals, and contract management",
+                "Account Intelligence & Expansion Insights – Data-driven growth strategies for existing customers",
+                "Revenue Forecasting & Risk Intelligence – Real-time predictions with actionable insights"
             ],
             outcomes: [
-                "4â€“6Ã— faster sales velocity",
-                "30â€“45% higher win rates",
-                "35â€“50% shorter sales cycles",
+                "4–6× faster sales velocity",
+                "30–45% higher win rates",
+                "35–50% shorter sales cycles",
                 "85%+ forecast accuracy",
                 "15% reduction in discounting"
             ]
@@ -721,14 +721,14 @@ export default function Offerings() {
                 "Mismatched attribution models"
             ],
             solutions: [
-                "Unified Revenue Command Center â€“ Cross-functional visibility across marketing, sales, and success",
-                "Pipeline Integrity & Leakage Detection â€“ AI identifies and remedies revenue gaps",
-                "Sales Performance Intelligence â€“ Personalized coaching recommendations",
-                "Board-Ready Analytics â€“ Standardized KPIs and executive dashboards"
+                "Unified Revenue Command Center – Cross-functional visibility across marketing, sales, and success",
+                "Pipeline Integrity & Leakage Detection – AI identifies and remedies revenue gaps",
+                "Sales Performance Intelligence – Personalized coaching recommendations",
+                "Board-Ready Analytics – Standardized KPIs and executive dashboards"
             ],
             outcomes: [
                 "95%+ forecast accuracy",
-                "20â€“30% reduction in revenue leakage",
+                "20–30% reduction in revenue leakage",
                 "Enhanced investor confidence with transparent reporting",
                 "40% reduction in manual reporting time",
                 "Unified attribution across marketing-sales-success"
@@ -737,7 +737,7 @@ export default function Offerings() {
         {
             title: "AI-Driven Digital Marketing & Demand Generation",
             subtitle: "Transform awareness into pipeline with precision",
-            icon: <Target className="h-6 w-6 text-[#064e3b]" />,
+            icon: <Target className="h-6 w-6 text-[#0066FF]" />,
             challenges: [
                 { title: "Lead Quality Issues", desc: "61% of marketers send all leads directly to sales, despite 80% being unqualified" },
                 { title: "Channel Fragmentation", desc: "Average marketers use 8+ channels with siloed performance data" },
@@ -752,15 +752,15 @@ export default function Offerings() {
                 "Campaign ROI unknown or negative"
             ],
             solutions: [
-                "Hyper-Personalized Campaign Execution â€“ Dynamic content and channel optimization",
-                "Predictive Audience Intelligence â€“ Look-alike modeling and micro-segmentation",
-                "Content & SEO Optimization â€“ AI-generated insights for higher visibility",
-                "Conversion Rate Intelligence â€“ Real-time funnel optimization",
-                "Multi-Channel Attribution â€“ Clear ROI measurement across touchpoints"
+                "Hyper-Personalized Campaign Execution – Dynamic content and channel optimization",
+                "Predictive Audience Intelligence – Look-alike modeling and micro-segmentation",
+                "Content & SEO Optimization – AI-generated insights for higher visibility",
+                "Conversion Rate Intelligence – Real-time funnel optimization",
+                "Multi-Channel Attribution – Clear ROI measurement across touchpoints"
             ],
             outcomes: [
-                "2â€“3Ã— improvement in marketing-to-sales conversion",
-                "25â€“35% lower customer acquisition costs",
+                "2–3× improvement in marketing-to-sales conversion",
+                "25–35% lower customer acquisition costs",
                 "Maximized channel ROI",
                 "90%+ attribution accuracy",
                 "50% increase in content utilization"
@@ -769,7 +769,7 @@ export default function Offerings() {
         {
             title: "Market & Demand Intelligence",
             subtitle: "Discover hidden opportunities before your competitors",
-            icon: <Search className="h-6 w-6 text-[#064e3b]" />,
+            icon: <Search className="h-6 w-6 text-[#0066FF]" />,
             challenges: [
                 { title: "Market Blind Spots", desc: "73% of companies miss emerging market opportunities until competitors capture them" },
                 { title: "Inefficient Targeting", desc: "42% of sales outreach goes to accounts with no active demand" },
@@ -784,10 +784,10 @@ export default function Offerings() {
                 "Poor ICP matching accuracy"
             ],
             solutions: [
-                "Demand Signal Intelligence â€“ AI-driven analysis of search, social, web, and intent data",
-                "Market White Space Mapping â€“ Uncover underserved segments and emerging trends",
-                "Buying Committee Intelligence â€“ Map decision-makers and influence networks",
-                "Competitive Intelligence Suite â€“ Share-of-voice tracking and strategic gap analysis"
+                "Demand Signal Intelligence – AI-driven analysis of search, social, web, and intent data",
+                "Market White Space Mapping – Uncover underserved segments and emerging trends",
+                "Buying Committee Intelligence – Map decision-makers and influence networks",
+                "Competitive Intelligence Suite – Share-of-voice tracking and strategic gap analysis"
             ],
             outcomes: [
                 "Accelerated entry into high-growth markets (3-6 months faster)",
@@ -815,11 +815,11 @@ export default function Offerings() {
                 "Slow market insight turnaround (weeks/months)"
             ],
             solutions: [
-                "AI-Powered Market Sizing â€“ Dynamic TAM/SAM/SOM analysis",
-                "Pricing Intelligence & Elasticity Modeling â€“ Optimal price point identification",
-                "Customer Problem & JTBD Analysis â€“ Deep insight into unmet needs",
-                "Competitive Benchmarking â€“ Feature, pricing, and positioning comparisons",
-                "Automated Research Synthesis â€“ Rapid insight generation from multiple data sources"
+                "AI-Powered Market Sizing – Dynamic TAM/SAM/SOM analysis",
+                "Pricing Intelligence & Elasticity Modeling – Optimal price point identification",
+                "Customer Problem & JTBD Analysis – Deep insight into unmet needs",
+                "Competitive Benchmarking – Feature, pricing, and positioning comparisons",
+                "Automated Research Synthesis – Rapid insight generation from multiple data sources"
             ],
             outcomes: [
                 "Reduced launch risk (50% higher success rates)",
@@ -847,10 +847,10 @@ export default function Offerings() {
                 "High product rework (>25% of dev time)"
             ],
             solutions: [
-                "MVP Experimentation Framework â€“ Structured hypothesis testing with AI analysis",
-                "User Behavior & Adoption Analytics â€“ Early signal detection for feature validation",
-                "PMF Scoring Models â€“ Quantified product-market fit metrics",
-                "Automated Feedback Synthesis â€“ Insights from reviews, support tickets, and user interviews"
+                "MVP Experimentation Framework – Structured hypothesis testing with AI analysis",
+                "User Behavior & Adoption Analytics – Early signal detection for feature validation",
+                "PMF Scoring Models – Quantified product-market fit metrics",
+                "Automated Feedback Synthesis – Insights from reviews, support tickets, and user interviews"
             ],
             outcomes: [
                 "Faster validation cycles (weeks vs months)",
@@ -863,7 +863,7 @@ export default function Offerings() {
         {
             title: "Product Scaling & Growth Intelligence",
             subtitle: "Scale what works, optimize what doesn't",
-            icon: <TrendingUp className="h-6 w-6 text-teal-700" />,
+            icon: <TrendingUp className="h-6 w-6 text-[#0066FF]" />,
             challenges: [
                 { title: "Adoption Plateaus", desc: "85% of features see less than 20% adoption after 90 days" },
                 { title: "Monetization Gaps", desc: "Companies leave 30-40% of potential revenue on the table" },
@@ -878,14 +878,14 @@ export default function Offerings() {
                 "Low product-led growth contribution"
             ],
             solutions: [
-                "Product Usage Intelligence â€“ Deep analytics on feature adoption and engagement",
-                "Roadmap Optimization Engine â€“ AI-driven feature prioritization",
-                "Monetization & Expansion Signals â€“ Identify upsell and expansion opportunities",
-                "Cohort Retention Modeling â€“ Predict and improve customer lifetime value",
-                "Product-Led Growth Acceleration â€“ Automated in-product guidance and optimization"
+                "Product Usage Intelligence – Deep analytics on feature adoption and engagement",
+                "Roadmap Optimization Engine – AI-driven feature prioritization",
+                "Monetization & Expansion Signals – Identify upsell and expansion opportunities",
+                "Cohort Retention Modeling – Predict and improve customer lifetime value",
+                "Product-Led Growth Acceleration – Automated in-product guidance and optimization"
             ],
             outcomes: [
-                "25â€“40% increase in product-led revenue",
+                "25–40% increase in product-led revenue",
                 "Higher feature adoption rates (2-3x improvement)",
                 "Improved retention and expansion metrics",
                 "30% reduction in preventable churn",
@@ -895,7 +895,7 @@ export default function Offerings() {
         {
             title: "Customer Success & Retention Intelligence",
             subtitle: "Transform customers into growth assets",
-            icon: <Users className="h-6 w-6 text-teal-600" />,
+            icon: <Users className="h-6 w-6 text-[#0066FF]" />,
             challenges: [
                 { title: "Surprise Churn", desc: "80% of customers show clear churn signals 90+ days before leaving" },
                 { title: "Renewal Uncertainty", desc: "CSMs spend 40% of their time on manual renewal forecasting" },
@@ -910,11 +910,11 @@ export default function Offerings() {
                 "Poor expansion forecasting accuracy"
             ],
             solutions: [
-                "Predictive Health Scoring â€“ Early churn risk identification",
-                "Renewal & Expansion Forecasting â€“ Accurate prediction of growth opportunities",
-                "CSM Intelligence Platform â€“ AI-guided playbooks and next-best actions",
-                "Integrated Support-Success Signals â€“ Unified view of customer experience",
-                "Voice-of-Customer Intelligence â€“ Sentiment analysis and trend detection"
+                "Predictive Health Scoring – Early churn risk identification",
+                "Renewal & Expansion Forecasting – Accurate prediction of growth opportunities",
+                "CSM Intelligence Platform – AI-guided playbooks and next-best actions",
+                "Integrated Support-Success Signals – Unified view of customer experience",
+                "Voice-of-Customer Intelligence – Sentiment analysis and trend detection"
             ],
             outcomes: [
                 "Reduced churn through proactive intervention (30-50% reduction)",
@@ -927,7 +927,7 @@ export default function Offerings() {
         {
             title: "Enterprise GTM Transformation",
             subtitle: "Modernize and scale your go-to-market engine",
-            icon: <Globe className="h-6 w-6 text-[#053d2e]" />,
+            icon: <Globe className="h-6 w-6 text-[#0066FF]" />,
             challenges: [
                 { title: "GTM Inconsistency", desc: "70% of transformation initiatives fail due to poor change management" },
                 { title: "Territory Imbalance", desc: "35% of reps are under-quota due to poor territory design" },
@@ -942,11 +942,11 @@ export default function Offerings() {
                 "Low new process adoption (<40%)"
             ],
             solutions: [
-                "GTM Maturity Assessment â€“ AI-powered evaluation of current capabilities",
-                "Sales Process Re-engineering â€“ Optimization based on data patterns",
-                "Territory & Capacity Optimization â€“ Intelligent resource allocation",
-                "Multi-Product GTM Design â€“ Coordinated launch and scaling frameworks",
-                "Change Management & Adoption â€“ Accelerated implementation programs"
+                "GTM Maturity Assessment – AI-powered evaluation of current capabilities",
+                "Sales Process Re-engineering – Optimization based on data patterns",
+                "Territory & Capacity Optimization – Intelligent resource allocation",
+                "Multi-Product GTM Design – Coordinated launch and scaling frameworks",
+                "Change Management & Adoption – Accelerated implementation programs"
             ],
             outcomes: [
                 "Scalable enterprise growth architecture",
@@ -959,7 +959,7 @@ export default function Offerings() {
         {
             title: "AI Governance & Enterprise Enablement",
             subtitle: "Enterprise-grade trust and compliance",
-            icon: <ShieldCheck className="h-6 w-6 text-slate-600" />,
+            icon: <ShieldCheck className="h-6 w-6 text-[#0066FF]" />,
             challenges: [
                 { title: "AI Black Box", desc: "78% of executives can't explain how AI decisions are made" },
                 { title: "Compliance Risk", desc: "62% of AI projects face regulatory or compliance delays" },
@@ -974,11 +974,11 @@ export default function Offerings() {
                 "High risk of regulatory penalties"
             ],
             solutions: [
-                "Explainable AI & Decision Traceability â€“ Transparent algorithmic insights",
-                "Security & Compliance Frameworks â€“ Built-in privacy and regulatory adherence",
-                "Bias Detection & Model Monitoring â€“ Continuous fairness and accuracy validation",
-                "AI Governance Operating Models â€“ Structured oversight and control frameworks",
-                "Executive AI Enablement â€“ Board-level education and strategic guidance"
+                "Explainable AI & Decision Traceability – Transparent algorithmic insights",
+                "Security & Compliance Frameworks – Built-in privacy and regulatory adherence",
+                "Bias Detection & Model Monitoring – Continuous fairness and accuracy validation",
+                "AI Governance Operating Models – Structured oversight and control frameworks",
+                "Executive AI Enablement – Board-level education and strategic guidance"
             ],
             outcomes: [
                 "Accelerated enterprise adoption and approval (60% faster)",
@@ -991,7 +991,7 @@ export default function Offerings() {
         {
             title: "Behaviour Analytics",
             subtitle: "Decode the digital body language of every visitor",
-            icon: <Activity className="h-6 w-6 text-teal-700" />,
+            icon: <Activity className="h-6 w-6 text-[#0066FF]" />,
             challenges: [
                 { title: "Engagement Blindness", desc: "95% of businesses only know THAT users visit, not WHY they visit" },
                 { title: "Lead Leakage", desc: "40% of high-intent visitors leave without being identified as leads" },
@@ -1005,11 +1005,11 @@ export default function Offerings() {
                 "Low context in CRM leads"
             ],
             solutions: [
-                "Chatbot Lead Intelligence â€“ Autonomous capture with real-time scoring",
-                "Engagement & Behaviour Mapping â€“ Track depth, clicks, and intent clusters",
-                "Global Traffic ROI Tracking â€“ Holistic attribution for every source",
-                "Unified Behaviour Library â€“ Aggregated session history per user",
-                "Automated Reporting Swarms â€“ Daily and weekly intelligence delivery"
+                "Chatbot Lead Intelligence – Autonomous capture with real-time scoring",
+                "Engagement & Behaviour Mapping – Track depth, clicks, and intent clusters",
+                "Global Traffic ROI Tracking – Holistic attribution for every source",
+                "Unified Behaviour Library – Aggregated session history per user",
+                "Automated Reporting Swarms – Daily and weekly intelligence delivery"
             ],
             outcomes: [
                 "3x higher identified lead volume",
@@ -1022,7 +1022,7 @@ export default function Offerings() {
     ];
 
     return (
-        <div className="min-h-screen bg-slate-50 text-slate-900 overflow-hidden relative selection:bg-emerald-100">
+        <div className="min-h-screen bg-white text-[#0066FF] overflow-hidden relative selection:bg-white">
             {/* Premium Offerings Carousel - First Section */}
             <div>
                 <OfferingsCarousel />
@@ -1033,8 +1033,8 @@ export default function Offerings() {
                 <section className="relative py-20 md:py-24 overflow-hidden">
                     <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
                         <Reveal width="100%">
-                            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-5">Autonomous Revenue Engineering</h2>
-                            <p className="text-xl text-slate-600 leading-relaxed font-medium">
+                            <h2 className="text-3xl md:text-4xl font-bold text-[#0066FF] mb-5">Autonomous Revenue Engineering</h2>
+                            <p className="text-xl text-[#0066FF] leading-relaxed font-medium">
                                 ProfitMachines delivers a comprehensive suite of AI-native offerings designed to modernize the enterprise revenue stack. We transform manual, siloed processes into a unified, predictive engine that accelerates growth at every stage of the customer lifecycle.
                             </p>
                         </Reveal>
@@ -1043,12 +1043,12 @@ export default function Offerings() {
 
                 {/* Platform Overview */}
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 md:mb-20 lg:mb-24">
-                    <div className="bg-white/80 border border-slate-200/60 rounded-[2.5rem] p-8 lg:p-12 shadow-2xl shadow-indigo-100/50 backdrop-blur-xl relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-gradient-to-br from-teal-50/30 via-transparent to-emerald-50/30 opacity-100 pointer-events-none"></div>
+                    <div className="bg-white/80 border border-[#0066FF]/60 rounded-[2.5rem] p-8 lg:p-12 shadow-2xl shadow-indigo-100/50 backdrop-blur-xl relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#0066FF]/30 via-transparent to-[#0066FF]/30 opacity-100 pointer-events-none"></div>
                         <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
                             <div>
-                                <h2 className="text-4xl font-bold text-slate-900 mb-6 tracking-tight">One Intelligence Platform. <br /> <span className="text-[#064e3b]">Infinite Growth.</span></h2>
-                                <p className="text-lg text-slate-600 mb-8 font-medium leading-relaxed">
+                                <h2 className="text-4xl font-bold text-[#0066FF] mb-6 tracking-tight">One Intelligence Platform. <br /> <span className="text-[#0066FF]">Infinite Growth.</span></h2>
+                                <p className="text-lg text-[#0066FF] mb-8 font-medium leading-relaxed">
                                     ProfitMachines unifies marketing, sales, and customer success into a single intelligent revenue engine, replacing siloed tools with a unified nervous system.
                                 </p>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
@@ -1061,10 +1061,10 @@ export default function Offerings() {
                                         "Real-time revenue visibility"
                                     ].map((item, index) => (
                                         <div key={index} className="flex items-center gap-3 group/item">
-                                            <div className="min-w-[24px] min-h-[24px] rounded-full bg-emerald-50 flex items-center justify-center border border-emerald-100 group-hover/item:border-emerald-200 transition-colors">
-                                                <Check className="w-3.5 h-3.5 text-[#064e3b]" />
+                                            <div className="min-w-[24px] min-h-[24px] rounded-full bg-white flex items-center justify-center border border-[#0066FF] group-hover/item:border-[#0066FF] transition-colors">
+                                                <Check className="w-3.5 h-3.5 text-[#0066FF]" />
                                             </div>
-                                            <span className="text-slate-700 font-medium">{item}</span>
+                                            <span className="text-[#0066FF] font-medium">{item}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -1072,31 +1072,31 @@ export default function Offerings() {
                             <div className="relative">
                                 {/* Abstract Icons Visual */}
                                 <div className="grid gap-5">
-                                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(79,70,229,0.1)] transition-all hover:-translate-y-1 flex items-center gap-5 group/card">
-                                        <div className="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center group-hover/card:bg-emerald-100 transition-colors">
-                                            <Brain className="w-6 h-6 text-[#064e3b]" />
+                                    <div className="bg-white p-6 rounded-2xl border border-[#0066FF] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(79,70,229,0.1)] transition-all hover:-translate-y-1 flex items-center gap-5 group/card">
+                                        <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center group-hover/card:bg-white transition-colors">
+                                            <Brain className="w-6 h-6 text-[#0066FF]" />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-slate-900 text-lg">AI Intelligence Layer</h4>
-                                            <p className="text-sm text-slate-500 font-medium">Predictive Modeling & Insights</p>
+                                            <h4 className="font-bold text-[#0066FF] text-lg">AI Intelligence Layer</h4>
+                                            <p className="text-sm text-[#0066FF] font-medium">Predictive Modeling & Insights</p>
                                         </div>
                                     </div>
-                                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(79,70,229,0.1)] transition-all hover:-translate-y-1 ml-10 flex items-center gap-5 group/card">
+                                    <div className="bg-white p-6 rounded-2xl border border-[#0066FF] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(79,70,229,0.1)] transition-all hover:-translate-y-1 ml-10 flex items-center gap-5 group/card">
                                         <div className="w-12 h-12 rounded-xl bg-violet-50 flex items-center justify-center group-hover/card:bg-violet-100 transition-colors">
                                             <Workflow className="w-6 h-6 text-violet-600" />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-slate-900 text-lg">Unified Workflow</h4>
-                                            <p className="text-sm text-slate-500 font-medium">Orchestration & Automation</p>
+                                            <h4 className="font-bold text-[#0066FF] text-lg">Unified Workflow</h4>
+                                            <p className="text-sm text-[#0066FF] font-medium">Orchestration & Automation</p>
                                         </div>
                                     </div>
-                                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(79,70,229,0.1)] transition-all hover:-translate-y-1 flex items-center gap-5 group/card">
-                                        <div className="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center group-hover/card:bg-emerald-100 transition-colors">
-                                            <BarChart3 className="w-6 h-6 text-[#064e3b]" />
+                                    <div className="bg-white p-6 rounded-2xl border border-[#0066FF] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(79,70,229,0.1)] transition-all hover:-translate-y-1 flex items-center gap-5 group/card">
+                                        <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center group-hover/card:bg-white transition-colors">
+                                            <BarChart3 className="w-6 h-6 text-[#0066FF]" />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-slate-900 text-lg">Revenue Growth</h4>
-                                            <p className="text-sm text-slate-500 font-medium">Predictable Scale</p>
+                                            <h4 className="font-bold text-[#0066FF] text-lg">Revenue Growth</h4>
+                                            <p className="text-sm text-[#0066FF] font-medium">Predictable Scale</p>
                                         </div>
                                     </div>
                                 </div>
@@ -1110,28 +1110,28 @@ export default function Offerings() {
                     <div className="text-center mb-12 md:mb-16">
                         <Link 
                             to="/offerings/profit-pool-discovery"
-                            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-[#064e3b] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm hover:bg-emerald-100 transition-colors"
+                            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#0066FF] text-[#0066FF] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm hover:bg-[#0066FF] transition-colors"
                         >
                             Profit Pool Discovery Engine
                         </Link>
-                        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 font-heading">
-                            <Link to="/offerings/profit-pool-discovery" className="hover:text-[#064e3b] transition-colors">
+                        <h2 className="text-3xl md:text-5xl font-bold text-[#0066FF] mb-6 font-heading">
+                            <Link to="/offerings/profit-pool-discovery" className="hover:text-[#0066FF] transition-colors">
                                 AI Driven Profit Pool Discovery
                             </Link>
                         </h2>
-                        <p className="text-xl text-slate-600 max-w-3xl mx-auto font-medium mb-12">
+                        <p className="text-xl text-[#0066FF] max-w-3xl mx-auto font-medium mb-12">
                             Engineering intelligence to uncover revenue others cannot see across B2B and B2C stacks.
                         </p>
 
                         {/* Premium B2B/B2C Tabs */}
                         <div className="flex justify-center mb-8">
-                            <div className="flex gap-2 p-1.5 bg-slate-100/90 backdrop-blur-md rounded-2xl border border-slate-200/50 shadow-inner">
+                            <div className="flex gap-2 p-1.5 bg-white/90 backdrop-blur-md rounded-2xl border border-[#0066FF]/50 shadow-inner">
                                 <button
                                     onClick={() => setActivePoolTab('overview')}
                                     className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
                                         activePoolTab === 'overview'
-                                            ? 'bg-[#064e3b] text-white shadow-md'
-                                            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                                            ? 'bg-[#0066FF] text-white shadow-md'
+                                            : 'text-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10/50'
                                     }`}
                                 >
                                     Overview
@@ -1140,8 +1140,8 @@ export default function Offerings() {
                                     onClick={() => setActivePoolTab('b2b')}
                                     className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
                                         activePoolTab === 'b2b'
-                                            ? 'bg-[#064e3b] text-white shadow-md'
-                                            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                                            ? 'bg-[#0066FF] text-white shadow-md'
+                                            : 'text-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10/50'
                                     }`}
                                 >
                                     B2B Profit Pools
@@ -1150,8 +1150,8 @@ export default function Offerings() {
                                     onClick={() => setActivePoolTab('b2c')}
                                     className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
                                         activePoolTab === 'b2c'
-                                            ? 'bg-[#064e3b] text-white shadow-md'
-                                            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                                            ? 'bg-[#0066FF] text-white shadow-md'
+                                            : 'text-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10/50'
                                     }`}
                                 >
                                     B2C Profit Pools
@@ -1172,10 +1172,10 @@ export default function Offerings() {
                             const overviewItems = [
                                 { name: "Market Discovery", slug: "market-discovery", question: "Where is the revenue we haven't mapped?", impact: "$300M unserved market identified" },
                                 { name: "Demand Discovery", slug: "demand-discovery", question: "What are customers struggling to articulate they need?", impact: "Pipeline: +300%" },
-                                { name: "Value Discovery", slug: "value-discovery", question: "How do we prove ROI before the PO is signed?", impact: "Deal velocity: +50% Â· POC conversion: 85%" },
+                                { name: "Value Discovery", slug: "value-discovery", question: "How do we prove ROI before the PO is signed?", impact: "Deal velocity: +50% · POC conversion: 85%" },
                                 { name: "Channel Discovery", slug: "channel-discovery", question: "How do we distribute without platform dependency?", impact: "Margin: +30 points" },
                                 { name: "Competitive Discovery", slug: "competitive-discovery", question: "How do we win before the RFP is issued?", impact: "Win rate: +25%" },
-                                { name: "Customer Discovery", slug: "customer-discovery", question: "Who is actually ready to buy AI â€” and who will waste our time?", impact: "CAC: -65%" },
+                                { name: "Customer Discovery", slug: "customer-discovery", question: "Who is actually ready to buy AI — and who will waste our time?", impact: "CAC: -65%" },
                                 { name: "Product-Market Fit Discovery", slug: "product-market-fit-discovery", question: "How do we stop building features no one uses?", impact: "R&D waste: -$2M/year" },
                                 { name: "B2B Profit Pool Discovery", slug: "b2b", question: "Where are the hidden margin drivers in our enterprise sales cycles?", impact: "$450M enterprise revenue unlocked" },
                                 { name: "B2C Profit Pool Discovery", slug: "b2c", question: "How do we identify and capture micro-segment margins in high-velocity consumer paths?", impact: "$180M consumer margin optimized" }
@@ -1208,26 +1208,26 @@ export default function Offerings() {
                                     : overviewItems;
 
                             return items.map((disc, idx) => (
-                                <div key={idx} className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-all duration-300 flex flex-col justify-between group">
+                                <div key={idx} className="bg-white rounded-3xl p-8 border border-[#0066FF] shadow-sm hover:shadow-xl hover:border-[#0066FF] transition-all duration-300 flex flex-col justify-between group">
                                     <div>
                                         <div className="flex items-center justify-between mb-4">
-                                            <span className="text-xs font-bold uppercase tracking-wider text-[#064e3b] bg-emerald-50 px-3 py-1 rounded-full">
+                                            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF] bg-white px-3 py-1 rounded-full">
                                                 Layer 0{idx + 1}
                                             </span>
-                                            <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
+                                            <span className="text-xs font-semibold text-[#0066FF] bg-white px-2.5 py-1 rounded-full">
                                                 {disc.impact}
                                             </span>
                                         </div>
-                                        <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-[#064e3b] transition-colors">
+                                        <h3 className="text-2xl font-bold text-[#0066FF] mb-3 group-hover:text-[#0066FF] transition-colors">
                                             {disc.name}
                                         </h3>
-                                        <p className="text-slate-600 text-sm font-medium italic mb-6">
+                                        <p className="text-[#0066FF] text-sm font-medium italic mb-6">
                                             "{disc.question}"
                                         </p>
                                     </div>
                                     <Link 
                                         to={`/offerings/profit-pool-discovery/${disc.slug}`}
-                                        className="inline-flex items-center gap-2 text-sm font-bold text-[#064e3b] hover:text-[#053d2e] transition-colors pt-4 border-t border-slate-100"
+                                        className="inline-flex items-center gap-2 text-sm font-bold text-[#0066FF] hover:text-[#0066FF] transition-colors pt-4 border-t border-[#0066FF]"
                                     >
                                         Explore Discovery Layer <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </Link>
@@ -1240,8 +1240,8 @@ export default function Offerings() {
                 {/* Core Offerings */}
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
                     <div className="text-center mb-20">
-                        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Core Offerings</h2>
-                        <p className="text-xl text-slate-600 max-w-3xl mx-auto font-medium">
+                        <h2 className="text-3xl md:text-5xl font-bold text-[#0066FF] mb-6">Core Offerings</h2>
+                        <p className="text-xl text-[#0066FF] max-w-3xl mx-auto font-medium">
                             Comprehensive solutions powered by AI to transform every stage of your revenue cycle.
                         </p>
                     </div>
@@ -1256,14 +1256,14 @@ export default function Offerings() {
 
                                         {/* 1. Header Section: Title & Tag Line */}
                                         <div className="flex flex-col items-center text-center mb-16 relative">
-                                            <div className="mb-8 p-5 bg-white rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100/80 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-[0_10px_30px_rgba(79,70,229,0.1)] transition-all duration-500 relative z-10">
+                                            <div className="mb-8 p-5 bg-white rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#0066FF]/80 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-[0_10px_30px_rgba(79,70,229,0.1)] transition-all duration-500 relative z-10">
                                                 {offering.icon}
                                             </div>
-                                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-50 border border-slate-200/60 text-slate-500 text-[11px] font-bold uppercase tracking-[0.15em] mb-6 shadow-sm">
+                                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#0066FF]/60 text-[#0066FF] text-[11px] font-bold uppercase tracking-[0.15em] mb-6 shadow-sm">
                                                 Module {index + 1}
                                             </div>
-                                            <h3 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">{offering.title}</h3>
-                                            <p className="text-xl md:text-2xl text-[#064e3b]/90 font-medium max-w-3xl leading-relaxed">{offering.subtitle}</p>
+                                            <h3 className="text-4xl md:text-5xl font-extrabold text-[#0066FF] mb-6 tracking-tight leading-tight">{offering.title}</h3>
+                                            <p className="text-xl md:text-2xl text-[#0066FF]/90 font-medium max-w-3xl leading-relaxed">{offering.subtitle}</p>
                                         </div>
 
                                         {/* 2. Challenges & KPI Grid */}
@@ -1282,8 +1282,8 @@ export default function Offerings() {
                                                         <li key={idx} className="flex gap-5 group/item">
                                                             <div className="mt-2 w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0 ring-4 ring-amber-50 group-hover/item:bg-amber-500 transition-colors"></div>
                                                             <div>
-                                                                <span className="font-bold text-slate-800 block mb-1.5 text-[0.95rem] group-hover/item:text-slate-900 transition-colors">{challenge.title}</span>
-                                                                <span className="text-slate-500 text-sm leading-relaxed">{challenge.desc}</span>
+                                                                <span className="font-bold text-[#0066FF] block mb-1.5 text-[0.95rem] group-hover/item:text-[#0066FF] transition-colors">{challenge.title}</span>
+                                                                <span className="text-[#0066FF] text-sm leading-relaxed">{challenge.desc}</span>
                                                             </div>
                                                         </li>
                                                     ))}
@@ -1292,8 +1292,8 @@ export default function Offerings() {
 
                                             {/* KPI Pain Points (Number Cards) */}
                                             <div className="flex flex-col h-full">
-                                                <h4 className="font-bold text-slate-400 text-xs uppercase tracking-[0.2em] mb-8 text-center lg:text-left flex items-center gap-3 lg:justify-start justify-center">
-                                                    <span className="w-8 h-[1px] bg-slate-200 inline-block"></span>
+                                                <h4 className="font-bold text-[#0066FF] text-xs uppercase tracking-[0.2em] mb-8 text-center lg:text-left flex items-center gap-3 lg:justify-start justify-center">
+                                                    <span className="w-8 h-[1px] bg-white inline-block"></span>
                                                     KPI Pain Points
                                                 </h4>
                                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 h-full">
@@ -1305,9 +1305,9 @@ export default function Offerings() {
                                                         return (
                                                             <div key={idx} className="bg-white p-8 rounded-3xl border border-red-50/60 shadow-[0_2px_15px_-4px_rgba(239,68,68,0.08)] hover:shadow-[0_8px_25px_-4px_rgba(239,68,68,0.12)] hover:border-red-100 transition-all duration-300 group/kpi flex flex-col justify-center items-center text-center h-full hover:-translate-y-1">
                                                                 {highlight && (
-                                                                    <span className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-rose-600 mb-3 block group-hover/kpi:scale-110 transition-transform duration-300">{highlight}</span>
+                                                                    <span className="text-3xl md:text-4xl font-black text-[#0066FF] bg-gradient-to-br from-red-500 to-rose-600 mb-3 block group-hover/kpi:scale-110 transition-transform duration-300">{highlight}</span>
                                                                 )}
-                                                                <span className="text-slate-600 font-semibold text-sm leading-snug">{text}</span>
+                                                                <span className="text-[#0066FF] font-semibold text-sm leading-snug">{text}</span>
                                                             </div>
                                                         );
                                                     })}
@@ -1317,22 +1317,22 @@ export default function Offerings() {
 
                                         {/* 3. Our Solutions (Portfolio Cards) */}
                                         <div className="mb-16">
-                                            <h4 className="font-bold text-slate-900 text-xl mb-10 flex items-center gap-4">
-                                                <div className="bg-emerald-50 p-2 rounded-xl text-[#064e3b]">
+                                            <h4 className="font-bold text-[#0066FF] text-xl mb-10 flex items-center gap-4">
+                                                <div className="bg-white p-2 rounded-xl text-[#0066FF]">
                                                     <Target className="w-5 h-5" />
                                                 </div>
                                                 Our Solutions
                                             </h4>
                                             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                                                 {offering.solutions.map((item, idx) => {
-                                                    const [title, desc] = item.includes('â€“') ? item.split('â€“') : [item, ''];
+                                                    const [title, desc] = item.includes('–') ? item.split('–') : [item, ''];
                                                     return (
-                                                        <div key={idx} className="bg-white hover:bg-slate-50/50 p-8 rounded-[1.5rem] border border-slate-100 hover:border-emerald-100/80 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_30px_-10px_rgba(79,70,229,0.1)] transition-all duration-300 group/card hover:-translate-y-1">
-                                                            <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center mb-6 group-hover/card:bg-[#064e3b] transition-all duration-300 group-hover/card:rotate-3 shadow-inner">
-                                                                <Check className="w-5 h-5 text-emerald-600 group-hover/card:text-white transition-colors" />
+                                                        <div key={idx} className="bg-white hover:bg-[#0066FF]/10/50 p-8 rounded-[1.5rem] border border-[#0066FF] hover:border-[#0066FF]/80 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_30px_-10px_rgba(79,70,229,0.1)] transition-all duration-300 group/card hover:-translate-y-1">
+                                                            <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center mb-6 group-hover/card:bg-[#0066FF] transition-all duration-300 group-hover/card:rotate-3 shadow-inner">
+                                                                <Check className="w-5 h-5 text-[#0066FF] group-hover/card:text-white transition-colors" />
                                                             </div>
-                                                            <h5 className="font-bold text-lg text-slate-900 mb-3 group-hover/card:text-[#053d2e] transition-colors">{title.trim()}</h5>
-                                                            {desc && <p className="text-sm text-slate-500 leading-relaxed font-medium">{desc.trim()}</p>}
+                                                            <h5 className="font-bold text-lg text-[#0066FF] mb-3 group-hover/card:text-[#0066FF] transition-colors">{title.trim()}</h5>
+                                                            {desc && <p className="text-sm text-[#0066FF] leading-relaxed font-medium">{desc.trim()}</p>}
                                                         </div>
                                                     );
                                                 })}
@@ -1340,32 +1340,32 @@ export default function Offerings() {
                                         </div>
 
                                         {/* 4. Business Impact & Tailored Solutions */}
-                                        <div className="grid lg:grid-cols-3 gap-8 md:gap-16 pt-12 border-t border-slate-100/80">
+                                        <div className="grid lg:grid-cols-3 gap-8 md:gap-16 pt-12 border-t border-[#0066FF]/80">
                                             {/* Business Impact */}
                                             <div className="lg:col-span-1">
-                                                <div className="bg-slate-900 rounded-[2rem] p-8 text-white relative overflow-hidden shadow-2xl shadow-indigo-900/20 group/bi hover:scale-[1.02] transition-transform duration-300">
+                                                <div className="bg-white rounded-[2rem] p-8 text-white relative overflow-hidden shadow-2xl shadow-indigo-900/20 group/bi hover:scale-[1.02] transition-transform duration-300">
                                                     {/* Gradient Overlay */}
-                                                    <div className="absolute inset-0 bg-gradient-to-br from-[#064e3b]/20 to-violet-600/20 opacity-100"></div>
-                                                    <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/30 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+                                                    <div className="absolute inset-0 bg-gradient-to-br from-[#0066FF]/20 to-violet-600/20 opacity-100"></div>
+                                                    <div className="absolute top-0 right-0 w-64 h-64 bg-white0/30 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
                                                     <h4 className="font-bold text-white/90 text-xs uppercase tracking-[0.2em] mb-8 flex items-center gap-3 relative z-10">
                                                         <div className="bg-white/10 p-1.5 rounded-lg backdrop-blur-sm">
-                                                            <TrendingUp className="w-4 h-4 text-emerald-300" />
+                                                            <TrendingUp className="w-4 h-4 text-[#0066FF]" />
                                                         </div>
                                                         Business Impact
                                                     </h4>
                                                     <ul className="space-y-5 relative z-10">
                                                         {offering.outcomes.map((outcome, idx) => (
                                                             <li key={idx} className="flex items-start gap-4">
-                                                                <div className="mt-1 w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 border border-emerald-500/30">
-                                                                    <Check className="w-3 h-3 text-emerald-400" />
+                                                                <div className="mt-1 w-5 h-5 rounded-full bg-white0/20 flex items-center justify-center flex-shrink-0 border border-[#0066FF]/30">
+                                                                    <Check className="w-3 h-3 text-[#0066FF]" />
                                                                 </div>
-                                                                <span className="text-[0.9rem] font-medium text-slate-200 leading-snug">{outcome}</span>
+                                                                <span className="text-[0.9rem] font-medium text-[#0066FF] leading-snug">{outcome}</span>
                                                             </li>
                                                         ))}
                                                     </ul>
                                                     <div className="mt-10 pt-6 border-t border-white/10 flex items-center gap-2.5 text-indigo-200 text-xs font-bold tracking-wide">
-                                                        <Zap className="w-4 h-4 text-emerald-400" />
+                                                        <Zap className="w-4 h-4 text-[#0066FF]" />
                                                         <span>ROI VERIFIED</span>
                                                     </div>
                                                 </div>
@@ -1375,8 +1375,8 @@ export default function Offerings() {
                                             <div className="lg:col-span-2">
                                                 {offeringStages[offering.title] && (
                                                     <div className="h-full flex flex-col">
-                                                        <h4 className="font-bold text-slate-800 text-xs uppercase tracking-[0.2em] mb-8 flex items-center gap-3">
-                                                            <div className="bg-emerald-50 p-1.5 rounded-lg text-[#064e3b]">
+                                                        <h4 className="font-bold text-[#0066FF] text-xs uppercase tracking-[0.2em] mb-8 flex items-center gap-3">
+                                                            <div className="bg-white p-1.5 rounded-lg text-[#0066FF]">
                                                                 <Layout className="w-4 h-4" />
                                                             </div>
                                                             Tailored Solutions by Stage
@@ -1387,7 +1387,7 @@ export default function Offerings() {
                                                                     <TabsTrigger
                                                                         key={i}
                                                                         value={stage.name}
-                                                                        className="w-full justify-start text-left data-[state=active]:bg-[#064e3b] data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-indigo-500/25 bg-white text-slate-600 rounded-xl px-5 py-3 h-auto text-sm font-semibold border border-slate-200 hover:border-emerald-200 hover:text-[#064e3b] transition-all duration-300"
+                                                                        className="w-full justify-start text-left data-[state=active]:bg-[#0066FF] data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-indigo-500/25 bg-white text-[#0066FF] rounded-xl px-5 py-3 h-auto text-sm font-semibold border border-[#0066FF] hover:border-[#0066FF] hover:text-[#0066FF] transition-all duration-300"
                                                                     >
                                                                         {stage.name}
                                                                     </TabsTrigger>
@@ -1396,12 +1396,12 @@ export default function Offerings() {
                                                             <div className="flex-1 lg:w-[72%]">
                                                                 {offeringStages[offering.title].map((stage, i) => (
                                                                     <TabsContent key={i} value={stage.name} className="mt-0 animate-in fade-in slide-in-from-right-4 duration-300 h-full">
-                                                                        <div className="bg-slate-50/50 rounded-3xl p-8 border border-slate-100 h-full relative overflow-hidden">
-                                                                            <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-50/50 rounded-full blur-[80px] pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
+                                                                        <div className="bg-white/50 rounded-3xl p-8 border border-[#0066FF] h-full relative overflow-hidden">
+                                                                            <div className="absolute top-0 right-0 w-64 h-64 bg-white/50 rounded-full blur-[80px] pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
                                                                             <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-6 relative z-10">
-                                                                                <h5 className="font-bold text-slate-900 text-xl">{stage.name}</h5>
+                                                                                <h5 className="font-bold text-[#0066FF] text-xl">{stage.name}</h5>
                                                                                 {stage.subtitle && (
-                                                                                    <span className="text-[#064e3b] text-xs font-bold uppercase tracking-wider bg-emerald-100/50 px-3 py-1 rounded-full border border-emerald-100">{stage.subtitle}</span>
+                                                                                    <span className="text-[#0066FF] text-xs font-bold uppercase tracking-wider bg-white/50 px-3 py-1 rounded-full border border-[#0066FF]">{stage.subtitle}</span>
                                                                                 )}
 
                                                                             </div>
@@ -1410,10 +1410,10 @@ export default function Offerings() {
                                                                                     const [title, desc] = point.includes(' - ') ? point.split(' - ') : [point, ''];
                                                                                     return (
                                                                                         <li key={idx} className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/60 transition-colors">
-                                                                                            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mt-2.5 flex-shrink-0 shadow-[0_0_8px_rgba(99,102,241,0.5)]"></div>
+                                                                                            <div className="w-1.5 h-1.5 bg-white0 rounded-full mt-2.5 flex-shrink-0 shadow-[0_0_8px_rgba(99,102,241,0.5)]"></div>
                                                                                             <span className="text-sm">
-                                                                                                <span className="font-bold text-slate-900">{title}</span>
-                                                                                                {desc && <span className="text-slate-500 block mt-0.5">{desc}</span>}
+                                                                                                <span className="font-bold text-[#0066FF]">{title}</span>
+                                                                                                {desc && <span className="text-[#0066FF] block mt-0.5">{desc}</span>}
                                                                                             </span>
                                                                                         </li>
                                                                                     );
@@ -1436,37 +1436,37 @@ export default function Offerings() {
                 </div>
 
                 {/* Strategic Value Proposition (Light Theme) */}
-                <div className="bg-white py-32 relative overflow-hidden text-slate-900 border-y border-slate-200">
+                <div className="bg-white py-32 relative overflow-hidden text-[#0066FF] border-y border-[#0066FF]">
                     {/* Background Elements */}
                     <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                        <div className="absolute top-[20%] right-0 w-[600px] h-[600px] bg-emerald-50 rounded-full blur-[100px]"></div>
-                        <div className="absolute bottom-[20%] left-0 w-[600px] h-[600px] bg-emerald-50 rounded-full blur-[100px]"></div>
+                        <div className="absolute top-[20%] right-0 w-[600px] h-[600px] bg-white rounded-full blur-[100px]"></div>
+                        <div className="absolute bottom-[20%] left-0 w-[600px] h-[600px] bg-white rounded-full blur-[100px]"></div>
                         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-multiply pointer-events-none"></div>
                     </div>
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                         <div className="mb-20 text-center">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-[#064e3b] text-xs font-bold uppercase tracking-wider mb-8 shadow-sm">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#0066FF] text-[#0066FF] text-xs font-bold uppercase tracking-wider mb-8 shadow-sm">
                                 Unlock Growth
                             </div>
-                            <h2 className="text-4xl lg:text-5xl font-extrabold mb-6 text-slate-900 tracking-tight">From Pain to Performance</h2>
-                            <p className="text-xl text-slate-600 max-w-3xl mx-auto font-medium">
+                            <h2 className="text-4xl lg:text-5xl font-extrabold mb-6 text-[#0066FF] tracking-tight">From Pain to Performance</h2>
+                            <p className="text-xl text-[#0066FF] max-w-3xl mx-auto font-medium">
                                 We help you connect the dots between isolated challenges and unified revenue intelligence.
                             </p>
                         </div>
 
                         <div className="grid md:grid-cols-3 gap-8 mb-24">
                             {/* Connected Pain Resolution */}
-                            <div className="bg-slate-50 border border-slate-100 rounded-3xl p-8 hover:border-emerald-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
-                                <h3 className="text-xl font-bold mb-6 text-slate-900 group-hover:text-[#053d2e] transition-colors">Connected Pain Resolution</h3>
-                                <p className="text-slate-600 text-sm mb-6 leading-relaxed font-medium">Most companies experience these challenges as isolated pains, but they're actually interconnected symptoms:</p>
+                            <div className="bg-white border border-[#0066FF] rounded-3xl p-8 hover:border-[#0066FF] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                                <h3 className="text-xl font-bold mb-6 text-[#0066FF] group-hover:text-[#0066FF] transition-colors">Connected Pain Resolution</h3>
+                                <p className="text-[#0066FF] text-sm mb-6 leading-relaxed font-medium">Most companies experience these challenges as isolated pains, but they're actually interconnected symptoms:</p>
                                 <ul className="space-y-4">
                                     {[
-                                        "Market Blindness â†’ Wasted R&D â†’ Failed Launches",
-                                        "Poor Targeting â†’ Low Win Rates â†’ High CAC",
-                                        "Data Silos â†’ Forecast Inaccuracy â†’ Investor Distrust"
+                                        "Market Blindness ? Wasted R&D ? Failed Launches",
+                                        "Poor Targeting ? Low Win Rates ? High CAC",
+                                        "Data Silos ? Forecast Inaccuracy ? Investor Distrust"
                                     ].map((item, i) => (
-                                        <li key={i} className="flex items-start gap-3 text-sm font-semibold text-slate-700">
+                                        <li key={i} className="flex items-start gap-3 text-sm font-semibold text-[#0066FF]">
                                             <div className="w-1.5 h-1.5 bg-rose-500 rounded-full mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(244,63,94,0.3)]"></div>
                                             <span className="leading-snug">{item}</span>
                                         </li>
@@ -1475,20 +1475,20 @@ export default function Offerings() {
                             </div>
 
                             {/* The ProfitMachines Difference */}
-                            <div className="bg-white border border-slate-200 rounded-3xl p-8 hover:border-emerald-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group shadow-sm">
-                                <h3 className="text-xl font-bold mb-6 text-slate-900 group-hover:text-[#053d2e] transition-colors">The ProfitMachines Difference</h3>
-                                <p className="text-slate-600 text-sm mb-6 leading-relaxed font-medium">Transforming your organization from reactive to proactive:</p>
+                            <div className="bg-white border border-[#0066FF] rounded-3xl p-8 hover:border-[#0066FF] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group shadow-sm">
+                                <h3 className="text-xl font-bold mb-6 text-[#0066FF] group-hover:text-[#0066FF] transition-colors">The ProfitMachines Difference</h3>
+                                <p className="text-[#0066FF] text-sm mb-6 leading-relaxed font-medium">Transforming your organization from reactive to proactive:</p>
                                 <ul className="space-y-4">
                                     {[
                                         { from: "Guesswork", to: "Predictive Intelligence" },
                                         { from: "Silos", to: "Unified Insights" },
                                         { from: "Reactive Operations", to: "Proactive Strategy" }
                                     ].map((item, i) => (
-                                        <li key={i} className="flex items-center gap-3 text-sm font-semibold text-slate-700">
-                                            <ArrowRight className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                                        <li key={i} className="flex items-center gap-3 text-sm font-semibold text-[#0066FF]">
+                                            <ArrowRight className="w-4 h-4 text-[#0066FF] flex-shrink-0" />
                                             <span className="flex items-center gap-2 flex-wrap">
-                                                <span className="text-slate-400 line-through decoration-slate-300">{item.from}</span>
-                                                <span className="text-[#053d2e]">â†’ {item.to}</span>
+                                                <span className="text-[#0066FF] line-through decoration-slate-300">{item.from}</span>
+                                                <span className="text-[#0066FF]">? {item.to}</span>
                                             </span>
                                         </li>
                                     ))}
@@ -1496,10 +1496,10 @@ export default function Offerings() {
                             </div>
 
                             {/* Measurable Transformation Impact */}
-                            <div className="bg-gradient-to-br from-[#064e3b] to-indigo-700 border border-emerald-600 rounded-3xl p-8 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
+                            <div className="bg-gradient-to-br from-[#0066FF] to-[#0066FF] border border-[#0066FF] rounded-3xl p-8 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none -mt-10 -mr-10"></div>
                                 <h3 className="text-xl font-bold mb-6 text-white relative z-10">Measurable Impact</h3>
-                                <p className="text-emerald-100 text-sm mb-6 leading-relaxed font-medium relative z-10">Companies using ProfitMachines achieve:</p>
+                                <p className="text-[#0066FF] text-sm mb-6 leading-relaxed font-medium relative z-10">Companies using ProfitMachines achieve:</p>
                                 <ul className="space-y-4 relative z-10">
                                     {[
                                         "40-60% faster revenue growth",
@@ -1521,7 +1521,7 @@ export default function Offerings() {
                         <div className="text-center">
                             <Button 
                                 onClick={() => openLongForm({ defaultService: 'Strategic Growth Transformation' })}
-                                className="bg-emerald-800 text-white hover:bg-emerald-900 text-lg px-10 py-6 h-auto shadow-xl rounded-full transition-all font-bold"
+                                className="bg-[#0066FF] text-white hover:bg-[#0066FF] text-lg px-10 py-6 h-auto shadow-xl rounded-full transition-all font-bold"
                             >
                                 Start Your Transformation Today
                             </Button>

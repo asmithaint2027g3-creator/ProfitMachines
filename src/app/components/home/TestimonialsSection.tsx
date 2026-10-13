@@ -60,31 +60,28 @@ export default function TestimonialsSection() {
     const visible = testimonials.slice(page * perPage, page * perPage + perPage);
 
     return (
-        <section className="py-20 md:py-24 lg:py-32 bg-slate-50 border-t border-slate-100 overflow-hidden">
+        <section className="py-20 md:py-24 lg:py-32 bg-white border-t-2 border-[#0066FF] overflow-hidden">
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
                     <div>
-                        <div className="eyebrow mb-3">
-                            <span className="dot"></span>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border-2 border-[#0066FF] bg-white text-xs font-bold text-[#0066FF] uppercase mb-3">
+                            <span className="w-2 h-2 rounded-full bg-[#0066FF]"></span>
                             <span>Client Success &amp; Executive Validation</span>
                         </div>
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-heading">
-                            Proven by{' '}
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#064e3b] to-emerald-600">
-                                Enterprise Leaders
-                            </span>
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0066FF] tracking-tight font-heading">
+                            Proven by Enterprise Leaders
                         </h2>
                     </div>
 
-                    {/* Pagination controls - GreenData Style */}
+                    {/* Pagination controls */}
                     <div className="flex items-center gap-3 shrink-0">
-                        <span className="text-xs font-mono font-bold text-slate-400">0{page + 1} / 0{totalPages}</span>
+                        <span className="text-xs font-mono font-bold text-[#0066FF]">0{page + 1} / 0{totalPages}</span>
                         <button
                             onClick={() => setPage(p => Math.max(0, p - 1))}
                             disabled={page === 0}
-                            className="w-10 h-10 rounded-full border border-slate-200/90 bg-white flex items-center justify-center text-slate-600 hover:bg-[#064e3b] hover:border-[#064e3b] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-xs"
+                            className="w-10 h-10 rounded-full border-2 border-[#0066FF] bg-white flex items-center justify-center text-[#0066FF] hover:bg-[#0066FF] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                             aria-label="Previous testimonials"
                         >
                             <ChevronLeft className="w-4 h-4" />
@@ -92,7 +89,7 @@ export default function TestimonialsSection() {
                         <button
                             onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
                             disabled={page === totalPages - 1}
-                            className="w-10 h-10 rounded-full border border-slate-200/90 bg-white flex items-center justify-center text-slate-600 hover:bg-[#064e3b] hover:border-[#064e3b] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-xs"
+                            className="w-10 h-10 rounded-full border-2 border-[#0066FF] bg-white flex items-center justify-center text-[#0066FF] hover:bg-[#0066FF] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                             aria-label="Next testimonials"
                         >
                             <ChevronRight className="w-4 h-4" />
@@ -113,36 +110,36 @@ export default function TestimonialsSection() {
                         {visible.map((testimonial, index) => (
                             <div
                                 key={index}
-                                className="bg-white rounded-[20px] p-8 border border-slate-200 relative group hover:border-emerald-200 hover:shadow-xl transition-all duration-300 flex flex-col"
+                                className="bg-white rounded-[20px] p-8 border-2 border-[#0066FF] relative group hover:-translate-y-1 transition-all duration-200 flex flex-col"
                             >
                                 {/* Stars */}
                                 <div className="flex gap-1 mb-5">
                                     {[...Array(testimonial.rating)].map((_, i) => (
-                                        <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                                        <Star key={i} className="w-4 h-4 fill-[#0066FF] text-[#0066FF]" />
                                     ))}
                                 </div>
 
                                 {/* Quote icon */}
-                                <Quote className="w-8 h-8 text-emerald-100 group-hover:text-emerald-200 transition-colors mb-3 shrink-0" />
+                                <Quote className="w-8 h-8 text-[#0066FF] mb-3 shrink-0" />
 
                                 {/* Quote text */}
-                                <p className="text-slate-700 font-medium leading-relaxed mb-6 text-sm flex-1">
+                                <p className="text-[#0066FF] font-medium leading-relaxed mb-6 text-sm flex-1">
                                     "{testimonial.quote}"
                                 </p>
 
                                 {/* Author */}
-                                <div className="pt-5 border-t border-slate-100 group-hover:border-emerald-50 transition-colors">
+                                <div className="pt-5 border-t-2 border-[#0066FF]">
                                     <div className="flex items-center gap-3">
                                         {/* Avatar initials */}
-                                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#064e3b] to-emerald-600 flex items-center justify-center shrink-0">
+                                        <div className="w-10 h-10 rounded-full bg-[#0066FF] flex items-center justify-center shrink-0 border-2 border-[#0066FF]">
                                             <span className="text-white text-sm font-extrabold">
                                                 {testimonial.author.split(' ').map(n => n[0]).join('')}
                                             </span>
                                         </div>
                                         <div>
-                                            <div className="font-bold text-slate-900 text-sm">{testimonial.author}</div>
-                                            <div className="text-xs text-slate-500">{testimonial.role}</div>
-                                            <div className="text-xs font-bold text-[#064e3b] mt-0.5">{testimonial.company} · {testimonial.industry}</div>
+                                            <div className="font-bold text-[#0066FF] text-sm">{testimonial.author}</div>
+                                            <div className="text-xs text-[#0066FF]">{testimonial.role}</div>
+                                            <div className="text-xs font-bold text-[#0066FF] mt-0.5">{testimonial.company} · {testimonial.industry}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +154,7 @@ export default function TestimonialsSection() {
                         <button
                             key={i}
                             onClick={() => setPage(i)}
-                            className={`rounded-full transition-all duration-300 ${i === page ? 'w-8 h-2.5 bg-[#064e3b]' : 'w-2.5 h-2.5 bg-slate-300 hover:bg-slate-400'}`}
+                            className={`rounded-full transition-all duration-300 ${i === page ? 'w-8 h-2.5 bg-[#0066FF]' : 'w-2.5 h-2.5 bg-white border-2 border-[#0066FF]'}`}
                             aria-label={`Go to page ${i + 1}`}
                         />
                     ))}

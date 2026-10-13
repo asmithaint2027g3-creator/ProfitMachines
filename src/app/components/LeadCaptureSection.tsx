@@ -85,23 +85,23 @@ export default function LeadCaptureSection() {
   };
 
   return (
-    <section className="py-20 lg:py-32 bg-slate-50 border-t border-slate-200">
+    <section className="py-20 lg:py-32 bg-white border-t border-[#0066FF]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Container */}
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-200/50 to-purple-200/50 rounded-3xl blur-2xl opacity-50"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0066FF]/50 to-purple-200/50 rounded-3xl blur-2xl opacity-50"></div>
 
-          <div className="relative bg-white rounded-3xl p-8 lg:p-12 border border-slate-200 shadow-xl">
+          <div className="relative bg-white rounded-3xl p-8 lg:p-12 border border-[#0066FF] shadow-xl">
             {/* Header */}
             <div className="text-center mb-10">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-slate-900 font-bold mb-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0066FF] font-bold mb-4">
                 Get a Free{' '}
-                <span className="bg-gradient-to-r from-[#064e3b] to-emerald-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#0066FF] to-[#0066FF] bg-clip-text text-transparent">
                   AI-Driven Sales Diagnostic
                 </span>{' '}
                 Consultation
               </h2>
-              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              <p className="text-lg text-[#0066FF] max-w-2xl mx-auto">
                 Discover how AI can transform your sales process and accelerate revenue growth
               </p>
             </div>
@@ -112,15 +112,15 @@ export default function LeadCaptureSection() {
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-green-50 rounded-full mb-6">
                   <CheckCircle2 className="w-10 h-10 text-green-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-3">
+                <h3 className="text-2xl font-bold text-[#0066FF] mb-3">
                   Request Received!
                 </h3>
-                <p className="text-slate-600 mb-4 font-medium">
+                <p className="text-[#0066FF] mb-4 font-medium">
                   We'll get back to you within 24 hours to schedule your free AI diagnostic consultation.
                 </p>
                 {submissionId && (
-                  <div className="inline-block p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono font-bold text-slate-700 mb-4">
-                    Reference ID: <span className="text-[#064e3b]">{submissionId}</span>
+                  <div className="inline-block p-3 rounded-xl bg-white border border-[#0066FF] text-xs font-mono font-bold text-[#0066FF] mb-4">
+                    Reference ID: <span className="text-[#0066FF]">{submissionId}</span>
                   </div>
                 )}
               </div>
@@ -130,7 +130,7 @@ export default function LeadCaptureSection() {
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Name */}
                   <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-bold text-slate-700">
+                    <label htmlFor="name" className="text-sm font-bold text-[#0066FF]">
                       Name *
                     </label>
                     <Input
@@ -141,13 +141,13 @@ export default function LeadCaptureSection() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="John Doe"
-                      className="bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-emerald-600 focus:ring-emerald-600"
+                      className="bg-white border-[#0066FF] text-[#0066FF] placeholder:text-[#0066FF] focus:border-[#0066FF] focus:ring-emerald-600"
                     />
                   </div>
 
                   {/* Email */}
                   <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-bold text-slate-700">
+                    <label htmlFor="email" className="text-sm font-bold text-[#0066FF]">
                       Email *
                     </label>
                     <Input
@@ -158,7 +158,7 @@ export default function LeadCaptureSection() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="john@company.com"
-                      className="bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-emerald-600 focus:ring-emerald-600"
+                      className="bg-white border-[#0066FF] text-[#0066FF] placeholder:text-[#0066FF] focus:border-[#0066FF] focus:ring-emerald-600"
                     />
                     {emailError && (
                       <p className="text-xs text-red-600 font-semibold">{emailError}</p>
@@ -168,7 +168,7 @@ export default function LeadCaptureSection() {
 
                 {/* Phone */}
                 <div className="space-y-2">
-                  <label htmlFor="phone" className="text-sm font-bold text-slate-700">
+                  <label htmlFor="phone" className="text-sm font-bold text-[#0066FF]">
                     Phone Number *
                   </label>
                   <Input
@@ -179,7 +179,7 @@ export default function LeadCaptureSection() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+1 (555) 000-0000"
-                    className="bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-emerald-600 focus:ring-emerald-600"
+                    className="bg-white border-[#0066FF] text-[#0066FF] placeholder:text-[#0066FF] focus:border-[#0066FF] focus:ring-emerald-600"
                   />
                   {phoneError && (
                     <p className="text-xs text-red-600 font-semibold">{phoneError}</p>
@@ -219,18 +219,18 @@ export default function LeadCaptureSection() {
             )}
 
             {/* Trust Indicators */}
-            <div className="grid grid-cols-3 gap-6 mt-10 pt-8 border-t border-slate-100">
+            <div className="grid grid-cols-3 gap-6 mt-10 pt-8 border-t border-[#0066FF]">
               <div className="text-center">
-                <div className="text-4xl font-bold text-slate-900 mb-1">500+</div>
-                <div className="text-xs text-slate-500 font-semibold uppercase tracking-wide">B2B Companies</div>
+                <div className="text-4xl font-bold text-[#0066FF] mb-1">500+</div>
+                <div className="text-xs text-[#0066FF] font-semibold uppercase tracking-wide">B2B Companies</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-slate-900 mb-1">5X</div>
-                <div className="text-xs text-slate-500 font-semibold uppercase tracking-wide">Avg Revenue Growth</div>
+                <div className="text-4xl font-bold text-[#0066FF] mb-1">5X</div>
+                <div className="text-xs text-[#0066FF] font-semibold uppercase tracking-wide">Avg Revenue Growth</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-slate-900 mb-1">24/7</div>
-                <div className="text-xs text-slate-500 font-semibold uppercase tracking-wide">AI Support</div>
+                <div className="text-4xl font-bold text-[#0066FF] mb-1">24/7</div>
+                <div className="text-xs text-[#0066FF] font-semibold uppercase tracking-wide">AI Support</div>
               </div>
             </div>
           </div>

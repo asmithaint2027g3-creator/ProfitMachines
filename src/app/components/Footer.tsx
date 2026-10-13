@@ -1,306 +1,200 @@
-
 import React from 'react';
-import { Facebook, Twitter, Linkedin, Mail, Phone, Cloud, Share2, LayoutGrid, Box, Server, MapPin } from 'lucide-react';
+import { Twitter, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/Trustgrid-logo.png';
 
 export default function Footer() {
 
     const quickLinks: { [key: string]: string } = {
         'Home': '/',
-        'About Us': '/#about-us',
-        'Case Studies': '/#case-studies',
-        'Blogs': '/#blogs',
+        'About Us': '/company',
+        'Case Studies': '/outcomes',
+        'Blogs': '/resources',
         'Careers': '/career',
         'Contact Us': '/book-consultation'
     };
 
     const solutionsLinks: { [key: string]: string } = {
-        'AI Solutions': '/#solutions',
-        'Enterprise AI': '/#solutions',
-        'AI Agents': '/#solutions',
-        'Cloud Services': '/#solutions',
-        'Custom Software': '/#solutions',
-        'Cyber Security': '/#solutions'
+        'AI Solutions': '/solutions',
+        'Enterprise AI': '/solutions',
+        'AI Agents': '/solutions',
+        'Cloud Services': '/solutions',
+        'Custom Software': '/solutions',
+        'Cyber Security': '/security'
     };
 
     const industriesLinks: { [key: string]: string } = {
-        'Healthcare': '/#industries',
-        'Finance': '/#industries',
-        'Retail': '/#industries',
-        'Manufacturing': '/#industries',
-        'Logistics': '/#industries',
-        'Enterprises': '/#industries'
+        'Healthcare': '/industries',
+        'Finance': '/industries',
+        'Retail': '/industries',
+        'Manufacturing': '/industries',
+        'Logistics': '/industries',
+        'Enterprises': '/industries'
     };
 
     const techLinks: { [key: string]: string } = {
-        'Artificial Intelligence': '/#technologies',
-        'Machine Learning': '/#technologies',
-        'Generative AI': '/#technologies',
-        'Cloud Computing': '/#technologies',
-        'Data Engineering': '/#technologies'
+        'Artificial Intelligence': '/solutions',
+        'Machine Learning': '/solutions',
+        'Generative AI': '/solutions',
+        'Cloud Computing': '/solutions',
+        'Data Engineering': '/solutions'
     };
 
     return (
-        <footer className="bg-[#021a15] pt-16 pb-8 border-t border-emerald-900/40 font-sans text-slate-300 relative overflow-hidden">
-            {/* Background Decoration */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-emerald-900/20 rounded-full blur-[140px] opacity-60"></div>
-                <div className="absolute bottom-[-20%] left-[-10%] w-[800px] h-[800px] bg-teal-900/20 rounded-full blur-[140px] opacity-50"></div>
-            </div>
-
+        <footer className="bg-white pt-16 pb-8 border-t-2 border-[#0066FF] font-sans text-[#0066FF] relative">
             <div className="max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-                {/* Footer CTA Section - GreenData Architecture Banner */}
-                <div className="bg-[#032b24] border border-emerald-400/25 rounded-3xl p-8 md:p-12 mb-16 text-center lg:text-left flex flex-col lg:flex-row items-center justify-between gap-8 shadow-xl">
+                {/* Footer CTA Section */}
+                <div className="bg-white border-2 border-[#0066FF] rounded-2xl p-8 md:p-12 mb-16 text-center lg:text-left flex flex-col lg:flex-row items-center justify-between gap-8">
                     <div className="max-w-2xl">
-                        <div className="eyebrow text-emerald-300 mb-2">
-                            <span className="dot"></span>
+                        <div className="inline-flex items-center gap-2 border border-[#0066FF] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3">
+                            <span className="w-2 h-2 rounded-full bg-[#0066FF]"></span>
                             <span>Executive Advisory Desk</span>
                         </div>
-                        <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-2 font-heading">Ready to Build Your Next AI Product?</h2>
-                        <p className="text-emerald-100/80 text-base md:text-lg">Let's discuss your requirements and recommend the right AI solution.</p>
+                        <h2 className="text-2xl md:text-3xl font-extrabold text-[#0066FF] mb-2 font-heading">Ready to Build Your Next AI Product?</h2>
+                        <p className="text-[#0066FF] text-base md:text-lg font-medium">Let's discuss your requirements and recommend the right AI solution.</p>
                     </div>
                     <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full lg:w-auto">
-                        <Link to="/book-consultation" className="btn-accent w-full sm:w-auto">
+                        <Link to="/book-consultation" className="inline-flex items-center justify-center bg-[#0066FF] text-white hover:bg-white hover:text-[#0066FF] border-2 border-[#0066FF] font-bold text-sm px-6 py-3.5 rounded-lg transition-all w-full sm:w-auto">
                             <span>Book Free Consultation</span>
                         </Link>
-                        <a href="mailto:connect@profitmachines.com" className="btn-dark-secondary w-full sm:w-auto">
+                        <a href="mailto:connect@profitmachines.com" className="inline-flex items-center justify-center bg-white text-[#0066FF] hover:bg-[#0066FF] hover:text-white border-2 border-[#0066FF] font-bold text-sm px-6 py-3.5 rounded-lg transition-all w-full sm:w-auto">
                             Email Us Directly
                         </a>
                     </div>
                 </div>
 
                 {/* Top Section: Brand & Contact vs Navigation Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-8">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-12">
 
                     {/* Brand & Contact (Left 4 Columns) */}
                     <div className="lg:col-span-4 space-y-6 lg:pr-8">
-                        {/* Brand */}
                         <div>
                             <Link to="/" className="inline-block mb-3">
                                 <div className="flex items-center gap-2.5">
-                                    <div className="w-9 h-9 rounded-xl bg-emerald-950 border border-emerald-400/40 flex items-center justify-center font-extrabold text-[12px] text-emerald-300 shadow-sm">PM</div>
+                                    <div className="w-9 h-9 rounded-lg bg-[#0066FF] text-white flex items-center justify-center font-extrabold text-[12px] border border-[#0066FF]">PM</div>
                                     <div className="flex flex-col">
-                                        <div className="text-xl md:text-2xl font-extrabold tracking-tight text-white flex items-center gap-0.5 font-heading">
+                                        <div className="text-xl md:text-2xl font-extrabold tracking-tight text-[#0066FF] font-heading">
                                             <span>Profit</span>
-                                            <span className="text-emerald-400">Machines</span>
+                                            <span>Machines</span>
                                         </div>
-                                        <span className="text-[9px] font-mono font-bold tracking-[0.16em] uppercase text-emerald-400/70">
+                                        <span className="text-[9px] font-mono font-bold tracking-[0.16em] uppercase text-[#0066FF]">
                                             Autonomous Revenue OS
                                         </span>
                                     </div>
                                 </div>
                             </Link>
-                            <p className="text-emerald-100/70 leading-relaxed mb-8 font-normal text-sm max-w-sm">
-                                Building Enterprise AI Solutions for the Future. AI. Cloud. Automation. Software. Delivered End-to-End.
+                            <p className="text-[#0066FF] leading-relaxed mb-6 font-medium text-sm max-w-sm">
+                                Building Enterprise AI Solutions for the Future. AI, Cloud, Automation, Software. Delivered End-to-End.
                             </p>
 
-                            <div className="space-y-4 mb-8">
-                                <a href="mailto:connect@profitmachines.com" className="group flex items-center gap-4 text-emerald-100/80 hover:text-white transition-colors duration-200">
-                                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-emerald-500/20 flex items-center justify-center group-hover:border-emerald-400 group-hover:bg-[#064e3b] transition-all">
-                                        <Mail className="w-4 h-4 text-emerald-300" />
+                            <div className="space-y-3 mb-6">
+                                <a href="mailto:connect@profitmachines.com" className="flex items-center gap-3 text-[#0066FF] hover:underline font-semibold text-sm">
+                                    <div className="w-8 h-8 rounded border border-[#0066FF] flex items-center justify-center shrink-0">
+                                        <Mail className="w-4 h-4 text-[#0066FF]" />
                                     </div>
-                                    <span className="font-medium text-sm tracking-wide">connect@profitmachines.com</span>
+                                    <span>connect@profitmachines.com</span>
                                 </a>
-                                <a href="tel:+919513288612" className="group flex items-center gap-4 text-emerald-100/80 hover:text-white transition-colors duration-200">
-                                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-emerald-500/20 flex items-center justify-center group-hover:border-emerald-400 group-hover:bg-[#064e3b] transition-all">
-                                        <Phone className="w-4 h-4 text-emerald-300" />
+                                <a href="tel:+919513088611" className="flex items-center gap-3 text-[#0066FF] hover:underline font-semibold text-sm">
+                                    <div className="w-8 h-8 rounded border border-[#0066FF] flex items-center justify-center shrink-0">
+                                        <Phone className="w-4 h-4 text-[#0066FF]" />
                                     </div>
-                                    <span className="font-medium text-sm tracking-wide">+91 9513288612</span>
+                                    <span>+91 9513088611</span>
                                 </a>
-                            </div>
-
-                            <div className="flex gap-4">
-                                {[Linkedin, Twitter, Facebook].map((Icon, i) => (
-                                    <a key={i} href="#" aria-label={['LinkedIn', 'Twitter', 'Facebook'][i]} title={['LinkedIn', 'Twitter', 'Facebook'][i]} className="w-10 h-10 rounded-xl bg-white/5 border border-emerald-500/20 flex items-center justify-center text-emerald-200 hover:text-white hover:bg-[#064e3b] hover:border-emerald-400 transition-all hover:shadow-[0_0_15px_rgba(52,211,153,0.35)] hover:-translate-y-1">
-                                        <Icon className="w-4 h-4" />
-                                        <span className="sr-only">{['LinkedIn', 'Twitter', 'Facebook'][i]}</span>
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Navigation Grid - 4 Columns with GreenData Mono Mint Headings */}
-                    <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-
-                        {/* Column 1: Quick Links */}
-                        <div className="space-y-4">
-                            <h3 className="text-xs font-mono font-bold text-emerald-300 uppercase tracking-[0.14em] border-b border-white/10 pb-3">Quick Links</h3>
-                            <ul className="space-y-3 text-[13px]">
-                                {Object.keys(quickLinks).map((item, i) => (
-                                    <li key={i}>
-                                        <Link to={quickLinks[item]} className="text-emerald-100/70 hover:text-emerald-300 transition-colors block hover:translate-x-1 font-medium">
-                                            {item}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Column 2: Solutions */}
-                        <div className="space-y-4">
-                            <h3 className="text-xs font-mono font-bold text-emerald-300 uppercase tracking-[0.14em] border-b border-white/10 pb-3">Solutions</h3>
-                            <ul className="space-y-3 text-[13px]">
-                                {Object.keys(solutionsLinks).map((item, i) => (
-                                    <li key={i}>
-                                        <Link to={solutionsLinks[item]} className="text-emerald-100/70 hover:text-emerald-300 transition-colors block hover:translate-x-1 font-medium">
-                                            {item}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Column 3: Industries */}
-                        <div className="space-y-4">
-                            <h3 className="text-xs font-mono font-bold text-emerald-300 uppercase tracking-[0.14em] border-b border-white/10 pb-3">Industries</h3>
-                            <ul className="space-y-3 text-[13px]">
-                                {Object.keys(industriesLinks).map((item, i) => (
-                                    <li key={i}>
-                                        <Link to={industriesLinks[item]} className="text-emerald-100/70 hover:text-emerald-300 transition-colors block hover:translate-x-1 font-medium">
-                                            {item}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Column 4: Technologies */}
-                        <div className="space-y-4">
-                            <h3 className="text-xs font-mono font-bold text-emerald-300 uppercase tracking-[0.14em] border-b border-white/10 pb-3">Technologies</h3>
-                            <ul className="space-y-3 text-[13px]">
-                                {Object.keys(techLinks).map((item, i) => (
-                                    <li key={i}>
-                                        <Link to={techLinks[item]} className="text-emerald-100/70 hover:text-emerald-300 transition-colors block hover:translate-x-1 font-medium">
-                                            {item}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Our Offices - Premium Minimalist */}
-                <div className="border-t border-white/10 py-10 mt-6">
-                    <div className="flex items-center justify-center mb-10">
-                        <h3 className="font-bold text-slate-300 text-xs tracking-[0.2em] uppercase px-6 border border-white/10 py-2 rounded-full bg-white/5 backdrop-blur-sm">
-                            Global Presence
-                        </h3>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12 text-left justify-items-center">
-                        {[
-                            {
-                                title: 'US Office',
-                                address: ['501 E Kennedy Blvd Suite 1400,', 'Tampa, FL 33602, United States'],
-                                email: 'connect@profitmachines.com',
-                                phone: '+91 9513288612'
-                            },
-                            {
-                                title: 'Singapore Office',
-                                address: ['5 Temasek Boulevard, 17th Floor,', 'Singapore 038985'],
-                                email: 'connect@profitmachines.com',
-                                phone: '+65 6050 5235'
-                            },
-                            {
-                                title: 'India Office',
-                                address: ['PROFITMACHINES INNOVATION PVT LTD', 'Suite: 32, 235, Binnamangala, 2nd Floor,', '13th Cross Road, Indira Nagar 2nd Stage,', 'Hoysala Nagar, Bengaluru – 560038, India'],
-                                email: 'connect@profitmachines.com',
-                                phone: '+91 9513288612'
-                            },
-                            {
-                                title: 'Mumbai Office',
-                                address: ['WeWork, Raheja Platinum, Sag Baug,', 'Marol, Andheri East, Mumbai 400059'],
-                                email: 'cs@profitmachines.com',
-                                phone: '+91 9513088612'
-                            },
-                            {
-                                title: 'Bangalore Office',
-                                address: ['WeWork, 13th floor, Tin Factory,', 'Old Madras Rd, Bengaluru 560016'],
-                                email: 'cs@profitmachines.com',
-                                phone: '+91 9513088612'
-                            }
-                        ].map((office, idx) => (
-                            <div key={idx} className="group flex flex-col items-start w-full max-w-xs">
-                                <h4 className="flex items-center gap-3 font-bold text-slate-200 text-[13px] uppercase tracking-wide mb-4">
-                                    <MapPin className="w-4 h-4 text-emerald-400 shrink-0" />
-                                    {office.title}
-                                </h4>
-
-                                <div className="mb-5 pl-7 border-l border-white/5 group-hover:border-emerald-600/50 transition-colors">
-                                    {office.address.map((line, i) => (
-                                        <p key={i} className="text-slate-400 text-[13px] leading-relaxed">
-                                            {line}
-                                        </p>
-                                    ))}
-                                </div>
-
-                                <div className="space-y-3 pl-7">
-                                    <a href={`mailto:${office.email}`} className="flex items-center gap-3 text-slate-400 hover:text-emerald-400 transition-colors text-[13px] group/item">
-                                        <Mail className="w-3.5 h-3.5" />
-                                        <span>{office.email}</span>
-                                    </a>
-                                    <a href={`tel:${office.phone.replace(/ /g, '')}`} className="flex items-center gap-3 text-slate-400 hover:text-emerald-400 transition-colors text-[13px] group/item">
-                                        <Phone className="w-3.5 h-3.5" />
-                                        <span>{office.phone}</span>
-                                    </a>
+                                <div className="flex items-start gap-3 text-[#0066FF] font-medium text-sm">
+                                    <div className="w-8 h-8 rounded border border-[#0066FF] flex items-center justify-center shrink-0 mt-0.5">
+                                        <MapPin className="w-4 h-4 text-[#0066FF]" />
+                                    </div>
+                                    <span>Bengaluru, India · Delaware, USA</span>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </div>
 
-                {/* Partners & Recognition */}
-                <div className="border-t border-white/10 py-6">
-                    <div className="flex flex-col items-center justify-center gap-4">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Trusted Ecosystem</span>
-                        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 opacity-80 grayscale hover:grayscale-0 transition-all duration-700">
-                            {/* Salesforce */}
-                            <div className="flex items-center gap-2 group cursor-default">
-                                <Cloud className="w-6 h-6 text-slate-500 group-hover:text-[#00A1E0] transition-colors" />
-                                <span className="font-bold text-slate-400 text-sm group-hover:text-slate-200 transition-colors">Salesforce</span>
+                            {/* Social Icons */}
+                            <div className="flex items-center gap-2.5">
+                                <a href="https://linkedin.com/company/profitmachines" target="_blank" rel="noopener noreferrer" aria-label="ProfitMachines LinkedIn"
+                                    className="w-9 h-9 rounded border border-[#0066FF] bg-white text-[#0066FF] hover:bg-[#0066FF] hover:text-white flex items-center justify-center transition-colors">
+                                    <Linkedin className="w-4 h-4" />
+                                </a>
+                                <a href="https://twitter.com/profitmachines" target="_blank" rel="noopener noreferrer" aria-label="ProfitMachines Twitter"
+                                    className="w-9 h-9 rounded border border-[#0066FF] bg-white text-[#0066FF] hover:bg-[#0066FF] hover:text-white flex items-center justify-center transition-colors">
+                                    <Twitter className="w-4 h-4" />
+                                </a>
                             </div>
-                            {/* HubSpot */}
-                            <div className="flex items-center gap-2 group cursor-default">
-                                <Share2 className="w-5 h-5 text-slate-500 group-hover:text-[#FF7A59] transition-colors" />
-                                <span className="font-bold text-slate-400 text-sm group-hover:text-slate-200 transition-colors">HubSpot</span>
-                            </div>
-                            {/* Microsoft */}
-                            <div className="flex items-center gap-2 group cursor-default">
-                                <LayoutGrid className="w-5 h-5 text-slate-500 group-hover:text-[#00A4EF] transition-colors" />
-                                <span className="font-bold text-slate-400 text-sm group-hover:text-slate-200 transition-colors">Microsoft</span>
-                            </div>
-                            {/* AWS */}
-                            <div className="flex items-center gap-2 group cursor-default">
-                                <Box className="w-6 h-6 text-slate-500 group-hover:text-[#FF9900] transition-colors" />
-                                <span className="font-bold text-slate-400 text-sm group-hover:text-slate-200 transition-colors">AWS</span>
-                            </div>
-                            {/* Google Cloud */}
-                            <div className="flex items-center gap-2 group cursor-default">
-                                <Server className="w-5 h-5 text-slate-500 group-hover:text-[#4285F4] transition-colors" />
-                                <span className="font-bold text-slate-400 text-sm group-hover:text-slate-200 transition-colors">Google Cloud</span>
-                            </div>
+                        </div>
+                    </div>
+
+                    {/* Navigation Columns (Right 8 Columns) */}
+                    <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
+                        <div>
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-[#0066FF] mb-4 pb-1 border-b border-[#0066FF]">
+                                Navigation
+                            </h4>
+                            <ul className="space-y-2.5 text-sm font-medium">
+                                {Object.entries(quickLinks).map(([name, link]) => (
+                                    <li key={name}>
+                                        <Link to={link} className="text-[#0066FF] hover:underline">
+                                            {name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-[#0066FF] mb-4 pb-1 border-b border-[#0066FF]">
+                                Solutions
+                            </h4>
+                            <ul className="space-y-2.5 text-sm font-medium">
+                                {Object.entries(solutionsLinks).map(([name, link]) => (
+                                    <li key={name}>
+                                        <Link to={link} className="text-[#0066FF] hover:underline">
+                                            {name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-[#0066FF] mb-4 pb-1 border-b border-[#0066FF]">
+                                Industries
+                            </h4>
+                            <ul className="space-y-2.5 text-sm font-medium">
+                                {Object.entries(industriesLinks).map(([name, link]) => (
+                                    <li key={name}>
+                                        <Link to={link} className="text-[#0066FF] hover:underline">
+                                            {name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-[#0066FF] mb-4 pb-1 border-b border-[#0066FF]">
+                                Technologies
+                            </h4>
+                            <ul className="space-y-2.5 text-sm font-medium">
+                                {Object.entries(techLinks).map(([name, link]) => (
+                                    <li key={name}>
+                                        <Link to={link} className="text-[#0066FF] hover:underline">
+                                            {name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-6 border-t border-white/10 mt-6">
-                    <p className="text-xs text-slate-400 font-medium tracking-wide">
-                        &copy; {new Date().getFullYear()} ProfitMachines. All rights reserved.
-                    </p>
-                    <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-xs font-medium text-slate-400">
-                        {['Privacy Policy', 'Terms of Service', 'Security', 'Copyright', 'Cookies', 'Sitemap'].map((item, i) => {
-                            const path = `/${item.toLowerCase().replace(/ /g, '-')}`;
-                            return (
-                                <Link key={i} to={item === 'Privacy Policy' ? '/privacy' : item === 'Terms of Service' ? '/terms' : path} className="hover:text-emerald-400 transition-colors">
-                                    {item}
-                                </Link>
-                            )
-                        })}
+                {/* Bottom Legal Strip */}
+                <div className="pt-8 border-t border-[#0066FF] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-[#0066FF]">
+                    <p>© {new Date().getFullYear()} ProfitMachines Inc. All rights reserved.</p>
+                    <div className="flex flex-wrap items-center gap-6">
+                        <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
+                        <Link to="/terms" className="hover:underline">Terms of Service</Link>
+                        <Link to="/security" className="hover:underline">Security</Link>
+                        <Link to="/cookies" className="hover:underline">Cookie Policy</Link>
+                        <Link to="/sitemap" className="hover:underline">Sitemap</Link>
                     </div>
                 </div>
             </div>

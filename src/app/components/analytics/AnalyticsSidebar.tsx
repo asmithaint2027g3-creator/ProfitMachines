@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import {
   Gauge,
   Briefcase,
@@ -120,23 +120,23 @@ export default function AnalyticsSidebar({
   const renderNavContent = () => (
     <div className="flex flex-col h-full">
       {/* Brand header */}
-      <div className="p-5 border-b border-slate-800 flex items-center justify-between">
+      <div className="p-5 border-b border-[#0066FF] flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#064e3b] to-emerald-600 flex items-center justify-center font-mono font-bold text-white shadow-md shadow-blue-500/20 text-sm">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#0066FF] to-[#0066FF] flex items-center justify-center font-mono font-bold text-white shadow-md shadow-blue-500/20 text-sm">
             ISI
           </div>
           <div>
             <div className="text-sm font-extrabold text-white tracking-tight flex items-center gap-1.5">
               ISI Intelligence
             </div>
-            <div className="text-[11px] font-mono text-slate-400">Sheet 1 & 2 Engine</div>
+            <div className="text-[11px] font-mono text-[#0066FF]">Sheet 1 & 2 Engine</div>
           </div>
         </div>
 
         {/* Mobile close button */}
         <button
           onClick={onCloseMobile}
-          className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+          className="lg:hidden p-1.5 rounded-lg text-[#0066FF] hover:text-white hover:bg-white"
         >
           <X className="w-5 h-5" />
         </button>
@@ -146,7 +146,7 @@ export default function AnalyticsSidebar({
       <div className="flex-1 overflow-y-auto p-4 space-y-6 scrollbar-thin scrollbar-thumb-slate-800">
         {NAV_GROUPS.map((group, gIdx) => (
           <div key={gIdx}>
-            <div className="px-3 mb-2 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
+            <div className="px-3 mb-2 text-[10px] font-mono font-bold uppercase tracking-wider text-[#0066FF]">
               {group.name}
             </div>
             <div className="space-y-1">
@@ -162,12 +162,12 @@ export default function AnalyticsSidebar({
                     }}
                     className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-150 group ${
                       isActive
-                        ? 'bg-[#064e3b] text-white shadow-md shadow-emerald-900/30'
-                        : 'text-slate-400 hover:text-white hover:bg-slate-900/80'
+                        ? 'bg-[#0066FF] text-white shadow-md shadow-[#0066FF]/20'
+                        : 'text-[#0066FF] hover:text-white hover:bg-white/80'
                     }`}
                   >
                     <div className="flex items-center gap-2.5 truncate">
-                      <Icon className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-white' : 'text-slate-400 group-hover:text-emerald-400'}`} />
+                      <Icon className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-white' : 'text-[#0066FF] group-hover:text-[#0066FF]'}`} />
                       <span className="truncate">{item.label}</span>
                     </div>
 
@@ -176,7 +176,7 @@ export default function AnalyticsSidebar({
                         <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold uppercase ${
                           isActive
                             ? 'bg-white/20 text-white'
-                            : 'bg-emerald-600/10 text-emerald-400 border border-emerald-600/20'
+                            : 'bg-[#0066FF]/10 text-[#0066FF] border border-[#0066FF]/20'
                         }`}>
                           {item.badge}
                         </span>
@@ -192,13 +192,13 @@ export default function AnalyticsSidebar({
       </div>
 
       {/* System status footer */}
-      <div className="p-4 border-t border-slate-800/80 bg-slate-950/60">
-        <div className="flex items-center gap-2 text-[11px] text-slate-400">
-          <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+      <div className="p-4 border-t border-[#0066FF]/80 bg-white/60">
+        <div className="flex items-center gap-2 text-[11px] text-[#0066FF]">
+          <ShieldCheck className="w-4 h-4 text-[#0066FF] shrink-0" />
           <span className="truncate">Sheet 2 Master Builder Active</span>
         </div>
-        <div className="text-[10px] font-mono text-slate-400 mt-1">
-          Zero Form Modification • Encrypted API
+        <div className="text-[10px] font-mono text-[#0066FF] mt-1">
+          Zero Form Modification � Encrypted API
         </div>
       </div>
     </div>
@@ -207,7 +207,7 @@ export default function AnalyticsSidebar({
   return (
     <>
       {/* Desktop Sticky Sidebar */}
-      <aside className="hidden lg:block w-64 shrink-0 bg-slate-950 border-r border-slate-800 min-h-[calc(100vh-5rem)] sticky top-20 self-start">
+      <aside className="hidden lg:block w-64 shrink-0 bg-white border-r border-[#0066FF] min-h-[calc(100vh-5rem)] sticky top-20 self-start">
         {renderNavContent()}
       </aside>
 
@@ -218,7 +218,7 @@ export default function AnalyticsSidebar({
             className="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
             onClick={onCloseMobile}
           />
-          <div className="fixed inset-y-0 left-0 w-72 max-w-[85vw] bg-slate-950 border-r border-slate-800 shadow-2xl z-50">
+          <div className="fixed inset-y-0 left-0 w-72 max-w-[85vw] bg-white border-r border-[#0066FF] shadow-2xl z-50">
             {renderNavContent()}
           </div>
         </div>

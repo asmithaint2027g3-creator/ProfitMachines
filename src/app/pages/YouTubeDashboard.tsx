@@ -420,37 +420,37 @@ export default function YouTubeDashboard() {
     // ── PIN Lock View ─────────────────────────────────────────────────────
     if (!isAuthenticated) {
         return (
-            <div className="min-h-screen bg-[#02130d] flex items-center justify-center p-6 text-slate-100 font-sans">
-                <div className="max-w-md w-full bg-[#05281e] border border-emerald-600/40 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
-                    <div className="w-16 h-16 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center mx-auto text-emerald-400 mb-5">
+            <div className="min-h-screen bg-[#02130d] flex items-center justify-center p-6 text-[#0066FF] font-sans">
+                <div className="max-w-md w-full bg-[#05281e] border border-[#0066FF]/40 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+                    <div className="w-16 h-16 rounded-2xl bg-white0/20 border border-[#0066FF]/40 flex items-center justify-center mx-auto text-[#0066FF] mb-5">
                         <Lock className="w-8 h-8" />
                     </div>
 
                     <div className="text-center">
-                        <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase tracking-widest">
+                        <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-white0/20 text-[#0066FF] border border-[#0066FF]/30 uppercase tracking-widest">
                             Restricted Admin Area
                         </span>
                         <h2 className="text-2xl font-black text-white mt-3 tracking-tight">
                             YouTube Growth & Leads
                         </h2>
-                        <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                        <p className="text-xs text-[#0066FF] mt-2 leading-relaxed">
                             Dual-channel YouTube engine: Post videos, scan channel uploads, and collect leads directly into Google Sheets, Airtable, and Jira.
                         </p>
                     </div>
 
                     <form onSubmit={handleUnlock} className="mt-8 space-y-4">
                         <div>
-                            <label className="text-xs font-semibold text-slate-300 block mb-1.5">
+                            <label className="text-xs font-semibold text-[#0066FF] block mb-1.5">
                                 Admin Security Passcode
                             </label>
                             <div className="relative">
-                                <Key className="w-4 h-4 text-emerald-400 absolute left-3.5 top-3.5" />
+                                <Key className="w-4 h-4 text-[#0066FF] absolute left-3.5 top-3.5" />
                                 <input
                                     type="password"
                                     value={passcode}
                                     onChange={e => setPasscode(e.target.value)}
                                     placeholder="Enter Admin Key (e.g. pm2026)"
-                                    className="w-full bg-[#031c15] border border-emerald-700/50 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition"
+                                    className="w-full bg-[#031c15] border border-[#0066FF]/50 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#0066FF] focus:ring-1 focus:ring-emerald-400 transition"
                                 />
                             </div>
                             {passcodeError && (
@@ -462,7 +462,7 @@ export default function YouTubeDashboard() {
 
                         <button
                             type="submit"
-                            className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold py-3 rounded-xl text-sm transition shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2 cursor-pointer"
+                            className="w-full bg-gradient-to-r from-[#0066FF] to-[#0066FF] hover:from-[#0066FF] hover:to-[#0066FF] text-[#0066FF] font-bold py-3 rounded-xl text-sm transition shadow-lg shadow-[#0066FF]/20 flex items-center justify-center gap-2 cursor-pointer"
                         >
                             <ShieldCheck className="w-4 h-4" /> Unlock Dashboard
                         </button>
@@ -475,9 +475,9 @@ export default function YouTubeDashboard() {
     const creds = diagnostics?.credentials;
 
     return (
-        <div className="min-h-screen bg-[#02130d] text-slate-100 font-sans pb-24">
+        <div className="min-h-screen bg-[#02130d] text-[#0066FF] font-sans pb-24">
             {/* Top Navigation Bar */}
-            <header className="border-b border-emerald-900/50 bg-[#042018]/80 backdrop-blur-md sticky top-0 z-40">
+            <header className="border-b border-[#0066FF]/50 bg-[#042018]/80 backdrop-blur-md sticky top-0 z-40">
                 <div className="max-w-7xl mx-auto px-6 sm:px-12 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400">
@@ -488,11 +488,11 @@ export default function YouTubeDashboard() {
                                 <h1 className="text-lg font-black text-white tracking-tight">
                                     YouTube Growth & Dual-Lead Engine
                                 </h1>
-                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-white0/20 text-[#0066FF] border border-[#0066FF]/30">
                                     ACTIVE
                                 </span>
                             </div>
-                            <p className="text-xs text-slate-400">
+                            <p className="text-xs text-[#0066FF]">
                                 Official Channel + Dashboard Posting $\leftrightarrow$ Google Sheets $\leftrightarrow$ Airtable $\leftrightarrow$ Jira
                             </p>
                         </div>
@@ -501,7 +501,7 @@ export default function YouTubeDashboard() {
                     <div className="flex items-center gap-3">
                         <button
                             onClick={() => setShowManualLeadModal(true)}
-                            className="px-3.5 py-2 rounded-xl text-xs font-bold bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 border border-teal-500/40 flex items-center gap-1.5 transition cursor-pointer"
+                            className="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#0066FF]/20 hover:bg-[#0066FF]/30 text-[#0066FF] border border-[#0066FF]/40 flex items-center gap-1.5 transition cursor-pointer"
                         >
                             <Plus className="w-3.5 h-3.5" /> Log Video Lead
                         </button>
@@ -511,8 +511,8 @@ export default function YouTubeDashboard() {
                             disabled={isSyncing}
                             className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition cursor-pointer ${
                                 isSyncing
-                                    ? 'bg-emerald-700/50 text-slate-300 cursor-not-allowed'
-                                    : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-md shadow-emerald-500/20'
+                                    ? 'bg-[#0066FF]/50 text-[#0066FF] cursor-not-allowed'
+                                    : 'bg-white0 hover:bg-[#0066FF] text-[#0066FF] shadow-md shadow-[#0066FF]/20'
                             }`}
                         >
                             <RefreshCw className={`w-3.5 h-3.5 ${isSyncing ? 'animate-spin' : ''}`} />
@@ -521,7 +521,7 @@ export default function YouTubeDashboard() {
 
                         <button
                             onClick={handleLock}
-                            className="p-2 rounded-xl bg-slate-900/60 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 transition cursor-pointer"
+                            className="p-2 rounded-xl bg-white/60 hover:bg-white text-[#0066FF] hover:text-white border border-[#0066FF] transition cursor-pointer"
                             title="Lock Admin Session"
                         >
                             <Lock className="w-4 h-4" />
@@ -534,15 +534,15 @@ export default function YouTubeDashboard() {
             {syncMessage && (
                 <div className="max-w-7xl mx-auto px-6 sm:px-12 mt-4">
                     <div className={`p-4 rounded-2xl border text-xs flex items-center justify-between ${
-                        syncMessage.type === 'success' ? 'bg-emerald-950/40 border-emerald-600/40 text-emerald-200' :
+                        syncMessage.type === 'success' ? 'bg-[#0066FF]/40 border-[#0066FF]/40 text-[#0066FF]' :
                         syncMessage.type === 'error' ? 'bg-rose-950/40 border-rose-600/40 text-rose-200' :
                         'bg-sky-950/40 border-sky-600/40 text-sky-200'
                     }`}>
                         <div className="flex items-center gap-2">
-                            {syncMessage.type === 'success' ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <AlertCircle className="w-4 h-4 text-rose-400" />}
+                            {syncMessage.type === 'success' ? <CheckCircle2 className="w-4 h-4 text-[#0066FF]" /> : <AlertCircle className="w-4 h-4 text-rose-400" />}
                             <span>{syncMessage.text}</span>
                         </div>
-                        <button onClick={() => setSyncMessage(null)} className="text-slate-400 hover:text-white">
+                        <button onClick={() => setSyncMessage(null)} className="text-[#0066FF] hover:text-white">
                             <X className="w-4 h-4" />
                         </button>
                     </div>
@@ -553,13 +553,13 @@ export default function YouTubeDashboard() {
             <div className="max-w-7xl mx-auto px-6 sm:px-12 mt-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {/* YouTube API Status */}
-                    <div className="bg-[#052319] border border-emerald-700/40 rounded-2xl p-4 shadow-md">
+                    <div className="bg-[#052319] border border-[#0066FF]/40 rounded-2xl p-4 shadow-md">
                         <div className="flex items-center justify-between">
-                            <span className="text-xs text-slate-400 font-semibold flex items-center gap-1.5">
+                            <span className="text-xs text-[#0066FF] font-semibold flex items-center gap-1.5">
                                 <Play className="w-3.5 h-3.5 text-rose-400" /> YouTube Channel
                             </span>
                             <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-                                creds?.youtubeConnected ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'
+                                creds?.youtubeConnected ? 'bg-white0/20 text-[#0066FF]' : 'bg-amber-500/20 text-amber-300'
                             }`}>
                                 {creds?.youtubeConnected ? 'CONNECTED' : 'KEY PENDING'}
                             </span>
@@ -567,61 +567,61 @@ export default function YouTubeDashboard() {
                         <div className="mt-2 text-sm font-bold text-white">
                             {creds?.authMode === 'OAUTH2_CHANNEL_OWNER' ? 'OAuth 2.0 (Dual Post/Sync)' : (creds?.youtubeConnected ? 'Public Data API' : 'Not Connected')}
                         </div>
-                        <div className="text-[11px] text-slate-400 mt-0.5">
+                        <div className="text-[11px] text-[#0066FF] mt-0.5">
                             Channel: {creds?.channelIdConfigured ? 'UC... Configured' : 'Missing in .env'}
                         </div>
                     </div>
 
                     {/* Google Sheets / Apps Script Status */}
-                    <div className="bg-[#052319] border border-emerald-700/40 rounded-2xl p-4 shadow-md">
+                    <div className="bg-[#052319] border border-[#0066FF]/40 rounded-2xl p-4 shadow-md">
                         <div className="flex items-center justify-between">
-                            <span className="text-xs text-slate-400 font-semibold flex items-center gap-1.5">
-                                <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-400" /> Google Sheets
+                            <span className="text-xs text-[#0066FF] font-semibold flex items-center gap-1.5">
+                                <FileSpreadsheet className="w-3.5 h-3.5 text-[#0066FF]" /> Google Sheets
                             </span>
-                            <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300">
+                            <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-white0/20 text-[#0066FF]">
                                 DUAL SYNC READY
                             </span>
                         </div>
                         <div className="mt-2 text-sm font-bold text-white truncate">
                             Apps Script + Dedicated Sheet
                         </div>
-                        <div className="text-[11px] text-slate-400 mt-0.5 truncate">
+                        <div className="text-[11px] text-[#0066FF] mt-0.5 truncate">
                             Tabs: YouTube_Videos, YouTube_Leads
                         </div>
                     </div>
 
                     {/* Airtable CRM */}
-                    <div className="bg-[#052319] border border-emerald-700/40 rounded-2xl p-4 shadow-md">
+                    <div className="bg-[#052319] border border-[#0066FF]/40 rounded-2xl p-4 shadow-md">
                         <div className="flex items-center justify-between">
-                            <span className="text-xs text-slate-400 font-semibold flex items-center gap-1.5">
-                                <Database className="w-3.5 h-3.5 text-teal-400" /> Airtable CRM
+                            <span className="text-xs text-[#0066FF] font-semibold flex items-center gap-1.5">
+                                <Database className="w-3.5 h-3.5 text-[#0066FF]" /> Airtable CRM
                             </span>
-                            <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300">
+                            <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-white0/20 text-[#0066FF]">
                                 ACTIVE
                             </span>
                         </div>
                         <div className="mt-2 text-sm font-bold text-white">
                             Base: appFHphPzP7b2VYq1
                         </div>
-                        <div className="text-[11px] text-slate-400 mt-0.5">
+                        <div className="text-[11px] text-[#0066FF] mt-0.5">
                             Target: Leads (YouTube Potential Lead)
                         </div>
                     </div>
 
                     {/* Jira Cloud */}
-                    <div className="bg-[#052319] border border-emerald-700/40 rounded-2xl p-4 shadow-md">
+                    <div className="bg-[#052319] border border-[#0066FF]/40 rounded-2xl p-4 shadow-md">
                         <div className="flex items-center justify-between">
-                            <span className="text-xs text-slate-400 font-semibold flex items-center gap-1.5">
+                            <span className="text-xs text-[#0066FF] font-semibold flex items-center gap-1.5">
                                 <ShieldCheck className="w-3.5 h-3.5 text-blue-400" /> Jira Cloud
                             </span>
-                            <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300">
+                            <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-white0/20 text-[#0066FF]">
                                 READY
                             </span>
                         </div>
                         <div className="mt-2 text-sm font-bold text-white">
                             Project: PROF
                         </div>
-                        <div className="text-[11px] text-slate-400 mt-0.5">
+                        <div className="text-[11px] text-[#0066FF] mt-0.5">
                             Host: trustworkz.atlassian.net
                         </div>
                     </div>
@@ -630,7 +630,7 @@ export default function YouTubeDashboard() {
 
             {/* Navigation Tabs */}
             <div className="max-w-7xl mx-auto px-6 sm:px-12 mt-8">
-                <div className="flex items-center gap-2 border-b border-emerald-900/40 pb-4 overflow-x-auto">
+                <div className="flex items-center gap-2 border-b border-[#0066FF]/40 pb-4 overflow-x-auto">
                     {[
                         { id: 'OVERVIEW', label: 'Pipeline Overview', icon: Sparkles },
                         { id: 'LEADS', label: `Potential Leads (${leads.length})`, icon: UserCheck },
@@ -646,8 +646,8 @@ export default function YouTubeDashboard() {
                                 onClick={() => setActiveTab(tab.id as any)}
                                 className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
                                     activeTab === tab.id
-                                        ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
-                                        : 'bg-slate-900/60 text-slate-400 hover:text-white border border-slate-800'
+                                        ? 'bg-white0 text-[#0066FF] shadow-md shadow-[#0066FF]/20'
+                                        : 'bg-white/60 text-[#0066FF] hover:text-white border border-[#0066FF]'
                                 }`}
                             >
                                 <Icon className="w-3.5 h-3.5" />
@@ -662,63 +662,63 @@ export default function YouTubeDashboard() {
                     <div className="mt-6 space-y-6">
                         {/* Summary Metrics */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                            <div className="bg-[#042018] border border-emerald-800/40 rounded-2xl p-5">
-                                <div className="text-xs text-slate-400 flex items-center gap-1.5">
-                                    <Sparkles className="w-4 h-4 text-emerald-400" /> Total Flagged Leads
+                            <div className="bg-[#042018] border border-[#0066FF]/40 rounded-2xl p-5">
+                                <div className="text-xs text-[#0066FF] flex items-center gap-1.5">
+                                    <Sparkles className="w-4 h-4 text-[#0066FF]" /> Total Flagged Leads
                                 </div>
                                 <div className="text-3xl font-black text-white mt-2">
                                     {leads.length}
                                 </div>
-                                <div className="text-[11px] text-emerald-400/80 mt-1">
+                                <div className="text-[11px] text-[#0066FF]/80 mt-1">
                                     From Channel Comments & Dashboard
                                 </div>
                             </div>
 
-                            <div className="bg-[#042018] border border-emerald-800/40 rounded-2xl p-5">
-                                <div className="text-xs text-slate-400 flex items-center gap-1.5">
+                            <div className="bg-[#042018] border border-[#0066FF]/40 rounded-2xl p-5">
+                                <div className="text-xs text-[#0066FF] flex items-center gap-1.5">
                                     <Play className="w-4 h-4 text-rose-400" /> Tracked Videos
                                 </div>
                                 <div className="text-3xl font-black text-white mt-2">
                                     {(diagnostics?.recentLogs?.[0]?.videosProcessed || 0) + videos.length}
                                 </div>
-                                <div className="text-[11px] text-slate-400 mt-1">
+                                <div className="text-[11px] text-[#0066FF] mt-1">
                                     Channel Uploads + Registered
                                 </div>
                             </div>
 
-                            <div className="bg-[#042018] border border-emerald-800/40 rounded-2xl p-5">
-                                <div className="text-xs text-slate-400 flex items-center gap-1.5">
+                            <div className="bg-[#042018] border border-[#0066FF]/40 rounded-2xl p-5">
+                                <div className="text-xs text-[#0066FF] flex items-center gap-1.5">
                                     <MessageSquare className="w-4 h-4 text-sky-400" /> Ingested Comments
                                 </div>
                                 <div className="text-3xl font-black text-white mt-2">
                                     {diagnostics?.recentLogs?.[0]?.commentsProcessed || 0}
                                 </div>
-                                <div className="text-[11px] text-slate-400 mt-1">
+                                <div className="text-[11px] text-[#0066FF] mt-1">
                                     Filtered by Intent Classifier
                                 </div>
                             </div>
 
-                            <div className="bg-[#042018] border border-emerald-800/40 rounded-2xl p-5">
-                                <div className="text-xs text-slate-400 flex items-center gap-1.5">
+                            <div className="bg-[#042018] border border-[#0066FF]/40 rounded-2xl p-5">
+                                <div className="text-xs text-[#0066FF] flex items-center gap-1.5">
                                     <Clock className="w-4 h-4 text-amber-400" /> Last Pipeline Sync
                                 </div>
                                 <div className="text-lg font-bold text-white mt-3 truncate">
                                     {diagnostics?.lastSyncAt ? new Date(diagnostics.lastSyncAt).toLocaleTimeString() : 'Never'}
                                 </div>
-                                <div className="text-[11px] text-slate-400 mt-1">
+                                <div className="text-[11px] text-[#0066FF] mt-1">
                                     {diagnostics?.lastSyncAt ? new Date(diagnostics.lastSyncAt).toLocaleDateString() : 'Click Sync Channel'}
                                 </div>
                             </div>
                         </div>
 
                         {/* Dual-Channel Architecture Explainer */}
-                        <div className="bg-gradient-to-r from-[#04261d] to-[#031d16] border border-emerald-600/40 rounded-2xl p-6 shadow-xl">
+                        <div className="bg-gradient-to-r from-[#04261d] to-[#031d16] border border-[#0066FF]/40 rounded-2xl p-6 shadow-xl">
                             <h3 className="text-base font-bold text-white flex items-center gap-2">
-                                <Share2 className="w-5 h-5 text-emerald-400" /> How ProfitMachines Dual-Posting & Lead Collection Operates
+                                <Share2 className="w-5 h-5 text-[#0066FF]" /> How ProfitMachines Dual-Posting & Lead Collection Operates
                             </h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-xs text-slate-300 leading-relaxed">
-                                <div className="bg-[#02130d] p-4 rounded-xl border border-emerald-900/50">
-                                    <div className="font-bold text-emerald-300 mb-1 flex items-center gap-1.5">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-xs text-[#0066FF] leading-relaxed">
+                                <div className="bg-[#02130d] p-4 rounded-xl border border-[#0066FF]/50">
+                                    <div className="font-bold text-[#0066FF] mb-1 flex items-center gap-1.5">
                                         <Play className="w-3.5 h-3.5 text-rose-400" /> 1. Channel Video Comments Scan
                                     </div>
                                     <p>
@@ -726,9 +726,9 @@ export default function YouTubeDashboard() {
                                     </p>
                                 </div>
 
-                                <div className="bg-[#02130d] p-4 rounded-xl border border-emerald-900/50">
-                                    <div className="font-bold text-emerald-300 mb-1 flex items-center gap-1.5">
-                                        <Video className="w-3.5 h-3.5 text-emerald-400" /> 2. Dashboard Posting & Specific Video Tracking
+                                <div className="bg-[#02130d] p-4 rounded-xl border border-[#0066FF]/50">
+                                    <div className="font-bold text-[#0066FF] mb-1 flex items-center gap-1.5">
+                                        <Video className="w-3.5 h-3.5 text-[#0066FF]" /> 2. Dashboard Posting & Specific Video Tracking
                                     </div>
                                     <p>
                                         Use the <strong>"Post Video to YouTube"</strong> tab to draft and publish video metadata with built-in ProfitMachines UTM tracking. Or paste any YouTube URL in <strong>"Scan Specific Video"</strong> to extract leads immediately on demand!
@@ -738,14 +738,14 @@ export default function YouTubeDashboard() {
                         </div>
 
                         {/* Recent Synchronization Runs */}
-                        <div className="bg-[#042018] border border-emerald-800/40 rounded-2xl p-6">
+                        <div className="bg-[#042018] border border-[#0066FF]/40 rounded-2xl p-6">
                             <h3 className="text-base font-bold text-white flex items-center gap-2">
-                                <Clock className="w-5 h-5 text-emerald-400" /> Recent Execution Logs
+                                <Clock className="w-5 h-5 text-[#0066FF]" /> Recent Execution Logs
                             </h3>
                             <div className="mt-4 overflow-x-auto">
                                 <table className="w-full text-left text-xs">
                                     <thead>
-                                        <tr className="border-b border-emerald-800/40 text-slate-400">
+                                        <tr className="border-b border-[#0066FF]/40 text-[#0066FF]">
                                             <th className="pb-3">Sync ID</th>
                                             <th className="pb-3">Timestamp</th>
                                             <th className="pb-3">Status</th>
@@ -758,18 +758,18 @@ export default function YouTubeDashboard() {
                                     <tbody className="divide-y divide-emerald-900/30">
                                         {(diagnostics?.recentLogs || []).length === 0 ? (
                                             <tr>
-                                                <td colSpan={7} className="py-6 text-center text-slate-500">
+                                                <td colSpan={7} className="py-6 text-center text-[#0066FF]">
                                                     No synchronization runs recorded yet. Click "Sync Channel Uploads" above to initiate a run.
                                                 </td>
                                             </tr>
                                         ) : (
                                             diagnostics?.recentLogs.map(log => (
-                                                <tr key={log.syncRunId} className="hover:bg-emerald-950/20">
-                                                    <td className="py-3 font-mono text-emerald-300">{log.syncRunId}</td>
-                                                    <td className="py-3 text-slate-300">{new Date(log.completedAt).toLocaleString()}</td>
+                                                <tr key={log.syncRunId} className="hover:bg-[#0066FF]/20">
+                                                    <td className="py-3 font-mono text-[#0066FF]">{log.syncRunId}</td>
+                                                    <td className="py-3 text-[#0066FF]">{new Date(log.completedAt).toLocaleString()}</td>
                                                     <td className="py-3">
                                                         <span className={`px-2 py-0.5 rounded-full font-bold text-[10px] ${
-                                                            log.status === 'SUCCESS' ? 'bg-emerald-500/20 text-emerald-300' :
+                                                            log.status === 'SUCCESS' ? 'bg-white0/20 text-[#0066FF]' :
                                                             log.status === 'PARTIAL_SUCCESS' ? 'bg-amber-500/20 text-amber-300' :
                                                             'bg-rose-500/20 text-rose-300'
                                                         }`}>
@@ -778,8 +778,8 @@ export default function YouTubeDashboard() {
                                                     </td>
                                                     <td className="py-3 text-white">{log.videosProcessed}</td>
                                                     <td className="py-3 text-white">{log.commentsProcessed}</td>
-                                                    <td className="py-3 text-emerald-400 font-bold">{log.potentialLeadsFlagged}</td>
-                                                    <td className="py-3 text-slate-400 max-w-xs truncate" title={log.errorDetails}>
+                                                    <td className="py-3 text-[#0066FF] font-bold">{log.potentialLeadsFlagged}</td>
+                                                    <td className="py-3 text-[#0066FF] max-w-xs truncate" title={log.errorDetails}>
                                                         {log.errorDetails}
                                                     </td>
                                                 </tr>
@@ -798,13 +798,13 @@ export default function YouTubeDashboard() {
                         {/* Filters & Actions Bar */}
                         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                             <div className="relative w-full sm:w-80">
-                                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                                <Search className="w-4 h-4 text-[#0066FF] absolute left-3 top-3" />
                                 <input
                                     type="text"
                                     value={searchQuery}
                                     onChange={e => setSearchQuery(e.target.value)}
                                     placeholder="Search commenter, video, notes..."
-                                    className="w-full bg-[#042018] border border-emerald-800/40 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"
+                                    className="w-full bg-[#042018] border border-[#0066FF]/40 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#0066FF]"
                                 />
                             </div>
 
@@ -812,7 +812,7 @@ export default function YouTubeDashboard() {
                                 <select
                                     value={selectedCategoryFilter}
                                     onChange={e => setSelectedCategoryFilter(e.target.value)}
-                                    className="bg-[#042018] border border-emerald-800/40 rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none"
+                                    className="bg-[#042018] border border-[#0066FF]/40 rounded-xl px-3 py-2 text-xs text-[#0066FF] focus:outline-none"
                                 >
                                     <option value="ALL">All Categories</option>
                                     <option value="PRICING">Pricing Inquiry</option>
@@ -824,7 +824,7 @@ export default function YouTubeDashboard() {
 
                                 <button
                                     onClick={() => setShowManualLeadModal(true)}
-                                    className="px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 flex items-center gap-1.5 transition cursor-pointer"
+                                    className="px-3.5 py-2 rounded-xl text-xs font-bold bg-white0 hover:bg-[#0066FF] text-[#0066FF] flex items-center gap-1.5 transition cursor-pointer"
                                 >
                                     <Plus className="w-3.5 h-3.5" /> Log Lead
                                 </button>
@@ -833,22 +833,22 @@ export default function YouTubeDashboard() {
 
                         {/* Flagged Leads List */}
                         {filteredLeads.length === 0 ? (
-                            <div className="bg-[#042018] border border-emerald-800/40 rounded-2xl p-12 text-center">
-                                <Sparkles className="w-8 h-8 text-emerald-400 mx-auto mb-3 opacity-60" />
+                            <div className="bg-[#042018] border border-[#0066FF]/40 rounded-2xl p-12 text-center">
+                                <Sparkles className="w-8 h-8 text-[#0066FF] mx-auto mb-3 opacity-60" />
                                 <h3 className="font-semibold text-white">No Flagged Potential Leads Found Yet</h3>
-                                <p className="text-xs text-slate-400 mt-1 max-w-md mx-auto">
+                                <p className="text-xs text-[#0066FF] mt-1 max-w-md mx-auto">
                                     When viewers comment asking for pricing, demos, consultations, or services on your YouTube channel videos, they will automatically appear here.
                                 </p>
                                 <div className="mt-4 flex items-center justify-center gap-3">
                                     <button
                                         onClick={handleSyncNow}
-                                        className="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition cursor-pointer"
+                                        className="px-4 py-2 rounded-xl text-xs font-bold bg-white0/20 text-[#0066FF] border border-[#0066FF]/40 hover:bg-[#0066FF]/30 transition cursor-pointer"
                                     >
                                         Run Channel Sync Now
                                     </button>
                                     <button
                                         onClick={() => setShowManualLeadModal(true)}
-                                        className="px-4 py-2 rounded-xl text-xs font-bold bg-teal-500/20 text-teal-300 border border-teal-500/40 hover:bg-teal-500/30 transition cursor-pointer"
+                                        className="px-4 py-2 rounded-xl text-xs font-bold bg-[#0066FF]/20 text-[#0066FF] border border-[#0066FF]/40 hover:bg-[#0066FF]/30 transition cursor-pointer"
                                     >
                                         Log First Direct Lead
                                     </button>
@@ -857,31 +857,31 @@ export default function YouTubeDashboard() {
                         ) : (
                             <div className="space-y-4">
                                 {filteredLeads.map(lead => (
-                                    <div key={lead.commentId} className="bg-[#042018] border border-emerald-700/50 rounded-2xl p-5 shadow-lg">
+                                    <div key={lead.commentId} className="bg-[#042018] border border-[#0066FF]/50 rounded-2xl p-5 shadow-lg">
                                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center font-bold text-emerald-300 text-sm">
+                                                <div className="w-10 h-10 rounded-full bg-white0/20 border border-[#0066FF]/40 flex items-center justify-center font-bold text-[#0066FF] text-sm">
                                                     {lead.authorDisplayName.slice(0, 2).toUpperCase()}
                                                 </div>
                                                 <div>
                                                     <div className="flex items-center gap-2">
                                                         <span className="font-bold text-white text-sm">{lead.authorDisplayName}</span>
                                                         <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-                                                            lead.source === 'DIRECT_CAPTURE' ? 'bg-teal-500/20 text-teal-300 border border-teal-500/40' :
+                                                            lead.source === 'DIRECT_CAPTURE' ? 'bg-[#0066FF]/20 text-[#0066FF] border border-[#0066FF]/40' :
                                                             lead.source === 'DASHBOARD_POST' ? 'bg-purple-500/20 text-purple-300 border border-purple-500/40' :
-                                                            'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                                                            'bg-white0/20 text-[#0066FF] border border-[#0066FF]/40'
                                                         }`}>
                                                             {lead.source === 'DIRECT_CAPTURE' ? 'DIRECT LOG' : lead.source === 'DASHBOARD_POST' ? 'DASHBOARD POST' : 'CHANNEL COMMENT'}
                                                         </span>
                                                         <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-amber-500/20 text-amber-300">
                                                             {lead.reviewStatus}
                                                         </span>
-                                                        <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300">
+                                                        <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-white0/20 text-[#0066FF]">
                                                             Score: {lead.confidenceScore}/100
                                                         </span>
                                                     </div>
-                                                    <div className="text-xs text-slate-400 mt-0.5">
-                                                        Source Video: <span className="text-slate-300">{lead.videoTitle}</span>
+                                                    <div className="text-xs text-[#0066FF] mt-0.5">
+                                                        Source Video: <span className="text-[#0066FF]">{lead.videoTitle}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -902,7 +902,7 @@ export default function YouTubeDashboard() {
                                                         href={`https://airtable.com/appFHphPzP7b2VYq1/tblLeads/${lead.airtableRecordId}`}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="px-2.5 py-1 rounded-lg bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 text-xs font-semibold flex items-center gap-1 border border-teal-500/40"
+                                                        className="px-2.5 py-1 rounded-lg bg-[#0066FF]/20 hover:bg-[#0066FF]/30 text-[#0066FF] text-xs font-semibold flex items-center gap-1 border border-[#0066FF]/40"
                                                     >
                                                         Airtable CRM <ExternalLink className="w-3 h-3" />
                                                     </a>
@@ -912,7 +912,7 @@ export default function YouTubeDashboard() {
                                                         href={lead.commentUrl}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1"
+                                                        className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#0066FF]/10 text-[#0066FF] text-xs font-semibold flex items-center gap-1"
                                                     >
                                                         YouTube <ExternalLink className="w-3 h-3" />
                                                     </a>
@@ -920,11 +920,11 @@ export default function YouTubeDashboard() {
                                             </div>
                                         </div>
 
-                                        <div className="mt-4 bg-[#02130d] p-3.5 rounded-xl border border-emerald-900/50 text-xs text-slate-200 font-mono">
+                                        <div className="mt-4 bg-[#02130d] p-3.5 rounded-xl border border-[#0066FF]/50 text-xs text-[#0066FF] font-mono">
                                             "{lead.commentText}"
                                         </div>
 
-                                        <div className="mt-3 text-[11px] text-emerald-400 flex items-center gap-1.5 font-medium">
+                                        <div className="mt-3 text-[11px] text-[#0066FF] flex items-center gap-1.5 font-medium">
                                             <Sparkles className="w-3.5 h-3.5" />
                                             <span>Reason Flagged: {lead.reasonFlagged}</span>
                                         </div>
@@ -937,35 +937,35 @@ export default function YouTubeDashboard() {
 
                 {/* ── Tab 3: POST VIDEO TO YOUTUBE ───────────────────────────── */}
                 {activeTab === 'POST_VIDEO' && (
-                    <div className="mt-6 bg-[#042018] border border-emerald-800/40 rounded-2xl p-6 shadow-xl">
-                        <div className="flex items-center justify-between pb-4 border-b border-emerald-900/40">
+                    <div className="mt-6 bg-[#042018] border border-[#0066FF]/40 rounded-2xl p-6 shadow-xl">
+                        <div className="flex items-center justify-between pb-4 border-b border-[#0066FF]/40">
                             <div>
                                 <h3 className="text-base font-bold text-white flex items-center gap-2">
-                                    <Video className="w-5 h-5 text-emerald-400" /> Post / Register Video on YouTube
+                                    <Video className="w-5 h-5 text-[#0066FF]" /> Post / Register Video on YouTube
                                 </h3>
-                                <p className="text-xs text-slate-400 mt-1">
+                                <p className="text-xs text-[#0066FF] mt-1">
                                     Publish video metadata to YouTube channel and automatically enter into ProfitMachines lead-tracking pipeline.
                                 </p>
                             </div>
-                            <span className="text-[11px] px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold">
+                            <span className="text-[11px] px-3 py-1 rounded-full bg-white0/20 text-[#0066FF] border border-[#0066FF]/30 font-bold">
                                 Dual-Channel Publishing
                             </span>
                         </div>
 
                         {publishResult && (
                             <div className={`mt-4 p-4 rounded-xl text-xs border flex items-center justify-between ${
-                                publishResult.success ? 'bg-emerald-950/40 border-emerald-500/40 text-emerald-200' : 'bg-rose-950/40 border-rose-500/40 text-rose-200'
+                                publishResult.success ? 'bg-[#0066FF]/40 border-[#0066FF]/40 text-[#0066FF]' : 'bg-rose-950/40 border-rose-500/40 text-rose-200'
                             }`}>
                                 <div className="flex items-center gap-2">
-                                    {publishResult.success ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <AlertCircle className="w-4 h-4 text-rose-400" />}
+                                    {publishResult.success ? <CheckCircle2 className="w-4 h-4 text-[#0066FF]" /> : <AlertCircle className="w-4 h-4 text-rose-400" />}
                                     <span>{publishResult.message}</span>
                                     {publishResult.url && (
-                                        <a href={publishResult.url} target="_blank" rel="noopener noreferrer" className="underline font-bold text-emerald-300 flex items-center gap-1">
+                                        <a href={publishResult.url} target="_blank" rel="noopener noreferrer" className="underline font-bold text-[#0066FF] flex items-center gap-1">
                                             View Video <ExternalLink className="w-3 h-3" />
                                         </a>
                                     )}
                                 </div>
-                                <button onClick={() => setPublishResult(null)} className="text-slate-400 hover:text-white">
+                                <button onClick={() => setPublishResult(null)} className="text-[#0066FF] hover:text-white">
                                     <X className="w-4 h-4" />
                                 </button>
                             </div>
@@ -973,7 +973,7 @@ export default function YouTubeDashboard() {
 
                         <form onSubmit={handlePublishVideo} className="mt-6 space-y-5">
                             <div>
-                                <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                <label className="text-xs font-semibold text-[#0066FF] block mb-1">
                                     Video Title *
                                 </label>
                                 <input
@@ -982,27 +982,27 @@ export default function YouTubeDashboard() {
                                     value={publishTitle}
                                     onChange={e => setPublishTitle(e.target.value)}
                                     placeholder="e.g. How to Capture 5% Active In-Market B2B Buyers with AI Intent"
-                                    className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"
+                                    className="w-full bg-[#02130d] border border-[#0066FF]/50 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#0066FF]"
                                 />
                             </div>
 
                             <div>
                                 <div className="flex items-center justify-between mb-1">
-                                    <label className="text-xs font-semibold text-slate-300">
+                                    <label className="text-xs font-semibold text-[#0066FF]">
                                         Video Description (With UTM Tracking)
                                     </label>
                                     <div className="flex items-center gap-2">
                                         <button
                                             type="button"
                                             onClick={() => setPublishDescription(prev => prev + '\n\n👉 Book an AI Strategy Consultation:\nhttps://profit-machines.vercel.app/book-consultation?utm_source=youtube&utm_medium=video_description')}
-                                            className="text-[10px] text-emerald-400 hover:underline cursor-pointer"
+                                            className="text-[10px] text-[#0066FF] hover:underline cursor-pointer"
                                         >
                                             + Insert Consultation Link
                                         </button>
                                         <button
                                             type="button"
                                             onClick={() => setPublishDescription(prev => prev + '\n\n👉 Request Profit Pool Audit:\nhttps://profit-machines.vercel.app/offerings/profit-pool-discovery?utm_source=youtube&utm_medium=video_description')}
-                                            className="text-[10px] text-teal-400 hover:underline cursor-pointer"
+                                            className="text-[10px] text-[#0066FF] hover:underline cursor-pointer"
                                         >
                                             + Insert Audit Link
                                         </button>
@@ -1012,31 +1012,31 @@ export default function YouTubeDashboard() {
                                     rows={5}
                                     value={publishDescription}
                                     onChange={e => setPublishDescription(e.target.value)}
-                                    className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 font-sans"
+                                    className="w-full bg-[#02130d] border border-[#0066FF]/50 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#0066FF] font-sans"
                                 />
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                    <label className="text-xs font-semibold text-[#0066FF] block mb-1">
                                         Tags (Comma-Separated)
                                     </label>
                                     <input
                                         type="text"
                                         value={publishTags}
                                         onChange={e => setPublishTags(e.target.value)}
-                                        className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl px-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"
+                                        className="w-full bg-[#02130d] border border-[#0066FF]/50 rounded-xl px-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#0066FF]"
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                    <label className="text-xs font-semibold text-[#0066FF] block mb-1">
                                         Privacy Status
                                     </label>
                                     <select
                                         value={publishPrivacy}
                                         onChange={e => setPublishPrivacy(e.target.value as any)}
-                                        className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-emerald-400"
+                                        className="w-full bg-[#02130d] border border-[#0066FF]/50 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-[#0066FF]"
                                     >
                                         <option value="public">Public (Visible to All)</option>
                                         <option value="unlisted">Unlisted (Anyone with link)</option>
@@ -1046,7 +1046,7 @@ export default function YouTubeDashboard() {
                             </div>
 
                             <div>
-                                <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                <label className="text-xs font-semibold text-[#0066FF] block mb-1">
                                     Existing YouTube Video URL (Optional — To Track An Already Posted Video)
                                 </label>
                                 <input
@@ -1054,7 +1054,7 @@ export default function YouTubeDashboard() {
                                     value={publishExistingUrl}
                                     onChange={e => setPublishExistingUrl(e.target.value)}
                                     placeholder="https://www.youtube.com/watch?v=..."
-                                    className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl px-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"
+                                    className="w-full bg-[#02130d] border border-[#0066FF]/50 rounded-xl px-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#0066FF]"
                                 />
                             </div>
 
@@ -1063,8 +1063,8 @@ export default function YouTubeDashboard() {
                                 disabled={isPublishingVideo}
                                 className={`px-6 py-3 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
                                     isPublishingVideo
-                                        ? 'bg-emerald-700 text-slate-300 cursor-not-allowed'
-                                        : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-lg shadow-emerald-500/20'
+                                        ? 'bg-[#0066FF] text-[#0066FF] cursor-not-allowed'
+                                        : 'bg-white0 hover:bg-[#0066FF] text-[#0066FF] shadow-lg shadow-[#0066FF]/20'
                                 }`}
                             >
                                 <Send className="w-4 h-4" />
@@ -1076,11 +1076,11 @@ export default function YouTubeDashboard() {
 
                 {/* ── Tab 4: SCAN SPECIFIC VIDEO ─────────────────────────────── */}
                 {activeTab === 'SCAN_VIDEO' && (
-                    <div className="mt-6 bg-[#042018] border border-emerald-800/40 rounded-2xl p-6 shadow-xl">
+                    <div className="mt-6 bg-[#042018] border border-[#0066FF]/40 rounded-2xl p-6 shadow-xl">
                         <h3 className="text-base font-bold text-white flex items-center gap-2">
-                            <Search className="w-5 h-5 text-emerald-400" /> Scan Any Specific Video URL for Leads
+                            <Search className="w-5 h-5 text-[#0066FF]" /> Scan Any Specific Video URL for Leads
                         </h3>
-                        <p className="text-xs text-slate-400 mt-1">
+                        <p className="text-xs text-[#0066FF] mt-1">
                             Enter any YouTube Video URL or Video ID to immediately inspect its comments, run the AI intent classifier, and collect discovered leads into Airtable, Jira, & Google Sheets.
                         </p>
 
@@ -1091,15 +1091,15 @@ export default function YouTubeDashboard() {
                                 value={scanTargetInput}
                                 onChange={e => setScanTargetInput(e.target.value)}
                                 placeholder="Paste YouTube URL: https://www.youtube.com/watch?v=... or Video ID"
-                                className="flex-1 bg-[#02130d] border border-emerald-700/50 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"
+                                className="flex-1 bg-[#02130d] border border-[#0066FF]/50 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#0066FF]"
                             />
                             <button
                                 type="submit"
                                 disabled={isScanningTarget}
                                 className={`px-6 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer ${
                                     isScanningTarget
-                                        ? 'bg-emerald-700 text-slate-300 cursor-not-allowed'
-                                        : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-md shadow-emerald-500/20'
+                                        ? 'bg-[#0066FF] text-[#0066FF] cursor-not-allowed'
+                                        : 'bg-white0 hover:bg-[#0066FF] text-[#0066FF] shadow-md shadow-[#0066FF]/20'
                                 }`}
                             >
                                 <RefreshCw className={`w-3.5 h-3.5 ${isScanningTarget ? 'animate-spin' : ''}`} />
@@ -1108,7 +1108,7 @@ export default function YouTubeDashboard() {
                         </form>
 
                         {scanTargetResult && (
-                            <div className="mt-4 p-4 rounded-xl text-xs bg-[#02130d] border border-emerald-700/50 text-emerald-200">
+                            <div className="mt-4 p-4 rounded-xl text-xs bg-[#02130d] border border-[#0066FF]/50 text-[#0066FF]">
                                 {scanTargetResult}
                             </div>
                         )}
@@ -1117,36 +1117,36 @@ export default function YouTubeDashboard() {
 
                 {/* ── Tab 5: VIDEOS ─────────────────────────────────────────── */}
                 {activeTab === 'VIDEOS' && (
-                    <div className="mt-6 bg-[#042018] border border-emerald-800/40 rounded-2xl p-6">
-                        <div className="flex items-center justify-between pb-4 border-b border-emerald-900/40">
+                    <div className="mt-6 bg-[#042018] border border-[#0066FF]/40 rounded-2xl p-6">
+                        <div className="flex items-center justify-between pb-4 border-b border-[#0066FF]/40">
                             <div>
                                 <h3 className="text-base font-bold text-white flex items-center gap-2">
                                     <Play className="w-5 h-5 text-rose-400" /> Channel Video Analytics & Tracked Videos
                                 </h3>
-                                <p className="text-xs text-slate-400 mt-1">
+                                <p className="text-xs text-[#0066FF] mt-1">
                                     Synchronized to Jira video analytics tasks and the "Video Analytics" tab in Google Sheets.
                                 </p>
                             </div>
                             <button
                                 onClick={handleSyncNow}
-                                className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition cursor-pointer"
+                                className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white0/20 text-[#0066FF] border border-[#0066FF]/40 hover:bg-[#0066FF]/30 transition cursor-pointer"
                             >
                                 Refresh Video Metrics
                             </button>
                         </div>
 
                         {videos.length === 0 ? (
-                            <div className="text-center py-12 text-slate-500 text-xs">
+                            <div className="text-center py-12 text-[#0066FF] text-xs">
                                 Click "Sync Channel Uploads" to fetch all existing videos, or use "Post Video to YouTube" to register new ones.
                             </div>
                         ) : (
                             <div className="mt-4 space-y-3">
                                 {videos.map(v => (
-                                    <div key={v.videoId} className="p-4 rounded-xl bg-[#02130d] border border-emerald-900/40 flex items-center justify-between">
+                                    <div key={v.videoId} className="p-4 rounded-xl bg-[#02130d] border border-[#0066FF]/40 flex items-center justify-between">
                                         <div>
                                             <div className="text-sm font-bold text-white">{v.title}</div>
-                                            <div className="text-xs text-slate-400 mt-0.5 flex items-center gap-3">
-                                                <span>ID: <code className="text-emerald-400">{v.videoId}</code></span>
+                                            <div className="text-xs text-[#0066FF] mt-0.5 flex items-center gap-3">
+                                                <span>ID: <code className="text-[#0066FF]">{v.videoId}</code></span>
                                                 <span>Views: {v.views}</span>
                                                 <span>Likes: {v.likes}</span>
                                                 <span>Comments: {v.commentsCount}</span>
@@ -1156,7 +1156,7 @@ export default function YouTubeDashboard() {
                                             href={v.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 flex items-center gap-1"
+                                            className="px-3 py-1.5 rounded-lg bg-white hover:bg-[#0066FF]/10 text-xs text-[#0066FF] flex items-center gap-1"
                                         >
                                             View <ExternalLink className="w-3 h-3" />
                                         </a>
@@ -1169,25 +1169,25 @@ export default function YouTubeDashboard() {
 
                 {/* ── Tab 6: LOGS ───────────────────────────────────────────── */}
                 {activeTab === 'LOGS' && (
-                    <div className="mt-6 bg-[#042018] border border-emerald-800/40 rounded-2xl p-6">
+                    <div className="mt-6 bg-[#042018] border border-[#0066FF]/40 rounded-2xl p-6">
                         <h3 className="text-base font-bold text-white flex items-center gap-2">
-                            <Clock className="w-5 h-5 text-emerald-400" /> Pipeline Synchronization Audit Trail
+                            <Clock className="w-5 h-5 text-[#0066FF]" /> Pipeline Synchronization Audit Trail
                         </h3>
-                        <p className="text-xs text-slate-400 mt-1">
+                        <p className="text-xs text-[#0066FF] mt-1">
                             Permanent audit trail mirrored to the "Sync Logs" tab in your dedicated Google Sheet.
                         </p>
 
                         <div className="mt-4 space-y-3">
                             {(diagnostics?.recentLogs || []).map(log => (
-                                <div key={log.syncRunId} className="p-4 rounded-xl bg-[#02130d] border border-emerald-900/40 text-xs">
+                                <div key={log.syncRunId} className="p-4 rounded-xl bg-[#02130d] border border-[#0066FF]/40 text-xs">
                                     <div className="flex items-center justify-between">
-                                        <span className="font-mono text-emerald-300 font-bold">{log.syncRunId}</span>
-                                        <span className="text-slate-400">{new Date(log.completedAt).toLocaleString()}</span>
+                                        <span className="font-mono text-[#0066FF] font-bold">{log.syncRunId}</span>
+                                        <span className="text-[#0066FF]">{new Date(log.completedAt).toLocaleString()}</span>
                                     </div>
-                                    <div className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2 text-slate-300">
+                                    <div className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2 text-[#0066FF]">
                                         <div>Videos: <strong className="text-white">{log.videosProcessed}</strong></div>
                                         <div>Comments: <strong className="text-white">{log.commentsProcessed}</strong></div>
-                                        <div>Flagged Leads: <strong className="text-emerald-400">{log.potentialLeadsFlagged}</strong></div>
+                                        <div>Flagged Leads: <strong className="text-[#0066FF]">{log.potentialLeadsFlagged}</strong></div>
                                         <div>Jira Issues: <strong className="text-blue-400">{log.jiraIssuesCount}</strong></div>
                                     </div>
                                     {log.errorDetails && log.errorDetails !== 'None' && (
@@ -1205,19 +1205,19 @@ export default function YouTubeDashboard() {
             {/* Direct Video Lead Modal */}
             {showManualLeadModal && (
                 <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
-                    <div className="bg-[#042018] border border-emerald-600/50 rounded-2xl max-w-lg w-full p-6 shadow-2xl">
-                        <div className="flex items-center justify-between pb-3 border-b border-emerald-900/40">
+                    <div className="bg-[#042018] border border-[#0066FF]/50 rounded-2xl max-w-lg w-full p-6 shadow-2xl">
+                        <div className="flex items-center justify-between pb-3 border-b border-[#0066FF]/40">
                             <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                                <Plus className="w-4 h-4 text-emerald-400" /> Log Direct Video Lead
+                                <Plus className="w-4 h-4 text-[#0066FF]" /> Log Direct Video Lead
                             </h3>
-                            <button onClick={() => setShowManualLeadModal(false)} className="text-slate-400 hover:text-white">
+                            <button onClick={() => setShowManualLeadModal(false)} className="text-[#0066FF] hover:text-white">
                                 <X className="w-4 h-4" />
                             </button>
                         </div>
 
                         <form onSubmit={handleCreateManualLead} className="mt-4 space-y-4">
                             <div>
-                                <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                <label className="text-xs font-semibold text-[#0066FF] block mb-1">
                                     Lead Name / Contact *
                                 </label>
                                 <input
@@ -1226,12 +1226,12 @@ export default function YouTubeDashboard() {
                                     value={manualLeadName}
                                     onChange={e => setManualLeadName(e.target.value)}
                                     placeholder="e.g. David Miller (VP Sales at TechCorp)"
-                                    className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"
+                                    className="w-full bg-[#02130d] border border-[#0066FF]/50 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#0066FF]"
                                 />
                             </div>
 
                             <div>
-                                <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                <label className="text-xs font-semibold text-[#0066FF] block mb-1">
                                     Inquiry / Viewer Requirement *
                                 </label>
                                 <textarea
@@ -1240,13 +1240,13 @@ export default function YouTubeDashboard() {
                                     value={manualLeadNotes}
                                     onChange={e => setManualLeadNotes(e.target.value)}
                                     placeholder="e.g. Saw your YouTube video on demand generation, interested in pricing for enterprise CRM."
-                                    className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"
+                                    className="w-full bg-[#02130d] border border-[#0066FF]/50 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#0066FF]"
                                 />
                             </div>
 
                             <div className="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                    <label className="text-xs font-semibold text-[#0066FF] block mb-1">
                                         Source Video Title
                                     </label>
                                     <input
@@ -1254,18 +1254,18 @@ export default function YouTubeDashboard() {
                                         value={manualLeadVideo}
                                         onChange={e => setManualLeadVideo(e.target.value)}
                                         placeholder="e.g. AI Growth Engine Breakdown"
-                                        className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"
+                                        className="w-full bg-[#02130d] border border-[#0066FF]/50 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#0066FF]"
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                    <label className="text-xs font-semibold text-[#0066FF] block mb-1">
                                         Lead Category
                                     </label>
                                     <select
                                         value={manualLeadCategory}
                                         onChange={e => setManualLeadCategory(e.target.value)}
-                                        className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-400"
+                                        className="w-full bg-[#02130d] border border-[#0066FF]/50 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-[#0066FF]"
                                     >
                                         <option value="CONSULTATION">Consultation Request</option>
                                         <option value="DEMO">Demo Request</option>
@@ -1276,7 +1276,7 @@ export default function YouTubeDashboard() {
                             </div>
 
                             <div>
-                                <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                <label className="text-xs font-semibold text-[#0066FF] block mb-1">
                                     Channel URL or Social Profile
                                 </label>
                                 <input
@@ -1284,7 +1284,7 @@ export default function YouTubeDashboard() {
                                     value={manualLeadChannelUrl}
                                     onChange={e => setManualLeadChannelUrl(e.target.value)}
                                     placeholder="https://youtube.com/@channel or LinkedIn"
-                                    className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"
+                                    className="w-full bg-[#02130d] border border-[#0066FF]/50 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#0066FF]"
                                 />
                             </div>
 
@@ -1292,14 +1292,14 @@ export default function YouTubeDashboard() {
                                 <button
                                     type="button"
                                     onClick={() => setShowManualLeadModal(false)}
-                                    className="px-4 py-2 rounded-xl text-xs text-slate-400 hover:text-white"
+                                    className="px-4 py-2 rounded-xl text-xs text-[#0066FF] hover:text-white"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
                                     disabled={isSubmittingLead}
-                                    className="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 flex items-center gap-1.5 transition cursor-pointer"
+                                    className="px-4 py-2 rounded-xl text-xs font-bold bg-white0 hover:bg-[#0066FF] text-[#0066FF] flex items-center gap-1.5 transition cursor-pointer"
                                 >
                                     <Send className="w-3.5 h-3.5" />
                                     {isSubmittingLead ? 'Syncing Lead...' : 'Submit to Airtable, Jira & Sheets'}

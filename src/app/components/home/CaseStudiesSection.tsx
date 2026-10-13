@@ -77,7 +77,7 @@ export default function CaseStudiesSection() {
         : caseStudies.filter(c => c.category === selectedCategory);
 
     return (
-        <section className="py-20 md:py-28 bg-[#F7F8F5] relative overflow-hidden border-b border-slate-200" id="outcomes">
+        <section className="py-20 md:py-28 bg-white relative overflow-hidden border-b-2 border-[#0066FF]" id="outcomes">
             {/* Scroll Anchors */}
             <div id="case-studies" className="scroll-mt-28 absolute -top-28 left-0 pointer-events-none" />
 
@@ -90,20 +90,20 @@ export default function CaseStudiesSection() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        <div className="eyebrow mb-3">
-                            <span className="dot"></span>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border-2 border-[#0066FF] bg-white text-xs font-bold text-[#0066FF] uppercase mb-4">
+                            <span className="w-2 h-2 rounded-full bg-[#0066FF]"></span>
                             <span>Business Impact &amp; Verifiable Proof</span>
                         </div>
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight font-heading">
-                            Measurable <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#064e3b] via-emerald-700 to-teal-700">Enterprise Outcomes</span>
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0066FF] mb-6 tracking-tight font-heading">
+                            Measurable Enterprise Outcomes
                         </h2>
-                        <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+                        <p className="text-base sm:text-lg text-[#0066FF] leading-relaxed font-medium max-w-2xl mx-auto">
                             Verifiable case studies demonstrating substantial revenue acceleration, cost optimization, operational intelligence, and faster decision-making.
                         </p>
                     </motion.div>
 
-                    {/* Filter Tabs - GreenData Style */}
-                    <div className="inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-[#DDEBE4]/60 border border-emerald-900/10 mt-8 shadow-xs">
+                    {/* Filter Tabs */}
+                    <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-white border-2 border-[#0066FF] mt-8">
                         {impactCategories.map((cat) => (
                             <button
                                 key={cat}
@@ -111,10 +111,10 @@ export default function CaseStudiesSection() {
                                     setSelectedCategory(cat);
                                     trackEvent({ eventName: 'FILTER_CASE_STUDIES_CLICK', label: cat });
                                 }}
-                                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 ${
+                                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 border-2 ${
                                     selectedCategory === cat
-                                        ? 'bg-[#064e3b] text-white shadow-sm'
-                                        : 'text-slate-700 hover:text-[#064e3b] hover:bg-white/80'
+                                        ? 'bg-[#0066FF] text-white border-[#0066FF]'
+                                        : 'bg-white text-[#0066FF] border-transparent hover:border-[#0066FF]'
                                 }`}
                             >
                                 {cat === 'all' ? 'All Case Evidence (04)' : cat}
@@ -129,7 +129,7 @@ export default function CaseStudiesSection() {
                     className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
                 >
                     <AnimatePresence>
-                        {filteredStudies.map((study, idx) => (
+                        {filteredStudies.map((study) => (
                             <motion.div
                                 key={study.id}
                                 layout
@@ -137,59 +137,59 @@ export default function CaseStudiesSection() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.95 }}
                                 transition={{ duration: 0.3 }}
-                                className="bg-white border border-slate-200/90 rounded-3xl p-7 sm:p-8 hover:shadow-2xl hover:shadow-blue-600/10 hover:border-emerald-400 transition-all duration-300 flex flex-col justify-between h-full group"
+                                className="bg-white border-2 border-[#0066FF] rounded-3xl p-7 sm:p-8 hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between h-full group"
                             >
                                 <div>
                                     {/* Client Header */}
                                     <div className="flex items-center justify-between mb-4">
-                                        <div className="text-xs font-bold text-[#064e3b] uppercase tracking-wider font-mono">
+                                        <div className="text-xs font-bold text-[#0066FF] uppercase tracking-wider font-mono">
                                             // {study.client}
                                         </div>
-                                        <span className="text-[10px] font-bold text-slate-400 uppercase bg-slate-50 px-2.5 py-1 rounded-md border border-slate-100">
+                                        <span className="text-[10px] font-bold text-[#0066FF] uppercase bg-white px-2.5 py-1 rounded-md border-2 border-[#0066FF]">
                                             {study.category}
                                         </span>
                                     </div>
 
-                                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-6 group-hover:text-[#064e3b] transition-colors font-heading leading-snug">
+                                    <h3 className="text-xl sm:text-2xl font-bold text-[#0066FF] mb-6 font-heading leading-snug">
                                         {study.title}
                                     </h3>
                                     
                                     {/* Problem & Solution Flow */}
                                     <div className="space-y-4 mb-8">
-                                        <div className="p-4 rounded-xl bg-red-50/60 border border-red-100 text-xs sm:text-sm text-slate-700">
-                                            <div className="flex items-center gap-1.5 font-bold text-red-700 mb-1">
+                                        <div className="p-4 rounded-xl bg-white border-2 border-[#0066FF] text-xs sm:text-sm text-[#0066FF]">
+                                            <div className="flex items-center gap-1.5 font-bold text-[#0066FF] mb-1">
                                                 <Layers className="w-3.5 h-3.5" />
                                                 <span>Operational Challenge</span>
                                             </div>
-                                            <p className="text-slate-600 leading-relaxed font-normal">{study.problem}</p>
+                                            <p className="text-[#0066FF] leading-relaxed font-normal">{study.problem}</p>
                                         </div>
 
-                                        <div className="p-4 rounded-xl bg-emerald-50/60 border border-emerald-100 text-xs sm:text-sm text-slate-700">
-                                            <div className="flex items-center gap-1.5 font-bold text-[#053d2e] mb-1">
+                                        <div className="p-4 rounded-xl bg-white border-2 border-[#0066FF] text-xs sm:text-sm text-[#0066FF]">
+                                            <div className="flex items-center gap-1.5 font-bold text-[#0066FF] mb-1">
                                                 <CheckCircle2 className="w-3.5 h-3.5" />
                                                 <span>AI Architectural Solution</span>
                                             </div>
-                                            <p className="text-slate-600 leading-relaxed font-normal">{study.solution}</p>
+                                            <p className="text-[#0066FF] leading-relaxed font-normal">{study.solution}</p>
                                         </div>
 
-                                        <div className="flex items-center gap-2 text-xs font-medium text-slate-500 pt-1">
-                                            <BarChart3 className="w-3.5 h-3.5 text-[#064e3b] shrink-0" />
+                                        <div className="flex items-center gap-2 text-xs font-bold text-[#0066FF] pt-1">
+                                            <BarChart3 className="w-3.5 h-3.5 text-[#0066FF] shrink-0" />
                                             <span><strong>Tech Architecture:</strong> {study.technologies}</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Metric Strip */}
-                                <div className="grid grid-cols-3 gap-3 border-t border-slate-100 pt-6 bg-slate-50/80 -mx-7 sm:-mx-8 -mb-7 sm:-mb-8 p-6 sm:p-8 rounded-b-3xl">
+                                <div className="grid grid-cols-3 gap-3 border-t-2 border-[#0066FF] pt-6 bg-white -mx-7 sm:-mx-8 -mb-7 sm:-mb-8 p-6 sm:p-8 rounded-b-3xl">
                                     {study.metrics.map((metric, i) => (
                                         <div key={i} className="text-left">
-                                            <div className="text-xl sm:text-2xl font-black text-slate-900 font-mono tracking-tight text-[#064e3b]">
+                                            <div className="text-xl sm:text-2xl font-black text-[#0066FF] font-mono tracking-tight">
                                                 {metric.value}
                                             </div>
-                                            <div className="text-xs font-bold text-slate-800 uppercase tracking-tight mt-0.5">
+                                            <div className="text-xs font-bold text-[#0066FF] uppercase tracking-tight mt-0.5">
                                                 {metric.label}
                                             </div>
-                                            <div className="text-[11px] text-slate-500 font-normal">
+                                            <div className="text-[11px] text-[#0066FF] font-medium">
                                                 {metric.sub}
                                             </div>
                                         </div>
@@ -203,10 +203,10 @@ export default function CaseStudiesSection() {
                 <div className="text-center mt-14">
                     <Link 
                         to="/outcomes" 
-                        className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-slate-300 shadow-sm text-sm font-bold rounded-full text-slate-800 bg-white hover:bg-slate-50 hover:border-emerald-300 transition-all group"
+                        className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#0066FF] text-sm font-bold rounded-xl text-white bg-[#0066FF] hover:bg-white hover:text-[#0066FF] transition-all group"
                     >
                         <span>Explore All Verified Enterprise Case Studies</span>
-                        <ArrowRight className="w-4 h-4 text-[#064e3b] group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-4 h-4 text-white group-hover:text-[#0066FF] group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
 

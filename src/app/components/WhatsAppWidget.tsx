@@ -3,9 +3,8 @@ import { useLocation } from 'react-router-dom';
 
 export default function WhatsAppWidget() {
     const location = useLocation();
-    const phoneNumber = '919513088611'; // Official ProfitMachines sales line (+91 9513088611)
+    const phoneNumber = '919513088611';
 
-    // Dynamic prefilled message tailored to the current context
     const getContextualMessage = (pathname: string): string => {
         if (pathname.includes('/crypto')) {
             return "Hi ProfitMachines, I'm interested in Web3 Protocol & Token Ecosystem Growth solutions.";
@@ -51,18 +50,15 @@ export default function WhatsAppWidget() {
                 className="fixed bottom-24 right-5 sm:right-6 z-40 group flex items-center gap-2.5 transition-all duration-300"
             >
                 {/* Tooltip Label */}
-                <span className="hidden md:flex bg-slate-900/95 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-xl border border-white/10 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all duration-300 whitespace-nowrap pointer-events-none">
+                <span className="hidden md:flex bg-white text-[#0066FF] text-xs font-bold px-3 py-1.5 rounded-lg border-2 border-[#0066FF] opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all duration-300 whitespace-nowrap pointer-events-none">
                     WhatsApp Sales (+91 9513088611)
                 </span>
 
-                {/* Official WhatsApp Button Container */}
-                <div className="relative w-13 h-13 sm:w-14 sm:h-14 bg-[#25D366] hover:bg-[#20bd5a] active:bg-[#1caa51] rounded-full shadow-lg shadow-[#25D366]/35 flex items-center justify-center hover:scale-105 active:scale-95 transition-transform duration-200 ring-2 ring-white/80">
-                    {/* Subtle pulse ring */}
-                    <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20 pointer-events-none" />
-
-                    {/* Official WhatsApp SVG Vector Icon */}
+                {/* WhatsApp Button Container */}
+                <div className="relative w-13 h-13 sm:w-14 sm:h-14 bg-[#0066FF] text-white hover:bg-white hover:text-[#0066FF] rounded-full border-2 border-[#0066FF] flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-200">
+                    {/* SVG Vector Icon */}
                     <svg
-                        className="w-7 h-7 sm:w-8 sm:h-8 text-white fill-current relative z-10"
+                        className="w-7 h-7 sm:w-8 sm:h-8 fill-current relative z-10 transition-colors"
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"

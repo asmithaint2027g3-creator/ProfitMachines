@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronLeft, ChevronRight, Building2, Sparkles } from 'lucide-react';
@@ -83,7 +83,7 @@ export default function IndustriesCarousel() {
 
     return (
         <section 
-            className="relative w-full h-[540px] md:h-[620px] lg:h-[700px] bg-slate-950 overflow-hidden group border-b border-slate-200"
+            className="relative w-full h-[540px] md:h-[620px] lg:h-[700px] bg-white overflow-hidden group border-b border-[#0066FF]"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -121,18 +121,18 @@ export default function IndustriesCarousel() {
                                 transition={{ delay: 0.15, duration: 0.6 }}
                                 className="max-w-4xl mx-auto"
                             >
-                                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-600/15 border border-emerald-400/30 text-emerald-300 rounded-full text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
-                                    <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#0066FF]/15 border border-[#0066FF]/30 text-[#0066FF] rounded-full text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
+                                    <Sparkles className="w-3.5 h-3.5 text-[#0066FF]" />
                                     <span>{slides[currentIndex].badge}</span>
                                 </div>
                                 <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight leading-[1.15] drop-shadow-md">
                                     {slides[currentIndex].title}
                                 </h2>
-                                <p className="text-base sm:text-xl text-slate-200 font-medium leading-relaxed max-w-3xl mx-auto mb-8 drop-shadow">
+                                <p className="text-base sm:text-xl text-[#0066FF] font-medium leading-relaxed max-w-3xl mx-auto mb-8 drop-shadow">
                                     {slides[currentIndex].subtitle}
                                 </p>
                                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                                    <Button asChild className="bg-[#064e3b] hover:bg-[#053d2e] text-white font-bold px-8 py-6 text-base rounded-full shadow-lg shadow-emerald-800/30 transition-all">
+                                    <Button asChild className="bg-[#0066FF] hover:bg-[#0066FF] text-white font-bold px-8 py-6 text-base rounded-full shadow-lg shadow-[#0066FF]/20 transition-all">
                                         <Link to={slides[currentIndex].primaryCta.link} className="flex items-center gap-2">
                                             <span>{slides[currentIndex].primaryCta.text}</span>
                                             <ArrowRight className="w-4 h-4" />
@@ -154,14 +154,14 @@ export default function IndustriesCarousel() {
             <button
                 onClick={handlePrev}
                 aria-label="Previous slide"
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-slate-900/60 hover:bg-slate-900/90 text-white border border-white/20 backdrop-blur-md flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110"
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/60 hover:bg-white/90 text-white border border-white/20 backdrop-blur-md flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110"
             >
                 <ChevronLeft className="w-6 h-6" />
             </button>
             <button
                 onClick={handleNext}
                 aria-label="Next slide"
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-slate-900/60 hover:bg-slate-900/90 text-white border border-white/20 backdrop-blur-md flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110"
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/60 hover:bg-white/90 text-white border border-white/20 backdrop-blur-md flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110"
             >
                 <ChevronRight className="w-6 h-6" />
             </button>
@@ -177,7 +177,7 @@ export default function IndustriesCarousel() {
                         }}
                         aria-label={`Go to slide ${idx + 1}`}
                         className={`h-2.5 rounded-full transition-all duration-300 ${
-                            idx === currentIndex ? 'w-8 bg-emerald-600' : 'w-2.5 bg-white/40 hover:bg-white/70'
+                            idx === currentIndex ? 'w-8 bg-[#0066FF]' : 'w-2.5 bg-white/40 hover:bg-white/70'
                         }`}
                     />
                 ))}

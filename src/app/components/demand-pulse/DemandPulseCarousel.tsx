@@ -1,4 +1,4 @@
-﻿
+
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -83,13 +83,13 @@ export default function DemandPulseCarousel() {
                                 transition={{ delay: 0.2, duration: 0.8 }}
                                 className="max-w-4xl mx-auto"
                             >
-                                <div className="inline-block px-4 py-1.5 bg-emerald-50 border border-emerald-100 text-[#064e3b] rounded-full text-[11px] font-bold uppercase tracking-[0.2em] mb-6 shadow-sm">
+                                <div className="inline-block px-4 py-1.5 bg-white border border-[#0066FF] text-[#0066FF] rounded-full text-[11px] font-bold uppercase tracking-[0.2em] mb-6 shadow-sm">
                                     DemandPulse OS
                                 </div>
-                                <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight leading-none drop-shadow-sm">
+                                <h2 className="text-4xl md:text-6xl font-black text-[#0066FF] mb-6 tracking-tight leading-none drop-shadow-sm">
                                     {slides[currentIndex].title}
                                 </h2>
-                                <p className="text-xl md:text-2xl text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto tracking-wide">
+                                <p className="text-xl md:text-2xl text-[#0066FF] font-medium leading-relaxed max-w-2xl mx-auto tracking-wide">
                                     {slides[currentIndex].subtitle}
                                 </p>
                             </motion.div>

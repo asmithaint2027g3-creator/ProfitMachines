@@ -23,7 +23,6 @@ export default function StickyCtaBar() {
 
     if (dismissed) return null;
 
-    // Get current page context for WhatsApp message
     const getContextTitle = () => {
         const path = location.pathname;
         if (path.includes('pricing')) return 'Pricing & Plans';
@@ -48,16 +47,13 @@ export default function StickyCtaBar() {
             }`}
             style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
         >
-            <div className="bg-[#032b24]/95 backdrop-blur-md border-t border-emerald-500/25 shadow-2xl text-white">
+            <div className="bg-white border-t-2 border-[#0066FF] text-[#0066FF]">
                 <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-3">
                     
-                    {/* Left Teaser Text (Hidden on smallest mobile) */}
+                    {/* Left Teaser Text */}
                     <div className="hidden sm:flex items-center gap-2.5 shrink-0">
-                        <span className="relative flex h-2.5 w-2.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-                        </span>
-                        <p className="text-white text-xs sm:text-sm font-semibold tracking-wide">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#0066FF]" />
+                        <p className="text-[#0066FF] text-xs sm:text-sm font-bold tracking-wide">
                             Ready to accelerate enterprise ARR velocity?
                         </p>
                     </div>
@@ -68,18 +64,18 @@ export default function StickyCtaBar() {
                         {/* 1. Quick Inquiry Button */}
                         <button
                             onClick={() => openQuickForm({ defaultService: getContextTitle(), source: 'Sticky CTA Bar' })}
-                            className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-emerald-900/60 hover:bg-emerald-800/80 text-emerald-200 hover:text-white border border-emerald-400/40 rounded-lg text-xs sm:text-sm font-bold transition-all shrink-0"
+                            className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-white text-[#0066FF] hover:bg-[#0066FF] hover:text-white border-2 border-[#0066FF] rounded-lg text-xs sm:text-sm font-bold transition-all shrink-0"
                         >
-                            <Zap className="w-3.5 h-3.5 text-emerald-300" />
+                            <Zap className="w-3.5 h-3.5" />
                             <span>Quick Inquiry</span>
                         </button>
 
                         {/* 2. Book Consultation Button */}
                         <button
                             onClick={() => openLongForm({ defaultService: getContextTitle(), source: 'Sticky CTA Bar' })}
-                            className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 bg-white hover:bg-emerald-50 text-[#064e3b] font-bold text-xs sm:text-sm rounded-lg transition-all shadow-md shrink-0 group"
+                            className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 bg-[#0066FF] text-white hover:bg-white hover:text-[#0066FF] border-2 border-[#0066FF] font-bold text-xs sm:text-sm rounded-lg transition-all shrink-0 group"
                         >
-                            <Calendar className="w-3.5 h-3.5 text-[#064e3b]" />
+                            <Calendar className="w-3.5 h-3.5" />
                             <span>Book Consultation</span>
                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                         </button>
@@ -90,7 +86,7 @@ export default function StickyCtaBar() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Direct WhatsApp Sales Line"
-                            className="inline-flex items-center gap-1.5 px-3 py-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs sm:text-sm rounded-lg transition-colors shrink-0"
+                            className="inline-flex items-center gap-1.5 px-3 py-2 bg-white text-[#0066FF] hover:bg-[#0066FF] hover:text-white border-2 border-[#0066FF] font-bold text-xs sm:text-sm rounded-lg transition-colors shrink-0"
                         >
                             <MessageSquare className="w-3.5 h-3.5" />
                             <span className="hidden md:inline">WhatsApp</span>
@@ -98,17 +94,13 @@ export default function StickyCtaBar() {
 
                         {/* Dismiss Button */}
                         <button
-                            onClick={() => {
-                                setDismissed(true);
-                                setVisible(false);
-                            }}
-                            className="p-1.5 text-emerald-300/70 hover:text-white transition-colors rounded-md hover:bg-white/10 shrink-0 ml-1"
-                            aria-label="Dismiss sticky CTA bar"
+                            onClick={() => setDismissed(true)}
+                            aria-label="Dismiss sticky notification bar"
+                            className="p-1.5 text-[#0066FF] hover:bg-[#0066FF]/10 rounded-lg transition-colors shrink-0 ml-1"
                         >
                             <X className="w-4 h-4" />
                         </button>
                     </div>
-
                 </div>
             </div>
         </aside>

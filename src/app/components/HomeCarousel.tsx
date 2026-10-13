@@ -1,4 +1,4 @@
-ï»¿
+
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -7,29 +7,29 @@ const slides = [
         id: 1,
         image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2672&auto=format&fit=crop",
         label: "The Compounding Velocity",
-        title: "Every Dollar Works Harder Tomorrow â€” AI Autopilot Compounds Your Revenue Engine",
-        subtitle: "5Ã— Sales Velocity in 12 Months. Then It Accelerates Exponentially."
+        title: "Every Dollar Works Harder Tomorrow — AI Autopilot Compounds Your Revenue Engine",
+        subtitle: "5× Sales Velocity in 12 Months. Then It Accelerates Exponentially."
     },
     {
         id: 2,
         image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2674&auto=format&fit=crop",
         label: "The Autopilot Wealth Loop",
         title: "Set the System. Watch It Grow. Reinvest. Repeat.",
-        subtitle: "AI-Driven Revenue That Compounds Like Capital â€” 24/7, Zero Friction"
+        subtitle: "AI-Driven Revenue That Compounds Like Capital — 24/7, Zero Friction"
     },
     {
         id: 3,
         image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2668&auto=format&fit=crop",
         label: "The Self-Reinforcing Engine",
         title: "One Closed Deal Feeds Ten More. That's the AI Compounding Effect.",
-        subtitle: "From Demand Discovery to Revenue Management â€” Autopilot Does the Heavy Lifting"
+        subtitle: "From Demand Discovery to Revenue Management — Autopilot Does the Heavy Lifting"
     },
     {
         id: 4,
         image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2832&auto=format&fit=crop",
         label: "The Crypto Money Multiplier",
         title: "TVL + AI Autopilot = Exponential Ecosystem Value",
-        subtitle: "Built for Web3 & DeFi â€” Where Every Incentive Compounds Community Growth"
+        subtitle: "Built for Web3 & DeFi — Where Every Incentive Compounds Community Growth"
     },
     {
         id: 5,
@@ -43,7 +43,7 @@ const slides = [
         image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670&auto=format&fit=crop",
         label: "The Infinite Loop",
         title: "Stop Trading Time for Money. Start Compounding with AI Autopilot.",
-        subtitle: "TRUSTFLOW.AI â€” Where Revenue Acceleration Meets Wealth Multiplication"
+        subtitle: "TRUSTFLOW.AI — Where Revenue Acceleration Meets Wealth Multiplication"
     }
 ];
 
@@ -89,7 +89,7 @@ export default function HomeCarousel() {
                     />
 
                     {/* Premium Unified Overlay - Enterprise Grade */}
-                    <div className="absolute inset-0 bg-slate-900/40 mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-white/40 mix-blend-multiply" />
                     <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent" />
 
                     {/* Content */}
@@ -101,13 +101,13 @@ export default function HomeCarousel() {
                                 transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                                 className="max-w-5xl mx-auto backdrop-blur-md bg-white/40 p-8 md:p-12 rounded-3xl border border-white/50 shadow-premium"
                             >
-                                <div className="inline-block px-5 py-2 bg-white/80 border border-emerald-100 text-[#053d2e] rounded-full text-xs font-bold uppercase tracking-[0.25em] mb-8 shadow-sm backdrop-blur-sm">
+                                <div className="inline-block px-5 py-2 bg-white/80 border border-[#0066FF] text-[#0066FF] rounded-full text-xs font-bold uppercase tracking-[0.25em] mb-8 shadow-sm backdrop-blur-sm">
                                     {slides[currentIndex].label}
                                 </div>
-                                <h2 className="text-4xl md:text-5xl lg:text-[4rem] font-extrabold text-slate-900 mb-6 tracking-tight leading-[1.15] drop-shadow-sm">
+                                <h2 className="text-4xl md:text-5xl lg:text-[4rem] font-extrabold text-[#0066FF] mb-6 tracking-tight leading-[1.15] drop-shadow-sm">
                                     {slides[currentIndex].title}
                                 </h2>
-                                <p className="text-lg md:text-xl lg:text-2xl text-slate-700 font-medium leading-relaxed max-w-3xl mx-auto tracking-wide">
+                                <p className="text-lg md:text-xl lg:text-2xl text-[#0066FF] font-medium leading-relaxed max-w-3xl mx-auto tracking-wide">
                                     {slides[currentIndex].subtitle}
                                 </p>
                             </motion.div>

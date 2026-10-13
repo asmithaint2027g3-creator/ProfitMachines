@@ -15,16 +15,16 @@ export default function VerticalSection({ data }: VerticalSectionProps) {
     const [activeTab, setActiveTab] = useState(0);
 
     return (
-        <section className="py-12 relative border-t border-slate-100 bg-white">
+        <section className="py-12 relative border-t border-[#0066FF] bg-white">
             <div className="max-w-6xl mx-auto px-6 space-y-8">
 
                 {/* 1. Section Header */}
                 <div className="text-center space-y-4 max-w-4xl mx-auto">
-                    <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">
+                    <h2 className="text-3xl md:text-5xl font-bold text-[#0066FF] tracking-tight">
                         {data.title}
                     </h2>
                     {data.subtitle && (
-                        <p className="text-xl text-slate-600 font-normal leading-relaxed">
+                        <p className="text-xl text-[#0066FF] font-normal leading-relaxed">
                             {data.subtitle}
                         </p>
                     )}
@@ -58,10 +58,10 @@ export default function VerticalSection({ data }: VerticalSectionProps) {
                 </div>
 
                 {/* 4. Engine Selector & Active Panel */}
-                <div className="bg-white rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/40 overflow-hidden flex flex-col md:flex-row">
+                <div className="bg-white rounded-3xl border border-[#0066FF] shadow-xl shadow-slate-200/40 overflow-hidden flex flex-col md:flex-row">
 
                     {/* Left Column: Vertical Tabs */}
-                    <div className="md:w-1/3 bg-slate-50/80 border-b md:border-b-0 md:border-r border-slate-200 p-4 md:p-6 flex flex-col gap-2">
+                    <div className="md:w-1/3 bg-white/80 border-b md:border-b-0 md:border-r border-[#0066FF] p-4 md:p-6 flex flex-col gap-2">
                         {data.tabs.map((tab, i) => (
                             <EngineTab
                                 key={i}
@@ -85,7 +85,7 @@ export default function VerticalSection({ data }: VerticalSectionProps) {
 
                 {/* CTA for Section */}
                 <div className="flex flex-col items-center justify-center pt-10 text-center">
-                    <p className="text-slate-600 font-medium mb-4">Need help choosing the right AI solution?</p>
+                    <p className="text-[#0066FF] font-medium mb-4">Need help choosing the right AI solution?</p>
                     <Link to={data.cta?.action || "/book-consultation"} className="btn-cta-primary group">
                         {data.cta?.text || "Talk to Our Experts"}
                         <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />

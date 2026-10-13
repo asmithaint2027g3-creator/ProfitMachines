@@ -24,17 +24,10 @@ export default function Navigation() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeMenu, setActiveMenu] = useState<string | null>(null);
     const [expandedMobile, setExpandedMobile] = useState<string[]>([]);
-    const [scrolled, setScrolled] = useState(false);
     const [activeCatMap, setActiveCatMap] = useState<Record<string, string>>({});
     const menuRef = useRef<HTMLDivElement>(null);
     const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
     const location = useLocation();
-
-    useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 20);
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     useEffect(() => {
         setActiveMenu(null);
@@ -53,8 +46,6 @@ export default function Navigation() {
             document.removeEventListener('mousedown', handleClick);
         };
     }, []);
-
-    const isHomeHero = location.pathname === '/' && !scrolled;
 
     const openMenu = useCallback((name: string, item: any) => {
         if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
@@ -98,35 +89,21 @@ export default function Navigation() {
         switch (name) {
             case 'Offerings':
                 return {
-                    width: 780,
+                    width: 760,
                     align: 'left' as const,
-                    sidebarWidth: 230,
+                    sidebarWidth: 240,
                     isSingleCol: false,
                 };
             case 'Industries':
                 return {
-                    width: 720,
+                    width: 680,
                     align: 'left' as const,
                     sidebarWidth: 230,
                     isSingleCol: false,
                 };
-            case 'Solutions':
-                return {
-                    width: 600,
-                    align: 'left' as const,
-                    sidebarWidth: 220,
-                    isSingleCol: true,
-                };
-            case 'Crypto':
+            case 'Resources':
                 return {
                     width: 520,
-                    align: 'right' as const,
-                    sidebarWidth: 200,
-                    isSingleCol: true,
-                };
-            case 'Partners':
-                return {
-                    width: 480,
                     align: 'right' as const,
                     sidebarWidth: 190,
                     isSingleCol: true,
@@ -150,11 +127,7 @@ export default function Navigation() {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b h-16 lg:h-[72px] flex items-center ${
-                isHomeHero
-                    ? 'bg-[#064e3b]/95 backdrop-blur-md border-emerald-500/20 text-white shadow-sm'
-                    : 'bg-white/98 backdrop-blur-md shadow-sm border-slate-200/80 text-slate-900'
-            }`}
+            className="fixed top-0 left-0 right-0 z-50 bg-white border-b-2 border-[#0066FF] h-16 lg:h-[72px] flex items-center transition-colors"
             ref={menuRef}
         >
             <nav className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-[1440px] h-full relative">
@@ -163,19 +136,15 @@ export default function Navigation() {
                     {/* Logo */}
                     <div className="flex-shrink-0 relative z-50">
                         <Link to="/" className="flex items-center gap-2.5 group" aria-label="ProfitMachines home">
-                            <div className={`w-9 h-9 rounded-xl flex items-center justify-center font-extrabold text-[12px] shadow-sm flex-shrink-0 transition-transform group-hover:scale-105 ${
-                                isHomeHero ? 'bg-white/15 text-emerald-200 border border-emerald-400/30' : 'bg-[#064e3b] text-white shadow-emerald-900/20'
-                            }`}>PM</div>
+                            <div className="w-9 h-9 rounded-lg bg-[#0066FF] text-white flex items-center justify-center font-extrabold text-[12px] flex-shrink-0 transition-transform group-hover:scale-105 border border-[#0066FF]">
+                                PM
+                            </div>
                             <div className="flex flex-col">
-                                <div className={`text-lg md:text-xl font-extrabold tracking-tight font-heading leading-tight transition-colors ${
-                                    isHomeHero ? 'text-white' : 'text-slate-900'
-                                }`}>
+                                <div className="text-lg md:text-xl font-extrabold tracking-tight font-heading leading-tight text-[#0066FF]">
                                     <span>Profit</span>
-                                    <span className={isHomeHero ? 'text-emerald-300' : 'text-[#064e3b]'}>Machines</span>
+                                    <span>Machines</span>
                                 </div>
-                                <span className={`text-[9px] font-mono font-bold tracking-[0.16em] uppercase leading-none mt-0.5 ${
-                                    isHomeHero ? 'text-emerald-300/80' : 'text-slate-400'
-                                }`}>
+                                <span className="text-[9px] font-mono font-bold tracking-[0.16em] uppercase leading-none mt-0.5 text-[#0066FF]">
                                     Autonomous Revenue OS
                                 </span>
                             </div>
@@ -183,7 +152,7 @@ export default function Navigation() {
                     </div>
 
                     {/* Desktop Nav */}
-                    <div className="hidden lg:flex items-center h-full gap-0.5 xl:gap-1">
+                    <div className="hidden lg:flex items-center h-full gap-1 xl:gap-1.5">
                         {(smNavItems as any[]).map((item: any) => {
                             const isActive = isItemActive(item);
                             const hasDropdown = Boolean(item.dropdown);
@@ -195,18 +164,15 @@ export default function Navigation() {
                                     <Link
                                         to={item.path}
                                         id={`nav-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
-                                        className={`relative text-[13.5px] xl:text-[14px] font-semibold px-3 py-1.5 rounded-lg transition-all duration-200 flex items-center gap-1.5 h-[38px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#064e3b]/50 ${
-                                            isHomeHero
-                                                ? isActive ? 'bg-white/15 text-white font-bold' : 'text-emerald-50/90 hover:text-white hover:bg-white/10'
-                                                : isActive ? 'bg-[#064e3b]/8 text-[#064e3b] font-bold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
+                                        className={`relative text-[13.5px] xl:text-[14px] font-bold px-3.5 py-1.5 rounded-lg transition-all duration-200 flex items-center gap-1.5 h-[38px] ${
+                                            isActive
+                                                ? 'bg-[#0066FF] text-white'
+                                                : 'text-[#0066FF] hover:bg-[#0066FF]/10'
                                         }`}
                                     >
-                                        {item.name}
+                                        <span>{item.name}</span>
                                         {hasDropdown && (
-                                            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 flex-shrink-0 ${isOpen ? 'rotate-180' : ''} ${isHomeHero ? 'text-emerald-200/70' : 'text-slate-400'}`} />
-                                        )}
-                                        {isActive && !isHomeHero && (
-                                            <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#064e3b] rounded-full" />
+                                            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} />
                                         )}
                                     </Link>
 
@@ -222,7 +188,7 @@ export default function Navigation() {
                                                         transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
                                                         onMouseEnter={keepMenuOpen}
                                                         onMouseLeave={closeMenuDelayed}
-                                                        className={`absolute top-[calc(100%+4px)] z-50 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.14)] border border-slate-200/90 overflow-hidden flex ${
+                                                        className={`absolute top-[calc(100%+4px)] z-50 bg-white rounded-xl border-2 border-[#0066FF] overflow-hidden flex ${
                                                             config.align === 'right' ? 'right-0 origin-top-right' : 'left-0 origin-top-left'
                                                         }`}
                                                         style={{ width: config.width, maxWidth: 'calc(100vw - 32px)' }}
@@ -233,14 +199,14 @@ export default function Navigation() {
                                                             <>
                                                                 {/* LEFT: Numbered category list */}
                                                                 <div
-                                                                    className="shrink-0 bg-slate-50/70 border-r border-slate-100 p-4 flex flex-col gap-1 overflow-y-auto max-h-[480px]"
+                                                                    className="shrink-0 bg-white border-r-2 border-[#0066FF] p-4 flex flex-col gap-1.5 overflow-y-auto max-h-[480px]"
                                                                     style={{ width: config.sidebarWidth }}
                                                                 >
                                                                     <div className="flex items-center justify-between mb-3 px-1">
-                                                                        <span className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-400">
+                                                                        <span className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#0066FF]">
                                                                             {item.dropdown.highlight?.title || item.name}
                                                                         </span>
-                                                                        <span className="text-[9.5px] font-bold text-slate-400 bg-slate-200/60 px-2 py-0.5 rounded-full whitespace-nowrap">
+                                                                        <span className="text-[9.5px] font-bold text-[#0066FF] border border-[#0066FF] px-2 py-0.5 rounded-full whitespace-nowrap">
                                                                             {item.dropdown.categories.length} CLUSTERS
                                                                         </span>
                                                                     </div>
@@ -251,103 +217,62 @@ export default function Navigation() {
                                                                             <Link key={cat.id} to={targetPath}
                                                                                 onClick={() => setActiveMenu(null)}
                                                                                 onMouseEnter={() => setActiveCatMap(prev => ({ ...prev, [item.name]: cat.id }))}
-                                                                                className={`group flex items-start gap-2.5 px-3 py-2.5 rounded-xl transition-all duration-150 focus-visible:outline-none ${
+                                                                                className={`group flex items-start gap-2.5 px-3 py-2.5 rounded-lg border transition-all duration-150 ${
                                                                                     isActiveCat
-                                                                                        ? 'bg-[#064e3b] text-white shadow-sm'
-                                                                                        : 'text-slate-700 hover:bg-white hover:shadow-sm hover:text-slate-900'
+                                                                                        ? 'bg-[#0066FF] text-white border-[#0066FF]'
+                                                                                        : 'bg-white text-[#0066FF] border-transparent hover:border-[#0066FF]'
                                                                                 }`}
                                                                             >
-                                                                                <span className={`flex-shrink-0 w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-black mt-0.5 ${
-                                                                                    isActiveCat ? 'bg-white/20 text-white' : 'bg-[#064e3b]/10 text-[#064e3b] group-hover:bg-[#064e3b]/15'
+                                                                                <span className={`flex-shrink-0 w-5 h-5 rounded flex items-center justify-center text-[10px] font-black mt-0.5 border ${
+                                                                                    isActiveCat
+                                                                                        ? 'bg-white text-[#0066FF] border-white'
+                                                                                        : 'bg-white text-[#0066FF] border-[#0066FF]'
                                                                                 }`}>
                                                                                     {String(idx + 1).padStart(2, '0')}
                                                                                 </span>
                                                                                 <div className="flex-1 min-w-0">
-                                                                                    <div className={`text-[12.5px] font-bold leading-tight ${isActiveCat ? 'text-white' : 'text-slate-800'}`}>
-                                                                                        {cat.title}
-                                                                                    </div>
-                                                                                    {cat.desc && (
-                                                                                        <div className={`text-[10.5px] leading-snug mt-0.5 ${isActiveCat ? 'text-emerald-100' : 'text-slate-500'}`}>
-                                                                                            {cat.desc}
-                                                                                        </div>
-                                                                                    )}
+                                                                                    <div className="text-[13px] font-bold leading-tight">{cat.title}</div>
                                                                                 </div>
-                                                                                <ChevronRight className={`w-3.5 h-3.5 flex-shrink-0 mt-1 transition-transform ${
-                                                                                    isActiveCat ? 'text-emerald-200' : 'text-slate-300 group-hover:text-slate-500 group-hover:translate-x-0.5'
-                                                                                }`} />
                                                                             </Link>
                                                                         );
                                                                     })}
                                                                 </div>
 
-                                                                {/* RIGHT: Card grid */}
-                                                                <div className="flex-1 p-5 flex flex-col overflow-y-auto max-h-[480px]">
+                                                                {/* RIGHT: Items in active category */}
+                                                                <div className="flex-1 p-5 overflow-y-auto max-h-[480px] bg-white">
                                                                     {(() => {
                                                                         const cat = getActiveCatData(item);
                                                                         if (!cat) return null;
-                                                                        const catIndex = item.dropdown.categories.findIndex((c: any) => c.id === cat.id);
-                                                                        const isProfitPool = item.name === 'Offerings' && cat.id === 'profit-pools';
                                                                         return (
-                                                                            <motion.div key={cat.id} initial={{ opacity: 0, x: 6 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.15 }}>
-                                                                                <div className="flex items-center gap-2.5 mb-3">
-                                                                                    <span className="text-[9.5px] font-black tracking-[0.18em] uppercase text-[#064e3b] bg-[#064e3b]/8 px-2 py-0.5 rounded-md border border-[#064e3b]/10">
-                                                                                        CLUSTER {String(catIndex + 1).padStart(2, '00')}
-                                                                                    </span>
-                                                                                    <h3 className="text-[14.5px] font-extrabold text-slate-900 font-heading leading-none">{cat.title}</h3>
-                                                                                </div>
-                                                                                {cat.desc && <p className="text-[12px] text-slate-500 mb-3.5 leading-relaxed">{cat.desc}</p>}
-
-                                                                                {isProfitPool ? (
-                                                                                    <div className="grid grid-cols-2 gap-x-6 gap-y-1">
-                                                                                        <div>
-                                                                                            <Link to="/offerings/b2b" onClick={() => setActiveMenu(null)}
-                                                                                                className="text-[10.5px] font-extrabold uppercase tracking-[0.15em] text-[#064e3b] border-b border-[#064e3b]/20 pb-1.5 mb-2 flex items-center gap-1 hover:text-emerald-700 transition-colors">
-                                                                                                B2B Profit Pools <ArrowRight className="w-3 h-3" />
-                                                                                            </Link>
-                                                                                            {(cat as any).b2bItems?.map((sub: any, i: number) => {
-                                                                                                const Icon = Icons[sub.icon] || ArrowRight;
-                                                                                                return (
-                                                                                                    <Link key={i} to={sub.path} onClick={() => setActiveMenu(null)}
-                                                                                                        className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-[12px] text-slate-600 font-medium hover:text-[#064e3b] hover:bg-emerald-50/60 transition-all group/sub">
-                                                                                                        <Icon className="w-3.5 h-3.5 text-slate-400 group-hover/sub:text-[#064e3b] shrink-0" />
-                                                                                                        <span className="truncate">{sub.name}</span>
-                                                                                                    </Link>
-                                                                                                );
-                                                                                            })}
-                                                                                        </div>
-                                                                                        <div>
-                                                                                            <Link to="/offerings/b2c" onClick={() => setActiveMenu(null)}
-                                                                                                className="text-[10.5px] font-extrabold uppercase tracking-[0.15em] text-teal-700 border-b border-teal-200 pb-1.5 mb-2 flex items-center gap-1 hover:text-teal-900 transition-colors">
-                                                                                                B2C Profit Pools <ArrowRight className="w-3 h-3" />
-                                                                                            </Link>
-                                                                                            {(cat as any).b2cItems?.map((sub: any, i: number) => {
-                                                                                                const Icon = Icons[sub.icon] || ArrowRight;
-                                                                                                return (
-                                                                                                    <Link key={i} to={sub.path} onClick={() => setActiveMenu(null)}
-                                                                                                        className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-[12px] text-slate-600 font-medium hover:text-teal-800 hover:bg-teal-50/60 transition-all group/sub">
-                                                                                                        <Icon className="w-3.5 h-3.5 text-slate-400 group-hover/sub:text-teal-700 shrink-0" />
-                                                                                                        <span className="truncate">{sub.name}</span>
-                                                                                                    </Link>
-                                                                                                );
-                                                                                            })}
-                                                                                        </div>
+                                                                            <motion.div
+                                                                                key={cat.id}
+                                                                                initial={{ opacity: 0, x: 6 }}
+                                                                                animate={{ opacity: 1, x: 0 }}
+                                                                                transition={{ duration: 0.15 }}
+                                                                            >
+                                                                                <div className="flex items-center justify-between mb-3.5 pb-2 border-b border-[#0066FF]">
+                                                                                    <div>
+                                                                                        <h4 className="text-[13px] font-extrabold text-[#0066FF] tracking-tight">{cat.title}</h4>
+                                                                                        {cat.description && (
+                                                                                            <p className="text-[11.5px] text-[#0066FF] mt-0.5">{cat.description}</p>
+                                                                                        )}
                                                                                     </div>
-                                                                                ) : config.isSingleCol ? (
-                                                                                    <div className="flex flex-col gap-2">
+                                                                                </div>
+
+                                                                                {config.isSingleCol ? (
+                                                                                    <div className="flex flex-col gap-1.5">
                                                                                         {cat.items?.map((sub: any, i: number) => {
                                                                                             const Icon = Icons[sub.icon] || ArrowRight;
                                                                                             return (
                                                                                                 <Link key={i} to={sub.path} onClick={() => setActiveMenu(null)}
-                                                                                                    className="group/card flex items-center justify-between p-2.5 rounded-xl border border-slate-100 bg-white hover:border-[#064e3b]/30 hover:bg-emerald-50/40 hover:shadow-xs transition-all duration-150">
-                                                                                                    <div className="flex items-center gap-3 min-w-0">
-                                                                                                        <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center group-hover/card:bg-[#064e3b] group-hover/card:border-[#064e3b] transition-all duration-200">
-                                                                                                            <Icon className="w-4 h-4 text-slate-500 group-hover/card:text-white transition-colors" />
-                                                                                                        </div>
-                                                                                                        <span className="text-[13px] font-semibold text-slate-800 group-hover/card:text-[#064e3b] truncate transition-colors">
-                                                                                                            {sub.name}
-                                                                                                        </span>
+                                                                                                    className="group/card flex items-center gap-3 p-2.5 rounded-lg border border-[#0066FF] bg-white text-[#0066FF] hover:bg-[#0066FF] hover:text-white transition-all duration-150">
+                                                                                                    <div className="flex-shrink-0 w-7 h-7 rounded border border-current flex items-center justify-center">
+                                                                                                        <Icon className="w-3.5 h-3.5" />
                                                                                                     </div>
-                                                                                                    <ChevronRight className="w-4 h-4 text-slate-300 group-hover/card:text-[#064e3b] group-hover/card:translate-x-0.5 transition-all flex-shrink-0" />
+                                                                                                    <div className="flex-1 min-w-0">
+                                                                                                        <div className="text-[12.5px] font-bold leading-snug">{sub.name}</div>
+                                                                                                    </div>
+                                                                                                    <ChevronRight className="w-4 h-4 group-hover/card:translate-x-0.5 transition-transform flex-shrink-0" />
                                                                                                 </Link>
                                                                                             );
                                                                                         })}
@@ -358,12 +283,12 @@ export default function Navigation() {
                                                                                             const Icon = Icons[sub.icon] || ArrowRight;
                                                                                             return (
                                                                                                 <Link key={i} to={sub.path} onClick={() => setActiveMenu(null)}
-                                                                                                    className="group/card flex items-start gap-2.5 p-2.5 rounded-xl border border-slate-100 bg-white hover:border-[#064e3b]/25 hover:bg-emerald-50/40 hover:shadow-xs transition-all duration-150">
-                                                                                                    <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center group-hover/card:bg-[#064e3b] group-hover/card:border-[#064e3b] transition-all duration-200">
-                                                                                                        <Icon className="w-3.5 h-3.5 text-slate-500 group-hover/card:text-white transition-colors" />
+                                                                                                    className="group/card flex items-start gap-2.5 p-2.5 rounded-lg border border-[#0066FF] bg-white text-[#0066FF] hover:bg-[#0066FF] hover:text-white transition-all duration-150">
+                                                                                                    <div className="flex-shrink-0 w-7 h-7 rounded border border-current flex items-center justify-center mt-0.5">
+                                                                                                        <Icon className="w-3.5 h-3.5" />
                                                                                                     </div>
-                                                                                                    <div className="flex-1 min-w-0 pt-0.5">
-                                                                                                        <div className="text-[12px] font-semibold text-slate-800 group-hover/card:text-[#064e3b] leading-snug transition-colors line-clamp-2">{sub.name}</div>
+                                                                                                    <div className="flex-1 min-w-0">
+                                                                                                        <div className="text-[12px] font-bold leading-snug">{sub.name}</div>
                                                                                                     </div>
                                                                                                 </Link>
                                                                                             );
@@ -372,9 +297,9 @@ export default function Navigation() {
                                                                                 )}
 
                                                                                 {cat.path && (
-                                                                                    <div className="mt-3.5 pt-3 border-t border-slate-100 flex items-center justify-end">
+                                                                                    <div className="mt-3.5 pt-3 border-t border-[#0066FF] flex items-center justify-end">
                                                                                         <Link to={cat.path} onClick={() => setActiveMenu(null)}
-                                                                                            className="inline-flex items-center gap-1.5 text-[11.5px] font-bold text-[#064e3b] hover:text-emerald-700 transition-colors group/cta">
+                                                                                            className="inline-flex items-center gap-1.5 text-[11.5px] font-bold text-[#0066FF] hover:underline transition-colors group/cta">
                                                                                             Explore {cat.title}
                                                                                             <ArrowRight className="w-3.5 h-3.5 group-hover/cta:translate-x-0.5 transition-transform" />
                                                                                         </Link>
@@ -386,14 +311,14 @@ export default function Navigation() {
                                                                 </div>
                                                             </>
                                                         ) : (
-                                                            <div className="p-6 w-full flex flex-col justify-center">
-                                                                <div className="text-lg font-extrabold text-slate-900 font-heading mb-2">
+                                                            <div className="p-6 w-full flex flex-col justify-center bg-white text-[#0066FF]">
+                                                                <div className="text-lg font-extrabold font-heading mb-2 text-[#0066FF]">
                                                                     {item.dropdown.highlight?.title || item.name}
                                                                 </div>
-                                                                <p className="text-[13px] text-slate-500 leading-relaxed mb-3">{item.dropdown.highlight?.desc}</p>
+                                                                <p className="text-[13px] text-[#0066FF] leading-relaxed mb-3">{item.dropdown.highlight?.desc}</p>
                                                                 {item.dropdown.highlight?.linkPath && (
                                                                     <Link to={item.dropdown.highlight.linkPath} onClick={() => setActiveMenu(null)}
-                                                                        className="inline-flex items-center gap-1.5 text-sm font-bold text-[#064e3b] hover:text-emerald-700 transition-colors">
+                                                                        className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0066FF] hover:underline">
                                                                         {item.dropdown.highlight.linkText || 'Learn More'} <ArrowRight className="w-3.5 h-3.5" />
                                                                     </Link>
                                                                 )}
@@ -412,7 +337,7 @@ export default function Navigation() {
                     {/* Desktop CTA */}
                     <div className="hidden lg:flex items-center gap-2.5 relative z-50 flex-shrink-0">
                         <Link to="/book-consultation" id="nav-cta-consultation"
-                            className="inline-flex items-center gap-2 bg-[#064e3b] hover:bg-[#053d2e] active:bg-[#042d22] text-white px-4 xl:px-5 py-2.5 rounded-xl font-bold text-xs xl:text-sm transition-all duration-200 shadow-md shadow-emerald-900/25 hover:shadow-emerald-900/40 hover:-translate-y-px group">
+                            className="inline-flex items-center gap-2 bg-[#0066FF] hover:bg-white text-white hover:text-[#0066FF] border-2 border-[#0066FF] px-4 xl:px-5 py-2 rounded-lg font-bold text-xs xl:text-sm transition-all duration-200 group">
                             <span>Book Consultation</span>
                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                         </Link>
@@ -420,7 +345,7 @@ export default function Navigation() {
                             href="https://wa.me/919513088611?text=Hi%20ProfitMachines%2C%20I'd%20like%20to%20consult%20on%20AI%20solutions."
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="btn-whatsapp px-3.5 py-2 text-xs flex items-center gap-1.5"
+                            className="inline-flex items-center gap-1.5 bg-white text-[#0066FF] hover:bg-[#0066FF] hover:text-white border-2 border-[#0066FF] px-3.5 py-2 rounded-lg font-bold text-xs xl:text-sm transition-all duration-200"
                             aria-label="Chat with ProfitMachines on WhatsApp"
                         >
                             <MessageSquare className="w-3.5 h-3.5" />
@@ -432,7 +357,7 @@ export default function Navigation() {
                     <div className="lg:hidden flex items-center relative z-50">
                         <button id="mobile-menu-toggle" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             aria-label="Toggle mobile menu" aria-expanded={mobileMenuOpen}
-                            className={`p-2 rounded-lg transition-colors ${isHomeHero ? 'text-white hover:bg-white/10' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}>
+                            className="p-2 rounded-lg text-[#0066FF] hover:bg-[#0066FF]/10 transition-colors border border-[#0066FF]">
                             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
                         </button>
                     </div>
@@ -445,26 +370,26 @@ export default function Navigation() {
                     <motion.div
                         initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
                         transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                        className="lg:hidden fixed inset-0 z-[60] bg-white flex flex-col" id="mobile-drawer"
+                        className="lg:hidden fixed inset-0 z-[60] bg-white flex flex-col text-[#0066FF]" id="mobile-drawer"
                     >
-                        <div className="flex items-center justify-between px-4 h-16 border-b border-slate-100 flex-shrink-0">
+                        <div className="flex items-center justify-between px-4 h-16 border-b-2 border-[#0066FF] flex-shrink-0">
                             <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2">
-                                <div className="w-7 h-7 rounded-lg bg-[#064e3b] flex items-center justify-center text-white text-[10px] font-black">PM</div>
-                                <span className="text-lg font-extrabold text-slate-900">Profit<span className="text-[#064e3b]">Machines</span></span>
+                                <div className="w-7 h-7 rounded bg-[#0066FF] text-white flex items-center justify-center text-[10px] font-black">PM</div>
+                                <span className="text-lg font-extrabold text-[#0066FF]">ProfitMachines</span>
                             </Link>
                             <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu"
-                                className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100">
+                                className="p-2 rounded-lg text-[#0066FF] border border-[#0066FF]">
                                 <X className="h-5 w-5" />
                             </button>
                         </div>
 
                         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
                             {(smNavItems as any[]).map((item: any, idx: number) => (
-                                <div key={idx} className="border-b border-slate-50 last:border-0">
+                                <div key={idx} className="border-b border-[#0066FF]/30 last:border-0">
                                     <div className="flex items-center justify-between">
                                         <Link to={item.path}
                                             onClick={() => { if (!item.dropdown) setMobileMenuOpen(false); }}
-                                            className="flex-1 py-3 text-[15px] font-semibold text-slate-800 hover:text-[#064e3b] transition-colors">
+                                            className="flex-1 py-3 text-[15px] font-bold text-[#0066FF]">
                                             {item.name}
                                         </Link>
                                         {item.dropdown && (
@@ -472,8 +397,8 @@ export default function Navigation() {
                                                 onClick={() => setExpandedMobile(prev =>
                                                     prev.includes(item.name) ? prev.filter(i => i !== item.name) : [...prev, item.name]
                                                 )}
-                                                className="p-2 text-slate-400 hover:text-slate-700 transition-colors">
-                                                <ChevronDown className={`w-4 h-4 transition-transform ${expandedMobile.includes(item.name) ? 'rotate-180 text-[#064e3b]' : ''}`} />
+                                                className="p-2 text-[#0066FF]">
+                                                <ChevronDown className={`w-4 h-4 transition-transform ${expandedMobile.includes(item.name) ? 'rotate-180' : ''}`} />
                                             </button>
                                         )}
                                     </div>
@@ -482,23 +407,23 @@ export default function Navigation() {
                                             <motion.div key="sub"
                                                 initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
                                                 transition={{ duration: 0.22, ease: 'easeInOut' }} className="overflow-hidden">
-                                                <div className="pl-3 pb-3 space-y-3 border-l-2 border-[#064e3b]/15 ml-2">
+                                                <div className="pl-3 pb-3 space-y-3 border-l-2 border-[#0066FF] ml-2">
                                                     {item.dropdown.categories?.map((cat: any, cIdx: number) => (
                                                         <div key={cIdx}>
                                                             <Link to={cat.path || `/${item.name.toLowerCase()}/${cat.id}`}
                                                                 onClick={() => setMobileMenuOpen(false)}
                                                                 className="flex items-center gap-2 mt-2 mb-1.5">
-                                                                <span className="text-[9px] font-black bg-[#064e3b]/10 text-[#064e3b] px-1.5 py-0.5 rounded-md">
+                                                                <span className="text-[9px] font-black border border-[#0066FF] text-[#0066FF] px-1.5 py-0.5 rounded">
                                                                     {String(cIdx + 1).padStart(2, '0')}
                                                                 </span>
-                                                                <span className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-slate-500 hover:text-[#064e3b] transition-colors">
+                                                                <span className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-[#0066FF]">
                                                                     {cat.title}
                                                                 </span>
                                                             </Link>
-                                                            <div className="space-y-0.5 pl-1">
+                                                            <div className="space-y-1 pl-1">
                                                                 {cat.items?.map((sub: any, subIdx: number) => (
                                                                     <Link key={subIdx} to={sub.path} onClick={() => setMobileMenuOpen(false)}
-                                                                        className="block text-[13px] text-slate-600 font-medium py-1.5 hover:text-[#064e3b] transition-colors">
+                                                                        className="block text-[13px] text-[#0066FF] font-semibold py-1 hover:underline">
                                                                         {sub.name}
                                                                     </Link>
                                                                 ))}
@@ -513,24 +438,13 @@ export default function Navigation() {
                             ))}
                         </div>
 
-                        <div className="px-4 py-4 border-t border-slate-100 flex-shrink-0">
+                        <div className="px-4 py-4 border-t-2 border-[#0066FF] flex-shrink-0">
                             <Link to="/book-consultation" onClick={() => setMobileMenuOpen(false)} id="mobile-cta-consultation"
-                                className="w-full flex items-center justify-center gap-2 bg-[#064e3b] hover:bg-[#053d2e] text-white py-3 rounded-xl font-bold text-sm transition-colors shadow-md">
+                                className="w-full flex items-center justify-center gap-2 bg-[#0066FF] text-white py-3 rounded-lg font-bold text-sm border-2 border-[#0066FF] hover:bg-white hover:text-[#0066FF] transition-colors">
                                 Book Consultation <ArrowRight className="w-4 h-4" />
                             </Link>
                         </div>
                     </motion.div>
-                )}
-            </AnimatePresence>
-
-            {/* Backdrop */}
-            <AnimatePresence>
-                {activeMenu && (
-                    <motion.div
-                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                        transition={{ duration: 0.15 }}
-                        className="fixed inset-0 top-[72px] bg-slate-900/10 backdrop-blur-[1px] z-40 pointer-events-none hidden lg:block"
-                    />
                 )}
             </AnimatePresence>
         </header>

@@ -1,4 +1,4 @@
-ï»¿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
     ArrowRight,
@@ -168,9 +168,9 @@ export default function Industries() {
                 situations: ["Siloed marketing and sales lists", "Low enterprise account penetration", "Manual ABM campaign execution"],
                 challenges: ["Aligning sales and marketing on target accounts", "Personalizing outreach at scale", "Measuring ABM pipeline influence"],
                 solution: "AI ingests CRM target lists, syncs intent signals, and orchestrates dynamic multi-channel outreach on autopilot.",
-                example: "A B2B SaaS enterprise scaled account penetration by 3.8Ã— across 250 target accounts.",
+                example: "A B2B SaaS enterprise scaled account penetration by 3.8× across 250 target accounts.",
                 benefits: ["Automated target account ingestion", "Real-time intent signal sync", "Higher win rates"],
-                outcomes: ["3.8Ã— Account Penetration", "45% Higher Pipeline", "92% Sales Alignment"]
+                outcomes: ["3.8× Account Penetration", "45% Higher Pipeline", "92% Sales Alignment"]
             }
         },
         {
@@ -187,7 +187,7 @@ export default function Industries() {
                 solution: "AI tracks public dissatisfaction signals and search queries, triggering automated win-back playbooks at contract renewal windows.",
                 example: "A cloud infrastructure provider displaced 35 rival enterprise accounts in 90 days.",
                 benefits: ["Automated competitive monitoring", "High-conversion win-back scripts", "Targeted pricing displacement"],
-                outcomes: ["35 Accounts Displaced", "62% Win-Back Rate", "2.8Ã— Higher ACV"]
+                outcomes: ["35 Accounts Displaced", "62% Win-Back Rate", "2.8× Higher ACV"]
             }
         },
         {
@@ -204,7 +204,7 @@ export default function Industries() {
                 solution: "AI acts as a 24/7 SDR co-pilot, qualifying prospects, handling pricing/timing objections, and booking meetings directly into AE calendars.",
                 example: "A B2B tech company booked 140+ qualified AE meetings per month with 0 additional SDR headcount.",
                 benefits: ["24/7 autonomous prospecting", "Reclaimed AE selling time", "Zero prospect drop-off"],
-                outcomes: ["140+ Meetings Booked/Mo", "15 Hours/Rep Saved", "3.2Ã— Pipeline Velocity"]
+                outcomes: ["140+ Meetings Booked/Mo", "15 Hours/Rep Saved", "3.2× Pipeline Velocity"]
             }
         },
         {
@@ -221,7 +221,7 @@ export default function Industries() {
                 solution: "AI analyzes historical deal patterns, stakeholder email sentiment, and engagement gaps to score close probability with up to 92% accuracy.",
                 example: "An enterprise B2B platform achieved 94% forecast precision across $45M in quarterly pipeline.",
                 benefits: ["Board-level forecast certainty", "Prioritized high-value pipeline", "Stalled deal alerts"],
-                outcomes: ["94% Forecast Precision", "40% Faster Close", "2.1Ã— Pipeline Accuracy"]
+                outcomes: ["94% Forecast Precision", "40% Faster Close", "2.1× Pipeline Accuracy"]
             }
         },
         {
@@ -238,7 +238,7 @@ export default function Industries() {
                 solution: "AI monitors product usage metrics and user thresholds, automatically alerting CSMs to execute upsell/expansion motions.",
                 example: "A SaaS company increased Net Revenue Retention (NRR) from 105% to 138% within two quarters.",
                 benefits: ["Proactive expansion triggers", "Higher Net Revenue Retention", "Automated renewal alerts"],
-                outcomes: ["138% NRR Achieved", "3Ã— Upsell Revenue", "55% Lower Churn"]
+                outcomes: ["138% NRR Achieved", "3× Upsell Revenue", "55% Lower Churn"]
             }
         },
 
@@ -257,7 +257,7 @@ export default function Industries() {
                 solution: "AI continuously shifts ad budget to highest-performing ad sets and creatives, cutting CPL while boosting volume.",
                 example: "A consumer brand reduced cost-per-lead by 42% while doubling monthly lead volume.",
                 benefits: ["Lowest CPL optimization", "Cross-platform ad automation", "Real-time budget reallocation"],
-                outcomes: ["42% Lower CPL", "2.4Ã— Lead Volume", "3.1Ã— ROAS"]
+                outcomes: ["42% Lower CPL", "2.4× Lead Volume", "3.1× ROAS"]
             }
         },
         {
@@ -274,7 +274,7 @@ export default function Industries() {
                 solution: "AI generates personalized 1:1 discount triggers tailored to buyer propensity score without sacrificing margin.",
                 example: "An online store boosted cart checkout completions by 34% with zero margin loss.",
                 benefits: ["Preserved profit margins", "Dynamic cart recovery", "1:1 Consumer personalization"],
-                outcomes: ["34% Higher Conversion", "Zero Margin Erosion", "2.2Ã— Repeat Purchases"]
+                outcomes: ["34% Higher Conversion", "Zero Margin Erosion", "2.2× Repeat Purchases"]
             }
         },
         {
@@ -291,7 +291,7 @@ export default function Industries() {
                 solution: "AI logs exact abandonment context and sends hyper-relevant multi-channel recovery sequences within 5 minutes.",
                 example: "A retail brand recovered $280K in abandoned cart revenue in 60 days.",
                 benefits: ["Instant 5-minute retargeting", "Multi-channel recovery loops", "Automated SMS/Email cadences"],
-                outcomes: ["$280K Recovered Revenue", "28% Bounce Recovery", "4.5Ã— SMS ROI"]
+                outcomes: ["$280K Recovered Revenue", "28% Bounce Recovery", "4.5× SMS ROI"]
             }
         },
         {
@@ -306,9 +306,9 @@ export default function Industries() {
                 situations: ["Ad targeting fatigue", "Rising ad network bidding competition", "Manual customer seed list exports"],
                 challenges: ["Scaling target audience pool", "Maintaining high buyer intent", "Automating seed list updates"],
                 solution: "AI updates ad network seed lists daily with recent high-LTV purchasers, scaling lookalike audience precision.",
-                example: "A DTC brand scaled ad audience reach by 5Ã— with a 38% reduction in CAC.",
+                example: "A DTC brand scaled ad audience reach by 5× with a 38% reduction in CAC.",
                 benefits: ["Daily automated seed updates", "High-intent lookalike targeting", "Ad fatigue prevention"],
-                outcomes: ["5Ã— Audience Scale", "38% CAC Reduction", "2.9Ã— ROAS"]
+                outcomes: ["5× Audience Scale", "38% CAC Reduction", "2.9× ROAS"]
             }
         },
 
@@ -327,7 +327,7 @@ export default function Industries() {
                 solution: "AI maps full corporate structures, uncovering unserved subsidiaries and triggering executive intro playbooks.",
                 example: "A Fortune 500 tech vendor expanded contract footprint across 12 international business units.",
                 benefits: ["Full corporate tree visibility", "Warm division introduction paths", "Higher enterprise ACV"],
-                outcomes: ["12 Subsidiaries Expanded", "4.2Ã— Contract Value", "50% Faster Expansion"]
+                outcomes: ["12 Subsidiaries Expanded", "4.2× Contract Value", "50% Faster Expansion"]
             }
         },
         {
@@ -344,7 +344,7 @@ export default function Industries() {
                 solution: "AI scans ecosystem compatibility, scores customer overlap, and automates partner outreach and co-selling playbooks.",
                 example: "An enterprise platform generated $12M in joint channel pipeline in year one.",
                 benefits: ["Predictable channel revenue", "Automated audience overlap scoring", "Co-selling playbooks"],
-                outcomes: ["$12M Channel Pipeline", "3.5Ã— Partner Reach", "65% Co-Sell Win Rate"]
+                outcomes: ["$12M Channel Pipeline", "3.5× Partner Reach", "65% Co-Sell Win Rate"]
             }
         },
         {
@@ -361,7 +361,7 @@ export default function Industries() {
                 solution: "AI mines annual reports and 10-K filings to generate tailored executive business cases for C-level buyers.",
                 example: "A B2B enterprise team achieved an 82% C-suite meeting acceptance rate with Fortune 1000 targets.",
                 benefits: ["CFO-ready business cases", "SEC filing goal alignment", "Faster executive sign-off"],
-                outcomes: ["82% Executive Meeting Rate", "60% Faster Sign-Off", "3.1Ã— Higher ACV"]
+                outcomes: ["82% Executive Meeting Rate", "60% Faster Sign-Off", "3.1× Higher ACV"]
             }
         },
 
@@ -380,7 +380,7 @@ export default function Industries() {
                 solution: "AI generates vertical-specific case studies, email vectors, and landing pages to enter new markets at top speed.",
                 example: "A mid-market company entered 3 new industry verticals within 30 days, capturing $2.4M in pipeline.",
                 benefits: ["30-Day vertical rollout", "Pre-built industry content", "Low entry capital"],
-                outcomes: ["30-Day Market Entry", "$2.4M New Pipeline", "4Ã— Speed-to-Revenue"]
+                outcomes: ["30-Day Market Entry", "$2.4M New Pipeline", "4× Speed-to-Revenue"]
             }
         },
         {
@@ -397,7 +397,7 @@ export default function Industries() {
                 solution: "AI maps the total addressable accounts in target micro-verticals and executes high-touch personalized engagement.",
                 example: "A specialized SaaS firm captured 48% market share in a 1,200-account niche vertical within 12 months.",
                 benefits: ["100% Account coverage", "Unmatched vertical relevance", "Dominant market share"],
-                outcomes: ["48% Market Share", "94% Account Reach", "3.6Ã— Pipeline Density"]
+                outcomes: ["48% Market Share", "94% Account Reach", "3.6× Pipeline Density"]
             }
         },
         {
@@ -413,8 +413,8 @@ export default function Industries() {
                 challenges: ["Reclaiming active selling hours", "Automating lead research", "Scaling revenue without hiring"],
                 solution: "AI automates CRM logging, prospect enrichment, and follow-up reminders, adding 15+ hours of selling time per rep.",
                 example: "A 6-person sales team generated the output of a 18-person sales org with zero extra hires.",
-                benefits: ["15+ Hours/rep reclaimed", "Zero manual CRM entry", "3Ã— Team output"],
-                outcomes: ["3Ã— Team Productivity", "15 Hours/Rep Saved", "$450K Hiring Cost Saved"]
+                benefits: ["15+ Hours/rep reclaimed", "Zero manual CRM entry", "3× Team output"],
+                outcomes: ["3× Team Productivity", "15 Hours/Rep Saved", "$450K Hiring Cost Saved"]
             }
         },
 
@@ -450,7 +450,7 @@ export default function Industries() {
                 solution: "AI tracks user behavioral loops and retention cohorts, delivering precise metrics on product-market fit score.",
                 example: "An early-stage SaaS startup identified its core PMF cohort, boosting 30-day retention from 18% to 62%.",
                 benefits: ["Data-backed PMF score", "Investor-ready retention metrics", "Roadmap clarity"],
-                outcomes: ["62% 30-Day Retention", "3.4Ã— Viral Coefficient", "Series A Ready"]
+                outcomes: ["62% 30-Day Retention", "3.4× Viral Coefficient", "Series A Ready"]
             }
         },
         {
@@ -503,7 +503,7 @@ export default function Industries() {
                 solution: "AI conducts automated trust audits, accelerates digital reputation, and powers targeted high-intent B2B lead generation.",
                 example: "A global consulting firm boosted enterprise lead conversions by 42% via automated trust audits.",
                 benefits: ["Accelerated client trust", "Automated lead qualification", "Higher conversion velocity"],
-                outcomes: ["42% Higher Conversions", "3Ã— Qualified Leads", "95% Trust Score"]
+                outcomes: ["42% Higher Conversions", "3× Qualified Leads", "95% Trust Score"]
             }
         },
         {
@@ -520,7 +520,7 @@ export default function Industries() {
                 solution: "AI automates disaster vulnerability scanning, streamlines risk compliance, and powers digital procurement outreach.",
                 example: "A heavy machinery manufacturer reduced compliance audit prep time by 75% while scaling procurement outreach.",
                 benefits: ["Comprehensive risk coverage", "Automated procurement outreach", "Zero compliance audit penalties"],
-                outcomes: ["75% Faster Audits", "Zero Downtime", "3.5Ã— Procurement Reach"]
+                outcomes: ["75% Faster Audits", "Zero Downtime", "3.5× Procurement Reach"]
             }
         },
         {
@@ -537,7 +537,7 @@ export default function Industries() {
                 solution: "AI deploys dynamic brand acceleration, protects consumer trust, and runs automated influencer acquisition loops.",
                 example: "An e-commerce lifestyle brand reduced customer acquisition costs by 38% while boosting repeat orders.",
                 benefits: ["Reduced customer acquisition cost", "Enhanced consumer trust", "Protected checkout infrastructure"],
-                outcomes: ["38% Lower CAC", "2.5Ã— Repeat Orders", "99.9% POS Cyber Security"]
+                outcomes: ["38% Lower CAC", "2.5× Repeat Orders", "99.9% POS Cyber Security"]
             }
         },
         {
@@ -554,7 +554,7 @@ export default function Industries() {
                 solution: "AI automates continuous compliance monitoring, performs API penetration audits, and fortifies investor confidence.",
                 example: "A digital lending NBFC achieved 100% regulatory audit compliance while reducing approval turnaround to minutes.",
                 benefits: ["Bank-grade regulatory compliance", "Immediate vulnerability detection", "Investor confidence reinforcement"],
-                outcomes: ["100% Audit Readiness", "Zero Security Breaches", "5Ã— Approval Velocity"]
+                outcomes: ["100% Audit Readiness", "Zero Security Breaches", "5× Approval Velocity"]
             }
         },
         {
@@ -569,9 +569,9 @@ export default function Industries() {
                 situations: ["SaaS churn caused by unmapped security concerns", "Low organic outreach response rates", "Long trial-to-paid conversion cycles"],
                 challenges: ["Enterprise buyers requiring SOC2 verification", "Standing out in saturated app marketplaces", "Scaling outbound SDR teams"],
                 solution: "AI automates SOC2 penetration audits, accelerates credibility signaling, and scales high-intent subscriber outreach.",
-                example: "An enterprise SaaS platform expanded ARR by 3.2Ã— after deploying AI penetration testing and credibility signals.",
+                example: "An enterprise SaaS platform expanded ARR by 3.2× after deploying AI penetration testing and credibility signals.",
                 benefits: ["Faster trial-to-paid conversions", "Automated penetration testing", "Predictable subscription ARR"],
-                outcomes: ["3.2Ã— ARR Growth", "60% Faster Sales Cycle", "SOC2 Type II Verified"]
+                outcomes: ["3.2× ARR Growth", "60% Faster Sales Cycle", "SOC2 Type II Verified"]
             }
         },
         {
@@ -663,12 +663,12 @@ export default function Industries() {
 
     const getColorClass = (color: string) => {
         const colors: { [key: string]: string } = {
-            blue: "text-[#064e3b] bg-emerald-50 border-emerald-100",
-            purple: "text-teal-700 bg-teal-50 border-purple-100",
-            indigo: "text-[#064e3b] bg-emerald-50 border-emerald-100",
-            teal: "text-teal-600 bg-teal-50 border-teal-100",
+            blue: "text-[#0066FF] bg-white border-[#0066FF]",
+            purple: "text-[#0066FF] bg-[#0066FF] border-purple-100",
+            indigo: "text-[#0066FF] bg-white border-[#0066FF]",
+            teal: "text-[#0066FF] bg-[#0066FF] border-[#0066FF]",
             amber: "text-amber-600 bg-amber-50 border-amber-100",
-            emerald: "text-emerald-600 bg-emerald-50 border-emerald-100",
+            emerald: "text-[#0066FF] bg-white border-[#0066FF]",
             pink: "text-pink-600 bg-pink-50 border-pink-100",
             orange: "text-orange-600 bg-orange-50 border-orange-100",
             cyan: "text-cyan-600 bg-cyan-50 border-cyan-100",
@@ -677,7 +677,7 @@ export default function Industries() {
     };
 
     return (
-        <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-emerald-100 composition-layer">
+        <div className="min-h-screen bg-white text-[#0066FF] font-sans selection:bg-white composition-layer">
             {/* Premium Industries Carousel - First Section */}
             <div>
                 <IndustriesCarousel />
@@ -743,20 +743,20 @@ export default function Industries() {
 
                             return (
                                 <>
-                                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-[#053d2e] text-xs font-bold uppercase tracking-wider mb-6">
-                                        <span className="w-2 h-2 rounded-full bg-[#064e3b] animate-pulse"></span>
+                                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#0066FF] text-[#0066FF] text-xs font-bold uppercase tracking-wider mb-6">
+                                        <span className="w-2 h-2 rounded-full bg-[#0066FF] animate-pulse"></span>
                                         {activeCategory !== 'all' ? `Industry Focus: ${headingInfo.title}` : "Enterprise Vertical Architecture"}
                                     </div>
-                                    <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-5 tracking-tight font-heading">
+                                    <h1 className="text-4xl md:text-6xl font-extrabold text-[#0066FF] mb-5 tracking-tight font-heading">
                                         {headingInfo.title}
                                     </h1>
-                                    <p className="text-lg md:text-xl text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
+                                    <p className="text-lg md:text-xl text-[#0066FF] font-medium max-w-3xl mx-auto leading-relaxed">
                                         {headingInfo.subtitle}
                                     </p>
                                     
                                     {/* Real-World Industry Intelligence Visual Grid */}
                                     <div className="grid md:grid-cols-2 gap-6 mt-12 text-left">
-                                        <div className="relative rounded-2xl overflow-hidden shadow-xl border border-slate-200 group">
+                                        <div className="relative rounded-2xl overflow-hidden shadow-xl border border-[#0066FF] group">
                                             <img 
                                                 src="/images/industry-fintech.png" 
                                                 alt="Fintech & Enterprise Banking Intelligence System"
@@ -764,11 +764,11 @@ export default function Industries() {
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
                                             <div className="absolute bottom-4 left-4 right-4">
-                                                <span className="px-2.5 py-1 bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold rounded-full font-mono">FINTECH & FINANCIAL SERVICES</span>
+                                                <span className="px-2.5 py-1 bg-white0/20 border border-[#0066FF]/30 text-[#0066FF] text-xs font-bold rounded-full font-mono">FINTECH & FINANCIAL SERVICES</span>
                                                 <h4 className="text-base font-bold text-white mt-1">Bank-Grade Compliance & Fraud Defense</h4>
                                             </div>
                                         </div>
-                                        <div className="relative rounded-2xl overflow-hidden shadow-xl border border-slate-200 group">
+                                        <div className="relative rounded-2xl overflow-hidden shadow-xl border border-[#0066FF] group">
                                             <img 
                                                 src="/images/industry-healthcare.png" 
                                                 alt="Healthcare & Life Sciences AI Analytics System"
@@ -776,7 +776,7 @@ export default function Industries() {
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
                                             <div className="absolute bottom-4 left-4 right-4">
-                                                <span className="px-2.5 py-1 bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold rounded-full font-mono">HEALTHCARE & BIOTECH</span>
+                                                <span className="px-2.5 py-1 bg-white0/20 border border-[#0066FF]/30 text-[#0066FF] text-xs font-bold rounded-full font-mono">HEALTHCARE & BIOTECH</span>
                                                 <h4 className="text-base font-bold text-white mt-1">HIPAA Verified Patient Outcome Analytics</h4>
                                             </div>
                                         </div>
@@ -805,42 +805,42 @@ export default function Industries() {
                                     <Reveal key={industry.title} width="100%" delay={index * 0.1} className="h-full">
                                     {industry.slugId && <div id={industry.slugId} className="scroll-mt-32" />}
                                     <div id={aliasId} className="scroll-mt-32" />
-                                    <Card id={mainId} className="flex flex-col h-full hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] transition-all duration-300 border-slate-200/60 bg-white/80 backdrop-blur-xl group hover:-translate-y-2 overflow-hidden scroll-mt-32 ring-1 ring-slate-200/50 hover:ring-blue-200/50">
-                                    <div className={`absolute top-0 inset-x-0 h-1 bg-gradient-to-r ${industry.color === 'blue' ? 'from-emerald-600 to-emerald-600' :
-                                        industry.color === 'purple' ? 'from-teal-500 to-pink-500' :
-                                            industry.color === 'indigo' ? 'from-teal-500 to-teal-500' :
-                                                industry.color === 'teal' ? 'from-teal-500 to-emerald-500' :
+                                    <Card id={mainId} className="flex flex-col h-full hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] transition-all duration-300 border-[#0066FF]/60 bg-white/80 backdrop-blur-xl group hover:-translate-y-2 overflow-hidden scroll-mt-32 ring-1 ring-slate-200/50 hover:ring-blue-200/50">
+                                    <div className={`absolute top-0 inset-x-0 h-1 bg-gradient-to-r ${industry.color === 'blue' ? 'from-[#0066FF] to-[#0066FF]' :
+                                        industry.color === 'purple' ? 'from-[#0066FF] to-pink-500' :
+                                            industry.color === 'indigo' ? 'from-[#0066FF] to-[#0066FF]' :
+                                                industry.color === 'teal' ? 'from-[#0066FF] to-[#0066FF]' :
                                                     industry.color === 'amber' ? 'from-amber-500 to-orange-500' :
-                                                        industry.color === 'emerald' ? 'from-emerald-500 to-teal-500' :
+                                                        industry.color === 'emerald' ? 'from-[#0066FF] to-[#0066FF]' :
                                                             industry.color === 'pink' ? 'from-pink-500 to-rose-500' :
                                                                 industry.color === 'orange' ? 'from-orange-500 to-red-500' :
-                                                                    'from-cyan-500 to-emerald-600'} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                                                                    'from-cyan-500 to-[#0066FF]'} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
 
-                                    <CardHeader className="pb-4 bg-slate-50/30 border-b border-slate-100/60">
+                                    <CardHeader className="pb-4 bg-white/30 border-b border-[#0066FF]/60">
                                         <div className="flex items-start justify-between gap-4">
                                             <div className={`p-3.5 rounded-2xl border ${getColorClass(industry.color)} transition-transform group-hover:scale-110 duration-500 shadow-sm`}>
                                                 {industry.icon}
                                             </div>
                                         </div>
-                                        <CardTitle className="text-2xl font-bold text-slate-900 mt-5 tracking-tight group-hover:text-[#053d2e] transition-colors">{industry.title}</CardTitle>
+                                        <CardTitle className="text-2xl font-bold text-[#0066FF] mt-5 tracking-tight group-hover:text-[#0066FF] transition-colors">{industry.title}</CardTitle>
                                         <div className="flex flex-wrap gap-2 mt-4">
                                             {industry.keyVerticals.map((vertical, i) => (
-                                                <span key={i} className="text-[10px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100/80 border border-slate-200 px-2 py-1 rounded-md">
+                                                <span key={i} className="text-[10px] font-bold uppercase tracking-wider text-[#0066FF] bg-white/80 border border-[#0066FF] px-2 py-1 rounded-md">
                                                     {vertical}
                                                 </span>
                                             ))}
                                         </div>
                                     </CardHeader>
                                     <CardContent className="flex-grow pt-6 space-y-6">
-                                        <p className="text-slate-600 text-base leading-relaxed font-medium">
+                                        <p className="text-[#0066FF] text-base leading-relaxed font-medium">
                                             {industry.offeringDescription}
                                         </p>
 
                                         <Tabs defaultValue="challenges" className="w-full">
-                                            <TabsList className="grid w-full grid-cols-3 mb-6 bg-slate-100/50 p-1 rounded-xl">
-                                                <TabsTrigger value="challenges" className="text-xs sm:text-xs font-bold uppercase tracking-wide data-[state=active]:bg-white data-[state=active]:text-[#053d2e] data-[state=active]:shadow-sm rounded-lg py-2">Challenges</TabsTrigger>
-                                                <TabsTrigger value="solution" className="text-xs sm:text-xs font-bold uppercase tracking-wide data-[state=active]:bg-white data-[state=active]:text-[#053d2e] data-[state=active]:shadow-sm rounded-lg py-2">Solution</TabsTrigger>
-                                                <TabsTrigger value="impact" className="text-xs sm:text-xs font-bold uppercase tracking-wide data-[state=active]:bg-white data-[state=active]:text-[#053d2e] data-[state=active]:shadow-sm rounded-lg py-2">Impact</TabsTrigger>
+                                            <TabsList className="grid w-full grid-cols-3 mb-6 bg-white/50 p-1 rounded-xl">
+                                                <TabsTrigger value="challenges" className="text-xs sm:text-xs font-bold uppercase tracking-wide data-[state=active]:bg-white data-[state=active]:text-[#0066FF] data-[state=active]:shadow-sm rounded-lg py-2">Challenges</TabsTrigger>
+                                                <TabsTrigger value="solution" className="text-xs sm:text-xs font-bold uppercase tracking-wide data-[state=active]:bg-white data-[state=active]:text-[#0066FF] data-[state=active]:shadow-sm rounded-lg py-2">Solution</TabsTrigger>
+                                                <TabsTrigger value="impact" className="text-xs sm:text-xs font-bold uppercase tracking-wide data-[state=active]:bg-white data-[state=active]:text-[#0066FF] data-[state=active]:shadow-sm rounded-lg py-2">Impact</TabsTrigger>
                                             </TabsList>
 
                                             {/* Tab: Challenges */}
@@ -851,18 +851,18 @@ export default function Industries() {
                                                     </div>
                                                     <ul className="space-y-3">
                                                         {industry.details.challenges.map((item, idx) => (
-                                                            <li key={idx} className="flex items-start gap-3 text-slate-600 text-sm leading-snug">
+                                                            <li key={idx} className="flex items-start gap-3 text-[#0066FF] text-sm leading-snug">
                                                                 <div className="w-1.5 h-1.5 rounded-full bg-amber-400/80 mt-1.5 flex-shrink-0 shadow-[0_0_8px_rgba(251,191,36,0.5)]" />
                                                                 <span>{item}</span>
                                                             </li>
                                                         ))}
                                                     </ul>
                                                 </div>
-                                                <div className="bg-slate-50 border border-slate-100 rounded-lg p-3 mt-4">
-                                                    <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Common Situations</span>
+                                                <div className="bg-white border border-[#0066FF] rounded-lg p-3 mt-4">
+                                                    <span className="block text-[10px] font-bold text-[#0066FF] uppercase tracking-widest mb-2">Common Situations</span>
                                                     <div className="space-y-1.5">
                                                         {industry.details.situations.slice(0, 2).map((sit, idx) => (
-                                                            <p key={idx} className="text-xs text-slate-500 italic">"{sit}"</p>
+                                                            <p key={idx} className="text-xs text-[#0066FF] italic">"{sit}"</p>
                                                         ))}
                                                     </div>
                                                 </div>
@@ -871,21 +871,21 @@ export default function Industries() {
                                             {/* Tab: Solution */}
                                             <TabsContent value="solution" className="space-y-4 animate-in fade-in-50 duration-300 focus-visible:outline-none h-full">
                                                 <div className="space-y-4 min-h-[160px]">
-                                                    <div className="flex items-center gap-2 text-[#064e3b] font-bold text-xs uppercase tracking-widest">
+                                                    <div className="flex items-center gap-2 text-[#0066FF] font-bold text-xs uppercase tracking-widest">
                                                         <Lightbulb className="w-3.5 h-3.5" /> Intelligence Layer
                                                     </div>
-                                                    <p className="text-slate-700 text-sm leading-relaxed font-medium">
+                                                    <p className="text-[#0066FF] text-sm leading-relaxed font-medium">
                                                         {industry.details.solution}
                                                     </p>
                                                 </div>
-                                                <div className="bg-gradient-to-br from-teal-50 to-emerald-50 p-4 rounded-xl border border-emerald-100/50 mt-4 shadow-sm group-hover:shadow-md transition-shadow">
+                                                <div className="bg-gradient-to-br from-[#0066FF] to-[#0066FF] p-4 rounded-xl border border-[#0066FF]/50 mt-4 shadow-sm group-hover:shadow-md transition-shadow">
                                                     <div className="flex gap-3 items-start">
                                                         <div className="p-1.5 bg-white rounded-lg shadow-sm">
-                                                            <Zap className="w-3.5 h-3.5 text-[#064e3b]" />
+                                                            <Zap className="w-3.5 h-3.5 text-[#0066FF]" />
                                                         </div>
                                                         <div>
                                                             <p className="text-[10px] font-bold text-indigo-900 uppercase tracking-widest mb-1.5">Proven Success</p>
-                                                            <p className="text-sm text-slate-700 italic border-l-2 border-emerald-200 pl-2 leading-relaxed">"{industry.details.example}"</p>
+                                                            <p className="text-sm text-[#0066FF] italic border-l-2 border-[#0066FF] pl-2 leading-relaxed">"{industry.details.example}"</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -894,33 +894,33 @@ export default function Industries() {
                                             {/* Tab: Impact */}
                                             <TabsContent value="impact" className="space-y-4 animate-in fade-in-50 duration-300 focus-visible:outline-none h-full">
                                                 <div className="space-y-4 min-h-[160px]">
-                                                    <div className="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase tracking-widest">
+                                                    <div className="flex items-center gap-2 text-[#0066FF] font-bold text-xs uppercase tracking-widest">
                                                         <TrendingUp className="w-3.5 h-3.5" /> Measurable Outcomes
                                                     </div>
                                                     <div className="grid grid-cols-1 gap-2">
                                                         {industry.details.outcomes.map((item, idx) => (
-                                                            <div key={idx} className="bg-emerald-50/50 p-2.5 rounded-lg flex items-center gap-3 border border-emerald-100/80 hover:bg-emerald-50 transition-colors">
-                                                                <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                                                                <span className="text-emerald-900 text-sm font-bold">{item}</span>
+                                                            <div key={idx} className="bg-white/50 p-2.5 rounded-lg flex items-center gap-3 border border-[#0066FF]/80 hover:bg-[#0066FF] transition-colors">
+                                                                <CheckCircle2 className="w-4 h-4 text-[#0066FF] flex-shrink-0" />
+                                                                <span className="text-[#0066FF] text-sm font-bold">{item}</span>
                                                             </div>
                                                         ))}
                                                     </div>
                                                 </div>
-                                                <div className="space-y-3 mt-4 pt-4 border-t border-slate-100">
-                                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Core Advantages</span>
+                                                <div className="space-y-3 mt-4 pt-4 border-t border-[#0066FF]">
+                                                    <span className="text-[10px] font-bold text-[#0066FF] uppercase tracking-widest">Core Advantages</span>
                                                     <div className="flex flex-wrap gap-2">
                                                         {industry.details.benefits.map((ben, idx) => (
-                                                            <span key={idx} className="text-[11px] font-semibold text-slate-600 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-md">{ben}</span>
+                                                            <span key={idx} className="text-[11px] font-semibold text-[#0066FF] bg-white border border-[#0066FF] px-2.5 py-1 rounded-md">{ben}</span>
                                                         ))}
                                                     </div>
                                                 </div>
                                             </TabsContent>
                                         </Tabs>
 
-                                        <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                        <div className="pt-4 border-t border-[#0066FF] flex items-center justify-between">
                                             <button
                                                 onClick={() => setSelectedModalIndustry(industry)}
-                                                className="inline-flex items-center gap-2 text-xs font-bold text-[#064e3b] hover:text-[#042d22] transition-colors group-hover:translate-x-1 duration-200"
+                                                className="inline-flex items-center gap-2 text-xs font-bold text-[#0066FF] hover:text-[#042d22] transition-colors group-hover:translate-x-1 duration-200"
                                             >
                                                 <span>Explore Full Specification</span>
                                                 <ArrowRight className="w-3.5 h-3.5" />
@@ -953,33 +953,33 @@ export default function Industries() {
             {/* CTA Section */}
             <div className="max-w-5xl mx-auto px-4 pb-24 pt-12 relative z-10">
                 <Reveal width="100%" direction="up">
-                    <div className="relative overflow-hidden rounded-[2.5rem] bg-slate-50 border border-slate-200 shadow-xl shadow-blue-900/5 group hover:shadow-2xl hover:shadow-blue-900/10 transition-shadow duration-500">
+                    <div className="relative overflow-hidden rounded-[2.5rem] bg-white border border-[#0066FF] shadow-xl shadow-blue-900/5 group hover:shadow-2xl hover:shadow-blue-900/10 transition-shadow duration-500">
                         {/* Background Effects */}
                         <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-50" />
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-3xl bg-emerald-100/50 blur-[100px] rounded-full pointer-events-none mix-blend-multiply" />
-                        <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-100/50 blur-[80px] rounded-full pointer-events-none mix-blend-multiply" />
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-3xl bg-white/50 blur-[100px] rounded-full pointer-events-none mix-blend-multiply" />
+                        <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/50 blur-[80px] rounded-full pointer-events-none mix-blend-multiply" />
 
                         <div className="relative z-10 px-8 py-16 md:py-24 text-center">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-[#053d2e] text-xs font-bold uppercase tracking-wider mb-8 shadow-sm">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#0066FF] text-[#0066FF] text-xs font-bold uppercase tracking-wider mb-8 shadow-sm">
                                 <Rocket className="w-4 h-4" /> Ready to Scale?
                             </div>
 
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 text-slate-900 tracking-tight leading-[1.1]">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 text-[#0066FF] tracking-tight leading-[1.1]">
                                 Architect Your <br className="hidden md:block" />
-                                <span className="text-[#053d2e]">
+                                <span className="text-[#0066FF]">
                                     Industry-Specific AI Engine
                                 </span>
                             </h2>
 
-                            <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
+                            <p className="text-xl text-[#0066FF] max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
                                 Stop relying on generic tools. Deploy a revenue engine engineered
-                                specifically for the <span className="text-[#064e3b] font-bold">nuances of your vertical</span>.
+                                specifically for the <span className="text-[#0066FF] font-bold">nuances of your vertical</span>.
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
                                 <Button 
                                     onClick={() => openLongForm({ defaultIndustry: 'Enterprise Vertical' })}
-                                    className="bg-emerald-800 text-white hover:bg-emerald-900 px-10 py-7 h-auto text-lg font-bold rounded-full shadow-lg shadow-emerald-900/30 transition-all duration-300 flex items-center gap-3 transform hover:-translate-y-1"
+                                    className="bg-[#0066FF] text-white hover:bg-[#0066FF] px-10 py-7 h-auto text-lg font-bold rounded-full shadow-lg shadow-[#0066FF]/20 transition-all duration-300 flex items-center gap-3 transform hover:-translate-y-1"
                                 >
                                     Start Building Now
                                     <ArrowRight className="w-5 h-5" />
@@ -987,15 +987,15 @@ export default function Industries() {
                                 <Button 
                                     onClick={() => openQuickForm({ defaultIndustry: 'Enterprise Vertical' })}
                                     variant="outline"
-                                    className="border-slate-300 text-slate-800 hover:bg-slate-100 px-8 py-7 h-auto text-base font-bold rounded-full transition-all duration-300"
+                                    className="border-[#0066FF] text-[#0066FF] hover:bg-[#0066FF]/10 px-8 py-7 h-auto text-base font-bold rounded-full transition-all duration-300"
                                 >
                                     Quick 60-Sec Inquiry
                                 </Button>
                                 <div className="flex flex-col items-center gap-2">
-                                    <p className="text-slate-500 text-sm font-medium sm:ml-6 flex items-center gap-2">
-                                        <span className="text-emerald-500 relative flex h-2.5 w-2.5">
-                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                                    <p className="text-[#0066FF] text-sm font-medium sm:ml-6 flex items-center gap-2">
+                                        <span className="text-[#0066FF] relative flex h-2.5 w-2.5">
+                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0066FF] opacity-75"></span>
+                                            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white0"></span>
                                         </span>
                                         Operational in weeks, not months
                                     </p>
@@ -1008,11 +1008,11 @@ export default function Industries() {
 
             {/* Detailed Industry Specification Modal (Like Offerings) */}
             {selectedModalIndustry && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-200">
-                    <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl border border-slate-200 p-6 sm:p-8 space-y-6">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-white/60 backdrop-blur-md animate-in fade-in duration-200">
+                    <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl border border-[#0066FF] p-6 sm:p-8 space-y-6">
                         <button
                             onClick={() => setSelectedModalIndustry(null)}
-                            className="absolute top-6 right-6 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors"
+                            className="absolute top-6 right-6 p-2 rounded-full bg-white hover:bg-[#0066FF]/10 text-[#0066FF] transition-colors"
                         >
                             <X className="w-5 h-5" />
                         </button>
@@ -1022,24 +1022,24 @@ export default function Industries() {
                                 {selectedModalIndustry.icon}
                             </div>
                             <div>
-                                <span className="text-xs font-bold uppercase tracking-wider text-[#064e3b]">Vertical Architecture Spec</span>
-                                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900">{selectedModalIndustry.title}</h3>
+                                <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">Vertical Architecture Spec</span>
+                                <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0066FF]">{selectedModalIndustry.title}</h3>
                             </div>
                         </div>
 
-                        <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-medium">
+                        <p className="text-[#0066FF] text-base sm:text-lg leading-relaxed font-medium">
                             {selectedModalIndustry.offeringDescription}
                         </p>
 
                         <div className="grid md:grid-cols-2 gap-6">
-                            <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                            <div className="bg-white p-6 rounded-2xl border border-[#0066FF]">
                                 <h4 className="text-sm font-bold uppercase tracking-wider text-amber-700 mb-3 flex items-center gap-2">
                                     <AlertTriangle className="w-4 h-4 text-amber-600" />
                                     Industry Challenges & Pain Points
                                 </h4>
                                 <ul className="space-y-2.5">
                                     {selectedModalIndustry.details.challenges.map((c: string, idx: number) => (
-                                        <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 font-medium">
+                                        <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#0066FF] font-medium">
                                             <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 shrink-0" />
                                             <span>{c}</span>
                                         </li>
@@ -1047,15 +1047,15 @@ export default function Industries() {
                                 </ul>
                             </div>
 
-                            <div className="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-200">
-                                <h4 className="text-sm font-bold uppercase tracking-wider text-emerald-800 mb-3 flex items-center gap-2">
-                                    <TrendingUp className="w-4 h-4 text-emerald-600" />
+                            <div className="bg-white/50 p-6 rounded-2xl border border-[#0066FF]">
+                                <h4 className="text-sm font-bold uppercase tracking-wider text-[#0066FF] mb-3 flex items-center gap-2">
+                                    <TrendingUp className="w-4 h-4 text-[#0066FF]" />
                                     Verified ROI & Revenue Impact
                                 </h4>
                                 <ul className="space-y-2.5">
                                     {selectedModalIndustry.details.outcomes.map((o: string, idx: number) => (
-                                        <li key={idx} className="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-emerald-900">
-                                            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                                        <li key={idx} className="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-[#0066FF]">
+                                            <CheckCircle2 className="w-4 h-4 text-[#0066FF] shrink-0" />
                                             <span>{o}</span>
                                         </li>
                                     ))}
@@ -1063,24 +1063,24 @@ export default function Industries() {
                             </div>
                         </div>
 
-                        <div className="bg-emerald-50/60 p-6 rounded-2xl border border-emerald-100">
+                        <div className="bg-white/60 p-6 rounded-2xl border border-[#0066FF]">
                             <h4 className="text-sm font-bold uppercase tracking-wider text-blue-900 mb-2 flex items-center gap-2">
-                                <Zap className="w-4 h-4 text-[#064e3b]" />
+                                <Zap className="w-4 h-4 text-[#0066FF]" />
                                 Autonomous Solution Architecture
                             </h4>
-                            <p className="text-sm text-slate-700 font-medium leading-relaxed">
+                            <p className="text-sm text-[#0066FF] font-medium leading-relaxed">
                                 {selectedModalIndustry.details.solution}
                             </p>
                         </div>
 
-                        <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-100">
+                        <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-[#0066FF]">
                             <Button 
                                 onClick={() => {
                                     const industry = selectedModalIndustry.title;
                                     setSelectedModalIndustry(null);
                                     openLongForm({ defaultIndustry: industry, defaultService: `${industry} Architecture Engine` });
                                 }}
-                                className="bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-6 py-3 rounded-full flex-1"
+                                className="bg-[#0066FF] hover:bg-[#0066FF] text-white font-bold px-6 py-3 rounded-full flex-1"
                             >
                                 Deploy {selectedModalIndustry.title} Engine
                             </Button>
@@ -1091,7 +1091,7 @@ export default function Industries() {
                                     openQuickForm({ defaultIndustry: industry, defaultService: `${industry} Quick Inquiry` });
                                 }}
                                 variant="outline" 
-                                className="border-slate-200 text-slate-700 hover:bg-slate-50 font-bold px-6 py-3 rounded-full flex-1"
+                                className="border-[#0066FF] text-[#0066FF] hover:bg-[#0066FF]/10 font-bold px-6 py-3 rounded-full flex-1"
                             >
                                 Quick 60-Sec Inquiry
                             </Button>

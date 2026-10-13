@@ -350,29 +350,29 @@ export default function LinkedInStudio() {
 
     if (!isAuthenticated) {
         return (
-            <div className="min-h-screen bg-[#02130d] flex items-center justify-center p-6 text-slate-100 font-sans">
-                <div className="max-w-md w-full bg-[#05281e] border border-emerald-600/40 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="min-h-screen bg-[#02130d] flex items-center justify-center p-6 text-[#0066FF] font-sans">
+                <div className="max-w-md w-full bg-[#05281e] border border-[#0066FF]/40 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-white0/10 rounded-full blur-2xl pointer-events-none" />
                     
-                    <div className="w-16 h-16 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center mx-auto text-emerald-400 mb-5 shadow-inner">
+                    <div className="w-16 h-16 rounded-2xl bg-white0/20 border border-[#0066FF]/40 flex items-center justify-center mx-auto text-[#0066FF] mb-5 shadow-inner">
                         <Lock className="w-8 h-8" />
                     </div>
 
                     <div className="text-center">
-                        <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase tracking-widest">
+                        <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-white0/20 text-[#0066FF] border border-[#0066FF]/30 uppercase tracking-widest">
                             Restricted Admin Area
                         </span>
                         <h2 className="text-2xl font-black text-white mt-3 tracking-tight">
                             ProfitMachines Security Perimeter
                         </h2>
-                        <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                        <p className="text-xs text-[#0066FF] mt-2 leading-relaxed">
                             Only authorized administrators can review, schedule, and publish LinkedIn content. Enter your Admin Key to continue.
                         </p>
                     </div>
 
                     <form onSubmit={handleUnlock} className="mt-6 space-y-4">
                         <div>
-                            <label className="block text-xs font-bold text-emerald-300 mb-1.5">
+                            <label className="block text-xs font-bold text-[#0066FF] mb-1.5">
                                 Admin Passcode / Security Key
                             </label>
                             <input
@@ -380,7 +380,7 @@ export default function LinkedInStudio() {
                                 value={passcode}
                                 onChange={e => { setPasscode(e.target.value); setPasscodeError(''); }}
                                 placeholder="Enter admin key (e.g. pm2026)"
-                                className="w-full bg-[#02130d] border border-emerald-700/60 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-emerald-400 transition"
+                                className="w-full bg-[#02130d] border border-[#0066FF]/60 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-[#0066FF] transition"
                                 autoFocus
                             />
                             {passcodeError && (
@@ -392,16 +392,16 @@ export default function LinkedInStudio() {
 
                         <button
                             type="submit"
-                            className="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-sm shadow-lg shadow-emerald-500/20 transition cursor-pointer flex items-center justify-center gap-2"
+                            className="w-full py-3 rounded-xl bg-white0 hover:bg-[#0066FF] text-[#0066FF] font-extrabold text-sm shadow-lg shadow-[#0066FF]/20 transition cursor-pointer flex items-center justify-center gap-2"
                         >
                             <Key className="w-4 h-4" /> Unlock LinkedIn Studio
                         </button>
                     </form>
 
-                    <div className="mt-6 pt-4 border-t border-emerald-800/30 text-center">
+                    <div className="mt-6 pt-4 border-t border-[#0066FF]/30 text-center">
                         <a
                             href="/"
-                            className="text-xs text-slate-400 hover:text-emerald-300 transition"
+                            className="text-xs text-[#0066FF] hover:text-[#0066FF] transition"
                         >
                             ← Return to ProfitMachines Homepage
                         </a>
@@ -412,21 +412,21 @@ export default function LinkedInStudio() {
     }
 
     return (
-        <div className="min-h-screen bg-[#02130d] text-slate-100 font-sans pb-24">
+        <div className="min-h-screen bg-[#02130d] text-[#0066FF] font-sans pb-24">
             {/* Top Brand Banner */}
-            <div className="bg-gradient-to-r from-[#064e3b] via-[#043327] to-[#021b14] border-b border-emerald-800/40 py-6 px-6 sm:px-12">
+            <div className="bg-gradient-to-r from-[#0066FF] via-[#043327] to-[#021b14] border-b border-[#0066FF]/40 py-6 px-6 sm:px-12">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
                         <div className="flex items-center gap-3">
-                            <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5">
+                            <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-white0/20 text-[#0066FF] border border-[#0066FF]/30 flex items-center gap-1.5">
                                 <Building2 className="w-3.5 h-3.5" /> Company Page Identity
                             </span>
-                            <span className="text-xs text-slate-400">Strict Organization Mode</span>
+                            <span className="text-xs text-[#0066FF]">Strict Organization Mode</span>
                         </div>
                         <h1 className="text-2xl sm:text-3xl font-extrabold text-white mt-2 tracking-tight">
                             ProfitMachines LinkedIn Growth Studio
                         </h1>
-                        <p className="text-sm text-emerald-200/80 mt-1">
+                        <p className="text-sm text-[#0066FF]/80 mt-1">
                             Review, approve, and publish B2B content directly to the ProfitMachines Company Page with automated UTM attribution.
                         </p>
                     </div>
@@ -435,14 +435,14 @@ export default function LinkedInStudio() {
                         <button
                             onClick={() => handleGenerateNewPost('abm-autopilot')}
                             disabled={isGenerating}
-                            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm shadow-lg shadow-emerald-500/20 transition-all cursor-pointer"
+                            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white0 hover:bg-[#0066FF] text-[#0066FF] font-bold text-sm shadow-lg shadow-[#0066FF]/20 transition-all cursor-pointer"
                         >
                             <Sparkles className="w-4 h-4" />
                             {isGenerating ? 'Synthesizing...' : 'Generate New Draft'}
                         </button>
                         <button
                             onClick={handleLock}
-                            className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-slate-900/60 hover:bg-rose-950/40 text-slate-300 hover:text-rose-300 text-xs border border-slate-700/60 transition-all cursor-pointer"
+                            className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-white/60 hover:bg-rose-950/40 text-[#0066FF] hover:text-rose-300 text-xs border border-[#0066FF]/60 transition-all cursor-pointer"
                             title="Lock Admin Studio"
                         >
                             <Lock className="w-3.5 h-3.5" /> Lock Studio
@@ -451,9 +451,9 @@ export default function LinkedInStudio() {
                             href="https://profit-machines.vercel.app"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-900/60 hover:bg-slate-800 text-slate-300 text-sm border border-slate-700/60 transition-all"
+                            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/60 hover:bg-white text-[#0066FF] text-sm border border-[#0066FF]/60 transition-all"
                         >
-                            Live Site <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+                            Live Site <ExternalLink className="w-3.5 h-3.5 text-[#0066FF]" />
                         </a>
                     </div>
                 </div>
@@ -461,37 +461,37 @@ export default function LinkedInStudio() {
 
             {/* Connection Diagnostics Card */}
             <div className="max-w-7xl mx-auto px-6 sm:px-12 mt-6">
-                <div className="bg-[#052319] border border-emerald-700/40 rounded-2xl p-5 shadow-xl">
+                <div className="bg-[#052319] border border-[#0066FF]/40 rounded-2xl p-5 shadow-xl">
                     <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                         <div className="flex items-start gap-3.5">
-                            <div className={`p-2.5 rounded-xl ${apiDiagnostics?.configured ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-300'}`}>
+                            <div className={`p-2.5 rounded-xl ${apiDiagnostics?.configured ? 'bg-white0/20 text-[#0066FF]' : 'bg-amber-500/20 text-amber-300'}`}>
                                 <ShieldCheck className="w-6 h-6" />
                             </div>
                             <div>
                                 <div className="flex items-center gap-2.5">
                                     <h3 className="font-bold text-white text-base">Official LinkedIn API Integration</h3>
-                                    <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${apiDiagnostics?.configured ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}`}>
+                                    <span className={`text-xs px-2 py-0.5 rounded-md font-semibold ${apiDiagnostics?.configured ? 'bg-white0/20 text-[#0066FF]' : 'bg-amber-500/20 text-amber-300'}`}>
                                         {apiDiagnostics?.configured ? '● LIVE & CONNECTED' : '○ CREDENTIALS PENDING'}
                                     </span>
                                 </div>
-                                <p className="text-xs text-slate-300 mt-1">
-                                    Publishing Target: <strong className="text-emerald-300">ProfitMachines Company Page</strong> &nbsp;•&nbsp; 
-                                    Personal Profiles: <strong className="text-slate-400">Blocked by policy</strong> &nbsp;•&nbsp; 
-                                    Airtable & Jira Attribution: <strong className="text-emerald-300">Active</strong> &nbsp;•&nbsp; 
-                                    Google Apps Script Publishing: <strong className="text-emerald-300">Enabled (LinkedIn_Posts Tab)</strong>
+                                <p className="text-xs text-[#0066FF] mt-1">
+                                    Publishing Target: <strong className="text-[#0066FF]">ProfitMachines Company Page</strong> &nbsp;•&nbsp; 
+                                    Personal Profiles: <strong className="text-[#0066FF]">Blocked by policy</strong> &nbsp;•&nbsp; 
+                                    Airtable & Jira Attribution: <strong className="text-[#0066FF]">Active</strong> &nbsp;•&nbsp; 
+                                    Google Apps Script Publishing: <strong className="text-[#0066FF]">Enabled (LinkedIn_Posts Tab)</strong>
                                 </p>
                             </div>
                         </div>
 
                         <div className="flex items-center gap-3">
-                            <span className="text-[11px] px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5">
-                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span className="text-[11px] px-2.5 py-1 rounded-lg bg-white0/10 text-[#0066FF] border border-[#0066FF]/30 flex items-center gap-1.5">
+                                <span className="w-2 h-2 rounded-full bg-[#0066FF] animate-pulse"></span>
                                 Apps Script Dual-Publish Ready
                             </span>
                             <button
                                 onClick={checkApiDiagnostics}
                                 disabled={isCheckingApi}
-                                className="flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-700 transition"
+                                className="flex items-center gap-1.5 text-xs text-[#0066FF] hover:text-white bg-white/80 hover:bg-[#0066FF]/10 px-3 py-1.5 rounded-lg border border-[#0066FF] transition"
                             >
                                 <RefreshCw className={`w-3.5 h-3.5 ${isCheckingApi ? 'animate-spin' : ''}`} /> Refresh Status
                             </button>
@@ -499,15 +499,15 @@ export default function LinkedInStudio() {
                     </div>
 
                     {!apiDiagnostics?.configured && (
-                        <div className="mt-4 pt-4 border-t border-emerald-800/30 text-xs text-slate-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <div className="mt-4 pt-4 border-t border-[#0066FF]/30 text-xs text-[#0066FF] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                             <div className="flex items-center gap-2 text-amber-200">
                                 <AlertCircle className="w-4 h-4 flex-shrink-0 text-amber-400" />
                                 <span>
                                     <strong>Manual Fallback Ready:</strong> You can review, approve, and <strong>1-Click Copy</strong> complete posts with tracked URLs to post manually anytime.
                                 </span>
                             </div>
-                            <span className="text-slate-400 text-[11px]">
-                                To enable 100% automated API publishing, add <code className="text-emerald-300 bg-slate-900 px-1 py-0.5 rounded">LINKEDIN_ORG_ID</code> & <code className="text-emerald-300 bg-slate-900 px-1 py-0.5 rounded">LINKEDIN_ACCESS_TOKEN</code> in Vercel.
+                            <span className="text-[#0066FF] text-[11px]">
+                                To enable 100% automated API publishing, add <code className="text-[#0066FF] bg-white px-1 py-0.5 rounded">LINKEDIN_ORG_ID</code> & <code className="text-[#0066FF] bg-white px-1 py-0.5 rounded">LINKEDIN_ACCESS_TOKEN</code> in Vercel.
                             </span>
                         </div>
                     )}
@@ -518,16 +518,16 @@ export default function LinkedInStudio() {
             {actionMessage && (
                 <div className="max-w-7xl mx-auto px-6 sm:px-12 mt-4">
                     <div className={`p-4 rounded-xl border flex items-center justify-between text-sm ${
-                        actionMessage.type === 'success' ? 'bg-emerald-950/80 border-emerald-500/50 text-emerald-200' :
+                        actionMessage.type === 'success' ? 'bg-[#0066FF]/80 border-[#0066FF]/50 text-[#0066FF]' :
                         actionMessage.type === 'error' ? 'bg-rose-950/80 border-rose-500/50 text-rose-200' :
-                        'bg-slate-900/80 border-slate-700 text-slate-200'
+                        'bg-white/80 border-[#0066FF] text-[#0066FF]'
                     }`}>
                         <div className="flex items-center gap-2.5">
-                            {actionMessage.type === 'success' && <CheckCircle2 className="w-5 h-5 text-emerald-400" />}
+                            {actionMessage.type === 'success' && <CheckCircle2 className="w-5 h-5 text-[#0066FF]" />}
                             {actionMessage.type === 'error' && <AlertCircle className="w-5 h-5 text-rose-400" />}
                             <span>{actionMessage.text}</span>
                         </div>
-                        <button onClick={() => setActionMessage(null)} className="text-slate-400 hover:text-white">
+                        <button onClick={() => setActionMessage(null)} className="text-[#0066FF] hover:text-white">
                             <X className="w-4 h-4" />
                         </button>
                     </div>
@@ -537,18 +537,18 @@ export default function LinkedInStudio() {
             {/* Main Content Area */}
             <div className="max-w-7xl mx-auto px-6 sm:px-12 mt-8 space-y-6">
                 {/* LinkedIn Analytics & Engagement Grid */}
-                <div className="bg-[#052319] border border-emerald-700/40 rounded-2xl p-6 shadow-xl">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-emerald-800/40">
+                <div className="bg-[#052319] border border-[#0066FF]/40 rounded-2xl p-6 shadow-xl">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#0066FF]/40">
                         <div>
                             <div className="flex items-center gap-2">
                                 <h3 className="font-bold text-white text-base flex items-center gap-2">
-                                    <Eye className="w-4 h-4 text-emerald-400" /> LinkedIn Post Analytics & Google Sheets Sync
+                                    <Eye className="w-4 h-4 text-[#0066FF]" /> LinkedIn Post Analytics & Google Sheets Sync
                                 </h3>
-                                <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-white0/20 text-[#0066FF] border border-[#0066FF]/30">
                                     AUTO SYNC
                                 </span>
                             </div>
-                            <p className="text-xs text-slate-300 mt-1">
+                            <p className="text-xs text-[#0066FF] mt-1">
                                 Tracks who saw your posts, who liked/reacted, who commented, and identifies buyer leads into Google Sheets, Airtable, & Jira.
                             </p>
                         </div>
@@ -558,8 +558,8 @@ export default function LinkedInStudio() {
                             disabled={isSyncingAnalytics}
                             className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer ${
                                 isSyncingAnalytics
-                                    ? 'bg-emerald-700/50 text-slate-300 cursor-not-allowed'
-                                    : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-md shadow-emerald-500/20'
+                                    ? 'bg-[#0066FF]/50 text-[#0066FF] cursor-not-allowed'
+                                    : 'bg-white0 hover:bg-[#0066FF] text-[#0066FF] shadow-md shadow-[#0066FF]/20'
                             }`}
                         >
                             <RefreshCw className={`w-3.5 h-3.5 ${isSyncingAnalytics ? 'animate-spin' : ''}`} />
@@ -569,71 +569,71 @@ export default function LinkedInStudio() {
 
                     {/* Metric Cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
-                        <div className="bg-[#02130d] border border-emerald-900/50 rounded-xl p-4">
-                            <div className="text-xs text-slate-400 flex items-center gap-1.5">
+                        <div className="bg-[#02130d] border border-[#0066FF]/50 rounded-xl p-4">
+                            <div className="text-xs text-[#0066FF] flex items-center gap-1.5">
                                 <Eye className="w-3.5 h-3.5 text-sky-400" /> Impressions (Who Saw)
                             </div>
                             <div className="text-2xl font-black text-white mt-1">
                                 {analyticsSummary ? analyticsSummary.totalImpressions.toLocaleString() : 'Live on Sync'}
                             </div>
-                            <div className="text-[11px] text-slate-400 mt-0.5">
+                            <div className="text-[11px] text-[#0066FF] mt-0.5">
                                 Total viewers reached across posts
                             </div>
                         </div>
 
-                        <div className="bg-[#02130d] border border-emerald-900/50 rounded-xl p-4">
-                            <div className="text-xs text-slate-400 flex items-center gap-1.5">
-                                <ThumbsUp className="w-3.5 h-3.5 text-emerald-400" /> Likes & Reactions
+                        <div className="bg-[#02130d] border border-[#0066FF]/50 rounded-xl p-4">
+                            <div className="text-xs text-[#0066FF] flex items-center gap-1.5">
+                                <ThumbsUp className="w-3.5 h-3.5 text-[#0066FF]" /> Likes & Reactions
                             </div>
                             <div className="text-2xl font-black text-white mt-1">
                                 {analyticsSummary ? analyticsSummary.totalLikes.toLocaleString() : 'Live on Sync'}
                             </div>
-                            <div className="text-[11px] text-slate-400 mt-0.5">
-                                Reacters logged in <code className="text-emerald-300">LinkedIn_Reactions</code>
+                            <div className="text-[11px] text-[#0066FF] mt-0.5">
+                                Reacters logged in <code className="text-[#0066FF]">LinkedIn_Reactions</code>
                             </div>
                         </div>
 
-                        <div className="bg-[#02130d] border border-emerald-900/50 rounded-xl p-4">
-                            <div className="text-xs text-slate-400 flex items-center gap-1.5">
-                                <MessageSquare className="w-3.5 h-3.5 text-teal-400" /> Post Comments
+                        <div className="bg-[#02130d] border border-[#0066FF]/50 rounded-xl p-4">
+                            <div className="text-xs text-[#0066FF] flex items-center gap-1.5">
+                                <MessageSquare className="w-3.5 h-3.5 text-[#0066FF]" /> Post Comments
                             </div>
                             <div className="text-2xl font-black text-white mt-1">
                                 {analyticsSummary ? analyticsSummary.totalComments.toLocaleString() : 'Live on Sync'}
                             </div>
-                            <div className="text-[11px] text-slate-400 mt-0.5">
-                                Stored in <code className="text-emerald-300">LinkedIn_Comments</code>
+                            <div className="text-[11px] text-[#0066FF] mt-0.5">
+                                Stored in <code className="text-[#0066FF]">LinkedIn_Comments</code>
                             </div>
                         </div>
 
-                        <div className="bg-[#02130d] border border-emerald-900/50 rounded-xl p-4">
-                            <div className="text-xs text-slate-400 flex items-center gap-1.5">
+                        <div className="bg-[#02130d] border border-[#0066FF]/50 rounded-xl p-4">
+                            <div className="text-xs text-[#0066FF] flex items-center gap-1.5">
                                 <Sparkles className="w-3.5 h-3.5 text-amber-400" /> Buyer Leads Flagged
                             </div>
                             <div className="text-2xl font-black text-amber-300 mt-1">
                                 {analyticsSummary ? analyticsSummary.leadsDiscovered : '0'}
                             </div>
-                            <div className="text-[11px] text-slate-400 mt-0.5">
+                            <div className="text-[11px] text-[#0066FF] mt-0.5">
                                 Synced to Airtable CRM & Jira PROF
                             </div>
                         </div>
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-emerald-900/30 text-[11px] text-slate-400 flex items-center justify-between">
-                        <span>Google Sheet Tabs: <strong className="text-emerald-300">LinkedIn_Post_Analytics, LinkedIn_Comments, LinkedIn_Reactions, LinkedIn_Leads</strong></span>
+                    <div className="mt-4 pt-3 border-t border-[#0066FF]/30 text-[11px] text-[#0066FF] flex items-center justify-between">
+                        <span>Google Sheet Tabs: <strong className="text-[#0066FF]">LinkedIn_Post_Analytics, LinkedIn_Comments, LinkedIn_Reactions, LinkedIn_Leads</strong></span>
                         <span>{analyticsSummary?.lastSyncedAt ? `Last Synced: ${analyticsSummary.lastSyncedAt}` : 'Click button above to run sync'}</span>
                     </div>
                 </div>
 
                 {/* Status Tabs */}
-                <div className="flex items-center gap-2 border-b border-emerald-900/40 pb-4 overflow-x-auto">
+                <div className="flex items-center gap-2 border-b border-[#0066FF]/40 pb-4 overflow-x-auto">
                     {(['ALL', 'DRAFT', 'APPROVED', 'SCHEDULED', 'PUBLISHED'] as const).map(tab => (
                         <button
                             key={tab}
                             onClick={() => setActiveTab(tab)}
                             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
                                 activeTab === tab
-                                    ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
-                                    : 'bg-slate-900/60 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800'
+                                    ? 'bg-white0 text-[#0066FF] shadow-md shadow-[#0066FF]/20'
+                                    : 'bg-white/60 text-[#0066FF] hover:text-white hover:bg-white border border-[#0066FF]'
                             }`}
                         >
                             {tab === 'ALL' && 'All Posts'}
@@ -642,7 +642,7 @@ export default function LinkedInStudio() {
                             {tab === 'SCHEDULED' && 'Scheduled'}
                             {tab === 'PUBLISHED' && 'Published'}
                             <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${
-                                activeTab === tab ? 'bg-slate-950 text-emerald-400' : 'bg-slate-800 text-slate-400'
+                                activeTab === tab ? 'bg-white text-[#0066FF]' : 'bg-white text-[#0066FF]'
                             }`}>
                                 {counts[tab]}
                             </span>
@@ -655,10 +655,10 @@ export default function LinkedInStudio() {
                     {/* Left Column: Post Cards List */}
                     <div className="lg:col-span-6 space-y-4">
                         {filteredPosts.length === 0 ? (
-                            <div className="bg-[#052319]/50 border border-emerald-800/20 rounded-2xl p-12 text-center">
-                                <Sparkles className="w-8 h-8 text-emerald-400 mx-auto mb-3 opacity-60" />
+                            <div className="bg-[#052319]/50 border border-[#0066FF]/20 rounded-2xl p-12 text-center">
+                                <Sparkles className="w-8 h-8 text-[#0066FF] mx-auto mb-3 opacity-60" />
                                 <h3 className="font-semibold text-white">No posts in this category</h3>
-                                <p className="text-xs text-slate-400 mt-1">Generate a new draft or switch tabs.</p>
+                                <p className="text-xs text-[#0066FF] mt-1">Generate a new draft or switch tabs.</p>
                             </div>
                         ) : (
                             filteredPosts.map(post => {
@@ -669,30 +669,30 @@ export default function LinkedInStudio() {
                                         onClick={() => setSelectedPost(post)}
                                         className={`p-5 rounded-2xl border transition-all cursor-pointer ${
                                             isSelected 
-                                                ? 'bg-[#062d21] border-emerald-500 shadow-lg shadow-emerald-950/40 ring-1 ring-emerald-500/50' 
-                                                : 'bg-[#041d14]/70 border-emerald-900/40 hover:bg-[#06241a] hover:border-emerald-700/60'
+                                                ? 'bg-[#062d21] border-[#0066FF] shadow-lg shadow-[#0066FF]/20 ring-1 ring-emerald-500/50' 
+                                                : 'bg-[#041d14]/70 border-[#0066FF]/40 hover:bg-[#06241a] hover:border-[#0066FF]/60'
                                         }`}
                                     >
                                         <div className="flex items-start justify-between gap-3">
                                             <div className="flex items-center gap-2">
                                                 <span className={`text-[11px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${
-                                                    post.status === 'PUBLISHED' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' :
-                                                    post.status === 'APPROVED' ? 'bg-teal-500/20 text-teal-300 border border-teal-500/30' :
+                                                    post.status === 'PUBLISHED' ? 'bg-white0/20 text-[#0066FF] border border-[#0066FF]/30' :
+                                                    post.status === 'APPROVED' ? 'bg-[#0066FF]/20 text-[#0066FF] border border-[#0066FF]/30' :
                                                     post.status === 'SCHEDULED' ? 'bg-sky-500/20 text-sky-300 border border-sky-500/30' :
                                                     post.status === 'REJECTED' ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' :
                                                     'bg-amber-500/20 text-amber-300 border border-amber-500/30'
                                                 }`}>
                                                     {post.status}
                                                 </span>
-                                                <span className="text-xs text-slate-400">{post.topic}</span>
+                                                <span className="text-xs text-[#0066FF]">{post.topic}</span>
                                             </div>
-                                            <span className="text-[11px] text-slate-500 font-mono">{post.id}</span>
+                                            <span className="text-[11px] text-[#0066FF] font-mono">{post.id}</span>
                                         </div>
 
                                         <h3 className="text-base font-bold text-white mt-2.5 line-clamp-2">
                                             {post.title}
                                         </h3>
-                                        <p className="text-xs text-slate-300/80 mt-1.5 line-clamp-2">
+                                        <p className="text-xs text-[#0066FF]/80 mt-1.5 line-clamp-2">
                                             {post.hook}
                                         </p>
 
@@ -711,13 +711,13 @@ export default function LinkedInStudio() {
                                         )}
 
                                         {/* Action Buttons Toolbar */}
-                                        <div className="mt-4 pt-3 border-t border-emerald-900/30 flex items-center justify-between gap-2" onClick={e => e.stopPropagation()}>
+                                        <div className="mt-4 pt-3 border-t border-[#0066FF]/30 flex items-center justify-between gap-2" onClick={e => e.stopPropagation()}>
                                             <div className="flex items-center gap-1.5">
                                                 {post.status === 'DRAFT' && (
                                                     <>
                                                         <button
                                                             onClick={() => handleApprove(post)}
-                                                            className="text-xs px-2.5 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-semibold border border-emerald-500/30 transition flex items-center gap-1 cursor-pointer"
+                                                            className="text-xs px-2.5 py-1.5 rounded-lg bg-white0/20 hover:bg-[#0066FF]/30 text-[#0066FF] font-semibold border border-[#0066FF]/30 transition flex items-center gap-1 cursor-pointer"
                                                         >
                                                             <Check className="w-3.5 h-3.5" /> Approve
                                                         </button>
@@ -741,7 +741,7 @@ export default function LinkedInStudio() {
 
                                                 <button
                                                     onClick={() => setEditingPost(post)}
-                                                    className="text-xs px-2 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition flex items-center gap-1 cursor-pointer"
+                                                    className="text-xs px-2 py-1.5 rounded-lg bg-white hover:bg-[#0066FF]/10 text-[#0066FF] transition flex items-center gap-1 cursor-pointer"
                                                 >
                                                     <Edit3 className="w-3.5 h-3.5" /> Edit
                                                 </button>
@@ -750,10 +750,10 @@ export default function LinkedInStudio() {
                                             <div className="flex items-center gap-1.5">
                                                 <button
                                                     onClick={() => handleCopyPost(post)}
-                                                    className="text-xs px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1 cursor-pointer"
+                                                    className="text-xs px-2.5 py-1.5 rounded-lg bg-white hover:bg-[#0066FF]/10 text-[#0066FF] border border-[#0066FF] transition flex items-center gap-1 cursor-pointer"
                                                     title="Copy formatted post text & UTM URL"
                                                 >
-                                                    {copiedPostId === post.id ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                                                    {copiedPostId === post.id ? <Check className="w-3.5 h-3.5 text-[#0066FF]" /> : <Copy className="w-3.5 h-3.5" />}
                                                     {copiedPostId === post.id ? 'Copied' : 'Copy'}
                                                 </button>
 
@@ -761,7 +761,7 @@ export default function LinkedInStudio() {
                                                     <button
                                                         onClick={() => handlePublishToLinkedIn(post)}
                                                         disabled={publishingId === post.id}
-                                                        className="text-xs px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold transition flex items-center gap-1 shadow-sm cursor-pointer"
+                                                        className="text-xs px-3 py-1.5 rounded-lg bg-white0 hover:bg-[#0066FF] text-[#0066FF] font-bold transition flex items-center gap-1 shadow-sm cursor-pointer"
                                                     >
                                                         <Send className="w-3.5 h-3.5" />
                                                         {publishingId === post.id ? 'Publishing...' : 'Publish'}
@@ -779,19 +779,19 @@ export default function LinkedInStudio() {
                     <div className="lg:col-span-6">
                         <div className="sticky top-6">
                             <div className="flex items-center justify-between mb-3 px-1">
-                                <h3 className="text-sm font-bold text-slate-300 flex items-center gap-2">
-                                    <Eye className="w-4 h-4 text-emerald-400" /> Live LinkedIn Company Preview
+                                <h3 className="text-sm font-bold text-[#0066FF] flex items-center gap-2">
+                                    <Eye className="w-4 h-4 text-[#0066FF]" /> Live LinkedIn Company Preview
                                 </h3>
-                                <span className="text-xs text-slate-400">
-                                    Publishing as: <strong className="text-emerald-300">ProfitMachines</strong>
+                                <span className="text-xs text-[#0066FF]">
+                                    Publishing as: <strong className="text-[#0066FF]">ProfitMachines</strong>
                                 </span>
                             </div>
 
                             {selectedPost ? (
-                                <div className="bg-[#1b1f23] border border-slate-700/80 rounded-2xl overflow-hidden shadow-2xl text-slate-200">
+                                <div className="bg-[#1b1f23] border border-[#0066FF]/80 rounded-2xl overflow-hidden shadow-2xl text-[#0066FF]">
                                     {/* LinkedIn Post Header */}
-                                    <div className="p-4 flex items-start gap-3 border-b border-slate-700/50">
-                                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#064e3b] to-[#10b981] flex items-center justify-center text-white font-extrabold text-xl shadow-md border border-emerald-400/30 flex-shrink-0">
+                                    <div className="p-4 flex items-start gap-3 border-b border-[#0066FF]/50">
+                                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0066FF] to-[#10b981] flex items-center justify-center text-white font-extrabold text-xl shadow-md border border-[#0066FF]/30 flex-shrink-0">
                                             PM
                                         </div>
                                         <div className="flex-1">
@@ -799,25 +799,25 @@ export default function LinkedInStudio() {
                                                 <h4 className="font-bold text-white text-sm hover:underline cursor-pointer">
                                                     ProfitMachines
                                                 </h4>
-                                                <span className="text-[11px] text-slate-400">• Company</span>
+                                                <span className="text-[11px] text-[#0066FF]">• Company</span>
                                             </div>
-                                            <p className="text-xs text-slate-400">
+                                            <p className="text-xs text-[#0066FF]">
                                                 AI-Powered Revenue Operations & Enterprise Demand Intelligence
                                             </p>
-                                            <p className="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
+                                            <p className="text-[11px] text-[#0066FF] flex items-center gap-1 mt-0.5">
                                                 Now • 🌐
                                             </p>
                                         </div>
                                     </div>
 
                                     {/* Post Body Content */}
-                                    <div className="p-4 text-sm leading-relaxed whitespace-pre-line text-slate-100">
+                                    <div className="p-4 text-sm leading-relaxed whitespace-pre-line text-[#0066FF]">
                                         <p className="font-semibold text-white">{selectedPost.hook}</p>
-                                        <p className="mt-3 text-slate-300">{selectedPost.body}</p>
+                                        <p className="mt-3 text-[#0066FF]">{selectedPost.body}</p>
                                         
-                                        <div className="mt-4 p-3 rounded-xl bg-[#06281e] border border-emerald-600/40 text-xs">
-                                            <span className="font-bold text-emerald-300">👉 {selectedPost.ctaText}</span>
-                                            <div className="mt-1 font-mono text-emerald-400 break-all text-[11px]">
+                                        <div className="mt-4 p-3 rounded-xl bg-[#06281e] border border-[#0066FF]/40 text-xs">
+                                            <span className="font-bold text-[#0066FF]">👉 {selectedPost.ctaText}</span>
+                                            <div className="mt-1 font-mono text-[#0066FF] break-all text-[11px]">
                                                 {selectedPost.utmUrl}
                                             </div>
                                         </div>
@@ -832,51 +832,51 @@ export default function LinkedInStudio() {
                                         href={selectedPost.utmUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="block border-t border-b border-slate-700/60 bg-[#12161a] hover:bg-[#181d22] transition p-3.5"
+                                        className="block border-t border-b border-[#0066FF]/60 bg-[#12161a] hover:bg-[#181d22] transition p-3.5"
                                     >
-                                        <div className="text-[11px] uppercase tracking-wider text-emerald-400 font-mono">
+                                        <div className="text-[11px] uppercase tracking-wider text-[#0066FF] font-mono">
                                             profit-machines.vercel.app
                                         </div>
                                         <h5 className="font-bold text-white text-sm mt-0.5">
                                             {selectedPost.title}
                                         </h5>
-                                        <p className="text-xs text-slate-400 mt-1 line-clamp-2">
+                                        <p className="text-xs text-[#0066FF] mt-1 line-clamp-2">
                                             Explore how ProfitMachines orchestrates buyer intent, autonomous SDR nurturing, and multi-touch revenue attribution.
                                         </p>
                                     </a>
 
                                     {/* LinkedIn Post Reaction Bar */}
-                                    <div className="px-4 py-2.5 flex items-center justify-around border-t border-slate-700/60 text-xs text-slate-400">
-                                        <button className="flex items-center gap-1.5 hover:text-emerald-400 transition cursor-pointer">
+                                    <div className="px-4 py-2.5 flex items-center justify-around border-t border-[#0066FF]/60 text-xs text-[#0066FF]">
+                                        <button className="flex items-center gap-1.5 hover:text-[#0066FF] transition cursor-pointer">
                                             <ThumbsUp className="w-4 h-4" /> Like
                                         </button>
-                                        <button className="flex items-center gap-1.5 hover:text-emerald-400 transition cursor-pointer">
+                                        <button className="flex items-center gap-1.5 hover:text-[#0066FF] transition cursor-pointer">
                                             <MessageSquare className="w-4 h-4" /> Comment
                                         </button>
-                                        <button className="flex items-center gap-1.5 hover:text-emerald-400 transition cursor-pointer">
+                                        <button className="flex items-center gap-1.5 hover:text-[#0066FF] transition cursor-pointer">
                                             <Share2 className="w-4 h-4" /> Repost
                                         </button>
-                                        <button className="flex items-center gap-1.5 hover:text-emerald-400 transition cursor-pointer">
+                                        <button className="flex items-center gap-1.5 hover:text-[#0066FF] transition cursor-pointer">
                                             <Send className="w-4 h-4" /> Send
                                         </button>
                                     </div>
 
                                     {/* Action Bar at Bottom of Preview */}
-                                    <div className="p-4 bg-[#0d1216] border-t border-slate-700/60 flex items-center justify-between gap-3">
-                                        <div className="text-xs text-slate-400">
+                                    <div className="p-4 bg-[#0d1216] border-t border-[#0066FF]/60 flex items-center justify-between gap-3">
+                                        <div className="text-xs text-[#0066FF]">
                                             Status: <strong className="text-white">{selectedPost.status}</strong>
                                         </div>
                                         <div className="flex items-center gap-2">
                                             <button
                                                 onClick={() => handleCopyPost(selectedPost)}
-                                                className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition cursor-pointer"
+                                                className="px-3 py-1.5 rounded-lg bg-white hover:bg-[#0066FF]/10 text-xs font-semibold text-[#0066FF] border border-[#0066FF] transition cursor-pointer"
                                             >
                                                 {copiedPostId === selectedPost.id ? 'Copied!' : 'Copy Post Text'}
                                             </button>
                                             {selectedPost.status === 'DRAFT' && (
                                                 <button
                                                     onClick={() => handleApprove(selectedPost)}
-                                                    className="px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-md transition cursor-pointer"
+                                                    className="px-3.5 py-1.5 rounded-lg bg-white0 hover:bg-[#0066FF] text-[#0066FF] font-bold text-xs shadow-md transition cursor-pointer"
                                                 >
                                                     Approve for Publication
                                                 </button>
@@ -885,7 +885,7 @@ export default function LinkedInStudio() {
                                     </div>
                                 </div>
                             ) : (
-                                <div className="p-12 text-center bg-slate-900/40 rounded-2xl border border-slate-800 text-slate-500 text-sm">
+                                <div className="p-12 text-center bg-white/40 rounded-2xl border border-[#0066FF] text-[#0066FF] text-sm">
                                     Select a post from the left to view preview.
                                 </div>
                             )}
@@ -897,41 +897,41 @@ export default function LinkedInStudio() {
             {/* Schedule Post Modal */}
             {schedulingPost && (
                 <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-                    <div className="bg-[#05281e] border border-emerald-600/60 rounded-2xl max-w-md w-full p-6 shadow-2xl">
+                    <div className="bg-[#05281e] border border-[#0066FF]/60 rounded-2xl max-w-md w-full p-6 shadow-2xl">
                         <div className="flex items-center justify-between">
                             <h3 className="font-bold text-white text-lg flex items-center gap-2">
-                                <Calendar className="w-5 h-5 text-emerald-400" /> Schedule Publication
+                                <Calendar className="w-5 h-5 text-[#0066FF]" /> Schedule Publication
                             </h3>
-                            <button onClick={() => setSchedulingPost(null)} className="text-slate-400 hover:text-white">
+                            <button onClick={() => setSchedulingPost(null)} className="text-[#0066FF] hover:text-white">
                                 <X className="w-5 h-5" />
                             </button>
                         </div>
-                        <p className="text-xs text-slate-300 mt-2">
+                        <p className="text-xs text-[#0066FF] mt-2">
                             Select date & time for automated dispatch to ProfitMachines LinkedIn Company Page:
                         </p>
 
                         <div className="mt-4">
-                            <label className="block text-xs font-bold text-emerald-300 mb-1">
+                            <label className="block text-xs font-bold text-[#0066FF] mb-1">
                                 Scheduled Publishing Date & Time (Local)
                             </label>
                             <input
                                 type="datetime-local"
                                 value={scheduleDateTime}
                                 onChange={e => setScheduleDateTime(e.target.value)}
-                                className="w-full bg-[#02130d] border border-emerald-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400"
+                                className="w-full bg-[#02130d] border border-[#0066FF] rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#0066FF]"
                             />
                         </div>
 
                         <div className="mt-6 flex items-center justify-end gap-3">
                             <button
                                 onClick={() => setSchedulingPost(null)}
-                                className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-700"
+                                className="px-4 py-2 rounded-xl bg-white text-[#0066FF] text-xs font-semibold hover:bg-[#0066FF]/10"
                             >
                                 Cancel
                             </button>
                             <button
                                 onClick={handleConfirmSchedule}
-                                className="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-md"
+                                className="px-5 py-2 rounded-xl bg-white0 hover:bg-[#0066FF] text-[#0066FF] font-bold text-xs shadow-md"
                             >
                                 Confirm Schedule
                             </button>
@@ -943,89 +943,89 @@ export default function LinkedInStudio() {
             {/* Edit Post Modal */}
             {editingPost && (
                 <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-                    <div className="bg-[#042018] border border-emerald-600/50 rounded-2xl max-w-2xl w-full p-6 shadow-2xl my-8">
+                    <div className="bg-[#042018] border border-[#0066FF]/50 rounded-2xl max-w-2xl w-full p-6 shadow-2xl my-8">
                         <div className="flex items-center justify-between">
                             <h3 className="font-bold text-white text-lg flex items-center gap-2">
-                                <Edit3 className="w-5 h-5 text-emerald-400" /> Edit LinkedIn Post Draft
+                                <Edit3 className="w-5 h-5 text-[#0066FF]" /> Edit LinkedIn Post Draft
                             </h3>
-                            <button onClick={() => setEditingPost(null)} className="text-slate-400 hover:text-white">
+                            <button onClick={() => setEditingPost(null)} className="text-[#0066FF] hover:text-white">
                                 <X className="w-5 h-5" />
                             </button>
                         </div>
 
                         <form onSubmit={handleSaveEdit} className="mt-4 space-y-4">
                             <div>
-                                <label className="block text-xs font-bold text-emerald-300 mb-1">Internal Title</label>
+                                <label className="block text-xs font-bold text-[#0066FF] mb-1">Internal Title</label>
                                 <input
                                     type="text"
                                     value={editingPost.title}
                                     onChange={e => setEditingPost({ ...editingPost, title: e.target.value })}
-                                    className="w-full bg-[#02130d] border border-emerald-700/60 rounded-xl px-3.5 py-2 text-sm text-white focus:border-emerald-400"
+                                    className="w-full bg-[#02130d] border border-[#0066FF]/60 rounded-xl px-3.5 py-2 text-sm text-white focus:border-[#0066FF]"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-xs font-bold text-emerald-300 mb-1">Opening Hook (First 1-2 lines)</label>
+                                <label className="block text-xs font-bold text-[#0066FF] mb-1">Opening Hook (First 1-2 lines)</label>
                                 <textarea
                                     rows={2}
                                     value={editingPost.hook}
                                     onChange={e => setEditingPost({ ...editingPost, hook: e.target.value })}
-                                    className="w-full bg-[#02130d] border border-emerald-700/60 rounded-xl px-3.5 py-2 text-sm text-white focus:border-emerald-400"
+                                    className="w-full bg-[#02130d] border border-[#0066FF]/60 rounded-xl px-3.5 py-2 text-sm text-white focus:border-[#0066FF]"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-xs font-bold text-emerald-300 mb-1">Body Content & Insights</label>
+                                <label className="block text-xs font-bold text-[#0066FF] mb-1">Body Content & Insights</label>
                                 <textarea
                                     rows={6}
                                     value={editingPost.body}
                                     onChange={e => setEditingPost({ ...editingPost, body: e.target.value })}
-                                    className="w-full bg-[#02130d] border border-emerald-700/60 rounded-xl px-3.5 py-2 text-sm text-white focus:border-emerald-400"
+                                    className="w-full bg-[#02130d] border border-[#0066FF]/60 rounded-xl px-3.5 py-2 text-sm text-white focus:border-[#0066FF]"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-xs font-bold text-emerald-300 mb-1">Call to Action (CTA)</label>
+                                <label className="block text-xs font-bold text-[#0066FF] mb-1">Call to Action (CTA)</label>
                                 <input
                                     type="text"
                                     value={editingPost.ctaText}
                                     onChange={e => setEditingPost({ ...editingPost, ctaText: e.target.value })}
-                                    className="w-full bg-[#02130d] border border-emerald-700/60 rounded-xl px-3.5 py-2 text-sm text-white focus:border-emerald-400"
+                                    className="w-full bg-[#02130d] border border-[#0066FF]/60 rounded-xl px-3.5 py-2 text-sm text-white focus:border-[#0066FF]"
                                 />
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-xs font-bold text-emerald-300 mb-1">Target Service Route</label>
+                                    <label className="block text-xs font-bold text-[#0066FF] mb-1">Target Service Route</label>
                                     <input
                                         type="text"
                                         value={editingPost.targetServicePath}
                                         onChange={e => setEditingPost({ ...editingPost, targetServicePath: e.target.value })}
-                                        className="w-full bg-[#02130d] border border-emerald-700/60 rounded-xl px-3.5 py-2 text-sm text-white font-mono text-xs focus:border-emerald-400"
+                                        className="w-full bg-[#02130d] border border-[#0066FF]/60 rounded-xl px-3.5 py-2 text-sm text-white font-mono text-xs focus:border-[#0066FF]"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold text-emerald-300 mb-1">Campaign Slug</label>
+                                    <label className="block text-xs font-bold text-[#0066FF] mb-1">Campaign Slug</label>
                                     <input
                                         type="text"
                                         value={editingPost.campaignSlug}
                                         onChange={e => setEditingPost({ ...editingPost, campaignSlug: e.target.value })}
-                                        className="w-full bg-[#02130d] border border-emerald-700/60 rounded-xl px-3.5 py-2 text-sm text-white font-mono text-xs focus:border-emerald-400"
+                                        className="w-full bg-[#02130d] border border-[#0066FF]/60 rounded-xl px-3.5 py-2 text-sm text-white font-mono text-xs focus:border-[#0066FF]"
                                     />
                                 </div>
                             </div>
 
-                            <div className="pt-3 flex items-center justify-end gap-3 border-t border-emerald-900/40">
+                            <div className="pt-3 flex items-center justify-end gap-3 border-t border-[#0066FF]/40">
                                 <button
                                     type="button"
                                     onClick={() => setEditingPost(null)}
-                                    className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-700 cursor-pointer"
+                                    className="px-4 py-2 rounded-xl bg-white text-[#0066FF] text-xs font-semibold hover:bg-[#0066FF]/10 cursor-pointer"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-md cursor-pointer"
+                                    className="px-5 py-2 rounded-xl bg-white0 hover:bg-[#0066FF] text-[#0066FF] font-bold text-xs shadow-md cursor-pointer"
                                 >
                                     Save Changes
                                 </button>

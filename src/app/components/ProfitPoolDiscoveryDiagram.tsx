@@ -1,4 +1,4 @@
-﻿import { Search, Target, DollarSign, Network, ShieldCheck, Users, Sparkles } from 'lucide-react';
+import { Search, Target, DollarSign, Network, ShieldCheck, Users, Sparkles } from 'lucide-react';
 
 const steps = [
     { icon: Search, title: "Market Discovery" },
@@ -12,8 +12,8 @@ const steps = [
 
 function DiscoveryColumn({ label, accent, prefix }: { label: string; accent: 'blue' | 'purple'; prefix: string }) {
     const theme = accent === 'blue'
-        ? { pill: 'bg-[#064e3b]', card: 'from-[#064e3b] to-emerald-600', ring: 'group-hover:ring-blue-300', num: 'bg-[#031f18]/30' }
-        : { pill: 'bg-[#064e3b]', card: 'from-[#064e3b] to-teal-500', ring: 'group-hover:ring-purple-300', num: 'bg-emerald-950/30' };
+        ? { pill: 'bg-[#0066FF]', card: 'from-[#0066FF] to-[#0066FF]', ring: 'group-hover:ring-blue-300', num: 'bg-[#031f18]/30' }
+        : { pill: 'bg-[#0066FF]', card: 'from-[#0066FF] to-[#0066FF]', ring: 'group-hover:ring-purple-300', num: 'bg-[#0066FF]/30' };
 
     return (
         <div className="flex-1 min-w-0">
@@ -44,14 +44,14 @@ function DiscoveryColumn({ label, accent, prefix }: { label: string; accent: 'bl
 
 /**
  * Recreates the "AI Driven Profit Pool Discovery" B2B/B2C step diagram as live
- * markup (previously a static branded raster image) — keeps content accurate and
+ * markup (previously a static branded raster image) � keeps content accurate and
  * removes a large, off-brand image asset.
  */
 export default function ProfitPoolDiscoveryDiagram() {
     return (
-        <div className="w-full max-w-5xl rounded-[2rem] shadow-2xl border border-slate-200/80 hover:shadow-indigo-200/50 transition-all duration-300 bg-white p-8 sm:p-12">
+        <div className="w-full max-w-5xl rounded-[2rem] shadow-2xl border border-[#0066FF]/80 hover:shadow-indigo-200/50 transition-all duration-300 bg-white p-8 sm:p-12">
             <div className="text-center mb-10">
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">AI-Driven Profit Pool Discovery</span>
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#0066FF]">AI-Driven Profit Pool Discovery</span>
             </div>
             <div className="flex flex-col md:flex-row gap-10 md:gap-14">
                 <DiscoveryColumn label="B2B" accent="blue" prefix="B2B-" />

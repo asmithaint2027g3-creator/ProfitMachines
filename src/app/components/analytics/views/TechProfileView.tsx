@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import {
   Laptop,
   Monitor,
@@ -45,13 +45,13 @@ export default function TechProfileView({ data }: Props) {
       {/* 1. Viewports & Operating Systems Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Operating Systems Bar Chart */}
-        <div className="lg:col-span-7 p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
+        <div className="lg:col-span-7 p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h4 className="text-lg font-bold text-white">Operating System Landscape</h4>
-              <p className="text-xs text-slate-400">Enterprise OS distribution detected across visitor sessions</p>
+              <p className="text-xs text-[#0066FF]">Enterprise OS distribution detected across visitor sessions</p>
             </div>
-            <div className="p-2 rounded-lg bg-emerald-600/10 text-emerald-400">
+            <div className="p-2 rounded-lg bg-[#0066FF]/10 text-[#0066FF]">
               <Laptop className="w-4 h-4" />
             </div>
           </div>
@@ -73,10 +73,10 @@ export default function TechProfileView({ data }: Props) {
         </div>
 
         {/* Viewport Category Donut */}
-        <div className="lg:col-span-5 p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex flex-col justify-between">
+        <div className="lg:col-span-5 p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl flex flex-col justify-between">
           <div>
             <h4 className="text-lg font-bold text-white mb-1">Viewport Form Factor</h4>
-            <p className="text-xs text-slate-400 mb-4">Desktop vs Mobile vs Tablet client viewports</p>
+            <p className="text-xs text-[#0066FF] mb-4">Desktop vs Mobile vs Tablet client viewports</p>
           </div>
 
           <div className="h-48 w-full relative flex items-center justify-center">
@@ -108,7 +108,7 @@ export default function TechProfileView({ data }: Props) {
               <div key={idx} className="flex items-center justify-between text-xs font-mono">
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: viewportColors[idx] }} />
-                  <span className="text-slate-300">{vp.type}</span>
+                  <span className="text-[#0066FF]">{vp.type}</span>
                 </div>
                 <span className="text-white font-bold">{vp.share}</span>
               </div>
@@ -120,18 +120,18 @@ export default function TechProfileView({ data }: Props) {
       {/* 2. Browsers, Screen Resolutions & Network Details */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Browsers Table */}
-        <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
+        <div className="p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
           <h4 className="text-base font-bold text-white mb-3 flex items-center gap-2">
-            <Monitor className="w-4 h-4 text-emerald-400" />
+            <Monitor className="w-4 h-4 text-[#0066FF]" />
             <span>Browser Engine</span>
           </h4>
           <div className="space-y-2.5 font-mono text-xs">
             {browsers.map((b, idx) => (
-              <div key={idx} className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between">
-                <span className="text-slate-300">{b.name}</span>
+              <div key={idx} className="p-2.5 rounded-xl bg-white/70 border border-[#0066FF] flex items-center justify-between">
+                <span className="text-[#0066FF]">{b.name}</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-slate-400">{b.count.toLocaleString()}</span>
-                  <span className="text-emerald-400 font-bold">{b.share}</span>
+                  <span className="text-[#0066FF]">{b.count.toLocaleString()}</span>
+                  <span className="text-[#0066FF] font-bold">{b.share}</span>
                 </div>
               </div>
             ))}
@@ -139,31 +139,31 @@ export default function TechProfileView({ data }: Props) {
         </div>
 
         {/* Screen Resolutions */}
-        <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
+        <div className="p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
           <h4 className="text-base font-bold text-white mb-3 flex items-center gap-2">
-            <Laptop className="w-4 h-4 text-emerald-400" />
+            <Laptop className="w-4 h-4 text-[#0066FF]" />
             <span>Screen Resolution</span>
           </h4>
           <div className="space-y-2.5 font-mono text-xs">
             {screenResolutions.map((sr, idx) => (
-              <div key={idx} className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between">
-                <span className="text-slate-300">{sr.resolution}</span>
-                <span className="text-emerald-400 font-bold">{sr.share}</span>
+              <div key={idx} className="p-2.5 rounded-xl bg-white/70 border border-[#0066FF] flex items-center justify-between">
+                <span className="text-[#0066FF]">{sr.resolution}</span>
+                <span className="text-[#0066FF] font-bold">{sr.share}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Environment Profile (Dark Theme, Connection, Lang) */}
-        <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-4">
+        <div className="p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl space-y-4">
           <div>
             <h4 className="text-base font-bold text-white mb-3 flex items-center gap-2">
-              <Moon className="w-4 h-4 text-teal-400" />
+              <Moon className="w-4 h-4 text-[#0066FF]" />
               <span>Theme Preference</span>
             </h4>
-            <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between font-mono text-xs">
-              <span className="text-slate-400">Dark Mode Active:</span>
-              <span className="text-emerald-400 font-bold">
+            <div className="p-3 rounded-xl bg-white/70 border border-[#0066FF] flex items-center justify-between font-mono text-xs">
+              <span className="text-[#0066FF]">Dark Mode Active:</span>
+              <span className="text-[#0066FF] font-bold">
                 {Math.round((themePreference.dark / (themePreference.dark + themePreference.light)) * 100)}%
               </span>
             </div>
@@ -171,13 +171,13 @@ export default function TechProfileView({ data }: Props) {
 
           <div>
             <h4 className="text-base font-bold text-white mb-3 flex items-center gap-2">
-              <Wifi className="w-4 h-4 text-emerald-400" />
+              <Wifi className="w-4 h-4 text-[#0066FF]" />
               <span>Network Protocol</span>
             </h4>
             <div className="space-y-1.5 font-mono text-xs">
               {connections.map((c, idx) => (
-                <div key={idx} className="flex items-center justify-between py-1 border-b border-slate-800/60">
-                  <span className="text-slate-300">{c.type}</span>
+                <div key={idx} className="flex items-center justify-between py-1 border-b border-[#0066FF]/60">
+                  <span className="text-[#0066FF]">{c.type}</span>
                   <span className="text-white font-bold">{c.share}</span>
                 </div>
               ))}

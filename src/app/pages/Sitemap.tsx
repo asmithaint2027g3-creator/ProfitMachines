@@ -1,4 +1,4 @@
-﻿import { ArrowLeft, Map, Layout, Users, Shield, Briefcase, Database, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Map, Layout, Users, Shield, Briefcase, Database, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Sitemap() {
@@ -68,15 +68,15 @@ export default function Sitemap() {
                         "Detailed Service Packages",
                         "Relocated Outcome Pages",
                         "Profit Pool Discovery (Parent Offering)",
-                        "  ├─ Market Discovery",
-                        "  ├─ Demand Discovery",
-                        "  ├─ Value Discovery",
-                        "  ├─ Channel Discovery",
-                        "  ├─ Competitive Discovery",
-                        "  ├─ Customer Discovery",
-                        "  ├─ Product-Market Fit Discovery",
-                        "  ├─ B2B Profit Pool Discovery",
-                        "  └─ B2C Profit Pool Discovery"
+                        "  +- Market Discovery",
+                        "  +- Demand Discovery",
+                        "  +- Value Discovery",
+                        "  +- Channel Discovery",
+                        "  +- Competitive Discovery",
+                        "  +- Customer Discovery",
+                        "  +- Product-Market Fit Discovery",
+                        "  +- B2B Profit Pool Discovery",
+                        "  +- B2C Profit Pool Discovery"
                     ]
                 },
                 {
@@ -185,27 +185,27 @@ export default function Sitemap() {
     ];
 
     return (
-        <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+        <div className="min-h-screen bg-white font-sans text-[#0066FF]">
             {/* Header/Hero Section */}
-            <div className="bg-white border-b border-slate-200 pt-32 pb-12 lg:pt-40 lg:pb-16 relative overflow-hidden">
-                <div className="absolute inset-0 bg-slate-50 opacity-50"></div>
-                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-emerald-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+            <div className="bg-white border-b border-[#0066FF] pt-32 pb-12 lg:pt-40 lg:pb-16 relative overflow-hidden">
+                <div className="absolute inset-0 bg-white opacity-50"></div>
+                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-white rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <Link to="/" className="inline-flex items-center text-sm font-medium text-slate-500 hover:text-[#064e3b] mb-8 transition-colors group">
+                    <Link to="/" className="inline-flex items-center text-sm font-medium text-[#0066FF] hover:text-[#0066FF] mb-8 transition-colors group">
                         <ArrowLeft className="w-4 h-4 mr-1 group-hover:-translate-x-1 transition-transform" />
                         Back to Home
                     </Link>
                     <div className="flex items-center gap-3 mb-4">
-                        <div className="p-2 bg-emerald-100 rounded-lg text-[#064e3b]">
+                        <div className="p-2 bg-white rounded-lg text-[#0066FF]">
                             <Map className="w-6 h-6" />
                         </div>
-                        <span className="text-[#064e3b] font-bold uppercase tracking-wider text-sm">Site Overview</span>
+                        <span className="text-[#0066FF] font-bold uppercase tracking-wider text-sm">Site Overview</span>
                     </div>
-                    <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-6">
+                    <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0066FF] tracking-tight mb-6">
                         Detailed Sitemap
                     </h1>
-                    <p className="text-lg text-slate-600 max-w-2xl">
+                    <p className="text-lg text-[#0066FF] max-w-2xl">
                         A complete overview of all pages and their key sections on ProfitMachines
                     </p>
                 </div>
@@ -215,14 +215,14 @@ export default function Sitemap() {
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div className="space-y-12">
                     {sitemapData.map((section, index) => (
-                        <div key={index} className="bg-white p-8 lg:p-10 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all hover:border-emerald-200 group">
+                        <div key={index} className="bg-white p-8 lg:p-10 rounded-2xl border border-[#0066FF] shadow-sm hover:shadow-lg transition-all hover:border-[#0066FF] group">
 
                             {/* Category Header */}
-                            <div className="flex items-center gap-4 mb-8 border-b border-slate-100 pb-6">
-                                <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-emerald-50 group-hover:text-[#064e3b] transition-colors">
-                                    <section.icon className="w-8 h-8 text-slate-400 group-hover:text-[#064e3b] transition-colors" />
+                            <div className="flex items-center gap-4 mb-8 border-b border-[#0066FF] pb-6">
+                                <div className="p-3 bg-white rounded-xl group-hover:bg-[#0066FF] group-hover:text-[#0066FF] transition-colors">
+                                    <section.icon className="w-8 h-8 text-[#0066FF] group-hover:text-[#0066FF] transition-colors" />
                                 </div>
-                                <h2 className="text-2xl font-bold text-slate-900">{section.category}</h2>
+                                <h2 className="text-2xl font-bold text-[#0066FF]">{section.category}</h2>
                             </div>
 
                             {/* Links Grid */}
@@ -231,7 +231,7 @@ export default function Sitemap() {
                                     <div key={linkIndex} className="space-y-3">
                                         <Link
                                             to={link.path}
-                                            className="flex items-center gap-2 text-lg font-bold text-slate-900 hover:text-[#064e3b] transition-colors group/link mb-2"
+                                            className="flex items-center gap-2 text-lg font-bold text-[#0066FF] hover:text-[#0066FF] transition-colors group/link mb-2"
                                         >
                                             {link.name}
                                             <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all" />
@@ -239,10 +239,10 @@ export default function Sitemap() {
 
                                         {/* Sections List */}
                                         {link.sections && link.sections.length > 0 && (
-                                            <ul className="space-y-2 border-l-2 border-slate-100 pl-4">
+                                            <ul className="space-y-2 border-l-2 border-[#0066FF] pl-4">
                                                 {link.sections.map((subSection, subIndex) => (
-                                                    <li key={subIndex} className="text-sm text-slate-500 font-medium hover:text-slate-800 transition-colors flex items-center gap-2">
-                                                        <div className="w-1 h-1 rounded-full bg-slate-300"></div>
+                                                    <li key={subIndex} className="text-sm text-[#0066FF] font-medium hover:text-[#0066FF] transition-colors flex items-center gap-2">
+                                                        <div className="w-1 h-1 rounded-full bg-white"></div>
                                                         {subSection}
                                                     </li>
                                                 ))}

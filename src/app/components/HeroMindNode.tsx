@@ -1,4 +1,4 @@
-﻿import type { NodeProps } from "reactflow"
+import type { NodeProps } from "reactflow"
 import { Handle, Position } from "reactflow"
 
 export default function HeroMindNode({ id, data }: NodeProps) {
@@ -22,8 +22,8 @@ export default function HeroMindNode({ id, data }: NodeProps) {
         "shadow-sm",
         "transition-all",
         "duration-300",
-        isCenter ? "bg-white border-emerald-100" : "bg-white border-slate-200",
-        clickable ? "cursor-pointer hover:shadow-lg hover:border-emerald-200" : "cursor-default",
+        isCenter ? "bg-white border-[#0066FF]" : "bg-white border-[#0066FF]",
+        clickable ? "cursor-pointer hover:shadow-lg hover:border-[#0066FF]" : "cursor-default",
         isCenter ? "px-8 py-6" : "px-6 py-4",
         "min-w-[220px]",
       ].join(" ")}
@@ -32,7 +32,7 @@ export default function HeroMindNode({ id, data }: NodeProps) {
         <div
           className={[
             "text-center",
-            isCenter ? "text-2xl font-bold text-slate-900" : "text-lg font-semibold text-slate-800",
+            isCenter ? "text-2xl font-bold text-[#0066FF]" : "text-lg font-semibold text-[#0066FF]",
           ].join(" ")}
         >
           {data?.label}
@@ -43,7 +43,7 @@ export default function HeroMindNode({ id, data }: NodeProps) {
           {data.items.map((item: string, i: number) => (
             <div
               key={i}
-              className="inline-flex items-center justify-center rounded-full px-3 py-1 text-sm bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100 text-[#053d2e]"
+              className="inline-flex items-center justify-center rounded-full px-3 py-1 text-sm bg-gradient-to-r from-[#0066FF] to-[#0066FF] border border-[#0066FF] text-[#0066FF]"
             >
               {item}
             </div>

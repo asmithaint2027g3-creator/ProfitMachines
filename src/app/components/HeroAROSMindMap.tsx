@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import ReactFlow from "reactflow"
 import type { Edge, Node } from "reactflow"
 import "reactflow/dist/style.css"
@@ -58,14 +58,14 @@ export default function HeroAROSMindMap() {
   }, [])
 
   return (
-    <section className="relative py-24 bg-white border-t border-slate-100 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-50 via-white to-white"></div>
+    <section className="relative py-24 bg-white border-t border-[#0066FF] overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#0066FF] via-white to-white"></div>
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="mb-10 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">AI Revenue Operations</h2>
-          <p className="text-slate-600 text-lg">System overview</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#0066FF]">AI Revenue Operations</h2>
+          <p className="text-[#0066FF] text-lg">System overview</p>
         </div>
-        <div ref={containerRef} className="relative w-full h-[520px] rounded-3xl border border-slate-200 bg-white shadow-sm">
+        <div ref={containerRef} className="relative w-full h-[520px] rounded-3xl border border-[#0066FF] bg-white shadow-sm">
           <ReactFlow
             nodes={nodes}
             edges={edges}

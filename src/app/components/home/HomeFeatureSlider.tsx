@@ -26,7 +26,6 @@ export interface SliderItem {
     }[];
     highlights: string[];
     image: string;
-    fallbackGradient: string;
     badgeText: string;
     primaryCta: {
         text: string;
@@ -59,7 +58,6 @@ export const homeSliders: SliderItem[] = [
             'Algorithmic revenue forecasting with verifiable precision'
         ],
         image: '/images/hero-consulting-team.jpg',
-        fallbackGradient: 'from-emerald-900/60 via-teal-900/40 to-slate-900/80',
         badgeText: 'AI + Business Transformation Active',
         primaryCta: {
             text: 'Explore Transformation Engine',
@@ -90,7 +88,6 @@ export const homeSliders: SliderItem[] = [
             'Automated profit-pool scoring across global vertical markets'
         ],
         image: '/images/hero-market-radar.jpg',
-        fallbackGradient: 'from-teal-900/60 via-emerald-900/40 to-slate-900/80',
         badgeText: 'Profit Pool Discovery Telemetry: Active',
         primaryCta: {
             text: 'Launch Demand Radar',
@@ -98,143 +95,142 @@ export const homeSliders: SliderItem[] = [
         },
         secondaryCta: {
             text: 'Discover Hidden TAM',
-            link: '/solutions'
+            link: '/offerings/profit-pool-discovery'
         }
     },
     {
-        id: 'agentic-automation',
+        id: 'autonomous-sdr',
         stepNumber: '03',
-        tag: 'Agentic AI & Automation',
-        pillTitle: 'Agentic AI Swarms',
+        tag: 'Autonomous Sales & SDRs',
+        pillTitle: 'Autonomous SDRs',
         icon: Bot,
-        title: 'Intelligent Multi-Agent Mesh &',
-        highlightTitle: 'Agentic AI & Automation',
-        description: 'Deploy persistent multi-agent swarms that autonomously orchestrate enterprise workflows, qualify high-value pipeline, resolve operational friction, and execute complex business processes 24/7.',
+        title: 'Full-Funnel Outbound &',
+        highlightTitle: 'Autonomous Sales Pipeline',
+        description: 'Deploy adaptive AI agents that research target accounts, craft hyper-personalized executive narratives, orchestrate multi-touch outreach, and automatically book qualified meetings.',
         stats: [
-            { value: '3.8×', label: 'Meeting Velocity', sublabel: 'Auto-Booked Pipeline' },
-            { value: '80%', label: 'Auto-SQL Sourced', sublabel: 'Zero Manual SDR Drag' },
-            { value: '-65%', label: 'Customer CAC', sublabel: 'Radical Efficiency' }
+            { value: '3.8×', label: 'Meeting Conversion', sublabel: 'Benchmarked Lift' },
+            { value: '24/7', label: 'Autonomous Pacing', sublabel: 'Continuous Pipeline' },
+            { value: '-65%', label: 'SDR Acquisition Cost', sublabel: 'Efficiency Multiple' }
         ],
         highlights: [
-            'Hyper-personalized multi-channel email, LinkedIn & voice outreach',
-            'Autonomous objection resolution backed by unified knowledge graphs',
-            'Instant two-way CRM synchronization & automated calendar routing'
+            'Hyper-personalized messaging generated from multi-source account dossiers',
+            'Autonomous follow-ups and objection handling across email & social touchpoints',
+            'Zero pipeline fatigue with intelligent capacity pacing'
         ],
-        image: '/images/hero-agentic-ai.jpg',
-        fallbackGradient: 'from-emerald-900/60 via-teal-900/40 to-slate-900/80',
-        badgeText: 'Agentic AI & Automation Mesh: 4,812 Active Swarms',
+        image: '/images/hero-autonomous-sdr.jpg',
+        badgeText: 'Autonomous Agent Fleet: 24/7 Operational',
         primaryCta: {
-            text: 'Deploy AI Agent Mesh',
+            text: 'Deploy Autonomous SDRs',
             link: '/solutions'
         },
         secondaryCta: {
-            text: 'Schedule Agent Demo',
-            link: '/book-consultation'
-        }
-    },
-    {
-        id: 'revenue-acceleration',
-        stepNumber: '04',
-        tag: 'Sales & Revenue Acceleration',
-        pillTitle: 'Revenue Acceleration',
-        icon: LineChart,
-        title: 'Real-Time Telemetry &',
-        highlightTitle: 'Sales & Revenue Acceleration',
-        description: 'Eliminate pipeline friction with intelligent funnel diagnostics, predictive deal scoring, dynamic objection handling, and automated revenue velocity triggers.',
-        stats: [
-            { value: '+185%', label: 'Pipeline Yield', sublabel: 'Full-Funnel Conversion' },
-            { value: '$1.4M+', label: 'Recovered ARR', sublabel: 'Leakage Prevention' },
-            { value: '45ms', label: 'Decision Latency', sublabel: 'Real-Time Scoring' }
-        ],
-        highlights: [
-            'Algorithmic deal slippage detection and instant recovery interventions',
-            'Full-funnel multi-touch revenue attribution and conversion radar',
-            'Self-healing CRM data fabric with automated contact enrichment'
-        ],
-        image: '/images/hero-revenue-team.jpg',
-        fallbackGradient: 'from-teal-900/60 via-emerald-900/40 to-slate-900/80',
-        badgeText: 'Sales & Revenue Acceleration Engine: Active',
-        primaryCta: {
-            text: 'Accelerate Revenue',
-            link: '/offerings'
-        },
-        secondaryCta: {
-            text: 'Run Revenue Leak Audit',
-            link: '/hidden-revenue-capture'
-        }
-    },
-    {
-        id: 'data-intelligence',
-        stepNumber: '05',
-        tag: 'Digital & Data Intelligence',
-        pillTitle: 'Data Intelligence',
-        icon: Database,
-        title: 'Enterprise Data Fabric &',
-        highlightTitle: 'Digital & Data Intelligence',
-        description: 'Unify disparate cloud databases, CRM streams, and operational systems into a real-time predictive intelligence engine powered by connected neural knowledge graphs.',
-        stats: [
-            { value: '4,500+', label: 'Active Pipelines', sublabel: 'Connected Systems' },
-            { value: '98%', label: 'Forecast Accuracy', sublabel: 'Neural Prediction' },
-            { value: '<12ms', label: 'Telemetry Latency', sublabel: 'Sub-Second Response' }
-        ],
-        highlights: [
-            'Bidirectional connectors for Salesforce, HubSpot, Snowflake & ERPs',
-            'Real-time anomaly detection and predictive customer churn signals',
-            'Unified data lakehouse with zero-trust sandboxing and role access'
-        ],
-        image: '/images/hero-data-strategy.jpg',
-        fallbackGradient: 'from-emerald-900/60 via-teal-900/40 to-slate-900/80',
-        badgeText: 'Digital & Data Intelligence Mesh: 4,500+ Streams',
-        primaryCta: {
-            text: 'Explore Data Intelligence',
-            link: '/solutions'
-        },
-        secondaryCta: {
-            text: 'View Architecture Matrix',
-            link: '/offerings'
-        }
-    },
-    {
-        id: 'end-to-end-transformation',
-        stepNumber: '06',
-        tag: 'End-to-End Transformation',
-        pillTitle: 'Enterprise Advisory',
-        icon: ShieldCheck,
-        title: 'Strategy, Tech & Operations //',
-        highlightTitle: 'End-to-End Transformation',
-        description: 'Seamlessly integrating strategic business consulting, enterprise AI architecture, autonomous operations, and verified financial outcomes into a unified transformation ecosystem.',
-        stats: [
-            { value: '300%', label: 'Avg Pipeline Lift', sublabel: 'Verified Outcome' },
-            { value: 'SOC 2', label: 'Type II Certified', sublabel: 'Bank-Grade Security' },
-            { value: '500+', label: 'Global Clients', sublabel: 'Enterprises & Scale-Ups' }
-        ],
-        highlights: [
-            'End-to-end enterprise delivery model tailored to complex workflows',
-            'Full governance compliance with SOC2 Type II, ISO27001 and GDPR',
-            'Continuous learning models that compound operational advantages over time'
-        ],
-        image: '/images/hero-enterprise-board.jpg',
-        fallbackGradient: 'from-teal-900/60 via-emerald-900/40 to-slate-900/80',
-        badgeText: 'End-to-End Transformation Ecosystem: Verified',
-        primaryCta: {
-            text: 'Start Enterprise Transformation',
-            link: '/book-consultation'
-        },
-        secondaryCta: {
-            text: 'Review Proven Outcomes',
+            text: 'View Pipeline lift metrics',
             link: '/outcomes'
+        }
+    },
+    {
+        id: 'revops-acceleration',
+        stepNumber: '04',
+        tag: 'AI Revenue Operations',
+        pillTitle: 'Revenue Acceleration',
+        icon: TrendingUp,
+        title: 'Algorithmic CRM &',
+        highlightTitle: 'AI Revenue Acceleration',
+        description: 'Eliminate revenue drag, clean decayed pipeline signals, predict deal slippage with Bayesian accuracy, and guide sales teams to close highest-probability opportunities.',
+        stats: [
+            { value: '+42%', label: 'Win Rate Uplift', sublabel: 'Enterprise Deals' },
+            { value: '-55%', label: 'Sales Cycle Drag', sublabel: 'Rapid Velocity' },
+            { value: '99.2%', label: 'Pipeline Cleanliness', sublabel: 'Automated RevOps' }
+        ],
+        highlights: [
+            'Continuous CRM hygiene and autonomous pipeline decay correction',
+            'Predictive deal scoring and automated next-best-action alerts for reps',
+            'Boardroom-ready ARR reporting and predictive revenue forecasting'
+        ],
+        image: '/images/hero-revops-war-room.jpg',
+        badgeText: 'RevOps Optimization: Real-Time Stream',
+        primaryCta: {
+            text: 'Audit Your Pipeline',
+            link: '/solutions'
+        },
+        secondaryCta: {
+            text: 'See RevOps Architecture',
+            link: '/offerings'
+        }
+    },
+    {
+        id: 'crypto-web3-growth',
+        stepNumber: '05',
+        tag: 'Crypto & Web3 Growth',
+        pillTitle: 'Web3 Ecosystems',
+        icon: Network,
+        title: 'Protocol Adoption &',
+        highlightTitle: 'Crypto Ecosystem Growth',
+        description: 'Comprehensive go-to-market architecture for protocols, DeFi primitives, Layer-1/2 chains, and tokenized networks seeking sustainable TVL, developer acquisition, and liquidity depth.',
+        stats: [
+            { value: '$120M+', label: 'TVL Scaled', sublabel: 'Across Partner Protocols' },
+            { value: '45,000+', label: 'Developer Cohort', sublabel: 'Ecosystem Ingestion' },
+            { value: '18+', label: 'Chains Architected', sublabel: 'Cross-Ecosystem GTM' }
+        ],
+        highlights: [
+            'Institutional developer acquisition frameworks and grant program architecture',
+            'Sustainable token economics modeling and liquidity incentive optimization',
+            'Global Web3 ecosystem partner alignment and hackathon onboarding'
+        ],
+        image: '/images/hero-crypto-trading.jpg',
+        badgeText: 'Web3 Ecosystem Engine: Active Telemetry',
+        primaryCta: {
+            text: 'Explore Crypto Engine',
+            link: '/crypto'
+        },
+        secondaryCta: {
+            text: 'Speak to Web3 Partner',
+            link: '/book-consultation'
+        }
+    },
+    {
+        id: 'custom-ai-engineering',
+        stepNumber: '06',
+        tag: 'Enterprise Custom AI',
+        pillTitle: 'Enterprise Custom AI',
+        icon: Sparkles,
+        title: 'Cognitive Architecture &',
+        highlightTitle: 'Custom AI Engineering',
+        description: 'Bespoke agentic systems, proprietary fine-tuned SLMs/LLMs, secure multi-tenant data pipelines, and air-gapped enterprise deployments that turn proprietary enterprise data into compounding margin.',
+        stats: [
+            { value: 'SOC-2', label: 'Enterprise Security', sublabel: 'Type II Alignment' },
+            { value: '<100ms', label: 'Inference Latency', sublabel: 'High-Throughput OS' },
+            { value: '100%', label: 'IP Ownership', sublabel: 'Client-Owned Weights' }
+        ],
+        highlights: [
+            'Proprietary agentic orchestration frameworks built on air-gapped infrastructure',
+            'Custom fine-tuned domain models trained exclusively on enterprise corpora',
+            'Full enterprise IP transfer with zero vendor lock-in or training leakage'
+        ],
+        image: '/images/hero-ai-infrastructure.jpg',
+        badgeText: 'Custom AI Architecture: Production Grade',
+        primaryCta: {
+            text: 'Build Custom AI Engine',
+            link: '/book-consultation'
+        },
+        secondaryCta: {
+            text: 'View Tech Stack',
+            link: '/offerings'
         }
     }
 ];
 
 export default function HomeFeatureSlider() {
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
-    const [isPlaying, setIsPlaying] = useState<boolean>(true);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isPlaying, setIsPlaying] = useState(true);
+    const [progress, setProgress] = useState(0);
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
-    const [progress, setProgress] = useState<number>(0);
-    const SLIDE_DURATION = 7000; // 7 seconds per slide for relaxed executive reading
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
     const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
     const { openQuickForm, openLongForm } = useLeadModal();
+
+    const slideDuration = 6500;
+    const progressStepTime = 50;
 
     const activeSlide = homeSliders[currentIndex];
 
@@ -252,50 +248,38 @@ export default function HomeFeatureSlider() {
         setCurrentIndex(index);
         setProgress(0);
         trackEvent({
-            eventName: 'HOME_SLIDER_SELECT',
-            label: homeSliders[index].title
+            eventName: 'SLIDER_MANUAL_NAVIGATION',
+            label: `Slide ${index + 1}: ${homeSliders[index].pillTitle}`
         });
     };
 
-    // Keyboard navigation
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'ArrowLeft') {
-                prevSlide();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-            }
-        };
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [nextSlide, prevSlide]);
-
-    // Autoplay timer with progressive bar
     useEffect(() => {
         if (!isPlaying) {
+            if (timerRef.current) clearInterval(timerRef.current);
             if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
             return;
         }
 
-        const stepTime = 50;
-        const stepIncrement = (stepTime / SLIDE_DURATION) * 100;
-
         progressIntervalRef.current = setInterval(() => {
             setProgress((prev) => {
-                if (prev >= 100) {
-                    nextSlide();
+                const nextVal = prev + (progressStepTime / slideDuration) * 100;
+                if (nextVal >= 100) {
                     return 0;
                 }
-                return prev + stepIncrement;
+                return nextVal;
             });
-        }, stepTime);
+        }, progressStepTime);
+
+        timerRef.current = setInterval(() => {
+            nextSlide();
+        }, slideDuration);
 
         return () => {
+            if (timerRef.current) clearInterval(timerRef.current);
             if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
         };
-    }, [isPlaying, nextSlide, currentIndex]);
+    }, [isPlaying, nextSlide, slideDuration]);
 
-    // Touch Swipe Gestures
     const handleTouchStart = (e: React.TouchEvent) => {
         setTouchStartX(e.touches[0].clientX);
     };
@@ -315,30 +299,16 @@ export default function HomeFeatureSlider() {
 
     return (
         <section 
-            className="pt-24 pb-14 sm:pt-28 sm:pb-18 lg:pt-32 lg:pb-24 bg-[#064e3b] text-white relative overflow-hidden border-b border-emerald-500/20"
+            className="pt-24 pb-14 sm:pt-28 sm:pb-18 lg:pt-32 lg:pb-24 bg-white text-[#0066FF] relative border-b-2 border-[#0066FF]"
             onMouseEnter={() => setIsPlaying(false)}
             onMouseLeave={() => setIsPlaying(true)}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
             aria-label="Executive AI Revenue OS Platform Showcase"
         >
-            {/* Ambient Background Glow & Subtle Mesh */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <div 
-                    className="absolute inset-0 opacity-[0.08]"
-                    style={{
-                        backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
-                        backgroundSize: '4rem 4rem'
-                    }}
-                />
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-400/15 rounded-full blur-[140px] pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-teal-400/15 rounded-full blur-[140px] pointer-events-none" />
-            </div>
-
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 
-
-                {/* Main 2-Column Hero Showcase (Balanced Desktop, Stacked Mobile) */}
+                {/* Main 2-Column Hero Showcase */}
                 <div className="relative">
                     <AnimatePresence mode="wait">
                         <motion.div
@@ -346,31 +316,31 @@ export default function HomeFeatureSlider() {
                             initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -15 }}
-                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                            transition={{ duration: 0.3 }}
                             className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center"
                         >
                             {/* Left Content Column */}
                             <div className="lg:col-span-6 flex flex-col justify-center">
-                                                              {/* Step Tag Pill / Eyebrow with glowing mint pulse dot */}
+                                {/* Eyebrow Pill */}
                                 <div className="flex items-center gap-2.5 mb-4">
-                                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-400/40 text-emerald-300 text-xs font-semibold tracking-wide uppercase shadow-xs backdrop-blur-md">
-                                        <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] inline-block animate-pulse"></span>
-                                        <span className="font-mono text-emerald-300 font-extrabold">{activeSlide.stepNumber}</span>
-                                        <span className="text-emerald-400/60 font-normal">·</span>
+                                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border-2 border-[#0066FF] bg-white text-[#0066FF] text-xs font-bold tracking-wide uppercase">
+                                        <span className="w-2 h-2 rounded-full bg-[#0066FF] inline-block"></span>
+                                        <span className="font-mono font-extrabold">{activeSlide.stepNumber}</span>
+                                        <span>·</span>
                                         <span>{activeSlide.tag}</span>
                                     </div>
                                 </div>
 
-                                {/* Main Headline (High Contrast White & Mint Highlight with GreenData-style leading) */}
-                                <h1 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-extrabold text-white leading-[1.12] tracking-tight mb-4 font-heading">
+                                {/* Main Headline */}
+                                <h1 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-extrabold text-[#0066FF] leading-[1.12] tracking-tight mb-4 font-heading">
                                     {activeSlide.title}{' '}
-                                    <span className="text-emerald-300 italic">
+                                    <span className="underline decoration-[#0066FF]">
                                         {activeSlide.highlightTitle}
                                     </span>
                                 </h1>
 
                                 {/* Supporting Paragraph */}
-                                <p className="text-base sm:text-lg text-emerald-100/90 leading-relaxed mb-6 font-normal max-w-xl">
+                                <p className="text-base sm:text-lg text-[#0066FF] leading-relaxed mb-6 font-medium max-w-xl">
                                     {activeSlide.description}
                                 </p>
 
@@ -378,10 +348,10 @@ export default function HomeFeatureSlider() {
                                 <div className="space-y-2.5 mb-8">
                                     {activeSlide.highlights.map((highlight, hIdx) => (
                                         <div key={hIdx} className="flex items-start gap-3">
-                                            <div className="mt-0.5 flex-shrink-0 w-4 h-4 rounded-full bg-emerald-900/80 border border-emerald-400/60 flex items-center justify-center">
-                                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" />
+                                            <div className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full border-2 border-[#0066FF] bg-white flex items-center justify-center">
+                                                <CheckCircle2 className="w-3.5 h-3.5 text-[#0066FF]" />
                                             </div>
-                                            <span className="text-xs sm:text-sm text-emerald-50 font-medium">
+                                            <span className="text-xs sm:text-sm text-[#0066FF] font-semibold">
                                                 {highlight}
                                             </span>
                                         </div>
@@ -390,7 +360,7 @@ export default function HomeFeatureSlider() {
 
                                 {/* Action Buttons Group */}
                                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6">
-                                    {/* Primary CTA (Mint Accent Button with Arrow - GreenData style) */}
+                                    {/* Primary CTA */}
                                     <button
                                         onClick={() => {
                                             trackEvent({ eventName: 'SLIDER_PRIMARY_CTA_CLICK', label: activeSlide.primaryCta.text });
@@ -400,18 +370,18 @@ export default function HomeFeatureSlider() {
                                                 title: activeSlide.primaryCta.text
                                             });
                                         }}
-                                        className="w-full sm:w-auto bg-emerald-400 hover:bg-emerald-300 text-[#032b24] font-bold px-7 py-3.5 rounded-lg shadow-[0_4px_14px_rgba(52,211,153,0.3)] hover:shadow-[0_6px_20px_rgba(52,211,153,0.45)] text-sm sm:text-base transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer hover:-translate-y-0.5"
+                                        className="w-full sm:w-auto bg-[#0066FF] hover:bg-white text-white hover:text-[#0066FF] font-bold px-7 py-3.5 rounded-lg border-2 border-[#0066FF] text-sm sm:text-base transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer"
                                     >
-                                        <Zap className="w-4 h-4 text-[#032b24]" />
+                                        <Zap className="w-4 h-4" />
                                         <span>{activeSlide.primaryCta.text}</span>
                                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </button>
 
-                                    {/* Secondary CTA (Dark Glass Secondary - GreenData style) */}
+                                    {/* Secondary CTA */}
                                     <Link 
                                         to={activeSlide.secondaryCta.link}
                                         onClick={() => trackEvent({ eventName: 'SLIDER_SECONDARY_CTA_CLICK', label: activeSlide.secondaryCta.text })}
-                                        className="w-full sm:w-auto border border-emerald-400/40 hover:border-emerald-300 bg-white/10 hover:bg-white/15 backdrop-blur-md text-white hover:text-emerald-200 font-semibold px-6 py-3.5 rounded-lg text-sm sm:text-base transition-all duration-200 flex items-center justify-center gap-2 text-center hover:-translate-y-0.5"
+                                        className="w-full sm:w-auto border-2 border-[#0066FF] bg-white hover:bg-[#0066FF] text-[#0066FF] hover:text-white font-bold px-6 py-3.5 rounded-lg text-sm sm:text-base transition-all duration-200 flex items-center justify-center gap-2 text-center"
                                     >
                                         <span>{activeSlide.secondaryCta.text}</span>
                                     </Link>
@@ -424,30 +394,30 @@ export default function HomeFeatureSlider() {
                                                 source: `Hero Slider Detailed Assessment (${activeSlide.tag})`
                                             });
                                         }}
-                                        className="text-xs text-emerald-300/90 hover:text-white underline font-semibold flex items-center justify-center gap-1 sm:ml-2 py-2"
+                                        className="text-xs text-[#0066FF] hover:underline font-bold flex items-center justify-center gap-1 sm:ml-2 py-2"
                                     >
                                         <FileText className="w-3.5 h-3.5" />
                                         <span>Detailed Assessment</span>
                                     </button>
                                 </div>
 
-                                {/* Hero Meta Strip (Reference Spec - GreenData style) */}
-                                <div className="font-mono text-[11px] text-emerald-300/80 flex items-center gap-2 mb-6">
+                                {/* Hero Meta Strip */}
+                                <div className="font-mono text-[11px] text-[#0066FF] flex items-center gap-2 mb-6 font-bold">
                                     <span>Ref: PM-AI-REV/2026/0{currentIndex + 1} · Autonomous Revenue OS · Verified Enterprise Outcomes</span>
                                 </div>
 
-                                {/* Key Metrics Strip (Underneath CTAs, Exactly Like Reference Screenshot) */}
-                                <div className="grid grid-cols-3 gap-3 sm:gap-4 p-4 rounded-xl bg-emerald-950/60 border border-emerald-400/20 shadow-inner">
+                                {/* Key Metrics Strip */}
+                                <div className="grid grid-cols-3 gap-3 sm:gap-4 p-4 rounded-xl bg-white border-2 border-[#0066FF]">
                                     {activeSlide.stats.map((stat, sIdx) => (
                                         <div key={sIdx} className="text-left">
-                                            <div className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white font-mono">
+                                            <div className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#0066FF] font-mono">
                                                 {stat.value}
                                             </div>
-                                            <div className="text-xs font-bold text-emerald-200/90 leading-tight mt-0.5 uppercase tracking-wide">
+                                            <div className="text-xs font-bold text-[#0066FF] leading-tight mt-0.5 uppercase tracking-wide">
                                                 {stat.label}
                                             </div>
                                             {stat.sublabel && (
-                                                <div className="text-[11px] text-emerald-300/75 font-normal hidden sm:block mt-0.5">
+                                                <div className="text-[11px] text-[#0066FF] font-medium hidden sm:block mt-0.5">
                                                     {stat.sublabel}
                                                 </div>
                                             )}
@@ -457,52 +427,49 @@ export default function HomeFeatureSlider() {
 
                             </div>
 
-                            {/* Right Column: Realistic Business Corporate Photography */}
+                            {/* Right Column: Visual Frame */}
                             <div className="lg:col-span-6 relative">
-                                <div className="relative rounded-2xl lg:rounded-3xl overflow-hidden border border-emerald-400/30 shadow-2xl bg-emerald-950 group">
+                                <div className="relative rounded-2xl lg:rounded-3xl overflow-hidden border-2 border-[#0066FF] bg-white group">
                                     
                                     {/* Top Status Bar */}
-                                    <div className="bg-[#032b24] px-4 py-3 border-b border-emerald-500/20 flex items-center justify-between">
+                                    <div className="bg-white px-4 py-3 border-b-2 border-[#0066FF] flex items-center justify-between text-[#0066FF]">
                                         <div className="flex items-center space-x-2">
-                                            <div className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
-                                            <div className="w-2.5 h-2.5 rounded-full bg-teal-400/80" />
-                                            <div className="w-2.5 h-2.5 rounded-full bg-cyan-400/80" />
+                                            <div className="w-2.5 h-2.5 rounded-full bg-[#0066FF]" />
+                                            <div className="w-2.5 h-2.5 rounded-full border border-[#0066FF]" />
+                                            <div className="w-2.5 h-2.5 rounded-full border border-[#0066FF]" />
                                         </div>
-                                        <div className="text-[11px] font-mono text-emerald-200/90 flex items-center gap-2">
-                                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                                        <div className="text-[11px] font-mono font-bold flex items-center gap-2">
+                                            <span className="w-2 h-2 rounded-full bg-[#0066FF]" />
                                             <span>profitmachines.ai/engine-{activeSlide.stepNumber}</span>
                                         </div>
-                                        <div className="text-[10px] font-mono text-emerald-300 font-bold uppercase">
+                                        <div className="text-[10px] font-mono font-bold uppercase">
                                             Engine {activeSlide.stepNumber}
                                         </div>
                                     </div>
 
                                     {/* Main Realistic Photograph */}
-                                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-emerald-950 flex items-center justify-center">
+                                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-white flex items-center justify-center">
                                         <img 
                                             src={activeSlide.image} 
                                             alt={`${activeSlide.title} ${activeSlide.highlightTitle} - ProfitMachines Executive Consulting`}
-                                            className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-104"
+                                            className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-102"
                                             loading="eager"
                                             onError={(e) => {
                                                 (e.currentTarget as HTMLImageElement).src = '/images/home-why-choose.png';
                                             }}
                                         />
 
-                                        {/* Soft gradient mask for text contrast */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-transparent to-transparent pointer-events-none" />
-
                                         {/* Floating Live Telemetry Badge on Image */}
-                                        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-2 p-3 rounded-xl bg-slate-900/90 border border-emerald-500/30 backdrop-blur-md shadow-lg">
+                                        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-2 p-3 rounded-xl bg-white border-2 border-[#0066FF] text-[#0066FF]">
                                             <div className="flex items-center gap-2">
-                                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
-                                                <span className="text-xs font-mono font-semibold text-white truncate">
+                                                <span className="w-2 h-2 rounded-full bg-[#0066FF] flex-shrink-0" />
+                                                <span className="text-xs font-mono font-bold truncate">
                                                     {activeSlide.badgeText}
                                                 </span>
                                             </div>
                                             <button
                                                 onClick={() => openQuickForm({ defaultService: activeSlide.highlightTitle, source: 'Image Telemetry Badge' })}
-                                                className="hidden sm:inline-flex items-center gap-1 text-[11px] font-mono text-emerald-300 font-bold flex-shrink-0 hover:underline"
+                                                className="hidden sm:inline-flex items-center gap-1 text-[11px] font-mono font-bold flex-shrink-0 hover:underline"
                                             >
                                                 <span>Deploy Engine</span>
                                                 <ArrowRight className="w-3 h-3" />
@@ -516,21 +483,21 @@ export default function HomeFeatureSlider() {
                     </AnimatePresence>
                 </div>
 
-                {/* Bottom Controls Strip: Prev/Next, Slider Progress, and Trust Accreditations */}
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-10 px-2 pt-6 border-t border-emerald-500/20">
+                {/* Bottom Controls Strip */}
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-10 px-2 pt-6 border-t-2 border-[#0066FF]">
                     
                     {/* Left: Enterprise Trust Accreditations */}
-                    <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs font-semibold text-emerald-200/90">
+                    <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs font-bold text-[#0066FF]">
                         <div className="flex items-center gap-1.5">
-                            <ShieldCheck className="w-4 h-4 text-emerald-300" />
+                            <ShieldCheck className="w-4 h-4 text-[#0066FF]" />
                             <span>SOC2 Type II Aligned</span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                            <Globe className="w-4 h-4 text-teal-300" />
+                            <Globe className="w-4 h-4 text-[#0066FF]" />
                             <span>Global Enterprise Telemetry</span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+                            <CheckCircle2 className="w-4 h-4 text-[#0066FF]" />
                             <span>Fortune 500 & Scale-Up Grade</span>
                         </div>
                     </div>
@@ -538,22 +505,22 @@ export default function HomeFeatureSlider() {
                     {/* Right: Slide Controls, Dots, and Progress Bar */}
                     <div className="flex items-center gap-3">
                         
-                        {/* Dot Indicators with Active Progress Fill */}
+                        {/* Dot Indicators */}
                         <div className="flex items-center gap-1.5 mr-2">
                             {homeSliders.map((_, dotIdx) => (
                                 <button
                                     key={dotIdx}
                                     onClick={() => goToSlide(dotIdx)}
-                                    className={`relative h-2.5 rounded-full overflow-hidden transition-all duration-300 ${
+                                    className={`relative h-2.5 rounded-full overflow-hidden transition-all duration-300 border border-[#0066FF] ${
                                         dotIdx === currentIndex 
-                                            ? 'w-8 bg-emerald-900' 
-                                            : 'w-2.5 bg-emerald-700/60 hover:bg-emerald-600'
+                                            ? 'w-8 bg-white' 
+                                            : 'w-2.5 bg-white hover:bg-[#0066FF]'
                                     }`}
                                     aria-label={`Go to slide ${dotIdx + 1}`}
                                 >
                                     {dotIdx === currentIndex && (
                                         <div 
-                                            className="absolute top-0 bottom-0 left-0 bg-emerald-300 transition-all"
+                                            className="absolute top-0 bottom-0 left-0 bg-[#0066FF] transition-all"
                                             style={{ width: `${progress}%` }}
                                         />
                                     )}
@@ -562,35 +529,35 @@ export default function HomeFeatureSlider() {
                         </div>
 
                         {/* Navigation Control Box */}
-                        <div className="flex items-center bg-emerald-900/60 border border-emerald-500/30 rounded-xl p-1 shadow-sm">
+                        <div className="flex items-center bg-white border-2 border-[#0066FF] rounded-xl p-1 text-[#0066FF]">
                             <button
                                 onClick={() => setIsPlaying(!isPlaying)}
-                                className="p-2 text-emerald-200 hover:text-white rounded-lg hover:bg-emerald-800/60 transition-colors"
+                                className="p-2 text-[#0066FF] hover:bg-[#0066FF]/10 rounded-lg transition-colors"
                                 title={isPlaying ? "Pause autoplay" : "Start autoplay"}
                                 aria-label={isPlaying ? "Pause autoplay" : "Start autoplay"}
                             >
-                                {isPlaying ? <Pause className="w-4 h-4 text-emerald-300" /> : <Play className="w-4 h-4 text-emerald-300" />}
+                                {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                             </button>
                             
-                            <div className="h-4 w-px bg-emerald-500/30 mx-1" />
+                            <div className="h-4 w-px bg-[#0066FF] mx-1" />
 
                             <button
                                 onClick={prevSlide}
-                                className="p-2 text-emerald-200 hover:text-white rounded-lg hover:bg-emerald-800/60 transition-colors"
+                                className="p-2 text-[#0066FF] hover:bg-[#0066FF]/10 rounded-lg transition-colors"
                                 aria-label="Previous slide"
                             >
                                 <ChevronLeft className="w-5 h-5" />
                             </button>
 
-                            <div className="px-2.5 text-xs font-mono font-bold text-white">
-                                <span className="text-emerald-300">{activeSlide.stepNumber}</span>
-                                <span className="text-emerald-400/60"> / </span>
+                            <div className="px-2.5 text-xs font-mono font-bold text-[#0066FF]">
+                                <span>{activeSlide.stepNumber}</span>
+                                <span> / </span>
                                 <span>0{homeSliders.length}</span>
                             </div>
 
                             <button
                                 onClick={nextSlide}
-                                className="p-2 text-emerald-200 hover:text-white rounded-lg hover:bg-emerald-800/60 transition-colors"
+                                className="p-2 text-[#0066FF] hover:bg-[#0066FF]/10 rounded-lg transition-colors"
                                 aria-label="Next slide"
                             >
                                 <ChevronRight className="w-5 h-5" />

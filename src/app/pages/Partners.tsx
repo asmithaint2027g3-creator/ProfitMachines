@@ -123,9 +123,9 @@ export default function Partners() {
     };
 
     return (
-        <div className="min-h-screen bg-white font-sans text-slate-900">
+        <div className="min-h-screen bg-white font-sans text-[#0066FF]">
             {/* 1. Hero Section */}
-            <section id="partner-hero" className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-50 border-b border-slate-200">
+            <section id="partner-hero" className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden bg-white border-b border-[#0066FF]">
                 {/* Background Slideshow */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                     {/* Premium Unified Overlay - Matched with AI Lead Gen Visibility */}
@@ -135,22 +135,22 @@ export default function Partners() {
 
                 <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
                     <Reveal width="100%">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-emerald-100/60 shadow-[0_2px_10px_-4px_rgba(6,78,59,0.3)] text-[#053d2e] text-sm font-bold mb-8 backdrop-blur-sm animate-fade-in-up">
-                            <Handshake className="w-4 h-4 text-[#064e3b]" />
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#0066FF]/60 shadow-[0_2px_10px_-4px_rgba(6,78,59,0.3)] text-[#0066FF] text-sm font-bold mb-8 backdrop-blur-sm animate-fade-in-up">
+                            <Handshake className="w-4 h-4 text-[#0066FF]" />
                             <span className="bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent">Partner Program</span>
                         </div>
 
-                        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-8 tracking-tight leading-[1.1] text-slate-900 drop-shadow-sm">
-                            Grow with <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#064e3b] via-emerald-700 to-teal-700">ProfitMachines</span>
+                        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-8 tracking-tight leading-[1.1] text-[#0066FF] drop-shadow-sm">
+                            Grow with <span className="text-[#0066FF] bg-gradient-to-r from-[#0066FF] to-[#0066FF]">ProfitMachines</span>
                         </h1>
 
-                        <p className="text-xl sm:text-2xl text-slate-600 max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
+                        <p className="text-xl sm:text-2xl text-[#0066FF] max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
                             Join our ecosystem of industry-leading partners. Accelerate your growth by delivering the world's most advanced AI revenue platform to your clients.
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-5 justify-center">
                             <a href="#partner-form">
-                                <Button className="bg-gradient-to-r from-[#064e3b] to-emerald-600 hover:from-blue-700 hover:to-indigo-700 text-white px-10 py-6 text-lg h-auto rounded-full shadow-lg shadow-emerald-800/30 hover:shadow-emerald-800/45 transition-all hover:-translate-y-1">
+                                <Button className="bg-gradient-to-r from-[#0066FF] to-[#0066FF] hover:from-blue-700 hover:to-indigo-700 text-white px-10 py-6 text-lg h-auto rounded-full shadow-lg shadow-[#0066FF]/20 hover:shadow-[#0066FF]/20 transition-all hover:-translate-y-1">
                                     Become a Partner
                                 </Button>
                             </a>
@@ -160,39 +160,39 @@ export default function Partners() {
             </section>
 
             {/* 2. Why Partner Section */}
-            <section id="why-partner" className="py-24 bg-slate-50 relative" style={{ scrollMarginTop: '80px' }}>
+            <section id="why-partner" className="py-24 bg-white relative" style={{ scrollMarginTop: '80px' }}>
                 <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight text-slate-900">Why Partner with Us?</h2>
-                        <p className="text-slate-600 text-xl font-medium max-w-2xl mx-auto">Unlock new revenue streams and deliver exceptional value.</p>
+                        <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight text-[#0066FF]">Why Partner with Us?</h2>
+                        <p className="text-[#0066FF] text-xl font-medium max-w-2xl mx-auto">Unlock new revenue streams and deliver exceptional value.</p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {[
                             {
-                                icon: <BarChart3 className="w-8 h-8 text-[#064e3b]" />,
+                                icon: <BarChart3 className="w-8 h-8 text-[#0066FF]" />,
                                 title: "New Revenue Streams",
                                 description: "Earn attractive commissions and unlock recurring revenue opportunities through our tiered partner program."
                             },
                             {
-                                icon: <Zap className="w-8 h-8 text-teal-700" />,
+                                icon: <Zap className="w-8 h-8 text-[#0066FF]" />,
                                 title: "Leading Edge AI",
                                 description: "Differentiate yourself by offering the most advanced AI-powered revenue acceleration platform in the market."
                             },
                             {
-                                icon: <Users className="w-8 h-8 text-[#064e3b]" />,
+                                icon: <Users className="w-8 h-8 text-[#0066FF]" />,
                                 title: "Co-Marketing & Support",
                                 description: "Access dedicated partner support, co-marketing resources, and sales enablement tools to help you win."
                             }
                         ].map((item, idx) => (
                             <Reveal key={idx} width="100%" delay={idx * 0.1}>
-                                <Card className="border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white h-full">
+                                <Card className="border border-[#0066FF] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white h-full">
                                     <CardContent className="p-8">
-                                        <div className="p-4 bg-slate-50 rounded-2xl w-fit mb-6 border border-slate-100">
+                                        <div className="p-4 bg-white rounded-2xl w-fit mb-6 border border-[#0066FF]">
                                             {item.icon}
                                         </div>
-                                        <h3 className="text-2xl font-bold text-slate-900 mb-4">{item.title}</h3>
-                                        <p className="text-slate-600 leading-relaxed">{item.description}</p>
+                                        <h3 className="text-2xl font-bold text-[#0066FF] mb-4">{item.title}</h3>
+                                        <p className="text-[#0066FF] leading-relaxed">{item.description}</p>
                                     </CardContent>
                                 </Card>
                             </Reveal>
@@ -207,8 +207,8 @@ export default function Partners() {
                     <div className="grid md:grid-cols-2 gap-16 items-center">
                         <Reveal width="100%">
                             <div>
-                                <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-6 mt-4">Partner Programs tailored to your business</h2>
-                                <p className="text-xl text-slate-600 leading-relaxed font-medium mb-10">
+                                <h2 className="text-4xl md:text-5xl font-extrabold text-[#0066FF] tracking-tight mb-6 mt-4">Partner Programs tailored to your business</h2>
+                                <p className="text-xl text-[#0066FF] leading-relaxed font-medium mb-10">
                                     Whether you're a consultancy, technology provider, or agency, we have a program designed for your success.
                                 </p>
 
@@ -218,18 +218,18 @@ export default function Partners() {
                                         { id: "technology-partners", title: "Technology Partners", desc: "ISVs and Tech platforms integrating with our ecosystem." },
                                         { id: "referral-partners", title: "Referral Partners", desc: "Agencies and individuals referring qualified leads." }
                                     ].map((prog, i) => (
-                                        <div key={i} id={prog.id} className="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100" style={{ scrollMarginTop: '100px' }}>
+                                        <div key={i} id={prog.id} className="flex gap-4 p-4 rounded-xl hover:bg-[#0066FF]/10 transition-colors border border-transparent hover:border-[#0066FF]" style={{ scrollMarginTop: '100px' }}>
                                             <div className="mt-1">
                                                 <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center border border-green-200">
                                                     <CheckCircle2 className="w-3.5 h-3.5 text-green-700" />
                                                 </div>
                                             </div>
                                             <div>
-                                                <h4 className="text-lg font-bold text-slate-900">{prog.title}</h4>
-                                                <p className="text-slate-600 mb-2">{prog.desc}</p>
+                                                <h4 className="text-lg font-bold text-[#0066FF]">{prog.title}</h4>
+                                                <p className="text-[#0066FF] mb-2">{prog.desc}</p>
                                                 <button
                                                     onClick={() => setSelectedModalPartner(prog)}
-                                                    className="inline-flex items-center gap-2 text-xs font-bold text-[#064e3b] hover:text-[#042d22] transition-colors"
+                                                    className="inline-flex items-center gap-2 text-xs font-bold text-[#0066FF] hover:text-[#042d22] transition-colors"
                                                 >
                                                     <span>Explore Program Specification</span>
                                                     <ArrowRight className="w-3.5 h-3.5" />
@@ -242,20 +242,20 @@ export default function Partners() {
                         </Reveal>
                         <Reveal width="100%" delay={0.2}>
                             <div className="relative">
-                                <div className="absolute inset-0 bg-gradient-to-r from-[#064e3b] to-emerald-600 rounded-2xl transform rotate-3 blur-sm opacity-20"></div>
-                                <div className="relative bg-slate-900 rounded-2xl p-10 text-white overflow-hidden shadow-2xl">
-                                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald-600/20 rounded-full blur-[80px] -mr-20 -mt-20"></div>
-                                    <QuoteIcon className="w-12 h-12 text-emerald-400 mb-6 opacity-50" />
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#0066FF] to-[#0066FF] rounded-2xl transform rotate-3 blur-sm opacity-20"></div>
+                                <div className="relative bg-white rounded-2xl p-10 text-white overflow-hidden shadow-2xl">
+                                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#0066FF]/20 rounded-full blur-[80px] -mr-20 -mt-20"></div>
+                                    <QuoteIcon className="w-12 h-12 text-[#0066FF] mb-6 opacity-50" />
                                     <blockquote className="text-2xl font-medium leading-relaxed mb-8 relative z-10">
                                         "Partnering with ProfitMachines has been a game-changer for our agency. We've not only increased our revenue but also deepened our client relationships by delivering tangible ROI."
                                     </blockquote>
                                     <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 bg-slate-700 rounded-full flex items-center justify-center text-xl font-bold">
+                                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-xl font-bold">
                                             JD
                                         </div>
                                         <div>
                                             <div className="font-bold text-lg">John Doe</div>
-                                            <div className="text-slate-400">CEO, GrowthAgency</div>
+                                            <div className="text-[#0066FF]">CEO, GrowthAgency</div>
                                         </div>
                                     </div>
                                 </div>
@@ -266,26 +266,26 @@ export default function Partners() {
             </section>
 
             {/* 4. Partner Application Form */}
-            <section id="partner-form" className="py-24 bg-slate-50 border-t border-slate-200">
+            <section id="partner-form" className="py-24 bg-white border-t border-[#0066FF]">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <Reveal width="100%">
                         <div className="text-center mb-12">
-                            <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight text-slate-900">Become a Partner</h2>
-                            <p className="text-slate-600 text-xl font-medium max-w-2xl mx-auto">
+                            <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight text-[#0066FF]">Become a Partner</h2>
+                            <p className="text-[#0066FF] text-xl font-medium max-w-2xl mx-auto">
                                 Fill out the form below to join our partner ecosystem.
                             </p>
                         </div>
                     </Reveal>
 
                     <Reveal width="100%" delay={0.2}>
-                        <div className="bg-white rounded-[2rem] shadow-xl border border-slate-100 p-8 sm:p-12">
+                        <div className="bg-white rounded-[2rem] shadow-xl border border-[#0066FF] p-8 sm:p-12">
                             {submitted ? (
                                 <div className="text-center py-12">
                                     <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                                         <CheckCircle2 className="w-10 h-10 text-green-600" />
                                     </div>
-                                    <h3 className="text-2xl font-bold text-slate-900 mb-4">Application Received!</h3>
-                                    <p className="text-lg text-slate-600 max-w-md mx-auto mb-8">
+                                    <h3 className="text-2xl font-bold text-[#0066FF] mb-4">Application Received!</h3>
+                                    <p className="text-lg text-[#0066FF] max-w-md mx-auto mb-8">
                                         Thank you for your interest in partnering with ProfitMachines. Our partnership team will review your application and be in touch shortly.
                                     </p>
                                     <Button onClick={() => setSubmitted(false)} variant="outline">
@@ -355,9 +355,9 @@ export default function Partners() {
                                                 <select
                                                     id="partnerType" name="partnerType" required
                                                     value={formData.partnerType} onChange={handleChange}
-                                                    className={`flex h-11 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${formData.partnerType === "" ? "text-slate-500" : "text-slate-900"}`}
+                                                    className={`flex h-11 w-full rounded-md border border-[#0066FF] bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[#0066FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${formData.partnerType === "" ? "text-[#0066FF]" : "text-[#0066FF]"}`}
                                                 >
-                                                    <option value="" className="text-slate-400">Select Type</option>
+                                                    <option value="" className="text-[#0066FF]">Select Type</option>
                                                     <option value="Solution Partner">Solution Partner (SI/Consultancy)</option>
                                                     <option value="Technology Partner">Technology Partner (ISV)</option>
                                                     <option value="Referral Partner">Referral Partner</option>
@@ -379,7 +379,7 @@ export default function Partners() {
                                     <Button
                                         type="submit"
                                         size="lg"
-                                        className="w-full bg-[#064e3b] hover:bg-[#053d2e] text-white font-bold h-12 text-lg rounded-xl mt-4"
+                                        className="w-full bg-[#0066FF] hover:bg-[#0066FF] text-white font-bold h-12 text-lg rounded-xl mt-4"
                                         disabled={isSubmitting}
                                     >
                                         {isSubmitting ? 'Submitting Application...' : 'Apply to Partner Program'}
@@ -399,59 +399,59 @@ export default function Partners() {
 
             {/* Detailed Partner Specification Modal (Like Offerings) */}
             {selectedModalPartner && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-200">
-                    <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl border border-slate-200 p-6 sm:p-8 space-y-6">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-white/60 backdrop-blur-md animate-in fade-in duration-200">
+                    <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl border border-[#0066FF] p-6 sm:p-8 space-y-6">
                         <button
                             onClick={() => setSelectedModalPartner(null)}
-                            className="absolute top-6 right-6 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors"
+                            className="absolute top-6 right-6 p-2 rounded-full bg-white hover:bg-[#0066FF]/10 text-[#0066FF] transition-colors"
                         >
                             <X className="w-5 h-5" />
                         </button>
 
                         <div className="flex items-center gap-3">
-                            <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-100 text-[#064e3b]">
+                            <div className="p-3.5 rounded-2xl bg-white border border-[#0066FF] text-[#0066FF]">
                                 <Handshake className="w-7 h-7" />
                             </div>
                             <div>
-                                <span className="text-xs font-bold uppercase tracking-wider text-[#064e3b]">Partner Program Specification</span>
-                                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900">{selectedModalPartner.title}</h3>
+                                <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">Partner Program Specification</span>
+                                <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0066FF]">{selectedModalPartner.title}</h3>
                             </div>
                         </div>
 
-                        <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-medium">
+                        <p className="text-[#0066FF] text-base sm:text-lg leading-relaxed font-medium">
                             {selectedModalPartner.desc}
                         </p>
 
                         <div className="grid md:grid-cols-2 gap-6">
-                            <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                            <div className="bg-white p-6 rounded-2xl border border-[#0066FF]">
                                 <h4 className="text-sm font-bold uppercase tracking-wider text-blue-900 mb-3 flex items-center gap-2">
-                                    <Sparkles className="w-4 h-4 text-[#064e3b]" />
+                                    <Sparkles className="w-4 h-4 text-[#0066FF]" />
                                     Program Benefits
                                 </h4>
-                                <ul className="space-y-2 text-sm text-slate-700 font-medium">
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" /> Tiered margin sharing & recurring commissions</li>
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" /> Dedicated partner success manager</li>
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" /> Joint GTM & co-marketing collateral</li>
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" /> Technical & solution architecture support</li>
+                                <ul className="space-y-2 text-sm text-[#0066FF] font-medium">
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0066FF] shrink-0" /> Tiered margin sharing & recurring commissions</li>
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0066FF] shrink-0" /> Dedicated partner success manager</li>
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0066FF] shrink-0" /> Joint GTM & co-marketing collateral</li>
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0066FF] shrink-0" /> Technical & solution architecture support</li>
                                 </ul>
                             </div>
 
-                            <div className="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-200">
-                                <h4 className="text-sm font-bold uppercase tracking-wider text-emerald-800 mb-3 flex items-center gap-2">
-                                    <TrendingUp className="w-4 h-4 text-emerald-600" />
+                            <div className="bg-white/50 p-6 rounded-2xl border border-[#0066FF]">
+                                <h4 className="text-sm font-bold uppercase tracking-wider text-[#0066FF] mb-3 flex items-center gap-2">
+                                    <TrendingUp className="w-4 h-4 text-[#0066FF]" />
                                     Expected ROI
                                 </h4>
-                                <ul className="space-y-2 text-sm font-bold text-emerald-900">
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" /> 20-35% revenue share on closed deals</li>
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" /> Accelerated client deal velocity</li>
-                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" /> Enhanced account retention & expansion</li>
+                                <ul className="space-y-2 text-sm font-bold text-[#0066FF]">
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0066FF] shrink-0" /> 20-35% revenue share on closed deals</li>
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0066FF] shrink-0" /> Accelerated client deal velocity</li>
+                                    <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0066FF] shrink-0" /> Enhanced account retention & expansion</li>
                                 </ul>
                             </div>
                         </div>
 
-                        <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-slate-100">
+                        <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-[#0066FF]">
                             <a href="#partner-form" onClick={() => setSelectedModalPartner(null)} className="flex-1">
-                                <Button className="w-full bg-[#064e3b] hover:bg-[#053d2e] text-white font-bold py-3 rounded-full">Apply for {selectedModalPartner.title}</Button>
+                                <Button className="w-full bg-[#0066FF] hover:bg-[#0066FF] text-white font-bold py-3 rounded-full">Apply for {selectedModalPartner.title}</Button>
                             </a>
                         </div>
                     </div>

@@ -7,10 +7,10 @@ const partners = [
 ];
 
 const trustBadges = [
-    { icon: ShieldCheck, color: 'text-emerald-600', label: 'SOC2 Type II Certified' },
-    { icon: Award, color: 'text-[#064e3b]', label: 'ISO 27001 Security' },
-    { icon: Zap, color: 'text-amber-500', label: '99.99% Enterprise Uptime' },
-    { icon: Server, color: 'text-[#064e3b]', label: 'Single-Tenant Vault' }
+    { icon: ShieldCheck, label: 'SOC2 Type II Certified' },
+    { icon: Award, label: 'ISO 27001 Security' },
+    { icon: Zap, label: '99.99% Enterprise Uptime' },
+    { icon: Server, label: 'Single-Tenant Vault' }
 ];
 
 export default function TrustedBySection() {
@@ -18,20 +18,16 @@ export default function TrustedBySection() {
     const loopPartners = [...partners, ...partners];
 
     return (
-        <section id="partners" className="py-12 md:py-16 border-b border-slate-200/80 bg-white relative z-10 overflow-hidden">
+        <section id="partners" className="py-12 md:py-16 border-b-2 border-[#0066FF] bg-white relative z-10 overflow-hidden">
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-                <p className="text-center font-mono text-xs font-bold text-slate-400 uppercase tracking-[0.16em] mb-8 flex items-center justify-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]"></span>
+                <p className="text-center font-mono text-xs font-bold text-[#0066FF] uppercase tracking-[0.16em] mb-8 flex items-center justify-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#0066FF]"></span>
                     <span>Trusted by 100+ Companies · Strategic Partners &amp; Enterprise Integrations</span>
                 </p>
             </div>
 
             {/* Infinite scroll ticker */}
             <div className="relative mb-10">
-                {/* Fade masks */}
-                <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none" />
-                <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none" />
-
                 <div className="flex overflow-hidden">
                     <div
                         className="flex gap-4 shrink-0 items-center"
@@ -43,7 +39,7 @@ export default function TrustedBySection() {
                         {loopPartners.map((partner, idx) => (
                             <div
                                 key={idx}
-                                className="h-11 px-6 bg-slate-50/80 border border-slate-200/90 rounded-xl flex items-center justify-center text-slate-700 font-bold tracking-wide text-sm shrink-0 hover:bg-emerald-50 hover:border-emerald-300 hover:text-[#064e3b] transition-all duration-300 cursor-default shadow-xs"
+                                className="h-11 px-6 bg-white border-2 border-[#0066FF] rounded-xl flex items-center justify-center text-[#0066FF] font-bold tracking-wide text-sm shrink-0 hover:bg-[#0066FF] hover:text-white transition-all duration-200 cursor-default"
                             >
                                 {partner}
                             </div>
@@ -52,12 +48,12 @@ export default function TrustedBySection() {
                 </div>
             </div>
 
-            {/* Trust Badges - GreenData Trust Pill Style */}
+            {/* Trust Badges */}
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
-                    {trustBadges.map(({ icon: Icon, color, label }, i) => (
-                        <div key={i} className="flex items-center justify-center gap-2.5 text-xs sm:text-sm font-bold text-slate-700 bg-[#F7F8F5] border border-slate-200/90 rounded-xl py-3 px-4 shadow-xs hover:border-emerald-300 transition-colors">
-                            <Icon className={`w-4 h-4 shrink-0 ${color}`} />
+                    {trustBadges.map(({ icon: Icon, label }, i) => (
+                        <div key={i} className="flex items-center justify-center gap-2.5 text-xs sm:text-sm font-bold text-[#0066FF] bg-white border-2 border-[#0066FF] rounded-xl py-3 px-4 hover:bg-[#0066FF] hover:text-white transition-colors group">
+                            <Icon className="w-4 h-4 shrink-0 text-[#0066FF] group-hover:text-white" />
                             <span>{label}</span>
                         </div>
                     ))}

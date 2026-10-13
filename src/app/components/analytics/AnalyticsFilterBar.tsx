@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import {
   Calendar,
   Filter,
@@ -51,21 +51,21 @@ export default function AnalyticsFilterBar({
     filters.visitorType !== 'all';
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xl mb-8 space-y-4">
+    <div className="bg-white/90 border border-[#0066FF] rounded-2xl p-4 sm:p-5 shadow-xl mb-8 space-y-4">
       {/* Top primary controls row */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         {/* Mobile menu trigger + Date selector */}
         <div className="flex flex-wrap items-center gap-2.5">
           <button
             onClick={onToggleMobileSidebar}
-            className="lg:hidden p-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white border border-slate-700"
+            className="lg:hidden p-2 rounded-xl bg-white text-[#0066FF] hover:text-white border border-[#0066FF]"
             title="Open navigation menu"
           >
             <SlidersHorizontal className="w-4 h-4" />
           </button>
 
           {/* Date range pills */}
-          <div className="bg-slate-950 border border-slate-800 rounded-xl p-1 flex flex-wrap items-center gap-1 text-xs font-semibold">
+          <div className="bg-white border border-[#0066FF] rounded-xl p-1 flex flex-wrap items-center gap-1 text-xs font-semibold">
             {[
               { id: 'today', label: 'Today' },
               { id: 'yesterday', label: 'Yesterday' },
@@ -79,8 +79,8 @@ export default function AnalyticsFilterBar({
                 onClick={() => update({ dateRange: d.id as any })}
                 className={`px-2.5 py-1.5 rounded-lg transition-all ${
                   filters.dateRange === d.id
-                    ? 'bg-[#064e3b] text-white shadow-sm font-bold'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-[#0066FF] text-white shadow-sm font-bold'
+                    : 'text-[#0066FF] hover:text-white'
                 }`}
               >
                 {d.label}
@@ -89,7 +89,7 @@ export default function AnalyticsFilterBar({
           </div>
 
           {/* Visitor Type Toggle */}
-          <div className="bg-slate-950 border border-slate-800 rounded-xl p-1 flex items-center gap-1 text-xs font-semibold">
+          <div className="bg-white border border-[#0066FF] rounded-xl p-1 flex items-center gap-1 text-xs font-semibold">
             {[
               { id: 'all', label: 'All Visitors' },
               { id: 'new', label: 'New' },
@@ -100,8 +100,8 @@ export default function AnalyticsFilterBar({
                 onClick={() => update({ visitorType: v.id as any })}
                 className={`px-2.5 py-1.5 rounded-lg transition-all ${
                   filters.visitorType === v.id
-                    ? 'bg-[#064e3b] text-white shadow-sm font-bold'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-[#0066FF] text-white shadow-sm font-bold'
+                    : 'text-[#0066FF] hover:text-white'
                 }`}
               >
                 {v.label}
@@ -114,14 +114,14 @@ export default function AnalyticsFilterBar({
             onClick={() => setShowAdvanced(!showAdvanced)}
             className={`px-3 py-1.5 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-all ${
               showAdvanced || hasActiveCustomFilters
-                ? 'bg-[#064e3b]/15 border-emerald-600/40 text-emerald-400'
-                : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-white'
+                ? 'bg-[#0066FF]/15 border-[#0066FF]/40 text-[#0066FF]'
+                : 'bg-white border-[#0066FF] text-[#0066FF] hover:text-white'
             }`}
           >
             <Filter className="w-3.5 h-3.5" />
             <span>Filters</span>
             {hasActiveCustomFilters && (
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[#0066FF] animate-pulse" />
             )}
             <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showAdvanced ? 'rotate-180' : ''}`} />
           </button>
@@ -129,7 +129,7 @@ export default function AnalyticsFilterBar({
           {hasActiveCustomFilters && (
             <button
               onClick={resetFilters}
-              className="p-2 text-slate-400 hover:text-rose-400 transition-colors"
+              className="p-2 text-[#0066FF] hover:text-rose-400 transition-colors"
               title="Reset all filters"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -139,16 +139,16 @@ export default function AnalyticsFilterBar({
 
         {/* Live status & Refresh action */}
         <div className="flex flex-wrap items-center gap-3 self-end lg:self-center">
-          <div className="flex items-center gap-2 text-xs font-mono text-slate-400 bg-slate-950/80 px-3 py-1.5 rounded-xl border border-slate-800">
-            <span className={`w-2 h-2 rounded-full ${isLiveFeed ? 'bg-emerald-400 animate-pulse' : 'bg-emerald-400'}`} />
-            <Clock className="w-3.5 h-3.5 text-slate-400" />
+          <div className="flex items-center gap-2 text-xs font-mono text-[#0066FF] bg-white/80 px-3 py-1.5 rounded-xl border border-[#0066FF]">
+            <span className={`w-2 h-2 rounded-full ${isLiveFeed ? 'bg-[#0066FF] animate-pulse' : 'bg-[#0066FF]'}`} />
+            <Clock className="w-3.5 h-3.5 text-[#0066FF]" />
             <span>Updated: {lastUpdated}</span>
           </div>
 
           <button
             onClick={onRefresh}
             disabled={isRefreshing}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#064e3b] hover:bg-emerald-600 disabled:opacity-50 text-white text-xs font-bold transition-all shadow-md shadow-blue-600/20"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#0066FF] hover:bg-[#0066FF] disabled:opacity-50 text-white text-xs font-bold transition-all shadow-md shadow-blue-600/20"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin' : ''}`} />
             <span>Refresh Analytics</span>
@@ -158,14 +158,14 @@ export default function AnalyticsFilterBar({
 
       {/* Advanced Drawer Row */}
       {showAdvanced && (
-        <div className="pt-4 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
+        <div className="pt-4 border-t border-[#0066FF]/80 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
           {/* Traffic Source */}
           <div>
-            <label className="block text-[11px] font-mono text-slate-400 mb-1">Traffic Source</label>
+            <label className="block text-[11px] font-mono text-[#0066FF] mb-1">Traffic Source</label>
             <select
               value={filters.trafficSource}
               onChange={(e) => update({ trafficSource: e.target.value })}
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-emerald-600"
+              className="w-full bg-white border border-[#0066FF] rounded-lg px-2.5 py-1.5 text-[#0066FF] focus:outline-none focus:border-[#0066FF]"
             >
               <option value="all">All Sources</option>
               <option value="google">Google Organic / Search</option>
@@ -180,11 +180,11 @@ export default function AnalyticsFilterBar({
 
           {/* UTM Campaign */}
           <div>
-            <label className="block text-[11px] font-mono text-slate-400 mb-1">UTM Campaign</label>
+            <label className="block text-[11px] font-mono text-[#0066FF] mb-1">UTM Campaign</label>
             <select
               value={filters.utmCampaign}
               onChange={(e) => update({ utmCampaign: e.target.value })}
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-emerald-600"
+              className="w-full bg-white border border-[#0066FF] rounded-lg px-2.5 py-1.5 text-[#0066FF] focus:outline-none focus:border-[#0066FF]"
             >
               <option value="all">All Campaigns</option>
               <option value="enterprise_ai">Enterprise-AI-Revenue</option>
@@ -196,11 +196,11 @@ export default function AnalyticsFilterBar({
 
           {/* UTM Medium */}
           <div>
-            <label className="block text-[11px] font-mono text-slate-400 mb-1">UTM Medium</label>
+            <label className="block text-[11px] font-mono text-[#0066FF] mb-1">UTM Medium</label>
             <select
               value={filters.utmMedium}
               onChange={(e) => update({ utmMedium: e.target.value })}
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-emerald-600"
+              className="w-full bg-white border border-[#0066FF] rounded-lg px-2.5 py-1.5 text-[#0066FF] focus:outline-none focus:border-[#0066FF]"
             >
               <option value="all">All Mediums</option>
               <option value="cpc">Paid Search (CPC)</option>
@@ -213,11 +213,11 @@ export default function AnalyticsFilterBar({
 
           {/* Target Page */}
           <div>
-            <label className="block text-[11px] font-mono text-slate-400 mb-1">Page Route</label>
+            <label className="block text-[11px] font-mono text-[#0066FF] mb-1">Page Route</label>
             <select
               value={filters.page}
               onChange={(e) => update({ page: e.target.value })}
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-emerald-600"
+              className="w-full bg-white border border-[#0066FF] rounded-lg px-2.5 py-1.5 text-[#0066FF] focus:outline-none focus:border-[#0066FF]"
             >
               <option value="all">All Pages</option>
               <option value="/">Homepage (/)</option>
@@ -231,11 +231,11 @@ export default function AnalyticsFilterBar({
 
           {/* Geo Location */}
           <div>
-            <label className="block text-[11px] font-mono text-slate-400 mb-1">Location</label>
+            <label className="block text-[11px] font-mono text-[#0066FF] mb-1">Location</label>
             <select
               value={filters.location}
               onChange={(e) => update({ location: e.target.value })}
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-emerald-600"
+              className="w-full bg-white border border-[#0066FF] rounded-lg px-2.5 py-1.5 text-[#0066FF] focus:outline-none focus:border-[#0066FF]"
             >
               <option value="all">All Locations</option>
               <option value="US">United States</option>
@@ -249,11 +249,11 @@ export default function AnalyticsFilterBar({
 
           {/* Device / OS */}
           <div>
-            <label className="block text-[11px] font-mono text-slate-400 mb-1">Device / OS</label>
+            <label className="block text-[11px] font-mono text-[#0066FF] mb-1">Device / OS</label>
             <select
               value={filters.device}
               onChange={(e) => update({ device: e.target.value })}
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-slate-200 focus:outline-none focus:border-emerald-600"
+              className="w-full bg-white border border-[#0066FF] rounded-lg px-2.5 py-1.5 text-[#0066FF] focus:outline-none focus:border-[#0066FF]"
             >
               <option value="all">All Devices</option>
               <option value="desktop">Desktop (macOS / Windows)</option>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle2, AlertCircle, Copy, Check, ArrowRight, ShieldCheck, RefreshCw } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Copy, Check, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export interface FormSuccessModalProps {
     isOpen: boolean;
@@ -32,44 +32,44 @@ export const FormSuccessModal: React.FC<FormSuccessModalProps> = ({
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 sm:p-8 text-slate-900 relative">
-                <div className="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 mx-auto mb-5 shadow-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white/90 backdrop-blur-sm animate-in fade-in duration-200">
+            <div className="w-full max-w-lg bg-white rounded-2xl border-2 border-[#0066FF] p-6 sm:p-8 text-[#0066FF] relative">
+                <div className="w-14 h-14 rounded-2xl bg-white border-2 border-[#0066FF] flex items-center justify-center text-[#0066FF] mx-auto mb-5">
                     <CheckCircle2 className="w-8 h-8" />
                 </div>
 
-                <h3 className="text-2xl font-bold text-center text-slate-900 mb-2">
+                <h3 className="text-2xl font-bold text-center text-[#0066FF] mb-2 font-heading">
                     {title}
                 </h3>
 
-                <p className="text-sm text-slate-600 text-center mb-6 leading-relaxed">
+                <p className="text-sm text-[#0066FF] text-center mb-6 leading-relaxed font-medium">
                     {message}
                 </p>
 
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 mb-6">
-                    <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
+                <div className="p-4 rounded-xl bg-white border border-[#0066FF] mb-6">
+                    <div className="flex items-center justify-between text-xs text-[#0066FF] mb-1 font-bold">
                         <span>Official Reference ID:</span>
-                        <span className="font-mono text-emerald-700 font-semibold">Priority Logged</span>
+                        <span className="font-mono text-[#0066FF]">Priority Logged</span>
                     </div>
-                    <div className="flex items-center justify-between font-mono font-bold text-slate-900 text-sm">
+                    <div className="flex items-center justify-between font-mono font-bold text-[#0066FF] text-sm">
                         <span>{submissionId}</span>
                         <button
                             onClick={copyToClipboard}
-                            className="inline-flex items-center gap-1 text-xs text-[#064e3b] hover:text-[#042d22] font-sans font-semibold py-1 px-2 rounded-md hover:bg-emerald-50 transition-colors"
+                            className="inline-flex items-center gap-1 text-xs text-[#0066FF] font-semibold py-1 px-2 rounded border border-[#0066FF] hover:bg-[#0066FF] hover:text-white transition-colors"
                         >
-                            {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                            {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                             <span>{copied ? 'Copied' : 'Copy'}</span>
                         </button>
                     </div>
                     {email && (
-                        <div className="mt-2 pt-2 border-t border-slate-200/60 text-xs text-slate-500">
-                            Confirmation logged for <span className="font-semibold text-slate-800">{email}</span>
+                        <div className="mt-2 pt-2 border-t border-[#0066FF]/40 text-xs text-[#0066FF]">
+                            Confirmation logged for <span className="font-bold">{email}</span>
                         </div>
                     )}
                 </div>
 
-                <div className="flex items-center justify-center gap-2 text-xs text-slate-500 mb-6">
-                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <div className="flex items-center justify-center gap-2 text-xs text-[#0066FF] mb-6 font-semibold">
+                    <ShieldCheck className="w-4 h-4 text-[#0066FF]" />
                     <span>SOC2 Type II & GDPR Compliant Ingestion</span>
                 </div>
 
@@ -77,14 +77,14 @@ export const FormSuccessModal: React.FC<FormSuccessModalProps> = ({
                     <Link
                         to="/solutions"
                         onClick={onClose}
-                        className="flex-1 py-2.5 px-3 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-xs transition-colors flex items-center justify-center gap-1.5"
+                        className="flex-1 py-2.5 px-3 rounded-lg border-2 border-[#0066FF] bg-white hover:bg-[#0066FF] hover:text-white text-[#0066FF] font-bold text-xs transition-colors flex items-center justify-center gap-1.5"
                     >
                         <span>Explore Solutions</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                     <button
                         onClick={onClose}
-                        className="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-md"
+                        className="flex-1 py-2.5 px-3 rounded-lg bg-[#0066FF] hover:bg-white text-white hover:text-[#0066FF] border-2 border-[#0066FF] font-bold text-xs transition-all"
                     >
                         Done & Return
                     </button>
@@ -142,10 +142,6 @@ export const validatePhone = (phone: string): { valid: boolean; message?: string
     return { valid: true };
 };
 
-/**
- * Invisible honeypot field — bots tend to auto-fill every input, humans never see or touch it.
- * Wire `value`/`onChange` into a piece of state and drop the submission silently if it's non-empty.
- */
 export const HoneypotField: React.FC<{ value: string; onChange: (value: string) => void }> = ({ value, onChange }) => (
     <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: 0, width: '1px', height: '1px', overflow: 'hidden' }}>
         <label htmlFor="website_url">Leave this field empty</label>
@@ -171,14 +167,14 @@ export const FormErrorBanner: React.FC<FormErrorBannerProps> = ({ message, error
     const text = message || error;
     if (!text) return null;
     return (
-        <div role="alert" className="flex items-start gap-3 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm animate-in fade-in slide-in-from-top-1 duration-200">
-            <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+        <div role="alert" className="flex items-start gap-3 p-4 rounded-xl bg-white border-2 border-[#0066FF] text-[#0066FF] text-sm">
+            <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-[#0066FF]" />
             <div className="flex-1">
-                <p className="font-semibold leading-relaxed">{text}</p>
+                <p className="font-bold leading-relaxed">{text}</p>
             </div>
             {onDismiss && (
-                <button type="button" onClick={onDismiss} aria-label="Dismiss error" className="text-red-400 hover:text-red-700 transition-colors">
-                    <Check className="w-4 h-4 rotate-45" />
+                <button type="button" onClick={onDismiss} aria-label="Dismiss error" className="text-[#0066FF] hover:bg-[#0066FF]/10 p-1 rounded">
+                    ✕
                 </button>
             )}
         </div>

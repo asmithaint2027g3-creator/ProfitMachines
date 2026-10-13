@@ -32,15 +32,15 @@ export default function ContextualCtaSection({
     const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMsg)}`;
 
     return (
-        <section className={`py-16 sm:py-20 lg:py-24 bg-[#064e3b] text-white relative overflow-hidden border-t border-emerald-500/20 ${className}`}>
+        <section className={`py-16 sm:py-20 lg:py-24 bg-[#0066FF] text-white relative overflow-hidden border-t border-[#0066FF]/20 ${className}`}>
             {/* Ambient Background Glow */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-400/10 rounded-full blur-[120px]" />
-                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-teal-400/10 rounded-full blur-[120px]" />
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0066FF]/10 rounded-full blur-[120px]" />
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#0066FF]/10 rounded-full blur-[120px]" />
             </div>
 
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/60 border border-emerald-400/30 text-emerald-300 text-xs font-bold tracking-wide uppercase mb-6">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0066FF]/60 border border-[#0066FF]/30 text-[#0066FF] text-xs font-bold tracking-wide uppercase mb-6">
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>{badge}</span>
                 </div>
@@ -49,7 +49,7 @@ export default function ContextualCtaSection({
                     {title}
                 </h2>
 
-                <p className="text-base sm:text-lg text-emerald-100/90 leading-relaxed max-w-2xl mx-auto mb-10 font-normal">
+                <p className="text-base sm:text-lg text-[#0066FF]/90 leading-relaxed max-w-2xl mx-auto mb-10 font-normal">
                     {subtitle}
                 </p>
 
@@ -57,16 +57,16 @@ export default function ContextualCtaSection({
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto mb-10">
                     <button
                         onClick={() => openQuickForm({ defaultService: serviceContext, source })}
-                        className="w-full sm:w-auto px-7 py-3.5 rounded-lg bg-white hover:bg-emerald-50 text-[#064e3b] font-bold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 group"
+                        className="w-full sm:w-auto px-7 py-3.5 rounded-lg bg-white hover:bg-[#0066FF] text-[#0066FF] font-bold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 group"
                     >
-                        <Zap className="w-4 h-4 text-[#064e3b]" />
+                        <Zap className="w-4 h-4 text-[#0066FF]" />
                         <span>Quick Inquiry (60s)</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                     </button>
 
                     <button
                         onClick={() => openLongForm({ defaultService: serviceContext, defaultIndustry: industryContext, source })}
-                        className="w-full sm:w-auto px-7 py-3.5 rounded-lg bg-emerald-900/50 hover:bg-emerald-800/60 text-white font-semibold text-sm sm:text-base border border-emerald-400/40 hover:border-emerald-300 transition-all duration-200 flex items-center justify-center gap-2"
+                        className="w-full sm:w-auto px-7 py-3.5 rounded-lg bg-[#0066FF]/50 hover:bg-[#0066FF]/60 text-white font-semibold text-sm sm:text-base border border-[#0066FF]/40 hover:border-[#0066FF] transition-all duration-200 flex items-center justify-center gap-2"
                     >
                         <span>Detailed Assessment</span>
                     </button>
@@ -83,9 +83,9 @@ export default function ContextualCtaSection({
                 </div>
 
                 {/* Trust Strip */}
-                <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-semibold text-emerald-200/80 pt-4 border-t border-emerald-500/20 max-w-2xl mx-auto">
+                <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-semibold text-[#0066FF]/80 pt-4 border-t border-[#0066FF]/20 max-w-2xl mx-auto">
                     <span className="flex items-center gap-1.5">
-                        <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                        <ShieldCheck className="w-4 h-4 text-[#0066FF]" />
                         <span>SOC2 Type II Aligned</span>
                     </span>
                     <span>•</span>

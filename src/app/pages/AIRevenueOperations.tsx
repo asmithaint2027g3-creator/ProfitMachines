@@ -1,4 +1,4 @@
-ï»¿
+
 import { useEffect } from 'react';
 import { Button } from '../components/ui/button';
 import { Bot, Zap, TrendingUp, Target, Shield, Cpu, ArrowRight } from 'lucide-react';
@@ -141,9 +141,9 @@ export default function AIRevenueOperations() {
     ];
 
     return (
-        <div className="min-h-screen bg-white font-sans text-slate-900">
+        <div className="min-h-screen bg-white font-sans text-[#0066FF]">
             {/* Hero Section */}
-            <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-slate-900">
+            <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-white">
                 <div className="absolute inset-0 z-0">
                     <style>{`
                         @keyframes fadeZoom {
@@ -175,30 +175,30 @@ export default function AIRevenueOperations() {
                 </div>
 
                 <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 pt-20">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-xl bg-white border border-emerald-100/60 shadow-[0_2px_10px_-4px_rgba(6,78,59,0.3)] text-[#053d2e] text-sm font-bold mb-8 backdrop-blur-sm animate-fade-in-up">
-                        <Zap className="w-4 h-4 text-[#064e3b]" />
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-xl bg-white border border-[#0066FF]/60 shadow-[0_2px_10px_-4px_rgba(6,78,59,0.3)] text-[#0066FF] text-sm font-bold mb-8 backdrop-blur-sm animate-fade-in-up">
+                        <Zap className="w-4 h-4 text-[#0066FF]" />
                         <span className="bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent uppercase tracking-wider">AROS: Agentic Revenue Operating System</span>
                     </div>
 
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-8 tracking-tight leading-[1.1] text-slate-900 drop-shadow-sm">
+                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-8 tracking-tight leading-[1.1] text-[#0066FF] drop-shadow-sm">
                         Autonomous <br className="hidden md:block" />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#064e3b] via-emerald-700 to-teal-700">
+                        <span className="text-[#0066FF] bg-gradient-to-r from-[#0066FF] to-[#0066FF]">
                             Revenue Generation
                         </span>
                     </h1>
 
-                    <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto mb-10 leading-relaxed font-semibold">
-                        Deploy an autonomous engine that manages the entire revenue lifecycleâ€”from demand discovery to expansionâ€”with zero human intervention.
+                    <p className="text-xl md:text-2xl text-[#0066FF] max-w-4xl mx-auto mb-10 leading-relaxed font-semibold">
+                        Deploy an autonomous engine that manages the entire revenue lifecycle—from demand discovery to expansion—with zero human intervention.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-5 justify-center">
                         <Link to="/book-consultation">
-                            <Button className="bg-gradient-to-r from-[#064e3b] to-emerald-600 hover:from-blue-700 hover:to-indigo-700 text-white px-10 py-7 text-xl h-auto rounded-xl shadow-lg shadow-emerald-800/30 hover:shadow-emerald-800/45 transition-all hover:-translate-y-1 font-bold">
+                            <Button className="bg-gradient-to-r from-[#0066FF] to-[#0066FF] hover:from-blue-700 hover:to-indigo-700 text-white px-10 py-7 text-xl h-auto rounded-xl shadow-lg shadow-[#0066FF]/20 hover:shadow-[#0066FF]/20 transition-all hover:-translate-y-1 font-bold">
                                 Activate AROS Swarm
                             </Button>
                         </Link>
                         <Link to="/talk-to-expert">
-                            <Button variant="outline" className="border-slate-200 text-slate-700 hover:bg-slate-50 px-10 py-7 text-xl h-auto rounded-xl backdrop-blur-sm transition-all font-bold">
+                            <Button variant="outline" className="border-[#0066FF] text-[#0066FF] hover:bg-[#0066FF]/10 px-10 py-7 text-xl h-auto rounded-xl backdrop-blur-sm transition-all font-bold">
                                 View Architecture
                             </Button>
                         </Link>
@@ -207,20 +207,20 @@ export default function AIRevenueOperations() {
             </section>
 
             {/* Metrics Section */}
-            <section className="py-24 bg-white border-y border-slate-100">
+            <section className="py-24 bg-white border-y border-[#0066FF]">
                 <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                         {metrics.map((m, i) => (
-                            <div key={i} className="p-8 bg-slate-50 border border-slate-100 rounded-[20px] relative group overflow-hidden transition-all duration-500 hover:bg-white hover:shadow-2xl hover:shadow-blue-500/10">
-                                <div className="absolute top-0 right-0 p-2 text-emerald-600/5 group-hover:text-emerald-600/10 transition-colors">
+                            <div key={i} className="p-8 bg-white border border-[#0066FF] rounded-[20px] relative group overflow-hidden transition-all duration-500 hover:bg-white hover:shadow-2xl hover:shadow-blue-500/10">
+                                <div className="absolute top-0 right-0 p-2 text-[#0066FF]/5 group-hover:text-[#0066FF]/10 transition-colors">
                                     <TrendingUp className="w-16 h-16" />
                                 </div>
-                                <p className="text-slate-500 text-sm font-bold uppercase tracking-widest mb-2">{m.label}</p>
+                                <p className="text-[#0066FF] text-sm font-bold uppercase tracking-widest mb-2">{m.label}</p>
                                 <div className="flex items-baseline gap-2">
-                                    <h3 className="text-3xl font-black text-[#064e3b]">{m.aros}</h3>
+                                    <h3 className="text-3xl font-black text-[#0066FF]">{m.aros}</h3>
                                     <span className="text-xs text-green-700 font-bold bg-green-100 px-2.5 py-1 rounded-xl">{m.multiplier}</span>
                                 </div>
-                                <p className="text-slate-400 text-xs mt-3 font-semibold uppercase">vs {m.traditional} (Traditional)</p>
+                                <p className="text-[#0066FF] text-xs mt-3 font-semibold uppercase">vs {m.traditional} (Traditional)</p>
                             </div>
                         ))}
                     </div>
@@ -230,30 +230,30 @@ export default function AIRevenueOperations() {
             {/* Phases Grid */}
             <div className="space-y-0">
                 {phases.map((phase, pIdx) => (
-                    <section key={pIdx} className={`py-24 ${pIdx % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}>
+                    <section key={pIdx} className={`py-24 ${pIdx % 2 === 0 ? 'bg-white' : 'bg-white'}`}>
                         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="mb-16">
-                                <span className="inline-block px-4 py-1 rounded-xl bg-emerald-100 text-[#053d2e] text-xs font-bold tracking-widest uppercase mb-4">{phase.title}</span>
-                                <h3 className="text-4xl md:text-5xl font-black text-slate-900 leading-tight">{phase.subtitle}</h3>
+                                <span className="inline-block px-4 py-1 rounded-xl bg-white text-[#0066FF] text-xs font-bold tracking-widest uppercase mb-4">{phase.title}</span>
+                                <h3 className="text-4xl md:text-5xl font-black text-[#0066FF] leading-tight">{phase.subtitle}</h3>
                             </div>
 
                             <div className="grid md:grid-cols-2 gap-10">
                                 {phase.agents.map((agent, aIdx) => (
-                                    <div key={aIdx} className="bg-white p-10 rounded-[20px] border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
-                                        <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-xl -mr-16 -mt-16 transition-all group-hover:scale-150 group-hover:bg-emerald-100/50"></div>
+                                    <div key={aIdx} className="bg-white p-10 rounded-[20px] border border-[#0066FF] shadow-sm hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+                                        <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-xl -mr-16 -mt-16 transition-all group-hover:scale-150 group-hover:bg-[#0066FF]/50"></div>
 
                                         <div className="relative z-10">
-                                            <div className="w-16 h-16 bg-slate-900 border-4 border-slate-50 text-white rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#064e3b] group-hover:rotate-6 transition-all duration-500">
+                                            <div className="w-16 h-16 bg-white border-4 border-[#0066FF] text-white rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#0066FF] group-hover:rotate-6 transition-all duration-500">
                                                 <Bot className="w-9 h-9" />
                                             </div>
-                                            <h4 className="text-2xl font-bold text-slate-900 mb-2">{agent.name}</h4>
-                                            <p className="text-[#064e3b] font-bold text-sm uppercase tracking-wider mb-8">Persona: "{agent.persona}"</p>
+                                            <h4 className="text-2xl font-bold text-[#0066FF] mb-2">{agent.name}</h4>
+                                            <p className="text-[#0066FF] font-bold text-sm uppercase tracking-wider mb-8">Persona: "{agent.persona}"</p>
 
                                             <div className="space-y-4">
                                                 {agent.workflows.map((flow, fIdx) => (
                                                     <div key={fIdx} className="flex gap-4 items-start group/flow">
-                                                        <div className="mt-1.5 w-2 h-2 rounded-xl bg-emerald-600 group-hover/flow:scale-125 transition-all" />
-                                                        <p className="text-slate-600 font-medium leading-relaxed">{flow}</p>
+                                                        <div className="mt-1.5 w-2 h-2 rounded-xl bg-[#0066FF] group-hover/flow:scale-125 transition-all" />
+                                                        <p className="text-[#0066FF] font-medium leading-relaxed">{flow}</p>
                                                     </div>
                                                 ))}
                                             </div>
@@ -267,12 +267,12 @@ export default function AIRevenueOperations() {
             </div>
 
             {/* Tech Stack / Architecture */}
-            <section className="py-24 bg-slate-900 text-white overflow-hidden relative">
+            <section className="py-24 bg-white text-white overflow-hidden relative">
                 <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.5),transparent_50%)]"></div>
                 <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="text-center mb-20">
                         <h2 className="text-4xl md:text-5xl font-black mb-6">The Agentic Stack</h2>
-                        <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">Built on a foundation of proprietary AI orchestration and global intelligence layers.</p>
+                        <p className="text-xl text-[#0066FF] max-w-3xl mx-auto leading-relaxed">Built on a foundation of proprietary AI orchestration and global intelligence layers.</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -282,15 +282,15 @@ export default function AIRevenueOperations() {
                             { icon: Zap, label: "Action", items: ["n8n Workflow Engine", "Playwright Automation", "Stripe Billing APIs"] },
                             { icon: Shield, label: "Governance", items: ["LangSmith Performance", "W&B Model Monitoring", "Compliance Guardrails"] }
                         ].map((stack, i) => (
-                            <div key={i} className="p-10 rounded-[20px] border border-white/10 bg-white/5 backdrop-blur-xl hover:border-emerald-600/50 transition-all group">
-                                <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#064e3b] transition-colors">
-                                    <stack.icon className="w-8 h-8 text-emerald-400 group-hover:text-white" />
+                            <div key={i} className="p-10 rounded-[20px] border border-white/10 bg-white/5 backdrop-blur-xl hover:border-[#0066FF]/50 transition-all group">
+                                <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#0066FF] transition-colors">
+                                    <stack.icon className="w-8 h-8 text-[#0066FF] group-hover:text-white" />
                                 </div>
                                 <h4 className="font-bold text-xl mb-6 text-white tracking-wide uppercase">{stack.label}</h4>
                                 <ul className="space-y-4">
                                     {stack.items.map((item, ii) => (
-                                        <li key={ii} className="text-slate-400 font-medium text-sm flex items-center gap-2">
-                                            <div className="w-1 h-1 bg-emerald-600 rounded-xl" />
+                                        <li key={ii} className="text-[#0066FF] font-medium text-sm flex items-center gap-2">
+                                            <div className="w-1 h-1 bg-[#0066FF] rounded-xl" />
                                             {item}
                                         </li>
                                     ))}
@@ -302,18 +302,18 @@ export default function AIRevenueOperations() {
             </section>
 
             {/* CTA */}
-            <section className="py-32 bg-slate-50 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#064e3b]/5 to-teal-700/5 opacity-50"></div>
+            <section className="py-32 bg-white relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0066FF]/5 to-[#0066FF]/5 opacity-50"></div>
                 <div className="max-w-5xl mx-auto text-center px-4 relative z-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-1 rounded-xl bg-[#064e3b] text-white text-xs font-bold mb-8">
+                    <div className="inline-flex items-center gap-2 px-4 py-1 rounded-xl bg-[#0066FF] text-white text-xs font-bold mb-8">
                         <Zap className="w-3 h-3 fill-current" />
                         <span>READY TO SCALE?</span>
                     </div>
-                    <h2 className="text-5xl md:text-6xl font-black text-slate-900 mb-8 leading-tight">Scale Your Revenue Without <br /> Increasing Your Headcount</h2>
-                    <p className="text-xl md:text-2xl text-slate-600 mb-12 max-w-3xl mx-auto font-medium leading-relaxed">Join the elite enterprises moving from manual sales to autonomous agent swarms.</p>
+                    <h2 className="text-5xl md:text-6xl font-black text-[#0066FF] mb-8 leading-tight">Scale Your Revenue Without <br /> Increasing Your Headcount</h2>
+                    <p className="text-xl md:text-2xl text-[#0066FF] mb-12 max-w-3xl mx-auto font-medium leading-relaxed">Join the elite enterprises moving from manual sales to autonomous agent swarms.</p>
                     <div className="flex flex-col sm:flex-row gap-6 justify-center">
                         <Link to="/book-consultation">
-                            <Button className="bg-slate-900 hover:bg-black text-white text-xl px-12 py-8 h-auto rounded-xl font-bold shadow-2xl transition-all hover:-translate-y-1 flex items-center gap-3">
+                            <Button className="bg-white hover:bg-black text-white text-xl px-12 py-8 h-auto rounded-xl font-bold shadow-2xl transition-all hover:-translate-y-1 flex items-center gap-3">
                                 Start Your Swarm <ArrowRight className="w-6 h-6" />
                             </Button>
                         </Link>
