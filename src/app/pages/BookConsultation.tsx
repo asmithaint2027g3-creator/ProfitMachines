@@ -20,6 +20,7 @@ import { submitToSheet } from '../../lib/sheets';
 import { captureLeadInJira } from '../../lib/jira';
 import { trackEvent } from '../../lib/analytics';
 import { FormSuccessModal, validateBusinessEmail, validatePhone, FormErrorBanner, HoneypotField } from '../components/forms/FormFeedback';
+import CalendarBookingWidget from '../components/forms/CalendarBookingWidget';
 
 export default function BookConsultation() {
     React.useEffect(() => {
@@ -37,10 +38,15 @@ export default function BookConsultation() {
         revenue: '$10M - $50M ARR',
         interest: 'AI Revenue Engine & Autonomous SDR',
         message: '',
-        date: '',
-        time: 'Morning (9:00 AM - 12:00 PM EST)',
         consent: true
     });
+
+    const [selectedSlot, setSelectedSlot] = useState<{
+        date: string;
+        startTime: string;
+        endTime: string;
+        label: string;
+    } | null>(null);
 
     const [emailError, setEmailError] = useState<string | null>(null);
     const [phoneError, setPhoneError] = useState<string | null>(null);
@@ -49,6 +55,7 @@ export default function BookConsultation() {
     const [submitted, setSubmitted] = useState(false);
     const [submissionId, setSubmissionId] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [calendarEventLink, setCalendarEventLink] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -70,9 +77,73 @@ export default function BookConsultation() {
             return;
         }
 
+        if (!selectedSlot) {
+            setSubmitError('Please select a preferred date and time slot for your consultation.');
+            return;
+        }
+
         setIsSubmitting(true);
         trackEvent({ eventName: 'FORM_SUBMIT_START', category: 'LEAD', label: 'Book Consultation' });
 
+        try {
+            // ── POST to backend calendar booking endpoint ─────────────────
+            const bookingRes = await fetch('/api/book-calendar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    email: formData.email,
+                    phone: formData.phone,
+                    company: formData.company,
+                    jobTitle: formData.jobTitle,
+                    revenue: formData.revenue,
+                    interest: formData.interest,
+                    message: formData.message,
+                    startTime: selectedSlot.startTime,
+                    endTime: selectedSlot.endTime,
+                }),
+            });
+
+            const bookingData = await bookingRes.json();
+
+            if (bookingRes.ok && bookingData.success) {
+                // Calendar event created successfully
+                setSubmissionId(bookingData.eventId || 'GCAL-CONFIRMED');
+                setCalendarEventLink(bookingData.eventLink || '');
+                setSubmitted(true);
+                trackEvent({ eventName: 'FORM_SUBMIT_SUCCESS', category: 'LEAD', label: bookingData.eventId });
+                return;
+            }
+
+            if (bookingData.slotUnavailable) {
+                // Slot was taken between selection and submission
+                setSubmitError(bookingData.error || 'This slot is no longer available. Please select a different time.');
+                setSelectedSlot(null);
+                return;
+            }
+
+            if (bookingData.setupRequired) {
+                // Google Calendar not configured — fall back to Sheet + Jira flow
+                console.warn('[BookConsultation] Calendar API not configured, falling back to Sheet+Jira flow.');
+                await fallbackSubmission();
+                return;
+            }
+
+            // Other server error
+            setSubmitError(bookingData.error || 'Something went wrong. Please try again.');
+
+        } catch (error: any) {
+            console.warn('[BookConsultation] Calendar booking network error, trying fallback:', error);
+            // Network error — fall back to Sheet + Jira flow
+            await fallbackSubmission();
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    // ── Fallback: Original Sheet + Jira submission (if Calendar API unavailable)
+    const fallbackSubmission = async () => {
         try {
             const res = await submitToSheet('Book for Consultation', {
                 formName: 'Executive Consultation Booking',
@@ -85,8 +156,8 @@ export default function BookConsultation() {
                 revenue: formData.revenue,
                 interest: formData.interest,
                 message: formData.message,
-                preferredDate: formData.date,
-                preferredTime: formData.time,
+                preferredDate: selectedSlot?.date || '',
+                preferredTime: selectedSlot?.label || '',
                 source: 'Book Consultation Page'
             });
 
@@ -106,15 +177,13 @@ export default function BookConsultation() {
                 revenue: formData.revenue,
                 interest: formData.interest,
                 message: formData.message,
-                date: formData.date,
-                time: formData.time,
+                date: selectedSlot?.date || '',
+                time: selectedSlot?.label || '',
                 source: 'Book Consultation Page'
             }).catch(jiraErr => console.warn('[Jira] Consultation Lead capture notice:', jiraErr));
-        } catch (error: any) {
-            console.error("Error submitting form:", error);
+        } catch (err: any) {
+            console.error("Error submitting form:", err);
             setSubmitError("We couldn't reach our scheduling system just now. Please try again in a moment, or email us directly.");
-        } finally {
-            setIsSubmitting(false);
         }
     };
 
@@ -189,7 +258,7 @@ export default function BookConsultation() {
                         </div>
                     </div>
 
-                    {/* Right Column: Standardized Enterprise Booking Form */}
+                    {/* Right Column: Booking Form with Calendar Integration */}
                     <div className="lg:w-1/2 w-full">
                         <div className="p-8 sm:p-10 rounded-3xl bg-white border border-slate-200/90 shadow-2xl shadow-slate-900/5 relative">
                             <div className="mb-6 border-b border-slate-100 pb-5">
@@ -325,6 +394,23 @@ export default function BookConsultation() {
                                     />
                                 </div>
 
+                                {/* ── Calendar Booking Widget ─────────────────────────── */}
+                                <div className="pt-2 pb-1">
+                                    <div className="mb-3 pb-3 border-b border-slate-100">
+                                        <h4 className="text-sm font-bold text-slate-800 flex items-center gap-2">
+                                            <Calendar className="w-4 h-4 text-[#2878B5]" />
+                                            Choose Your Consultation Slot
+                                        </h4>
+                                        <p className="text-[11px] text-slate-500 mt-1">
+                                            Select a preferred date and available time. Slots are 45-minute sessions, Monday–Friday.
+                                        </p>
+                                    </div>
+                                    <CalendarBookingWidget
+                                        selectedSlot={selectedSlot}
+                                        onSlotSelected={setSelectedSlot}
+                                    />
+                                </div>
+
                                 <HoneypotField value={honeypot} onChange={setHoneypot} />
 
                                 {submitError && (
@@ -334,14 +420,19 @@ export default function BookConsultation() {
                                 <div className="pt-2">
                                     <Button
                                         type="submit"
-                                        disabled={isSubmitting}
-                                        className="w-full py-3.5 h-12 bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold rounded-xl shadow-lg shadow-blue-900/25 transition-all flex items-center justify-center gap-2 group"
+                                        disabled={isSubmitting || !selectedSlot}
+                                        className="w-full py-3.5 h-12 bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold rounded-xl shadow-lg shadow-blue-900/25 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {isSubmitting ? (
                                             <div className="flex items-center gap-2">
                                                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                                                <span>Connecting to Enterprise Gateway...</span>
+                                                <span>Booking Your Consultation...</span>
                                             </div>
+                                        ) : !selectedSlot ? (
+                                            <span className="flex items-center gap-2">
+                                                <Calendar className="w-4 h-4" />
+                                                Select a Date & Time to Continue
+                                            </span>
                                         ) : (
                                             <>
                                                 <span>Confirm Consultation Request</span>
@@ -368,8 +459,12 @@ export default function BookConsultation() {
                 onClose={() => setSubmitted(false)}
                 submissionId={submissionId}
                 email={formData.email}
-                title="Consultation Request Logged"
-                message="Your consultation request has been registered in the ProfitMachines executive queue. A Principal AI Strategist has been assigned and will connect with your scheduling link."
+                title="Consultation Booked Successfully"
+                message={
+                    calendarEventLink
+                        ? "Your consultation has been confirmed and a Google Calendar invitation has been sent to your email. A Principal AI Strategist will connect with you at the scheduled time."
+                        : "Your consultation request has been registered in the ProfitMachines executive queue. A Principal AI Strategist has been assigned and will connect with your scheduling link."
+                }
             />
         </div>
     );

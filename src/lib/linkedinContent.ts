@@ -30,7 +30,7 @@ export interface LinkedInPost {
     };
 }
 
-const BASE_URL = 'https://profit-machines.vercel.app';
+const BASE_URL = 'https://profit-machines-1.vercel.app';
 
 export function buildUtmUrl(path: string, campaign: string, postId: string): string {
     const cleanPath = path.startsWith('/') ? path : `/${path}`;

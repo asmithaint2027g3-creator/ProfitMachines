@@ -11,13 +11,15 @@ import {
     Shield,
     ArrowRight,
     Lock,
-    Cpu
+    Cpu,
+    Calendar
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Label } from '../components/ui/label';
 import { FormSuccessModal, validateBusinessEmail, validatePhone, FormErrorBanner, HoneypotField } from '../components/forms/FormFeedback';
+import CalendarBookingWidget from '../components/forms/CalendarBookingWidget';
 
 export default function TalkToExpert() {
     useEffect(() => {
@@ -36,6 +38,13 @@ export default function TalkToExpert() {
         challenge: 'Scaling Multi-Touch Revenue Attribution',
         message: ''
     });
+
+    const [selectedSlot, setSelectedSlot] = useState<{
+        date: string;
+        startTime: string;
+        endTime: string;
+        label: string;
+    } | null>(null);
 
     const [emailError, setEmailError] = useState<string | null>(null);
     const [phoneError, setPhoneError] = useState<string | null>(null);
@@ -69,6 +78,48 @@ export default function TalkToExpert() {
         trackEvent({ eventName: 'FORM_SUBMIT_START', category: 'LEAD', label: 'Talk To Expert' });
 
         try {
+            if (selectedSlot) {
+                // Try calendar booking with selected slot
+                const bookingRes = await fetch('/api/book-calendar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        firstName: formData.firstName,
+                        lastName: formData.lastName,
+                        email: formData.email,
+                        phone: formData.phone,
+                        company: formData.company,
+                        jobTitle: formData.jobTitle,
+                        interest: formData.challenge,
+                        message: formData.message,
+                        startTime: selectedSlot.startTime,
+                        endTime: selectedSlot.endTime,
+                    }),
+                });
+
+                const bookingData = await bookingRes.json();
+
+                if (bookingRes.ok && bookingData.success) {
+                    setSubmissionId(bookingData.eventId || 'GCAL-CONFIRMED');
+                    setSubmitted(true);
+                    trackEvent({ eventName: 'FORM_SUBMIT_SUCCESS', category: 'LEAD', label: bookingData.eventId });
+                    return;
+                }
+
+                if (bookingData.slotUnavailable) {
+                    setSubmitError(bookingData.error || 'This slot is no longer available.');
+                    setSelectedSlot(null);
+                    return;
+                }
+
+                // Fallback if calendar API not configured
+                if (!bookingData.setupRequired) {
+                    setSubmitError(bookingData.error || 'Something went wrong.');
+                    return;
+                }
+            }
+
+            // Fallback: Sheet + Jira
             const res = await submitToSheet('Talk to Expert', {
                 formName: 'Expert Technical Consultation',
                 firstName: formData.firstName,
@@ -79,6 +130,8 @@ export default function TalkToExpert() {
                 designation: formData.jobTitle,
                 interest: formData.challenge,
                 message: formData.message,
+                preferredDate: selectedSlot?.date || '',
+                preferredTime: selectedSlot?.label || '',
                 source: 'Talk to Expert Page'
             });
 
@@ -97,6 +150,8 @@ export default function TalkToExpert() {
                 designation: formData.jobTitle,
                 interest: formData.challenge,
                 message: formData.message,
+                date: selectedSlot?.date || '',
+                time: selectedSlot?.label || '',
                 source: 'Talk to Expert Page'
             }).catch(jiraErr => console.warn('[Jira] Audit Lead capture notice:', jiraErr));
         } catch (error: any) {
@@ -292,20 +347,42 @@ export default function TalkToExpert() {
                                     />
                                 </div>
 
+                                {/* Calendar Booking Widget */}
+                                <div className="pt-2 pb-1">
+                                    <div className="mb-3 pb-3 border-b border-slate-100">
+                                        <h4 className="text-sm font-bold text-slate-800 flex items-center gap-2">
+                                            <Calendar className="w-4 h-4 text-[#2878B5]" />
+                                            Choose Your Consultation Slot
+                                        </h4>
+                                        <p className="text-[11px] text-slate-500 mt-1">
+                                            Select a preferred date and available time. Slots are 45-minute sessions, Monday–Friday.
+                                        </p>
+                                    </div>
+                                    <CalendarBookingWidget
+                                        selectedSlot={selectedSlot}
+                                        onSlotSelected={setSelectedSlot}
+                                    />
+                                </div>
+
                                 <div className="pt-2">
                                     <Button
                                         type="submit"
-                                        disabled={isSubmitting}
-                                        className="w-full py-3.5 h-12 bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold rounded-xl shadow-lg shadow-blue-900/25 transition-all flex items-center justify-center gap-2 group"
+                                        disabled={isSubmitting || !selectedSlot}
+                                        className="w-full py-3.5 h-12 bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold rounded-xl shadow-lg shadow-blue-900/25 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {isSubmitting ? (
                                             <div className="flex items-center gap-2">
                                                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                                                <span>Submitting Inquiry...</span>
+                                                <span>Booking Your Session...</span>
                                             </div>
+                                        ) : !selectedSlot ? (
+                                            <span className="flex items-center gap-2">
+                                                <Calendar className="w-4 h-4" />
+                                                Select a Date & Time to Continue
+                                            </span>
                                         ) : (
                                             <>
-                                                <span>Connect with Solutions Architect</span>
+                                                <span>Confirm Expert Consultation</span>
                                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                             </>
                                         )}

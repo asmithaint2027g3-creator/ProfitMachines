@@ -9,6 +9,7 @@ import {
     LinkedInPost, getStoredPosts, saveStoredPosts, createNewDraft, 
     buildUtmUrl, formatFullPostText, DEFAULT_LINKEDIN_POSTS 
 } from '../../lib/linkedinContent';
+import LinkedInOrganicLeads from '../components/linkedin/LinkedInOrganicLeads';
 
 export default function LinkedInStudio() {
     // Admin Security Gate State
@@ -19,6 +20,7 @@ export default function LinkedInStudio() {
     const [passcode, setPasscode] = useState('');
     const [passcodeError, setPasscodeError] = useState('');
 
+    const [studioSection, setStudioSection] = useState<'LEADS' | 'PUBLISHER'>('LEADS');
     const [posts, setPosts] = useState<LinkedInPost[]>([]);
     const [activeTab, setActiveTab] = useState<'ALL' | 'DRAFT' | 'APPROVED' | 'SCHEDULED' | 'PUBLISHED'>('ALL');
     const [selectedPost, setSelectedPost] = useState<LinkedInPost | null>(null);
@@ -459,6 +461,38 @@ export default function LinkedInStudio() {
                 </div>
             </div>
 
+            {/* Top Studio Navigation Tabs */}
+            <div className="max-w-7xl mx-auto px-6 sm:px-12 mt-6">
+                <div className="flex items-center gap-3 border-b border-emerald-800/40 pb-3">
+                    <button
+                        onClick={() => setStudioSection('LEADS')}
+                        className={`px-4 py-2.5 rounded-xl font-bold text-sm transition flex items-center gap-2 cursor-pointer ${
+                            studioSection === 'LEADS'
+                                ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
+                                : 'text-slate-400 hover:text-white hover:bg-slate-900/60'
+                        }`}
+                    >
+                        <MessageSquare className="w-4 h-4" /> Organic Post Leads & Engagement
+                    </button>
+                    <button
+                        onClick={() => setStudioSection('PUBLISHER')}
+                        className={`px-4 py-2.5 rounded-xl font-bold text-sm transition flex items-center gap-2 cursor-pointer ${
+                            studioSection === 'PUBLISHER'
+                                ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
+                                : 'text-slate-400 hover:text-white hover:bg-slate-900/60'
+                        }`}
+                    >
+                        <Edit3 className="w-4 h-4" /> Content Studio & Publisher
+                    </button>
+                </div>
+            </div>
+
+            {studioSection === 'LEADS' ? (
+                <div className="max-w-7xl mx-auto px-6 sm:px-12 mt-6">
+                    <LinkedInOrganicLeads />
+                </div>
+            ) : (
+                <>
             {/* Connection Diagnostics Card */}
             <div className="max-w-7xl mx-auto px-6 sm:px-12 mt-6">
                 <div className="bg-[#091D2C] border border-emerald-700/40 rounded-2xl p-5 shadow-xl">
@@ -893,6 +927,8 @@ export default function LinkedInStudio() {
                     </div>
                 </div>
             </div>
+            </>
+            )}
 
             {/* Schedule Post Modal */}
             {schedulingPost && (

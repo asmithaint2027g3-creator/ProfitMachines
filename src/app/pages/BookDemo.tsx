@@ -16,6 +16,7 @@ import { Label } from '../components/ui/label';
 import { submitToSheet } from '../../lib/sheets';
 import { captureLeadInJira } from '../../lib/jira';
 import { validateBusinessEmail, validatePhone, FormErrorBanner, HoneypotField } from '../components/forms/FormFeedback';
+import CalendarBookingWidget from '../components/forms/CalendarBookingWidget';
 
 export default function BookDemo() {
     React.useEffect(() => {
@@ -32,9 +33,14 @@ export default function BookDemo() {
         revenue: '',
         interest: '',
         message: '',
-        date: '',
-        time: ''
     });
+
+    const [selectedSlot, setSelectedSlot] = useState<{
+        date: string;
+        startTime: string;
+        endTime: string;
+        label: string;
+    } | null>(null);
 
     const [submitted, setSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -64,8 +70,62 @@ export default function BookDemo() {
             }
         }
 
+        if (!selectedSlot) {
+            setSubmitError('Please select a preferred date and time slot for your consultation.');
+            return;
+        }
+
         setIsSubmitting(true);
 
+        try {
+            // Try calendar booking first
+            const bookingRes = await fetch('/api/book-calendar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    email: formData.email,
+                    phone: formData.phone,
+                    company: formData.company,
+                    jobTitle: formData.jobTitle,
+                    revenue: formData.revenue,
+                    interest: formData.interest,
+                    message: formData.message,
+                    startTime: selectedSlot.startTime,
+                    endTime: selectedSlot.endTime,
+                }),
+            });
+
+            const bookingData = await bookingRes.json();
+
+            if (bookingRes.ok && bookingData.success) {
+                setSubmitted(true);
+                return;
+            }
+
+            if (bookingData.slotUnavailable) {
+                setSubmitError(bookingData.error || 'This slot is no longer available. Please select a different time.');
+                setSelectedSlot(null);
+                return;
+            }
+
+            if (bookingData.setupRequired) {
+                // Fallback to Sheet + Jira
+                await fallbackSubmission();
+                return;
+            }
+
+            setSubmitError(bookingData.error || 'Something went wrong. Please try again.');
+        } catch (error: any) {
+            console.warn('[BookDemo] Calendar booking error, trying fallback:', error);
+            await fallbackSubmission();
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    const fallbackSubmission = async () => {
         try {
             const res = await submitToSheet('Book for Consulting', {
                 "First Name": formData.firstName,
@@ -78,12 +138,11 @@ export default function BookDemo() {
                 "Annual Revenue": formData.revenue,
                 "Interest": formData.interest,
                 "Message": formData.message,
-                "Preferred Date": formData.date,
-                "Preferred Time": formData.time
+                "Preferred Date": selectedSlot?.date || '',
+                "Preferred Time": selectedSlot?.label || '',
             });
             setSubmitted(true);
 
-            // Capture Demo Lead in Jira Space (Tasks + Subtasks)
             captureLeadInJira('demo', {
                 submission_id: res?.submissionId,
                 firstName: formData.firstName,
@@ -94,15 +153,13 @@ export default function BookDemo() {
                 revenue: formData.revenue,
                 interest: formData.interest,
                 message: formData.message,
-                date: formData.date,
-                time: formData.time,
+                date: selectedSlot?.date || '',
+                time: selectedSlot?.label || '',
                 source: 'Book Demo Page'
             }).catch(jiraErr => console.warn('[Jira] Demo Lead capture notice:', jiraErr));
-        } catch (error: any) {
-            console.error("Error submitting form:", error);
+        } catch (err: any) {
+            console.error("Error submitting form:", err);
             setSubmitError("We couldn't submit your request just now. Please try again in a moment, or contact us directly.");
-        } finally {
-            setIsSubmitting(false);
         }
     };
 
@@ -315,23 +372,21 @@ export default function BookDemo() {
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div className="space-y-2">
-                                            <Label htmlFor="date">Preferred Date</Label>
-                                            <Input
-                                                id="date" name="date" type="date" required
-                                                value={formData.date} onChange={handleChange}
-                                                className="h-10 md:h-11"
-                                            />
+                                    {/* Calendar Booking Widget */}
+                                    <div className="pt-2 pb-1">
+                                        <div className="mb-3 pb-3 border-b border-slate-100">
+                                            <h4 className="text-sm font-bold text-slate-800 flex items-center gap-2">
+                                                <Calendar className="w-4 h-4 text-[#2878B5]" />
+                                                Choose Your Consultation Slot
+                                            </h4>
+                                            <p className="text-[11px] text-slate-500 mt-1">
+                                                Select a preferred date and available time. Slots are 45-minute sessions, Monday–Friday.
+                                            </p>
                                         </div>
-                                        <div className="space-y-2">
-                                            <Label htmlFor="time">Preferred Time</Label>
-                                            <Input
-                                                id="time" name="time" type="time" required
-                                                value={formData.time} onChange={handleChange}
-                                                className="h-10 md:h-11"
-                                            />
-                                        </div>
+                                        <CalendarBookingWidget
+                                            selectedSlot={selectedSlot}
+                                            onSlotSelected={setSelectedSlot}
+                                        />
                                     </div>
 
                                     <div className="space-y-2">
@@ -366,9 +421,9 @@ export default function BookDemo() {
                                         type="submit"
                                         size="lg"
                                         className="btn-cta-primary w-full mt-4"
-                                        disabled={isSubmitting}
+                                        disabled={isSubmitting || !selectedSlot}
                                     >
-                                        {isSubmitting ? 'Submitting...' : 'Schedule Free Consultation'}
+                                        {isSubmitting ? 'Booking Your Consultation...' : !selectedSlot ? 'Select a Date & Time to Continue' : 'Confirm Consultation Booking'}
                                     </Button>
 
                                     <HoneypotField value={honeypot} onChange={setHoneypot} />
