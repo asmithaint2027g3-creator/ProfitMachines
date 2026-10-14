@@ -64,6 +64,22 @@ ${data.hashtags.map(h => (h.startsWith('#') ? h : `#${h}`)).join(' ')}`.trim();
  */
 export const DEFAULT_LINKEDIN_POSTS: LinkedInPost[] = [
     {
+        id: 'pm-li-lead-magnet',
+        title: 'Autonomous Revenue Acceleration Blueprint (High-Converting Lead Magnet)',
+        topic: 'Enterprise AI Pipeline Acceleration',
+        serviceCategory: 'revenue-acceleration',
+        hook: 'Most B2B teams are spending 20+ hours a week manually researching buying committees and chasing unresponsive leads.\n\nAutonomous AI agents change the equation completely.',
+        body: `At ProfitMachines, we built an AI Demand & Pipeline Acceleration Engine that:\n1. Detects in-market buying signals 3 weeks before prospects show up on search\n2. Identifies executive decision-makers across target enterprise accounts\n3. Automates hyper-personalized outreach that books calls directly into your calendar\n\nWe just published our 2026 Enterprise Pipeline Blueprint:\n"How AI Agents Discover Hidden Profit Pools and Accelerate Revenue."\n\nWant a copy of the blueprint or a live interactive walkthrough?\n\n👇 Drop a comment below with:\n• "DEMO" — if you’d like to see a live walkthrough of the engine\n• "PRICING" — to receive our enterprise implementation tiers\n• "AUDIT" — for a complimentary pipeline health audit`,
+        ctaText: 'Or explore the architecture & schedule an executive consultation directly:',
+        targetServicePath: '/book-consultation',
+        campaignSlug: 'organic-lead-magnet',
+        hashtags: ['#B2BGrowth', '#AI', '#RevenueOperations', '#LeadGeneration', '#ProfitMachines', '#EnterpriseAI'],
+        utmUrl: buildUtmUrl('/book-consultation', 'organic-lead-magnet', 'pm-li-lead-magnet'),
+        fullPostText: '',
+        status: 'APPROVED',
+        createdAt: new Date().toISOString()
+    },
+    {
         id: 'pm-li-001',
         title: 'Stop Chasing Cold Leads — Capture Active Buyer Intent',
         topic: 'AI Intent-Based Lead Generation',
@@ -201,7 +217,7 @@ ProfitMachines offers an Executive Profit & Revenue Diagnostic to uncover bottle
     fullPostText: formatFullPostText(post)
 })) as LinkedInPost[];
 
-const POSTS_STORAGE_KEY = 'pm_linkedin_posts_v1';
+const POSTS_STORAGE_KEY = 'pm_linkedin_posts_v2';
 
 export function getStoredPosts(): LinkedInPost[] {
     if (typeof window === 'undefined') return DEFAULT_LINKEDIN_POSTS;
