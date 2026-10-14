@@ -1,13 +1,13 @@
-import { motion } from 'framer-motion';
+﻿import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import VerticalTabEngine from './VerticalTabEngine';
 import type { ConversionBlockData } from '../../data/homeContent';
 
 const getColorTheme = (index: number) => {
     const themes = [
-        'from-[#0066FF] to-cyan-500',
-        'from-[#0066FF] to-pink-500',
-        'from-[#0066FF] to-[#0066FF]',
+        'from-emerald-600 to-cyan-500',
+        'from-teal-500 to-pink-500',
+        'from-emerald-500 to-teal-500',
         'from-orange-500 to-red-500',
     ];
     return themes[index % themes.length];
@@ -18,7 +18,7 @@ export default function ConversionBlock({ data, index }: { data: ConversionBlock
     const themeGradient = getColorTheme(index);
 
     return (
-        <section className={`py-20 lg:py-32 relative overflow-hidden ${isAltBackground ? 'bg-white' : 'bg-white'}`}>
+        <section className={`py-20 lg:py-32 relative overflow-hidden ${isAltBackground ? 'bg-slate-50' : 'bg-white'}`}>
 
             {/* Background Ambience */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -36,11 +36,11 @@ export default function ConversionBlock({ data, index }: { data: ConversionBlock
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#0066FF] mb-6 tracking-tight">
+                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
                             {data.title}
                         </h2>
                         {data.subtitle && (
-                            <p className="text-xl text-[#0066FF] max-w-2xl border-l-4 border-[#0066FF] pl-6 font-medium">
+                            <p className="text-xl text-slate-600 max-w-2xl border-l-4 border-[#2878B5] pl-6 font-medium">
                                 {data.subtitle}
                             </p>
                         )}
@@ -61,21 +61,21 @@ export default function ConversionBlock({ data, index }: { data: ConversionBlock
                                     whileInView={{ opacity: 1, x: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1, duration: 0.5 }}
-                                    className="bg-white border border-[#0066FF] rounded-2xl p-6 transition-all shadow-sm hover:shadow-md hover:border-[#0066FF] group"
+                                    className="bg-white border border-slate-200 rounded-2xl p-6 transition-all shadow-sm hover:shadow-md hover:border-emerald-200 group"
                                 >
-                                    <p className="text-[#0066FF] text-sm font-bold uppercase tracking-wider mb-2">{stat.label}</p>
+                                    <p className="text-slate-500 text-sm font-bold uppercase tracking-wider mb-2">{stat.label}</p>
                                     <div className={`text-3xl font-bold bg-gradient-to-r ${themeGradient} bg-clip-text text-transparent`}>
                                         {stat.value}
-                                        {stat.suffix && <span className="text-lg text-[#0066FF] ml-1">{stat.suffix}</span>}
+                                        {stat.suffix && <span className="text-lg text-slate-400 ml-1">{stat.suffix}</span>}
                                     </div>
-                                    {stat.subtext && <p className="text-xs text-[#0066FF] mt-2 font-medium">{stat.subtext}</p>}
+                                    {stat.subtext && <p className="text-xs text-slate-400 mt-2 font-medium">{stat.subtext}</p>}
                                 </motion.div>
                             ))}
                         </div>
 
                         {/* PANEL 3: Portfolio Cards */}
                         <div className="space-y-4">
-                            <h3 className="text-sm font-bold text-[#0066FF] uppercase tracking-wider mb-4">Core Capabilities</h3>
+                            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">Core Capabilities</h3>
                             {data.portfolio.map((item, i) => {
                                 const Icon = item.icon;
                                 return (
@@ -85,14 +85,14 @@ export default function ConversionBlock({ data, index }: { data: ConversionBlock
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: 0.3 + (i * 0.1), duration: 0.5 }}
-                                        className="flex items-center space-x-4 p-4 rounded-xl bg-white border border-[#0066FF] hover:border-[#0066FF] transition-all shadow-sm hover:shadow-md"
+                                        className="flex items-center space-x-4 p-4 rounded-xl bg-white border border-slate-200 hover:border-emerald-300 transition-all shadow-sm hover:shadow-md"
                                     >
                                         <div className={`p-2.5 rounded-lg bg-gradient-to-br ${themeGradient} bg-opacity-10 text-white`}>
                                             <Icon className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <h4 className="text-[#0066FF] font-bold">{item.title}</h4>
-                                            {item.desc && <p className="text-xs text-[#0066FF] font-medium">{item.desc}</p>}
+                                            <h4 className="text-slate-900 font-bold">{item.title}</h4>
+                                            {item.desc && <p className="text-xs text-slate-500 font-medium">{item.desc}</p>}
                                         </div>
                                     </motion.div>
                                 );
@@ -104,7 +104,7 @@ export default function ConversionBlock({ data, index }: { data: ConversionBlock
                     <div className="lg:col-span-8 space-y-12">
 
                         {/* PANEL 4: Vertical Tab Engine */}
-                        <div className="bg-white rounded-3xl p-2 border border-[#0066FF] shadow-xl">
+                        <div className="bg-white rounded-3xl p-2 border border-slate-200 shadow-xl">
                             <VerticalTabEngine tabs={data.tabs} />
                         </div>
 
@@ -116,7 +116,7 @@ export default function ConversionBlock({ data, index }: { data: ConversionBlock
                             transition={{ delay: 0.5 }}
                             className="flex justify-start md:justify-end"
                         >
-                            <button className="group relative px-8 py-4 bg-white text-white font-bold rounded-full overflow-hidden hover:shadow-xl transition-all duration-300">
+                            <button className="group relative px-8 py-4 bg-slate-900 text-white font-bold rounded-full overflow-hidden hover:shadow-xl transition-all duration-300">
                                 <div className={`absolute inset-0 bg-gradient-to-r ${themeGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                                 <span className="relative z-10 flex items-center space-x-2 transition-colors">
                                     <span>{data.cta.text}</span>

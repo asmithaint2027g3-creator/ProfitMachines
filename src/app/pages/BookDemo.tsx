@@ -114,10 +114,10 @@ export default function BookDemo() {
     };
 
     return (
-        <div className="pt-20 lg:pt-28 pb-16 min-h-screen bg-white text-[#0066FF] overflow-hidden">
+        <div className="pt-20 lg:pt-28 pb-16 min-h-screen bg-slate-50 text-slate-900 overflow-hidden">
             {/* Background Decorative Blobs */}
-            <div className="absolute top-0 right-0 -mr-40 -mt-40 w-[600px] h-[600px] bg-white/40 rounded-full blur-[100px] pointer-events-none mix-blend-multiply" />
-            <div className="absolute bottom-0 left-0 -ml-40 -mb-40 w-[600px] h-[600px] bg-[#0066FF]/40 rounded-full blur-[100px] pointer-events-none mix-blend-multiply" />
+            <div className="absolute top-0 right-0 -mr-40 -mt-40 w-[600px] h-[600px] bg-emerald-100/40 rounded-full blur-[100px] pointer-events-none mix-blend-multiply" />
+            <div className="absolute bottom-0 left-0 -ml-40 -mb-40 w-[600px] h-[600px] bg-teal-100/40 rounded-full blur-[100px] pointer-events-none mix-blend-multiply" />
 
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -127,17 +127,17 @@ export default function BookDemo() {
                     <div className="lg:w-1/2 space-y-10">
                         <Reveal width="100%">
                             <div>
-                                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#0066FF] font-bold text-xs uppercase tracking-wider mb-6 border border-[#0066FF] shadow-sm">
+                                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 text-[#1E6297] font-bold text-xs uppercase tracking-wider mb-6 border border-emerald-100 shadow-sm">
                                     <Calendar className="w-4 h-4" />
                                     Schedule a Consultation
                                 </span>
-                                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-[#0066FF] mb-6 tracking-tighter leading-[1.05]">
+                                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-slate-900 mb-6 tracking-tighter leading-[1.05]">
                                     Architect Your <br />
-                                    <span className="bg-gradient-to-r from-[#0066FF] to-[#0066FF] bg-clip-text text-transparent">
+                                    <span className="bg-gradient-to-r from-[#2878B5] to-emerald-600 bg-clip-text text-transparent">
                                         AI Revenue Engine
                                     </span>
                                 </h1>
-                                <p className="text-xl text-[#0066FF] leading-relaxed font-medium max-w-lg">
+                                <p className="text-xl text-slate-600 leading-relaxed font-medium max-w-lg">
                                     Book a personalized consulting session with our revenue architects. See how ProfitMachines can transform your unstructured data into predictable growth.
                                 </p>
                             </div>
@@ -145,7 +145,7 @@ export default function BookDemo() {
 
                         <div className="space-y-6">
                             <Reveal width="100%" delay={0.2}>
-                                <h3 className="text-xl font-bold text-[#0066FF] tracking-tight">What you'll get:</h3>
+                                <h3 className="text-xl font-bold text-slate-900 tracking-tight">What you'll get:</h3>
                                 <ul className="space-y-4">
                                     {[
                                         { text: "Full platform walkthrough customized to your vertical", icon: Users },
@@ -153,11 +153,11 @@ export default function BookDemo() {
                                         { text: "Revenue acceleration roadmap & ROI projection", icon: TrendingUp },
                                         { text: "Competitive whitespace analysis preview", icon: Building2 }
                                     ].map((item, idx) => (
-                                        <li key={idx} className="flex items-start gap-4 p-5 bg-white rounded-2xl border border-[#0066FF] shadow-sm hover:border-[#0066FF] hover:shadow-md transition-all group">
-                                            <div className="bg-white p-2.5 rounded-xl text-[#0066FF] group-hover:bg-[#0066FF] group-hover:text-white transition-colors">
+                                        <li key={idx} className="flex items-start gap-4 p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:border-emerald-200 hover:shadow-md transition-all group">
+                                            <div className="bg-emerald-50 p-2.5 rounded-xl text-[#2878B5] group-hover:bg-[#2878B5] group-hover:text-white transition-colors">
                                                 <item.icon className="w-5 h-5" />
                                             </div>
-                                            <span className="text-[#0066FF] font-semibold text-lg leading-snug">{item.text}</span>
+                                            <span className="text-slate-700 font-semibold text-lg leading-snug">{item.text}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -166,7 +166,7 @@ export default function BookDemo() {
 
                         {/* Real-World Interactive Demo Workspace Visual */}
                         <Reveal width="100%" delay={0.25}>
-                            <div className="relative rounded-2xl overflow-hidden shadow-xl border border-[#0066FF] group">
+                            <div className="relative rounded-2xl overflow-hidden shadow-xl border border-slate-200 group">
                                 <img 
                                     src="/images/book-demo-preview.png" 
                                     alt="ProfitMachines Interactive AI Platform Consultation & Live Demo Session" 
@@ -175,22 +175,22 @@ export default function BookDemo() {
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
                                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-left">
                                     <div>
-                                        <span className="text-[10px] font-mono font-bold text-[#0066FF] uppercase tracking-widest">Interactive Session</span>
+                                        <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-widest">Interactive Session</span>
                                         <h4 className="text-sm font-bold text-white mt-0.5">Live AI Co-Pilot & Revenue Architecture Review</h4>
                                     </div>
-                                    <span className="px-2.5 py-1 bg-[#0066FF]/20 border border-[#0066FF]/40 text-[#0066FF] text-xs font-mono font-bold rounded-full">
+                                    <span className="px-2.5 py-1 bg-emerald-600/20 border border-emerald-400/40 text-emerald-300 text-xs font-mono font-bold rounded-full">
                                         30-Min Session
                                     </span>
                                 </div>
                             </div>
                         </Reveal>
 
-                        <div className="pt-8 border-t border-[#0066FF]/60">
+                        <div className="pt-8 border-t border-slate-200/60">
                             <Reveal width="100%" delay={0.3}>
                                 <div className="flex items-center gap-5">
                                     <div className="flex -space-x-4">
                                         {[1, 2, 3, 4].map((i) => (
-                                            <div key={i} className="w-12 h-12 rounded-full border-2 border-white bg-white flex items-center justify-center overflow-hidden shadow-sm">
+                                            <div key={i} className="w-12 h-12 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center overflow-hidden shadow-sm">
                                                 
                                             </div>
                                         ))}
@@ -203,7 +203,7 @@ export default function BookDemo() {
                                                 </svg>
                                             ))}
                                         </div>
-                                        <p className="text-sm font-bold text-[#0066FF] tracking-wide">Trusted by 500+ Revenue Leaders</p>
+                                        <p className="text-sm font-bold text-slate-700 tracking-wide">Trusted by 500+ Revenue Leaders</p>
                                     </div>
                                 </div>
                             </Reveal>
@@ -213,21 +213,21 @@ export default function BookDemo() {
                     {/* Right Column: Form */}
                     <div className="lg:w-1/2">
                         <Reveal width="100%" delay={0.2}>
-                            <div className="bg-white rounded-[2rem] shadow-2xl shadow-slate-200/50 border border-[#0066FF] p-8 sm:p-12 relative overflow-hidden ring-1 ring-slate-900/5 mx-auto w-full max-w-lg lg:max-w-none hover:shadow-3xl transition-shadow duration-500">
+                            <div className="bg-white rounded-[2rem] shadow-2xl shadow-slate-200/50 border border-slate-100 p-8 sm:p-12 relative overflow-hidden ring-1 ring-slate-900/5 mx-auto w-full max-w-lg lg:max-w-none hover:shadow-3xl transition-shadow duration-500">
 
                                 {submitted ? (
                                     <div className="absolute inset-0 z-20 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center text-center p-8 animate-in fade-in zoom-in duration-300">
                                         <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mb-6 shadow-sm border border-green-100 animate-bounce">
                                             <CheckCircle2 className="w-12 h-12 text-green-600" />
                                         </div>
-                                        <h2 className="text-3xl font-bold text-[#0066FF] mb-4 tracking-tight">Request Received!</h2>
-                                        <p className="text-lg text-[#0066FF] max-w-md mx-auto mb-8 font-medium">
+                                        <h2 className="text-3xl font-bold text-slate-900 mb-4 tracking-tight">Request Received!</h2>
+                                        <p className="text-lg text-slate-600 max-w-md mx-auto mb-8 font-medium">
                                             Thanks for your interest, {formData.firstName}. Our revenue architects will review your profile and contact you shortly.
                                         </p>
                                         <Button
                                             onClick={() => setSubmitted(false)}
                                             variant="outline"
-                                            className="border-[#0066FF] text-[#0066FF] h-12 px-8 text-base font-bold hover:bg-[#0066FF]/10 hover:text-[#0066FF] rounded-xl"
+                                            className="border-slate-300 text-slate-700 h-12 px-8 text-base font-bold hover:bg-slate-50 hover:text-slate-900 rounded-xl"
                                         >
                                             Submit Another Request
                                         </Button>
@@ -235,8 +235,8 @@ export default function BookDemo() {
                                 ) : null}
 
                                 <div className="relative z-10 mb-8">
-                                    <h2 className="text-2xl font-bold text-[#0066FF] mb-2">Schedule Free Consultation</h2>
-                                    <p className="text-[#0066FF]">Fill out the form below to schedule your consulting session.</p>
+                                    <h2 className="text-2xl font-bold text-slate-900 mb-2">Schedule Free Consultation</h2>
+                                    <p className="text-slate-500">Fill out the form below to schedule your consulting session.</p>
                                 </div>
 
                                 <form onSubmit={handleSubmit} className="relative z-10 space-y-5">
@@ -304,9 +304,9 @@ export default function BookDemo() {
                                                 <select
                                                     id="revenue" name="revenue"
                                                     value={formData.revenue} onChange={handleChange}
-                                                    className={`flex h-10 md:h-11 w-full rounded-md border border-[#0066FF] bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[#0066FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${formData.revenue === "" ? "text-[#0066FF]" : "text-[#0066FF]"}`}
+                                                    className={`flex h-10 md:h-11 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${formData.revenue === "" ? "text-slate-500" : "text-slate-900"}`}
                                                 >
-                                                    <option value="" className="text-[#0066FF]">Select Range</option>
+                                                    <option value="" className="text-slate-400">Select Range</option>
                                                     <option value="Seed - Series A">Seed - Series A</option>
                                                     <option value="Series B - C ($10M - $50M)">Series B - C ($10M - $50M)</option>
                                                     <option value="Enterprise ($50M+)">Enterprise ($50M+)</option>
@@ -340,9 +340,9 @@ export default function BookDemo() {
                                             <select
                                                 id="interest" name="interest" required
                                                 value={formData.interest} onChange={handleChange}
-                                                className={`flex h-10 md:h-11 w-full rounded-md border border-[#0066FF] bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[#0066FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${formData.interest === "" ? "text-[#0066FF]" : "text-[#0066FF]"}`}
+                                                className={`flex h-10 md:h-11 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${formData.interest === "" ? "text-slate-500" : "text-slate-900"}`}
                                             >
-                                                <option value="" className="text-[#0066FF]">Select a Solution</option>
+                                                <option value="" className="text-slate-400">Select a Solution</option>
                                                 <option value="AI Sales Acceleration">AI Sales Acceleration</option>
                                                 <option value="Demand Discovery Engine">Demand Discovery Engine</option>
                                                 <option value="Revenue Operations (RevOps)">Revenue Operations (RevOps)</option>
@@ -377,7 +377,7 @@ export default function BookDemo() {
                                         <FormErrorBanner message={submitError} onDismiss={() => setSubmitError(null)} />
                                     )}
 
-                                    <p className="text-xs text-center text-[#0066FF] mt-4">
+                                    <p className="text-xs text-center text-slate-500 mt-4">
                                         By submitting this form, you agree to our Terms of Service and Privacy Policy.
                                     </p>
                                 </form>

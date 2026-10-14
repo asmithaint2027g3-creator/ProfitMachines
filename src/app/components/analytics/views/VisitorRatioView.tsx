@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import {
   UserPlus,
   RotateCw,
@@ -37,58 +37,58 @@ export default function VisitorRatioView({ data }: Props) {
     <div className="space-y-8 animate-fadeIn">
       {/* 1. Four KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">New Visitors</span>
-            <div className="p-2 rounded-lg bg-[#0066FF]/10 text-[#0066FF]">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">New Visitors</span>
+            <div className="p-2 rounded-lg bg-emerald-600/10 text-emerald-400">
               <UserPlus className="w-4 h-4" />
             </div>
           </div>
           <div className="text-2xl font-extrabold text-white font-mono">{newVisitors.toLocaleString()}</div>
-          <span className="text-xs text-[#0066FF] font-bold">First-touch discovery</span>
+          <span className="text-xs text-emerald-400 font-bold">First-touch discovery</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">Returning Visitors</span>
-            <div className="p-2 rounded-lg bg-white0/10 text-[#0066FF]">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Returning Visitors</span>
+            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
               <RotateCw className="w-4 h-4" />
             </div>
           </div>
           <div className="text-2xl font-extrabold text-white font-mono">{returningVisitors.toLocaleString()}</div>
-          <span className="text-xs text-[#0066FF] font-bold">Nurtured multi-visit intent</span>
+          <span className="text-xs text-emerald-400 font-bold">Nurtured multi-visit intent</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">New Visitor Ratio</span>
-            <div className="p-2 rounded-lg bg-white0/10 text-[#0066FF]">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">New Visitor Ratio</span>
+            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
               <Percent className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-[#0066FF] font-mono">{newVisitorPct}%</div>
-          <span className="text-xs text-[#0066FF]">Healthy top-of-funnel intake</span>
+          <div className="text-2xl font-extrabold text-emerald-400 font-mono">{newVisitorPct}%</div>
+          <span className="text-xs text-slate-400">Healthy top-of-funnel intake</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">Returning Visitor Ratio</span>
-            <div className="p-2 rounded-lg bg-[#0066FF]/10 text-[#0066FF]">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Returning Visitor Ratio</span>
+            <div className="p-2 rounded-lg bg-teal-500/10 text-teal-400">
               <Percent className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-[#0066FF] font-mono">{returningVisitorPct}%</div>
-          <span className="text-xs text-[#0066FF]">Enterprise consideration depth</span>
+          <div className="text-2xl font-extrabold text-emerald-400 font-mono">{returningVisitorPct}%</div>
+          <span className="text-xs text-slate-400">Enterprise consideration depth</span>
         </div>
       </div>
 
       {/* 2. Donut Ratio Chart & Longitudinal Trend Line */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Donut Chart */}
-        <div className="lg:col-span-5 p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl flex flex-col justify-between">
+        <div className="lg:col-span-5 p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex flex-col justify-between">
           <div>
             <h4 className="text-lg font-bold text-white mb-1">Audience Composition Donut</h4>
-            <p className="text-xs text-[#0066FF] mb-4">First-party split of new vs recurring enterprise prospects</p>
+            <p className="text-xs text-slate-400 mb-4">First-party split of new vs recurring enterprise prospects</p>
           </div>
 
           <div className="h-60 w-full relative flex items-center justify-center">
@@ -114,35 +114,35 @@ export default function VisitorRatioView({ data }: Props) {
               </PieChart>
             </ResponsiveContainer>
             <div className="absolute flex flex-col items-center pointer-events-none">
-              <span className="text-xs font-mono text-[#0066FF]">RETURNING</span>
-              <span className="text-2xl font-extrabold text-[#0066FF] font-mono">{returningVisitorPct}%</span>
+              <span className="text-xs font-mono text-slate-400">RETURNING</span>
+              <span className="text-2xl font-extrabold text-emerald-400 font-mono">{returningVisitorPct}%</span>
             </div>
           </div>
 
-          <div className="pt-4 border-t border-[#0066FF]/80 grid grid-cols-2 gap-3 text-xs font-mono">
-            <div className="p-2.5 rounded-xl bg-white/70 border border-[#0066FF] flex items-center justify-between">
+          <div className="pt-4 border-t border-slate-800/80 grid grid-cols-2 gap-3 text-xs font-mono">
+            <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between">
               <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#0066FF]" />
-                <span className="text-[#0066FF]">New</span>
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
+                <span className="text-slate-300">New</span>
               </div>
               <span className="text-white font-bold">{newVisitorPct}%</span>
             </div>
-            <div className="p-2.5 rounded-xl bg-white/70 border border-[#0066FF] flex items-center justify-between">
+            <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between">
               <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-white0" />
-                <span className="text-[#0066FF]">Returning</span>
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                <span className="text-slate-300">Returning</span>
               </div>
-              <span className="text-[#0066FF] font-bold">{returningVisitorPct}%</span>
+              <span className="text-emerald-400 font-bold">{returningVisitorPct}%</span>
             </div>
           </div>
         </div>
 
         {/* Trend Line */}
-        <div className="lg:col-span-7 p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="lg:col-span-7 p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h4 className="text-lg font-bold text-white">New vs Returning Trajectory</h4>
-              <p className="text-xs text-[#0066FF]">5-week rolling retention and acquisition velocity</p>
+              <p className="text-xs text-slate-400">5-week rolling retention and acquisition velocity</p>
             </div>
           </div>
 

@@ -36,17 +36,11 @@ export default function ChatBot() {
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [agentName, setAgentName] = useState('Pooja');
-    const [agentRole] = useState('AI Revenue Strategist');
+    const [agentRole] = useState('Digital Success Director');
     const location = useLocation();
     const { openQuickForm, openLongForm } = useLeadModal();
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const dragControls = useDragControls();
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            (window as any).__PM_CHATBOT_OPEN__ = isOpen;
-        }
-    }, [isOpen]);
 
     // ── Location / Name Mapping ─────────────────────────────────────────
     useEffect(() => {
@@ -481,30 +475,30 @@ export default function ChatBot() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 24, scale: 0.95 }}
                         transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                        className="fixed bottom-24 right-5 sm:right-6 w-[390px] max-w-[calc(100vw-2.5rem)] h-[620px] max-h-[calc(100vh-8rem)] bg-white rounded-2xl border-2 border-[#0066FF] z-[90] flex flex-col overflow-hidden font-sans text-[#0066FF]"
+                        className="fixed bottom-24 right-5 sm:right-6 w-[390px] max-w-[calc(100vw-2.5rem)] h-[620px] max-h-[calc(100vh-8rem)] bg-white rounded-2xl shadow-2xl border border-slate-200 z-[90] flex flex-col overflow-hidden font-sans ring-1 ring-black/5"
                     >
-                        {/* Header */}
+                        {/* Executive Dark Teal Header */}
                         <div
                             onPointerDown={(e) => dragControls.start(e)}
-                            className="bg-[#0066FF] px-5 py-3.5 flex items-center justify-between text-white shrink-0 border-b-2 border-[#0066FF]"
+                            className="bg-[#2878B5] px-5 py-3.5 flex items-center justify-between text-white shrink-0 border-b border-emerald-500/20"
                         >
                             <div className="flex items-center gap-3">
                                 <div className="relative">
-                                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center p-1 border border-white">
+                                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center p-1 shadow-sm">
                                         <img src={logo} alt="ProfitMachines" className="w-full h-full object-contain" />
                                     </div>
-                                    <span className="absolute bottom-0 right-0 w-3 h-3 bg-white border-2 border-[#0066FF] rounded-full" />
+                                    <span className="absolute bottom-0 right-0 w-3 h-3 bg-[#10b981] border-2 border-[#2878B5] rounded-full" />
                                 </div>
                                 <div>
                                     <div className="flex items-center gap-1.5">
                                         <h3 className="font-extrabold text-sm tracking-wide text-white font-heading">
                                             ProfitMachines AI
                                         </h3>
-                                        <span className="px-1.5 py-0.5 rounded text-[10px] bg-white text-[#0066FF] font-bold uppercase">
+                                        <span className="px-1.5 py-0.2 rounded text-[10px] bg-emerald-900/80 text-emerald-300 font-bold uppercase">
                                             Live
                                         </span>
                                     </div>
-                                    <p className="text-[11px] text-white font-medium">
+                                    <p className="text-[11px] text-emerald-200/90 font-medium">
                                         {agentName} • {agentRole}
                                     </p>
                                 </div>
@@ -513,28 +507,28 @@ export default function ChatBot() {
                             <button
                                 aria-label="Close chat"
                                 onClick={() => setIsOpen(false)}
-                                className="p-1.5 text-white hover:bg-white hover:text-[#0066FF] rounded-lg transition-colors border border-white"
+                                className="p-1.5 text-emerald-200 hover:text-white rounded-full hover:bg-emerald-800/60 transition-colors"
                             >
                                 <X className="w-5 h-5" />
                             </button>
                         </div>
 
                         {/* Page Context Badge */}
-                        <div className="bg-white border-b-2 border-[#0066FF] px-4 py-2 flex items-center justify-between text-[11px] text-[#0066FF] font-bold shrink-0">
+                        <div className="bg-emerald-50/80 border-b border-emerald-100/80 px-4 py-2 flex items-center justify-between text-[11px] text-emerald-900 font-semibold shrink-0">
                             <span className="flex items-center gap-1.5">
-                                <span className="w-2 h-2 rounded-full bg-[#0066FF]" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
                                 <span>Context: {currentPageContext.title}</span>
                             </span>
                             <button
                                 onClick={() => openQuickForm({ defaultService: currentPageContext.title, source: 'Chat Header' })}
-                                className="text-[#0066FF] underline font-bold"
+                                className="text-emerald-700 hover:text-emerald-900 underline font-bold"
                             >
                                 Quick Form
                             </button>
                         </div>
 
                         {/* Messages Area */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-white">
+                        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/60">
                             {messages.map((msg) => (
                                 <div
                                     key={msg.id}
@@ -543,20 +537,20 @@ export default function ChatBot() {
                                     <div
                                         className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                                             msg.role === 'user'
-                                                ? 'bg-[#0066FF] text-white border-2 border-[#0066FF]'
-                                                : 'bg-white text-[#0066FF] border-2 border-[#0066FF]'
+                                                ? 'bg-[#2878B5] text-white rounded-br-xs shadow-xs'
+                                                : 'bg-white text-slate-800 border border-slate-200/90 rounded-bl-xs shadow-xs'
                                         }`}
                                     >
-                                        <p className="whitespace-pre-line font-medium">{msg.content}</p>
+                                        <p className="whitespace-pre-line">{msg.content}</p>
 
                                         {/* Action Buttons inside message */}
                                         {msg.actions && msg.actions.length > 0 && (
-                                            <div className="mt-3 pt-2.5 border-t border-[#0066FF] flex flex-wrap gap-2">
+                                            <div className="mt-3 pt-2.5 border-t border-slate-100 flex flex-wrap gap-2">
                                                 {msg.actions.map((act, aIdx) => (
                                                     <button
                                                         key={aIdx}
                                                         onClick={() => handleActionClick(act)}
-                                                        className="px-3 py-1.5 rounded-lg bg-white hover:bg-[#0066FF] text-[#0066FF] hover:text-white border border-[#0066FF] text-xs font-bold transition-all flex items-center gap-1.5"
+                                                        className="px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/80 text-[#2878B5] text-xs font-bold transition-all flex items-center gap-1.5 shadow-xs"
                                                     >
                                                         <span>{act.label}</span>
                                                     </button>
@@ -564,15 +558,15 @@ export default function ChatBot() {
                                             </div>
                                         )}
                                     </div>
-                                    <span className="text-[10px] text-[#0066FF] mt-1 px-1 font-mono">
+                                    <span className="text-[10px] text-slate-400 mt-1 px-1">
                                         {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                     </span>
                                 </div>
                             ))}
 
                             {isLoading && (
-                                <div className="flex items-center gap-2 text-[#0066FF] text-xs py-2 px-3 bg-white rounded-xl border border-[#0066FF] w-max font-bold">
-                                    <Sparkles className="w-3.5 h-3.5 text-[#0066FF] animate-spin" />
+                                <div className="flex items-center gap-2 text-slate-500 text-xs py-2 px-3 bg-white rounded-xl border border-slate-200 w-max shadow-xs">
+                                    <Sparkles className="w-3.5 h-3.5 text-emerald-600 animate-spin" />
                                     <span>{agentName} is thinking...</span>
                                 </div>
                             )}
@@ -581,12 +575,12 @@ export default function ChatBot() {
                         </div>
 
                         {/* Suggested Prompt Chips */}
-                        <div className="bg-white border-t-2 border-[#0066FF] px-3 py-2 overflow-x-auto whitespace-nowrap scrollbar-none flex gap-1.5 shrink-0">
+                        <div className="bg-white border-t border-slate-200 px-3 py-2 overflow-x-auto whitespace-nowrap scrollbar-none flex gap-1.5 shrink-0">
                             {currentPageContext.quickPrompts.map((chip, cIdx) => (
                                 <button
                                     key={cIdx}
                                     onClick={() => handleSend(chip)}
-                                    className="px-2.5 py-1 rounded-full bg-white hover:bg-[#0066FF] text-[#0066FF] hover:text-white border border-[#0066FF] text-[11px] font-bold transition-all shrink-0"
+                                    className="px-2.5 py-1 rounded-full bg-slate-100 hover:bg-emerald-50 hover:border-emerald-200 border border-slate-200 text-slate-700 hover:text-[#2878B5] text-[11px] font-semibold transition-all shrink-0"
                                 >
                                     {chip}
                                 </button>
@@ -594,7 +588,7 @@ export default function ChatBot() {
                         </div>
 
                         {/* Input Area */}
-                        <div className="p-3 bg-white border-t-2 border-[#0066FF] shrink-0">
+                        <div className="p-3 bg-white border-t border-slate-200 shrink-0">
                             <form
                                 onSubmit={(e) => {
                                     e.preventDefault();
@@ -607,13 +601,13 @@ export default function ChatBot() {
                                     value={inputValue}
                                     onChange={(e) => setInputValue(e.target.value)}
                                     placeholder={`Ask ${agentName} anything about ${currentPageContext.title}...`}
-                                    className="flex-1 px-3.5 py-2.5 rounded-lg border-2 border-[#0066FF] focus:border-[#0066FF] outline-none text-xs sm:text-sm text-[#0066FF] transition-all placeholder:text-[#0066FF]/60 bg-white"
+                                    className="flex-1 px-3.5 py-2.5 rounded-xl border border-slate-300 focus:border-[#2878B5] focus:ring-2 focus:ring-[#2878B5]/20 outline-none text-xs sm:text-sm text-slate-900 transition-all placeholder:text-slate-400 bg-white"
                                 />
                                 <button
                                     type="submit"
                                     disabled={!inputValue.trim() || isLoading}
                                     aria-label="Send message"
-                                    className="p-2.5 rounded-lg bg-[#0066FF] text-white hover:bg-white hover:text-[#0066FF] border-2 border-[#0066FF] disabled:opacity-40 transition-all shrink-0"
+                                    className="p-2.5 rounded-xl bg-[#2878B5] hover:bg-[#085a45] text-white disabled:opacity-40 transition-all shrink-0"
                                 >
                                     <Send className="w-4 h-4" />
                                 </button>
@@ -628,9 +622,12 @@ export default function ChatBot() {
                 <button
                     onClick={() => setIsOpen(true)}
                     aria-label="Open AI Assistant Chat"
-                    className="fixed bottom-6 right-5 sm:right-6 z-40 bg-[#0066FF] hover:bg-white text-white hover:text-[#0066FF] border-2 border-[#0066FF] px-4 py-3 rounded-full flex items-center gap-2.5 transition-all duration-200 hover:scale-105 group"
+                    className="fixed bottom-6 right-5 sm:right-6 z-40 bg-[#2878B5] hover:bg-[#085a45] active:bg-[#032b24] text-white px-4 py-3 rounded-full shadow-xl shadow-[#2878B5]/30 flex items-center gap-2.5 transition-all duration-300 hover:scale-105 group ring-2 ring-white/60"
                 >
-                    <MessageSquare className="w-5 h-5" />
+                    <div className="relative">
+                        <MessageSquare className="w-5 h-5 text-emerald-300" />
+                        <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping" />
+                    </div>
                     <span className="text-xs sm:text-sm font-bold tracking-wide">
                         Ask AI Assistant
                     </span>

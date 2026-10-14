@@ -1,4 +1,4 @@
-import { Quote, TrendingUp, Users, DollarSign, Clock } from 'lucide-react';
+﻿import { Quote, TrendingUp, Users, DollarSign, Clock } from 'lucide-react';
 
 const testimonials = [
   {
@@ -29,8 +29,8 @@ const testimonials = [
 
 const getColorClasses = (color: string) => {
   const colors = {
-    blue: 'from-[#0066FF] to-[#0066FF]',
-    purple: 'from-[#0066FF] to-[#0066FF]',
+    blue: 'from-emerald-600 to-[#2878B5]',
+    purple: 'from-teal-500 to-teal-700',
     cyan: 'from-cyan-500 to-cyan-600',
     green: 'from-green-500 to-green-600',
   };
@@ -39,17 +39,17 @@ const getColorClasses = (color: string) => {
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-20 lg:py-32 bg-white border-t border-[#0066FF]">
+    <section className="py-20 lg:py-32 bg-slate-50 border-t border-slate-200">
       <div className="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0066FF] font-bold mb-6 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-slate-900 font-bold mb-6 tracking-tight">
             Customer{' '}
-            <span className="bg-gradient-to-r from-[#0066FF] to-[#0066FF] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#2878B5] to-emerald-600 bg-clip-text text-transparent">
               Success Stories
             </span>
           </h2>
-          <p className="text-lg text-[#0066FF] leading-relaxed font-normal">
+          <p className="text-lg text-slate-600 leading-relaxed font-normal">
             See how leading B2B companies are achieving exponential growth with ProfitMachines
           </p>
         </div>
@@ -61,25 +61,25 @@ export default function TestimonialsSection() {
               key={index}
               className="relative group"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#0066FF] to-purple-100 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-100 to-purple-100 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
-              <div className="relative bg-white rounded-3xl p-8 border border-[#0066FF] hover:border-[#0066FF] transition-all shadow-sm hover:shadow-lg">
+              <div className="relative bg-white rounded-3xl p-8 border border-slate-200 hover:border-emerald-200 transition-all shadow-sm hover:shadow-lg">
                 {/* Header */}
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 bg-gradient-to-br from-[#0066FF] to-[#0066FF] rounded-xl flex items-center justify-center shadow-sm border border-[#0066FF]">
-                      <span className="text-[#0066FF] font-bold text-lg">{testimonial.logo}</span>
+                    <div className="w-14 h-14 bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-xl flex items-center justify-center shadow-sm border border-emerald-50">
+                      <span className="text-[#1E6297] font-bold text-lg">{testimonial.logo}</span>
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-[#0066FF]">{testimonial.company}</h3>
-                      <p className="text-sm text-[#0066FF] font-medium">{testimonial.author}</p>
+                      <h3 className="text-xl font-bold text-slate-900">{testimonial.company}</h3>
+                      <p className="text-sm text-slate-500 font-medium">{testimonial.author}</p>
                     </div>
                   </div>
-                  <Quote className="w-8 h-8 text-[#0066FF]" />
+                  <Quote className="w-8 h-8 text-emerald-100" />
                 </div>
 
                 {/* Testimonial Text */}
-                <p className="text-[#0066FF] leading-relaxed mb-8 italic">
+                <p className="text-slate-600 leading-relaxed mb-8 italic">
                   "{testimonial.testimonial}"
                 </p>
 
@@ -90,11 +90,11 @@ export default function TestimonialsSection() {
                     return (
                       <div
                         key={metricIndex}
-                        className="bg-white rounded-xl p-4 border border-[#0066FF] hover:border-[#0066FF] transition-colors"
+                        className="bg-slate-50 rounded-xl p-4 border border-slate-100 hover:border-emerald-100 transition-colors"
                       >
                         <div className="flex items-center gap-2 mb-2">
                           <Icon className={`w-4 h-4 bg-gradient-to-r ${getColorClasses(metric.color)} bg-clip-text text-transparent`} />
-                          <span className="text-xs text-[#0066FF] font-semibold">{metric.label}</span>
+                          <span className="text-xs text-slate-500 font-semibold">{metric.label}</span>
                         </div>
                         <div className={`text-2xl font-bold bg-gradient-to-r ${getColorClasses(metric.color)} bg-clip-text text-transparent`}>
                           {metric.value}

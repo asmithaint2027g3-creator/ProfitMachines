@@ -1,4 +1,4 @@
-
+Ôªø
 
 import FeatureSection from '../components/demand-pulse/FeatureSection';
 import DemandPulseCarousel from '../components/demand-pulse/DemandPulseCarousel';
@@ -10,7 +10,7 @@ export default function DemandPulse() {
     const { openQuickForm, openLongForm } = useLeadModal();
     return (
 
-        <main className="bg-white min-h-screen text-[#0066FF] selection:bg-white selection:text-blue-900">
+        <main className="bg-white min-h-screen text-slate-600 selection:bg-emerald-100 selection:text-blue-900">
             {/* Premium Interactive Carousel - Now First Section */}
             <div>
                 <DemandPulseCarousel />
@@ -19,61 +19,61 @@ export default function DemandPulse() {
             {/* Hero Section */}
             <section className="relative pt-12 pb-20 overflow-hidden">
                 <div className="absolute inset-0 bg-white">
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-white/60 rounded-full blur-[120px] opacity-60"></div>
-                    <div className="absolute bottom-0 right-0 w-[800px] h-[600px] bg-white/40 rounded-full blur-[120px] opacity-50"></div>
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-emerald-100/60 rounded-full blur-[120px] opacity-60"></div>
+                    <div className="absolute bottom-0 right-0 w-[800px] h-[600px] bg-emerald-100/40 rounded-full blur-[120px] opacity-50"></div>
                 </div>
 
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#0066FF] text-[#0066FF] font-mono text-sm mb-8 backdrop-blur-md">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-100 text-[#2878B5] font-mono text-sm mb-8 backdrop-blur-md">
                         <Sparkles className="w-4 h-4" />
                         <span>INTELLIGENCE REDEFINED</span>
                     </div>
 
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-[#0066FF] mb-6 tracking-tight leading-none">
-                        DemandPulse AI<span className="text-[#0066FF]">ô</span>
+                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-slate-900 mb-6 tracking-tight leading-none">
+                        DemandPulse AI<span className="text-[#2878B5]">‚Ñ¢</span>
                     </h1>
 
-                    <p className="text-2xl md:text-3xl font-light text-[#0066FF] mb-8 tracking-wide">
+                    <p className="text-2xl md:text-3xl font-light text-slate-500 mb-8 tracking-wide">
                         The Autonomous Demand Engine
                     </p>
 
-                    <p className="text-xl text-[#0066FF] max-w-3xl mx-auto mb-12 leading-relaxed">
-                        ìGenerate High-Intent, Revenue-Ready Demand 24/7ó1000X Faster, Smarter, and Always On.î
+                    <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+                        ‚ÄúGenerate High-Intent, Revenue-Ready Demand 24/7‚Äî1000X Faster, Smarter, and Always On.‚Äù
                     </p>
 
                     <div className="flex flex-col sm:flex-row justify-center items-center gap-6 justify-center mb-16">
                         <button 
-                            onClick={() => openLongForm({ defaultService: 'DemandPulse AIô Engine' })}
-                            className="px-10 py-5 bg-[#0066FF] hover:bg-[#0066FF] text-white text-lg font-bold rounded-full shadow-lg shadow-[#0066FF]/20 transition-all transform hover:scale-105 flex items-center gap-3 group"
+                            onClick={() => openLongForm({ defaultService: 'DemandPulse AI‚Ñ¢ Engine' })}
+                            className="px-10 py-5 bg-emerald-800 hover:bg-emerald-900 text-white text-lg font-bold rounded-full shadow-lg shadow-blue-900/25 transition-all transform hover:scale-105 flex items-center gap-3 group"
                         >
                             Deploy DemandPulse
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </button>
                         <button 
-                            onClick={() => openQuickForm({ defaultService: 'DemandPulse AIô Engine' })}
-                            className="px-10 py-5 bg-white border border-[#0066FF] hover:bg-[#0066FF]/10 text-[#0066FF] text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all flex items-center gap-3"
+                            onClick={() => openQuickForm({ defaultService: 'DemandPulse AI‚Ñ¢ Engine' })}
+                            className="px-10 py-5 bg-white border border-slate-200 hover:bg-slate-50 text-slate-800 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all flex items-center gap-3"
                         >
                             Quick 60-Sec Inquiry
                         </button>
                     </div>
 
                     {/* Real-World Demand Pulse Intent Dashboard */}
-                    <div className="relative max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-[#0066FF] group">
+                    <div className="relative max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-slate-200 group">
                         <img 
                             src="/images/demand-pulse-dashboard.png" 
                             alt="ProfitMachines DemandPulse Autonomous Buyer Intent Radar & Signals Dashboard" 
                             className="w-full h-[400px] md:h-[480px] object-cover transform transition-transform duration-700 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-                        <div className="absolute bottom-6 left-6 right-6 flex flex-col md:flex-row items-start md:items-center justify-between text-left gap-4 bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-[#0066FF]">
+                        <div className="absolute bottom-6 left-6 right-6 flex flex-col md:flex-row items-start md:items-center justify-between text-left gap-4 bg-slate-900/90 backdrop-blur-md p-6 rounded-2xl border border-slate-800">
                             <div>
-                                <div className="text-xs font-bold text-[#0066FF] font-mono uppercase tracking-widest flex items-center gap-2">
-                                    <span className="w-2 h-2 rounded-full bg-[#0066FF] animate-pulse"></span>
+                                <div className="text-xs font-bold text-emerald-400 font-mono uppercase tracking-widest flex items-center gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
                                     DemandPulse Signal Radar
                                 </div>
                                 <h3 className="text-xl font-bold text-white mt-1">Autonomous Buyer Intent & Dark Social Signal Decoder</h3>
                             </div>
-                            <span className="px-3.5 py-1.5 bg-[#0066FF]/20 border border-[#0066FF]/40 text-[#0066FF] text-xs font-mono font-bold rounded-full">
+                            <span className="px-3.5 py-1.5 bg-[#2878B5]/20 border border-emerald-600/40 text-emerald-300 text-xs font-mono font-bold rounded-full">
                                 1,000+ Signal Inputs/Sec
                             </span>
                         </div>
@@ -89,13 +89,13 @@ export default function DemandPulse() {
                 number="1"
                 title="AI-Driven Demand Discovery"
                 tagline="Uncover Hidden Buyer Clusters Before Competitors Do"
-                successExample="A Series B HR SaaS platform struggled to expand beyond enterprise clients. Using DemandPulse AI, they discovered a surge in intent from mid-market e-commerce brands hiring ìremote compliance managersî and searching for ìglobal payroll + contractor management.î Within 30 days, they launched a tailored micro-offeróand generated $1.2M in pipeline from a segment they didnít know existed."
+                successExample="A Series B HR SaaS platform struggled to expand beyond enterprise clients. Using DemandPulse AI, they discovered a surge in intent from mid-market e-commerce brands hiring ‚Äúremote compliance managers‚Äù and searching for ‚Äúglobal payroll + contractor management.‚Äù Within 30 days, they launched a tailored micro-offer‚Äîand generated $1.2M in pipeline from a segment they didn‚Äôt know existed."
                 useCases={[
-                    { sector: "SaaS", description: "Discovered that ìedtech startups using Stripe + Teachableî were actively seeking LMS integrations ? launched API-focused campaign." },
-                    { sector: "Fintech", description: "Detected rising searches for ìBNPL for B2B SaaSî among SMBs ? pivoted product messaging to ìRevenue-based financing for subscription businesses.î" },
-                    { sector: "D2C", description: "Identified ìvegan skincare buyers in Tier-2 cities engaging with sustainability influencersî ? launched regional influencer + sample kit program." }
+                    { sector: "SaaS", description: "Discovered that ‚Äúedtech startups using Stripe + Teachable‚Äù were actively seeking LMS integrations ‚Üí launched API-focused campaign." },
+                    { sector: "Fintech", description: "Detected rising searches for ‚ÄúBNPL for B2B SaaS‚Äù among SMBs ‚Üí pivoted product messaging to ‚ÄúRevenue-based financing for subscription businesses.‚Äù" },
+                    { sector: "D2C", description: "Identified ‚Äúvegan skincare buyers in Tier-2 cities engaging with sustainability influencers‚Äù ‚Üí launched regional influencer + sample kit program." }
                 ]}
-                howAiDeliveredIt="Scanned job boards, app store reviews, Reddit threads, and G2 comparisons to cluster latent demand signals ? auto-generated ICP profiles with predicted conversion likelihood."
+                howAiDeliveredIt="Scanned job boards, app store reviews, Reddit threads, and G2 comparisons to cluster latent demand signals ‚Üí auto-generated ICP profiles with predicted conversion likelihood."
                 outcomeKPIs={[
                     "TAM expanded by 4.2X",
                     "New segment lead-to-opportunity rate: 32%",
@@ -108,17 +108,17 @@ export default function DemandPulse() {
                 id="feature-demand-generation"
                 number="2"
                 title="AI-Driven Demand Generation"
-                tagline="Your 24/7 Autonomous Lead FactoryóZero Downtime, Infinite Scale"
-                successExample="A fintech lending platform lost 68% of weekend applicants due to delayed responses. After deploying DemandPulse AI, it engaged leads via WhatsApp + email within 47 secondsóeven at 2 AMóusing pre-approved offers based on open banking data. Weekend conversions jumped by 210%, and CAC dropped by 52%."
+                tagline="Your 24/7 Autonomous Lead Factory‚ÄîZero Downtime, Infinite Scale"
+                successExample="A fintech lending platform lost 68% of weekend applicants due to delayed responses. After deploying DemandPulse AI, it engaged leads via WhatsApp + email within 47 seconds‚Äîeven at 2 AM‚Äîusing pre-approved offers based on open banking data. Weekend conversions jumped by 210%, and CAC dropped by 52%."
                 useCases={[
-                    { sector: "SaaS", description: "Visitor watches pricing video ? AI sends personalized Loom demo + Calendly link ? books meeting while still on site." },
-                    { sector: "Fintech", description: "User abandons loan application ? AI triggers SMS: ìComplete in 90 secóyour rate is locked!î + pre-filled form." },
-                    { sector: "D2C", description: "Cart abandoner receives Instagram retargeting ad + limited-time discount via SMS ? converts in 4 hours." }
+                    { sector: "SaaS", description: "Visitor watches pricing video ‚Üí AI sends personalized Loom demo + Calendly link ‚Üí books meeting while still on site." },
+                    { sector: "Fintech", description: "User abandons loan application ‚Üí AI triggers SMS: ‚ÄúComplete in 90 sec‚Äîyour rate is locked!‚Äù + pre-filled form." },
+                    { sector: "D2C", description: "Cart abandoner receives Instagram retargeting ad + limited-time discount via SMS ‚Üí converts in 4 hours." }
                 ]}
-                howAiDeliveredIt="Behavior-triggered, multi-channel sequences with dynamic content personalizationóno human required."
+                howAiDeliveredIt="Behavior-triggered, multi-channel sequences with dynamic content personalization‚Äîno human required."
                 outcomeKPIs={[
                     "Lead response time: <90 sec",
-                    "CPQL reduced from $120 ? $38",
+                    "CPQL reduced from $120 ‚Üí $38",
                     "38% of monthly pipeline generated on nights/weekends"
                 ]}
             />
@@ -128,13 +128,13 @@ export default function DemandPulse() {
                 id="feature-competitive-tracing"
                 number="3"
                 title="Competitive Demand Tracing"
-                tagline="Intercept Buyers Evaluating CompetitorsóBefore They Convert"
-                successExample="A B2B analytics SaaS noticed declining win rates against a rival. DemandPulse AI flagged accounts visiting G2 comparison pages and reading negative reviews about the competitorís ìpoor onboarding.î The system auto-deployed LinkedIn ads: ìWhy 200+ teams switched after [Competitor]ís onboarding failed themîówith a side-by-side onboarding timeline. Win rate increased from 28% to 51% in 6 weeks."
+                tagline="Intercept Buyers Evaluating Competitors‚ÄîBefore They Convert"
+                successExample="A B2B analytics SaaS noticed declining win rates against a rival. DemandPulse AI flagged accounts visiting G2 comparison pages and reading negative reviews about the competitor‚Äôs ‚Äúpoor onboarding.‚Äù The system auto-deployed LinkedIn ads: ‚ÄúWhy 200+ teams switched after [Competitor]‚Äôs onboarding failed them‚Äù‚Äîwith a side-by-side onboarding timeline. Win rate increased from 28% to 51% in 6 weeks."
                 useCases={[
-                    { sector: "Fintech", description: "Detected users comparing ìStripe Capital vs. [Client]î ? triggered email: ìGet 2X higher approval with same-day funding.î" },
-                    { sector: "D2C", description: "Shoppers viewed competitorís product page + left 1-star review ? retargeted with UGC video: ìReal customers explain why they chose us.î" }
+                    { sector: "Fintech", description: "Detected users comparing ‚ÄúStripe Capital vs. [Client]‚Äù ‚Üí triggered email: ‚ÄúGet 2X higher approval with same-day funding.‚Äù" },
+                    { sector: "D2C", description: "Shoppers viewed competitor‚Äôs product page + left 1-star review ‚Üí retargeted with UGC video: ‚ÄúReal customers explain why they chose us.‚Äù" }
                 ]}
-                howAiDeliveredIt="Monitored review sites, social mentions, and competitor website traffic ? triggered hyper-contextual counter-messaging with proof points."
+                howAiDeliveredIt="Monitored review sites, social mentions, and competitor website traffic ‚Üí triggered hyper-contextual counter-messaging with proof points."
                 outcomeKPIs={[
                     "35% win-back rate on competitor-intent accounts",
                     "Sales cycle shortened by 22 days",
@@ -147,13 +147,13 @@ export default function DemandPulse() {
                 id="feature-micro-segmentation"
                 number="4"
                 title="Micro-Segmentation Analytics"
-                tagline="From ìMarketersî to ìB2B SaaS Growth Marketers Using HubSpot + Running LinkedIn Adsî"
-                successExample="A D2C protein brand was wasting budget targeting ìfitness enthusiasts.î AI segmented users into: ìVegan gym-goers in Bangalore who follow @FitIndia and bought plant-based snacks in last 30 days.î Campaigns to this group achieved 7.4% CTR and 22% repeat purchase rateóvs. 1.1% CTR for broad campaigns."
+                tagline="From ‚ÄúMarketers‚Äù to ‚ÄúB2B SaaS Growth Marketers Using HubSpot + Running LinkedIn Ads‚Äù"
+                successExample="A D2C protein brand was wasting budget targeting ‚Äúfitness enthusiasts.‚Äù AI segmented users into: ‚ÄúVegan gym-goers in Bangalore who follow @FitIndia and bought plant-based snacks in last 30 days.‚Äù Campaigns to this group achieved 7.4% CTR and 22% repeat purchase rate‚Äîvs. 1.1% CTR for broad campaigns."
                 useCases={[
-                    { sector: "SaaS", description: "ìE-commerce brands using Klaviyo + Shopify but with <1% email revenueî ? targeted with cart-recovery automation offer." },
-                    { sector: "Fintech", description: "ìFreelancers using PayPal + Upwork, earning >$3K/mo, searching ëtax savingsíî ? offered automated tax-loss harvesting." }
+                    { sector: "SaaS", description: "‚ÄúE-commerce brands using Klaviyo + Shopify but with <1% email revenue‚Äù ‚Üí targeted with cart-recovery automation offer." },
+                    { sector: "Fintech", description: "‚ÄúFreelancers using PayPal + Upwork, earning >$3K/mo, searching ‚Äòtax savings‚Äô‚Äù ‚Üí offered automated tax-loss harvesting." }
                 ]}
-                howAiDeliveredIt="Fused technographics, behavioral history, and real-time intent into 500+ dynamic micro-segmentsórefreshed daily."
+                howAiDeliveredIt="Fused technographics, behavioral history, and real-time intent into 500+ dynamic micro-segments‚Äîrefreshed daily."
                 outcomeKPIs={[
                     "CTR: 6.8% (vs. industry avg 1.2%)",
                     "Opt-out rate: 0.9%",
@@ -167,12 +167,12 @@ export default function DemandPulse() {
                 number="5"
                 title="Offer Refinement & Optimization Analytics"
                 tagline="Optimize Pricing, Packaging & Messaging Based on Real Buyer Behavior"
-                successExample="A project management SaaS had 40% churn in its ìProî plan. AI analyzed support tickets and found users couldnít collaborate with external clients. It recommended a ìClient Portalî add-on. After bundling it, churn dropped to 12%, and ARPU increased by 28%."
+                successExample="A project management SaaS had 40% churn in its ‚ÄúPro‚Äù plan. AI analyzed support tickets and found users couldn‚Äôt collaborate with external clients. It recommended a ‚ÄúClient Portal‚Äù add-on. After bundling it, churn dropped to 12%, and ARPU increased by 28%."
                 useCases={[
-                    { sector: "Fintech", description: "SMEs rejected flat-rate loans ? AI suggested ìrevenue-linked repaymentî ? adoption rose by 65%." },
-                    { sector: "D2C", description: "Subscription box had high first-month churn ? AI found users wanted customization ? added ìbuild-your-boxî option ? retention ? 34%." }
+                    { sector: "Fintech", description: "SMEs rejected flat-rate loans ‚Üí AI suggested ‚Äúrevenue-linked repayment‚Äù ‚Üí adoption rose by 65%." },
+                    { sector: "D2C", description: "Subscription box had high first-month churn ‚Üí AI found users wanted customization ‚Üí added ‚Äúbuild-your-box‚Äù option ‚Üí retention ‚Üë 34%." }
                 ]}
-                howAiDeliveredIt="NLP analysis of win/loss calls + usage telemetry ? A/B tested offer constructs via AI-powered landing pages."
+                howAiDeliveredIt="NLP analysis of win/loss calls + usage telemetry ‚Üí A/B tested offer constructs via AI-powered landing pages."
                 outcomeKPIs={[
                     "Offer adoption: 62% (vs. 18% pre-AI)",
                     "Churn reduced by 28%",
@@ -186,15 +186,15 @@ export default function DemandPulse() {
                 number="6"
                 title="Multi-Channel Demand Gen Automation"
                 tagline="Orchestrate 15+ Channels Like a Single, Intelligent System"
-                successExample="A fintech neobank ran siloed campaigns: Meta ads, Google Search, email. Attribution was chaotic. After unifying channels under DemandPulse AI, it discovered TikTok drove awareness, but WhatsApp closed deals. AI shifted budget dynamicallyóresulting in 5.8x ROAS and 41% lower CAC."
+                successExample="A fintech neobank ran siloed campaigns: Meta ads, Google Search, email. Attribution was chaotic. After unifying channels under DemandPulse AI, it discovered TikTok drove awareness, but WhatsApp closed deals. AI shifted budget dynamically‚Äîresulting in 5.8x ROAS and 41% lower CAC."
                 useCases={[
-                    { sector: "SaaS", description: "LinkedIn ? Email ? Personalized demo video ? Calendly booking (all tracked in one journey)." },
-                    { sector: "D2C", description: "Instagram Reels ? SMS flash sale ? Post-purchase referral loop via WhatsApp." }
+                    { sector: "SaaS", description: "LinkedIn ‚Üí Email ‚Üí Personalized demo video ‚Üí Calendly booking (all tracked in one journey)." },
+                    { sector: "D2C", description: "Instagram Reels ‚Üí SMS flash sale ‚Üí Post-purchase referral loop via WhatsApp." }
                 ]}
                 howAiDeliveredIt="Unified identity resolution + cross-channel attribution + real-time budget reallocation."
                 outcomeKPIs={[
                     "Cross-channel conversion: 7.2%",
-                    "Ad waste reduced from 48% ? 12%",
+                    "Ad waste reduced from 48% ‚Üí 12%",
                     "Full-funnel visibility with revenue attribution"
                 ]}
             />
@@ -204,16 +204,16 @@ export default function DemandPulse() {
                 id="feature-pmf-acceleration"
                 number="7"
                 title="Product-Market Fit (PMF) Acceleration"
-                tagline="Validate PMF in 30 DaysóNot 6 Months"
-                successExample="An AI-powered accounting SaaS for freelancers launched with low traction. AI found that users who connected 2+ bank accounts + ran quarterly reports had 92% 90-day retention. The team redesigned onboarding to drive those actionsóPMF confirmed in 28 days, and seed round extended."
+                tagline="Validate PMF in 30 Days‚ÄîNot 6 Months"
+                successExample="An AI-powered accounting SaaS for freelancers launched with low traction. AI found that users who connected 2+ bank accounts + ran quarterly reports had 92% 90-day retention. The team redesigned onboarding to drive those actions‚ÄîPMF confirmed in 28 days, and seed round extended."
                 useCases={[
-                    { sector: "Fintech", description: "Borrowers who linked payroll data + set up autopay = 5X LTV ? made mandatory in flow." },
-                    { sector: "D2C", description: "Customers who engaged with UGC videos = 3X repeat rate ? prioritized in post-purchase sequence." }
+                    { sector: "Fintech", description: "Borrowers who linked payroll data + set up autopay = 5X LTV ‚Üí made mandatory in flow." },
+                    { sector: "D2C", description: "Customers who engaged with UGC videos = 3X repeat rate ‚Üí prioritized in post-purchase sequence." }
                 ]}
-                howAiDeliveredIt="ML models identified behavioral proxies for long-term value ? guided product, onboarding, and messaging."
+                howAiDeliveredIt="ML models identified behavioral proxies for long-term value ‚Üí guided product, onboarding, and messaging."
                 outcomeKPIs={[
                     "PMF validated in 28 days",
-                    "Early churn reduced from 48% ? 14%",
+                    "Early churn reduced from 48% ‚Üí 14%",
                     "Feature adoption depth: 76%"
                 ]}
             />
@@ -223,13 +223,13 @@ export default function DemandPulse() {
                 id="feature-behavioral-targeting"
                 number="8"
                 title="Behavioral Segmentation & Targeting"
-                tagline="Target What People DoóNot Just Who They Are"
-                successExample="A cybersecurity SaaS saw low engagement from ìCISOs.î AI revealed that only those who visited compliance pages + downloaded SOC2 templates converted. It created a ìCompliance-Ready CISOî segmentócampaigns to this group had 41% meeting-book rate vs. 6% for generic lists."
+                tagline="Target What People Do‚ÄîNot Just Who They Are"
+                successExample="A cybersecurity SaaS saw low engagement from ‚ÄúCISOs.‚Äù AI revealed that only those who visited compliance pages + downloaded SOC2 templates converted. It created a ‚ÄúCompliance-Ready CISO‚Äù segment‚Äîcampaigns to this group had 41% meeting-book rate vs. 6% for generic lists."
                 useCases={[
-                    { sector: "Fintech", description: "Users who checked ìloan eligibilityî 3x in a week ? triggered pre-approved offer." },
-                    { sector: "D2C", description: "Visitors who watched ingredient explainer video ? sent sample kit + dermatologist note." }
+                    { sector: "Fintech", description: "Users who checked ‚Äúloan eligibility‚Äù 3x in a week ‚Üí triggered pre-approved offer." },
+                    { sector: "D2C", description: "Visitors who watched ingredient explainer video ‚Üí sent sample kit + dermatologist note." }
                 ]}
-                howAiDeliveredIt="Tracked digital body language ? scored urgency ? triggered right action at right time."
+                howAiDeliveredIt="Tracked digital body language ‚Üí scored urgency ‚Üí triggered right action at right time."
                 outcomeKPIs={[
                     "Anonymous-to-known conversion: 18%",
                     "Lead-to-opportunity time: 6 days",
@@ -243,10 +243,10 @@ export default function DemandPulse() {
                 number="9"
                 title="AI-Driven Campaign Optimization"
                 tagline="Self-Optimizing Campaigns That Get Smarter Every Hour"
-                successExample="A D2C beauty brand ran static Meta ads. CTR dropped 60% in 3 weeks. DemandPulse AI tested 120 variants/dayódiscovering that ìbefore/afterî UGC videos with real customer names outperformed polished ads by 4.7x. ROAS jumped from 2.4x ? 6.1x in 21 days."
+                successExample="A D2C beauty brand ran static Meta ads. CTR dropped 60% in 3 weeks. DemandPulse AI tested 120 variants/day‚Äîdiscovering that ‚Äúbefore/after‚Äù UGC videos with real customer names outperformed polished ads by 4.7x. ROAS jumped from 2.4x ‚Üí 6.1x in 21 days."
                 useCases={[
-                    { sector: "SaaS", description: "ìFree trialî CTAs underperformed vs. ìSee your ROI in 5 minî ? AI shifted all budget." },
-                    { sector: "Fintech", description: "ìLow interestî messaging failed; ìGet funded before payroll Fridayî won." }
+                    { sector: "SaaS", description: "‚ÄúFree trial‚Äù CTAs underperformed vs. ‚ÄúSee your ROI in 5 min‚Äù ‚Üí AI shifted all budget." },
+                    { sector: "Fintech", description: "‚ÄúLow interest‚Äù messaging failed; ‚ÄúGet funded before payroll Friday‚Äù won." }
                 ]}
                 howAiDeliveredIt="Reinforcement learning engine continuously tested creatives, copy, offers, and audiences."
                 outcomeKPIs={[
@@ -261,22 +261,22 @@ export default function DemandPulse() {
                 id="feature-conversational-marketing"
                 number="10"
                 title="AI ChatGPT Conversational Marketing Engine"
-                tagline="Your 24/7 AI Sales RepóTrained on Your Playbook"
-                successExample="A B2B SaaS for restaurant POS had 89% of website visitors leave without engaging. After deploying the AI chatbot, it asked: ìWhich feature matters mostóinventory, payroll, or delivery integration?î Based on answers, it showed relevant case studies and booked consulting sessions. Website conversion rose from 1.4% ? 6.3%"
+                tagline="Your 24/7 AI Sales Rep‚ÄîTrained on Your Playbook"
+                successExample="A B2B SaaS for restaurant POS had 89% of website visitors leave without engaging. After deploying the AI chatbot, it asked: ‚ÄúWhich feature matters most‚Äîinventory, payroll, or delivery integration?‚Äù Based on answers, it showed relevant case studies and booked consulting sessions. Website conversion rose from 1.4% ‚Üí 6.3%"
                 useCases={[]} // No key use cases provided for this one in the prompt, or implicit?
                 howAiDeliveredIt="Conversational AI trained on sales methodology acting as an SDR."
                 outcomeKPIs={[
-                    "Website conversion rose from 1.4% ? 6.3%",
+                    "Website conversion rose from 1.4% ‚Üí 6.3%",
                     "24/7 Availability"
                 ]}
             />
 
             {/* Configurable Contextual CTA Section */}
             <ContextualCtaSection
-                badge="DemandPulse AIô Engine"
+                badge="DemandPulse AI‚Ñ¢ Engine"
                 title="Ready to Deploy Autonomous Demand Generation?"
                 subtitle="Generate high-intent, revenue-ready demand 24/7 across every digital channel. Schedule an enterprise consultation or submit a 60-second quick inquiry."
-                defaultService="DemandPulse AIô Engine"
+                defaultService="DemandPulse AI‚Ñ¢ Engine"
             />
         </main>
     );

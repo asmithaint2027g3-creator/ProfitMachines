@@ -111,7 +111,7 @@ export default function Career() {
 
     const values = [
         {
-            icon: <Rocket className="w-6 h-6 text-[#0066FF]" />,
+            icon: <Rocket className="w-6 h-6 text-[#2878B5]" />,
             title: "Move Fast & Build",
             desc: "We believe in rapid iteration and shipping high-quality software that solves real problems."
         },
@@ -121,7 +121,7 @@ export default function Career() {
             desc: "Our customers' success is our success. We go above and beyond to deliver value."
         },
         {
-            icon: <Brain className="w-6 h-6 text-[#0066FF]" />,
+            icon: <Brain className="w-6 h-6 text-teal-700" />,
             title: "First Principles Thinking",
             desc: "We challenge assumptions and solve problems from their fundamental truths."
         },
@@ -160,36 +160,36 @@ export default function Career() {
     ];
 
     return (
-        <div className="min-h-screen bg-white font-sans text-[#0066FF]">
+        <div className="min-h-screen bg-white font-sans text-slate-900">
             {/* 1. Hero Section */}
-            <section className="relative bg-[#0066FF] text-white pt-32 pb-24 overflow-hidden">
+            <section className="relative bg-[#2878B5] text-white pt-32 pb-24 overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none opacity-30">
-                    <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-[#0066FF] rounded-full blur-[160px]" />
-                    <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-[#0066FF] rounded-full blur-[120px]" />
+                    <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-emerald-400 rounded-full blur-[160px]" />
+                    <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-teal-600 rounded-full blur-[120px]" />
                 </div>
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
 
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
                     <Reveal width="100%">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0066FF]/60 border border-[#0066FF]/40 text-[#0066FF] text-sm font-bold mb-8 backdrop-blur-sm animate-fade-in-up">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/60 border border-emerald-400/40 text-emerald-300 text-sm font-bold mb-8 backdrop-blur-sm animate-fade-in-up">
                             <Briefcase className="w-4 h-4" />
                             <span>We're Hiring</span>
                         </div>
 
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-8 tracking-tight leading-[1.1] text-white drop-shadow-lg">
                             Build the Future of <br className="hidden md:block" />
-                            <span className="text-[#0066FF] bg-gradient-to-r from-[#0066FF] via-teal-300 to-[#0066FF]">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-300 to-emerald-200">
                                 Revenue Intelligence
                             </span>
                         </h1>
 
-                        <p className="text-xl text-[#0066FF]/90 max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
+                        <p className="text-xl text-emerald-100/90 max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
                             Join a team of world-class engineers, researchers, and operators building the next generation of AI-powered enterprise software.
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-5 justify-center">
                             <a href="#open-roles">
-                                <Button className="bg-white text-[#0066FF] hover:bg-[#0066FF] px-10 py-6 text-lg h-auto rounded-full font-bold shadow-lg transition-all hover:-translate-y-1">
+                                <Button className="bg-white text-[#2878B5] hover:bg-emerald-50 px-10 py-6 text-lg h-auto rounded-full font-bold shadow-lg transition-all hover:-translate-y-1">
                                     View Open Roles
                                 </Button>
                             </a>
@@ -202,19 +202,19 @@ export default function Career() {
             <section className="py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight text-[#0066FF]">Our Values</h2>
-                        <p className="text-[#0066FF] text-xl font-medium max-w-2xl mx-auto">The principles that guide how we build, sell, and support.</p>
+                        <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight text-slate-900">Our Values</h2>
+                        <p className="text-slate-600 text-xl font-medium max-w-2xl mx-auto">The principles that guide how we build, sell, and support.</p>
                     </div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {values.map((val, idx) => (
                             <Reveal key={idx} width="100%" delay={idx * 0.1}>
-                                <div className="p-6 bg-white rounded-2xl border border-[#0066FF] hover:border-[#0066FF] hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full">
-                                    <div className="mb-4 p-3 bg-white rounded-xl shadow-sm w-fit border border-[#0066FF]">
+                                <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:border-emerald-300 hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full">
+                                    <div className="mb-4 p-3 bg-white rounded-xl shadow-sm w-fit border border-slate-100">
                                         {val.icon}
                                     </div>
-                                    <h3 className="text-xl font-bold text-[#0066FF] mb-3">{val.title}</h3>
-                                    <p className="text-[#0066FF] leading-relaxed text-sm">
+                                    <h3 className="text-xl font-bold text-slate-900 mb-3">{val.title}</h3>
+                                    <p className="text-slate-600 leading-relaxed text-sm">
                                         {val.desc}
                                     </p>
                                 </div>
@@ -225,31 +225,31 @@ export default function Career() {
             </section>
 
             {/* 3. Open Roles Section */}
-            <section id="open-roles" className="py-24 bg-white relative">
+            <section id="open-roles" className="py-24 bg-slate-50 relative">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight text-[#0066FF]">Open Positions</h2>
-                        <p className="text-[#0066FF] text-xl font-medium max-w-2xl mx-auto">Come do the best work of your career.</p>
+                        <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight text-slate-900">Open Positions</h2>
+                        <p className="text-slate-600 text-xl font-medium max-w-2xl mx-auto">Come do the best work of your career.</p>
                     </div>
 
                     <div className="space-y-4">
                         {openRoles.map((role, idx) => (
                             <Reveal key={idx} width="100%" delay={idx * 0.1}>
-                                <div className="bg-white p-6 md:p-8 rounded-2xl border border-[#0066FF] hover:border-[#0066FF] hover:shadow-md transition-all duration-300 group cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 hover:border-emerald-300 hover:shadow-md transition-all duration-300 group cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4">
                                     <div>
-                                        <h3 className="text-xl font-bold text-[#0066FF] group-hover:text-[#0066FF] transition-colors mb-1">{role.title}</h3>
-                                        <div className="flex flex-wrap gap-3 text-sm text-[#0066FF] font-medium">
+                                        <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#2878B5] transition-colors mb-1">{role.title}</h3>
+                                        <div className="flex flex-wrap gap-3 text-sm text-slate-500 font-medium">
                                             <span className="flex items-center gap-1"><Code2 className="w-3.5 h-3.5" /> {role.dept}</span>
-                                            <span className="w-1 h-1 bg-white rounded-full"></span>
+                                            <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
                                             <span className="flex items-center gap-1"><Globe className="w-3.5 h-3.5" /> {role.loc}</span>
-                                            <span className="w-1 h-1 bg-white rounded-full"></span>
+                                            <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
                                             <span className="flex items-center gap-1"><Briefcase className="w-3.5 h-3.5" /> {role.type}</span>
                                         </div>
                                     </div>
                                     <Button
                                         onClick={() => handleApply(role.title)}
                                         variant="outline"
-                                        className="border-[#0066FF] text-[#0066FF] group-hover:bg-[#0066FF] group-hover:text-white group-hover:border-[#0066FF] transition-all rounded-full px-6"
+                                        className="border-emerald-200 text-[#2878B5] group-hover:bg-[#2878B5] group-hover:text-white group-hover:border-[#2878B5] transition-all rounded-full px-6"
                                     >
                                         Apply Now
                                     </Button>
@@ -259,18 +259,18 @@ export default function Career() {
                     </div>
 
                     <div className="mt-12 text-center">
-                        <p className="text-[#0066FF] text-lg font-medium">
-                            Don't see your role? <a href="mailto:careers@profitmachines.com" className="text-[#0066FF] font-semibold hover:underline">Email us</a> your resume.
+                        <p className="text-slate-600 text-lg font-medium">
+                            Don't see your role? <a href="mailto:careers@profitmachines.com" className="text-[#2878B5] font-semibold hover:underline">Email us</a> your resume.
                         </p>
                     </div>
                 </div>
             </section>
             {/* Application Modal */}
             <Dialog open={isApplyOpen} onOpenChange={setIsApplyOpen}>
-                <DialogContent className="sm:max-w-[600px] bg-white border-[#0066FF]">
+                <DialogContent className="sm:max-w-[600px] bg-white border-emerald-100">
                     <DialogHeader>
-                        <DialogTitle className="text-2xl font-bold text-[#0066FF]">Apply for {selectedRole}</DialogTitle>
-                        <DialogDescription className="text-[#0066FF]">
+                        <DialogTitle className="text-2xl font-bold text-slate-900">Apply for {selectedRole}</DialogTitle>
+                        <DialogDescription className="text-slate-500">
                             Fill out the form below to apply. We'll get back to you soon.
                         </DialogDescription>
                     </DialogHeader>
@@ -301,8 +301,8 @@ export default function Career() {
 
                         <div className="space-y-2">
                             <Label htmlFor="resume">Resume / CV</Label>
-                            <Input id="resume" type="file" className="cursor-pointer file:text-[#0066FF] file:font-semibold" accept=".pdf,.doc,.docx" required />
-                            <p className="text-xs text-[#0066FF]">PDF, DOC, DOCX up to 10MB</p>
+                            <Input id="resume" type="file" className="cursor-pointer file:text-[#2878B5] file:font-semibold" accept=".pdf,.doc,.docx" required />
+                            <p className="text-xs text-slate-500">PDF, DOC, DOCX up to 10MB</p>
                         </div>
 
                         <div className="space-y-2">
@@ -319,7 +319,7 @@ export default function Career() {
                             <Button type="button" variant="outline" onClick={() => setIsApplyOpen(false)}>
                                 Cancel
                             </Button>
-                            <Button type="submit" disabled={isSubmitting} className="bg-[#0066FF] hover:bg-[#085a45] text-white font-bold">
+                            <Button type="submit" disabled={isSubmitting} className="bg-[#2878B5] hover:bg-[#085a45] text-white font-bold">
                                 {isSubmitting ? 'Transmitting Application...' : 'Submit Application'}
                             </Button>
                         </DialogFooter>

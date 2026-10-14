@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { 
-    ChevronLeft, ChevronRight, Pause, Play, ArrowRight, 
-    TrendingUp, Cpu, Radar, Bot, Sparkles, ShieldCheck, 
+import {
+    ChevronLeft, ChevronRight, Pause, Play, ArrowRight,
+    TrendingUp, Cpu, Radar, Bot, Sparkles, ShieldCheck,
     Layers, Activity, CheckCircle2, Zap, BarChart3, Database,
     Globe, Network, LineChart, Compass, FileText
 } from 'lucide-react';
@@ -26,6 +26,7 @@ export interface SliderItem {
     }[];
     highlights: string[];
     image: string;
+    fallbackGradient: string;
     badgeText: string;
     primaryCta: {
         text: string;
@@ -57,7 +58,8 @@ export const homeSliders: SliderItem[] = [
             'Strategic alignment between boardroom goals and autonomous AI workflows',
             'Algorithmic revenue forecasting with verifiable precision'
         ],
-        image: '/images/hero-consulting-team.jpg',
+        image: '/images/industry-saas.png',
+        fallbackGradient: 'from-[#091D2C] via-[#0F2D44] to-[#2878B5]',
         badgeText: 'AI + Business Transformation Active',
         primaryCta: {
             text: 'Explore Transformation Engine',
@@ -87,7 +89,8 @@ export const homeSliders: SliderItem[] = [
             'Competitor displacement signals and micro-segment revenue discovery',
             'Automated profit-pool scoring across global vertical markets'
         ],
-        image: '/images/hero-market-radar.jpg',
+        image: '/images/hero-profit-pool.png',
+        fallbackGradient: 'from-[#091D2C] via-[#0F2D44] to-[#2878B5]',
         badgeText: 'Profit Pool Discovery Telemetry: Active',
         primaryCta: {
             text: 'Launch Demand Radar',
@@ -95,142 +98,143 @@ export const homeSliders: SliderItem[] = [
         },
         secondaryCta: {
             text: 'Discover Hidden TAM',
-            link: '/offerings/profit-pool-discovery'
+            link: '/solutions'
         }
     },
     {
-        id: 'autonomous-sdr',
+        id: 'agentic-automation',
         stepNumber: '03',
-        tag: 'Autonomous Sales & SDRs',
-        pillTitle: 'Autonomous SDRs',
+        tag: 'Agentic AI & Automation',
+        pillTitle: 'Agentic AI Swarms',
         icon: Bot,
-        title: 'Full-Funnel Outbound &',
-        highlightTitle: 'Autonomous Sales Pipeline',
-        description: 'Deploy adaptive AI agents that research target accounts, craft hyper-personalized executive narratives, orchestrate multi-touch outreach, and automatically book qualified meetings.',
+        title: 'Intelligent Multi-Agent Mesh &',
+        highlightTitle: 'Agentic AI & Automation',
+        description: 'Deploy persistent multi-agent swarms that autonomously orchestrate enterprise workflows, qualify high-value pipeline, resolve operational friction, and execute complex business processes 24/7.',
         stats: [
-            { value: '3.8×', label: 'Meeting Conversion', sublabel: 'Benchmarked Lift' },
-            { value: '24/7', label: 'Autonomous Pacing', sublabel: 'Continuous Pipeline' },
-            { value: '-65%', label: 'SDR Acquisition Cost', sublabel: 'Efficiency Multiple' }
+            { value: '3.8×', label: 'Meeting Velocity', sublabel: 'Auto-Booked Pipeline' },
+            { value: '80%', label: 'Auto-SQL Sourced', sublabel: 'Zero Manual SDR Drag' },
+            { value: '-65%', label: 'Customer CAC', sublabel: 'Radical Efficiency' }
         ],
         highlights: [
-            'Hyper-personalized messaging generated from multi-source account dossiers',
-            'Autonomous follow-ups and objection handling across email & social touchpoints',
-            'Zero pipeline fatigue with intelligent capacity pacing'
+            'Hyper-personalized multi-channel email, LinkedIn & voice outreach',
+            'Autonomous objection resolution backed by unified knowledge graphs',
+            'Instant two-way CRM synchronization & automated calendar routing'
         ],
-        image: '/images/hero-autonomous-sdr.jpg',
-        badgeText: 'Autonomous Agent Fleet: 24/7 Operational',
+        image: '/images/demand-pulse-dashboard.png',
+        fallbackGradient: 'from-[#091D2C] via-[#0F2D44] to-[#2878B5]',
+        badgeText: 'Agentic AI & Automation Mesh: 4,812 Active Swarms',
         primaryCta: {
-            text: 'Deploy Autonomous SDRs',
+            text: 'Deploy AI Agent Mesh',
             link: '/solutions'
         },
         secondaryCta: {
-            text: 'View Pipeline lift metrics',
-            link: '/outcomes'
+            text: 'Schedule Agent Demo',
+            link: '/book-consultation'
         }
     },
     {
-        id: 'revops-acceleration',
+        id: 'revenue-acceleration',
         stepNumber: '04',
-        tag: 'AI Revenue Operations',
+        tag: 'Sales & Revenue Acceleration',
         pillTitle: 'Revenue Acceleration',
-        icon: TrendingUp,
-        title: 'Algorithmic CRM &',
-        highlightTitle: 'AI Revenue Acceleration',
-        description: 'Eliminate revenue drag, clean decayed pipeline signals, predict deal slippage with Bayesian accuracy, and guide sales teams to close highest-probability opportunities.',
+        icon: LineChart,
+        title: 'Real-Time Telemetry &',
+        highlightTitle: 'Sales & Revenue Acceleration',
+        description: 'Eliminate pipeline friction with intelligent funnel diagnostics, predictive deal scoring, dynamic objection handling, and automated revenue velocity triggers.',
         stats: [
-            { value: '+42%', label: 'Win Rate Uplift', sublabel: 'Enterprise Deals' },
-            { value: '-55%', label: 'Sales Cycle Drag', sublabel: 'Rapid Velocity' },
-            { value: '99.2%', label: 'Pipeline Cleanliness', sublabel: 'Automated RevOps' }
+            { value: '+185%', label: 'Pipeline Yield', sublabel: 'Full-Funnel Conversion' },
+            { value: '$1.4M+', label: 'Recovered ARR', sublabel: 'Leakage Prevention' },
+            { value: '45ms', label: 'Decision Latency', sublabel: 'Real-Time Scoring' }
         ],
         highlights: [
-            'Continuous CRM hygiene and autonomous pipeline decay correction',
-            'Predictive deal scoring and automated next-best-action alerts for reps',
-            'Boardroom-ready ARR reporting and predictive revenue forecasting'
+            'Algorithmic deal slippage detection and instant recovery interventions',
+            'Full-funnel multi-touch revenue attribution and conversion radar',
+            'Self-healing CRM data fabric with automated contact enrichment'
         ],
-        image: '/images/hero-revops-war-room.jpg',
-        badgeText: 'RevOps Optimization: Real-Time Stream',
+        image: '/images/hero-revenue-acceleration.png',
+        fallbackGradient: 'from-[#091D2C] via-[#0F2D44] to-[#2878B5]',
+        badgeText: 'Sales & Revenue Acceleration Engine: Active',
         primaryCta: {
-            text: 'Audit Your Pipeline',
+            text: 'Accelerate Revenue',
+            link: '/offerings'
+        },
+        secondaryCta: {
+            text: 'Run Revenue Leak Audit',
+            link: '/hidden-revenue-capture'
+        }
+    },
+    {
+        id: 'data-intelligence',
+        stepNumber: '05',
+        tag: 'Digital & Data Intelligence',
+        pillTitle: 'Data Intelligence',
+        icon: Database,
+        title: 'Enterprise Data Fabric &',
+        highlightTitle: 'Digital & Data Intelligence',
+        description: 'Unify disparate cloud databases, CRM streams, and operational systems into a real-time predictive intelligence engine powered by connected neural knowledge graphs.',
+        stats: [
+            { value: '4,500+', label: 'Active Pipelines', sublabel: 'Connected Systems' },
+            { value: '98%', label: 'Forecast Accuracy', sublabel: 'Neural Prediction' },
+            { value: '<12ms', label: 'Telemetry Latency', sublabel: 'Sub-Second Response' }
+        ],
+        highlights: [
+            'Bidirectional connectors for Salesforce, HubSpot, Snowflake & ERPs',
+            'Real-time anomaly detection and predictive customer churn signals',
+            'Unified data lakehouse with zero-trust sandboxing and role access'
+        ],
+        image: '/images/hero-data-intelligence.png',
+        fallbackGradient: 'from-[#091D2C] via-[#0F2D44] to-[#2878B5]',
+        badgeText: 'Digital & Data Intelligence Mesh: 4,500+ Streams',
+        primaryCta: {
+            text: 'Explore Data Intelligence',
             link: '/solutions'
         },
         secondaryCta: {
-            text: 'See RevOps Architecture',
+            text: 'View Architecture Matrix',
             link: '/offerings'
         }
     },
     {
-        id: 'crypto-web3-growth',
-        stepNumber: '05',
-        tag: 'Crypto & Web3 Growth',
-        pillTitle: 'Web3 Ecosystems',
-        icon: Network,
-        title: 'Protocol Adoption &',
-        highlightTitle: 'Crypto Ecosystem Growth',
-        description: 'Comprehensive go-to-market architecture for protocols, DeFi primitives, Layer-1/2 chains, and tokenized networks seeking sustainable TVL, developer acquisition, and liquidity depth.',
-        stats: [
-            { value: '$120M+', label: 'TVL Scaled', sublabel: 'Across Partner Protocols' },
-            { value: '45,000+', label: 'Developer Cohort', sublabel: 'Ecosystem Ingestion' },
-            { value: '18+', label: 'Chains Architected', sublabel: 'Cross-Ecosystem GTM' }
-        ],
-        highlights: [
-            'Institutional developer acquisition frameworks and grant program architecture',
-            'Sustainable token economics modeling and liquidity incentive optimization',
-            'Global Web3 ecosystem partner alignment and hackathon onboarding'
-        ],
-        image: '/images/hero-crypto-trading.jpg',
-        badgeText: 'Web3 Ecosystem Engine: Active Telemetry',
-        primaryCta: {
-            text: 'Explore Crypto Engine',
-            link: '/crypto'
-        },
-        secondaryCta: {
-            text: 'Speak to Web3 Partner',
-            link: '/book-consultation'
-        }
-    },
-    {
-        id: 'custom-ai-engineering',
+        id: 'end-to-end-transformation',
         stepNumber: '06',
-        tag: 'Enterprise Custom AI',
-        pillTitle: 'Enterprise Custom AI',
-        icon: Sparkles,
-        title: 'Cognitive Architecture &',
-        highlightTitle: 'Custom AI Engineering',
-        description: 'Bespoke agentic systems, proprietary fine-tuned SLMs/LLMs, secure multi-tenant data pipelines, and air-gapped enterprise deployments that turn proprietary enterprise data into compounding margin.',
+        tag: 'End-to-End Transformation',
+        pillTitle: 'Enterprise Advisory',
+        icon: ShieldCheck,
+        title: 'Strategy, Tech & Operations',
+        highlightTitle: 'End-to-End Transformation',
+        description: 'Seamlessly integrating strategic business consulting, enterprise AI architecture, autonomous operations, and verified financial outcomes into a unified transformation ecosystem.',
         stats: [
-            { value: 'SOC-2', label: 'Enterprise Security', sublabel: 'Type II Alignment' },
-            { value: '<100ms', label: 'Inference Latency', sublabel: 'High-Throughput OS' },
-            { value: '100%', label: 'IP Ownership', sublabel: 'Client-Owned Weights' }
+            { value: '300%', label: 'Avg Pipeline Lift', sublabel: 'Verified Outcome' },
+            { value: 'SOC 2', label: 'Type II Certified', sublabel: 'Bank-Grade Security' },
+            { value: '500+', label: 'Global Clients', sublabel: 'Enterprises & Scale-Ups' }
         ],
         highlights: [
-            'Proprietary agentic orchestration frameworks built on air-gapped infrastructure',
-            'Custom fine-tuned domain models trained exclusively on enterprise corpora',
-            'Full enterprise IP transfer with zero vendor lock-in or training leakage'
+            'End-to-end enterprise delivery model tailored to complex workflows',
+            'Full governance compliance with SOC2 Type II, ISO27001 and GDPR',
+            'Continuous learning models that compound operational advantages over time'
         ],
-        image: '/images/hero-ai-infrastructure.jpg',
-        badgeText: 'Custom AI Architecture: Production Grade',
+        image: '/images/hero-end-to-end-transformation.png',
+        fallbackGradient: 'from-[#091D2C] via-[#0F2D44] to-[#2878B5]',
+        badgeText: 'End-to-End Transformation Ecosystem: Verified',
         primaryCta: {
-            text: 'Build Custom AI Engine',
+            text: 'Start Enterprise Transformation',
             link: '/book-consultation'
         },
         secondaryCta: {
-            text: 'View Tech Stack',
-            link: '/offerings'
+            text: 'Review Proven Outcomes',
+            link: '/outcomes'
         }
     }
 ];
 
 export default function HomeFeatureSlider() {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(true);
-    const [progress, setProgress] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
+    const [isPlaying, setIsPlaying] = useState<boolean>(true);
     const [touchStartX, setTouchStartX] = useState<number | null>(null);
-    const timerRef = useRef<NodeJS.Timeout | null>(null);
+    const [progress, setProgress] = useState<number>(0);
+    const SLIDE_DURATION = 7000;
     const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
     const { openQuickForm, openLongForm } = useLeadModal();
-
-    const slideDuration = 6500;
-    const progressStepTime = 50;
 
     const activeSlide = homeSliders[currentIndex];
 
@@ -247,280 +251,218 @@ export default function HomeFeatureSlider() {
     const goToSlide = (index: number) => {
         setCurrentIndex(index);
         setProgress(0);
-        trackEvent({
-            eventName: 'SLIDER_MANUAL_NAVIGATION',
-            label: `Slide ${index + 1}: ${homeSliders[index].pillTitle}`
-        });
+        trackEvent({ eventName: 'HOME_SLIDER_SELECT', label: homeSliders[index].title });
     };
 
+    // Keyboard navigation
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            else if (e.key === 'ArrowRight') nextSlide();
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [nextSlide, prevSlide]);
+
+    // Autoplay with progress bar
     useEffect(() => {
         if (!isPlaying) {
-            if (timerRef.current) clearInterval(timerRef.current);
             if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
             return;
         }
-
+        const stepTime = 50;
+        const stepIncrement = (stepTime / SLIDE_DURATION) * 100;
         progressIntervalRef.current = setInterval(() => {
             setProgress((prev) => {
-                const nextVal = prev + (progressStepTime / slideDuration) * 100;
-                if (nextVal >= 100) {
-                    return 0;
-                }
-                return nextVal;
+                if (prev >= 100) { nextSlide(); return 0; }
+                return prev + stepIncrement;
             });
-        }, progressStepTime);
+        }, stepTime);
+        return () => { if (progressIntervalRef.current) clearInterval(progressIntervalRef.current); };
+    }, [isPlaying, nextSlide, currentIndex]);
 
-        timerRef.current = setInterval(() => {
-            nextSlide();
-        }, slideDuration);
-
-        return () => {
-            if (timerRef.current) clearInterval(timerRef.current);
-            if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
-        };
-    }, [isPlaying, nextSlide, slideDuration]);
-
-    const handleTouchStart = (e: React.TouchEvent) => {
-        setTouchStartX(e.touches[0].clientX);
-    };
-
+    // Touch swipe
+    const handleTouchStart = (e: React.TouchEvent) => setTouchStartX(e.touches[0].clientX);
     const handleTouchEnd = (e: React.TouchEvent) => {
         if (touchStartX === null) return;
-        const touchEndX = e.changedTouches[0].clientX;
-        const diffX = touchStartX - touchEndX;
-
-        if (diffX > 45) {
-            nextSlide();
-        } else if (diffX < -45) {
-            prevSlide();
-        }
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (diff > 45) nextSlide();
+        else if (diff < -45) prevSlide();
         setTouchStartX(null);
     };
 
     return (
-        <section 
-            className="pt-24 pb-14 sm:pt-28 sm:pb-18 lg:pt-32 lg:pb-24 bg-white text-[#0066FF] relative border-b-2 border-[#0066FF]"
-            onMouseEnter={() => setIsPlaying(false)}
-            onMouseLeave={() => setIsPlaying(true)}
+        <section
+            className="relative w-full min-h-screen flex flex-col overflow-hidden"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
             aria-label="Executive AI Revenue OS Platform Showcase"
         >
-            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {/* ── Full-Bleed Background Image with Animated Transitions ── */}
+            <div className="absolute inset-0 z-0">
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={activeSlide.id + '-bg'}
+                        initial={{ opacity: 0, scale: 1.04 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.98 }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute inset-0"
+                    >
+                        <img
+                            src={activeSlide.image}
+                            alt=""
+                            className="w-full h-full object-cover object-right lg:object-[80%_center]"
+                            loading="eager"
+                            onError={(e) => {
+                                (e.currentTarget as HTMLImageElement).style.display = 'none';
+                            }}
+                        />
+                    </motion.div>
+                </AnimatePresence>
+
+                {/* Left Blur Backdrop: softly blurs the background image behind the text on the left */}
+                <div 
+                    className="absolute inset-y-0 left-0 w-full lg:w-[60%] backdrop-blur-[8px] pointer-events-none"
+                    style={{
+                        maskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 60%, rgba(0,0,0,0) 100%)',
+                        WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 60%, rgba(0,0,0,0) 100%)'
+                    }}
+                />
+
+                {/* Left dark gradient for crystal clear text readability, leaving the right side 100% crisp and vibrant */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#040f1a]/95 via-[#040f1a]/75 via-50% to-transparent pointer-events-none" />
                 
-                {/* Main 2-Column Hero Showcase */}
-                <div className="relative">
+                {/* Subtle bottom fade */}
+                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#040f1a]/80 to-transparent pointer-events-none" />
+            </div>
+
+            {/* ── Content Layer ── */}
+            <div className="relative z-10 flex flex-col flex-1 justify-between w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-16 pt-24 sm:pt-28 lg:pt-32 pb-6">
+
+                {/* Hero Content */}
+                <div className="flex-1 flex flex-col justify-center py-6 sm:py-8 lg:py-10 max-w-4xl">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeSlide.id}
-                            initial={{ opacity: 0, y: 15 }}
+                            initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -15 }}
-                            transition={{ duration: 0.3 }}
-                            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center"
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                         >
-                            {/* Left Content Column */}
-                            <div className="lg:col-span-6 flex flex-col justify-center">
-                                {/* Eyebrow Pill */}
-                                <div className="flex items-center gap-2.5 mb-4">
-                                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border-2 border-[#0066FF] bg-white text-[#0066FF] text-xs font-bold tracking-wide uppercase">
-                                        <span className="w-2 h-2 rounded-full bg-[#0066FF] inline-block"></span>
-                                        <span className="font-mono font-extrabold">{activeSlide.stepNumber}</span>
-                                        <span>·</span>
-                                        <span>{activeSlide.tag}</span>
-                                    </div>
-                                </div>
 
-                                {/* Main Headline */}
-                                <h1 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-extrabold text-[#0066FF] leading-[1.12] tracking-tight mb-4 font-heading">
-                                    {activeSlide.title}{' '}
-                                    <span className="underline decoration-[#0066FF]">
-                                        {activeSlide.highlightTitle}
-                                    </span>
-                                </h1>
+                            {/* Main Headline */}
+                            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-2 font-heading">
+                                {activeSlide.title}
+                            </h1>
+                            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold italic text-[#5CAAE6] leading-[1.08] tracking-tight mb-6 font-heading">
+                                {activeSlide.highlightTitle}.
+                            </h1>
 
-                                {/* Supporting Paragraph */}
-                                <p className="text-base sm:text-lg text-[#0066FF] leading-relaxed mb-6 font-medium max-w-xl">
-                                    {activeSlide.description}
-                                </p>
+                            {/* Description */}
+                            <p className="text-base sm:text-lg lg:text-xl text-white/80 leading-relaxed mb-8 max-w-2xl font-normal">
+                                {activeSlide.description.split(' ').map((word, i) => {
+                                    // Bold key metric words
+                                    const bold = ['AI', 'autonomous', 'enterprise', 'predictive', 'real-time', 'pipeline', 'velocity'].includes(word.toLowerCase().replace(/[^a-z-]/g, ''));
+                                    return bold
+                                        ? <strong key={i} className="text-white font-semibold">{word} </strong>
+                                        : <span key={i}>{word} </span>;
+                                })}
+                            </p>
 
-                                {/* Key Highlight Bullet Points */}
-                                <div className="space-y-2.5 mb-8">
-                                    {activeSlide.highlights.map((highlight, hIdx) => (
-                                        <div key={hIdx} className="flex items-start gap-3">
-                                            <div className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full border-2 border-[#0066FF] bg-white flex items-center justify-center">
-                                                <CheckCircle2 className="w-3.5 h-3.5 text-[#0066FF]" />
-                                            </div>
-                                            <span className="text-xs sm:text-sm text-[#0066FF] font-semibold">
-                                                {highlight}
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
+                            {/* CTA Buttons */}
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-10">
+                                {/* Primary */}
+                                <button
+                                    onClick={() => {
+                                        trackEvent({ eventName: 'SLIDER_PRIMARY_CTA_CLICK', label: activeSlide.primaryCta.text });
+                                        openQuickForm({
+                                            defaultService: activeSlide.highlightTitle,
+                                            source: `Hero Slider (${activeSlide.tag})`,
+                                            title: activeSlide.primaryCta.text
+                                        });
+                                    }}
+                                    className="flex items-center gap-2.5 px-7 py-3.5 bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold text-sm rounded-lg shadow-lg shadow-[#2878B5]/40 hover:shadow-[#2878B5]/60 transition-all duration-200 hover:-translate-y-0.5 group cursor-pointer"
+                                >
+                                    <Zap className="w-4 h-4" />
+                                    <span>{activeSlide.primaryCta.text}</span>
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </button>
 
-                                {/* Action Buttons Group */}
-                                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6">
-                                    {/* Primary CTA */}
-                                    <button
-                                        onClick={() => {
-                                            trackEvent({ eventName: 'SLIDER_PRIMARY_CTA_CLICK', label: activeSlide.primaryCta.text });
-                                            openQuickForm({
-                                                defaultService: activeSlide.highlightTitle,
-                                                source: `Hero Slider (${activeSlide.tag})`,
-                                                title: activeSlide.primaryCta.text
-                                            });
-                                        }}
-                                        className="w-full sm:w-auto bg-[#0066FF] hover:bg-white text-white hover:text-[#0066FF] font-bold px-7 py-3.5 rounded-lg border-2 border-[#0066FF] text-sm sm:text-base transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer"
-                                    >
-                                        <Zap className="w-4 h-4" />
-                                        <span>{activeSlide.primaryCta.text}</span>
-                                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                    </button>
+                                {/* Secondary */}
+                                <Link
+                                    to={activeSlide.secondaryCta.link}
+                                    onClick={() => trackEvent({ eventName: 'SLIDER_SECONDARY_CTA_CLICK', label: activeSlide.secondaryCta.text })}
+                                    className="flex items-center gap-2 px-7 py-3.5 border-2 border-[#2878B5] hover:border-[#5CAAE6] bg-[#0A253D] hover:bg-[#133E60] text-white font-bold text-sm rounded-lg shadow-md transition-all duration-200 hover:-translate-y-0.5"
+                                >
+                                    {activeSlide.secondaryCta.text}
+                                </Link>
 
-                                    {/* Secondary CTA */}
-                                    <Link 
-                                        to={activeSlide.secondaryCta.link}
-                                        onClick={() => trackEvent({ eventName: 'SLIDER_SECONDARY_CTA_CLICK', label: activeSlide.secondaryCta.text })}
-                                        className="w-full sm:w-auto border-2 border-[#0066FF] bg-white hover:bg-[#0066FF] text-[#0066FF] hover:text-white font-bold px-6 py-3.5 rounded-lg text-sm sm:text-base transition-all duration-200 flex items-center justify-center gap-2 text-center"
-                                    >
-                                        <span>{activeSlide.secondaryCta.text}</span>
-                                    </Link>
-
-                                    {/* Detailed Assessment Trigger */}
-                                    <button
-                                        onClick={() => {
-                                            openLongForm({
-                                                defaultService: activeSlide.highlightTitle,
-                                                source: `Hero Slider Detailed Assessment (${activeSlide.tag})`
-                                            });
-                                        }}
-                                        className="text-xs text-[#0066FF] hover:underline font-bold flex items-center justify-center gap-1 sm:ml-2 py-2"
-                                    >
-                                        <FileText className="w-3.5 h-3.5" />
-                                        <span>Detailed Assessment</span>
-                                    </button>
-                                </div>
-
-                                {/* Hero Meta Strip */}
-                                <div className="font-mono text-[11px] text-[#0066FF] flex items-center gap-2 mb-6 font-bold">
-                                    <span>Ref: PM-AI-REV/2026/0{currentIndex + 1} · Autonomous Revenue OS · Verified Enterprise Outcomes</span>
-                                </div>
-
-                                {/* Key Metrics Strip */}
-                                <div className="grid grid-cols-3 gap-3 sm:gap-4 p-4 rounded-xl bg-white border-2 border-[#0066FF]">
-                                    {activeSlide.stats.map((stat, sIdx) => (
-                                        <div key={sIdx} className="text-left">
-                                            <div className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#0066FF] font-mono">
-                                                {stat.value}
-                                            </div>
-                                            <div className="text-xs font-bold text-[#0066FF] leading-tight mt-0.5 uppercase tracking-wide">
-                                                {stat.label}
-                                            </div>
-                                            {stat.sublabel && (
-                                                <div className="text-[11px] text-[#0066FF] font-medium hidden sm:block mt-0.5">
-                                                    {stat.sublabel}
-                                                </div>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-
+                                {/* Tertiary */}
+                                <button
+                                    onClick={() => openLongForm({
+                                        defaultService: activeSlide.highlightTitle,
+                                        source: `Hero Slider Detailed Assessment (${activeSlide.tag})`
+                                    })}
+                                    className="flex items-center gap-1.5 text-sm text-[#BAE0F8] hover:text-white font-semibold underline underline-offset-4 transition-colors py-1"
+                                >
+                                    <FileText className="w-3.5 h-3.5" />
+                                    Request Institutional Dossier (PDF) →
+                                </button>
                             </div>
 
-                            {/* Right Column: Visual Frame */}
-                            <div className="lg:col-span-6 relative">
-                                <div className="relative rounded-2xl lg:rounded-3xl overflow-hidden border-2 border-[#0066FF] bg-white group">
-                                    
-                                    {/* Top Status Bar */}
-                                    <div className="bg-white px-4 py-3 border-b-2 border-[#0066FF] flex items-center justify-between text-[#0066FF]">
-                                        <div className="flex items-center space-x-2">
-                                            <div className="w-2.5 h-2.5 rounded-full bg-[#0066FF]" />
-                                            <div className="w-2.5 h-2.5 rounded-full border border-[#0066FF]" />
-                                            <div className="w-2.5 h-2.5 rounded-full border border-[#0066FF]" />
-                                        </div>
-                                        <div className="text-[11px] font-mono font-bold flex items-center gap-2">
-                                            <span className="w-2 h-2 rounded-full bg-[#0066FF]" />
-                                            <span>profitmachines.ai/engine-{activeSlide.stepNumber}</span>
-                                        </div>
-                                        <div className="text-[10px] font-mono font-bold uppercase">
-                                            Engine {activeSlide.stepNumber}
-                                        </div>
-                                    </div>
-
-                                    {/* Main Realistic Photograph */}
-                                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-white flex items-center justify-center">
-                                        <img 
-                                            src={activeSlide.image} 
-                                            alt={`${activeSlide.title} ${activeSlide.highlightTitle} - ProfitMachines Executive Consulting`}
-                                            className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-102"
-                                            loading="eager"
-                                            onError={(e) => {
-                                                (e.currentTarget as HTMLImageElement).src = '/images/home-why-choose.png';
-                                            }}
-                                        />
-
-                                        {/* Floating Live Telemetry Badge on Image */}
-                                        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-2 p-3 rounded-xl bg-white border-2 border-[#0066FF] text-[#0066FF]">
-                                            <div className="flex items-center gap-2">
-                                                <span className="w-2 h-2 rounded-full bg-[#0066FF] flex-shrink-0" />
-                                                <span className="text-xs font-mono font-bold truncate">
-                                                    {activeSlide.badgeText}
-                                                </span>
-                                            </div>
-                                            <button
-                                                onClick={() => openQuickForm({ defaultService: activeSlide.highlightTitle, source: 'Image Telemetry Badge' })}
-                                                className="hidden sm:inline-flex items-center gap-1 text-[11px] font-mono font-bold flex-shrink-0 hover:underline"
-                                            >
-                                                <span>Deploy Engine</span>
-                                                <ArrowRight className="w-3 h-3" />
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
+                            {/* Reference / metadata bar */}
+                            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-white/45 font-medium border-t border-white/10 pt-5">
+                                <span>Ref: PM-{activeSlide.stepNumber}-2026/001</span>
+                                <span>·</span>
+                                {activeSlide.stats.map((s, i) => (
+                                    <span key={i} className="flex items-center gap-1">
+                                        <span className="text-[#5CAAE6] font-bold">{s.value}</span>
+                                        <span>{s.label}</span>
+                                    </span>
+                                ))}
                             </div>
                         </motion.div>
                     </AnimatePresence>
                 </div>
 
-                {/* Bottom Controls Strip */}
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-10 px-2 pt-6 border-t-2 border-[#0066FF]">
-                    
-                    {/* Left: Enterprise Trust Accreditations */}
-                    <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs font-bold text-[#0066FF]">
+                {/* Bottom Controls Bar */}
+                <div className="pb-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10 pt-4">
+
+                    {/* Trust badges */}
+                    <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs font-semibold text-white/50">
                         <div className="flex items-center gap-1.5">
-                            <ShieldCheck className="w-4 h-4 text-[#0066FF]" />
+                            <ShieldCheck className="w-4 h-4 text-[#5CAAE6]" />
                             <span>SOC2 Type II Aligned</span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                            <Globe className="w-4 h-4 text-[#0066FF]" />
+                            <Globe className="w-4 h-4 text-[#5CAAE6]" />
                             <span>Global Enterprise Telemetry</span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                            <CheckCircle2 className="w-4 h-4 text-[#0066FF]" />
+                            <CheckCircle2 className="w-4 h-4 text-[#5CAAE6]" />
                             <span>Fortune 500 & Scale-Up Grade</span>
                         </div>
                     </div>
 
-                    {/* Right: Slide Controls, Dots, and Progress Bar */}
+                    {/* Dots + Nav Controls */}
                     <div className="flex items-center gap-3">
-                        
-                        {/* Dot Indicators */}
-                        <div className="flex items-center gap-1.5 mr-2">
+                        {/* Progress dots */}
+                        <div className="flex items-center gap-1.5 mr-1">
                             {homeSliders.map((_, dotIdx) => (
                                 <button
                                     key={dotIdx}
                                     onClick={() => goToSlide(dotIdx)}
-                                    className={`relative h-2.5 rounded-full overflow-hidden transition-all duration-300 border border-[#0066FF] ${
-                                        dotIdx === currentIndex 
-                                            ? 'w-8 bg-white' 
-                                            : 'w-2.5 bg-white hover:bg-[#0066FF]'
+                                    className={`relative h-2 rounded-full overflow-hidden transition-all duration-300 ${
+                                        dotIdx === currentIndex
+                                            ? 'w-8 bg-white/20'
+                                            : 'w-2 bg-white/25 hover:bg-white/50'
                                     }`}
                                     aria-label={`Go to slide ${dotIdx + 1}`}
                                 >
                                     {dotIdx === currentIndex && (
-                                        <div 
-                                            className="absolute top-0 bottom-0 left-0 bg-[#0066FF] transition-all"
+                                        <div
+                                            className="absolute top-0 bottom-0 left-0 bg-[#5CAAE6] transition-all"
                                             style={{ width: `${progress}%` }}
                                         />
                                     )}
@@ -528,45 +470,38 @@ export default function HomeFeatureSlider() {
                             ))}
                         </div>
 
-                        {/* Navigation Control Box */}
-                        <div className="flex items-center bg-white border-2 border-[#0066FF] rounded-xl p-1 text-[#0066FF]">
+                        {/* Prev / counter / next */}
+                        <div className="flex items-center bg-white/10 border border-white/20 backdrop-blur-sm rounded-xl p-1 gap-0.5">
                             <button
                                 onClick={() => setIsPlaying(!isPlaying)}
-                                className="p-2 text-[#0066FF] hover:bg-[#0066FF]/10 rounded-lg transition-colors"
-                                title={isPlaying ? "Pause autoplay" : "Start autoplay"}
-                                aria-label={isPlaying ? "Pause autoplay" : "Start autoplay"}
+                                className="p-2 text-white/60 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+                                aria-label={isPlaying ? 'Pause autoplay' : 'Start autoplay'}
                             >
-                                {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                                {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
                             </button>
-                            
-                            <div className="h-4 w-px bg-[#0066FF] mx-1" />
-
+                            <div className="h-4 w-px bg-white/20 mx-0.5" />
                             <button
                                 onClick={prevSlide}
-                                className="p-2 text-[#0066FF] hover:bg-[#0066FF]/10 rounded-lg transition-colors"
+                                className="p-2 text-white/60 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
                                 aria-label="Previous slide"
                             >
-                                <ChevronLeft className="w-5 h-5" />
+                                <ChevronLeft className="w-4 h-4" />
                             </button>
-
-                            <div className="px-2.5 text-xs font-mono font-bold text-[#0066FF]">
-                                <span>{activeSlide.stepNumber}</span>
-                                <span> / </span>
-                                <span>0{homeSliders.length}</span>
+                            <div className="px-2.5 text-xs font-mono font-bold">
+                                <span className="text-[#5CAAE6]">{activeSlide.stepNumber}</span>
+                                <span className="text-white/30"> / </span>
+                                <span className="text-white">0{homeSliders.length}</span>
                             </div>
-
                             <button
                                 onClick={nextSlide}
-                                className="p-2 text-[#0066FF] hover:bg-[#0066FF]/10 rounded-lg transition-colors"
+                                className="p-2 text-white/60 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
                                 aria-label="Next slide"
                             >
-                                <ChevronRight className="w-5 h-5" />
+                                <ChevronRight className="w-4 h-4" />
                             </button>
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </section>
     );

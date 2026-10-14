@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+﻿import { useEffect } from 'react';
 import { Button } from '../components/ui/button';
 import { 
     TrendingUp, 
@@ -74,7 +74,7 @@ export default function BehaviourAnalytics() {
         {
             title: "User Behaviour Library",
             icon: Users,
-            description: "Aggregated user-level behavioral profiles for a 360� view of individual journeys.",
+            description: "Aggregated user-level behavioral profiles for a 360° view of individual journeys.",
             points: [
                 "Historical Event Aggregation",
                 "Session Lifecycle Tracking",
@@ -105,9 +105,9 @@ export default function BehaviourAnalytics() {
     ];
 
     return (
-        <div className="min-h-screen bg-white font-sans text-[#0066FF]">
+        <div className="min-h-screen bg-white font-sans text-slate-900">
             {/* Hero Section */}
-            <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-white">
+            <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-slate-900">
                 <div className="absolute inset-0 z-0">
                     <style>{`
                         @keyframes fadeZoom {
@@ -137,25 +137,25 @@ export default function BehaviourAnalytics() {
                 </div>
 
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 pt-20">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#0066FF]/60 shadow-[0_2px_10px_-4px_rgba(6,78,59,0.3)] text-[#0066FF] text-sm font-bold mb-8 backdrop-blur-sm">
-                        <BarChart3 className="w-4 h-4 text-[#0066FF]" />
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-emerald-100/60 shadow-[0_2px_10px_-4px_rgba(6,78,59,0.3)] text-[#1E6297] text-sm font-bold mb-8 backdrop-blur-sm">
+                        <BarChart3 className="w-4 h-4 text-[#2878B5]" />
                         <span className="bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent uppercase tracking-wider font-bold">Intelligence Module: Behaviour Analytics</span>
                     </div>
 
-                    <h1 className="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight leading-[1.1] text-[#0066FF]">
+                    <h1 className="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight leading-[1.1] text-slate-900">
                         Decode the <br className="hidden md:block" />
-                        <span className="text-[#0066FF] bg-gradient-to-r from-[#0066FF] to-[#0066FF]">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2878B5] via-emerald-700 to-teal-700">
                             Digital Body Language
                         </span>
                     </h1>
 
-                    <p className="text-xl md:text-2xl text-[#0066FF] max-w-4xl mx-auto mb-10 leading-relaxed font-semibold">
+                    <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto mb-10 leading-relaxed font-semibold">
                         Don't just track clicks. Understand intent. ProfitMachines maps every interaction to reveal the hidden patterns of your highest-value users.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-5 justify-center">
                         <Link to="/book-consultation">
-                            <Button className="bg-gradient-to-r from-[#0066FF] to-[#0066FF] hover:from-blue-700 hover:to-indigo-700 text-white px-10 py-7 text-xl h-auto rounded-full shadow-lg shadow-[#0066FF]/20 hover:shadow-[#0066FF]/20 transition-all hover:-translate-y-1 font-bold">
+                            <Button className="bg-gradient-to-r from-[#2878B5] to-emerald-600 hover:from-blue-700 hover:to-indigo-700 text-white px-10 py-7 text-xl h-auto rounded-full shadow-lg shadow-[#2878B5]/25 hover:shadow-[#2878B5]/35 transition-all hover:-translate-y-1 font-bold">
                                 Activate Behaviour Engine
                             </Button>
                         </Link>
@@ -170,20 +170,20 @@ export default function BehaviourAnalytics() {
                         {features.map((feature, idx) => {
                             const Icon = feature.icon;
                             return (
-                                <div key={idx} className="bg-white p-10 rounded-3xl border border-[#0066FF] shadow-sm hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+                                <div key={idx} className="bg-slate-50 p-10 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
                                     <div className="relative z-10">
-                                        <div className="w-16 h-16 bg-white border-4 border-[#0066FF] text-white rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#0066FF] group-hover:rotate-6 transition-all duration-500">
+                                        <div className="w-16 h-16 bg-slate-900 border-4 border-slate-50 text-white rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#2878B5] group-hover:rotate-6 transition-all duration-500">
                                             <Icon className="w-9 h-9" />
                                         </div>
-                                        <h4 className="text-2xl font-bold text-[#0066FF] mb-4">{feature.title}</h4>
-                                        <p className="text-[#0066FF] font-medium mb-8 leading-relaxed italic">
+                                        <h4 className="text-2xl font-bold text-slate-900 mb-4">{feature.title}</h4>
+                                        <p className="text-slate-600 font-medium mb-8 leading-relaxed italic">
                                             "{feature.description}"
                                         </p>
                                         <div className="space-y-4">
                                             {feature.points.map((p, i) => (
                                                 <div key={i} className="flex gap-4 items-start group/flow">
-                                                    <div className="mt-1.5 w-2 h-2 rounded-full bg-[#0066FF]" />
-                                                    <p className="text-[#0066FF] font-bold text-sm leading-relaxed">{p}</p>
+                                                    <div className="mt-1.5 w-2 h-2 rounded-full bg-emerald-600" />
+                                                    <p className="text-slate-700 font-bold text-sm leading-relaxed">{p}</p>
                                                 </div>
                                             ))}
                                         </div>
@@ -196,21 +196,21 @@ export default function BehaviourAnalytics() {
             </section>
 
             {/* Reporting & Trends Section */}
-            <section className="py-24 bg-white border-y border-[#0066FF]">
+            <section className="py-24 bg-slate-50 border-y border-slate-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-20">
-                        <span className="inline-block px-4 py-1 rounded-full bg-white text-[#0066FF] text-xs font-bold tracking-widest uppercase mb-4">Reports & Trends</span>
-                        <h2 className="text-4xl md:text-5xl font-black text-[#0066FF]">Automated Intelligence Sheets</h2>
+                        <span className="inline-block px-4 py-1 rounded-full bg-emerald-100 text-[#1E6297] text-xs font-bold tracking-widest uppercase mb-4">Reports & Trends</span>
+                        <h2 className="text-4xl md:text-5xl font-black text-slate-900">Automated Intelligence Sheets</h2>
                     </div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {trends.map((trend, i) => (
-                            <div key={i} className="bg-white p-8 rounded-3xl border border-[#0066FF] shadow-sm hover:shadow-blue-500/10 transition-all group">
-                                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-6 text-[#0066FF] group-hover:bg-[#0066FF] group-hover:text-white transition-all">
+                            <div key={i} className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-blue-500/10 transition-all group">
+                                <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6 text-[#2878B5] group-hover:bg-[#2878B5] group-hover:text-white transition-all">
                                     <TrendingUp className="w-6 h-6" />
                                 </div>
-                                <h4 className="font-bold text-xl mb-4 text-[#0066FF]">{trend.label}</h4>
-                                <p className="text-[#0066FF] font-medium text-sm leading-relaxed">{trend.desc}</p>
+                                <h4 className="font-bold text-xl mb-4 text-slate-900">{trend.label}</h4>
+                                <p className="text-slate-500 font-medium text-sm leading-relaxed">{trend.desc}</p>
                             </div>
                         ))}
                     </div>

@@ -111,7 +111,7 @@ export default function IndustriesSection() {
         : industries.filter(i => i.sectorGroup === selectedSector);
 
     return (
-        <section className="py-20 md:py-28 bg-white text-[#0066FF] relative overflow-hidden border-b-2 border-[#0066FF]" id="industries">
+        <section className="py-20 md:py-28 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200" id="industries">
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 
                 <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
@@ -121,20 +121,20 @@ export default function IndustriesSection() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border-2 border-[#0066FF] bg-white text-xs font-bold text-[#0066FF] uppercase mb-4">
-                            <span className="w-2 h-2 rounded-full bg-[#0066FF]"></span>
-                            <span>Sector Expertise · Domain Models</span>
+                        <div className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-[#1E6297] font-bold text-xs uppercase tracking-wider mb-4 border border-emerald-100 shadow-sm">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            Sector Expertise
                         </div>
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0066FF] mb-6 tracking-tight font-heading">
-                            Tailored For Your Industry's Growth Model
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight font-heading">
+                            Tailored For <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2878B5] via-emerald-700 to-teal-700">Your Industry's Growth Model</span>
                         </h2>
-                        <p className="text-base sm:text-lg text-[#0066FF] font-medium leading-relaxed max-w-2xl mx-auto">
+                        <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
                             Domain-specific AI growth engines, revenue protection architectures, and market discovery frameworks custom-engineered for your sector.
                         </p>
                     </motion.div>
 
                     {/* Sector Filter Tabs */}
-                    <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-white border-2 border-[#0066FF] mt-8">
+                    <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
                         {sectorFilters.map((filter) => (
                             <button
                                 key={filter}
@@ -142,10 +142,10 @@ export default function IndustriesSection() {
                                     setSelectedSector(filter);
                                     trackEvent({ eventName: 'FILTER_INDUSTRIES_CLICK', label: filter });
                                 }}
-                                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 border-2 ${
+                                className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
                                     selectedSector === filter
-                                        ? 'bg-[#0066FF] text-white border-[#0066FF]'
-                                        : 'bg-white text-[#0066FF] border-transparent hover:border-[#0066FF]'
+                                        ? 'bg-slate-900 text-white shadow-md'
+                                        : 'bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200'
                                 }`}
                             >
                                 {filter === 'all' ? 'All Sectors (09)' : filter}
@@ -160,7 +160,7 @@ export default function IndustriesSection() {
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"
                 >
                     <AnimatePresence>
-                        {filteredIndustries.map((ind) => {
+                        {filteredIndustries.map((ind, idx) => {
                             const Icon = ind.icon;
                             return (
                                 <motion.div
@@ -175,26 +175,27 @@ export default function IndustriesSection() {
                                     <Link
                                         to={ind.link}
                                         onClick={() => trackEvent({ eventName: 'INDUSTRY_CARD_CLICK', label: ind.title })}
-                                        className="block h-full group focus:outline-none rounded-2xl"
+                                        className="block h-full group focus:outline-none focus:ring-2 focus:ring-emerald-600 rounded-2xl"
                                     >
-                                        <div className="h-full flex flex-col justify-between rounded-2xl bg-white border-2 border-[#0066FF] hover:-translate-y-1 transition-all duration-200 relative overflow-hidden">
+                                        <div className="h-full flex flex-col justify-between rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-2xl hover:shadow-blue-600/10 hover:border-emerald-400 hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden">
                                             
                                             {/* Top Visual Image Strip */}
                                             {ind.image && (
-                                                <div className="relative h-44 w-full overflow-hidden bg-white border-b-2 border-[#0066FF]">
+                                                <div className="relative h-44 w-full overflow-hidden bg-slate-950">
                                                     <img 
                                                         src={ind.image} 
                                                         alt={ind.title} 
-                                                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                                                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-90"
                                                         loading="lazy"
                                                     />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent" />
                                                     
                                                     {/* Floating Sector Badge on Image */}
-                                                    <div className="absolute top-3 left-3 bg-white px-2.5 py-1 rounded-md border-2 border-[#0066FF] text-[10px] font-mono font-bold text-[#0066FF]">
+                                                    <div className="absolute top-3 left-3 bg-slate-900/90 backdrop-blur-md px-2.5 py-1 rounded-md border border-slate-700/80 text-[10px] font-mono font-bold text-emerald-400">
                                                         {ind.tag}
                                                     </div>
 
-                                                    <div className="absolute bottom-3 right-3 w-8 h-8 rounded-lg bg-[#0066FF] text-white flex items-center justify-center border-2 border-[#0066FF]">
+                                                    <div className="absolute bottom-3 right-3 w-8 h-8 rounded-lg bg-[#2878B5] text-white flex items-center justify-center shadow-md">
                                                         <Icon className="w-4 h-4" />
                                                     </div>
                                                 </div>
@@ -202,23 +203,23 @@ export default function IndustriesSection() {
 
                                             <div className="p-6 flex-1 flex flex-col justify-between">
                                                 <div>
-                                                    <h3 className="text-xl font-bold text-[#0066FF] mb-2.5">
+                                                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-[#2878B5] transition-colors mb-2.5">
                                                         {ind.title}
                                                     </h3>
 
-                                                    <p className="text-xs text-[#0066FF] font-medium mb-4 line-clamp-2">
-                                                        <strong>Sub-sectors:</strong> {ind.useCases}
+                                                    <p className="text-xs text-slate-500 font-medium mb-4 line-clamp-2">
+                                                        <strong className="text-slate-700">Sub-sectors:</strong> {ind.useCases}
                                                     </p>
 
-                                                    <div className="p-3.5 rounded-xl bg-white border-2 border-[#0066FF] text-xs text-[#0066FF] font-medium leading-relaxed mb-4">
-                                                        <span className="font-bold block mb-1">Strategic Objective:</span>
+                                                    <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-700 font-medium leading-relaxed mb-4">
+                                                        <span className="font-bold text-[#1E6297] block mb-1">Strategic Objective:</span>
                                                         {ind.focus}
                                                     </div>
                                                 </div>
 
-                                                <div className="pt-3 border-t-2 border-[#0066FF] flex items-center justify-between text-xs font-bold text-[#0066FF]">
+                                                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#2878B5]">
                                                     <span>Explore Sector Blueprint</span>
-                                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform text-[#0066FF]" />
+                                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                                                 </div>
                                             </div>
 
@@ -233,10 +234,10 @@ export default function IndustriesSection() {
                 <div className="mt-14 text-center">
                     <Link
                         to="/industries"
-                        className="inline-flex items-center gap-2 text-sm font-bold text-[#0066FF] hover:underline transition-colors group"
+                        className="inline-flex items-center gap-2 text-sm font-bold text-slate-900 hover:text-[#2878B5] transition-colors group"
                     >
                         <span>View complete industry matrices & compliance frameworks</span>
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#0066FF]" />
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#2878B5]" />
                     </Link>
                 </div>
 

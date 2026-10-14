@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import {
   Activity,
   AlertTriangle,
@@ -39,63 +39,63 @@ export default function StdDeviationView({ data }: Props) {
     <div className="space-y-8 animate-fadeIn">
       {/* 1. Header Statistical KPIs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">Mean Baseline (�)</span>
-            <div className="p-2 rounded-lg bg-[#0066FF]/10 text-[#0066FF]">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Mean Baseline (μ)</span>
+            <div className="p-2 rounded-lg bg-emerald-600/10 text-emerald-400">
               <Activity className="w-4 h-4" />
             </div>
           </div>
           <div className="text-2xl font-extrabold text-white font-mono">{mean.toFixed(1)}s</div>
-          <span className="text-xs text-[#0066FF]">Average engagement time per session</span>
+          <span className="text-xs text-slate-400">Average engagement time per session</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">Std Deviation (s)</span>
-            <div className="p-2 rounded-lg bg-white0/10 text-[#0066FF]">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Std Deviation (σ)</span>
+            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
               <Activity className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-[#0066FF] font-mono">�{stdDev.toFixed(1)}s</div>
-          <span className="text-xs text-[#0066FF]">Standard variance window</span>
+          <div className="text-2xl font-extrabold text-emerald-400 font-mono">±{stdDev.toFixed(1)}s</div>
+          <span className="text-xs text-slate-400">Standard variance window</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">Normal Range (�2s)</span>
-            <div className="p-2 rounded-lg bg-white0/10 text-[#0066FF]">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Normal Range (±2σ)</span>
+            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
               <CheckCircle2 className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-[#0066FF] font-mono">
-            {lower2Sigma.toFixed(0)}s � {upper2Sigma.toFixed(0)}s
+          <div className="text-2xl font-extrabold text-emerald-400 font-mono">
+            {lower2Sigma.toFixed(0)}s – {upper2Sigma.toFixed(0)}s
           </div>
-          <span className="text-xs text-[#0066FF]">95.4% of all verified visitors</span>
+          <span className="text-xs text-slate-400">95.4% of all verified visitors</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">Statistical Anomalies</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Statistical Anomalies</span>
             <div className="p-2 rounded-lg bg-rose-500/10 text-rose-400">
               <AlertTriangle className="w-4 h-4" />
             </div>
           </div>
           <div className="text-2xl font-extrabold text-rose-400 font-mono">{anomaliesDetected} Detected</div>
-          <span className="text-xs text-rose-400">Outliers beyond �2s boundary</span>
+          <span className="text-xs text-rose-400">Outliers beyond ±2σ boundary</span>
         </div>
       </div>
 
       {/* 2. Bell Curve / Distribution Histogram */}
-      <div className="p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+      <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
           <div>
             <h4 className="text-lg font-bold text-white">Gaussian Engagement Dispersion</h4>
-            <p className="text-xs text-[#0066FF]">{metricName} � Normal curve distribution with outlier flags</p>
+            <p className="text-xs text-slate-400">{metricName} — Normal curve distribution with outlier flags</p>
           </div>
           <div className="flex items-center gap-3 text-xs font-mono">
-            <span className="inline-flex items-center gap-1.5 text-[#0066FF]">
-              <span className="w-2.5 h-2.5 rounded-sm bg-[#0066FF]" /> Expected Range
+            <span className="inline-flex items-center gap-1.5 text-emerald-400">
+              <span className="w-2.5 h-2.5 rounded-sm bg-emerald-600" /> Expected Range
             </span>
             <span className="inline-flex items-center gap-1.5 text-rose-400">
               <span className="w-2.5 h-2.5 rounded-sm bg-rose-500" /> Outlier / Anomaly
@@ -124,18 +124,18 @@ export default function StdDeviationView({ data }: Props) {
       </div>
 
       {/* 3. Recent Observations & Outliers Table */}
-      <div className="p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+      <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h4 className="text-lg font-bold text-white">Recent Hourly Statistical Inspections</h4>
-            <p className="text-xs text-[#0066FF]">Live hourly sample deviations relative to baseline mean</p>
+            <p className="text-xs text-slate-400">Live hourly sample deviations relative to baseline mean</p>
           </div>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs font-mono">
             <thead>
-              <tr className="border-b border-[#0066FF] text-[#0066FF] uppercase">
+              <tr className="border-b border-slate-800 text-slate-400 uppercase">
                 <th className="pb-3 font-semibold">Time Window</th>
                 <th className="pb-3 font-semibold">Observed Value</th>
                 <th className="pb-3 font-semibold">Z-Score Deviation</th>
@@ -147,19 +147,19 @@ export default function StdDeviationView({ data }: Props) {
                 const isAlert = obs.status === 'Anomaly Alert';
                 const isHigh = obs.status === 'High Activity';
                 return (
-                  <tr key={idx} className="hover:bg-white/30 transition-colors">
+                  <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
                     <td className="py-3 font-bold text-white">{obs.date}</td>
-                    <td className="py-3 text-[#0066FF]">{obs.value}s</td>
-                    <td className="py-3 text-[#0066FF] font-bold">
-                      {obs.deviationScore > 0 ? `+${obs.deviationScore.toFixed(2)}s` : `${obs.deviationScore.toFixed(2)}s`}
+                    <td className="py-3 text-slate-200">{obs.value}s</td>
+                    <td className="py-3 text-emerald-400 font-bold">
+                      {obs.deviationScore > 0 ? `+${obs.deviationScore.toFixed(2)}σ` : `${obs.deviationScore.toFixed(2)}σ`}
                     </td>
                     <td className="py-3 text-right">
                       <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold ${
                         isAlert
                           ? 'bg-rose-950 text-rose-400 border border-rose-800/60'
                           : isHigh
-                          ? 'bg-[#0066FF] text-[#0066FF] border border-[#0066FF]/60'
-                          : 'bg-white text-[#0066FF]'
+                          ? 'bg-emerald-950 text-emerald-400 border border-emerald-800/60'
+                          : 'bg-slate-800 text-slate-300'
                       }`}>
                         {obs.status}
                       </span>

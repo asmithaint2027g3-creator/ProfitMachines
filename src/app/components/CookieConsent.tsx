@@ -1,14 +1,18 @@
+﻿
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { X, Cookie } from 'lucide-react';
+import { X, ShieldCheck, Cookie } from 'lucide-react';
+import { Button } from './ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CookieConsent() {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
+        // Check if user has already accepted cookies
         const consent = localStorage.getItem('trustgrid_cookie_consent');
         if (!consent) {
+            // Show popup after a small delay for better UX
             const timer = setTimeout(() => setIsVisible(true), 1500);
             return () => clearTimeout(timer);
         }
@@ -34,40 +38,42 @@ export default function CookieConsent() {
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     className="fixed bottom-6 left-6 right-6 md:left-auto md:right-6 md:w-[480px] z-[100]"
                 >
-                    <div className="bg-white border-2 border-[#0066FF] rounded-2xl p-6 text-[#0066FF]">
+                    <div className="bg-white/90 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl p-6 ring-1 ring-slate-900/5 dark:bg-slate-900/90 dark:border-slate-800">
                         <div className="flex items-start gap-4">
-                            <div className="p-3 bg-white border border-[#0066FF] rounded-xl text-[#0066FF] shrink-0">
+                            <div className="p-3 bg-emerald-50 rounded-xl text-[#2878B5] shrink-0">
                                 <Cookie className="w-6 h-6" />
                             </div>
                             <div className="flex-1 space-y-3">
                                 <div className="flex items-start justify-between">
-                                    <h3 className="text-lg font-bold text-[#0066FF] font-heading">Cookie Policy</h3>
+                                    <h3 className="text-lg font-bold text-slate-900">Cookie Policy</h3>
                                     <button
                                         onClick={() => setIsVisible(false)}
                                         aria-label="Close dialog"
                                         title="Close dialog"
-                                        className="text-[#0066FF] hover:bg-[#0066FF]/10 rounded p-1 transition-colors"
+                                        className="text-slate-400 hover:text-slate-600 transition-colors p-1"
                                     >
                                         <X className="w-4 h-4" />
+                                        <span className="sr-only">Close dialog</span>
                                     </button>
                                 </div>
-                                <p className="text-sm text-[#0066FF] leading-relaxed font-medium">
+                                <p className="text-sm text-slate-600 leading-relaxed font-medium">
                                     We use cookies to enhance your experience, analyze site traffic, and assist in our marketing efforts. By continuing to visit this site, you agree to our use of cookies.
-                                    Read our <Link to="/privacy" className="text-[#0066FF] underline font-bold">Privacy Policy</Link> and <Link to="/terms" className="text-[#0066FF] underline font-bold">Terms of Service</Link>.
+                                    Read our <Link to="/privacy" className="text-[#2878B5] hover:underline">Privacy Policy</Link> and <Link to="/terms" className="text-[#2878B5] hover:underline">Terms of Service</Link>.
                                 </p>
                                 <div className="flex gap-3 pt-2">
-                                    <button
+                                    <Button
                                         onClick={handleAccept}
-                                        className="bg-[#0066FF] text-white hover:bg-white hover:text-[#0066FF] border-2 border-[#0066FF] font-bold flex-1 h-10 rounded-lg text-sm transition-all"
+                                        className="bg-[#2878B5] hover:bg-[#1E6297] text-white shadow-lg shadow-blue-500/20 font-semibold flex-1 h-10 rounded-lg text-sm"
                                     >
                                         Accept All
-                                    </button>
-                                    <button
+                                    </Button>
+                                    <Button
                                         onClick={handleDecline}
-                                        className="bg-white text-[#0066FF] hover:bg-[#0066FF] hover:text-white border-2 border-[#0066FF] font-bold flex-1 h-10 rounded-lg text-sm transition-all"
+                                        variant="outline"
+                                        className="border-slate-200 text-slate-600 hover:bg-slate-50 font-medium flex-1 h-10 rounded-lg text-sm"
                                     >
                                         Decline
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
                         </div>

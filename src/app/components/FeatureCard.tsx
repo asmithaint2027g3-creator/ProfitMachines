@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { LucideIcon } from 'lucide-react';
 
 interface FeatureCardProps {
@@ -11,18 +11,18 @@ interface FeatureCardProps {
 export default function FeatureCard({ icon: Icon, title, desc, index }: FeatureCardProps) {
     return (
         <div
-            className="group p-6 rounded-2xl bg-white border border-[#0066FF] hover:border-[#0066FF] transition-all duration-300 hover:shadow-lg hover:shadow-blue-900/5 flex flex-col items-center text-center gap-4"
+            className="group p-6 rounded-2xl bg-white border border-slate-100 hover:border-emerald-200 transition-all duration-300 hover:shadow-lg hover:shadow-blue-900/5 flex flex-col items-center text-center gap-4"
         >
-            <div className="p-3 rounded-lg bg-white text-[#0066FF] group-hover:bg-[#0066FF] group-hover:text-white transition-all duration-300">
+            <div className="p-3 rounded-lg bg-emerald-50 text-[#2878B5] group-hover:bg-[#2878B5] group-hover:text-white transition-all duration-300">
                 <Icon className="w-6 h-6" />
             </div>
 
             <div>
-                <h3 className="text-lg font-bold text-[#0066FF] mb-2 group-hover:text-[#0066FF] transition-colors">
+                <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#1E6297] transition-colors">
                     {title}
                 </h3>
                 {desc && (
-                    <p className="text-sm text-[#0066FF] leading-relaxed font-normal">
+                    <p className="text-sm text-slate-600 leading-relaxed font-normal">
                         {desc}
                     </p>
                 )}

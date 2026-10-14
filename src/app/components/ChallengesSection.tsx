@@ -22,17 +22,17 @@ const salesChallenges = [
 
 export default function ChallengesSection() {
   return (
-    <section className="py-20 lg:py-32 bg-white">
+    <section className="py-20 lg:py-32 bg-slate-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0066FF] font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-slate-900 font-bold mb-6">
             Sales & Demand Generation{' '}
             <span className="bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
               Challenges
             </span>
           </h2>
-          <p className="text-lg text-[#0066FF]">
+          <p className="text-lg text-slate-600">
             Identify and overcome the critical challenges holding back your revenue growth
           </p>
         </div>
@@ -47,7 +47,7 @@ export default function ChallengesSection() {
                 <div className="p-2 bg-red-50 rounded-lg">
                   <AlertCircle className="w-6 h-6 text-red-600" />
                 </div>
-                <h3 className="text-xl font-bold text-[#0066FF]">
+                <h3 className="text-xl font-bold text-slate-900">
                   Demand Generation Performance Challenges
                 </h3>
               </div>
@@ -61,7 +61,7 @@ export default function ChallengesSection() {
                     <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <span className="text-xs text-red-700 font-semibold">{index + 1}</span>
                     </div>
-                    <span className="text-[#0066FF] font-medium">{challenge}</span>
+                    <span className="text-slate-700 font-medium">{challenge}</span>
                   </div>
                 ))}
               </div>
@@ -76,7 +76,7 @@ export default function ChallengesSection() {
                 <div className="p-2 bg-orange-50 rounded-lg">
                   <AlertCircle className="w-6 h-6 text-orange-600" />
                 </div>
-                <h3 className="text-xl font-bold text-[#0066FF]">
+                <h3 className="text-xl font-bold text-slate-900">
                   Sales & Revenue Challenges
                 </h3>
               </div>
@@ -90,7 +90,7 @@ export default function ChallengesSection() {
                     <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <span className="text-xs text-orange-700 font-semibold">{index + 1}</span>
                     </div>
-                    <span className="text-[#0066FF] font-medium">{challenge}</span>
+                    <span className="text-slate-700 font-medium">{challenge}</span>
                   </div>
                 ))}
               </div>

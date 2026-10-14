@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import {
   Users,
   Eye,
@@ -42,10 +42,10 @@ export default function ExecutiveKPIsView({ data }: Props) {
         {cards.map((c, idx) => {
           const Icon = c.icon;
           return (
-            <div key={idx} className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl relative overflow-hidden">
+            <div key={idx} className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl relative overflow-hidden">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF] truncate">{c.title}</span>
-                <div className="p-2 rounded-lg bg-white text-[#0066FF]">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-400 truncate">{c.title}</span>
+                <div className="p-2 rounded-lg bg-slate-800 text-emerald-400">
                   <Icon className="w-4 h-4" />
                 </div>
               </div>
@@ -53,11 +53,11 @@ export default function ExecutiveKPIsView({ data }: Props) {
                 {c.value}
               </div>
               <div className="flex items-center justify-between text-xs">
-                <span className="text-[#0066FF] font-bold font-mono inline-flex items-center gap-0.5">
+                <span className="text-emerald-400 font-bold font-mono inline-flex items-center gap-0.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   {c.change}
                 </span>
-                <span className="text-[#0066FF] text-[11px] truncate">{c.sub}</span>
+                <span className="text-slate-400 text-[11px] truncate">{c.sub}</span>
               </div>
             </div>
           );
@@ -67,13 +67,13 @@ export default function ExecutiveKPIsView({ data }: Props) {
       {/* 2. Top 5 Pages & Top Pages by Time Spent Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Top 5 Pages Bar Chart */}
-        <div className="p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h4 className="text-lg font-bold text-white">Top 5 Pages by Traffic</h4>
-              <p className="text-xs text-[#0066FF]">Visit volume and total share from Sheet 2 Executive_KPIs</p>
+              <p className="text-xs text-slate-400">Visit volume and total share from Sheet 2 Executive_KPIs</p>
             </div>
-            <span className="text-xs font-mono text-[#0066FF] bg-[#02241e]/60 px-2.5 py-1 rounded-full border border-blue-800/40">
+            <span className="text-xs font-mono text-emerald-400 bg-[#02241e]/60 px-2.5 py-1 rounded-full border border-blue-800/40">
               Ranked
             </span>
           </div>
@@ -99,13 +99,13 @@ export default function ExecutiveKPIsView({ data }: Props) {
         </div>
 
         {/* Top Pages by Time Spent Bar Chart */}
-        <div className="p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h4 className="text-lg font-bold text-white">Top Pages by Average Time Spent</h4>
-              <p className="text-xs text-[#0066FF]">Engagement depth indicating high buying intent</p>
+              <p className="text-xs text-slate-400">Engagement depth indicating high buying intent</p>
             </div>
-            <span className="text-xs font-mono text-[#0066FF] bg-[#0066FF]/60 px-2.5 py-1 rounded-full border border-[#0066FF]/40">
+            <span className="text-xs font-mono text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-800/40">
               Deep Dwell
             </span>
           </div>
@@ -128,18 +128,18 @@ export default function ExecutiveKPIsView({ data }: Props) {
       </div>
 
       {/* 3. Top Repeat Visitors Leaderboard Table */}
-      <div className="p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+      <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h4 className="text-lg font-bold text-white">Top Repeat Visitors Leaderboard</h4>
-            <p className="text-xs text-[#0066FF]">First-party anonymous profiles exhibiting high frequency and multi-session velocity</p>
+            <p className="text-xs text-slate-400">First-party anonymous profiles exhibiting high frequency and multi-session velocity</p>
           </div>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-[#0066FF] text-[#0066FF] uppercase font-mono">
+              <tr className="border-b border-slate-800 text-slate-400 uppercase font-mono">
                 <th className="pb-3 font-semibold">Visitor ID</th>
                 <th className="pb-3 font-semibold">Sessions</th>
                 <th className="pb-3 font-semibold">Total Time</th>
@@ -150,17 +150,17 @@ export default function ExecutiveKPIsView({ data }: Props) {
             </thead>
             <tbody className="divide-y divide-slate-800/60 font-mono">
               {topRepeatVisitors.map((vis, idx) => (
-                <tr key={idx} className="hover:bg-white/30 transition-colors">
-                  <td className="py-3 text-[#0066FF] font-bold">{vis.visitorId}</td>
+                <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
+                  <td className="py-3 text-emerald-400 font-bold">{vis.visitorId}</td>
                   <td className="py-3 text-white font-bold">{vis.sessionsCount}</td>
-                  <td className="py-3 text-[#0066FF]">{vis.totalTimeFormatted}</td>
-                  <td className="py-3 text-[#0066FF]">{vis.dominantSource}</td>
-                  <td className="py-3 text-[#0066FF]">{vis.lastSeen}</td>
+                  <td className="py-3 text-emerald-400">{vis.totalTimeFormatted}</td>
+                  <td className="py-3 text-slate-300">{vis.dominantSource}</td>
+                  <td className="py-3 text-slate-400">{vis.lastSeen}</td>
                   <td className="py-3 text-right">
                     <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                       vis.status.includes('Booked') || vis.status.includes('Hot')
-                        ? 'bg-[#0066FF] text-[#0066FF] border border-[#0066FF]/60'
-                        : 'bg-[#02241e] text-[#0066FF] border border-blue-800/60'
+                        ? 'bg-emerald-950 text-emerald-400 border border-emerald-800/60'
+                        : 'bg-[#02241e] text-emerald-400 border border-blue-800/60'
                     }`}>
                       {vis.status}
                     </span>
@@ -173,18 +173,18 @@ export default function ExecutiveKPIsView({ data }: Props) {
       </div>
 
       {/* 4. Master Page Metrics Table */}
-      <div className="p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+      <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h4 className="text-lg font-bold text-white">Master Page Metrics</h4>
-            <p className="text-xs text-[#0066FF]">Complete performance ledger across all published site routes</p>
+            <p className="text-xs text-slate-400">Complete performance ledger across all published site routes</p>
           </div>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-[#0066FF] text-[#0066FF] uppercase font-mono">
+              <tr className="border-b border-slate-800 text-slate-400 uppercase font-mono">
                 <th className="pb-3 font-semibold">Page URL</th>
                 <th className="pb-3 font-semibold">Total Visits</th>
                 <th className="pb-3 font-semibold">Unique Users</th>
@@ -195,13 +195,13 @@ export default function ExecutiveKPIsView({ data }: Props) {
             </thead>
             <tbody className="divide-y divide-slate-800/60 font-mono">
               {masterPageMetrics.map((page, idx) => (
-                <tr key={idx} className="hover:bg-white/30 transition-colors">
+                <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
                   <td className="py-3 font-bold text-white">{page.pageUrl}</td>
-                  <td className="py-3 text-[#0066FF]">{page.totalVisits.toLocaleString()}</td>
-                  <td className="py-3 text-[#0066FF]">{page.uniqueUsers.toLocaleString()}</td>
-                  <td className="py-3 text-[#0066FF]">{page.avgTime}</td>
-                  <td className="py-3 text-[#0066FF]">{page.maxTime}</td>
-                  <td className="py-3 text-right text-[#0066FF]">{page.bounceRate}</td>
+                  <td className="py-3 text-slate-300">{page.totalVisits.toLocaleString()}</td>
+                  <td className="py-3 text-emerald-400">{page.uniqueUsers.toLocaleString()}</td>
+                  <td className="py-3 text-emerald-400">{page.avgTime}</td>
+                  <td className="py-3 text-slate-400">{page.maxTime}</td>
+                  <td className="py-3 text-right text-slate-300">{page.bounceRate}</td>
                 </tr>
               ))}
             </tbody>

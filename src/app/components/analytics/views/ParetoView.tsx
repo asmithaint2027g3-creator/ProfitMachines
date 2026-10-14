@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import {
   BarChart2,
   TrendingUp,
@@ -30,52 +30,52 @@ export default function ParetoView({ data }: Props) {
     <div className="space-y-8 animate-fadeIn">
       {/* 1. Header Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">Total Measured Volume</span>
-            <div className="p-2 rounded-lg bg-[#0066FF]/10 text-[#0066FF]">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Total Measured Volume</span>
+            <div className="p-2 rounded-lg bg-emerald-600/10 text-emerald-400">
               <BarChart2 className="w-4 h-4" />
             </div>
           </div>
           <div className="text-2xl font-extrabold text-white font-mono">{totalVolume.toLocaleString()}</div>
-          <span className="text-xs text-[#0066FF]">Aggregated events across pages & sources</span>
+          <span className="text-xs text-slate-400">Aggregated events across pages & sources</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">80% Threshold Reached At</span>
-            <div className="p-2 rounded-lg bg-white0/10 text-[#0066FF]">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">80% Threshold Reached At</span>
+            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
               <Filter className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-[#0066FF] font-mono">Top {threshold80Index} Entities</div>
-          <span className="text-xs text-[#0066FF]">Drive ~80% of total revenue momentum</span>
+          <div className="text-2xl font-extrabold text-emerald-400 font-mono">Top {threshold80Index} Entities</div>
+          <span className="text-xs text-slate-400">Drive ~80% of total revenue momentum</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">Vital Few Concentration</span>
-            <div className="p-2 rounded-lg bg-white0/10 text-[#0066FF]">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Vital Few Concentration</span>
+            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
               <Award className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-[#0066FF] font-mono">{topEntitiesContributionPct}%</div>
-          <span className="text-xs text-[#0066FF]">Classic 80/20 power law validated</span>
+          <div className="text-2xl font-extrabold text-emerald-400 font-mono">{topEntitiesContributionPct}%</div>
+          <span className="text-xs text-slate-400">Classic 80/20 power law validated</span>
         </div>
       </div>
 
       {/* 2. Pareto Dual-Axis Visualization */}
-      <div className="p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+      <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
           <div>
             <h4 className="text-lg font-bold text-white">Pareto 80/20 Activity Curve</h4>
-            <p className="text-xs text-[#0066FF]">
+            <p className="text-xs text-slate-400">
               Bars denote individual contribution; line traces cumulative impact against the 80% benchmark line
             </p>
           </div>
           <div className="flex items-center gap-3 text-xs font-mono">
-            <span className="inline-flex items-center gap-1.5 text-[#0066FF]">
-              <span className="w-2.5 h-2.5 rounded-sm bg-[#0066FF]" /> Individual Volume
+            <span className="inline-flex items-center gap-1.5 text-emerald-400">
+              <span className="w-2.5 h-2.5 rounded-sm bg-emerald-600" /> Individual Volume
             </span>
             <span className="inline-flex items-center gap-1.5 text-amber-400">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Cumulative %
@@ -109,18 +109,18 @@ export default function ParetoView({ data }: Props) {
       </div>
 
       {/* 3. Pareto Breakdown Table */}
-      <div className="p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+      <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h4 className="text-lg font-bold text-white">Entity Cumulative Contribution Ledger</h4>
-            <p className="text-xs text-[#0066FF]">Entities sorted by individual contribution weight</p>
+            <p className="text-xs text-slate-400">Entities sorted by individual contribution weight</p>
           </div>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs font-mono">
             <thead>
-              <tr className="border-b border-[#0066FF] text-[#0066FF] uppercase">
+              <tr className="border-b border-slate-800 text-slate-400 uppercase">
                 <th className="pb-3 font-semibold">Entity Name</th>
                 <th className="pb-3 font-semibold">Type</th>
                 <th className="pb-3 font-semibold">Contribution</th>
@@ -133,18 +133,18 @@ export default function ParetoView({ data }: Props) {
                 const individualShare = ((item.contribution / totalVolume) * 100).toFixed(1);
                 const isUnder80 = item.cumulativePct <= 80;
                 return (
-                  <tr key={idx} className="hover:bg-white/30 transition-colors">
+                  <tr key={idx} className="hover:bg-slate-800/30 transition-colors">
                     <td className="py-3 font-bold text-white">{item.name}</td>
-                    <td className="py-3 text-[#0066FF] uppercase text-[11px]">{item.type}</td>
-                    <td className="py-3 text-[#0066FF] font-bold">{item.contribution.toLocaleString()}</td>
-                    <td className="py-3 text-[#0066FF]">{individualShare}%</td>
+                    <td className="py-3 text-slate-400 uppercase text-[11px]">{item.type}</td>
+                    <td className="py-3 text-emerald-400 font-bold">{item.contribution.toLocaleString()}</td>
+                    <td className="py-3 text-slate-300">{individualShare}%</td>
                     <td className="py-3 text-right">
                       <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                         isUnder80
-                          ? 'bg-[#0066FF] text-[#0066FF] border border-[#0066FF]/50'
-                          : 'bg-white text-[#0066FF]'
+                          ? 'bg-emerald-950 text-emerald-400 border border-emerald-800/50'
+                          : 'bg-slate-800 text-slate-400'
                       }`}>
-                        {item.cumulativePct}% {isUnder80 ? '? Core 80%' : ''}
+                        {item.cumulativePct}% {isUnder80 ? '★ Core 80%' : ''}
                       </span>
                     </td>
                   </tr>

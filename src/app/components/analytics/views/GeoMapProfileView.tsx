@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import {
   Globe2,
   MapPin,
@@ -34,57 +34,57 @@ export default function GeoMapProfileView({ data }: Props) {
     <div className="space-y-8 animate-fadeIn">
       {/* 1. Header KPIs */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">Total Countries Reached</span>
-            <div className="p-2 rounded-lg bg-[#0066FF]/10 text-[#0066FF]">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Total Countries Reached</span>
+            <div className="p-2 rounded-lg bg-emerald-600/10 text-emerald-400">
               <Globe2 className="w-4 h-4" />
             </div>
           </div>
           <div className="text-2xl font-extrabold text-white font-mono">{totalCountries}</div>
-          <span className="text-xs text-[#0066FF]">Active telemetry clusters</span>
+          <span className="text-xs text-slate-400">Active telemetry clusters</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">Top Geographic Market</span>
-            <div className="p-2 rounded-lg bg-white0/10 text-[#0066FF]">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Top Geographic Market</span>
+            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
               <Compass className="w-4 h-4" />
             </div>
           </div>
           <div className="text-2xl font-extrabold text-white font-mono">{topCountry}</div>
-          <span className="text-xs text-[#0066FF] font-bold">58.4% of high-intent traffic</span>
+          <span className="text-xs text-emerald-400 font-bold">58.4% of high-intent traffic</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+        <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">Top Urban Hub</span>
-            <div className="p-2 rounded-lg bg-white0/10 text-[#0066FF]">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Top Urban Hub</span>
+            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
               <MapPin className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl font-extrabold text-[#0066FF] font-mono">{topCity}</div>
-          <span className="text-xs text-[#0066FF]">Silicon Valley enterprise density</span>
+          <div className="text-2xl font-extrabold text-emerald-400 font-mono">{topCity}</div>
+          <span className="text-xs text-slate-400">Silicon Valley enterprise density</span>
         </div>
       </div>
 
       {/* 2. Interactive SVG Vector Map & Selected Detail */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Vector Map */}
-        <div className="lg:col-span-8 p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl relative overflow-hidden">
+        <div className="lg:col-span-8 p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl relative overflow-hidden">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h4 className="text-lg font-bold text-white">Interactive Global Density Map</h4>
-              <p className="text-xs text-[#0066FF]">Click any density cluster to inspect regional engagement</p>
+              <p className="text-xs text-slate-400">Click any density cluster to inspect regional engagement</p>
             </div>
-            <div className="flex items-center gap-2 text-xs font-mono text-[#0066FF] bg-[#0066FF]/50 px-2.5 py-1 rounded-full border border-[#0066FF]/40">
+            <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 bg-emerald-950/50 px-2.5 py-1 rounded-full border border-emerald-800/40">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Zero Raw IP Exposure</span>
             </div>
           </div>
 
           {/* Stylized SVG World Map Visualization */}
-          <div className="relative w-full h-80 bg-white/80 rounded-xl border border-[#0066FF]/80 p-2 flex items-center justify-center overflow-hidden">
+          <div className="relative w-full h-80 bg-slate-950/80 rounded-xl border border-slate-800/80 p-2 flex items-center justify-center overflow-hidden">
             <svg viewBox="0 0 1000 450" className="w-full h-full opacity-60">
               {/* World outline paths */}
               <path
@@ -178,56 +178,56 @@ export default function GeoMapProfileView({ data }: Props) {
         </div>
 
         {/* Selected Location Card */}
-        <div className="lg:col-span-4 p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl flex flex-col justify-between">
+        <div className="lg:col-span-4 p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl flex flex-col justify-between">
           <div>
-            <div className="flex items-center gap-2 text-xs font-mono text-[#0066FF] uppercase tracking-wider mb-2">
+            <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 uppercase tracking-wider mb-2">
               <MapPin className="w-4 h-4" />
               <span>Selected Geo Territory</span>
             </div>
             <h4 className="text-xl font-bold text-white mb-1">
               {selectedLocation.city}, {selectedLocation.country}
             </h4>
-            <p className="text-xs text-[#0066FF] mb-6">{selectedLocation.region}</p>
+            <p className="text-xs text-slate-400 mb-6">{selectedLocation.region}</p>
 
             <div className="space-y-3 font-mono text-xs">
-              <div className="p-3 rounded-xl bg-white/70 border border-[#0066FF] flex items-center justify-between">
-                <span className="text-[#0066FF]">Total Visitors:</span>
+              <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between">
+                <span className="text-slate-400">Total Visitors:</span>
                 <span className="text-white font-bold">{selectedLocation.visitorCount.toLocaleString()}</span>
               </div>
-              <div className="p-3 rounded-xl bg-white/70 border border-[#0066FF] flex items-center justify-between">
-                <span className="text-[#0066FF]">Sessions Logged:</span>
-                <span className="text-[#0066FF] font-bold">{selectedLocation.sessions.toLocaleString()}</span>
+              <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between">
+                <span className="text-slate-400">Sessions Logged:</span>
+                <span className="text-emerald-400 font-bold">{selectedLocation.sessions.toLocaleString()}</span>
               </div>
-              <div className="p-3 rounded-xl bg-white/70 border border-[#0066FF] flex items-center justify-between">
-                <span className="text-[#0066FF]">Engagement Score:</span>
-                <span className="text-[#0066FF] font-bold">{selectedLocation.engagementScore}/100</span>
+              <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between">
+                <span className="text-slate-400">Engagement Score:</span>
+                <span className="text-emerald-400 font-bold">{selectedLocation.engagementScore}/100</span>
               </div>
-              <div className="p-3 rounded-xl bg-white/70 border border-[#0066FF] flex items-center justify-between">
-                <span className="text-[#0066FF]">High-Intent Leads:</span>
+              <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between">
+                <span className="text-slate-400">High-Intent Leads:</span>
                 <span className="text-rose-400 font-bold">{selectedLocation.leads}</span>
               </div>
             </div>
           </div>
 
-          <div className="mt-6 pt-4 border-t border-[#0066FF] text-[11px] text-[#0066FF]">
+          <div className="mt-6 pt-4 border-t border-slate-800 text-[11px] text-slate-400">
             Privacy Filter: Aggregated regional telemetry without individual PII or raw IP addresses.
           </div>
         </div>
       </div>
 
       {/* 3. Geographic Distribution Table */}
-      <div className="p-6 rounded-2xl bg-white/90 border border-[#0066FF] shadow-xl">
+      <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h4 className="text-lg font-bold text-white">Geographic Distribution Ledger</h4>
-            <p className="text-xs text-[#0066FF]">Ranked by volume of verified unique visitors and lead conversions</p>
+            <p className="text-xs text-slate-400">Ranked by volume of verified unique visitors and lead conversions</p>
           </div>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs font-mono">
             <thead>
-              <tr className="border-b border-[#0066FF] text-[#0066FF] uppercase">
+              <tr className="border-b border-slate-800 text-slate-400 uppercase">
                 <th className="pb-3 font-semibold">Country</th>
                 <th className="pb-3 font-semibold">Region</th>
                 <th className="pb-3 font-semibold">City Cluster</th>
@@ -243,15 +243,15 @@ export default function GeoMapProfileView({ data }: Props) {
                   key={loc.id}
                   onClick={() => setSelectedLocation(loc)}
                   className={`cursor-pointer transition-colors ${
-                    selectedLocation.id === loc.id ? 'bg-[#0066FF]/10' : 'hover:bg-white/30'
+                    selectedLocation.id === loc.id ? 'bg-[#2878B5]/10' : 'hover:bg-slate-800/30'
                   }`}
                 >
                   <td className="py-3 font-bold text-white">{loc.country}</td>
-                  <td className="py-3 text-[#0066FF]">{loc.region}</td>
-                  <td className="py-3 text-[#0066FF]">{loc.city}</td>
-                  <td className="py-3 text-[#0066FF]">{loc.visitorCount.toLocaleString()}</td>
-                  <td className="py-3 text-[#0066FF]">{loc.sessions.toLocaleString()}</td>
-                  <td className="py-3 text-[#0066FF] font-bold">{loc.engagementScore}/100</td>
+                  <td className="py-3 text-slate-400">{loc.region}</td>
+                  <td className="py-3 text-emerald-400">{loc.city}</td>
+                  <td className="py-3 text-slate-200">{loc.visitorCount.toLocaleString()}</td>
+                  <td className="py-3 text-slate-300">{loc.sessions.toLocaleString()}</td>
+                  <td className="py-3 text-emerald-400 font-bold">{loc.engagementScore}/100</td>
                   <td className="py-3 text-right text-rose-400 font-bold">{loc.leads}</td>
                 </tr>
               ))}

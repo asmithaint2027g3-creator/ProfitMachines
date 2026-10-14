@@ -296,7 +296,7 @@ export default function VisitorDashboard() {
     },
     subtitle: { color: '#64748b', fontSize: '14px' },
     refreshBtn: {
-      background: 'linear-gradient(135deg, #065f46, #0066FF)',
+      background: 'linear-gradient(135deg, #1B5E91, #2878B5)',
       color: '#34d399',
       border: '1px solid #34d39930',
       borderRadius: '10px',

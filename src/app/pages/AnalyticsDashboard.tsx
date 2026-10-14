@@ -96,30 +96,30 @@ export default function AnalyticsDashboardPage() {
   // ── Security Gate UI ──
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-6 text-[#0066FF] font-sans">
-        <div className="max-w-md w-full bg-white/80 border border-[#0066FF]/40 rounded-3xl p-8 shadow-2xl relative overflow-hidden backdrop-blur-lg">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white0/10 rounded-full blur-2xl pointer-events-none" />
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6 text-slate-100 font-sans">
+        <div className="max-w-md w-full bg-slate-900/80 border border-emerald-600/40 rounded-3xl p-8 shadow-2xl relative overflow-hidden backdrop-blur-lg">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-cyan-500/8 rounded-full blur-xl pointer-events-none" />
 
-          <div className="w-16 h-16 rounded-2xl bg-white0/20 border border-[#0066FF]/40 flex items-center justify-center mx-auto text-[#0066FF] mb-5 shadow-inner">
+          <div className="w-16 h-16 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center mx-auto text-emerald-400 mb-5 shadow-inner">
             <Lock className="w-8 h-8" />
           </div>
 
           <div className="text-center">
-            <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-white0/20 text-[#0066FF] border border-[#0066FF]/30 uppercase tracking-widest">
+            <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase tracking-widest">
               Restricted Admin Area
             </span>
             <h2 className="text-2xl font-black text-white mt-3 tracking-tight">
               Analytics Security Perimeter
             </h2>
-            <p className="text-xs text-[#0066FF] mt-2 leading-relaxed">
+            <p className="text-xs text-slate-300 mt-2 leading-relaxed">
               The Enterprise Intelligence &amp; Telemetry dashboard contains sensitive business data. Only authorized administrators can access this system.
             </p>
           </div>
 
           <form onSubmit={handleUnlock} className="mt-6 space-y-4">
             <div>
-              <label className="block text-xs font-bold text-[#0066FF] mb-1.5">
+              <label className="block text-xs font-bold text-emerald-300 mb-1.5">
                 Admin Passcode / Security Key
               </label>
               <input
@@ -127,7 +127,7 @@ export default function AnalyticsDashboardPage() {
                 value={passcode}
                 onChange={e => { setPasscode(e.target.value); setPasscodeError(''); }}
                 placeholder="Enter admin key"
-                className="w-full bg-white/80 border border-[#0066FF]/60 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-[#0066FF] transition"
+                className="w-full bg-slate-950/80 border border-emerald-700/60 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-emerald-400 transition"
                 autoFocus
               />
               {passcodeError && (
@@ -139,16 +139,16 @@ export default function AnalyticsDashboardPage() {
 
             <button
               type="submit"
-              className="w-full py-3 rounded-xl bg-white0 hover:bg-[#0066FF] text-[#0066FF] font-extrabold text-sm shadow-lg shadow-[#0066FF]/20 transition cursor-pointer flex items-center justify-center gap-2"
+              className="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-sm shadow-lg shadow-emerald-500/20 transition cursor-pointer flex items-center justify-center gap-2"
             >
               <Key className="w-4 h-4" /> Unlock Analytics Dashboard
             </button>
           </form>
 
-          <div className="mt-6 pt-4 border-t border-[#0066FF]/30 text-center">
+          <div className="mt-6 pt-4 border-t border-emerald-800/30 text-center">
             <a
               href="/"
-              className="text-xs text-[#0066FF] hover:text-[#0066FF] transition"
+              className="text-xs text-slate-400 hover:text-emerald-300 transition"
             >
               ← Return to ProfitMachines Homepage
             </a>
@@ -281,7 +281,7 @@ export default function AnalyticsDashboardPage() {
   };
 
   return (
-    <div className="pt-20 lg:pt-24 min-h-screen bg-white text-white font-sans flex">
+    <div className="pt-20 lg:pt-24 min-h-screen bg-slate-950 text-white font-sans flex">
       {/* 1. Left Fixed Sidebar */}
       <AnalyticsSidebar
         activeTab={activeTab}
@@ -299,17 +299,17 @@ export default function AnalyticsDashboardPage() {
           {/* Admin Authenticated Banner + Lock */}
           <div className="flex items-center justify-between mb-4 px-1">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-[#0066FF]" />
-              <span className="text-xs text-[#0066FF] font-semibold">Admin Session Active</span>
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
+              <span className="text-xs text-emerald-300 font-semibold">Admin Session Active</span>
               {dashboardData.isLiveFeed && (
-                <span className="ml-2 px-2 py-0.5 rounded-full text-[10px] font-bold bg-white0/20 text-[#0066FF] border border-[#0066FF]/30 animate-pulse">
+                <span className="ml-2 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 animate-pulse">
                   ● LIVE
                 </span>
               )}
             </div>
             <button
               onClick={handleLock}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/60 hover:bg-rose-950/40 text-[#0066FF] hover:text-rose-300 text-xs border border-[#0066FF]/60 transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/60 hover:bg-rose-950/40 text-slate-400 hover:text-rose-300 text-xs border border-slate-700/60 transition-all cursor-pointer"
               title="Lock Analytics Dashboard"
             >
               <LogOut className="w-3.5 h-3.5" /> Lock Dashboard

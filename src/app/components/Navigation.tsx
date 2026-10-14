@@ -1,18 +1,18 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import {
-    Menu, X, ArrowRight, ChevronDown, Rocket, Shield, Globe, Cpu, Zap, Lightbulb, Link as LinkIcon, Lock,
-    MessageSquare, Briefcase, BarChart, Database, MapPin,
-    BrainCircuit, Network, Sparkles, Building2, Bot, Cloud, Workflow, GitMerge, RefreshCw,
+import { useState, useEffect, useRef } from 'react';
+import { 
+    Menu, X, ArrowRight, ChevronDown, Rocket, Shield, Globe, Cpu, Zap, Lightbulb, Link as LinkIcon, Lock, 
+    MessageSquare, Briefcase, BarChart, Database, MapPin, 
+    BrainCircuit, Network, Sparkles, Building2, Bot, Cloud, Workflow, GitMerge, RefreshCw, 
     FileCode2, Coins, Boxes, Server, Image, TrendingUp, PieChart, Settings, Smile, Layers, DollarSign,
     Brain, CloudRain, Building, AppWindow, Code2, ShieldCheck, Users, HeartPulse, Landmark, ShoppingBag,
     Factory, GraduationCap, Truck, Home, Radio, Wrench, CloudCog, UserPlus, Layout, Search, LifeBuoy, BookOpen,
     Handshake, Info, Target, FileText, Phone, ChevronRight, Activity
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
 import { smNavItems } from '../../data/navigationContent';
+import { useLeadModal } from '../context/LeadModalContext';
 
-const Icons: any = {
+const Icons: Record<string, any> = {
     BrainCircuit, Network, Sparkles, Building2, Bot, Cloud, Workflow, GitMerge, RefreshCw, Briefcase, Shield, Database,
     Link: LinkIcon, Globe, FileCode2, Coins, Boxes, Server, Image, MessageSquare, TrendingUp, BarChart, PieChart, Settings,
     Smile, Layers, Cpu, DollarSign, Brain, CloudRain, Building, AppWindow, Zap, Code2, ShieldCheck, Users, HeartPulse,
@@ -22,431 +22,702 @@ const Icons: any = {
 
 export default function Navigation() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [activeMenu, setActiveMenu] = useState<string | null>(null);
-    const [expandedMobile, setExpandedMobile] = useState<string[]>([]);
-    const [activeCatMap, setActiveCatMap] = useState<Record<string, string>>({});
-    const menuRef = useRef<HTMLDivElement>(null);
-    const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+    const [expandedItems, setExpandedItems] = useState<string[]>([]);
+    const [activeOfferingGroup, setActiveOfferingGroup] = useState("profit-pools");
+    const [activeMenuCat, setActiveMenuCat] = useState<Record<string, string>>({});
+    const [dropdownPos, setDropdownPos] = useState<Record<string, { left: number; width: number }>>({});
+    
+    const closeTimeout = useRef<NodeJS.Timeout | null>(null);
+    const navRef = useRef<HTMLElement | null>(null);
     const location = useLocation();
+    const { openLongForm } = useLeadModal();
 
+    // Close mobile menu on route change
     useEffect(() => {
-        setActiveMenu(null);
         setMobileMenuOpen(false);
+        setHoveredItem(null);
     }, [location.pathname]);
 
+    // Handle Escape key and Outside Clicks to close mega menu and mobile menu
     useEffect(() => {
-        const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setActiveMenu(null); };
-        const handleClick = (e: MouseEvent) => {
-            if (menuRef.current && !menuRef.current.contains(e.target as Node)) setActiveMenu(null);
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                setHoveredItem(null);
+                setMobileMenuOpen(false);
+            }
         };
-        document.addEventListener('keydown', handleKey);
-        document.addEventListener('mousedown', handleClick);
+
+        const handleClickOutside = (e: MouseEvent) => {
+            if (navRef.current && !navRef.current.contains(e.target as Node)) {
+                setHoveredItem(null);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('mousedown', handleClickOutside);
         return () => {
-            document.removeEventListener('keydown', handleKey);
-            document.removeEventListener('mousedown', handleClick);
+            window.removeEventListener('keydown', handleKeyDown);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
 
-    const openMenu = useCallback((name: string, item: any) => {
-        if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
-        if (!item.dropdown) { setActiveMenu(null); return; }
-        setActiveMenu(name);
-        if (item.dropdown.categories && !activeCatMap[name]) {
-            setActiveCatMap(prev => ({ ...prev, [name]: item.dropdown.categories[0]?.id }));
-        }
-    }, [activeCatMap]);
-
-    const closeMenuDelayed = useCallback(() => {
-        hoverTimeout.current = setTimeout(() => setActiveMenu(null), 120);
-    }, []);
-
-    const keepMenuOpen = useCallback(() => {
-        if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
-    }, []);
-
-    const getActiveCatId = (item: any): string | null => {
-        const cats = item.dropdown?.categories;
-        if (!cats) return null;
-        return activeCatMap[item.name] ?? cats[0]?.id ?? null;
+    // Positions dropdown menu centered or clamped within the viewport
+    const calculateDropdownPos = (name: string, triggerEl: HTMLElement, width: number) => {
+        const margin = 16;
+        const rect = triggerEl.getBoundingClientRect();
+        const triggerCenter = rect.left + rect.width / 2;
+        const desiredLeft = triggerCenter - width / 2;
+        const minLeft = margin;
+        const maxLeft = window.innerWidth - width - margin;
+        const clampedLeft = Math.min(Math.max(desiredLeft, minLeft), maxLeft);
+        
+        setDropdownPos(prev => ({
+            ...prev,
+            [name]: {
+                left: clampedLeft - rect.left,
+                width: Math.min(width, window.innerWidth - margin * 2)
+            }
+        }));
     };
 
-    const getActiveCatData = (item: any) => {
-        const id = getActiveCatId(item);
-        return item.dropdown?.categories?.find((c: any) => c.id === id) ?? null;
+    const handleMouseEnter = (item: any, triggerEl: HTMLElement) => {
+        if (closeTimeout.current) {
+            clearTimeout(closeTimeout.current);
+            closeTimeout.current = null;
+        }
+        
+        if (item.dropdown) {
+            const width = item.name === "Verticals" ? 820 : item.dropdown.categories ? (item.name === "Offerings" ? 820 : 760) : 340;
+            calculateDropdownPos(item.name, triggerEl, width);
+            setHoveredItem(item.name);
+        } else {
+            setHoveredItem(null);
+        }
     };
 
-    const isItemActive = (item: any): boolean => {
-        if (location.pathname === item.path) return true;
-        if (item.dropdown?.categories) {
-            return item.dropdown.categories.some((cat: any) =>
-                cat.items?.some((sub: any) => sub.path === location.pathname)
-            );
-        }
-        return false;
+    const handleMouseLeave = () => {
+        closeTimeout.current = setTimeout(() => {
+            setHoveredItem(null);
+        }, 150); // Matches ISI Security's 150ms transition grace period
     };
 
-    const getDropdownConfig = (name: string) => {
-        switch (name) {
-            case 'Offerings':
-                return {
-                    width: 760,
-                    align: 'left' as const,
-                    sidebarWidth: 240,
-                    isSingleCol: false,
-                };
-            case 'Industries':
-                return {
-                    width: 680,
-                    align: 'left' as const,
-                    sidebarWidth: 230,
-                    isSingleCol: false,
-                };
-            case 'Resources':
-                return {
-                    width: 520,
-                    align: 'right' as const,
-                    sidebarWidth: 190,
-                    isSingleCol: true,
-                };
-            case 'Company':
-                return {
-                    width: 520,
-                    align: 'right' as const,
-                    sidebarWidth: 190,
-                    isSingleCol: true,
-                };
-            default:
-                return {
-                    width: 540,
-                    align: 'left' as const,
-                    sidebarWidth: 200,
-                    isSingleCol: true,
-                };
-        }
+    const toggleExpanded = (name: string) => {
+        setExpandedItems(prev =>
+            prev.includes(name)
+                ? prev.filter(item => item !== name)
+                : [...prev, name]
+        );
     };
 
     return (
-        <header
-            className="fixed top-0 left-0 right-0 z-50 bg-white border-b-2 border-[#0066FF] h-16 lg:h-[72px] flex items-center transition-colors"
-            ref={menuRef}
-        >
+        <header ref={navRef} className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-xs border-b border-border/60 text-foreground h-16 lg:h-[72px] flex items-center">
             <nav className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-[1440px] h-full relative">
                 <div className="flex items-center justify-between h-full gap-4">
-
-                    {/* Logo */}
+                    {/* Brand Logo matching ISI clean palette */}
                     <div className="flex-shrink-0 relative z-50">
-                        <Link to="/" className="flex items-center gap-2.5 group" aria-label="ProfitMachines home">
-                            <div className="w-9 h-9 rounded-lg bg-[#0066FF] text-white flex items-center justify-center font-extrabold text-[12px] flex-shrink-0 transition-transform group-hover:scale-105 border border-[#0066FF]">
-                                PM
-                            </div>
-                            <div className="flex flex-col">
-                                <div className="text-lg md:text-xl font-extrabold tracking-tight font-heading leading-tight text-[#0066FF]">
-                                    <span>Profit</span>
-                                    <span>Machines</span>
-                                </div>
-                                <span className="text-[9px] font-mono font-bold tracking-[0.16em] uppercase leading-none mt-0.5 text-[#0066FF]">
-                                    Autonomous Revenue OS
-                                </span>
+                        <Link to="/" className="flex items-center gap-2 group">
+                            <div className="text-xl md:text-2xl font-extrabold tracking-tight font-heading text-slate-900 transition-colors">
+                                <span>Profit</span>
+                                <span className="text-primary transition-colors">Machines</span>
                             </div>
                         </Link>
                     </div>
 
-                    {/* Desktop Nav */}
-                    <div className="hidden lg:flex items-center h-full gap-1 xl:gap-1.5">
-                        {(smNavItems as any[]).map((item: any) => {
-                            const isActive = isItemActive(item);
-                            const hasDropdown = Boolean(item.dropdown);
-                            const isOpen = activeMenu === item.name;
+                    {/* Desktop Navigation Links */}
+                    <div className="hidden lg:flex items-center h-full gap-1 xl:gap-2 2xl:gap-4">
+                        {smNavItems.map((item) => {
+                            const isActive = location.pathname === item.path ||
+                                (item.dropdown?.categories && (item.dropdown.categories as any).some((cat: any) =>
+                                    cat.items?.some((sub: any) => sub.path === location.pathname) ||
+                                    cat.b2bItems?.some((sub: any) => sub.path === location.pathname) ||
+                                    cat.b2cItems?.some((sub: any) => sub.path === location.pathname)
+                                ));
+
+                            const isHovered = hoveredItem === item.name;
+                            const pos = dropdownPos[item.name];
+
                             return (
-                                <div key={item.name} className="h-full flex items-center relative"
-                                    onMouseEnter={() => openMenu(item.name, item)}
-                                    onMouseLeave={closeMenuDelayed}>
+                                <div
+                                    key={item.name}
+                                    className="h-full flex items-center relative"
+                                    onMouseEnter={(e) => handleMouseEnter(item, e.currentTarget)}
+                                    onMouseLeave={handleMouseLeave}
+                                >
                                     <Link
                                         to={item.path}
-                                        id={`nav-item-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
-                                        className={`relative text-[13.5px] xl:text-[14px] font-bold px-3.5 py-1.5 rounded-lg transition-all duration-200 flex items-center gap-1.5 h-[38px] ${
-                                            isActive
-                                                ? 'bg-[#0066FF] text-white'
-                                                : 'text-[#0066FF] hover:bg-[#0066FF]/10'
+                                        onClick={() => setHoveredItem(null)}
+                                        className={`relative px-2.5 xl:px-3 py-4 text-[13.5px] xl:text-[14px] 2xl:text-[15px] font-medium transition-colors duration-200 flex items-center gap-1.5 outline-none rounded-md ${
+                                            isActive || isHovered ? 'text-primary font-semibold' : 'text-slate-700 hover:text-primary'
                                         }`}
                                     >
                                         <span>{item.name}</span>
-                                        {hasDropdown && (
-                                            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} />
+                                        {item.dropdown && (
+                                            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                                                isHovered ? 'rotate-180 text-primary' : 'text-slate-400 group-hover:text-primary'
+                                            }`} />
                                         )}
+                                        {/* ISI Security animated underline indicator */}
+                                        <span className={`absolute bottom-1 left-2.5 right-2.5 h-0.5 bg-primary transition-transform duration-300 origin-left ${
+                                            isActive || isHovered ? 'scale-x-100' : 'scale-x-0'
+                                        }`} />
                                     </Link>
 
-                                    {hasDropdown && (() => {
-                                        const config = getDropdownConfig(item.name);
-                                        return (
-                                            <AnimatePresence>
-                                                {isOpen && (
-                                                    <motion.div
-                                                        initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                                                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                                                        exit={{ opacity: 0, y: 6, scale: 0.98 }}
-                                                        transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-                                                        onMouseEnter={keepMenuOpen}
-                                                        onMouseLeave={closeMenuDelayed}
-                                                        className={`absolute top-[calc(100%+4px)] z-50 bg-white rounded-xl border-2 border-[#0066FF] overflow-hidden flex ${
-                                                            config.align === 'right' ? 'right-0 origin-top-right' : 'left-0 origin-top-left'
-                                                        }`}
-                                                        style={{ width: config.width, maxWidth: 'calc(100vw - 32px)' }}
-                                                    >
-                                                        <div className="absolute -top-4 left-0 right-0 h-4 bg-transparent" />
-
-                                                        {item.dropdown.categories ? (
-                                                            <>
-                                                                {/* LEFT: Numbered category list */}
-                                                                <div
-                                                                    className="shrink-0 bg-white border-r-2 border-[#0066FF] p-4 flex flex-col gap-1.5 overflow-y-auto max-h-[480px]"
-                                                                    style={{ width: config.sidebarWidth }}
-                                                                >
-                                                                    <div className="flex items-center justify-between mb-3 px-1">
-                                                                        <span className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#0066FF]">
-                                                                            {item.dropdown.highlight?.title || item.name}
-                                                                        </span>
-                                                                        <span className="text-[9.5px] font-bold text-[#0066FF] border border-[#0066FF] px-2 py-0.5 rounded-full whitespace-nowrap">
-                                                                            {item.dropdown.categories.length} CLUSTERS
-                                                                        </span>
+                                    {/* Dropdown Menu Container (Matches ISI Security dropdown structure) */}
+                                    {item.dropdown && (
+                                        <div
+                                            style={pos ? { left: `${pos.left}px`, width: `${pos.width}px` } : undefined}
+                                            className={`absolute top-[calc(100%-4px)] pt-2 transition-all duration-300 ease-out z-50 origin-top ${
+                                                isHovered ? 'opacity-100 visible translate-y-0 pointer-events-auto' : 'opacity-0 invisible -translate-y-2 pointer-events-none'
+                                            }`}
+                                        >
+                                            <div className="bg-card border border-border/60 shadow-2xl rounded-2xl overflow-hidden flex min-h-[380px] text-foreground">
+                                                {item.name === "Verticals" ? (
+                                                    <div className="flex flex-col md:flex-row w-full min-h-[380px]">
+                                                        {/* Left Column: 6 Industry Categories */}
+                                                        <div className="flex-1 p-6 bg-white border-r border-border/50 flex flex-col justify-between">
+                                                            <div>
+                                                                <div className="mb-4 pb-3 border-b border-border/40 flex items-center justify-between">
+                                                                    <div>
+                                                                        <h3 className="text-base font-bold text-foreground font-heading">Industry Verticals</h3>
+                                                                        <p className="text-xs text-muted-foreground mt-0.5">Explore structured frameworks tailored to your sector</p>
                                                                     </div>
-                                                                    {item.dropdown.categories.map((cat: any, idx: number) => {
-                                                                        const isActiveCat = getActiveCatId(item) === cat.id;
-                                                                        const targetPath = cat.path || `/${item.name.toLowerCase()}/${cat.id}`;
+                                                                    <Link
+                                                                        to="/verticals"
+                                                                        onClick={() => setHoveredItem(null)}
+                                                                        className="text-xs font-semibold text-primary hover:underline flex items-center gap-1"
+                                                                    >
+                                                                        View All Verticals
+                                                                        <ChevronRight className="w-3.5 h-3.5" />
+                                                                    </Link>
+                                                                </div>
+                                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                                                    {(item.dropdown as any)?.items?.map((ind: any, iIdx: number) => {
+                                                                        const IconComponent = Icons[ind.icon] || ArrowRight;
                                                                         return (
-                                                                            <Link key={cat.id} to={targetPath}
-                                                                                onClick={() => setActiveMenu(null)}
-                                                                                onMouseEnter={() => setActiveCatMap(prev => ({ ...prev, [item.name]: cat.id }))}
-                                                                                className={`group flex items-start gap-2.5 px-3 py-2.5 rounded-lg border transition-all duration-150 ${
-                                                                                    isActiveCat
-                                                                                        ? 'bg-[#0066FF] text-white border-[#0066FF]'
-                                                                                        : 'bg-white text-[#0066FF] border-transparent hover:border-[#0066FF]'
-                                                                                }`}
+                                                                            <Link
+                                                                                key={iIdx}
+                                                                                to={ind.path}
+                                                                                onClick={() => setHoveredItem(null)}
+                                                                                className="group p-3 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-[#F0F7FC] hover:border-[#2878B5]/40 transition-all flex items-start gap-3 text-left"
                                                                             >
-                                                                                <span className={`flex-shrink-0 w-5 h-5 rounded flex items-center justify-center text-[10px] font-black mt-0.5 border ${
-                                                                                    isActiveCat
-                                                                                        ? 'bg-white text-[#0066FF] border-white'
-                                                                                        : 'bg-white text-[#0066FF] border-[#0066FF]'
-                                                                                }`}>
-                                                                                    {String(idx + 1).padStart(2, '0')}
-                                                                                </span>
-                                                                                <div className="flex-1 min-w-0">
-                                                                                    <div className="text-[13px] font-bold leading-tight">{cat.title}</div>
+                                                                                <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-primary group-hover:text-white transition-colors">
+                                                                                    <IconComponent className="w-4 h-4" />
+                                                                                </div>
+                                                                                <div className="min-w-0">
+                                                                                    <h4 className="text-sm font-bold text-slate-900 group-hover:text-primary transition-colors flex items-center gap-1">
+                                                                                        <span>{ind.name}</span>
+                                                                                        <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all text-primary" />
+                                                                                    </h4>
+                                                                                    <p className="text-xs text-slate-500 line-clamp-2 mt-0.5 leading-relaxed font-medium">
+                                                                                        {ind.desc}
+                                                                                    </p>
                                                                                 </div>
                                                                             </Link>
                                                                         );
                                                                     })}
                                                                 </div>
+                                                            </div>
+                                                            
+                                                            <div className="mt-4 pt-3 border-t border-border/30 flex items-center justify-between text-xs text-muted-foreground">
+                                                                <span>Looking for multi-sector enterprise deployment?</span>
+                                                                <Link to="/verticals" onClick={() => setHoveredItem(null)} className="font-semibold text-primary hover:underline">
+                                                                    Compare All 6 Verticals &rarr;
+                                                                </Link>
+                                                            </div>
+                                                        </div>
 
-                                                                {/* RIGHT: Items in active category */}
-                                                                <div className="flex-1 p-5 overflow-y-auto max-h-[480px] bg-white">
-                                                                    {(() => {
-                                                                        const cat = getActiveCatData(item);
-                                                                        if (!cat) return null;
-                                                                        return (
-                                                                            <motion.div
-                                                                                key={cat.id}
-                                                                                initial={{ opacity: 0, x: 6 }}
-                                                                                animate={{ opacity: 1, x: 0 }}
-                                                                                transition={{ duration: 0.15 }}
-                                                                            >
-                                                                                <div className="flex items-center justify-between mb-3.5 pb-2 border-b border-[#0066FF]">
-                                                                                    <div>
-                                                                                        <h4 className="text-[13px] font-extrabold text-[#0066FF] tracking-tight">{cat.title}</h4>
-                                                                                        {cat.description && (
-                                                                                            <p className="text-[11.5px] text-[#0066FF] mt-0.5">{cat.description}</p>
-                                                                                        )}
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                {config.isSingleCol ? (
-                                                                                    <div className="flex flex-col gap-1.5">
-                                                                                        {cat.items?.map((sub: any, i: number) => {
-                                                                                            const Icon = Icons[sub.icon] || ArrowRight;
-                                                                                            return (
-                                                                                                <Link key={i} to={sub.path} onClick={() => setActiveMenu(null)}
-                                                                                                    className="group/card flex items-center gap-3 p-2.5 rounded-lg border border-[#0066FF] bg-white text-[#0066FF] hover:bg-[#0066FF] hover:text-white transition-all duration-150">
-                                                                                                    <div className="flex-shrink-0 w-7 h-7 rounded border border-current flex items-center justify-center">
-                                                                                                        <Icon className="w-3.5 h-3.5" />
-                                                                                                    </div>
-                                                                                                    <div className="flex-1 min-w-0">
-                                                                                                        <div className="text-[12.5px] font-bold leading-snug">{sub.name}</div>
-                                                                                                    </div>
-                                                                                                    <ChevronRight className="w-4 h-4 group-hover/card:translate-x-0.5 transition-transform flex-shrink-0" />
-                                                                                                </Link>
-                                                                                            );
-                                                                                        })}
-                                                                                    </div>
-                                                                                ) : (
-                                                                                    <div className="grid grid-cols-2 gap-2">
-                                                                                        {cat.items?.map((sub: any, i: number) => {
-                                                                                            const Icon = Icons[sub.icon] || ArrowRight;
-                                                                                            return (
-                                                                                                <Link key={i} to={sub.path} onClick={() => setActiveMenu(null)}
-                                                                                                    className="group/card flex items-start gap-2.5 p-2.5 rounded-lg border border-[#0066FF] bg-white text-[#0066FF] hover:bg-[#0066FF] hover:text-white transition-all duration-150">
-                                                                                                    <div className="flex-shrink-0 w-7 h-7 rounded border border-current flex items-center justify-center mt-0.5">
-                                                                                                        <Icon className="w-3.5 h-3.5" />
-                                                                                                    </div>
-                                                                                                    <div className="flex-1 min-w-0">
-                                                                                                        <div className="text-[12px] font-bold leading-snug">{sub.name}</div>
-                                                                                                    </div>
-                                                                                                </Link>
-                                                                                            );
-                                                                                        })}
-                                                                                    </div>
-                                                                                )}
-
-                                                                                {cat.path && (
-                                                                                    <div className="mt-3.5 pt-3 border-t border-[#0066FF] flex items-center justify-end">
-                                                                                        <Link to={cat.path} onClick={() => setActiveMenu(null)}
-                                                                                            className="inline-flex items-center gap-1.5 text-[11.5px] font-bold text-[#0066FF] hover:underline transition-colors group/cta">
-                                                                                            Explore {cat.title}
-                                                                                            <ArrowRight className="w-3.5 h-3.5 group-hover/cta:translate-x-0.5 transition-transform" />
-                                                                                        </Link>
-                                                                                    </div>
-                                                                                )}
-                                                                            </motion.div>
-                                                                        );
-                                                                    })()}
+                                                        {/* Right Column: Highlighted panel titled "Need Help Choosing?" */}
+                                                        <div className="w-full md:w-[280px] bg-sky-50/60 p-6 flex flex-col justify-between shrink-0 border-t md:border-t-0 border-sky-100">
+                                                            <div>
+                                                                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-sky-200 text-primary text-[11px] font-bold uppercase tracking-wider mb-4 shadow-xs">
+                                                                    <Sparkles className="w-3 h-3" />
+                                                                    <span>Advisory</span>
                                                                 </div>
-                                                            </>
+                                                                <h3 className="text-lg font-bold text-slate-900 font-heading">
+                                                                    {(item.dropdown as any)?.highlight?.title || "Need Help Choosing?"}
+                                                                </h3>
+                                                                <p className="text-xs text-slate-600 mt-2.5 leading-relaxed font-medium">
+                                                                    {(item.dropdown as any)?.highlight?.desc || "Not sure which vertical framework fits your operational model? Our growth architects can assess your workflows and recommend the right setup."}
+                                                                </p>
+                                                            </div>
+
+                                                            <div className="pt-6 space-y-2.5">
+                                                                <button
+                                                                    onClick={() => {
+                                                                        setHoveredItem(null);
+                                                                        openLongForm({ defaultService: 'Industry Verticals Consultation', title: 'Consult with Industry Verticals Experts' });
+                                                                    }}
+                                                                    className="w-full py-2.5 px-4 rounded-xl bg-primary hover:bg-primary/90 active:bg-blue-700 text-white font-bold text-xs shadow-md shadow-primary/20 hover:shadow-primary/30 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                                                                >
+                                                                    <span>Talk to Experts</span>
+                                                                    <ArrowRight className="w-3.5 h-3.5" />
+                                                                </button>
+                                                                <Link
+                                                                    to="/verticals"
+                                                                    onClick={() => setHoveredItem(null)}
+                                                                    className="w-full py-2 px-3 rounded-xl text-xs font-semibold text-primary hover:bg-sky-100/60 transition-colors flex items-center justify-center gap-1 text-center"
+                                                                >
+                                                                    <span>Explore All Verticals</span>
+                                                                    <ChevronRight className="w-3.5 h-3.5" />
+                                                                </Link>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <>
+                                                        {/* Left Column: Categories List (ISI Multi-Column Layout) */}
+                                                        {item.dropdown.categories ? (
+                                                            <div className="w-[250px] bg-muted/20 border-r border-border/50 p-4 flex flex-col gap-1.5 shrink-0 justify-start">
+                                                        <div className="mb-3 px-3">
+                                                            <h3 className="text-base font-bold text-foreground font-heading">{item.name}</h3>
+                                                            <p className="text-xs text-muted-foreground mt-0.5">Explore our {item.name.toLowerCase()}</p>
+                                                        </div>
+
+                                                        {item.name === "Offerings" ? (
+                                                            <div className="flex flex-col gap-1.5">
+                                                                <Link
+                                                                    to="/offerings/profit-pool-discovery"
+                                                                    onClick={() => setHoveredItem(null)}
+                                                                    onMouseEnter={() => setActiveOfferingGroup("profit-pools")}
+                                                                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm transition-all text-left ${
+                                                                        activeOfferingGroup === 'profit-pools' || activeOfferingGroup === 'b2b' || activeOfferingGroup === 'b2c'
+                                                                            ? 'bg-card shadow-sm font-semibold text-primary border border-border/40' 
+                                                                            : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
+                                                                    }`}
+                                                                >
+                                                                    <span>Profit Pools</span>
+                                                                    <ChevronRight className="w-3.5 h-3.5 shrink-0 text-primary" />
+                                                                </Link>
+
+                                                                {item.dropdown.categories.filter((cat: any) => cat.id !== "profit-pools").map((cat: any, cIdx: number) => {
+                                                                    const targetPath = cat.path || `/offerings/${cat.id}`;
+                                                                    const isSelected = activeOfferingGroup === cat.id;
+                                                                    return (
+                                                                        <Link
+                                                                            key={cIdx}
+                                                                            to={targetPath}
+                                                                            onClick={() => setHoveredItem(null)}
+                                                                            onMouseEnter={() => setActiveOfferingGroup(cat.id)}
+                                                                            className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm transition-all text-left ${
+                                                                                isSelected 
+                                                                                    ? 'bg-card shadow-sm font-semibold text-primary border border-border/40' 
+                                                                                    : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
+                                                                            }`}
+                                                                        >
+                                                                            <span>{cat.title}</span>
+                                                                            <ChevronRight className={`w-3.5 h-3.5 shrink-0 transition-opacity ${isSelected ? 'opacity-100 text-primary' : 'opacity-0'}`} />
+                                                                        </Link>
+                                                                    );
+                                                                })}
+                                                            </div>
                                                         ) : (
-                                                            <div className="p-6 w-full flex flex-col justify-center bg-white text-[#0066FF]">
-                                                                <div className="text-lg font-extrabold font-heading mb-2 text-[#0066FF]">
-                                                                    {item.dropdown.highlight?.title || item.name}
-                                                                </div>
-                                                                <p className="text-[13px] text-[#0066FF] leading-relaxed mb-3">{item.dropdown.highlight?.desc}</p>
-                                                                {item.dropdown.highlight?.linkPath && (
-                                                                    <Link to={item.dropdown.highlight.linkPath} onClick={() => setActiveMenu(null)}
-                                                                        className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0066FF] hover:underline">
-                                                                        {item.dropdown.highlight.linkText || 'Learn More'} <ArrowRight className="w-3.5 h-3.5" />
-                                                                    </Link>
-                                                                )}
+                                                            <div className="flex flex-col gap-1.5">
+                                                                {(item.dropdown as any)?.categories?.map((cat: any, cIdx: number) => {
+                                                                    const menuKey = item.name;
+                                                                    const activeCat = activeMenuCat[menuKey] ?? (item.dropdown as any)?.categories?.[0]?.id;
+                                                                    const targetPath = cat.path || `/${item.name.toLowerCase()}/${cat.id}`;
+                                                                    const isSelected = activeCat === cat.id;
+                                                                    return (
+                                                                        <Link
+                                                                            key={cIdx}
+                                                                            to={targetPath}
+                                                                            onClick={() => setHoveredItem(null)}
+                                                                            onMouseEnter={() => setActiveMenuCat(prev => ({ ...prev, [menuKey]: cat.id }))}
+                                                                            className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm transition-all text-left ${
+                                                                                isSelected 
+                                                                                    ? 'bg-card shadow-sm font-semibold text-primary border border-border/40' 
+                                                                                    : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
+                                                                            }`}
+                                                                        >
+                                                                            <span>{cat.title}</span>
+                                                                            <ChevronRight className={`w-3.5 h-3.5 shrink-0 transition-opacity ${isSelected ? 'opacity-100 text-primary' : 'opacity-0'}`} />
+                                                                        </Link>
+                                                                    );
+                                                                })}
                                                             </div>
                                                         )}
-                                                    </motion.div>
+                                                    </div>
+                                                ) : (
+                                                    <div className="w-[220px] bg-muted/20 border-r border-border/50 p-5 flex flex-col justify-between shrink-0">
+                                                        <div>
+                                                            <h3 className="text-base font-bold text-foreground font-heading">
+                                                                {item.dropdown.highlight?.title || item.name}
+                                                            </h3>
+                                                            <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
+                                                                {item.dropdown.highlight?.desc || `Explore our high-performance suite of ${item.name.toLowerCase()} solutions.`}
+                                                            </p>
+                                                        </div>
+                                                        {item.dropdown.highlight?.linkPath && (
+                                                            <Link
+                                                                to={item.dropdown.highlight.linkPath}
+                                                                onClick={() => setHoveredItem(null)}
+                                                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline mt-4"
+                                                            >
+                                                                {item.dropdown.highlight.linkText || 'Learn More'}
+                                                                <ChevronRight className="w-3.5 h-3.5" />
+                                                            </Link>
+                                                        )}
+                                                    </div>
                                                 )}
-                                            </AnimatePresence>
-                                        );
-                                    })()}
+
+                                                {/* Right Area: Display Sub-Items (Clean 2-Column Grid matching ISI) */}
+                                                <div className="flex-1 p-6 flex flex-col justify-between overflow-y-auto">
+                                                    {item.name === "Offerings" ? (
+                                                        (() => {
+                                                            if (activeOfferingGroup === "b2b" || activeOfferingGroup === "b2c" || activeOfferingGroup === "profit-pools") {
+                                                                const b2bItems = (item.dropdown.categories?.find((cat: any) => cat.id === "profit-pools") as any)?.b2bItems || [];
+                                                                const b2cItems = (item.dropdown.categories?.find((cat: any) => cat.id === "profit-pools") as any)?.b2cItems || [];
+                                                                
+                                                                return (
+                                                                    <div key={`offerings-${activeOfferingGroup}`} className="grid grid-cols-2 gap-6 w-full">
+                                                                        {/* B2B Column */}
+                                                                        <div className="flex flex-col gap-2 min-w-0">
+                                                                            <Link
+                                                                                to="/offerings/b2b"
+                                                                                onClick={() => setHoveredItem(null)}
+                                                                                className="text-xs font-bold uppercase tracking-wider text-primary border-b pb-2 border-border/50 flex items-center justify-between hover:text-primary/80 transition-colors"
+                                                                            >
+                                                                                <span>B2B Profit Pools</span>
+                                                                                <ChevronRight className="w-3 h-3 text-primary/70" />
+                                                                            </Link>
+                                                                            <div className="flex flex-col gap-1">
+                                                                                {b2bItems.map((sub: any, sIdx: number) => {
+                                                                                    const IconComponent = Icons[sub.icon] || ArrowRight;
+                                                                                    return (
+                                                                                        <Link
+                                                                                            key={sIdx}
+                                                                                            to={sub.path}
+                                                                                            onClick={() => setHoveredItem(null)}
+                                                                                            className="group flex items-center justify-between p-2 rounded-xl hover:bg-muted/50 transition-colors"
+                                                                                        >
+                                                                                            <div className="flex items-center gap-2.5 min-w-0">
+                                                                                                <div className="p-1.5 rounded-lg bg-primary/5 text-primary/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors shrink-0">
+                                                                                                    <IconComponent className="w-3.5 h-3.5" />
+                                                                                                </div>
+                                                                                                <span className="text-xs font-medium text-foreground group-hover:text-primary transition-colors truncate">
+                                                                                                    {sub.name}
+                                                                                                </span>
+                                                                                            </div>
+                                                                                            <ChevronRight className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200 shrink-0" />
+                                                                                        </Link>
+                                                                                    );
+                                                                                })}
+                                                                            </div>
+                                                                        </div>
+
+                                                                        {/* B2C Column */}
+                                                                        <div className="flex flex-col gap-2 min-w-0">
+                                                                            <Link
+                                                                                to="/offerings/b2c"
+                                                                                onClick={() => setHoveredItem(null)}
+                                                                                className="text-xs font-bold uppercase tracking-wider text-primary border-b pb-2 border-border/50 flex items-center justify-between hover:text-primary/80 transition-colors"
+                                                                            >
+                                                                                <span>B2C Profit Pools</span>
+                                                                                <ChevronRight className="w-3 h-3 text-primary/70" />
+                                                                            </Link>
+                                                                            <div className="flex flex-col gap-1">
+                                                                                {b2cItems.map((sub: any, sIdx: number) => {
+                                                                                    const IconComponent = Icons[sub.icon] || ArrowRight;
+                                                                                    return (
+                                                                                        <Link
+                                                                                            key={sIdx}
+                                                                                            to={sub.path}
+                                                                                            onClick={() => setHoveredItem(null)}
+                                                                                            className="group flex items-center justify-between p-2 rounded-xl hover:bg-muted/50 transition-colors"
+                                                                                        >
+                                                                                            <div className="flex items-center gap-2.5 min-w-0">
+                                                                                                <div className="p-1.5 rounded-lg bg-primary/5 text-primary/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors shrink-0">
+                                                                                                    <IconComponent className="w-3.5 h-3.5" />
+                                                                                                </div>
+                                                                                                <span className="text-xs font-medium text-foreground group-hover:text-primary transition-colors truncate">
+                                                                                                    {sub.name}
+                                                                                                </span>
+                                                                                            </div>
+                                                                                            <ChevronRight className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200 shrink-0" />
+                                                                                        </Link>
+                                                                                    );
+                                                                                })}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                );
+                                                            }
+
+                                                            const selectedItems = item.dropdown.categories?.find((cat: any) => cat.id === activeOfferingGroup)?.items || [];
+                                                            return (
+                                                                <div key={`offerings-sel-${activeOfferingGroup}`} className="grid grid-cols-2 gap-3 w-full">
+                                                                    {selectedItems.map((sub: any, sIdx: number) => {
+                                                                        const IconComponent = Icons[sub.icon] || ArrowRight;
+                                                                        return (
+                                                                            <Link
+                                                                                key={sIdx}
+                                                                                to={sub.path}
+                                                                                onClick={() => setHoveredItem(null)}
+                                                                                className="group flex items-center justify-between p-2.5 rounded-xl hover:bg-muted/50 transition-colors"
+                                                                            >
+                                                                                <div className="flex items-center gap-3 min-w-0">
+                                                                                    <div className="p-2 rounded-lg bg-primary/5 text-primary/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors shrink-0">
+                                                                                        <IconComponent className="w-4 h-4" />
+                                                                                    </div>
+                                                                                    <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate">
+                                                                                        {sub.name}
+                                                                                    </span>
+                                                                                </div>
+                                                                                <ChevronRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200 shrink-0" />
+                                                                            </Link>
+                                                                        );
+                                                                    })}
+                                                                </div>
+                                                            );
+                                                        })()
+                                                    ) : item.dropdown.categories ? (
+                                                        (() => {
+                                                            const menuKey = item.name;
+                                                            const activeCatId = activeMenuCat[menuKey] ?? item.dropdown.categories[0]?.id;
+                                                            const selectedItems = item.dropdown.categories.find((cat: any) => cat.id === activeCatId)?.items || [];
+                                                            return (
+                                                                <div key={`${menuKey}-${activeCatId}`} className="grid grid-cols-2 gap-3 w-full">
+                                                                    {selectedItems.map((sub: any, sIdx: number) => {
+                                                                        const IconComponent = Icons[sub.icon] || ArrowRight;
+                                                                        return (
+                                                                            <Link
+                                                                                key={sIdx}
+                                                                                to={sub.path}
+                                                                                onClick={() => setHoveredItem(null)}
+                                                                                className="group flex items-center justify-between p-2.5 rounded-xl hover:bg-muted/50 transition-colors"
+                                                                            >
+                                                                                <div className="flex items-center gap-3 min-w-0">
+                                                                                    <div className="p-2 rounded-lg bg-primary/5 text-primary/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors shrink-0">
+                                                                                        <IconComponent className="w-4 h-4" />
+                                                                                    </div>
+                                                                                    <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate">
+                                                                                        {sub.name}
+                                                                                    </span>
+                                                                                </div>
+                                                                                <ChevronRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200 shrink-0" />
+                                                                            </Link>
+                                                                        );
+                                                                    })}
+                                                                </div>
+                                                            );
+                                                        })()
+                                                    ) : null}
+
+                                                    {/* Bottom helper bar (Matching ISI Security dropdown footer) */}
+                                                    <div className="mt-6 p-3.5 bg-muted/30 rounded-xl flex items-center justify-between border border-border/50">
+                                                        <span className="text-xs text-muted-foreground">
+                                                            Need tailored revenue systems for your enterprise?
+                                                        </span>
+                                                        <Link
+                                                            to="/book-consultation"
+                                                            onClick={() => setHoveredItem(null)}
+                                                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-primary-foreground font-semibold text-xs rounded-lg hover:bg-primary/90 transition-all shadow-sm"
+                                                        >
+                                                            <span>Talk to Expert</span>
+                                                            <ChevronRight className="w-3 h-3" />
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                            </>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
                                 </div>
                             );
                         })}
                     </div>
 
-                    {/* Desktop CTA */}
-                    <div className="hidden lg:flex items-center gap-2.5 relative z-50 flex-shrink-0">
-                        <Link to="/book-consultation" id="nav-cta-consultation"
-                            className="inline-flex items-center gap-2 bg-[#0066FF] hover:bg-white text-white hover:text-[#0066FF] border-2 border-[#0066FF] px-4 xl:px-5 py-2 rounded-lg font-bold text-xs xl:text-sm transition-all duration-200 group">
+                    {/* Right CTA Button (Matching ISI Security primary action button) */}
+                    <div className="hidden lg:flex items-center gap-3 shrink-0 relative z-50">
+                        <Link
+                            to="/book-consultation"
+                            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 active:bg-blue-700 text-primary-foreground px-5 py-2.5 rounded-full font-bold text-sm transition-all duration-200 shadow-md shadow-primary/20 hover:shadow-primary/35 hover:-translate-y-px group"
+                        >
                             <span>Book Consultation</span>
                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                         </Link>
-                        <a 
-                            href="https://wa.me/919513088611?text=Hi%20ProfitMachines%2C%20I'd%20like%20to%20consult%20on%20AI%20solutions."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 bg-white text-[#0066FF] hover:bg-[#0066FF] hover:text-white border-2 border-[#0066FF] px-3.5 py-2 rounded-lg font-bold text-xs xl:text-sm transition-all duration-200"
-                            aria-label="Chat with ProfitMachines on WhatsApp"
-                        >
-                            <MessageSquare className="w-3.5 h-3.5" />
-                            <span>WhatsApp</span>
-                        </a>
                     </div>
 
-                    {/* Mobile Toggle */}
+                    {/* Mobile Hamburger Toggle Button */}
                     <div className="lg:hidden flex items-center relative z-50">
-                        <button id="mobile-menu-toggle" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            aria-label="Toggle mobile menu" aria-expanded={mobileMenuOpen}
-                            className="p-2 rounded-lg text-[#0066FF] hover:bg-[#0066FF]/10 transition-colors border border-[#0066FF]">
-                            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                        <button
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            aria-label="Toggle mobile menu"
+                            className="p-2 rounded-lg text-slate-700 hover:text-primary hover:bg-muted focus:outline-none transition-colors"
+                        >
+                            {mobileMenuOpen ? (
+                                <X className="block h-6 w-6" aria-hidden="true" />
+                            ) : (
+                                <Menu className="block h-6 w-6" aria-hidden="true" />
+                            )}
                         </button>
                     </div>
                 </div>
             </nav>
 
-            {/* Mobile Drawer */}
-            <AnimatePresence>
-                {mobileMenuOpen && (
-                    <motion.div
-                        initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
-                        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                        className="lg:hidden fixed inset-0 z-[60] bg-white flex flex-col text-[#0066FF]" id="mobile-drawer"
-                    >
-                        <div className="flex items-center justify-between px-4 h-16 border-b-2 border-[#0066FF] flex-shrink-0">
-                            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2">
-                                <div className="w-7 h-7 rounded bg-[#0066FF] text-white flex items-center justify-center text-[10px] font-black">PM</div>
-                                <span className="text-lg font-extrabold text-[#0066FF]">ProfitMachines</span>
-                            </Link>
-                            <button onClick={() => setMobileMenuOpen(false)} aria-label="Close menu"
-                                className="p-2 rounded-lg text-[#0066FF] border border-[#0066FF]">
-                                <X className="h-5 w-5" />
-                            </button>
-                        </div>
-
-                        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
-                            {(smNavItems as any[]).map((item: any, idx: number) => (
-                                <div key={idx} className="border-b border-[#0066FF]/30 last:border-0">
-                                    <div className="flex items-center justify-between">
-                                        <Link to={item.path}
-                                            onClick={() => { if (!item.dropdown) setMobileMenuOpen(false); }}
-                                            className="flex-1 py-3 text-[15px] font-bold text-[#0066FF]">
-                                            {item.name}
-                                        </Link>
-                                        {item.dropdown && (
-                                            <button
-                                                onClick={() => setExpandedMobile(prev =>
-                                                    prev.includes(item.name) ? prev.filter(i => i !== item.name) : [...prev, item.name]
-                                                )}
-                                                className="p-2 text-[#0066FF]">
-                                                <ChevronDown className={`w-4 h-4 transition-transform ${expandedMobile.includes(item.name) ? 'rotate-180' : ''}`} />
-                                            </button>
-                                        )}
-                                    </div>
-                                    <AnimatePresence initial={false}>
-                                        {item.dropdown && expandedMobile.includes(item.name) && (
-                                            <motion.div key="sub"
-                                                initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
-                                                transition={{ duration: 0.22, ease: 'easeInOut' }} className="overflow-hidden">
-                                                <div className="pl-3 pb-3 space-y-3 border-l-2 border-[#0066FF] ml-2">
-                                                    {item.dropdown.categories?.map((cat: any, cIdx: number) => (
-                                                        <div key={cIdx}>
-                                                            <Link to={cat.path || `/${item.name.toLowerCase()}/${cat.id}`}
-                                                                onClick={() => setMobileMenuOpen(false)}
-                                                                className="flex items-center gap-2 mt-2 mb-1.5">
-                                                                <span className="text-[9px] font-black border border-[#0066FF] text-[#0066FF] px-1.5 py-0.5 rounded">
-                                                                    {String(cIdx + 1).padStart(2, '0')}
-                                                                </span>
-                                                                <span className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-[#0066FF]">
-                                                                    {cat.title}
-                                                                </span>
-                                                            </Link>
-                                                            <div className="space-y-1 pl-1">
-                                                                {cat.items?.map((sub: any, subIdx: number) => (
-                                                                    <Link key={subIdx} to={sub.path} onClick={() => setMobileMenuOpen(false)}
-                                                                        className="block text-[13px] text-[#0066FF] font-semibold py-1 hover:underline">
-                                                                        {sub.name}
-                                                                    </Link>
-                                                                ))}
-                                                            </div>
-                                                        </div>
+            {/* Mobile Drawer (Matching ISI Security mobile menu with smooth accordions) */}
+            <div className={`lg:hidden fixed top-16 left-0 right-0 bottom-0 z-40 bg-white/98 backdrop-blur-md transition-all duration-300 overflow-y-auto ${
+                mobileMenuOpen ? 'opacity-100 visible translate-x-0' : 'opacity-0 invisible translate-x-full'
+            }`}>
+                <div className="p-4 space-y-1 pb-24">
+                    {smNavItems.map((item, idx) => (
+                        <div key={idx} className="border-b border-border/50 pb-1">
+                            <div className="flex items-center justify-between">
+                                <Link 
+                                    to={item.path} 
+                                    className="text-base font-semibold text-slate-800 hover:text-primary py-2.5 px-2 flex-1 transition-colors"
+                                    onClick={() => {
+                                        if (!item.dropdown) setMobileMenuOpen(false);
+                                    }}
+                                >
+                                    {item.name}
+                                </Link>
+                                {item.dropdown && (
+                                    <button
+                                        onClick={() => toggleExpanded(item.name)}
+                                        className="p-2.5 text-slate-500 hover:text-primary transition-colors"
+                                        aria-label={`Toggle ${item.name} sub-menu`}
+                                    >
+                                        <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${
+                                            expandedItems.includes(item.name) ? 'rotate-180 text-primary' : ''
+                                        }`} />
+                                    </button>
+                                )}
+                            </div>
+                            
+                            {item.dropdown && expandedItems.includes(item.name) && (
+                                <div className="pl-4 sm:pl-6 bg-muted/20 border-l-2 border-primary/30 my-1 py-2 flex flex-col gap-2 rounded-r-lg">
+                                    {item.name === "Offerings" ? (
+                                        <div className="space-y-3">
+                                            <div>
+                                                <div className="text-[10px] font-bold text-primary/70 uppercase tracking-widest px-2 mb-1">
+                                                    B2B Profit Pools
+                                                </div>
+                                                <div className="flex flex-col gap-0.5">
+                                                    {((item.dropdown.categories?.find((c: any) => c.id === "profit-pools") as any)?.b2bItems || []).map((sub: any, sIdx: number) => (
+                                                        <Link
+                                                            key={sIdx}
+                                                            to={sub.path}
+                                                            onClick={() => setMobileMenuOpen(false)}
+                                                            className="text-xs text-muted-foreground hover:text-primary py-1.5 px-2 rounded-md hover:bg-muted/50 transition-colors block"
+                                                        >
+                                                            {sub.name}
+                                                        </Link>
                                                     ))}
                                                 </div>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
+                                            </div>
+                                            <div>
+                                                <div className="text-[10px] font-bold text-primary/70 uppercase tracking-widest px-2 mb-1">
+                                                    B2C Profit Pools
+                                                </div>
+                                                <div className="flex flex-col gap-0.5">
+                                                    {((item.dropdown.categories?.find((c: any) => c.id === "profit-pools") as any)?.b2cItems || []).map((sub: any, sIdx: number) => (
+                                                        <Link
+                                                            key={sIdx}
+                                                            to={sub.path}
+                                                            onClick={() => setMobileMenuOpen(false)}
+                                                            className="text-xs text-muted-foreground hover:text-primary py-1.5 px-2 rounded-md hover:bg-muted/50 transition-colors block"
+                                                        >
+                                                            {sub.name}
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            {item.dropdown.categories?.filter((c: any) => c.id !== "profit-pools").map((cat: any, cIdx: number) => (
+                                                <div key={cIdx}>
+                                                    <div className="text-[10px] font-bold text-primary/70 uppercase tracking-widest px-2 mb-1">
+                                                        {cat.title}
+                                                    </div>
+                                                    <div className="flex flex-col gap-0.5">
+                                                        {cat.items?.map((sub: any, sIdx: number) => (
+                                                            <Link
+                                                                key={sIdx}
+                                                                to={sub.path}
+                                                                onClick={() => setMobileMenuOpen(false)}
+                                                                className="text-xs text-muted-foreground hover:text-primary py-1.5 px-2 rounded-md hover:bg-muted/50 transition-colors block"
+                                                            >
+                                                                {sub.name}
+                                                            </Link>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : item.name === "Verticals" && (item.dropdown as any)?.items ? (
+                                        <div className="space-y-1.5 p-1">
+                                            {(item.dropdown as any).items.map((sub: any, sIdx: number) => {
+                                                const IconComponent = Icons[sub.icon] || ArrowRight;
+                                                return (
+                                                    <Link
+                                                        key={sIdx}
+                                                        to={sub.path}
+                                                        onClick={() => setMobileMenuOpen(false)}
+                                                        className="flex items-center gap-2.5 text-xs text-foreground hover:text-primary py-2 px-2.5 rounded-lg hover:bg-muted/50 transition-colors"
+                                                    >
+                                                        <IconComponent className="w-4 h-4 text-primary shrink-0" />
+                                                        <div className="min-w-0">
+                                                            <div className="font-semibold text-slate-800">{sub.name}</div>
+                                                            <div className="text-[11px] text-muted-foreground truncate">{sub.desc}</div>
+                                                        </div>
+                                                    </Link>
+                                                );
+                                            })}
+                                            <div className="pt-2 border-t border-border/40 mt-2 px-1">
+                                                <button
+                                                    onClick={() => {
+                                                        setMobileMenuOpen(false);
+                                                        openLongForm({ defaultService: 'Industry Verticals Consultation', title: 'Consult with Industry Verticals Experts' });
+                                                    }}
+                                                    className="w-full text-center py-2 px-3 rounded-lg bg-primary text-white text-xs font-bold shadow-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                                                >
+                                                    <span>Talk to Experts</span>
+                                                    <ArrowRight className="w-3 h-3" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ) : item.dropdown.categories ? (
+                                        <div className="space-y-3">
+                                            {item.dropdown.categories.map((cat: any, cIdx: number) => (
+                                                <div key={cIdx}>
+                                                    <div className="text-[10px] font-bold text-primary/70 uppercase tracking-widest px-2 mb-1">
+                                                        {cat.title}
+                                                    </div>
+                                                    <div className="flex flex-col gap-0.5">
+                                                        {cat.items?.map((sub: any, sIdx: number) => (
+                                                            <Link
+                                                                key={sIdx}
+                                                                to={sub.path}
+                                                                onClick={() => setMobileMenuOpen(false)}
+                                                                className="text-xs text-muted-foreground hover:text-primary py-1.5 px-2 rounded-md hover:bg-muted/50 transition-colors block"
+                                                            >
+                                                                {sub.name}
+                                                            </Link>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : null}
                                 </div>
-                            ))}
+                            )}
                         </div>
+                    ))}
 
-                        <div className="px-4 py-4 border-t-2 border-[#0066FF] flex-shrink-0">
-                            <Link to="/book-consultation" onClick={() => setMobileMenuOpen(false)} id="mobile-cta-consultation"
-                                className="w-full flex items-center justify-center gap-2 bg-[#0066FF] text-white py-3 rounded-lg font-bold text-sm border-2 border-[#0066FF] hover:bg-white hover:text-[#0066FF] transition-colors">
-                                Book Consultation <ArrowRight className="w-4 h-4" />
-                            </Link>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                    {/* Bottom CTA for Mobile */}
+                    <div className="pt-5 px-2">
+                        <Link
+                            to="/book-consultation"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="w-full justify-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 text-sm py-3 px-5 rounded-full font-bold flex items-center transition-all"
+                        >
+                            <span>Book Consultation</span>
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
+                    </div>
+                </div>
+            </div>
         </header>
     );
 }

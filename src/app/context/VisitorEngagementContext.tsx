@@ -34,8 +34,6 @@ import {
 } from '../services/engagementStorage';
 import { getPageContextPrompt, PageContextPrompt } from '../services/smartRecommendations';
 
-import { useLeadModal } from './LeadModalContext';
-
 export type EngagementType =
     | 'none'
     | 'welcome'
@@ -77,7 +75,6 @@ const CONTEXTUAL_PROMPT_DELAY_MS = 18 * 1000; // 18 seconds on page
 
 export const VisitorEngagementProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const location = useLocation();
-    const leadModal = useLeadModal();
     const [activeEngagement, setActiveEngagement] = useState<EngagementType>('none');
     
     // Form tracking
@@ -95,17 +92,6 @@ export const VisitorEngagementProvider: React.FC<{ children: React.ReactNode }> 
     const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
     const contextPromptTimerRef = useRef<NodeJS.Timeout | null>(null);
     const userIsTypingRef = useRef(false);
-
-    // Helper to check if modal, chatbot, or cookie consent is actively demanding attention (Priorities 1 & 2)
-    const isInterruptionBlocked = useCallback(() => {
-        if (leadModal.isOpen || isFormActive) return true;
-        if (typeof window !== 'undefined') {
-            if ((window as any).__PM_CHATBOT_OPEN__) return true;
-            const consent = localStorage.getItem('trustgrid_cookie_consent');
-            if (!consent) return true; // Cookie consent has priority
-        }
-        return false;
-    }, [leadModal.isOpen, isFormActive]);
 
     // Initial page load & returning visitor detection
     useEffect(() => {
@@ -125,7 +111,7 @@ export const VisitorEngagementProvider: React.FC<{ children: React.ReactNode }> 
         // Show welcome or recent page reminder once per session (after brief initial delay)
         const welcomeTimer = setTimeout(() => {
             // Priority 5 & 6: Only if no higher priority engagement is active
-            if (activeEngagement !== 'none' || isInterruptionBlocked()) return;
+            if (activeEngagement !== 'none' || isFormActive) return;
 
             if (info.isReturning) {
                 if (previous && !hasSeenRecentPageThisSession()) {
@@ -144,7 +130,7 @@ export const VisitorEngagementProvider: React.FC<{ children: React.ReactNode }> 
         }, 3500);
 
         return () => clearTimeout(welcomeTimer);
-    }, [isInterruptionBlocked]);
+    }, []); // Run on initial mount
 
     // Page route change listener
     useEffect(() => {
@@ -166,7 +152,7 @@ export const VisitorEngagementProvider: React.FC<{ children: React.ReactNode }> 
         const pageKey = currentPrompt.pageKey;
         if (!hasSeenContextualPromptThisSession(pageKey)) {
             contextPromptTimerRef.current = setTimeout(() => {
-                if (activeEngagement === 'none' && !isInterruptionBlocked() && !userIsTypingRef.current) {
+                if (activeEngagement === 'none' && !isFormActive && !userIsTypingRef.current) {
                     setActiveEngagement('contextual_prompt');
                     markContextualPromptSeenThisSession(pageKey);
                 }
@@ -176,7 +162,7 @@ export const VisitorEngagementProvider: React.FC<{ children: React.ReactNode }> 
         return () => {
             if (contextPromptTimerRef.current) clearTimeout(contextPromptTimerRef.current);
         };
-    }, [location.pathname, isInterruptionBlocked]);
+    }, [location.pathname]);
 
     // ── Desktop Exit Intent & Mouse Tracking ──────────────────────────────
     useEffect(() => {
@@ -190,7 +176,7 @@ export const VisitorEngagementProvider: React.FC<{ children: React.ReactNode }> 
             if (e.clientY <= 12 && isMovingUp) {
                 if (
                     activeEngagement === 'none' &&
-                    !isInterruptionBlocked() &&
+                    !isFormActive &&
                     !hasSeenExitIntentThisSession()
                 ) {
                     setActiveEngagement('exit_intent');
@@ -201,54 +187,24 @@ export const VisitorEngagementProvider: React.FC<{ children: React.ReactNode }> 
 
         window.addEventListener('mousemove', handleMouseMove);
         return () => window.removeEventListener('mousemove', handleMouseMove);
-    }, [activeEngagement, isInterruptionBlocked]);
-
-    // ── Mobile Exit / Upward Velocity Intent ─────────────────────────────
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-        const isMobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
-        if (!isMobile) return;
-
-        let maxScrollY = 0;
-        const handleScroll = () => {
-            const currentY = window.scrollY;
-            if (currentY > maxScrollY) {
-                maxScrollY = currentY;
-            }
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            // Trigger if visitor read at least 50% of the page and quickly returned to top (< 80px)
-            if (docHeight > 500 && maxScrollY > docHeight * 0.5 && currentY < 80) {
-                if (
-                    activeEngagement === 'none' &&
-                    !isInterruptionBlocked() &&
-                    !hasSeenExitIntentThisSession()
-                ) {
-                    setActiveEngagement('exit_intent');
-                    markExitIntentSeenThisSession();
-                }
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [activeEngagement, isInterruptionBlocked]);
+    }, [activeEngagement, isFormActive]);
 
     // ── Inactivity / Idle Timer ──────────────────────────────────────────
     const resetInactivityTimer = useCallback(() => {
         if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
 
         // Do not trigger if form is active or popup already visible
-        if (isInterruptionBlocked() || activeEngagement !== 'none' || hasSeenInactivityThisSession()) {
+        if (isFormActive || activeEngagement !== 'none' || hasSeenInactivityThisSession()) {
             return;
         }
 
         idleTimerRef.current = setTimeout(() => {
-            if (activeEngagement === 'none' && !isInterruptionBlocked() && !userIsTypingRef.current) {
+            if (activeEngagement === 'none' && !isFormActive && !userIsTypingRef.current) {
                 setActiveEngagement('inactivity');
                 markInactivitySeenThisSession();
             }
         }, INACTIVITY_TIMEOUT_MS);
-    }, [activeEngagement, isInterruptionBlocked]);
+    }, [activeEngagement, isFormActive]);
 
     useEffect(() => {
         const events = ['mousemove', 'mousedown', 'keydown', 'scroll', 'touchstart'];

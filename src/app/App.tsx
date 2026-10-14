@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useParams, useLocation } from 'react-router-dom';
+import { Suspense, lazy, useEffect } from 'react';
 import Navigation from './components/Navigation';
 import ChatBot from './components/ChatBot';
 import Footer from './components/Footer';
@@ -7,6 +7,7 @@ import { LeadModalProvider } from './context/LeadModalContext';
 import { VisitorEngagementProvider } from './context/VisitorEngagementContext';
 import SmartEngagementManager from './components/engagement/SmartEngagementManager';
 import GlobalLeadModal from './components/forms/GlobalLeadModal';
+import TabExitPopup from './components/TabExitPopup';
 import StickyCtaBar from './components/StickyCtaBar';
 import WhatsAppWidget from './components/WhatsAppWidget';
 import { servicesData } from '../data/navigationContent';
@@ -18,12 +19,32 @@ import { useVisitorTracker } from '../hooks/useVisitorTracker';
 
 import Home from './pages/Home';
 
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) {
+      window.scrollTo(0, 0);
+    } else {
+      const element = document.getElementById(hash.replace('#', ''));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }
+  }, [pathname, hash]);
+
+  return null;
+}
+
 const BookConsultation = lazy(() => import('./pages/BookConsultation'));
 const Crypto = lazy(() => import('./pages/Crypto'));
 const Outcomes = lazy(() => import('./pages/Outcomes'));
 const Solutions = lazy(() => import('./pages/Solutions'));
 const Capabilities = lazy(() => import('./pages/Capabilities'));
 const Industries = lazy(() => import('./pages/Industries'));
+const Verticals = lazy(() => import('./pages/Verticals'));
 const Offerings = lazy(() => import('./pages/Offerings'));
 const Resources = lazy(() => import('./pages/Resources'));
 const Company = lazy(() => import('./pages/Company'));
@@ -68,7 +89,7 @@ function AnalyticsTracker() {
 // Fallback loader for lazy pages
 const PageLoader = () => (
   <div className="flex items-center justify-center min-h-[50vh]">
-    <div className="w-8 h-8 border-4 border-[#0066FF] border-t-transparent rounded-full animate-spin"></div>
+    <div className="w-8 h-8 border-4 border-[#2878B5] border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
 
@@ -107,6 +128,7 @@ function NavigateToSolutionsSection() {
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <LeadModalProvider>
         <VisitorEngagementProvider>
           <AnalyticsTracker />
@@ -123,6 +145,7 @@ export default function App() {
                   <Route path="/solutions/:slug" element={<NavigateToSolutionsSection />} />
                   <Route path="/capabilities" element={<Navigate to="/solutions" replace />} />
                   <Route path="/industries" element={<Industries />} />
+                  <Route path="/verticals" element={<Verticals />} />
                   <Route path="/offerings" element={<Offerings />} />
                   <Route path="/resources" element={<Resources />} />
                   {/* ── New consolidated service routes ── */}
@@ -195,6 +218,7 @@ export default function App() {
 
             <ChatBot />
             <CookieConsent />
+            <TabExitPopup />
             <StickyCtaBar />
             <WhatsAppWidget />
             <GlobalLeadModal />

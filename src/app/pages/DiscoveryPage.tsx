@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+ï»¿import { useEffect, useState } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -46,15 +46,15 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         route: "/offerings/profit-pool-discovery/market-discovery",
         question: "Where is the revenue we haven't mapped?",
         spin: {
-            situation: "Your current TAM/SAM analysis is built on annual reports, analyst forecasts, and internal assumptions — refreshed once per planning cycle.",
+            situation: "Your current TAM/SAM analysis is built on annual reports, analyst forecasts, and internal assumptions â€” refreshed once per planning cycle.",
             problem: "Markets shift in weeks, not years. By the time your strategy deck is approved, the opportunity has moved or been captured by a faster competitor.",
             implication: "You enter markets already saturated, miss $300M+ white spaces, and allocate capital to shrinking segments while high-growth adjacencies go unserved.",
             needPayoff: "Dynamic market sizing that updates continuously, identifies uncontested spaces, and quantifies entry timing before competitors react."
         },
         frameworks: [
-            "Jobs-to-be-Done (JTBD) — What \"job\" is your customer hiring AI to do that no one serves?",
-            "Blue Ocean Strategy — Which factors can you eliminate, reduce, raise, or create to open new market space?",
-            "Adjacent Market Expansion — Where does your current capability create asymmetric advantage in an untapped vertical?"
+            "Jobs-to-be-Done (JTBD) â€” What \"job\" is your customer hiring AI to do that no one serves?",
+            "Blue Ocean Strategy â€” Which factors can you eliminate, reduce, raise, or create to open new market space?",
+            "Adjacent Market Expansion â€” Where does your current capability create asymmetric advantage in an untapped vertical?"
         ],
         profitPool: [
             "Unserved market identification with zero direct competition",
@@ -62,7 +62,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
             "Entry window mapping: 12-18 month head start before competitive response"
         ],
         metrics: [
-            { category: "Market Sizing", metric: "TAM Accuracy", baseline: "±25%", target: "±5%", frequency: "Quarterly" },
+            { category: "Market Sizing", metric: "TAM Accuracy", baseline: "Â±25%", target: "Â±5%", frequency: "Quarterly" },
             { category: "Market Sizing", metric: "SAM Coverage", baseline: "40%", target: "85%", frequency: "Quarterly" },
             { category: "Market Sizing", metric: "SOM Capture Rate", baseline: "8%", target: "18%", frequency: "Annually" },
             { category: "Growth", metric: "Market Entry Speed", baseline: "18 months", target: "3 months", frequency: "Per market" },
@@ -101,15 +101,15 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         route: "/offerings/profit-pool-discovery/demand-discovery",
         question: "What are customers struggling to articulate they need?",
         spin: {
-            situation: "Your demand generation relies on explicit signals — inbound forms, RFPs, sales conversations. These capture only buyers already in-market.",
+            situation: "Your demand generation relies on explicit signals â€” inbound forms, RFPs, sales conversations. These capture only buyers already in-market.",
             problem: "67% of enterprise AI demand is latent: employees using shadow tools, compliance officers scrambling for governance, operations leaders tolerating inefficiency because \"no solution exists.\"",
             implication: "Your pipeline is 30% of what it could be. Competitors with better demand sensing capture the \"unarticulated need\" before you know it exists. Sales cycles stretch to 18 months because you're educating, not fulfilling.",
-            needPayoff: "Surface latent demand before it becomes explicit — engage buyers 6-9 months earlier, when relationship and solution design advantages are still yours to claim."
+            needPayoff: "Surface latent demand before it becomes explicit â€” engage buyers 6-9 months earlier, when relationship and solution design advantages are still yours to claim."
         },
         frameworks: [
-            "Voice of Customer (VoC) Deep Mining — Analyze support tickets, call transcripts, and employee behavior patterns for \"problem statements without solutions\"",
-            "Derived Demand Tracking — Map upstream regulatory, supply chain, and technology shifts that create downstream AI demand",
-            "FOMO & Competitive Pressure Modeling — Quantify the cost of inaction when peers adopt AI"
+            "Voice of Customer (VoC) Deep Mining â€” Analyze support tickets, call transcripts, and employee behavior patterns for \"problem statements without solutions\"",
+            "Derived Demand Tracking â€” Map upstream regulatory, supply chain, and technology shifts that create downstream AI demand",
+            "FOMO & Competitive Pressure Modeling â€” Quantify the cost of inaction when peers adopt AI"
         ],
         profitPool: [
             "12,400+ intent signals captured monthly from accounts not yet in your CRM",
@@ -162,14 +162,14 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         question: "How do we prove ROI before the PO is signed?",
         spin: {
             situation: "Your AI proposals rely on case studies, benchmarks, and projected savings. Procurement demands customer-specific ROI proof.",
-            problem: "60% of AI deals stall at procurement because value is \"soft\" — efficiency, innovation, strategic positioning. CFOs kill projects without hard numbers tied to their P&L.",
+            problem: "60% of AI deals stall at procurement because value is \"soft\" â€” efficiency, innovation, strategic positioning. CFOs kill projects without hard numbers tied to their P&L.",
             implication: "POCs fail to convert. \"Pilot purgatory\" consumes 12-18 months. Sales cycles extend. Win rates drop against vendors who can quantify value in the customer's language.",
-            needPayoff: "Customer-specific value quantification delivered in the first sales conversation — economic, time, quality, risk, and strategic value modeled to their actual data."
+            needPayoff: "Customer-specific value quantification delivered in the first sales conversation â€” economic, time, quality, risk, and strategic value modeled to their actual data."
         },
         frameworks: [
-            "Economic Value Estimation (EVE) — Build the business case from customer's cost structure, not vendor benchmarks",
-            "Time-to-Value Compression — Map process mining insights to 90-day proof points",
-            "Total Cost of Ownership (TCO) Reframing — Shift conversation from \"AI costs\" to \"cost of not using AI\""
+            "Economic Value Estimation (EVE) â€” Build the business case from customer's cost structure, not vendor benchmarks",
+            "Time-to-Value Compression â€” Map process mining insights to 90-day proof points",
+            "Total Cost of Ownership (TCO) Reframing â€” Shift conversation from \"AI costs\" to \"cost of not using AI\""
         ],
         profitPool: [
             "90-day value proof guaranteed before full commitment",
@@ -177,7 +177,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
             "POC conversion from industry average 55% to 85%"
         ],
         metrics: [
-            { category: "Value Quantification", metric: "ROI Model Accuracy", baseline: "±40%", target: "±8%", frequency: "Per deal" },
+            { category: "Value Quantification", metric: "ROI Model Accuracy", baseline: "Â±40%", target: "Â±8%", frequency: "Per deal" },
             { category: "Value Quantification", metric: "Customer-Specific Value Proof", baseline: "20%", target: "100%", frequency: "Per deal" },
             { category: "Sales Velocity", metric: "Deal Velocity", baseline: "$25K/month", target: "$75K/month", frequency: "Monthly" },
             { category: "Sales Velocity", metric: "Sales Cycle Length", baseline: "9 months", target: "4.5 months", frequency: "Quarterly" },
@@ -195,7 +195,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
             { category: "Retention", metric: "Gross Revenue Retention", baseline: "85%", target: "95%", frequency: "Annually" },
             { category: "Retention", metric: "Net Revenue Retention", baseline: "105%", target: "125%", frequency: "Annually" }
         ],
-        impact: "Deal velocity: +50% · POC conversion: 85%",
+        impact: "Deal velocity: +50% Â· POC conversion: 85%",
         treeOfThoughts: [
             {
                 phase: "Root Analysis (Premise)",
@@ -225,12 +225,12 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
             situation: "Your AI services or products rely on partner networks, app stores, or algorithm-dependent platforms. A single algorithm change or partner defection threatens 70% of revenue.",
             problem: "Platform dependency creates margin compression (8-12% net), unpredictable visibility, and zero customer relationship ownership. You're renting your distribution.",
             implication: "Competitors with owned channels capture 2-3x margin on equivalent offerings. Your growth ceiling is set by someone else's API or policy team.",
-            needPayoff: "Algorithm-resilient distribution architecture with owned channels, productized service automation, and partner intelligence that optimizes — not replaces — your go-to-market."
+            needPayoff: "Algorithm-resilient distribution architecture with owned channels, productized service automation, and partner intelligence that optimizes â€” not replaces â€” your go-to-market."
         },
         frameworks: [
-            "Channel Mix Optimization — Model owned vs. earned vs. paid vs. partner contribution to margin and control",
-            "Productized Service Design — Convert 60% of bespoke delivery to scalable, margin-rich offerings",
-            "Partner Ecosystem Intelligence — Score partners by culture fit, co-sell velocity, and strategic alignment, not just revenue"
+            "Channel Mix Optimization â€” Model owned vs. earned vs. paid vs. partner contribution to margin and control",
+            "Productized Service Design â€” Convert 60% of bespoke delivery to scalable, margin-rich offerings",
+            "Partner Ecosystem Intelligence â€” Score partners by culture fit, co-sell velocity, and strategic alignment, not just revenue"
         ],
         profitPool: [
             "Platform dependency reduced from 70% to 30%",
@@ -256,7 +256,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
             { category: "Digital", metric: "LTV:CAC Ratio", baseline: "4:1", target: "12:1", frequency: "Annually" },
             { category: "Productization", metric: "Productized Revenue %", baseline: "20%", target: "60%", frequency: "Quarterly" },
             { category: "Productization", metric: "Time-to-Delivery (Productized)", baseline: "12 weeks", target: "2 weeks", frequency: "Per engagement" },
-            { category: "Productization", metric: "Delivery Cost Reduction", baseline: "—", target: "45%", frequency: "Annually" }
+            { category: "Productization", metric: "Delivery Cost Reduction", baseline: "â€”", target: "45%", frequency: "Annually" }
         ],
         impact: "Margin: +30 points",
         treeOfThoughts: [
@@ -288,12 +288,12 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
             situation: "Your competitive intelligence is quarterly: win/loss reviews, analyst reports, sales anecdotes. By the time you react, the deal is lost.",
             problem: "Competitors launch features, drop prices, or shift messaging in days. Your battlecards are outdated before they're printed. Response time averages 2-3 weeks.",
             implication: "You win on price, not value. Premium positioning erodes. Deals lost to \"surprise\" competitors cost $2M+ annually. Market share shifts before your next board meeting.",
-            needPayoff: "Real-time competitive sensing with automated response playbooks — detect moves in hours, counter in days, maintain premium pricing through superior positioning intelligence."
+            needPayoff: "Real-time competitive sensing with automated response playbooks â€” detect moves in hours, counter in days, maintain premium pricing through superior positioning intelligence."
         },
         frameworks: [
-            "Competitive Early Warning System — Monitor pricing, messaging, hiring, patent filings, and product releases across 50+ signal types",
-            "Game Theory Pricing — Model competitor response to your moves before you make them",
-            "Win/Loss Pattern Recognition — Identify the 3-4 factors that actually determine wins, not what sales thinks determines wins"
+            "Competitive Early Warning System â€” Monitor pricing, messaging, hiring, patent filings, and product releases across 50+ signal types",
+            "Game Theory Pricing â€” Model competitor response to your moves before you make them",
+            "Win/Loss Pattern Recognition â€” Identify the 3-4 factors that actually determine wins, not what sales thinks determines wins"
         ],
         profitPool: [
             "Competitive response time compressed from weeks to under 4 hours",
@@ -314,7 +314,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
             { category: "Pricing", metric: "Price Premium Maintained", baseline: "0%", target: "35%", frequency: "Quarterly" },
             { category: "Market Share", metric: "Market Share (Addressable)", baseline: "4%", target: "12%", frequency: "Annually" },
             { category: "Market Share", metric: "Market Share Growth Rate", baseline: "1%", target: "5%", frequency: "Annually" },
-            { category: "Market Share", metric: "Competitor Share Erosion", baseline: "—", target: "8%", frequency: "Annually" },
+            { category: "Market Share", metric: "Competitor Share Erosion", baseline: "â€”", target: "8%", frequency: "Annually" },
             { category: "Deal Protection", metric: "At-Risk Deal Identification", baseline: "60%", target: "95%", frequency: "Weekly" },
             { category: "Deal Protection", metric: "Deal Recovery Rate", baseline: "25%", target: "65%", frequency: "Quarterly" }
         ],
@@ -343,17 +343,17 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
     "customer-discovery": {
         title: "Customer Discovery",
         route: "/offerings/profit-pool-discovery/customer-discovery",
-        question: "Who is actually ready to buy AI — and who will waste our time?",
+        question: "Who is actually ready to buy AI â€” and who will waste our time?",
         spin: {
             situation: "Your ICP is defined by firmographics: company size, industry, revenue. Marketing generates MQLs; sales qualifies. The funnel is linear and noisy.",
             problem: "50% of \"target\" accounts lack AI readiness: no data infrastructure, no executive sponsor, no change appetite. SDRs burn 60% of capacity on accounts that will never convert this year.",
             implication: "$1.2M+ in wasted sales capacity annually. CAC inflates 3x above benchmark. Marketing ROI is unmeasurable because the targeting is wrong, not the messaging.",
-            needPayoff: "Segment by AI readiness, behavioral signals, and psychographic alignment — prioritize the 20% of accounts with 80% conversion probability, and personalize engagement to their specific maturity and values."
+            needPayoff: "Segment by AI readiness, behavioral signals, and psychographic alignment â€” prioritize the 20% of accounts with 80% conversion probability, and personalize engagement to their specific maturity and values."
         },
         frameworks: [
-            "Technographic + Digital Maturity Scoring — Assess stack, data quality, and cloud posture as readiness predictors",
-            "Psychographic AI Segmentation — Cluster by attitudes toward innovation, risk tolerance, and automation philosophy",
-            "Propensity Modeling — Predict 12-month purchase likelihood with 85%+ accuracy"
+            "Technographic + Digital Maturity Scoring â€” Assess stack, data quality, and cloud posture as readiness predictors",
+            "Psychographic AI Segmentation â€” Cluster by attitudes toward innovation, risk tolerance, and automation philosophy",
+            "Propensity Modeling â€” Predict 12-month purchase likelihood with 85%+ accuracy"
         ],
         profitPool: [
             "CAC reduced 65% through precision targeting",
@@ -411,12 +411,12 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
             situation: "Your product roadmap is built on customer requests, competitive parity, and engineering capability. Features ship; adoption is assumed.",
             problem: "70% of AI features are never used. $3M+ in annual R&D waste. Feature bloat confuses users. Engineering velocity slows maintaining unused code.",
             implication: "Churn rises 30% above benchmark as users fail to find value. Competitors with leaner, validated offerings win on simplicity. Your roadmap becomes a graveyard of good intentions.",
-            needPayoff: "Validate features before build with simulated user behavior, cohort retention prediction, and rapid prototyping — ship only what users will adopt, pay for, and expand."
+            needPayoff: "Validate features before build with simulated user behavior, cohort retention prediction, and rapid prototyping â€” ship only what users will adopt, pay for, and expand."
         },
         frameworks: [
-            "Wizard of Oz Testing — Simulate AI features with human backend to validate demand before model training",
-            "Cohort Retention Prediction — Model which features drive 90-day retention before development",
-            "Feature Adoption Path Analysis — Map the sequence of features that leads from trial to expansion, not just activation"
+            "Wizard of Oz Testing â€” Simulate AI features with human backend to validate demand before model training",
+            "Cohort Retention Prediction â€” Model which features drive 90-day retention before development",
+            "Feature Adoption Path Analysis â€” Map the sequence of features that leads from trial to expansion, not just activation"
         ],
         profitPool: [
             "Feature success rate improved from 30% to 70%",
@@ -433,7 +433,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
             { category: "Adoption", metric: "Power User Feature Utilization", baseline: "8 features", target: "22 features", frequency: "Monthly" },
             { category: "Retention", metric: "30-Day Retention (New Feature)", baseline: "40%", target: "82%", frequency: "Per feature" },
             { category: "Retention", metric: "90-Day Retention (Cohort)", baseline: "55%", target: "85%", frequency: "Per cohort" },
-            { category: "Retention", metric: "Feature-Driven Churn Reduction", baseline: "—", target: "25%", frequency: "Annually" },
+            { category: "Retention", metric: "Feature-Driven Churn Reduction", baseline: "â€”", target: "25%", frequency: "Annually" },
             { category: "Expansion", metric: "Feature Expansion Revenue", baseline: "8%", target: "32%", frequency: "Annually" },
             { category: "Expansion", metric: "Upsell Rate (Feature-Driven)", baseline: "12%", target: "38%", frequency: "Quarterly" },
             { category: "Expansion", metric: "Net Revenue Retention", baseline: "105%", target: "128%", frequency: "Annually" },
@@ -477,9 +477,9 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
             needPayoff: "A systematic B2B profit pool mapping engine that detects procurement-ready intent, maps stakeholder networks, and identifies pricing leverage to secure full-margin contracts."
         },
         frameworks: [
-            "Economic Value to Customer (EVC) — Quantifying clear business value to eliminate discount pressures",
-            "Account Stakeholder Influence Mapping — Tracking influence coefficients of buying committee members",
-            "Contract Value Optimization — Predictive modeling of contract terms, pricing tiers, and renewal margins"
+            "Economic Value to Customer (EVC) â€” Quantifying clear business value to eliminate discount pressures",
+            "Account Stakeholder Influence Mapping â€” Tracking influence coefficients of buying committee members",
+            "Contract Value Optimization â€” Predictive modeling of contract terms, pricing tiers, and renewal margins"
         ],
         profitPool: [
             "Identification of high-margin cross-sell adjacencies within target accounts",
@@ -487,9 +487,9 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
             "Early risk detection to prevent late-stage deal slippage and protect margins"
         ],
         metrics: [
-            { category: "Market Sizing", metric: "TAM Accuracy", baseline: "±20%", target: "±3%", frequency: "Quarterly" },
+            { category: "Market Sizing", metric: "TAM Accuracy", baseline: "Â±20%", target: "Â±3%", frequency: "Quarterly" },
             { category: "Sales Acceleration", metric: "Win Rate", baseline: "28%", target: "45%", frequency: "Quarterly" },
-            { category: "Sales Acceleration", metric: "ACV Growth", baseline: "—", target: "+25%", frequency: "Annually" },
+            { category: "Sales Acceleration", metric: "ACV Growth", baseline: "â€”", target: "+25%", frequency: "Annually" },
             { category: "Sales Acceleration", metric: "Sales Cycle Time", baseline: "10 months", target: "6 months", frequency: "Per deal" },
             { category: "Financial", metric: "Margin Capture Rate", baseline: "80%", target: "96%", frequency: "Annually" },
             { category: "Financial", metric: "Discount Reduction", baseline: "22%", target: "8%", frequency: "Quarterly" }
@@ -527,9 +527,9 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
             needPayoff: "Real-time user behavior analysis and dynamic cohort personalization that identifies high-LTV buyers instantly and delivers custom checkout funnels."
         },
         frameworks: [
-            "Behavioral Cohorting & LTV Modeling — Classifying traffic by active engagement triggers instead of demographics",
-            "Dynamic Funnel Synthesis — Synthesizing micro-personalized customer journeys based on real-time intent",
-            "Price Elasticity Testing — Algorithmic sensitivity modeling to maximize margin without hurting conversion"
+            "Behavioral Cohorting & LTV Modeling â€” Classifying traffic by active engagement triggers instead of demographics",
+            "Dynamic Funnel Synthesis â€” Synthesizing micro-personalized customer journeys based on real-time intent",
+            "Price Elasticity Testing â€” Algorithmic sensitivity modeling to maximize margin without hurting conversion"
         ],
         profitPool: [
             "Capturing incremental margin from high-intent cohorts through targeted upsells",
@@ -539,7 +539,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Funnel Analysis", metric: "Conversion Rate", baseline: "1.8%", target: "4.2%", frequency: "Real-time" },
             { category: "Funnel Analysis", metric: "Cart Abandonment", baseline: "76%", target: "48%", frequency: "Weekly" },
-            { category: "Ad Acquisition", metric: "CAC Reduction", baseline: "—", target: "35%", frequency: "Monthly" },
+            { category: "Ad Acquisition", metric: "CAC Reduction", baseline: "â€”", target: "35%", frequency: "Monthly" },
             { category: "Customer Value", metric: "LTV:CAC Ratio", baseline: "1.8:1", target: "4.5:1", frequency: "Quarterly" },
             { category: "Financial", metric: "Margin Capture Rate", baseline: "85%", target: "97%", frequency: "Annually" }
         ],
@@ -586,10 +586,10 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
             "4.2x higher opportunity pipeline rate"
         ],
         metrics: [
-            { category: "Market", metric: "TAM Precision", baseline: "±25%", target: "±4%", frequency: "Quarterly" },
+            { category: "Market", metric: "TAM Precision", baseline: "Â±25%", target: "Â±4%", frequency: "Quarterly" },
             { category: "Efficiency", metric: "Account Conversion", baseline: "12%", target: "38%", frequency: "Monthly" }
         ],
-        impact: "Enterprise TAM: +45% · Pipeline: +3.2x",
+        impact: "Enterprise TAM: +45% Â· Pipeline: +3.2x",
         treeOfThoughts: [
             {
                 phase: "Strategic Analysis",
@@ -622,7 +622,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Pipeline", metric: "Pre-RFP Deals Sourced", baseline: "5%", target: "45%", frequency: "Monthly" }
         ],
-        impact: "Enterprise pipeline: +250% · CAC: -60%",
+        impact: "Enterprise pipeline: +250% Â· CAC: -60%",
         treeOfThoughts: [
             {
                 phase: "Demand Tracking",
@@ -655,7 +655,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Financial", metric: "Discount Rate", baseline: "22%", target: "6%", frequency: "Monthly" }
         ],
-        impact: "CFO Approval: 90% · ACV: +25%",
+        impact: "CFO Approval: 90% Â· ACV: +25%",
         treeOfThoughts: [
             {
                 phase: "Financial Modeling",
@@ -688,7 +688,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Channel", metric: "Partner-Sourced Pipeline", baseline: "10%", target: "48%", frequency: "Quarterly" }
         ],
-        impact: "Channel Margin: +25 pts · Partner pipeline: +3x",
+        impact: "Channel Margin: +25 pts Â· Partner pipeline: +3x",
         treeOfThoughts: [
             {
                 phase: "Alliance Optimization",
@@ -721,7 +721,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Win Rate", metric: "Competitive Win Rate", baseline: "24%", target: "48%", frequency: "Monthly" }
         ],
-        impact: "Enterprise Win Rate: +35% · RFP Influence: 60%",
+        impact: "Enterprise Win Rate: +35% Â· RFP Influence: 60%",
         treeOfThoughts: [
             {
                 phase: "Competitive Playbook",
@@ -754,7 +754,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Sales Waste", metric: "Unqualified Opportunity Pipeline", baseline: "55%", target: "12%", frequency: "Monthly" }
         ],
-        impact: "Sales Resource Waste: -50% · ACV: +2.8x",
+        impact: "Sales Resource Waste: -50% Â· ACV: +2.8x",
         treeOfThoughts: [
             {
                 phase: "Account Qualification",
@@ -787,7 +787,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "R&D Efficiency", metric: "Feature Adoption Rate", baseline: "18%", target: "65%", frequency: "Quarterly" }
         ],
-        impact: "R&D Savings: $1.5M/yr · Feature Adoption: 65%",
+        impact: "R&D Savings: $1.5M/yr Â· Feature Adoption: 65%",
         treeOfThoughts: [
             {
                 phase: "PMF Validation",
@@ -820,7 +820,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Ad Spend", metric: "CAC Reduction Rate", baseline: "0%", target: "35%", frequency: "Monthly" }
         ],
-        impact: "New Niches: $200M · CAC: -35%",
+        impact: "New Niches: $200M Â· CAC: -35%",
         treeOfThoughts: [
             {
                 phase: "Niche Mapping",
@@ -853,7 +853,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Ad Spend", metric: "CTR Lift", baseline: "1.8%", target: "8%", frequency: "Real-time" }
         ],
-        impact: "Traffic Lift: 4x · CTR: 8%",
+        impact: "Traffic Lift: 4x Â· CTR: 8%",
         treeOfThoughts: [
             {
                 phase: "Trend Analysis",
@@ -886,7 +886,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Funnel", metric: "Cart Abandonment Rate", baseline: "75%", target: "48%", frequency: "Weekly" }
         ],
-        impact: "Conversion Rate: +85% · Cart Abandonment: -30%",
+        impact: "Conversion Rate: +85% Â· Cart Abandonment: -30%",
         treeOfThoughts: [
             {
                 phase: "Checkout Optimization",
@@ -919,7 +919,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Margin", metric: "Direct Channel Revenue Share", baseline: "15%", target: "65%", frequency: "Quarterly" }
         ],
-        impact: "D2C Margin: +30 pts · Customer LTV: +40%",
+        impact: "D2C Margin: +30 pts Â· Customer LTV: +40%",
         treeOfThoughts: [
             {
                 phase: "Direct GTM",
@@ -952,7 +952,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Ad Spend", metric: "Average CPC Reduction", baseline: "$1.80", target: "$0.90", frequency: "Monthly" }
         ],
-        impact: "Ad Efficiency: +40% · CPC: -50%",
+        impact: "Ad Efficiency: +40% Â· CPC: -50%",
         treeOfThoughts: [
             {
                 phase: "Search Strategy",
@@ -985,7 +985,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Funnel", metric: "Visitor-to-Buyer Conversion", baseline: "1.2%", target: "4.2%", frequency: "Real-time" }
         ],
-        impact: "Ad Waste: -60% · Conversion Rate: +2.5x",
+        impact: "Ad Waste: -60% Â· Conversion Rate: +2.5x",
         treeOfThoughts: [
             {
                 phase: "Visitor Profiling",
@@ -1018,7 +1018,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Performance", metric: "Checkout Page Load Time", baseline: "3.5s", target: "1.2s", frequency: "Daily" }
         ],
-        impact: "Recovered Revenue: +35% · Load Time: -65%",
+        impact: "Recovered Revenue: +35% Â· Load Time: -65%",
         treeOfThoughts: [
             {
                 phase: "Checkout Performance",
@@ -1051,7 +1051,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Demand", metric: "Latent Intent Surfaced", baseline: "15%", target: "67%", frequency: "Monthly" }
         ],
-        impact: "Pipeline: +300% · Latent Intent: 67%",
+        impact: "Pipeline: +300% Â· Latent Intent: 67%",
         treeOfThoughts: [
             {
                 phase: "Demand Sensing",
@@ -1084,7 +1084,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Sales Velocity", metric: "Deal Cycle Compression", baseline: "90 days", target: "45 days", frequency: "Monthly" }
         ],
-        impact: "Sales Velocity: +4x · Win Rate: +35%",
+        impact: "Sales Velocity: +4x Â· Win Rate: +35%",
         treeOfThoughts: [
             {
                 phase: "Velocity Optimization",
@@ -1117,7 +1117,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Growth", metric: "Experiment Iteration Speed", baseline: "1/month", target: "20/week", frequency: "Weekly" }
         ],
-        impact: "Conversion Lift: 2.5x · CAC: -40%",
+        impact: "Conversion Lift: 2.5x Â· CAC: -40%",
         treeOfThoughts: [
             {
                 phase: "Growth Experimentation",
@@ -1150,7 +1150,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Ad Performance", metric: "Return on Ad Spend (ROAS)", baseline: "1.2x", target: "3.5x", frequency: "Real-time" }
         ],
-        impact: "ROAS: +300% · CAC: -35%",
+        impact: "ROAS: +300% Â· CAC: -35%",
         treeOfThoughts: [
             {
                 phase: "Ad Optimization",
@@ -1183,7 +1183,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Enterprise", metric: "Committee Engagement Coverage", baseline: "20%", target: "85%", frequency: "Quarterly" }
         ],
-        impact: "Enterprise Win Rate: +35% · ACV: +25%",
+        impact: "Enterprise Win Rate: +35% Â· ACV: +25%",
         treeOfThoughts: [
             {
                 phase: "Enterprise Navigation",
@@ -1216,7 +1216,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "Productivity", metric: "Booked Meetings per Rep", baseline: "8/month", target: "28/month", frequency: "Monthly" }
         ],
-        impact: "Rep Productivity: +10x · SDR Meetings: +300%",
+        impact: "Rep Productivity: +10x Â· SDR Meetings: +300%",
         treeOfThoughts: [
             {
                 phase: "Inside Sales Automation",
@@ -1249,7 +1249,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "D2C Conversion", metric: "Cart Abandonment Rate", baseline: "75%", target: "48%", frequency: "Real-time" }
         ],
-        impact: "Conversion: +85% · Cart Abandonment: -35%",
+        impact: "Conversion: +85% Â· Cart Abandonment: -35%",
         treeOfThoughts: [
             {
                 phase: "D2C Checkout",
@@ -1282,7 +1282,7 @@ export const discoveryPagesData: Record<string, DiscoveryData> = {
         metrics: [
             { category: "BFSI Compliance", metric: "Onboarding Cycle Time", baseline: "30 days", target: "5 days", frequency: "Monthly" }
         ],
-        impact: "Compliance Pass: 100% · Processing Time: -45%",
+        impact: "Compliance Pass: 100% Â· Processing Time: -45%",
         treeOfThoughts: [
             {
                 phase: "BFSI Compliance",
@@ -1430,10 +1430,10 @@ function DiagnosticForm({ offeringName }: { offeringName: string }) {
 
     if (status === 'success') {
         return (
-            <div className="bg-white border border-[#0066FF] p-8 sm:p-12 rounded-3xl text-center shadow-xl max-w-2xl mx-auto my-12 animate-in fade-in-50 duration-500">
-                <CheckCircle2 className="w-16 h-16 text-[#0066FF] mx-auto mb-6" />
-                <h3 className="text-3xl font-extrabold text-[#0066FF] mb-3 font-heading">Diagnostic Form Submitted!</h3>
-                <p className="text-[#0066FF] font-medium max-w-md mx-auto text-base">
+            <div className="bg-emerald-50 border border-emerald-200 p-8 sm:p-12 rounded-3xl text-center shadow-xl max-w-2xl mx-auto my-12 animate-in fade-in-50 duration-500">
+                <CheckCircle2 className="w-16 h-16 text-emerald-600 mx-auto mb-6" />
+                <h3 className="text-3xl font-extrabold text-slate-900 mb-3 font-heading">Diagnostic Form Submitted!</h3>
+                <p className="text-slate-600 font-medium max-w-md mx-auto text-base">
                     Thank you! Your strategic profile has been captured and stored locally. Our AI revenue agents will review your inputs and custom insights will be prepared.
                 </p>
             </div>
@@ -1444,23 +1444,23 @@ function DiagnosticForm({ offeringName }: { offeringName: string }) {
     const progressPercent = Math.round(((currentStep + 1) / diagnosticSteps.length) * 100);
 
     return (
-        <div className="bg-white border border-[#0066FF]/80 p-8 sm:p-12 rounded-3xl shadow-xl max-w-2xl mx-auto my-12 relative overflow-hidden flex flex-col min-h-[420px]">
-            <div className="flex items-center justify-between border-b border-[#0066FF] pb-4 mb-6">
+        <div className="bg-white border border-slate-200/80 p-8 sm:p-12 rounded-3xl shadow-xl max-w-2xl mx-auto my-12 relative overflow-hidden flex flex-col min-h-[420px]">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
                 <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#2878B5]">
                         {offeringName} Diagnostic
                     </span>
                 </div>
                 <div className="text-right">
-                    <span className="text-xs font-semibold text-[#0066FF]">
+                    <span className="text-xs font-semibold text-slate-500">
                         Question {currentStep + 1} of {diagnosticSteps.length}
                     </span>
                 </div>
             </div>
 
-            <div className="w-full bg-white h-1.5 rounded-full mb-8 overflow-hidden">
+            <div className="w-full bg-slate-100 h-1.5 rounded-full mb-8 overflow-hidden">
                 <div 
-                    className="bg-[#0066FF] h-full rounded-full transition-all duration-300 ease-out"
+                    className="bg-[#2878B5] h-full rounded-full transition-all duration-300 ease-out"
                     style={{ width: `${progressPercent}%` }}
                 />
             </div>
@@ -1475,7 +1475,7 @@ function DiagnosticForm({ offeringName }: { offeringName: string }) {
                         transition={{ duration: 0.25, ease: 'easeInOut' }}
                         className="w-full flex flex-col gap-4"
                     >
-                        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0066FF] leading-tight font-heading">
+                        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight font-heading">
                             {step.label}
                         </h2>
 
@@ -1486,7 +1486,7 @@ function DiagnosticForm({ offeringName }: { offeringName: string }) {
                                         key={oIdx}
                                         type="button"
                                         onClick={() => handleInputChange(opt)}
-                                        className={`w-full text-left px-5 py-4 rounded-xl border text-sm font-semibold transition-all focus:outline-none ${formData[step.id] === opt ? 'bg-[#0066FF] border-[#0066FF] text-white shadow-md' : 'bg-white/50 border-[#0066FF] text-[#0066FF] hover:border-[#0066FF] hover:bg-[#0066FF]/10'}`}
+                                        className={`w-full text-left px-5 py-4 rounded-xl border text-sm font-semibold transition-all focus:outline-none ${formData[step.id] === opt ? 'bg-[#2878B5] border-[#2878B5] text-white shadow-md' : 'bg-slate-50/50 border-slate-200 text-slate-700 hover:border-emerald-300 hover:bg-slate-50'}`}
                                     >
                                         {opt}
                                     </button>
@@ -1498,7 +1498,7 @@ function DiagnosticForm({ offeringName }: { offeringName: string }) {
                                 onChange={(e) => handleInputChange(e.target.value)}
                                 placeholder={step.placeholder}
                                 rows={4}
-                                className="w-full px-5 py-4 rounded-xl border border-[#0066FF] focus:ring-2 focus:ring-emerald-600 focus:outline-none text-base font-medium mt-2 resize-none"
+                                className="w-full px-5 py-4 rounded-xl border border-slate-200 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-base font-medium mt-2 resize-none"
                             />
                         ) : (
                             <input
@@ -1506,7 +1506,7 @@ function DiagnosticForm({ offeringName }: { offeringName: string }) {
                                 value={formData[step.id]}
                                 onChange={(e) => handleInputChange(e.target.value)}
                                 placeholder={step.placeholder}
-                                className="w-full px-5 py-4 rounded-xl border border-[#0066FF] focus:ring-2 focus:ring-emerald-600 focus:outline-none text-base font-medium mt-2"
+                                className="w-full px-5 py-4 rounded-xl border border-slate-200 focus:ring-2 focus:ring-emerald-600 focus:outline-none text-base font-medium mt-2"
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
                                         e.preventDefault();
@@ -1526,12 +1526,12 @@ function DiagnosticForm({ offeringName }: { offeringName: string }) {
                 )}
             </div>
 
-            <div className="flex items-center justify-between border-t border-[#0066FF] pt-6 mt-8">
+            <div className="flex items-center justify-between border-t border-slate-100 pt-6 mt-8">
                 <button
                     type="button"
                     onClick={handlePrev}
                     disabled={currentStep === 0}
-                    className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-[#0066FF] text-[#0066FF] font-bold hover:bg-[#0066FF]/10 transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                    className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-bold hover:bg-slate-50 transition-colors disabled:opacity-30 disabled:pointer-events-none"
                 >
                     Previous
                 </button>
@@ -1540,7 +1540,7 @@ function DiagnosticForm({ offeringName }: { offeringName: string }) {
                     type="button"
                     onClick={handleNext}
                     disabled={status === 'submitting'}
-                    className="flex items-center gap-2 bg-[#0066FF] hover:bg-[#0066FF] text-white px-6 py-2.5 rounded-xl font-bold transition-all disabled:opacity-50"
+                    className="flex items-center gap-2 bg-[#2878B5] hover:bg-[#1E6297] text-white px-6 py-2.5 rounded-xl font-bold transition-all disabled:opacity-50"
                 >
                     {currentStep === diagnosticSteps.length - 1 ? (status === 'submitting' ? 'Submitting...' : 'Submit Profile') : 'Next Question'}
                     <ArrowRight className="w-4 h-4" />
@@ -1633,35 +1633,35 @@ function ConsolidatedOfferingsView({ mode }: { mode: 'b2b' | 'b2c' | 'ai-growth'
     }
 
     return (
-        <div className="min-h-screen bg-white text-[#0066FF] pt-24 lg:pt-32 pb-24">
+        <div className="min-h-screen bg-slate-50 text-slate-900 pt-24 lg:pt-32 pb-24">
             {/* Breadcrumb Navigation */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-                <nav className="flex items-center gap-2 text-sm text-[#0066FF] font-medium">
-                    <Link to="/" className="hover:text-[#0066FF] transition-colors">Home</Link>
+                <nav className="flex items-center gap-2 text-sm text-slate-500 font-medium">
+                    <Link to="/" className="hover:text-[#2878B5] transition-colors">Home</Link>
                     <ChevronRight className="w-4 h-4" />
-                    <Link to="/offerings" className="hover:text-[#0066FF] transition-colors">Offerings</Link>
+                    <Link to="/offerings" className="hover:text-[#2878B5] transition-colors">Offerings</Link>
                     <ChevronRight className="w-4 h-4" />
-                    <span className="text-[#0066FF] font-bold">{title}</span>
+                    <span className="text-[#2878B5] font-bold">{title}</span>
                 </nav>
             </div>
 
             {/* Hero Header */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
                 <Reveal width="100%">
-                    <div className={`rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden ${isB2B ? 'bg-gradient-to-br from-slate-900 via-[#042d22] to-slate-900' : 'bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900'}`}>
-                        <div className="absolute top-0 right-0 w-96 h-96 bg-[#0066FF]/10 rounded-full blur-3xl pointer-events-none" />
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#0066FF] text-xs sm:text-sm font-bold uppercase tracking-wider mb-6">
-                            <Building2 className="w-4 h-4 text-[#0066FF]" />
+                    <div className={`rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden ${isB2B ? 'bg-gradient-to-br from-slate-900 via-[#164E78] to-slate-900' : 'bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900'}`}>
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-emerald-300 text-xs sm:text-sm font-bold uppercase tracking-wider mb-6">
+                            <Building2 className="w-4 h-4 text-emerald-400" />
                             {badgeText}
                         </div>
                         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 font-heading leading-tight text-white drop-shadow-md">
                             {title}
                         </h1>
-                        <p className="text-lg sm:text-xl text-[#0066FF] font-medium max-w-3xl mb-8 leading-relaxed">
+                        <p className="text-lg sm:text-xl text-slate-300 font-medium max-w-3xl mb-8 leading-relaxed">
                             {heroDesc}
                         </p>
                         <div className="flex flex-wrap items-center gap-4">
-                            <a href="#market-discovery" className="inline-flex items-center justify-center px-6 py-3.5 bg-[#0066FF] hover:bg-[#0066FF] text-white font-bold text-base rounded-xl transition-all shadow-lg shadow-blue-500/20">
+                            <a href="#market-discovery" className="inline-flex items-center justify-center px-6 py-3.5 bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold text-base rounded-xl transition-all shadow-lg shadow-blue-500/20">
                                 Explore All 7 Engines
                                 <ArrowRight className="ml-2 w-5 h-5" />
                             </a>
@@ -1681,33 +1681,33 @@ function ConsolidatedOfferingsView({ mode }: { mode: 'b2b' | 'b2c' | 'ai-growth'
                     const IconComp = mod.icon;
 
                     return (
-                        <section key={idx} id={mod.id} className="mb-24 scroll-mt-28 relative bg-white border border-[#0066FF] rounded-3xl p-8 sm:p-12 shadow-lg overflow-hidden">
+                        <section key={idx} id={mod.id} className="mb-24 scroll-mt-28 relative bg-white border border-slate-200 rounded-3xl p-8 sm:p-12 shadow-lg overflow-hidden">
                             {/* Additional Invisible Anchor Divs for Aliases */}
                             {mod.aliases?.map(alias => (
                                 <div key={alias} id={alias} className="absolute -top-28 left-0 pointer-events-none" />
                             ))}
 
                             {/* Engine Header */}
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-[#0066FF] pb-8 mb-8">
+                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-100 pb-8 mb-8">
                                 <div>
                                     <div className="flex items-center gap-3 mb-3">
-                                        <span className="text-xs font-extrabold uppercase tracking-wider text-[#0066FF] bg-white border border-[#0066FF]/60 px-3.5 py-1 rounded-full flex items-center gap-1.5">
-                                            <IconComp className="w-4 h-4 text-[#0066FF]" />
+                                        <span className="text-xs font-extrabold uppercase tracking-wider text-[#2878B5] bg-emerald-50 border border-emerald-200/60 px-3.5 py-1 rounded-full flex items-center gap-1.5">
+                                            <IconComp className="w-4 h-4 text-[#2878B5]" />
                                             Engine 0{idx + 1}
                                         </span>
-                                        <span className="text-xs font-bold text-[#0066FF] bg-white px-3 py-1 rounded-full border border-[#0066FF]/60">
+                                        <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/60">
                                             {data.impact}
                                         </span>
                                     </div>
-                                    <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0066FF] font-heading">
+                                    <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-heading">
                                         {data.title}
                                     </h2>
-                                    <p className="text-lg text-[#0066FF] italic mt-2 font-medium">
+                                    <p className="text-lg text-slate-600 italic mt-2 font-medium">
                                         "{data.question}"
                                     </p>
                                 </div>
                                 <div className="shrink-0">
-                                    <Link to="/book-consultation" className="inline-flex items-center justify-center px-5 py-3 bg-white hover:bg-[#0066FF] text-white font-bold text-sm rounded-xl transition-all shadow-md">
+                                    <Link to="/book-consultation" className="inline-flex items-center justify-center px-5 py-3 bg-slate-900 hover:bg-[#2878B5] text-white font-bold text-sm rounded-xl transition-all shadow-md">
                                         Activate Engine
                                         <ArrowRight className="ml-2 w-4 h-4" />
                                     </Link>
@@ -1716,56 +1716,56 @@ function ConsolidatedOfferingsView({ mode }: { mode: 'b2b' | 'b2c' | 'ai-growth'
 
                             {/* SPIN Matrix */}
                             <div className="mb-10">
-                                <h3 className="text-lg font-bold text-[#0066FF] mb-4 font-heading flex items-center gap-2">
-                                    <Target className="w-5 h-5 text-[#0066FF]" />
+                                <h3 className="text-lg font-bold text-slate-900 mb-4 font-heading flex items-center gap-2">
+                                    <Target className="w-5 h-5 text-[#2878B5]" />
                                     SPIN Matrix Analysis
                                 </h3>
                                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                                    <div className="bg-white p-5 rounded-2xl border border-[#0066FF]">
-                                        <div className="text-xs font-bold text-[#0066FF] uppercase tracking-widest mb-1">Situation</div>
-                                        <p className="text-[#0066FF] text-xs sm:text-sm font-medium leading-relaxed">{data?.spin?.situation || data?.spin?.situation || ''}</p>
+                                    <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                                        <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Situation</div>
+                                        <p className="text-slate-700 text-xs sm:text-sm font-medium leading-relaxed">{data?.spin?.situation || data?.spin?.situation || ''}</p>
                                     </div>
                                     <div className="bg-rose-50/50 p-5 rounded-2xl border border-rose-100">
                                         <div className="text-xs font-bold text-rose-500 uppercase tracking-widest mb-1">Problem</div>
-                                        <p className="text-[#0066FF] text-xs sm:text-sm font-medium leading-relaxed">{data?.spin?.problem || data?.spin?.problem || ''}</p>
+                                        <p className="text-slate-700 text-xs sm:text-sm font-medium leading-relaxed">{data?.spin?.problem || data?.spin?.problem || ''}</p>
                                     </div>
                                     <div className="bg-amber-50/50 p-5 rounded-2xl border border-amber-100">
                                         <div className="text-xs font-bold text-amber-500 uppercase tracking-widest mb-1">Implication</div>
-                                        <p className="text-[#0066FF] text-xs sm:text-sm font-medium leading-relaxed">{data?.spin?.implication || data?.spin?.implication || ''}</p>
+                                        <p className="text-slate-700 text-xs sm:text-sm font-medium leading-relaxed">{data?.spin?.implication || data?.spin?.implication || ''}</p>
                                     </div>
-                                    <div className="bg-white/50 p-5 rounded-2xl border border-[#0066FF]">
-                                        <div className="text-xs font-bold text-[#0066FF] uppercase tracking-widest mb-1">Need-Payoff</div>
-                                        <p className="text-[#0066FF] text-xs sm:text-sm font-medium leading-relaxed">{data?.spin?.needPayoff || data?.spin?.needPayoff || ''}</p>
+                                    <div className="bg-emerald-50/50 p-5 rounded-2xl border border-emerald-100">
+                                        <div className="text-xs font-bold text-emerald-600 uppercase tracking-widest mb-1">Need-Payoff</div>
+                                        <p className="text-slate-700 text-xs sm:text-sm font-medium leading-relaxed">{data?.spin?.needPayoff || data?.spin?.needPayoff || ''}</p>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Frameworks & Profit Pool Grid */}
                             <div className="grid lg:grid-cols-2 gap-6 mb-10">
-                                <div className="bg-white/70 p-6 rounded-2xl border border-[#0066FF]">
-                                    <h4 className="text-base font-bold text-[#0066FF] mb-4 font-heading flex items-center gap-2">
+                                <div className="bg-slate-50/70 p-6 rounded-2xl border border-slate-100">
+                                    <h4 className="text-base font-bold text-slate-900 mb-4 font-heading flex items-center gap-2">
                                         <Lightbulb className="w-5 h-5 text-amber-500" />
                                         Applied Frameworks
                                     </h4>
                                     <ul className="space-y-3">
                                         {data.frameworks.map((fw, fIdx) => (
-                                            <li key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-[#0066FF]">
-                                                <CheckCircle2 className="w-4 h-4 text-[#0066FF] mt-0.5 shrink-0" />
+                                            <li key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-700">
+                                                <CheckCircle2 className="w-4 h-4 text-[#2878B5] mt-0.5 shrink-0" />
                                                 <span>{fw}</span>
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
 
-                                <div className="bg-white/30 p-6 rounded-2xl border border-[#0066FF]/60">
-                                    <h4 className="text-base font-bold text-[#0066FF] mb-4 font-heading flex items-center gap-2">
-                                        <TrendingUp className="w-5 h-5 text-[#0066FF]" />
+                                <div className="bg-emerald-50/30 p-6 rounded-2xl border border-emerald-100/60">
+                                    <h4 className="text-base font-bold text-slate-900 mb-4 font-heading flex items-center gap-2">
+                                        <TrendingUp className="w-5 h-5 text-emerald-500" />
                                         Profit Pool Capture Points
                                     </h4>
                                     <ul className="space-y-3">
                                         {data.profitPool.map((pp, pIdx) => (
-                                            <li key={pIdx} className="flex items-start gap-2.5 text-xs sm:text-sm font-bold text-[#0066FF]">
-                                                <Rocket className="w-4 h-4 text-[#0066FF] mt-0.5 shrink-0" />
+                                            <li key={pIdx} className="flex items-start gap-2.5 text-xs sm:text-sm font-bold text-slate-800">
+                                                <Rocket className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
                                                 <span>{pp}</span>
                                             </li>
                                         ))}
@@ -1776,14 +1776,14 @@ function ConsolidatedOfferingsView({ mode }: { mode: 'b2b' | 'b2c' | 'ai-growth'
                             {/* Metrics Summary Table */}
                             {data.metrics && data.metrics.length > 0 && (
                                 <div className="mb-6">
-                                    <h4 className="text-sm font-bold uppercase tracking-wider text-[#0066FF] mb-3 flex items-center gap-2">
-                                        <BarChart3 className="w-4 h-4 text-[#0066FF]" />
+                                    <h4 className="text-sm font-bold uppercase tracking-wider text-slate-500 mb-3 flex items-center gap-2">
+                                        <BarChart3 className="w-4 h-4 text-[#2878B5]" />
                                         Performance & Revenue Metrics
                                     </h4>
-                                    <div className="overflow-x-auto rounded-2xl border border-[#0066FF]">
+                                    <div className="overflow-x-auto rounded-2xl border border-slate-200">
                                         <table className="w-full text-left text-xs font-medium border-collapse">
                                             <thead>
-                                                <tr className="bg-white border-b border-[#0066FF] text-[#0066FF] font-bold uppercase tracking-wider">
+                                                <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider">
                                                     <th className="py-3 px-4">Category</th>
                                                     <th className="py-3 px-4">Metric</th>
                                                     <th className="py-3 px-4 text-center">Baseline</th>
@@ -1791,14 +1791,14 @@ function ConsolidatedOfferingsView({ mode }: { mode: 'b2b' | 'b2c' | 'ai-growth'
                                                     <th className="py-3 px-4 text-right">Frequency</th>
                                                 </tr>
                                             </thead>
-                                            <tbody className="divide-y divide-slate-100 text-[#0066FF]">
+                                            <tbody className="divide-y divide-slate-100 text-slate-700">
                                                 {data.metrics.map((m, mIdx) => (
-                                                    <tr key={mIdx} className="hover:bg-[#0066FF]/10/60">
-                                                        <td className="py-3 px-4 font-bold text-[#0066FF]">{m.category}</td>
+                                                    <tr key={mIdx} className="hover:bg-slate-50/60">
+                                                        <td className="py-3 px-4 font-bold text-slate-900">{m.category}</td>
                                                         <td className="py-3 px-4 font-semibold text-blue-900">{m.metric}</td>
-                                                        <td className="py-3 px-4 text-center text-[#0066FF]">{m.baseline}</td>
-                                                        <td className="py-3 px-4 text-center font-bold text-[#0066FF] bg-white/40">{m.target}</td>
-                                                        <td className="py-3 px-4 text-right text-[#0066FF]">{m.frequency}</td>
+                                                        <td className="py-3 px-4 text-center text-slate-500">{m.baseline}</td>
+                                                        <td className="py-3 px-4 text-center font-bold text-emerald-600 bg-emerald-50/40">{m.target}</td>
+                                                        <td className="py-3 px-4 text-right text-slate-500">{m.frequency}</td>
                                                     </tr>
                                                 ))}
                                             </tbody>
@@ -1814,14 +1814,14 @@ function ConsolidatedOfferingsView({ mode }: { mode: 'b2b' | 'b2c' | 'ai-growth'
             {/* Bottom Assessment Callout */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
                 <Reveal width="100%">
-                    <div className="bg-gradient-to-r from-slate-900 via-[#042d22] to-slate-900 rounded-3xl p-8 sm:p-12 text-white text-center shadow-xl">
+                    <div className="bg-gradient-to-r from-slate-900 via-[#164E78] to-slate-900 rounded-3xl p-8 sm:p-12 text-white text-center shadow-xl">
                         <h2 className="text-2xl sm:text-4xl font-extrabold mb-4 font-heading">Ready to Deploy Your Consolidated {isB2B ? 'B2B' : 'B2C'} Engine?</h2>
-                        <p className="text-base sm:text-lg text-[#0066FF] mb-8 max-w-2xl mx-auto font-medium">
+                        <p className="text-base sm:text-lg text-emerald-100 mb-8 max-w-2xl mx-auto font-medium">
                             Schedule a 45-minute revenue architecture session with our AI strategy team.
                         </p>
                         <Link 
                             to="/book-consultation"
-                            className="inline-flex items-center gap-2 bg-[#0066FF] text-white hover:bg-[#0066FF] px-8 py-4 rounded-xl text-base font-bold transition-all shadow-lg hover:-translate-y-0.5"
+                            className="inline-flex items-center gap-2 bg-[#2878B5] text-white hover:bg-emerald-600 px-8 py-4 rounded-xl text-base font-bold transition-all shadow-lg hover:-translate-y-0.5"
                         >
                             Schedule Strategic Audit
                             <ArrowRight className="w-5 h-5" />
@@ -1850,15 +1850,15 @@ export default function DiscoveryPage() {
 
     if (isParentOverview) {
         return (
-            <div className="min-h-screen bg-white text-[#0066FF] pt-24 lg:pt-32 pb-24">
+            <div className="min-h-screen bg-slate-50 text-slate-900 pt-24 lg:pt-32 pb-24">
                 {/* Breadcrumb Navigation */}
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-                    <nav className="flex items-center gap-2 text-sm text-[#0066FF] font-medium">
-                        <Link to="/" className="hover:text-[#0066FF] transition-colors">Home</Link>
+                    <nav className="flex items-center gap-2 text-sm text-slate-500 font-medium">
+                        <Link to="/" className="hover:text-[#2878B5] transition-colors">Home</Link>
                         <ChevronRight className="w-4 h-4" />
-                        <Link to="/offerings" className="hover:text-[#0066FF] transition-colors">Offerings</Link>
+                        <Link to="/offerings" className="hover:text-[#2878B5] transition-colors">Offerings</Link>
                         <ChevronRight className="w-4 h-4" />
-                        <span className="text-[#0066FF] font-bold" title="Identify and capture hidden margin drivers and high-margin revenue streams.">Profit Pool Discovery</span>
+                        <span className="text-[#2878B5] font-bold" title="Identify and capture hidden margin drivers and high-margin revenue streams.">Profit Pool Discovery</span>
                     </nav>
                 </div>
 
@@ -1866,25 +1866,25 @@ export default function DiscoveryPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                     <Reveal width="100%">
                         <div className="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-96 h-96 bg-[#0066FF]/10 rounded-full blur-3xl pointer-events-none" />
-                            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0066FF]/20 border border-[#0066FF]/30 text-[#0066FF] text-xs sm:text-sm font-bold uppercase tracking-wider mb-6">
-                                <Layers className="w-4 h-4 text-[#0066FF]" />
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
+                            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-600/20 border border-emerald-400/30 text-emerald-300 text-xs sm:text-sm font-bold uppercase tracking-wider mb-6">
+                                <Layers className="w-4 h-4 text-emerald-400" />
                                 Parent Offering
                             </div>
                             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 font-heading leading-tight text-white drop-shadow-md">
                                 <span title="Identify and capture hidden margin drivers and high-margin revenue streams.">Profit Pool Discovery</span>
                             </h1>
-                            <p className="text-xl sm:text-2xl text-[#0066FF] font-medium italic mb-8 max-w-3xl">
+                            <p className="text-xl sm:text-2xl text-emerald-200 font-medium italic mb-8 max-w-3xl">
                                 "Unlocking hidden value, identifying unmapped demand, and capturing high-margin revenue streams."
                             </p>
                             <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20">
-                                <span className="text-sm text-[#0066FF] font-medium">Total Strategic Modules:</span>
+                                <span className="text-sm text-slate-300 font-medium">Total Strategic Modules:</span>
                                 <span className="text-lg font-bold text-amber-300">
                                     {activePoolTab === 'overview' ? '9 Specialized Engines' : '7 Specialized Engines'}
                                 </span>
                             </div>
                             <div className="flex flex-wrap items-center gap-4 mt-8">
-                                <Link to="/book-consultation" className="inline-flex items-center justify-center px-6 py-3.5 bg-[#0066FF] hover:bg-[#0066FF] text-white font-bold text-base rounded-xl transition-all shadow-lg shadow-blue-500/20 hover:shadow-[#0066FF]/20">
+                                <Link to="/book-consultation" className="inline-flex items-center justify-center px-6 py-3.5 bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold text-base rounded-xl transition-all shadow-lg shadow-blue-500/20 hover:shadow-[#2878B5]/35">
                                     Discover Your Next Profit Pool
                                     <ArrowRight className="ml-2 w-5 h-5" />
                                 </Link>
@@ -1899,13 +1899,13 @@ export default function DiscoveryPage() {
                 {/* Premium B2B/B2C Tabs & Diagram */}
                 <div id="modules" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center scroll-mt-24">
                     <div className="flex justify-center mb-12">
-                        <div className="flex gap-2 p-1.5 bg-white/90 backdrop-blur-md rounded-2xl border border-[#0066FF]/50 shadow-inner">
+                        <div className="flex gap-2 p-1.5 bg-slate-100/90 backdrop-blur-md rounded-2xl border border-slate-200/50 shadow-inner">
                             <button
                                 onClick={() => setActivePoolTab('overview')}
                                 className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
                                     activePoolTab === 'overview'
-                                        ? 'bg-[#0066FF] text-white shadow-md'
-                                        : 'text-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10/50'
+                                        ? 'bg-[#2878B5] text-white shadow-md'
+                                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
                                 }`}
                             >
                                 Overview
@@ -1914,8 +1914,8 @@ export default function DiscoveryPage() {
                                 onClick={() => setActivePoolTab('b2b')}
                                 className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
                                     activePoolTab === 'b2b'
-                                        ? 'bg-[#0066FF] text-white shadow-md'
-                                        : 'text-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10/50'
+                                        ? 'bg-[#2878B5] text-white shadow-md'
+                                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
                                 }`}
                             >
                                 B2B Profit Pools
@@ -1924,8 +1924,8 @@ export default function DiscoveryPage() {
                                 onClick={() => setActivePoolTab('b2c')}
                                 className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
                                     activePoolTab === 'b2c'
-                                        ? 'bg-[#0066FF] text-white shadow-md'
-                                        : 'text-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10/50'
+                                        ? 'bg-[#2878B5] text-white shadow-md'
+                                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
                                 }`}
                             >
                                 B2C Profit Pools
@@ -1948,10 +1948,10 @@ export default function DiscoveryPage() {
                                 const overviewItems = [
                                     { name: "Market Discovery", slug: "market-discovery", question: "Where is the revenue we haven't mapped?", impact: "$300M unserved market identified", icon: Search },
                                     { name: "Demand Discovery", slug: "demand-discovery", question: "What are customers struggling to articulate they need?", impact: "Pipeline: +300%", icon: Target },
-                                    { name: "Value Discovery", slug: "value-discovery", question: "How do we prove ROI before the PO is signed?", impact: "Deal velocity: +50% · POC conversion: 85%", icon: DollarSign },
+                                    { name: "Value Discovery", slug: "value-discovery", question: "How do we prove ROI before the PO is signed?", impact: "Deal velocity: +50% Â· POC conversion: 85%", icon: DollarSign },
                                     { name: "Channel Discovery", slug: "channel-discovery", question: "How do we distribute without platform dependency?", impact: "Margin: +30 points", icon: Network },
                                     { name: "Competitive Discovery", slug: "competitive-discovery", question: "How do we win before the RFP is issued?", impact: "Win rate: +25%", icon: ShieldCheck },
-                                    { name: "Customer Discovery", slug: "customer-discovery", question: "Who is actually ready to buy AI — and who will waste our time?", impact: "CAC: -65%", icon: Users },
+                                    { name: "Customer Discovery", slug: "customer-discovery", question: "Who is actually ready to buy AI â€” and who will waste our time?", impact: "CAC: -65%", icon: Users },
                                     { name: "Product-Market Fit Discovery", slug: "product-market-fit-discovery", question: "How do we stop building features no one uses?", impact: "R&D waste: -$2M/year", icon: Sparkles },
                                     { name: "B2B Profit Pool Discovery", slug: "b2b", question: "Where are the hidden margin drivers in our enterprise sales cycles?", impact: "$450M enterprise revenue unlocked", icon: Building2 },
                                     { name: "B2C Profit Pool Discovery", slug: "b2c", question: "How do we identify and capture micro-segment margins in high-velocity consumer paths?", impact: "$180M consumer margin optimized", icon: ShoppingBag }
@@ -1986,27 +1986,27 @@ export default function DiscoveryPage() {
                                 return items.map((disc, idx) => {
                                     const IconComp = disc.icon;
                                     return (
-                                        <div key={idx} className="bg-white rounded-3xl p-8 border border-[#0066FF] shadow-sm hover:shadow-xl hover:border-[#0066FF] transition-all duration-300 flex flex-col justify-between group">
+                                        <div key={idx} className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-all duration-300 flex flex-col justify-between group">
                                             <div>
                                                 <div className="flex items-center justify-between mb-4">
-                                                    <span className="text-xs font-bold uppercase tracking-wider text-[#0066FF] bg-white px-3 py-1 rounded-full flex items-center gap-1.5">
+                                                    <span className="text-xs font-bold uppercase tracking-wider text-[#2878B5] bg-emerald-50 px-3 py-1 rounded-full flex items-center gap-1.5">
                                                         <IconComp className="w-3.5 h-3.5" />
                                                         Module 0{idx + 1}
                                                     </span>
-                                                    <span className="text-xs font-semibold text-[#0066FF] bg-white px-2.5 py-1 rounded-full">
+                                                    <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
                                                         {disc.impact}
                                                     </span>
                                                 </div>
-                                                <h3 className="text-2xl font-bold text-[#0066FF] mb-3 group-hover:text-[#0066FF] transition-colors">
+                                                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-[#2878B5] transition-colors">
                                                     {disc.name}
                                                 </h3>
-                                                <p className="text-[#0066FF] text-sm font-medium italic mb-6">
+                                                <p className="text-slate-600 text-sm font-medium italic mb-6">
                                                     "{disc.question}"
                                                 </p>
                                             </div>
                                             <Link 
                                                 to={`/offerings/profit-pool-discovery/${disc.slug}`}
-                                                className="inline-flex items-center gap-2 text-sm font-bold text-[#0066FF] hover:text-[#0066FF] transition-colors pt-4 border-t border-[#0066FF]"
+                                                className="inline-flex items-center gap-2 text-sm font-bold text-[#2878B5] hover:text-[#1E6297] transition-colors pt-4 border-t border-slate-100"
                                             >
                                                 Explore Discovery Layer <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                             </Link>
@@ -2018,7 +2018,7 @@ export default function DiscoveryPage() {
                     </Reveal>
 
                     <div className="text-center mt-12">
-                        <Link to="/book-consultation" className="inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-white text-white font-bold rounded-xl transition-colors shadow-lg">
+                        <Link to="/book-consultation" className="inline-flex items-center justify-center px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-colors shadow-lg">
                             Talk to an AI Consultant
                             <ArrowRight className="ml-2 w-5 h-5" />
                         </Link>
@@ -2028,29 +2028,29 @@ export default function DiscoveryPage() {
                 {/* Trust Metrics Section */}
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                     <Reveal width="100%">
-                        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#0066FF]/80 shadow-xl text-center">
-                            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0066FF] mb-8 tracking-tight">
+                        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-xl text-center">
+                            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-8 tracking-tight">
                                 Trusted by Leading Enterprises
                             </h2>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
                                 <div>
-                                    <div className="text-4xl sm:text-5xl font-black text-[#0066FF] mb-2">150+</div>
-                                    <div className="text-xs font-bold text-[#0066FF] uppercase tracking-wider">Projects Delivered</div>
+                                    <div className="text-4xl sm:text-5xl font-black text-[#2878B5] mb-2">150+</div>
+                                    <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Projects Delivered</div>
                                 </div>
                                 <div>
-                                    <div className="text-4xl sm:text-5xl font-black text-[#0066FF] mb-2">25+</div>
-                                    <div className="text-xs font-bold text-[#0066FF] uppercase tracking-wider">Industries Served</div>
+                                    <div className="text-4xl sm:text-5xl font-black text-[#2878B5] mb-2">25+</div>
+                                    <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Industries Served</div>
                                 </div>
                                 <div>
-                                    <div className="text-4xl sm:text-5xl font-black text-[#0066FF] mb-2">92%</div>
-                                    <div className="text-xs font-bold text-[#0066FF] uppercase tracking-wider">Client Retention</div>
+                                    <div className="text-4xl sm:text-5xl font-black text-[#2878B5] mb-2">92%</div>
+                                    <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Client Retention</div>
                                 </div>
                                 <div>
-                                    <div className="text-4xl sm:text-5xl font-black text-[#0066FF] mb-2">$10M+</div>
-                                    <div className="text-xs font-bold text-[#0066FF] uppercase tracking-wider">Revenue Generated</div>
+                                    <div className="text-4xl sm:text-5xl font-black text-[#2878B5] mb-2">$10M+</div>
+                                    <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Revenue Generated</div>
                                 </div>
                             </div>
-                            <Link to="/#case-studies" className="inline-flex items-center justify-center px-6 py-3 border border-[#0066FF] hover:bg-[#0066FF]/10 text-[#0066FF] font-bold rounded-xl transition-colors">
+                            <Link to="/#case-studies" className="inline-flex items-center justify-center px-6 py-3 border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold rounded-xl transition-colors">
                                 See Client Success Stories
                                 <ArrowRight className="ml-2 w-4 h-4" />
                             </Link>
@@ -2062,7 +2062,7 @@ export default function DiscoveryPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                     <Reveal width="100%">
                         <div className="bg-gradient-to-br from-[#02241e] via-slate-900 to-[#02241e] rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-8">
-                            <div className="absolute top-0 right-0 w-96 h-96 bg-white0/10 rounded-full blur-3xl pointer-events-none" />
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
                             <div className="max-w-2xl">
                                 <span className="inline-block px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4">
                                     Limited Opportunity
@@ -2070,14 +2070,14 @@ export default function DiscoveryPage() {
                                 <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight mb-4 text-white">
                                     Get Your Free AI Opportunity Assessment
                                 </h2>
-                                <p className="text-lg text-[#0066FF] mb-2">
+                                <p className="text-lg text-slate-300 mb-2">
                                     Discover Hidden Revenue Opportunities in 30 Minutes.
                                 </p>
                                 <p className="text-sm text-amber-400 font-semibold">
                                     Note: Limited to 10 Enterprise Consultations Per Month.
                                 </p>
                             </div>
-                            <Link to="/book-consultation" className="shrink-0 inline-flex items-center justify-center px-6 py-4 bg-[#0066FF] hover:bg-[#0066FF] text-white font-bold text-base rounded-xl transition-all shadow-lg shadow-blue-500/20">
+                            <Link to="/book-consultation" className="shrink-0 inline-flex items-center justify-center px-6 py-4 bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold text-base rounded-xl transition-all shadow-lg shadow-blue-500/20">
                                 Talk to Our AI Experts Today
                                 <ArrowRight className="ml-2 w-5 h-5" />
                             </Link>
@@ -2097,22 +2097,22 @@ export default function DiscoveryPage() {
     if (!data) {
         return (
             <div className="min-h-[60vh] flex flex-col items-center justify-center pt-32">
-                <h2 className="text-2xl font-bold text-[#0066FF] mb-4">Discovery Layer Not Found</h2>
-                <Link to="/offerings" className="text-[#0066FF] font-semibold hover:underline">Back to Offerings</Link>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4">Discovery Layer Not Found</h2>
+                <Link to="/offerings" className="text-[#2878B5] font-semibold hover:underline">Back to Offerings</Link>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-white text-[#0066FF] pt-24 lg:pt-32 pb-24">
+        <div className="min-h-screen bg-slate-50 text-slate-900 pt-24 lg:pt-32 pb-24">
             {/* Breadcrumb Navigation */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-                <nav className="flex items-center gap-2 text-sm text-[#0066FF] font-medium">
-                    <Link to="/" className="hover:text-[#0066FF] transition-colors">Home</Link>
+                <nav className="flex items-center gap-2 text-sm text-slate-500 font-medium">
+                    <Link to="/" className="hover:text-[#2878B5] transition-colors">Home</Link>
                     <ChevronRight className="w-4 h-4" />
-                    <Link to="/offerings" className="hover:text-[#0066FF] transition-colors">Offerings</Link>
+                    <Link to="/offerings" className="hover:text-[#2878B5] transition-colors">Offerings</Link>
                     <ChevronRight className="w-4 h-4" />
-                    <span className="text-[#0066FF] font-bold">{data.title}</span>
+                    <span className="text-[#2878B5] font-bold">{data.title}</span>
                 </nav>
             </div>
 
@@ -2120,19 +2120,19 @@ export default function DiscoveryPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                 <Reveal width="100%">
                     <div className="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-96 h-96 bg-[#0066FF]/10 rounded-full blur-3xl pointer-events-none" />
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0066FF]/20 border border-[#0066FF]/30 text-[#0066FF] text-xs sm:text-sm font-bold uppercase tracking-wider mb-6">
-                            <Layers className="w-4 h-4 text-[#0066FF]" />
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-600/20 border border-emerald-400/30 text-emerald-300 text-xs sm:text-sm font-bold uppercase tracking-wider mb-6">
+                            <Layers className="w-4 h-4 text-emerald-400" />
                             Discovery Layer
                         </div>
                         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 font-heading leading-tight text-white drop-shadow-md">
                             {data.title}
                         </h1>
-                        <p className="text-xl sm:text-2xl text-[#0066FF] font-medium italic mb-8 max-w-3xl">
+                        <p className="text-xl sm:text-2xl text-emerald-200 font-medium italic mb-8 max-w-3xl">
                             "{data.question}"
                         </p>
                         <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20">
-                            <span className="text-sm text-[#0066FF] font-medium">Quantified Business Impact:</span>
+                            <span className="text-sm text-slate-300 font-medium">Quantified Business Impact:</span>
                             <span className="text-lg font-bold text-amber-300">{data.impact}</span>
                         </div>
                     </div>
@@ -2142,41 +2142,41 @@ export default function DiscoveryPage() {
             {/* SPIN Element Matrix */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                 <Reveal width="100%">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0066FF] mb-8 font-heading flex items-center gap-3">
-                        <Target className="w-7 h-7 text-[#0066FF]" />
+                    <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-8 font-heading flex items-center gap-3">
+                        <Target className="w-7 h-7 text-[#2878B5]" />
                         SPIN Discovery Matrix
                     </h2>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div className="bg-white p-6 rounded-2xl border border-[#0066FF] shadow-sm hover:shadow-md transition-shadow">
-                            <div className="text-xs font-bold text-[#0066FF] uppercase tracking-widest mb-2">SPIN Element</div>
-                            <h3 className="text-xl font-bold text-[#0066FF] mb-3 flex items-center gap-2">
-                                <span className="w-2.5 h-2.5 rounded-full bg-[#0066FF]"></span> Situation
+                        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                            <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">SPIN Element</div>
+                            <h3 className="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+                                <span className="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> Situation
                             </h3>
-                            <p className="text-[#0066FF] text-sm font-medium leading-relaxed">{data.spin.situation || data.spin.situation}</p>
+                            <p className="text-slate-600 text-sm font-medium leading-relaxed">{data.spin.situation || data.spin.situation}</p>
                         </div>
 
-                        <div className="bg-white p-6 rounded-2xl border border-[#0066FF] shadow-sm hover:shadow-md transition-shadow">
-                            <div className="text-xs font-bold text-[#0066FF] uppercase tracking-widest mb-2">SPIN Element</div>
+                        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                            <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">SPIN Element</div>
                             <h3 className="text-xl font-bold text-rose-600 mb-3 flex items-center gap-2">
                                 <span className="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Problem
                             </h3>
-                            <p className="text-[#0066FF] text-sm font-medium leading-relaxed">{data.spin.problem || data.spin.problem}</p>
+                            <p className="text-slate-600 text-sm font-medium leading-relaxed">{data.spin.problem || data.spin.problem}</p>
                         </div>
 
-                        <div className="bg-white p-6 rounded-2xl border border-[#0066FF] shadow-sm hover:shadow-md transition-shadow">
-                            <div className="text-xs font-bold text-[#0066FF] uppercase tracking-widest mb-2">SPIN Element</div>
+                        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                            <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">SPIN Element</div>
                             <h3 className="text-xl font-bold text-amber-600 mb-3 flex items-center gap-2">
                                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Implication
                             </h3>
-                            <p className="text-[#0066FF] text-sm font-medium leading-relaxed">{data.spin.implication || data.spin.implication}</p>
+                            <p className="text-slate-600 text-sm font-medium leading-relaxed">{data.spin.implication || data.spin.implication}</p>
                         </div>
 
-                        <div className="bg-white p-6 rounded-2xl border border-[#0066FF] shadow-sm hover:shadow-md transition-shadow">
-                            <div className="text-xs font-bold text-[#0066FF] uppercase tracking-widest mb-2">SPIN Element</div>
-                            <h3 className="text-xl font-bold text-[#0066FF] mb-3 flex items-center gap-2">
-                                <span className="w-2.5 h-2.5 rounded-full bg-white0"></span> Need-Payoff
+                        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                            <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">SPIN Element</div>
+                            <h3 className="text-xl font-bold text-emerald-600 mb-3 flex items-center gap-2">
+                                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Need-Payoff
                             </h3>
-                            <p className="text-[#0066FF] text-sm font-medium leading-relaxed">{data.spin.needPayoff || data.spin.needPayoff}</p>
+                            <p className="text-slate-600 text-sm font-medium leading-relaxed">{data.spin.needPayoff || data.spin.needPayoff}</p>
                         </div>
                     </div>
                 </Reveal>
@@ -2186,16 +2186,16 @@ export default function DiscoveryPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                 <div className="grid lg:grid-cols-2 gap-8">
                     <Reveal width="100%">
-                        <div className="bg-white p-8 rounded-3xl border border-[#0066FF] shadow-sm h-full">
-                            <h2 className="text-2xl font-bold text-[#0066FF] mb-6 font-heading flex items-center gap-3">
+                        <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm h-full">
+                            <h2 className="text-2xl font-bold text-slate-900 mb-6 font-heading flex items-center gap-3">
                                 <Lightbulb className="w-6 h-6 text-amber-500" />
                                 Discovery Frameworks Applied
                             </h2>
                             <ul className="space-y-4">
                                 {data.frameworks.map((fw, idx) => (
-                                    <li key={idx} className="flex items-start gap-3 p-4 bg-white rounded-2xl border border-[#0066FF]">
-                                        <CheckCircle2 className="w-5 h-5 text-[#0066FF] mt-0.5 shrink-0" />
-                                        <span className="text-[#0066FF] font-semibold text-sm leading-snug">{fw}</span>
+                                    <li key={idx} className="flex items-start gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                                        <CheckCircle2 className="w-5 h-5 text-[#2878B5] mt-0.5 shrink-0" />
+                                        <span className="text-slate-700 font-semibold text-sm leading-snug">{fw}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -2203,16 +2203,16 @@ export default function DiscoveryPage() {
                     </Reveal>
 
                     <Reveal width="100%">
-                        <div className="bg-white p-8 rounded-3xl border border-[#0066FF] shadow-sm h-full">
-                            <h2 className="text-2xl font-bold text-[#0066FF] mb-6 font-heading flex items-center gap-3">
-                                <TrendingUp className="w-6 h-6 text-[#0066FF]" />
+                        <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm h-full">
+                            <h2 className="text-2xl font-bold text-slate-900 mb-6 font-heading flex items-center gap-3">
+                                <TrendingUp className="w-6 h-6 text-emerald-500" />
                                 Profit Pool Capture
                             </h2>
                             <ul className="space-y-4">
                                 {data.profitPool.map((pp, idx) => (
-                                    <li key={idx} className="flex items-start gap-3 p-4 bg-white/50 rounded-2xl border border-[#0066FF]">
-                                        <Rocket className="w-5 h-5 text-[#0066FF] mt-0.5 shrink-0" />
-                                        <span className="text-[#0066FF] font-bold text-sm leading-snug">{pp}</span>
+                                    <li key={idx} className="flex items-start gap-3 p-4 bg-emerald-50/50 rounded-2xl border border-emerald-100">
+                                        <Rocket className="w-5 h-5 text-emerald-600 mt-0.5 shrink-0" />
+                                        <span className="text-slate-800 font-bold text-sm leading-snug">{pp}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -2224,44 +2224,44 @@ export default function DiscoveryPage() {
             {/* Sales Acceleration Intelligence System */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                 <Reveal width="100%">
-                    <div className="bg-white rounded-3xl p-8 sm:p-10 text-white shadow-xl">
+                    <div className="bg-slate-900 rounded-3xl p-8 sm:p-10 text-white shadow-xl">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                             <div>
-                                <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#0066FF] mb-2">
+                                <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2">
                                     Autonomous Revenue Architecture
                                 </div>
                                 <h2 className="text-2xl sm:text-3xl font-extrabold font-heading flex items-center gap-3">
-                                    <HelpCircle className="w-7 h-7 text-[#0066FF]" />
+                                    <HelpCircle className="w-7 h-7 text-emerald-400" />
                                     Sales Acceleration Intelligence Matrix
                                 </h2>
                             </div>
-                            <span className="px-4 py-2 bg-white0/20 border border-[#0066FF]/30 rounded-xl text-[#0066FF] font-bold text-xs">
+                            <span className="px-4 py-2 bg-emerald-500/20 border border-emerald-400/30 rounded-xl text-emerald-300 font-bold text-xs">
                                 Executive Strategic Framework
                             </span>
                         </div>
 
                         <div className="grid md:grid-cols-3 gap-6">
                             {data.treeOfThoughts.map((tot, idx) => (
-                                <div key={idx} className="bg-white/80 border border-[#0066FF]/80 p-6 rounded-2xl flex flex-col justify-between">
+                                <div key={idx} className="bg-slate-800/80 border border-slate-700/80 p-6 rounded-2xl flex flex-col justify-between">
                                     <div>
                                         <div className="flex items-center justify-between mb-4">
-                                            <span className="text-xs font-extrabold uppercase tracking-wider text-[#0066FF] bg-[#02241e] px-3 py-1 rounded-full border border-indigo-800">
+                                            <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-400 bg-[#02241e] px-3 py-1 rounded-full border border-indigo-800">
                                                 Stage 0{idx + 1}
                                             </span>
-                                            <span className="text-xs text-[#0066FF] font-medium">{tot.phase}</span>
+                                            <span className="text-xs text-slate-400 font-medium">{tot.phase}</span>
                                         </div>
                                         <div className="mb-4">
-                                            <h4 className="text-xs font-bold text-[#0066FF] uppercase tracking-wider mb-1">Thought Hypothesis</h4>
-                                            <p className="text-sm text-[#0066FF] font-medium leading-relaxed">{tot.thought}</p>
+                                            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Thought Hypothesis</h4>
+                                            <p className="text-sm text-slate-200 font-medium leading-relaxed">{tot.thought}</p>
                                         </div>
                                         <div className="mb-4">
-                                            <h4 className="text-xs font-bold text-[#0066FF] uppercase tracking-wider mb-1">Logical Deduction</h4>
+                                            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Logical Deduction</h4>
                                             <p className="text-sm text-indigo-200 font-medium leading-relaxed">{tot.deduction}</p>
                                         </div>
                                     </div>
-                                    <div className="pt-4 border-t border-[#0066FF]/60 mt-2">
-                                        <h4 className="text-xs font-bold text-[#0066FF] uppercase tracking-wider mb-1">Actionable Takeaway</h4>
-                                        <p className="text-xs text-[#0066FF] font-semibold leading-normal">{tot.actionableTakeaway}</p>
+                                    <div className="pt-4 border-t border-slate-700/60 mt-2">
+                                        <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1">Actionable Takeaway</h4>
+                                        <p className="text-xs text-emerald-300 font-semibold leading-normal">{tot.actionableTakeaway}</p>
                                     </div>
                                 </div>
                             ))}
@@ -2273,15 +2273,15 @@ export default function DiscoveryPage() {
             {/* Standard Marketing, Sales & KPI Metrics Table */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                 <Reveal width="100%">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0066FF] mb-8 font-heading flex items-center gap-3">
-                        <BarChart3 className="w-7 h-7 text-[#0066FF]" />
+                    <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-8 font-heading flex items-center gap-3">
+                        <BarChart3 className="w-7 h-7 text-[#2878B5]" />
                         Standard Marketing, Sales & KPI Metrics
                     </h2>
-                    <div className="bg-white rounded-3xl border border-[#0066FF] shadow-sm overflow-hidden">
+                    <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
                         <div className="overflow-x-auto">
                             <table className="w-full text-left border-collapse">
                                 <thead>
-                                    <tr className="bg-white border-b border-[#0066FF] text-xs font-bold uppercase text-[#0066FF] tracking-wider">
+                                    <tr className="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase text-slate-500 tracking-wider">
                                         <th className="py-4 px-6">Metric Category</th>
                                         <th className="py-4 px-6">Specific Metric</th>
                                         <th className="py-4 px-6 text-center">Baseline</th>
@@ -2289,14 +2289,14 @@ export default function DiscoveryPage() {
                                         <th className="py-4 px-6 text-right">Measurement Frequency</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-slate-100 text-sm font-medium text-[#0066FF]">
+                                <tbody className="divide-y divide-slate-100 text-sm font-medium text-slate-700">
                                     {data.metrics.map((m, idx) => (
-                                        <tr key={idx} className="hover:bg-[#0066FF]/10/80 transition-colors">
-                                            <td className="py-4 px-6 font-bold text-[#0066FF]">{m.category}</td>
+                                        <tr key={idx} className="hover:bg-slate-50/80 transition-colors">
+                                            <td className="py-4 px-6 font-bold text-slate-900">{m.category}</td>
                                             <td className="py-4 px-6 text-blue-900 font-semibold">{m.metric}</td>
-                                            <td className="py-4 px-6 text-center text-[#0066FF]">{m.baseline}</td>
-                                            <td className="py-4 px-6 text-center font-bold text-[#0066FF] bg-white/40">{m.target}</td>
-                                            <td className="py-4 px-6 text-right text-[#0066FF]">{m.frequency}</td>
+                                            <td className="py-4 px-6 text-center text-slate-500">{m.baseline}</td>
+                                            <td className="py-4 px-6 text-center font-bold text-emerald-600 bg-emerald-50/40">{m.target}</td>
+                                            <td className="py-4 px-6 text-right text-slate-500">{m.frequency}</td>
                                         </tr>
                                     ))}
                                 </tbody>

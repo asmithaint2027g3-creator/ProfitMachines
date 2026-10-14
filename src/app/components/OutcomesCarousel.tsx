@@ -107,7 +107,7 @@ export default function OutcomesCarousel() {
 
     return (
         <section 
-            className="relative w-full h-[580px] md:h-[660px] lg:h-[720px] bg-white overflow-hidden group border-b border-[#0066FF]"
+            className="relative w-full h-[580px] md:h-[660px] lg:h-[720px] bg-slate-950 overflow-hidden group border-b border-slate-200"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -145,39 +145,39 @@ export default function OutcomesCarousel() {
                                 transition={{ delay: 0.15, duration: 0.6 }}
                                 className="max-w-5xl mx-auto"
                             >
-                                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white0/15 border border-[#0066FF]/30 text-[#0066FF] rounded-full text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
-                                    <Sparkles className="w-3.5 h-3.5 text-[#0066FF]" />
+                                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 rounded-full text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
+                                    <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
                                     <span>{currentSlide.badge}</span>
-                                    <span className="w-1 h-1 rounded-full bg-[#0066FF]"></span>
-                                    <span className="text-[#0066FF] font-normal">{currentSlide.tag}</span>
+                                    <span className="w-1 h-1 rounded-full bg-emerald-400"></span>
+                                    <span className="text-slate-300 font-normal">{currentSlide.tag}</span>
                                 </div>
 
                                 <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight leading-[1.15] drop-shadow-md">
                                     {currentSlide.title}
                                 </h1>
 
-                                <p className="text-base sm:text-xl text-[#0066FF] font-medium leading-relaxed max-w-3xl mx-auto mb-8 drop-shadow">
+                                <p className="text-base sm:text-xl text-slate-200 font-medium leading-relaxed max-w-3xl mx-auto mb-8 drop-shadow">
                                     {currentSlide.subtitle}
                                 </p>
 
                                 {/* Live Metrics Strip */}
                                 <div className="hidden sm:flex items-center justify-center gap-6 mb-8">
                                     {currentSlide.metrics.map((m, idx) => (
-                                        <div key={idx} className="bg-white/85 border border-[#0066FF]/80 backdrop-blur-md px-5 py-2.5 rounded-2xl">
-                                            <div className="text-xl font-extrabold text-[#0066FF] font-mono">{m.value}</div>
-                                            <div className="text-xs font-medium text-[#0066FF] uppercase tracking-wider">{m.label}</div>
+                                        <div key={idx} className="bg-slate-900/85 border border-slate-800/80 backdrop-blur-md px-5 py-2.5 rounded-2xl">
+                                            <div className="text-xl font-extrabold text-emerald-400 font-mono">{m.value}</div>
+                                            <div className="text-xs font-medium text-slate-400 uppercase tracking-wider">{m.label}</div>
                                         </div>
                                     ))}
                                 </div>
 
                                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                                    <Button asChild className="bg-[#0066FF] hover:bg-[#0066FF] text-white font-bold px-8 py-6 text-base rounded-full shadow-lg shadow-[#0066FF]/20 transition-all">
+                                    <Button asChild className="bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold px-8 py-6 text-base rounded-full shadow-lg shadow-[#2878B5]/30 transition-all cursor-pointer">
                                         <Link to={currentSlide.primaryCta.link} className="flex items-center gap-2">
                                             <span>{currentSlide.primaryCta.text}</span>
                                             <ArrowRight className="w-4 h-4" />
                                         </Link>
                                     </Button>
-                                    <Button asChild variant="outline" className="border-white/30 text-white hover:bg-white/15 px-8 py-6 text-base rounded-full backdrop-blur-sm font-semibold transition-all">
+                                    <Button asChild className="border-2 border-[#2878B5] bg-[#0A253D] hover:bg-[#1E6297] text-white font-bold px-8 py-6 text-base rounded-full shadow-md transition-all cursor-pointer">
                                         <Link to={currentSlide.secondaryCta.link}>
                                             {currentSlide.secondaryCta.text}
                                         </Link>
@@ -193,14 +193,14 @@ export default function OutcomesCarousel() {
             <button
                 onClick={handlePrev}
                 aria-label="Previous slide"
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/60 hover:bg-white/90 text-white border border-white/20 backdrop-blur-md flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110"
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-slate-900/60 hover:bg-slate-900/90 text-white border border-white/20 backdrop-blur-md flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110"
             >
                 <ChevronLeft className="w-6 h-6" />
             </button>
             <button
                 onClick={handleNext}
                 aria-label="Next slide"
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/60 hover:bg-white/90 text-white border border-white/20 backdrop-blur-md flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110"
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-slate-900/60 hover:bg-slate-900/90 text-white border border-white/20 backdrop-blur-md flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110"
             >
                 <ChevronRight className="w-6 h-6" />
             </button>
@@ -216,7 +216,7 @@ export default function OutcomesCarousel() {
                         }}
                         aria-label={`Go to slide ${idx + 1}`}
                         className={`h-2.5 rounded-full transition-all duration-300 ${
-                            idx === currentIndex ? 'w-8 bg-white0' : 'w-2.5 bg-white/40 hover:bg-white/70'
+                            idx === currentIndex ? 'w-8 bg-emerald-500' : 'w-2.5 bg-white/40 hover:bg-white/70'
                         }`}
                     />
                 ))}

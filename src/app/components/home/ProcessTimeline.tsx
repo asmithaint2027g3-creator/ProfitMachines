@@ -64,7 +64,7 @@ export default function ProcessTimeline() {
     const [activeStep, setActiveStep] = useState<number>(0);
 
     return (
-        <section className="py-20 md:py-28 bg-white relative overflow-hidden border-b-2 border-[#0066FF]" id="methodology">
+        <section className="py-20 md:py-28 bg-white relative overflow-hidden border-b border-slate-200" id="methodology">
             {/* Scroll Anchor for backward compatibility */}
             <div id="solutions-methodology" className="scroll-mt-28 absolute -top-28 left-0 pointer-events-none" />
 
@@ -77,20 +77,20 @@ export default function ProcessTimeline() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border-2 border-[#0066FF] bg-white text-xs font-bold text-[#0066FF] uppercase mb-4">
-                            <span className="w-2 h-2 rounded-full bg-[#0066FF]"></span>
-                            <span>Engineering Methodology · Systematic Execution</span>
+                        <div className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-[#1E6297] font-bold text-xs uppercase tracking-wider mb-4 border border-emerald-100 shadow-sm">
+                            <Sparkles className="w-3.5 h-3.5" />
+                            Engineering Methodology
                         </div>
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0066FF] mb-6 tracking-tight font-heading">
-                            The 6-Stage Enterprise Transformation Journey
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight font-heading">
+                            The 6-Stage <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2878B5] via-emerald-700 to-teal-700">Enterprise Transformation Journey</span>
                         </h2>
-                        <p className="text-base sm:text-lg text-[#0066FF] font-medium leading-relaxed max-w-2xl mx-auto">
+                        <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
                             A systematic, engineering-first approach to deploying autonomous AI systems and revenue architectures into your enterprise without operational friction.
                         </p>
                     </motion.div>
                 </div>
 
-                {/* Horizontal Step Navigation Bar */}
+                {/* Horizontal Step Navigation Bar for Quick Selection */}
                 <div className="hidden lg:grid grid-cols-6 gap-3 mb-16 max-w-5xl mx-auto">
                     {methodologySteps.map((step, idx) => {
                         const Icon = step.icon;
@@ -99,22 +99,22 @@ export default function ProcessTimeline() {
                             <button
                                 key={step.phase}
                                 onClick={() => setActiveStep(idx)}
-                                className={`p-4 rounded-2xl text-left transition-all duration-200 border-2 ${
+                                className={`p-4 rounded-2xl text-left transition-all relative overflow-hidden ${
                                     isActive 
-                                        ? 'bg-[#0066FF] text-white border-[#0066FF]' 
-                                        : 'bg-white hover:bg-[#0066FF] hover:text-white border-[#0066FF] text-[#0066FF]'
+                                        ? 'bg-slate-900 text-white shadow-xl shadow-slate-900/10 scale-105' 
+                                        : 'bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700'
                                 }`}
                             >
                                 <div className="flex items-center justify-between mb-2">
-                                    <span className={`text-[11px] font-mono font-bold ${isActive ? 'text-white' : 'text-[#0066FF]'}`}>
+                                    <span className={`text-[11px] font-mono font-bold ${isActive ? 'text-emerald-400' : 'text-slate-400'}`}>
                                         {step.phase}
                                     </span>
-                                    <Icon className="w-4 h-4" />
+                                    <Icon className={`w-4 h-4 ${isActive ? 'text-emerald-400' : 'text-slate-400'}`} />
                                 </div>
                                 <div className="text-sm font-bold truncate">
                                     {step.label}
                                 </div>
-                                <div className={`text-[11px] mt-0.5 ${isActive ? 'text-white' : 'text-[#0066FF]'}`}>
+                                <div className={`text-[11px] mt-0.5 ${isActive ? 'text-slate-300' : 'text-slate-500'}`}>
                                     {step.duration}
                                 </div>
                             </button>
@@ -125,7 +125,7 @@ export default function ProcessTimeline() {
                 {/* Connected Vertical Timeline */}
                 <div className="relative max-w-4xl mx-auto">
                     {/* Central Vertical Connecting Line */}
-                    <div className="absolute top-0 bottom-0 left-6 sm:left-8 md:left-1/2 w-0.5 bg-[#0066FF] -translate-x-1/2" />
+                    <div className="absolute top-0 bottom-0 left-6 sm:left-8 md:left-1/2 w-0.5 bg-gradient-to-b from-emerald-600 via-indigo-500 to-teal-500 -translate-x-1/2 opacity-30" />
                     
                     <div className="space-y-12 sm:space-y-16">
                         {methodologySteps.map((step, index) => {
@@ -140,40 +140,40 @@ export default function ProcessTimeline() {
                                     className={`relative flex items-center gap-8 md:gap-14 group ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
                                 >
                                     {/* Center Node Indicator */}
-                                    <div className="absolute left-6 sm:left-8 md:left-1/2 w-6 h-6 rounded-full bg-white border-4 border-[#0066FF] -translate-x-1/2 z-10 flex items-center justify-center">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-[#0066FF]" />
+                                    <div className="absolute left-6 sm:left-8 md:left-1/2 w-6 h-6 rounded-full bg-white border-4 border-[#2878B5] -translate-x-1/2 group-hover:scale-125 group-hover:border-[#2878B5] transition-all duration-300 z-10 shadow-md shadow-blue-600/30 flex items-center justify-center">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-[#2878B5]" />
                                     </div>
 
                                     {/* Content Card */}
                                     <div className={`flex-1 pl-12 sm:pl-14 md:pl-0 ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
-                                        <div className={`flex flex-col bg-white p-7 sm:p-8 rounded-2xl border-2 border-[#0066FF] transition-all duration-200 ${index % 2 === 0 ? 'md:items-start' : 'md:items-end'} text-left md:text-inherit`}>
+                                        <div className={`flex flex-col bg-slate-50/90 hover:bg-white p-7 sm:p-8 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-2xl hover:shadow-blue-600/10 hover:border-emerald-400 transition-all duration-300 ${index % 2 === 0 ? 'md:items-start' : 'md:items-end'} text-left md:text-inherit`}>
                                             
                                             {/* Phase Tag & Timeline Pill */}
                                             <div className="flex items-center gap-3 mb-4">
-                                                <div className="w-10 h-10 rounded-xl bg-white border-2 border-[#0066FF] flex items-center justify-center text-[#0066FF]">
+                                                <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[#2878B5] group-hover:bg-[#2878B5] group-hover:text-white transition-all shadow-sm">
                                                     <Icon className="w-5 h-5" />
                                                 </div>
                                                 <div className="flex items-center gap-2">
-                                                    <span className="text-xs font-mono font-bold text-[#0066FF] uppercase tracking-wider bg-white px-2.5 py-1 rounded-md border-2 border-[#0066FF]">
+                                                    <span className="text-xs font-mono font-bold text-[#2878B5] uppercase tracking-wider bg-emerald-50/80 px-2.5 py-1 rounded-md border border-emerald-100">
                                                         Phase {step.phase} // {step.label}
                                                     </span>
-                                                    <span className="text-[11px] text-[#0066FF] font-mono hidden sm:inline">
+                                                    <span className="text-[11px] text-slate-400 font-mono hidden sm:inline">
                                                         ({step.duration})
                                                     </span>
                                                 </div>
                                             </div>
 
-                                            <h4 className="text-xl sm:text-2xl font-bold text-[#0066FF] mb-2 font-heading">
+                                            <h4 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2 font-heading">
                                                 {step.name}
                                             </h4>
 
-                                            <p className="text-sm text-[#0066FF] leading-relaxed mb-4 font-normal">
+                                            <p className="text-sm text-slate-600 leading-relaxed mb-4 font-normal">
                                                 {step.desc}
                                             </p>
 
-                                            <div className="pt-3 border-t-2 border-[#0066FF] w-full flex items-center gap-2 text-xs font-semibold text-[#0066FF]">
-                                                <CheckCircle2 className="w-3.5 h-3.5 text-[#0066FF] shrink-0" />
-                                                <span><strong>Key Deliverable:</strong> {step.deliverable}</span>
+                                            <div className="pt-3 border-t border-slate-200/60 w-full flex items-center gap-2 text-xs font-semibold text-slate-700">
+                                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                                <span><strong className="text-slate-900">Key Deliverable:</strong> {step.deliverable}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -190,7 +190,7 @@ export default function ProcessTimeline() {
                 <div className="mt-16 text-center">
                     <Link
                         to="/book-consultation"
-                        className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#0066FF] hover:bg-white text-white hover:text-[#0066FF] border-2 border-[#0066FF] text-sm font-bold transition-all group"
+                        className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-slate-900 hover:bg-[#2878B5] text-white text-sm font-bold transition-all shadow-lg hover:-translate-y-0.5 group"
                     >
                         <span>Initiate Phase 01 Discovery Audit</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

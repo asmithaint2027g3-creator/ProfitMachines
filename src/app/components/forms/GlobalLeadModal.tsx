@@ -51,7 +51,7 @@ export default function GlobalLeadModal() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={handleSafeClose}
-                    className="fixed inset-0 bg-white/90 backdrop-blur-sm"
+                    className="fixed inset-0 bg-slate-950/75 backdrop-blur-md"
                 />
 
                 {/* Modal Window */}
@@ -60,21 +60,21 @@ export default function GlobalLeadModal() {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.96, y: 16 }}
                     transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative w-full max-w-2xl bg-white rounded-2xl border-2 border-[#0066FF] overflow-hidden z-10 max-h-[92vh] flex flex-col my-auto text-[#0066FF]"
+                    className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden z-10 max-h-[92vh] flex flex-col my-auto"
                 >
-                    {/* Header Banner */}
-                    <div className="bg-white px-6 py-5 text-[#0066FF] flex items-center justify-between shrink-0 border-b-2 border-[#0066FF]">
+                    {/* Header Banner - Executive Dark Teal */}
+                    <div className="bg-[#2878B5] px-6 py-5 text-white flex items-center justify-between shrink-0 border-b border-emerald-500/20">
                         <div>
                             <div className="flex items-center gap-2 mb-1">
-                                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-[#0066FF] text-[#0066FF] text-[11px] font-bold tracking-wide uppercase">
-                                    <Sparkles className="w-3 h-3 text-[#0066FF]" />
+                                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-900/60 border border-emerald-400/30 text-emerald-300 text-[11px] font-bold tracking-wide uppercase">
+                                    <Sparkles className="w-3 h-3 text-emerald-300" />
                                     <span>ProfitMachines Intelligence Desk</span>
                                 </span>
                             </div>
-                            <h2 className="text-xl sm:text-2xl font-bold font-heading text-[#0066FF]">
+                            <h2 className="text-xl sm:text-2xl font-bold font-heading text-white">
                                 {modalOptions.title || (modalType === 'quick' ? 'Quick Revenue Inquiry' : 'Enterprise Consultation Request')}
                             </h2>
-                            <p className="text-xs sm:text-sm text-[#0066FF] mt-0.5 font-medium">
+                            <p className="text-xs sm:text-sm text-emerald-100/90 mt-0.5 font-medium">
                                 {modalType === 'quick' 
                                     ? 'Get connected with an AI RevOps strategist in less than 60 seconds.'
                                     : 'Share your architecture bottlenecks for a tailored roadmap.'}
@@ -84,43 +84,43 @@ export default function GlobalLeadModal() {
                         <button
                             onClick={handleSafeClose}
                             aria-label="Close modal"
-                            className="p-2 rounded-lg text-[#0066FF] hover:bg-[#0066FF]/10 transition-colors shrink-0 border border-[#0066FF]"
+                            className="p-2 rounded-full text-emerald-200 hover:text-white hover:bg-emerald-800/60 transition-colors shrink-0"
                         >
                             <X className="w-5 h-5" />
                         </button>
                     </div>
 
                     {/* Mode Toggle Tabs */}
-                    <div className="flex items-center border-b-2 border-[#0066FF] bg-white px-6 pt-3 shrink-0 gap-2">
+                    <div className="flex items-center border-b border-slate-200 bg-slate-50/80 px-6 pt-3 shrink-0 gap-2">
                         <button
                             type="button"
                             onClick={() => openQuickForm(modalOptions)}
-                            className={`flex items-center gap-2 px-4 py-2.5 font-bold text-xs sm:text-sm transition-all border-2 border-b-0 rounded-t-lg ${
+                            className={`flex items-center gap-2 px-4 py-2.5 border-b-2 font-bold text-xs sm:text-sm transition-all ${
                                 modalType === 'quick'
-                                    ? 'bg-[#0066FF] text-white border-[#0066FF]'
-                                    : 'bg-white text-[#0066FF] border-transparent hover:border-[#0066FF]'
+                                    ? 'border-[#2878B5] text-[#2878B5] bg-white rounded-t-lg'
+                                    : 'border-transparent text-slate-500 hover:text-slate-900'
                             }`}
                         >
-                            <Zap className="w-4 h-4" />
+                            <Zap className="w-4 h-4 text-emerald-600" />
                             <span>Quick Inquiry (1 min)</span>
                         </button>
 
                         <button
                             type="button"
                             onClick={() => openLongForm(modalOptions)}
-                            className={`flex items-center gap-2 px-4 py-2.5 font-bold text-xs sm:text-sm transition-all border-2 border-b-0 rounded-t-lg ${
+                            className={`flex items-center gap-2 px-4 py-2.5 border-b-2 font-bold text-xs sm:text-sm transition-all ${
                                 modalType === 'long'
-                                    ? 'bg-[#0066FF] text-white border-[#0066FF]'
-                                    : 'bg-white text-[#0066FF] border-transparent hover:border-[#0066FF]'
+                                    ? 'border-[#2878B5] text-[#2878B5] bg-white rounded-t-lg'
+                                    : 'border-transparent text-slate-500 hover:text-slate-900'
                             }`}
                         >
-                            <FileText className="w-4 h-4" />
+                            <FileText className="w-4 h-4 text-emerald-600" />
                             <span>Detailed Assessment</span>
                         </button>
                     </div>
 
                     {/* Form Scroll Body */}
-                    <div className="p-6 sm:p-7 overflow-y-auto flex-1 bg-white">
+                    <div className="p-6 sm:p-7 overflow-y-auto flex-1">
                         {modalType === 'quick' ? (
                             <QuickLeadForm
                                 defaultService={modalOptions.defaultService}

@@ -251,31 +251,17 @@ var TAB_HEADERS = {
     "reason_flagged", "confidence_score", "review_status", "airtable_id", "jira_key"
   ],
 
-  // 22. YouTube Videos
+  // 22. YouTube Published & Tracked Videos
   YouTube_Videos: [
-    "Video ID", "Title", "Video URL", "Published Date", "Views", "Likes",
-    "Comment Count", "Last Synced At", "Sync Status", "Error Details"
+    "timestamp", "video_id", "title", "url", "status", "views", "likes", "comments_count",
+    "watch_time_mins", "published_at", "source"
   ],
 
-  // 23. YouTube Comments
-  YouTube_Comments: [
-    "Comment ID", "Video ID", "Video Title", "Author Display Name", "Author Channel ID",
-    "Original Comment", "Comment Date", "Comment URL", "Like Count", "Lead Classification",
-    "Qualification Reason", "Review Status"
-  ],
-
-  // 24. YouTube Leads
+  // 23. YouTube Potential Leads (Channel Scans + Dashboard Submissions)
   YouTube_Leads: [
-    "Lead ID", "Comment ID", "Video ID", "Video Title", "Original Comment", "Author Name",
-    "Author Channel ID", "Comment Date", "Comment URL", "Lead Type", "Qualification Reason",
-    "Intent Score", "Lead Status", "Jira Issue Key", "Airtable Record ID", "Created At", "Updated At"
-  ],
-
-  // 25. YouTube Sync Logs
-  YouTube_Sync_Logs: [
-    "Run ID", "Start Time", "End Time", "Videos Processed", "Comments Processed",
-    "Potential Leads Identified", "Google Sheets Status", "Jira Status", "Airtable Status",
-    "Overall Status", "Error Details"
+    "timestamp", "lead_id", "video_id", "video_title", "comment_id", "author_name",
+    "author_channel_url", "comment_text", "reason_flagged", "confidence_score",
+    "lead_category", "airtable_record_id", "jira_issue_key", "source", "lead_status"
   ]
 };
 
@@ -297,10 +283,7 @@ TAB_HEADERS["linkedin_comments"] = TAB_HEADERS.LinkedIn_Comments;
 TAB_HEADERS["linkedin_reactions"] = TAB_HEADERS.LinkedIn_Reactions;
 TAB_HEADERS["linkedin_leads"] = TAB_HEADERS.LinkedIn_Leads;
 TAB_HEADERS["youtube_videos"] = TAB_HEADERS.YouTube_Videos;
-TAB_HEADERS["youtube_comments"] = TAB_HEADERS.YouTube_Comments;
 TAB_HEADERS["youtube_leads"] = TAB_HEADERS.YouTube_Leads;
-TAB_HEADERS["youtube_sync_logs"] = TAB_HEADERS.YouTube_Sync_Logs;
-TAB_HEADERS["youtube_logs"] = TAB_HEADERS.YouTube_Sync_Logs;
 
 var CANONICAL_TABS = [
   "Live_Traffic_Events",
@@ -329,9 +312,7 @@ var CANONICAL_TABS = [
   "LinkedIn_Reactions",
   "LinkedIn_Leads",
   "YouTube_Videos",
-  "YouTube_Comments",
   "YouTube_Leads",
-  "YouTube_Sync_Logs",
   "Daily_Summary",
   "Weekly_Summary",
   "Monthly_Summary"
@@ -352,8 +333,6 @@ function getCanonicalTabName(name) {
   if (clean.indexOf("linkedinreact") >= 0) return "LinkedIn_Reactions";
   if (clean.indexOf("linkedinlead") >= 0) return "LinkedIn_Leads";
   if (clean.indexOf("linkedin") >= 0) return "LinkedIn_Posts";
-  if (clean.indexOf("youtubecomment") >= 0) return "YouTube_Comments";
-  if (clean.indexOf("youtubesync") >= 0 || clean.indexOf("youtubelog") >= 0) return "YouTube_Sync_Logs";
   if (clean.indexOf("youtubelead") >= 0) return "YouTube_Leads";
   if (clean.indexOf("youtubevid") >= 0 || clean.indexOf("youtube") >= 0) return "YouTube_Videos";
   return name;
@@ -488,88 +467,54 @@ function doPost(e) {
     var receivedAt = normalizeTimestamp(new Date());
 
     // ══════════════════════════════════════════════════════════════════════
-    // EARLY EXIT: YouTube sync actions (Batch & Individual Upserts)
+    // EARLY EXIT: YouTube & LinkedIn sync actions bypass the full pipeline.
+    // These are automated server-side pushes — no idempotency check, no
+    // Live_Traffic_Events row, no email alerts. Just write and return.
     // ══════════════════════════════════════════════════════════════════════
     var earlyAction = rawPayload.action || rawPayload.event_type || "";
 
-    if (earlyAction === "youtube_sync_batch" || earlyAction === "sync_youtube_batch") {
-      var batchVideos = rawPayload.videos || [];
-      var batchComments = rawPayload.comments || [];
-      var batchLeads = rawPayload.leads || [];
-      var batchLog = rawPayload.sync_log || rawPayload.log || null;
-
-      var vCount = 0, cCount = 0, lCount = 0;
-
-      batchVideos.forEach(function(v) {
-        var vidId = v.video_id || v.videoId;
-        if (vidId) {
-          upsertRowInTab(ss, "YouTube_Videos", "Video ID", vidId, v);
-          vCount++;
-        }
-      });
-
-      batchComments.forEach(function(c) {
-        var cId = c.comment_id || c.commentId;
-        if (cId) {
-          upsertRowInTab(ss, "YouTube_Comments", "Comment ID", cId, c);
-          cCount++;
-        }
-      });
-
-      batchLeads.forEach(function(l) {
-        var cId = l.comment_id || l.commentId || l.lead_id || l.leadRecordId;
-        if (cId) {
-          upsertRowInTab(ss, "YouTube_Leads", "Comment ID", cId, l);
-          lCount++;
-        }
-      });
-
-      if (batchLog) {
-        var runId = batchLog.run_id || batchLog.syncRunId || ("RUN-" + new Date().getTime());
-        upsertRowInTab(ss, "YouTube_Sync_Logs", "Run ID", runId, batchLog);
-      }
-
-      if (lock.hasLock()) lock.releaseLock();
-      return jsonResponse({
-        status: "success",
-        action: "youtube_sync_batch",
-        videos_synced: vCount,
-        comments_synced: cCount,
-        leads_synced: lCount,
-        log_recorded: Boolean(batchLog)
-      });
-    }
-
     if (earlyAction === "sync_youtube_video" || earlyAction === "youtube_video") {
       var ytVid = rawPayload.video || rawPayload;
-      var vidId = ytVid.video_id || ytVid.videoId || "";
-      var vRes = upsertRowInTab(ss, "YouTube_Videos", "Video ID", vidId, ytVid);
+      appendRowToTab(ss, "YouTube_Videos", {
+        timestamp: receivedAt,
+        video_id: ytVid.video_id || ytVid.videoId || "",
+        title: ytVid.title || "",
+        url: ytVid.url || ("https://youtube.com/watch?v=" + (ytVid.video_id || ytVid.videoId || "")),
+        status: ytVid.status || "TRACKED",
+        views: ytVid.views || 0,
+        likes: ytVid.likes || 0,
+        comments_count: ytVid.comments_count || ytVid.commentsCount || 0,
+        watch_time_mins: ytVid.watch_time_mins || ytVid.watchTimeMinutes || 0,
+        published_at: ytVid.published_at || ytVid.publishedAt || receivedAt,
+        source: ytVid.source || "Autonomous Scheduled Scanner"
+      });
       if (lock.hasLock()) lock.releaseLock();
-      return jsonResponse({ status: "success", action: "sync_youtube_video", video_id: vidId, operation: vRes ? vRes.action : "unknown" });
-    }
-
-    if (earlyAction === "sync_youtube_comment" || earlyAction === "youtube_comment") {
-      var ytComment = rawPayload.comment || rawPayload;
-      var cId = ytComment.comment_id || ytComment.commentId || "";
-      var cRes = upsertRowInTab(ss, "YouTube_Comments", "Comment ID", cId, ytComment);
-      if (lock.hasLock()) lock.releaseLock();
-      return jsonResponse({ status: "success", action: "sync_youtube_comment", comment_id: cId, operation: cRes ? cRes.action : "unknown" });
+      return jsonResponse({ status: "success", action: "sync_youtube_video", video_id: ytVid.video_id || ytVid.videoId });
     }
 
     if (earlyAction === "sync_youtube_lead" || earlyAction === "youtube_lead") {
       var ytLead = rawPayload.lead || rawPayload;
-      var cId = ytLead.comment_id || ytLead.commentId || ytLead.lead_id || "";
-      var lRes = upsertRowInTab(ss, "YouTube_Leads", "Comment ID", cId, ytLead);
+      var leadRow = {
+        timestamp: receivedAt,
+        lead_id: ytLead.lead_id || ytLead.commentId || ("YT-LEAD-" + new Date().getTime()),
+        video_id: ytLead.video_id || ytLead.videoId || "",
+        video_title: ytLead.video_title || ytLead.videoTitle || "Channel Video",
+        comment_id: ytLead.comment_id || ytLead.commentId || "",
+        author_name: ytLead.author_name || ytLead.authorDisplayName || ytLead.name || "Viewer",
+        author_channel_url: ytLead.author_channel_url || ytLead.authorChannelUrl || "",
+        comment_text: ytLead.comment_text || ytLead.commentText || ytLead.notes || "",
+        reason_flagged: ytLead.reason_flagged || ytLead.reasonFlagged || "High-Intent Video Viewer",
+        confidence_score: ytLead.confidence_score || ytLead.confidenceScore || 0.95,
+        lead_category: ytLead.lead_category || ytLead.leadCategory || "SERVICE_INQUIRY",
+        airtable_record_id: ytLead.airtable_record_id || ytLead.airtableRecordId || "",
+        jira_issue_key: ytLead.jira_issue_key || ytLead.jiraIssueKey || "",
+        source: ytLead.source || "Autonomous Scheduled Scanner",
+        lead_status: ytLead.lead_status || ytLead.reviewStatus || "Potential Lead - Needs Review"
+      };
+      appendRowToTab(ss, "YouTube_Leads", leadRow);
+      console.log("YouTube lead saved: " + leadRow.lead_id + " | " + leadRow.author_name + " | " + leadRow.video_title);
       if (lock.hasLock()) lock.releaseLock();
-      return jsonResponse({ status: "success", action: "sync_youtube_lead", comment_id: cId, operation: lRes ? lRes.action : "unknown" });
-    }
-
-    if (earlyAction === "sync_youtube_log" || earlyAction === "youtube_log") {
-      var ytLog = rawPayload.log || rawPayload.sync_log || rawPayload;
-      var rId = ytLog.run_id || ytLog.syncRunId || ("RUN-" + new Date().getTime());
-      var rRes = upsertRowInTab(ss, "YouTube_Sync_Logs", "Run ID", rId, ytLog);
-      if (lock.hasLock()) lock.releaseLock();
-      return jsonResponse({ status: "success", action: "sync_youtube_log", run_id: rId, operation: rRes ? rRes.action : "unknown" });
+      return jsonResponse({ status: "success", action: "sync_youtube_lead", lead_id: leadRow.lead_id });
     }
 
     var p = enrichPayload(rawPayload, receivedAt);
@@ -1288,91 +1233,6 @@ function appendRowToTab(ss, tabName, p) {
   });
 
   sheet.appendRow(row);
-}
-
-function upsertRowInTab(ss, tabName, keyColumnName, keyValue, rowData) {
-  if (!ss || !tabName || !keyColumnName || !keyValue) return null;
-  var sheet = getTab(ss, tabName);
-  if (!sheet) return null;
-
-  var lastRow = sheet.getLastRow();
-  var numCols = sheet.getLastColumn();
-  if (lastRow === 0 || numCols === 0) {
-    appendRowToTab(ss, tabName, rowData);
-    return { action: "appended", row: 2 };
-  }
-
-  var headers = sheet.getRange(1, 1, 1, numCols).getValues()[0];
-  var keyColIndex = -1;
-  var cleanKeyTarget = String(keyColumnName).toLowerCase().replace(/[^a-z0-9]/g, "");
-
-  for (var c = 0; c < headers.length; c++) {
-    var hName = String(headers[c] || "").toLowerCase().replace(/[^a-z0-9]/g, "");
-    if (hName === cleanKeyTarget) {
-      keyColIndex = c + 1;
-      break;
-    }
-  }
-
-  var rowValues = headers.map(function(h) {
-    var key = String(h || "").trim();
-    if (!key) return "";
-
-    if (rowData[key] !== undefined && rowData[key] !== null) return formatCell(rowData[key]);
-
-    var lowerKey = key.toLowerCase();
-    if (rowData[lowerKey] !== undefined && rowData[lowerKey] !== null) return formatCell(rowData[lowerKey]);
-
-    var snakeKey = lowerKey.replace(/[\s-]+/g, "_");
-    if (rowData[snakeKey] !== undefined && rowData[snakeKey] !== null) return formatCell(rowData[snakeKey]);
-
-    var camelKey = lowerKey.replace(/_([a-z])/g, function(g) { return g[1].toUpperCase(); });
-    if (rowData[camelKey] !== undefined && rowData[camelKey] !== null) return formatCell(rowData[camelKey]);
-
-    // Fallbacks for YouTube schemas
-    if (snakeKey === "video_id") return formatCell(rowData.video_id || rowData.videoId || "");
-    if (snakeKey === "video_title" || snakeKey === "title") return formatCell(rowData.video_title || rowData.videoTitle || rowData.title || "");
-    if (snakeKey === "video_url" || snakeKey === "url") return formatCell(rowData.video_url || rowData.videoUrl || rowData.url || "");
-    if (snakeKey === "comment_id") return formatCell(rowData.comment_id || rowData.commentId || "");
-    if (snakeKey === "original_comment" || snakeKey === "comment_text") return formatCell(rowData.original_comment || rowData.comment_text || rowData.commentText || "");
-    if (snakeKey === "author_name" || snakeKey === "author_display_name") return formatCell(rowData.author_name || rowData.author_display_name || rowData.authorDisplayName || "");
-    if (snakeKey === "author_channel_id") return formatCell(rowData.author_channel_id || rowData.authorChannelId || "");
-    if (snakeKey === "comment_date" || snakeKey === "published_date") return formatCell(rowData.comment_date || rowData.commentDate || rowData.published_at || rowData.publishedAt || "");
-    if (snakeKey === "comment_url") return formatCell(rowData.comment_url || rowData.commentUrl || "");
-    if (snakeKey === "lead_type" || snakeKey === "lead_classification" || snakeKey === "lead_category") return formatCell(rowData.lead_type || rowData.lead_classification || rowData.leadCategory || rowData.lead_category || "");
-    if (snakeKey === "qualification_reason" || snakeKey === "reason_flagged") return formatCell(rowData.qualification_reason || rowData.reason_flagged || rowData.reasonFlagged || "");
-    if (snakeKey === "intent_score" || snakeKey === "confidence_score") return formatCell(rowData.intent_score !== undefined ? rowData.intent_score : (rowData.confidence_score || rowData.confidenceScore || 0));
-    if (snakeKey === "lead_status" || snakeKey === "review_status") return formatCell(rowData.lead_status || rowData.review_status || rowData.reviewStatus || "Potential Lead - Needs Review");
-    if (snakeKey === "jira_issue_key") return formatCell(rowData.jira_issue_key || rowData.jiraIssueKey || rowData.jiraKey || "");
-    if (snakeKey === "airtable_record_id") return formatCell(rowData.airtable_record_id || rowData.airtableRecordId || rowData.airtableId || "");
-    if (snakeKey === "created_at") return formatCell(rowData.created_at || rowData.createdAt || rowData.timestamp || new Date().toISOString());
-    if (snakeKey === "updated_at" || snakeKey === "last_synced_at") return formatCell(rowData.updated_at || rowData.updatedAt || new Date().toISOString());
-    if (snakeKey === "views") return formatCell(rowData.views || 0);
-    if (snakeKey === "likes" || snakeKey === "like_count") return formatCell(rowData.likes || rowData.like_count || rowData.likeCount || 0);
-    if (snakeKey === "comment_count" || snakeKey === "comments_count") return formatCell(rowData.comment_count || rowData.comments_count || rowData.commentsCount || 0);
-    if (snakeKey === "sync_status") return formatCell(rowData.sync_status || rowData.status || "TRACKED");
-    if (snakeKey === "error_details") return formatCell(rowData.error_details || rowData.errorDetails || "None");
-    if (snakeKey === "run_id") return formatCell(rowData.run_id || rowData.syncRunId || "");
-    if (snakeKey === "start_time") return formatCell(rowData.start_time || rowData.startedAt || "");
-    if (snakeKey === "end_time") return formatCell(rowData.end_time || rowData.completedAt || "");
-
-    return "";
-  });
-
-  if (keyColIndex > 0 && lastRow > 1) {
-    var keyValues = sheet.getRange(2, keyColIndex, lastRow - 1, 1).getValues();
-    var cleanVal = String(keyValue).trim();
-    for (var r = 0; r < keyValues.length; r++) {
-      if (String(keyValues[r][0]).trim() === cleanVal) {
-        var matchRow = r + 2;
-        sheet.getRange(matchRow, 1, 1, rowValues.length).setValues([rowValues]);
-        return { action: "updated", row: matchRow };
-      }
-    }
-  }
-
-  sheet.appendRow(rowValues);
-  return { action: "appended", row: sheet.getLastRow() };
 }
 
 function formatCell(val) {
@@ -3254,59 +3114,5 @@ function createSampleYouTubeLeadInSheet() {
     }
   } catch (err) {
     console.error("Error creating sample YouTube lead: " + err);
-  }
-}
-
-/**
- * =========================================================================================
- * 18. DIRECT EXECUTION FUNCTIONS FOR APPS SCRIPT EDITOR & SPREADSHEET
- * =========================================================================================
- */
-
-/**
- * PRIMARY FUNCTION TO RUN:
- * Run this function in the Google Apps Script editor dropdown to scan all YouTube channel uploads,
- * fetch comments & replies, qualify leads, and update:
- * 1. Google Sheets tabs (YouTube_Videos, YouTube_Comments, YouTube_Leads, YouTube_Sync_Logs)
- * 2. Jira Cloud (Project PROF with "Original YouTube Comment")
- * 3. Airtable CRM (Leads table)
- */
-function SYNC_ALL_YOUTUBE_LEADS() {
-  return syncYouTubePipelineFromAppsScript();
-}
-
-/**
- * Alias function: Same as SYNC_ALL_YOUTUBE_LEADS
- */
-function GET_ALL_YOUTUBE_LEADS() {
-  return syncYouTubePipelineFromAppsScript();
-}
-
-/**
- * Quick 5-Second Test: Simulates a qualified lead end-to-end across Google Sheets, Jira, and Airtable.
- */
-function TEST_SIMULATE_YOUTUBE_LEAD() {
-  var url = CONFIG.WEBSITE + "/api/youtube-sync?simulate=true";
-  var options = {
-    method: "get",
-    headers: {
-      "Authorization": "Bearer pm2026",
-      "X-Cron-Secret": "profitmachines_secure_cron_2026"
-    },
-    muteHttpExceptions: true
-  };
-  try {
-    var response = UrlFetchApp.fetch(url, options);
-    var res = JSON.parse(response.getContentText());
-    var msg = "✅ YouTube Lead Test Pipeline Success!\n\n" +
-              "📋 Jira Issue: " + (res.integrations?.jiraIssueKey || "Created") + "\n" +
-              "🗂️ Airtable Record: " + (res.integrations?.airtableRecordId || "Created") + "\n" +
-              "📊 Google Sheets Status: Updated across all 4 YouTube tabs!";
-    console.log(msg);
-    try { SpreadsheetApp.getUi().alert(msg); } catch (e) {}
-    return res;
-  } catch (err) {
-    console.error("Simulation error: " + err);
-    try { SpreadsheetApp.getUi().alert("Simulation error: " + err.toString()); } catch (e) {}
   }
 }

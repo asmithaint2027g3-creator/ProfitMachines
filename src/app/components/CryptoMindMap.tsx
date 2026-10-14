@@ -8,12 +8,12 @@ import { cryptoMindMapData } from '../../data/cryptoMindMap';
 const UnifiedTimelineNode = ({ data }: NodeProps) => {
     const Icon = data.icon;
     const colors = [
-        'from-[#0066FF] to-cyan-500 shadow-blue-500/50',
-        'from-purple-400 to-[#0066FF] shadow-purple-500/50',
+        'from-emerald-400 to-cyan-500 shadow-blue-500/50',
+        'from-purple-400 to-emerald-600 shadow-purple-500/50',
         'from-pink-400 to-rose-500 shadow-pink-500/50',
         'from-amber-400 to-orange-500 shadow-amber-500/50',
-        'from-[#0066FF] to-[#0066FF] shadow-[#0066FF]/20',
-        'from-[#0066FF] to-[#0066FF] shadow-blue-600/50',
+        'from-emerald-400 to-teal-500 shadow-emerald-500/50',
+        'from-[#2878B5] to-emerald-600 shadow-blue-600/50',
         'from-violet-500 to-fuchsia-600 shadow-violet-600/50',
     ];
     const colorClass = colors[data.colorIndex % colors.length];
@@ -33,17 +33,17 @@ const UnifiedTimelineNode = ({ data }: NodeProps) => {
 
                 {/* Title & Number Group */}
                 <div className="text-left">
-                    <span className="text-2xl font-black text-[#0066FF] tracking-tighter mb-1 font-mono block">
+                    <span className="text-2xl font-black text-[#2878B5] tracking-tighter mb-1 font-mono block">
                         {data.number}
                     </span>
-                    <h3 className="text-2xl md:text-4xl font-extrabold text-[#0066FF] leading-tight max-w-[500px]">
+                    <h3 className="text-2xl md:text-4xl font-extrabold text-slate-900 leading-tight max-w-[500px]">
                         {data.title}
                     </h3>
                 </div>
             </div>
 
             {/* Tagline Below */}
-            <p className="text-[#0066FF] text-lg md:text-xl leading-relaxed font-semibold max-w-[600px] text-center mb-8 px-4">
+            <p className="text-slate-600 text-lg md:text-xl leading-relaxed font-semibold max-w-[600px] text-center mb-8 px-4">
                 {data.tagline}
             </p>
 
@@ -52,7 +52,7 @@ const UnifiedTimelineNode = ({ data }: NodeProps) => {
                 {data.tags?.map((tag: string, i: number) => (
                     <div
                         key={i}
-                        className="px-5 py-2.5 rounded-2xl bg-white border border-[#0066FF] text-[#0066FF] text-sm font-bold whitespace-nowrap shadow-sm hover:border-[#0066FF]/50 hover:shadow-md hover:bg-[#0066FF]/10 transition-all cursor-default"
+                        className="px-5 py-2.5 rounded-2xl bg-white border border-slate-200 text-slate-800 text-sm font-bold whitespace-nowrap shadow-sm hover:border-emerald-600/50 hover:shadow-md hover:bg-slate-50 transition-all cursor-default"
                     >
                         {tag}
                     </div>
@@ -66,13 +66,13 @@ const UnifiedTimelineNode = ({ data }: NodeProps) => {
 
 const RootTitleNode = ({ data }: NodeProps) => (
     <div className="text-center pb-12 select-none">
-        <div className="inline-block px-4 py-1 rounded-full bg-[#0066FF]/10 border border-[#0066FF]/20 text-[#0066FF] text-[10px] font-black uppercase tracking-[0.25em] mb-4">
+        <div className="inline-block px-4 py-1 rounded-full bg-emerald-600/10 border border-emerald-600/20 text-[#2878B5] text-[10px] font-black uppercase tracking-[0.25em] mb-4">
             Architecture Overview
         </div>
-        <h2 className="text-4xl md:text-6xl font-black text-[#0066FF] tracking-tighter mb-4 leading-none">
+        <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter mb-4 leading-none">
             {data.label}
         </h2>
-        <p className="text-sm md:text-base text-[#0066FF] font-bold uppercase tracking-[0.2em] max-w-2xl mx-auto">
+        <p className="text-sm md:text-base text-slate-500 font-bold uppercase tracking-[0.2em] max-w-2xl mx-auto">
             {data.description}
         </p>
     </div>
@@ -119,11 +119,11 @@ export default function CryptoMindMap() {
     }, []);
 
     return (
-        <div className="w-full h-[3200px] relative overflow-hidden group border-y border-[#0066FF]/50 mt-0 mb-20 bg-white/20 cursor-default">
+        <div className="w-full h-[3200px] relative overflow-hidden group border-y border-slate-100/50 mt-0 mb-20 bg-slate-50/20 cursor-default">
 
             {/* Dynamic Background Effects (Stateless) */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-[#0066FF]/0 via-blue-500/10 to-[#0066FF]/0" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-emerald-600/0 via-blue-500/10 to-emerald-600/0" />
                 <div className="absolute inset-0 pointer-events-none"></div>
             </div>
 
