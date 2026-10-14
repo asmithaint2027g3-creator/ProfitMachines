@@ -35,49 +35,93 @@ export default function Crypto() {
             {/* Global Background Noise & Gradients */}
             <div className="fixed inset-0 pointer-events-none z-0"></div>
 
-            <div className="relative z-10 pt-32 pb-20">
-                {/* Hero Section */}
-                <div className="relative mb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    {/* Hero Background Effects */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-sky-100 rounded-full blur-[120px] pointer-events-none -z-10 animate-pulse mix-blend-multiply opacity-60" />
+            {/* ── HERO SECTION (Dark Background with Background Image) ── */}
+            <section className="relative pt-32 pb-20 md:pt-40 md:pb-24 bg-[#070D18] border-b border-slate-800/80 overflow-hidden text-white">
+                {/* Background Image with dark blend */}
+                <div 
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 mix-blend-luminosity pointer-events-none scale-105"
+                    style={{ backgroundImage: `url('/images/hero-market-radar.jpg')` }}
+                />
+                {/* Dark gradient overlay on top of image */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#070D18]/90 via-[#070D18]/70 to-[#070D18] pointer-events-none" />
 
-                    <div className="text-center max-w-5xl mx-auto">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-sky-200 shadow-[0_2px_10px_-4px_rgba(40,120,181,0.2)] mb-8 transition-colors cursor-default">
-                            <Sparkles className="w-4 h-4 text-[#2878B5]" />
-                            <span className="text-sm font-bold text-[#1E6297] tracking-wide">New: AI-Native Revenue Protocol</span>
+                {/* Soft ambient gradient orbs */}
+                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[360px] bg-gradient-to-r from-sky-500/20 via-[#2878B5]/25 to-blue-600/20 rounded-full blur-[120px] pointer-events-none" />
+                <div className="absolute -top-24 -right-24 w-[480px] h-[480px] bg-sky-500/10 rounded-full blur-[110px] pointer-events-none" />
+                <div className="absolute -bottom-20 -left-20 w-[450px] h-[450px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
+
+                {/* Modern blueprint cyber grid pattern */}
+                <div
+                    className="absolute inset-0 pointer-events-none opacity-[0.35]"
+                    style={{
+                        backgroundImage: `
+                            linear-gradient(to right, rgba(56, 189, 248, 0.12) 1px, transparent 1px),
+                            linear-gradient(to bottom, rgba(56, 189, 248, 0.12) 1px, transparent 1px)
+                        `,
+                        backgroundSize: '44px 44px',
+                        maskImage: 'radial-gradient(ellipse 75% 70% at 50% 45%, #000 40%, transparent 100%)',
+                        WebkitMaskImage: 'radial-gradient(ellipse 75% 70% at 50% 45%, #000 40%, transparent 100%)',
+                    }}
+                />
+
+                {/* High-tech concentric sector framework rings */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[840px] h-[840px] pointer-events-none opacity-40">
+                    <div className="absolute inset-[8%] rounded-full border border-sky-400/10" />
+                    <div className="absolute inset-[22%] rounded-full border border-dashed border-sky-400/20 animate-[spin_180s_linear_infinite]" />
+                    <div className="absolute inset-[36%] rounded-full border border-sky-400/10" />
+                    <div className="absolute inset-[50%] rounded-full border border-sky-400/20" />
+                </div>
+
+                {/* Top and bottom subtle accent lines */}
+                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-sky-500/40 to-transparent pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-sky-500/30 to-transparent pointer-events-none" />
+
+                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+                    <Reveal width="100%">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-sky-500/30 text-sky-300 text-xs font-bold uppercase tracking-widest mb-8 shadow-lg shadow-sky-950/50 hover:border-sky-400/60 transition-colors">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-400"></span>
+                            </span>
+                            <Sparkles className="w-4 h-4 text-sky-400" />
+                            <span>New: AI-Native Revenue Protocol</span>
                         </div>
 
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-slate-900 mb-8 tracking-tighter leading-[1.05] drop-shadow-sm">
+                        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white mb-8 tracking-tighter leading-[1.05] drop-shadow-sm">
                             AI-Driven Sales Acceleration <br />
-                            <span className="bg-gradient-to-r from-[#2878B5] via-[#1E6297] to-[#0A253D] bg-clip-text text-transparent">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-[#38bdf8] to-blue-400 drop-shadow-[0_0_30px_rgba(56,189,248,0.35)]">
                                 for Crypto Ecosystems
                             </span>
                         </h1>
 
-                        <p className="text-xl md:text-2xl text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium text-balance mb-12">
-                            The AI-Native Revenue Protocol that transforms users, liquidity, and ecosystems into <span className="text-slate-900 font-bold">predictable revenue streams</span>. Built for L1/L2s, DeFi, Gaming, and CEXs.
+                        <p className="text-lg md:text-2xl text-slate-300 leading-relaxed max-w-3xl mx-auto font-normal text-balance mb-12">
+                            The AI-Native Revenue Protocol that transforms users, liquidity, and ecosystems into <span className="text-white font-bold">predictable revenue streams</span>. Built for L1/L2s, DeFi, Gaming, and CEXs.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row gap-5 justify-center items-center mb-16">
+                        <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
                             <Button 
                                 onClick={() => openLongForm({ defaultService: 'Crypto Protocol Revenue AI' })}
-                                className="bg-[#2878B5] hover:bg-[#1E6297] text-white px-10 py-7 h-auto text-lg font-bold rounded-full shadow-[0_10px_30px_rgba(40,120,181,0.35)] hover:shadow-[0_20px_40px_rgba(40,120,181,0.5)] transition-all flex items-center gap-2 group hover:-translate-y-1 cursor-pointer"
+                                className="bg-[#2878B5] hover:bg-[#1E6297] text-white px-10 py-6 h-auto text-base sm:text-lg font-bold rounded-full shadow-[0_10px_30px_rgba(40,120,181,0.4)] hover:shadow-[0_15px_35px_rgba(40,120,181,0.6)] transition-all flex items-center gap-2 group hover:-translate-y-0.5 cursor-pointer"
                             >
-                                Start Scaling Now
+                                <span>Start Scaling Now</span>
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </Button>
                             <Button 
                                 onClick={() => openQuickForm({ defaultService: 'Crypto Protocol Revenue AI' })}
                                 variant="outline" 
-                                className="text-[#2878B5] hover:text-white hover:bg-[#2878B5] px-10 py-7 h-auto text-lg font-bold rounded-full border-2 border-[#2878B5] transition-all bg-[#F0F7FC] shadow-sm cursor-pointer"
+                                className="text-sky-300 hover:text-white hover:bg-[#2878B5] px-10 py-6 h-auto text-base sm:text-lg font-bold rounded-full border-2 border-sky-500/40 hover:border-[#2878B5] transition-all bg-slate-900/60 backdrop-blur-sm shadow-sm cursor-pointer"
                             >
                                 Quick 60-Sec Inquiry
                             </Button>
                         </div>
-                    </div>
+                    </Reveal>
+                </div>
+            </section>
 
-                    {/* Premium Hero Mind Map - Seamlessly Integrated */}
-                    <div className="w-full mt-20 relative">
+            <div className="relative z-10 py-20">
+                {/* Premium Hero Mind Map - Seamlessly Integrated */}
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+                    <div className="w-full relative">
                         <CryptoMindMap />
                     </div>
                 </div>

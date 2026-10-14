@@ -124,33 +124,69 @@ export default function Partners() {
 
     return (
         <div className="min-h-screen bg-white font-sans text-slate-900">
-            {/* 1. Hero Section */}
-            <section id="partner-hero" className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-50 border-b border-slate-200">
-                {/* Background Slideshow */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                    {/* Premium Unified Overlay - Matched with AI Lead Gen Visibility */}
-                    <div className="absolute inset-0 bg-white/30 bg-gradient-to-b from-white/80 via-white/20 to-white/80" />
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-multiply"></div>
+            {/* 1. Hero Section (Dark Background with Background Image) */}
+            <section id="partner-hero" className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden bg-[#070D18] border-b border-slate-800/80 text-white">
+                {/* Background Image with dark blend */}
+                <div 
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 mix-blend-luminosity pointer-events-none scale-105"
+                    style={{ backgroundImage: `url('/images/hero-enterprise-board.jpg')` }}
+                />
+                {/* Dark gradient overlay on top of image */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#070D18]/90 via-[#070D18]/70 to-[#070D18] pointer-events-none" />
+
+                {/* Soft ambient gradient orbs */}
+                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[360px] bg-gradient-to-r from-sky-500/20 via-[#2878B5]/25 to-emerald-500/15 rounded-full blur-[120px] pointer-events-none" />
+                <div className="absolute -top-24 -right-24 w-[480px] h-[480px] bg-emerald-500/10 rounded-full blur-[110px] pointer-events-none" />
+                <div className="absolute -bottom-20 -left-20 w-[450px] h-[450px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
+
+                {/* Modern blueprint cyber grid pattern */}
+                <div
+                    className="absolute inset-0 pointer-events-none opacity-[0.35]"
+                    style={{
+                        backgroundImage: `
+                            linear-gradient(to right, rgba(56, 189, 248, 0.12) 1px, transparent 1px),
+                            linear-gradient(to bottom, rgba(56, 189, 248, 0.12) 1px, transparent 1px)
+                        `,
+                        backgroundSize: '44px 44px',
+                        maskImage: 'radial-gradient(ellipse 75% 70% at 50% 45%, #000 40%, transparent 100%)',
+                        WebkitMaskImage: 'radial-gradient(ellipse 75% 70% at 50% 45%, #000 40%, transparent 100%)',
+                    }}
+                />
+
+                {/* Concentric partner network rings */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[840px] h-[840px] pointer-events-none opacity-40">
+                    <div className="absolute inset-[8%] rounded-full border border-sky-400/10" />
+                    <div className="absolute inset-[22%] rounded-full border border-dashed border-sky-400/20 animate-[spin_180s_linear_infinite]" />
+                    <div className="absolute inset-[36%] rounded-full border border-sky-400/10" />
+                    <div className="absolute inset-[50%] rounded-full border border-sky-400/20" />
                 </div>
+
+                {/* Top and bottom subtle accent lines */}
+                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-sky-500/40 to-transparent pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-sky-500/30 to-transparent pointer-events-none" />
 
                 <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
                     <Reveal width="100%">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-emerald-100/60 shadow-[0_2px_10px_-4px_rgba(6,78,59,0.3)] text-[#1E6297] text-sm font-bold mb-8 backdrop-blur-sm animate-fade-in-up">
-                            <Handshake className="w-4 h-4 text-[#2878B5]" />
-                            <span className="bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent">Partner Program</span>
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-sky-500/30 text-sky-300 text-xs font-bold uppercase tracking-widest mb-8 shadow-lg shadow-sky-950/50 hover:border-sky-400/60 transition-colors">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-400"></span>
+                            </span>
+                            <Handshake className="w-4 h-4 text-sky-400" />
+                            <span>Partner Program</span>
                         </div>
 
-                        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-8 tracking-tight leading-[1.1] text-slate-900 drop-shadow-sm">
-                            Grow with <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2878B5] via-emerald-700 to-teal-700">ProfitMachines</span>
+                        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black mb-8 tracking-tight leading-[1.1] text-white drop-shadow-sm">
+                            Grow with <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-[#38bdf8] to-emerald-400 drop-shadow-[0_0_30px_rgba(56,189,248,0.35)]">ProfitMachines</span>
                         </h1>
 
-                        <p className="text-xl sm:text-2xl text-slate-600 max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
+                        <p className="text-xl sm:text-2xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-normal">
                             Join our ecosystem of industry-leading partners. Accelerate your growth by delivering the world's most advanced AI revenue platform to your clients.
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-5 justify-center">
                             <a href="#partner-form">
-                                <Button className="bg-gradient-to-r from-[#2878B5] to-emerald-600 hover:from-blue-700 hover:to-indigo-700 text-white px-10 py-6 text-lg h-auto rounded-full shadow-lg shadow-[#2878B5]/25 hover:shadow-[#2878B5]/35 transition-all hover:-translate-y-1">
+                                <Button className="bg-[#2878B5] hover:bg-[#1E6297] text-white px-10 py-6 text-lg h-auto rounded-full shadow-lg shadow-[#2878B5]/40 hover:shadow-[#2878B5]/60 transition-all hover:-translate-y-1 font-bold cursor-pointer">
                                     Become a Partner
                                 </Button>
                             </a>
