@@ -85,7 +85,7 @@ export default function VisitorDashboard() {
     setError('');
     try {
       // Fetch from Airtable directly via the get-visitors API endpoint
-      const res = await fetch('/api/get-visitors');
+      const res = await fetch('/api/track-visitor');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       setVisitors(data.visitors || []);

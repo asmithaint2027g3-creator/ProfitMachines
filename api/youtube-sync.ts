@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import publishHandler from './_lib/youtube-publish.ts';
 
 /**
  * api/youtube-sync.ts
@@ -847,6 +848,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
+    }
+
+    // ── Dispatch to YouTube Publishing Submodule if requested ───────────────
+    if (req.query.action === 'publish' || req.body?.action === 'publish') {
+        return publishHandler(req, res);
     }
 
     const cronSecret = (process.env.CRON_SECRET || 'profitmachines_secure_cron_2026').trim();

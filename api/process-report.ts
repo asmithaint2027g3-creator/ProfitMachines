@@ -1,14 +1,17 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { ReportController } from "./_lib/report-controller.ts";
+import { RptCtl } from "../src/controllers/rptCtl.ts";
 
 /**
  * api/process-report.ts
- * ProfitMachines Secure Report Automation Route Entrypoint
+ * ProfitMachines Report Automation API — Unified Report Endpoint
  *
- * Coordinates execution via ReportController, maintaining a clean
- * separation of concerns between HTTP routing, controller orchestration,
- * and service integrations (Sheets, Jira, and Email).
+ * Supports DAY (daily), WEK (weekly), MON (monthly) report generation via:
+ *   GET  /api/process-report?type=daily&secret=CRON_SECRET
+ *   POST /api/process-report  body: { type: "daily"|"weekly"|"monthly", secret: "..." }
+ *
+ * Coordinates execution through RptCtl → GshService → JirService → EmlService.
+ * Vercel Cron invokes this with x-vercel-cron header and ?type= query param.
  */
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  return ReportController.handle(req, res);
+  return RptCtl.handle(req, res);
 }

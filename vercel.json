@@ -2,6 +2,42 @@
   "framework": "vite",
   "rewrites": [
     {
+      "source": "/api/rpt/daily",
+      "destination": "/api/process-report?type=daily"
+    },
+    {
+      "source": "/api/rpt/weekly",
+      "destination": "/api/process-report?type=weekly"
+    },
+    {
+      "source": "/api/rpt/monthly",
+      "destination": "/api/process-report?type=monthly"
+    },
+    {
+      "source": "/api/book-calendar",
+      "destination": "/api/calendar?action=book"
+    },
+    {
+      "source": "/api/calendar-availability",
+      "destination": "/api/calendar?action=availability"
+    },
+    {
+      "source": "/api/cancel-calendar",
+      "destination": "/api/calendar?action=cancel"
+    },
+    {
+      "source": "/api/get-visitors",
+      "destination": "/api/track-visitor"
+    },
+    {
+      "source": "/api/geo",
+      "destination": "/api/track-visitor?action=geo"
+    },
+    {
+      "source": "/api/youtube-publish",
+      "destination": "/api/youtube-sync?action=publish"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
@@ -10,6 +46,18 @@
     {
       "path": "/api/youtube-sync",
       "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/process-report?type=daily",
+      "schedule": "30 2 * * *"
+    },
+    {
+      "path": "/api/process-report?type=weekly",
+      "schedule": "30 2 * * 1"
+    },
+    {
+      "path": "/api/process-report?type=monthly",
+      "schedule": "30 2 1 * *"
     }
   ]
 }

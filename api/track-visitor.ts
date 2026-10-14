@@ -105,10 +105,72 @@ async function saveToAirtable(visitor: VisitorRecord): Promise<void> {
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
+
+  // ── GET: Read all visitor records from Airtable OR Geo info ──
+  if (req.method === 'GET') {
+    if (req.query.action === 'geo') {
+      const country = (req.headers['x-vercel-ip-country'] as string) || 'Unknown';
+      const city = decodeURIComponent((req.headers['x-vercel-ip-city'] as string) || 'Unknown');
+      const region = (req.headers['x-vercel-ip-country-region'] as string) || 'Unknown';
+      const timezone = (req.headers['x-vercel-ip-timezone'] as string) || 'UTC';
+      const latitude = (req.headers['x-vercel-ip-latitude'] as string) || null;
+      const longitude = (req.headers['x-vercel-ip-longitude'] as string) || null;
+
+      return res.status(200).json({
+        success: true,
+        geo: {
+          country,
+          city,
+          region,
+          timezone,
+          coordinates: latitude && longitude ? { latitude, longitude } : null
+        }
+      });
+    }
+
+    const pat = process.env.AIRTABLE_PAT;
+    const baseId = process.env.AIRTABLE_BASE_ID;
+    const tableName = 'Visitors';
+    if (!pat || !baseId) {
+      return res.status(500).json({ error: 'Airtable credentials not configured.' });
+    }
+    try {
+      const url = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}?sort[0][field]=Visited At&sort[0][direction]=desc&maxRecords=200`;
+      const response = await fetch(url, { headers: { Authorization: `Bearer ${pat}` } });
+      if (!response.ok) {
+        const err = await response.text();
+        return res.status(response.status).json({ error: 'Failed to fetch from Airtable', detail: err });
+      }
+      const data = await response.json();
+      const records = data.records || [];
+      const visitors = records.map((record: any) => ({
+        id: record.id,
+        ip: record.fields['IP Address'] || 'Unknown',
+        country: record.fields['Country'] || 'Unknown',
+        city: record.fields['City'] || 'Unknown',
+        region: record.fields['Region'] || '',
+        timezone: record.fields['Timezone'] || '',
+        page: record.fields['Page Visited'] || '/',
+        referrer: record.fields['Referrer'] || 'Direct',
+        device: record.fields['Device Type'] || 'Desktop',
+        browser: record.fields['Browser'] || 'Unknown',
+        os: record.fields['Operating System'] || 'Unknown',
+        coordinates: record.fields['Coordinates'] || null,
+        visitedAt: record.fields['Visited At'] || record.createdTime,
+        sessionId: record.fields['Session ID'] || '',
+      }));
+      return res.status(200).json({ success: true, visitors, total: visitors.length });
+    } catch (err) {
+      console.error('[track-visitor GET] Error:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  // ── POST: Track new visitor ──
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
   try {
