@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import bookHandler from './_lib/book-calendar.ts';
-import availabilityHandler from './_lib/calendar-availability.ts';
-import cancelHandler from './_lib/cancel-calendar.ts';
+import bookHandler from './_lib/book-calendar';
+import availabilityHandler from './_lib/calendar-availability';
+import cancelHandler from './_lib/cancel-calendar';
 
 /**
  * api/calendar.ts

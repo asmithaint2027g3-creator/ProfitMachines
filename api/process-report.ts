@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { RptCtl } from "../src/controllers/rptCtl.ts";
+import { RptCtl } from "./_lib/rptCtl";
 
 /**
  * api/process-report.ts

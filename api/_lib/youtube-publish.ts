@@ -3,9 +3,9 @@ import {
     createYouTubeVideoPublishSession, 
     getYouTubeAccessToken, 
     YouTubeVideoData 
-} from './youtube.ts';
-import { syncToYouTubeGoogleSheet } from './youtube-sheets.ts';
-import { syncVideoAnalyticsToJira } from './youtube-jira.ts';
+} from './youtube';
+import { syncToYouTubeGoogleSheet } from './youtube-sheets';
+import { syncVideoAnalyticsToJira } from './youtube-jira';
 
 /**
  * api/youtube-publish.ts

@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import publishHandler from './_lib/youtube-publish.ts';
+import publishHandler from './_lib/youtube-publish';
 
 /**
  * api/youtube-sync.ts
