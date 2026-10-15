@@ -171,40 +171,41 @@ export default function OfferingIntelligenceView({ data }: { data: OfferingDetai
                         return (
                             <div
                                 key={cIdx}
-                                className="bg-white border border-slate-200/90 rounded-2xl p-6 hover:shadow-md hover:border-primary/40 transition-all flex flex-col justify-between group"
+                                className="bg-gradient-to-br from-[#020F1E] via-[#0A2540] to-[#0D2E4E] border border-white/10 hover:border-[#5CAAE6]/50 rounded-2xl p-6 shadow-xl transition-all flex flex-col justify-between group text-white relative overflow-hidden"
                             >
+                                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#5CAAE6]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                                 <div>
                                     <div className="flex items-center justify-between gap-2 mb-4">
-                                        <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+                                        <div className="w-10 h-10 rounded-xl bg-white/10 text-[#5CAAE6] border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-[#2878B5] group-hover:text-white transition-colors">
                                             <CardIcon className="w-5 h-5" />
                                         </div>
                                         {card.badge && (
-                                            <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-md">
+                                            <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#5CAAE6] bg-[#5CAAE6]/15 border border-[#5CAAE6]/30 px-2.5 py-1 rounded-md">
                                                 {card.badge}
                                             </span>
                                         )}
                                     </div>
 
                                     <div className="mb-2">
-                                        <span className="text-2xl sm:text-3xl font-black text-slate-900 font-heading tracking-tight">
+                                        <span className="text-2xl sm:text-3xl font-black text-white font-heading tracking-tight" style={{ color: '#FFFFFF' }}>
                                             {card.value}
                                         </span>
-                                        <div className="text-xs font-bold text-primary mt-0.5">
+                                        <div className="text-xs font-bold text-[#5CAAE6] mt-0.5">
                                             {card.subtitle}
                                         </div>
                                     </div>
 
-                                    <h3 className="text-sm font-extrabold text-slate-800 mb-2">
+                                    <h3 className="text-sm font-extrabold text-white mb-2">
                                         {card.label}
                                     </h3>
 
-                                    <p className="text-xs text-slate-600 leading-relaxed font-medium mb-4">
+                                    <p className="text-xs text-slate-300 leading-relaxed font-normal mb-4">
                                         {card.description}
                                     </p>
                                 </div>
 
-                                <div className="pt-3 border-t border-slate-100 text-[11px] text-slate-500 leading-normal">
-                                    <span className="font-bold text-slate-700">Methodology:</span> {card.methodology}
+                                <div className="pt-3 border-t border-white/10 text-[11px] text-slate-300 leading-normal">
+                                    <span className="font-bold text-[#5CAAE6]">Methodology:</span> {card.methodology}
                                 </div>
                             </div>
                         );
@@ -283,12 +284,12 @@ export default function OfferingIntelligenceView({ data }: { data: OfferingDetai
 
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                             {activeTab.details.map((detail, dIdx) => (
-                                <div key={dIdx} className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
-                                    <h4 className="text-sm font-extrabold text-slate-900 mb-2 flex items-center gap-2">
-                                        <span className="w-2 h-2 rounded-full bg-primary" />
+                                <div key={dIdx} className="p-5 rounded-2xl bg-gradient-to-br from-[#020F1E] via-[#0A2540] to-[#0D2E4E] border border-white/10 text-white shadow-md">
+                                    <h4 className="text-sm font-extrabold text-white mb-2 flex items-center gap-2">
+                                        <span className="w-2 h-2 rounded-full bg-[#5CAAE6]" />
                                         {detail.heading}
                                     </h4>
-                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
                                         {detail.text}
                                     </p>
                                 </div>
@@ -539,12 +540,12 @@ export default function OfferingIntelligenceView({ data }: { data: OfferingDetai
 
                     <div className="grid md:grid-cols-2 gap-6">
                         {data.faqs.map((faq, fIdx) => (
-                            <div key={fIdx} className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
-                                <h3 className="text-sm font-bold text-slate-900 mb-2 flex items-start gap-2">
-                                    <HelpCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                            <div key={fIdx} className="p-6 rounded-2xl bg-gradient-to-br from-[#020F1E] via-[#0A2540] to-[#0D2E4E] border border-white/10 text-white shadow-md">
+                                <h3 className="text-sm font-bold text-white mb-2 flex items-start gap-2">
+                                    <HelpCircle className="w-4 h-4 text-[#5CAAE6] shrink-0 mt-0.5" />
                                     <span>{faq.question}</span>
                                 </h3>
-                                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium pl-6">
+                                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal pl-6">
                                     {faq.answer}
                                 </p>
                             </div>
