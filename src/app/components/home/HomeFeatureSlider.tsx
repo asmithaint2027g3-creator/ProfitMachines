@@ -352,12 +352,12 @@ export default function HomeFeatureSlider() {
                         >
 
                             {/* Main Headline */}
-                            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.08] tracking-tight mb-2 font-heading">
+                            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold !text-white leading-[1.08] tracking-tight mb-2 drop-shadow-md" style={{ color: '#FFFFFF' }}>
                                 {activeSlide.title}
                             </h1>
-                            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold italic text-[#5CAAE6] leading-[1.08] tracking-tight mb-6 font-heading">
+                            <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold italic !text-[#60B5FF] leading-[1.08] tracking-tight mb-6 drop-shadow-md" style={{ color: '#60B5FF' }}>
                                 {activeSlide.highlightTitle}.
-                            </h1>
+                            </h2>
 
                             {/* Description */}
                             <p className="text-base sm:text-lg lg:text-xl text-white/80 leading-relaxed mb-8 max-w-2xl font-normal">

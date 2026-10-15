@@ -44,7 +44,6 @@ export default function TrustedBySection() {
                             <div
                                 key={idx}
                                 className="h-10 px-5 bg-slate-50 border border-slate-200/70 rounded-lg flex items-center justify-center text-slate-600 font-semibold tracking-tight text-sm shrink-0 hover:bg-[#F0F7FC] hover:border-[#BAE0F8] hover:text-[#2878B5] transition-all duration-300 cursor-default"
-                                style={{ fontFamily: 'Inter, sans-serif' }}
                             >
                                 {partner}
                             </div>
@@ -64,7 +63,6 @@ export default function TrustedBySection() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.4, delay: i * 0.07 }}
                             className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-600 bg-slate-50 border border-slate-200/80 rounded-xl py-3 px-4 hover:bg-[#F0F7FC] hover:border-[#BAE0F8] hover:text-[#2878B5] transition-all duration-200"
-                            style={{ fontFamily: 'Inter, sans-serif' }}
                         >
                             <Icon className="w-3.5 h-3.5 shrink-0 text-[#2878B5]" />
                             <span>{label}</span>

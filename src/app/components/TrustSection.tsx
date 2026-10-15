@@ -55,13 +55,12 @@ function StatCard({ value, suffix, label, delay }: { value: number; suffix: stri
 
             <div
                 className="text-4xl md:text-5xl font-black text-white mb-2 tabular-nums tracking-tight"
-                style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.03em' }}
+                style={{ color: '#FFFFFF' }}
             >
                 {count}{suffix}
             </div>
             <div
-                className="text-[11px] font-bold text-[#BAE0F8] uppercase tracking-[0.15em]"
-                style={{ fontFamily: 'Inter, sans-serif' }}
+                className="text-xs font-bold text-[#BAE0F8] uppercase tracking-[0.15em]"
             >
                 {label}
             </div>

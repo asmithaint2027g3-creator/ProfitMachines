@@ -74,10 +74,11 @@
     --sidebar-border: #E2E8F0;
     --sidebar-ring: #2878B5;
 
-    /* Typography — Premium Enterprise Stack */
-    --font-sans: 'Inter', 'Satoshi', system-ui, -apple-system, sans-serif;
-    --font-heading: 'Satoshi', 'Inter', system-ui, sans-serif;
-    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    /* Typography — Times New Roman */
+    --font-sans: 'Times New Roman', 'Tinos', Times, 'Nimbus Roman No9 L', serif;
+    --font-heading: 'Times New Roman', 'Tinos', Times, 'Nimbus Roman No9 L', serif;
+    --font-serif: 'Times New Roman', 'Tinos', Times, 'Nimbus Roman No9 L', serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 /* ═══ Global Font Application ═════════════════════════════ */
@@ -85,20 +86,49 @@ html,
 body {
     background-color: var(--background);
     color: var(--foreground);
-    font-family: 'Inter', 'Satoshi', system-ui, -apple-system, sans-serif !important;
+    font-family: 'Times New Roman', 'Tinos', Times, serif !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
 }
 
+*,
+*::before,
+*::after {
+    font-family: 'Times New Roman', 'Tinos', Times, serif !important;
+}
+
+/* Default headings inherit color so parent dark/light styles work properly */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Satoshi', 'Inter', system-ui, sans-serif !important;
-    letter-spacing: -0.025em;
+    font-family: 'Times New Roman', 'Tinos', Times, serif !important;
+    letter-spacing: -0.01em;
+}
+
+/* Base heading color in light areas */
+:root h1, :root h2, :root h3, :root h4, :root h5, :root h6 {
     color: #0A2540;
 }
 
+/* Dark mode and dark containers: crystal clear high contrast */
+.text-white,
+[class*="text-white"] {
+    color: #FFFFFF !important;
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
+[class*="bg-slate-900"] h1, [class*="bg-slate-900"] h2, [class*="bg-slate-900"] h3, [class*="bg-slate-900"] h4,
+[class*="bg-slate-950"] h1, [class*="bg-slate-950"] h2, [class*="bg-slate-950"] h3, [class*="bg-slate-950"] h4,
+[class*="from-slate-900"] h1, [class*="from-slate-900"] h2, [class*="from-slate-900"] h3,
+[class*="from-[#020F1E]"] h1, [class*="from-[#020F1E]"] h2, [class*="from-[#020F1E]"] h3,
+[class*="bg-[#020F1E]"] h1, [class*="bg-[#020F1E]"] h2, [class*="bg-[#020F1E]"] h3,
+[class*="bg-[#0A2540]"] h1, [class*="bg-[#0A2540]"] h2, [class*="bg-[#0A2540]"] h3,
+[class*="bg-[#040f1a]"] h1, [class*="bg-[#040f1a]"] h2, [class*="bg-[#040f1a]"] h3,
+[class*="bg-[#071b30]"] h1, [class*="bg-[#071b30]"] h2, [class*="bg-[#071b30]"] h3 {
+    color: #FFFFFF !important;
+}
+
 p, span, a, button, input, textarea, select, li, td, th {
-    font-family: 'Inter', system-ui, sans-serif !important;
+    font-family: 'Times New Roman', 'Tinos', Times, serif !important;
 }
 
 code, pre, .font-mono {

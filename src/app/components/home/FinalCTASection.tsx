@@ -36,8 +36,7 @@ export default function FinalCTASection() {
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
                         style={{
                             background: 'rgba(40,120,181,0.15)',
-                            border: '1px solid rgba(92,170,230,0.3)',
-                            fontFamily: 'Inter, sans-serif'
+                            border: '1px solid rgba(92,170,230,0.3)'
                         }}>
                         <span className="flex h-2 w-2 rounded-full bg-[#5CAAE6] animate-pulse" />
                         <span className="text-xs font-bold text-[#BAE0F8] tracking-[0.15em] uppercase">Enterprise Ingestion Ready</span>
@@ -46,13 +45,13 @@ export default function FinalCTASection() {
                     {/* Headline */}
                     <h2
                         className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-[1.05]"
-                        style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.03em' }}
+                        style={{ color: '#FFFFFF', letterSpacing: '-0.01em' }}
                     >
                         Ready to Deploy Your{' '}
                         <span className="text-[#5CAAE6]">Autonomous Revenue OS?</span>
                     </h2>
 
-                    <p className="text-lg sm:text-xl text-[#BAE0F8]/80 mb-12 max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <p className="text-lg sm:text-xl text-[#BAE0F8]/90 mb-12 max-w-2xl mx-auto leading-relaxed">
                         Join forward-thinking enterprise teams replacing fragmented tools with a unified, self-learning GTM intelligence infrastructure.
                     </p>
 
