@@ -98,33 +98,10 @@ body {
     font-family: 'Times New Roman', 'Tinos', Times, serif !important;
 }
 
-/* Default headings inherit color so parent dark/light styles work properly */
+/* Default headings font */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Times New Roman', 'Tinos', Times, serif !important;
     letter-spacing: -0.01em;
-}
-
-/* Base heading color in light areas */
-:root h1, :root h2, :root h3, :root h4, :root h5, :root h6 {
-    color: #0A2540;
-}
-
-/* Dark mode and dark containers: crystal clear high contrast */
-.text-white,
-[class*="text-white"] {
-    color: #FFFFFF !important;
-}
-
-.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
-[class*="bg-slate-900"] h1, [class*="bg-slate-900"] h2, [class*="bg-slate-900"] h3, [class*="bg-slate-900"] h4,
-[class*="bg-slate-950"] h1, [class*="bg-slate-950"] h2, [class*="bg-slate-950"] h3, [class*="bg-slate-950"] h4,
-[class*="from-slate-900"] h1, [class*="from-slate-900"] h2, [class*="from-slate-900"] h3,
-[class*="from-[#020F1E]"] h1, [class*="from-[#020F1E]"] h2, [class*="from-[#020F1E]"] h3,
-[class*="bg-[#020F1E]"] h1, [class*="bg-[#020F1E]"] h2, [class*="bg-[#020F1E]"] h3,
-[class*="bg-[#0A2540]"] h1, [class*="bg-[#0A2540]"] h2, [class*="bg-[#0A2540]"] h3,
-[class*="bg-[#040f1a]"] h1, [class*="bg-[#040f1a]"] h2, [class*="bg-[#040f1a]"] h3,
-[class*="bg-[#071b30]"] h1, [class*="bg-[#071b30]"] h2, [class*="bg-[#071b30]"] h3 {
-    color: #FFFFFF !important;
 }
 
 p, span, a, button, input, textarea, select, li, td, th {

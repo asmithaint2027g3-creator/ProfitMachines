@@ -2000,31 +2000,29 @@ export default function DiscoveryPage() {
                                 return items.map((disc, idx) => {
                                     const IconComp = disc.icon;
                                     return (
-                                        <div key={idx} className="bg-gradient-to-br from-[#020F1E] via-[#0A2540] to-[#0D2E4E] rounded-3xl p-8 border border-white/10 shadow-xl hover:shadow-2xl hover:border-[#5CAAE6]/50 transition-all duration-300 flex flex-col justify-between group text-white relative overflow-hidden">
-                                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#5CAAE6]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        <div key={idx} className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-all duration-300 flex flex-col justify-between group">
                                             <div>
                                                 <div className="flex items-center justify-between mb-4">
-                                                    <span className="text-xs font-bold uppercase tracking-wider text-[#5CAAE6] bg-[#5CAAE6]/15 border border-[#5CAAE6]/30 px-3 py-1 rounded-full flex items-center gap-1.5">
-                                                        <IconComp className="w-3.5 h-3.5 text-[#5CAAE6]" />
+                                                    <span className="text-xs font-bold uppercase tracking-wider text-[#2878B5] bg-emerald-50 px-3 py-1 rounded-full flex items-center gap-1.5">
+                                                        <IconComp className="w-3.5 h-3.5" />
                                                         Module 0{idx + 1}
                                                     </span>
-                                                    <span className="text-xs font-semibold text-emerald-300 bg-emerald-500/15 border border-emerald-400/30 px-2.5 py-1 rounded-full">
+                                                    <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
                                                         {disc.impact}
                                                     </span>
                                                 </div>
-                                                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#5CAAE6] transition-colors">
+                                                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-[#2878B5] transition-colors">
                                                     {disc.name}
                                                 </h3>
-                                                <p className="text-slate-300 text-sm font-normal italic mb-6">
+                                                <p className="text-slate-600 text-sm font-medium italic mb-6">
                                                     "{disc.question}"
                                                 </p>
                                             </div>
                                             <Link 
                                                 to={`/offerings/profit-pool-discovery/${disc.slug}`}
-                                                className="inline-flex items-center gap-2 text-sm font-bold text-[#5CAAE6] hover:text-white transition-colors pt-4 border-t border-white/10"
+                                                className="inline-flex items-center gap-2 text-sm font-bold text-[#2878B5] hover:text-[#1E6297] transition-colors pt-4 border-t border-slate-100"
                                             >
-                                                <span>Explore Discovery Layer</span>
-                                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                                Explore Discovery Layer <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                             </Link>
                                         </div>
                                     );

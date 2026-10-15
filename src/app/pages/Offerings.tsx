@@ -1252,30 +1252,32 @@ export default function Offerings() {
                                     : overviewItems;
 
                             return items.map((disc, idx) => (
-                                <div key={idx} className="bg-gradient-to-br from-[#020F1E] via-[#0A2540] to-[#0D2E4E] rounded-2xl p-7 sm:p-8 border border-white/10 hover:border-[#5CAAE6]/50 shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group text-white relative overflow-hidden">
-                                    <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#5CAAE6]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <div key={idx} className="bg-white rounded-2xl p-7 sm:p-8 border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-[#2878B5]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
                                     <div>
                                         <div className="flex items-center justify-between gap-2 mb-4">
-                                            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#5CAAE6] bg-[#5CAAE6]/15 px-2.5 py-1 rounded-md border border-[#5CAAE6]/30">
+                                            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#1E6297] bg-[#F0F7FC] px-2.5 py-1 rounded-md border border-[#E1EFF8]">
                                                 Layer 0{idx + 1}
                                             </span>
-                                            <span className="text-[11px] font-semibold text-emerald-300 bg-emerald-500/15 px-2.5 py-1 rounded-md border border-emerald-400/30 truncate">
+                                            <span className="text-[11px] font-semibold text-[#1E6297] bg-[#E1EFF8] px-2.5 py-1 rounded-md border border-[#BAE0F8] truncate">
                                                 {disc.impact}
                                             </span>
                                         </div>
-                                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#5CAAE6] transition-colors leading-snug">
+                                        <h3 className="text-xl font-bold text-[#0A2540] mb-3 group-hover:text-[#2878B5] transition-colors leading-snug"
+                                            style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.02em' }}>
                                             {disc.name}
                                         </h3>
-                                        <p className="text-slate-300 text-sm font-normal italic mb-6">
+                                        <p className="text-slate-600 text-sm font-normal italic mb-6"
+                                            style={{ fontFamily: 'Inter, sans-serif' }}>
                                             "{disc.question}"
                                         </p>
                                     </div>
                                     <Link 
                                         to={`/offerings/profit-pool-discovery/${disc.slug}`}
-                                        className="inline-flex items-center gap-2 text-xs font-bold text-[#5CAAE6] group-hover:text-white transition-colors pt-4 border-t border-white/10"
+                                        className="w-full mt-2 py-2.5 px-4 rounded-xl bg-[#2878B5] text-white font-bold text-xs flex items-center justify-center gap-2 hover:bg-[#1E6297] shadow-sm shadow-[#2878B5]/25 transition-all group-hover:shadow-md"
+                                        style={{ fontFamily: 'Inter, sans-serif' }}
                                     >
                                         <span>Explore Discovery Layer</span>
-                                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                                     </Link>
                                 </div>
                             ));
@@ -1438,7 +1440,7 @@ export default function Offerings() {
                                                                     <TabsTrigger
                                                                         key={i}
                                                                         value={stage.name}
-                                                                        className="w-full justify-start text-left data-[state=active]:bg-[#2878B5] data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-indigo-500/25 bg-white text-slate-600 rounded-xl px-5 py-3 h-auto text-sm font-semibold border border-slate-200 hover:border-emerald-200 hover:text-[#2878B5] transition-all duration-300"
+                                                                        className="w-full justify-start text-left data-[state=active]:!bg-[#2878B5] data-[state=active]:!text-white data-[state=active]:shadow-md bg-white text-slate-800 rounded-xl px-5 py-3.5 h-auto text-sm font-bold border border-slate-200/90 hover:border-[#2878B5]/50 hover:text-[#2878B5] hover:bg-[#F0F7FC] transition-all duration-200 shadow-2xs"
                                                                     >
                                                                         {stage.name}
                                                                     </TabsTrigger>
@@ -1572,7 +1574,7 @@ export default function Offerings() {
                         <div className="text-center">
                             <Button 
                                 onClick={() => openLongForm({ defaultService: 'Strategic Growth Transformation' })}
-                                className="bg-emerald-800 text-white hover:bg-emerald-900 text-lg px-10 py-6 h-auto shadow-xl rounded-full transition-all font-bold"
+                                className="bg-[#2878B5] text-white hover:bg-[#1E6297] text-lg px-10 py-6 h-auto shadow-xl shadow-[#2878B5]/30 rounded-full transition-all font-bold border-2 border-[#2878B5]/50"
                             >
                                 Start Your Transformation Today
                             </Button>

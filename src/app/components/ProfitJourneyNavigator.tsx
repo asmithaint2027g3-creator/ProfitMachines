@@ -341,31 +341,38 @@ export default function ProfitJourneyNavigator() {
                         </button>
                     </div>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                         {offeringCards.map((card) => {
                             const Icon = card.icon;
                             return (
                                 <Link
                                     key={card.code + card.name}
                                     to={card.path}
-                                    className="group flex flex-col p-5 rounded-2xl border border-white/10 bg-gradient-to-br from-[#020F1E] via-[#0A2540] to-[#0D2E4E] hover:from-[#0A2540] hover:to-[#133E65] hover:border-[#5CAAE6]/60 hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
+                                    className="group flex flex-col p-6 rounded-2xl border border-slate-200/90 bg-white hover:border-[#2878B5] hover:shadow-card-hover transition-all duration-300"
                                 >
-                                    {/* Top subtle glow accent line */}
-                                    <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#5CAAE6]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-
                                     <div className="flex items-center justify-between mb-4">
-                                        <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-[#5CAAE6]/15 text-[#5CAAE6] border border-[#5CAAE6]/30">{card.code}</span>
-                                        <div className="w-9 h-9 rounded-lg bg-white/10 text-[#5CAAE6] border border-white/10 flex items-center justify-center group-hover:bg-[#2878B5] group-hover:text-white transition-colors">
+                                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#1E6297] bg-[#E1EFF8] border border-[#BAE0F8] px-2.5 py-1 rounded-full">
+                                            {card.code}
+                                        </span>
+                                        <div className="w-9 h-9 rounded-xl bg-[#E1EFF8] text-[#2878B5] flex items-center justify-center group-hover:bg-[#2878B5] group-hover:text-white transition-all shadow-2xs">
                                             <Icon className="w-4 h-4" />
                                         </div>
                                     </div>
-                                    <h4 className="text-base font-bold text-white mb-2 group-hover:text-[#5CAAE6] transition-colors">{card.name}</h4>
-                                    <p className="text-xs text-slate-300 leading-relaxed mb-3 font-normal">{card.description}</p>
-                                    <div className="mt-auto pt-3 border-t border-white/10 space-y-1.5">
-                                        <p className="text-[11px] text-slate-300"><span className="font-bold text-amber-300">Problem:</span> {card.problem}</p>
-                                        <p className="text-[11px] text-slate-300"><span className="font-bold text-emerald-300">Outcome:</span> {card.outcome}</p>
+                                    <h4 className="text-base font-bold text-[#0A2540] mb-2 group-hover:text-[#2878B5] transition-colors leading-snug">
+                                        {card.name}
+                                    </h4>
+                                    <p className="text-xs text-slate-600 leading-relaxed mb-4 font-normal">
+                                        {card.description}
+                                    </p>
+                                    <div className="mt-auto pt-3 border-t border-slate-100 space-y-2 mb-4">
+                                        <p className="text-xs text-slate-700 leading-snug">
+                                            <span className="font-bold text-amber-700">Problem:</span> {card.problem}
+                                        </p>
+                                        <p className="text-xs text-slate-700 leading-snug">
+                                            <span className="font-bold text-[#1E6297]">Outcome:</span> {card.outcome}
+                                        </p>
                                     </div>
-                                    <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#5CAAE6] group-hover:text-white transition-colors">
+                                    <span className="w-full py-2.5 px-4 rounded-xl bg-[#2878B5] text-white font-bold text-xs flex items-center justify-center gap-2 group-hover:bg-[#1E6297] shadow-sm shadow-[#2878B5]/25 transition-all">
                                         <span>Explore Offering</span>
                                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                                     </span>
@@ -376,25 +383,25 @@ export default function ProfitJourneyNavigator() {
                 </div>
 
                 <div className="mt-16 grid lg:grid-cols-2 gap-6">
-                    <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#020F1E] via-[#0A2540] to-[#0D2E4E] text-white p-8 shadow-xl">
+                    <div className="rounded-3xl border border-slate-200 bg-white p-8">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 rounded-xl bg-[#5CAAE6]/15 text-[#5CAAE6] border border-[#5CAAE6]/30 flex items-center justify-center">
-                                <Rocket className="w-5 h-5 text-[#5CAAE6]" />
+                            <div className="w-10 h-10 rounded-xl bg-[#2878B5]/10 text-[#2878B5] flex items-center justify-center">
+                                <Rocket className="w-5 h-5" />
                             </div>
                             <div>
-                                <p className="text-xs font-bold uppercase tracking-widest text-[#5CAAE6]">Accelerate Growth</p>
-                                <h3 className="text-lg font-bold text-white">AI Growth Engines</h3>
+                                <p className="text-xs font-bold uppercase tracking-widest text-[#2878B5]">Accelerate Growth</p>
+                                <h3 className="text-lg font-bold text-slate-900">AI Growth Engines</h3>
                             </div>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-3">
                             {supportingCapabilities.map((cap) => {
                                 const Icon = cap.icon;
                                 return (
-                                    <div key={cap.name} className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.06] border border-white/10">
-                                        <Icon className="w-4 h-4 text-[#5CAAE6] mt-0.5 shrink-0" />
+                                    <div key={cap.name} className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                                        <Icon className="w-4 h-4 text-[#2878B5] mt-0.5 shrink-0" />
                                         <div>
-                                            <p className="text-xs font-bold text-white">{cap.name}</p>
-                                            <p className="text-[11px] text-slate-300 mt-0.5 leading-relaxed font-normal">{cap.desc}</p>
+                                            <p className="text-xs font-bold text-slate-800">{cap.name}</p>
+                                            <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">{cap.desc}</p>
                                         </div>
                                     </div>
                                 );
@@ -402,30 +409,30 @@ export default function ProfitJourneyNavigator() {
                         </div>
                     </div>
 
-                    <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#020F1E] via-[#0A2540] to-[#0D2E4E] text-white p-8 shadow-xl">
+                    <div className="rounded-3xl border border-slate-200 bg-white p-8">
                         <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-300 border border-emerald-400/30 flex items-center justify-center">
-                                <TrendingUp className="w-5 h-5 text-emerald-300" />
+                            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                                <TrendingUp className="w-5 h-5" />
                             </div>
                             <div>
-                                <p className="text-xs font-bold uppercase tracking-widest text-emerald-300">Sales Acceleration</p>
-                                <h3 className="text-lg font-bold text-white">Revenue Execution</h3>
+                                <p className="text-xs font-bold uppercase tracking-widest text-emerald-600">Sales Acceleration</p>
+                                <h3 className="text-lg font-bold text-slate-900">Revenue Execution</h3>
                             </div>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-3">
                             {salesAccelerationCapabilities.map((cap) => {
                                 const Icon = cap.icon;
                                 return (
-                                    <div key={cap.name} className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.06] border border-white/10">
-                                        <Icon className="w-4 h-4 text-emerald-300 mt-0.5 shrink-0" />
-                                        <p className="text-xs font-bold text-white">{cap.name}</p>
+                                    <div key={cap.name} className="flex items-start gap-3 p-3 rounded-xl bg-emerald-50/60 border border-emerald-100">
+                                        <Icon className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                                        <p className="text-xs font-bold text-slate-800">{cap.name}</p>
                                     </div>
                                 );
                             })}
                         </div>
                         <Link
                             to="/offerings/sales-acceleration/enterprise-sales"
-                            className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#5CAAE6] hover:text-white transition-colors"
+                            className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-emerald-700 hover:text-emerald-800 transition-colors"
                         >
                             Explore Sales Acceleration
                             <ArrowRight className="w-4 h-4" />

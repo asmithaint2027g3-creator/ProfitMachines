@@ -95,16 +95,15 @@ export default function MarketDiscoveryStatCards() {
                 {statCards.map((card) => {
                     const Icon = card.icon;
                     return (
-                        <div key={card.label} className="bg-gradient-to-br from-[#020F1E] via-[#0A2540] to-[#0D2E4E] border border-white/10 hover:border-[#5CAAE6]/50 rounded-2xl p-6 shadow-xl text-white relative overflow-hidden transition-all">
-                            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#5CAAE6]/40 to-transparent opacity-0 hover:opacity-100 transition-opacity" />
+                        <div key={card.label} className="bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-lg hover:border-[#2878B5]/40 transition-all">
                             <div className="flex items-center justify-between mb-4">
-                                <div className="w-10 h-10 rounded-xl bg-white/10 text-[#5CAAE6] border border-white/10 flex items-center justify-center">
+                                <div className="w-10 h-10 rounded-xl bg-[#2878B5]/10 text-[#2878B5] flex items-center justify-center">
                                     <Icon className="w-5 h-5" />
                                 </div>
-                                <span className="text-lg font-black text-white" style={{ color: '#FFFFFF' }}>{card.value}</span>
+                                <span className="text-lg font-extrabold text-slate-900">{card.value}</span>
                             </div>
-                            <h3 className="text-sm font-bold text-white mb-2">{card.label}</h3>
-                            <p className="text-xs text-slate-300 leading-relaxed font-normal">{card.description}</p>
+                            <h3 className="text-sm font-bold text-slate-900 mb-2">{card.label}</h3>
+                            <p className="text-xs text-slate-500 leading-relaxed">{card.description}</p>
                         </div>
                     );
                 })}
