@@ -439,23 +439,11 @@ function doPost(e) {
 
   try {
     if (!e || !e.postData || !e.postData.contents) {
-      // Default diagnostic payload if pinged directly without body
-      e = {
-        postData: {
-          contents: JSON.stringify({
-            event_type: "lead",
-            event_name: "lead_submit",
-            lead_type: "QUICK_FORM",
-            form_name: "Quick Inquiry Form",
-            name: "Jane Executive",
-            email: "asmitha.int2027g3@gmail.com",
-            phone: "+91 7339693105",
-            company: "Profit Machines Client",
-            requirement: "AI Growth Engine Review",
-            page_path: "/contact"
-          })
-        }
-      };
+      if (lock.hasLock()) lock.releaseLock();
+      return jsonResponse({
+        status: "ignored",
+        message: "No post data payload received. Standby mode active."
+      });
     }
 
     var rawPayload = JSON.parse(e.postData.contents);
@@ -1885,6 +1873,11 @@ function accumulateMetrics(bucket, key, visitor, isPageView, isQuick, isConsult,
     };
   }
 
+  // If this is an initialization-only call for an empty baseline period, return without incrementing
+  if (visitor === null && !isPageView && !isLead && !duration) {
+    return;
+  }
+
   var b = bucket[key];
   b.events++;
   if (visitor) b.visitors.add(String(visitor));
@@ -2170,9 +2163,362 @@ function writeIntervalTable(ss, tabName, bucket, label, headerColor) {
 // 13. EXECUTIVE REPORTS ENGINE (INDIVIDUAL EMAIL DISPATCH TO ASMITHA)
 // =========================================================================================
 
+// =========================================================================================
+// 13. EXECUTIVE REPORTS ENGINE (100% ORIGINAL LIVE DATA • INDIVIDUAL DISPATCH)
+// =========================================================================================
+
+function getPeriodDateRange(intervalName, periodKey, tz) {
+  tz = tz || CONFIG.TIMEZONE || "Asia/Kolkata";
+  var start, end;
+  if (intervalName === "Daily") {
+    start = parseDateSafe(periodKey + " 00:00:00") || new Date();
+    end = parseDateSafe(periodKey + " 23:59:59") || new Date();
+  } else if (intervalName === "Weekly") {
+    start = parseDateSafe(periodKey + " 00:00:00") || new Date();
+    end = new Date(start.getTime() + (7 * 24 * 60 * 60 * 1000) - 1000);
+  } else {
+    var parts = String(periodKey).split("-");
+    var yr = parseInt(parts[0], 10) || new Date().getFullYear();
+    var mo = (parseInt(parts[1], 10) || (new Date().getMonth() + 1)) - 1;
+    start = new Date(yr, mo, 1, 0, 0, 0);
+    end = new Date(yr, mo + 1, 0, 23, 59, 59);
+  }
+  return { start: start, end: end };
+}
+
+function getRealCTAStats(ss, dateRange) {
+  var res = { whatsapp: 0, consultation: 0, discovery: 0, total: 0 };
+  if (!ss) return res;
+
+  var sheet = ss.getSheetByName("Click_Interactions") || ss.getSheetByName("Live_Traffic_Events");
+  if (!sheet || sheet.getLastRow() < 2) return res;
+
+  var data = sheet.getDataRange().getValues();
+  var headers = data[0];
+  var tsCol = findFlexibleHeader(headers, ["received_at", "client_timestamp", "Timestamp"]);
+  var labelCol = findFlexibleHeader(headers, ["element_text", "event_label", "label", "Target_CTA_Text"]);
+  var idCol = findFlexibleHeader(headers, ["element_id", "event_name", "action"]);
+
+  for (var i = 1; i < data.length; i++) {
+    var rawTs = tsCol > -1 ? data[i][tsCol] : data[i][0];
+    var d = parseDateSafe(rawTs);
+    if (d && dateRange) {
+      if (d < dateRange.start || d > dateRange.end) continue;
+    }
+
+    var label = (labelCol > -1 ? String(data[i][labelCol] || "") : "").toLowerCase();
+    var id = (idCol > -1 ? String(data[i][idCol] || "") : "").toLowerCase();
+    var combined = label + " " + id;
+
+    res.total++;
+    if (combined.indexOf("whatsapp") >= 0 || combined.indexOf("chat") >= 0 || combined.indexOf("7339693105") >= 0) {
+      res.whatsapp++;
+    }
+    if (combined.indexOf("consult") >= 0 || combined.indexOf("demo") >= 0 || combined.indexOf("calendar") >= 0) {
+      res.consultation++;
+    }
+    if (combined.indexOf("audit") >= 0 || combined.indexOf("discover") >= 0 || combined.indexOf("leakage") >= 0 || combined.indexOf("score") >= 0) {
+      res.discovery++;
+    }
+  }
+  return res;
+}
+
+function getRealGeoStats(ss, dateRange) {
+  var geoCounts = {};
+  var totalGeo = 0;
+  if (!ss) return [];
+
+  var sheet = ss.getSheetByName("Geo_Timezone_Intelligence") || ss.getSheetByName("Live_Traffic_Events");
+  if (!sheet || sheet.getLastRow() < 2) return [];
+
+  var data = sheet.getDataRange().getValues();
+  var headers = data[0];
+  var tsCol = findFlexibleHeader(headers, ["received_at", "Timestamp", "client_timestamp", "Date"]);
+  var countryCol = findFlexibleHeader(headers, ["Country", "geo_country", "Country_Code"]);
+
+  for (var i = 1; i < data.length; i++) {
+    var rawTs = tsCol > -1 ? data[i][tsCol] : data[i][0];
+    var d = parseDateSafe(rawTs);
+    if (d && dateRange) {
+      if (d < dateRange.start || d > dateRange.end) continue;
+    }
+
+    var country = countryCol > -1 ? String(data[i][countryCol] || "").trim() : "";
+    if (!country || country === "undefined" || country === "null") country = "India";
+    geoCounts[country] = (geoCounts[country] || 0) + 1;
+    totalGeo++;
+  }
+
+  var sorted = Object.keys(geoCounts).map(function(k) {
+    return {
+      country: k,
+      count: geoCounts[k],
+      pct: totalGeo > 0 ? ((geoCounts[k] / totalGeo) * 100).toFixed(1) + "%" : "0.0%"
+    };
+  }).sort(function(a, b) { return b.count - a.count; });
+
+  return sorted.slice(0, 4);
+}
+
+function getRealTopPages(ss, dateRange, limit) {
+  limit = limit || 5;
+  if (!ss) return [];
+
+  var sheet = ss.getSheetByName("Page_Performance") || ss.getSheetByName("Live_Traffic_Events");
+  if (!sheet || sheet.getLastRow() < 2) return [];
+
+  var pageViews = {};
+  var pageLeads = {};
+
+  var data = sheet.getDataRange().getValues();
+  var headers = data[0];
+  var tsCol = findFlexibleHeader(headers, ["received_at", "client_timestamp", "Timestamp"]);
+  var pathCol = findFlexibleHeader(headers, ["page_path", "page_url", "Path"]);
+  var typeCol = findFlexibleHeader(headers, ["event_type", "type"]);
+
+  for (var i = 1; i < data.length; i++) {
+    var rawTs = tsCol > -1 ? data[i][tsCol] : data[i][0];
+    var d = parseDateSafe(rawTs);
+    if (d && dateRange) {
+      if (d < dateRange.start || d > dateRange.end) continue;
+    }
+
+    var type = typeCol > -1 ? String(data[i][typeCol] || "").toLowerCase() : "page_view";
+    if (type !== "page_view" && type !== "pageview" && type !== "session") continue;
+
+    var path = pathCol > -1 ? String(data[i][pathCol] || "").trim() : "/";
+    if (!path) path = "/";
+    if (path.indexOf("http") === 0) path = normalizeRoutePath(path);
+    pageViews[path] = (pageViews[path] || 0) + 1;
+  }
+
+  var leadSheet = ss.getSheetByName("Lead_Management");
+  if (leadSheet && leadSheet.getLastRow() >= 2) {
+    var lData = leadSheet.getDataRange().getValues();
+    var lh = lData[0];
+    var lTsCol = findFlexibleHeader(lh, ["received_at", "Timestamp", "Date"]);
+    var lPathCol = findFlexibleHeader(lh, ["page_path", "page_url", "Source_Page_URL", "source_page"]);
+
+    for (var j = 1; j < lData.length; j++) {
+      var lTs = lTsCol > -1 ? lData[j][lTsCol] : lData[j][0];
+      var ld = parseDateSafe(lTs);
+      if (ld && dateRange) {
+        if (ld < dateRange.start || ld > dateRange.end) continue;
+      }
+      var lPath = lPathCol > -1 ? String(lData[j][lPathCol] || "").trim() : "/";
+      if (!lPath) lPath = "/";
+      if (lPath.indexOf("http") === 0) lPath = normalizeRoutePath(lPath);
+      pageLeads[lPath] = (pageLeads[lPath] || 0) + 1;
+    }
+  }
+
+  var sorted = Object.keys(pageViews).map(function(p) {
+    return {
+      path: p,
+      views: pageViews[p],
+      leads: pageLeads[p] || 0
+    };
+  }).sort(function(a, b) { return b.views - a.views; });
+
+  return sorted.slice(0, limit);
+}
+
+function getRealRecentLeads(ss, dateRange, limit) {
+  limit = limit || 5;
+  var leads = [];
+  if (!ss) return leads;
+
+  var leadSheet = ss.getSheetByName("Lead_Management");
+  if (!leadSheet || leadSheet.getLastRow() < 2) return leads;
+
+  var data = leadSheet.getDataRange().getValues();
+  var headers = data[0];
+  var tsCol = findFlexibleHeader(headers, ["received_at", "Timestamp", "Date"]);
+  var nameCol = findFlexibleHeader(headers, ["name", "Full_Name", "Client Partner"]);
+  var emailCol = findFlexibleHeader(headers, ["email", "Work_Email", "Email"]);
+  var compCol = findFlexibleHeader(headers, ["company", "Company_Name", "Company"]);
+  var srcCol = findFlexibleHeader(headers, ["lead_source", "form_name", "lead_type", "Pipeline Track"]);
+  var reqCol = findFlexibleHeader(headers, ["requirement", "Primary_Requirement", "interest"]);
+
+  for (var i = data.length - 1; i >= 1; i--) {
+    var rawTs = tsCol > -1 ? data[i][tsCol] : data[i][0];
+    var d = parseDateSafe(rawTs);
+    if (d && dateRange) {
+      if (d < dateRange.start || d > dateRange.end) continue;
+    }
+
+    var email = emailCol > -1 ? String(data[i][emailCol] || "").trim() : "";
+    var name = nameCol > -1 ? String(data[i][nameCol] || "").trim() : "";
+    if (!name && !email) continue;
+
+    leads.push({
+      name: name || "Enterprise Prospect",
+      company: compCol > -1 ? String(data[i][compCol] || "").trim() || "B2B Enterprise" : "B2B Enterprise",
+      email: email || "N/A",
+      source: srcCol > -1 ? String(data[i][srcCol] || "").trim() || "Website Inbound" : "Website Inbound",
+      requirement: reqCol > -1 ? String(data[i][reqCol] || "").trim() : ""
+    });
+
+    if (leads.length >= limit) break;
+  }
+
+  return leads;
+}
+
+function getReal7DayVelocity(ss, weekStartStr) {
+  var tz = CONFIG.TIMEZONE || "Asia/Kolkata";
+  var startDate = parseDateSafe(weekStartStr) || new Date();
+  var dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  var days = [];
+  var totalVisitors = 0;
+  var totalLeads = 0;
+
+  var dailyMap = {};
+  var dailySheet = ss ? ss.getSheetByName("Daily_Summary") : null;
+  if (dailySheet && dailySheet.getLastRow() >= 2) {
+    var data = dailySheet.getDataRange().getValues();
+    for (var r = 1; r < data.length; r++) {
+      var dKey = String(data[r][0]).trim();
+      dailyMap[dKey] = {
+        visitors: Number(data[r][2]) || 0,
+        leads: Number(data[r][8]) || 0
+      };
+    }
+  }
+
+  for (var i = 0; i < 7; i++) {
+    var cur = new Date(startDate.getTime() + (i * 24 * 60 * 60 * 1000));
+    var curKey = Utilities.formatDate(cur, tz, "yyyy-MM-dd");
+    var stat = dailyMap[curKey] || { visitors: 0, leads: 0 };
+    days.push({
+      day: dayNames[i],
+      dateKey: curKey,
+      visitors: stat.visitors,
+      leads: stat.leads
+    });
+    totalVisitors += stat.visitors;
+    totalLeads += stat.leads;
+  }
+
+  return {
+    days: days,
+    totalVisitors: totalVisitors,
+    avgVisitors: Math.round(totalVisitors / 7),
+    totalLeads: totalLeads
+  };
+}
+
+function getRealWeeklyComparison(ss, curWeekStartStr) {
+  var comp = {
+    hasPrior: false,
+    cur: { visitors: 0, pageViews: 0, leads: 0, conversion: "0.0%", avg: 0 },
+    prior: { visitors: 0, pageViews: 0, leads: 0, conversion: "0.0%", avg: 0 },
+    changes: { visitors: "0.0%", pageViews: "0.0%", leads: "0.0%", conversion: "0.0%", avg: "0.0%" }
+  };
+  if (!ss) return comp;
+
+  var sheet = ss.getSheetByName("Weekly_Summary");
+  if (!sheet || sheet.getLastRow() < 2) return comp;
+
+  var data = sheet.getDataRange().getValues();
+  var curRow = null, priorRow = null;
+
+  for (var i = 1; i < data.length; i++) {
+    var k = String(data[i][0]).trim();
+    if (k === curWeekStartStr) {
+      curRow = data[i];
+      if (i + 1 < data.length) {
+        priorRow = data[i + 1];
+      }
+      break;
+    }
+  }
+
+  if (!curRow && data.length >= 2) curRow = data[1];
+
+  if (curRow) {
+    comp.cur.visitors = Number(curRow[2]) || 0;
+    comp.cur.pageViews = Number(curRow[3]) || 0;
+    comp.cur.leads = Number(curRow[8]) || 0;
+    comp.cur.conversion = String(curRow[9] || "0.0%");
+    comp.cur.avg = Number(curRow[10]) || 0;
+  }
+
+  if (priorRow) {
+    comp.hasPrior = true;
+    comp.prior.visitors = Number(priorRow[2]) || 0;
+    comp.prior.pageViews = Number(priorRow[3]) || 0;
+    comp.prior.leads = Number(priorRow[8]) || 0;
+    comp.prior.conversion = String(priorRow[9] || "0.0%");
+    comp.prior.avg = Number(priorRow[10]) || 0;
+
+    function calcChange(c, p) {
+      if (p === 0) return c > 0 ? "+100.0%" : "0.0%";
+      var diff = ((c - p) / p) * 100;
+      return (diff >= 0 ? "+" : "") + diff.toFixed(1) + "%";
+    }
+
+    comp.changes.visitors = calcChange(comp.cur.visitors, comp.prior.visitors);
+    comp.changes.pageViews = calcChange(comp.cur.pageViews, comp.prior.pageViews);
+    comp.changes.leads = calcChange(comp.cur.leads, comp.prior.leads);
+    comp.changes.avg = calcChange(comp.cur.avg, comp.prior.avg);
+
+    var cConv = parseFloat(comp.cur.conversion) || 0;
+    var pConv = parseFloat(comp.prior.conversion) || 0;
+    var diffConv = cConv - pConv;
+    comp.changes.conversion = (diffConv >= 0 ? "+" : "") + diffConv.toFixed(2) + "%";
+  }
+
+  return comp;
+}
+
+function getRealMonthlyGeography(ss, dateRange) {
+  var cities = {};
+  if (!ss) return [];
+
+  var sheet = ss.getSheetByName("Geo_Timezone_Intelligence") || ss.getSheetByName("Live_Traffic_Events");
+  if (!sheet || sheet.getLastRow() < 2) return [];
+
+  var data = sheet.getDataRange().getValues();
+  var headers = data[0];
+  var tsCol = findFlexibleHeader(headers, ["received_at", "Timestamp", "client_timestamp", "Date"]);
+  var cityCol = findFlexibleHeader(headers, ["City", "geo_city"]);
+  var regionCol = findFlexibleHeader(headers, ["Region", "geo_region", "State"]);
+
+  for (var i = 1; i < data.length; i++) {
+    var rawTs = tsCol > -1 ? data[i][tsCol] : data[i][0];
+    var d = parseDateSafe(rawTs);
+    if (d && dateRange) {
+      if (d < dateRange.start || d > dateRange.end) continue;
+    }
+
+    var city = cityCol > -1 ? String(data[i][cityCol] || "").trim() : "";
+    var region = regionCol > -1 ? String(data[i][regionCol] || "").trim() : "";
+    if (!city || city === "undefined" || city === "null") continue;
+    if (!region || region === "undefined" || region === "null") region = "India";
+
+    var key = city + "|" + region;
+    if (!cities[key]) {
+      cities[key] = { city: city, region: region, views: 0 };
+    }
+    cities[key].views++;
+  }
+
+  var sorted = Object.keys(cities).map(function(k) { return cities[k]; }).sort(function(a, b) { return b.views - a.views; });
+  return sorted.slice(0, 4);
+}
+
 function sendPeriodicExecutiveDigest(intervalName) {
   var ss = getSpreadsheet();
   if (!ss) return false;
+
+  // 1. Always run fresh aggregation first to guarantee 100% current state
+  try {
+    BUILD_AGGREGATED_INTERVAL_SUMMARIES();
+  } catch (errAgg) {
+    console.warn("Aggregation warning before digest: " + errAgg);
+  }
 
   var map = {
     Daily: "Daily_Summary",
@@ -2182,11 +2528,6 @@ function sendPeriodicExecutiveDigest(intervalName) {
 
   var targetTab = map[intervalName] || "Daily_Summary";
   var sheet = ss.getSheetByName(targetTab);
-
-  if (!sheet || sheet.getLastRow() < 2) {
-    BUILD_AGGREGATED_INTERVAL_SUMMARIES();
-    sheet = ss.getSheetByName(targetTab);
-  }
 
   var tz = CONFIG.TIMEZONE || "Asia/Kolkata";
   var now = new Date();
@@ -2207,34 +2548,45 @@ function sendPeriodicExecutiveDigest(intervalName) {
   var avg          = 0;
 
   if (sheet && sheet.getLastRow() >= 2) {
-    var r = sheet.getRange(2, 1, 1, 11).getValues()[0];
-    period     = r[0] || defaultPeriod;
-    events     = Number(r[1]) || 0;
-    visitors   = Number(r[2]) || 0;
-    pageViews  = Number(r[3]) || 0;
-    quick      = Number(r[4]) || 0;
-    consult    = Number(r[5]) || 0;
-    audit      = Number(r[6]) || 0;
-    chat       = Number(r[7]) || 0;
-    leads      = Number(r[8]) || 0;
-    conversion = String(r[9] || "0.0%");
-    avg        = Number(r[10]) || 0;
+    var allRows = sheet.getRange(2, 1, sheet.getLastRow() - 1, 11).getValues();
+    var matchedRow = null;
+    for (var ri = 0; ri < allRows.length; ri++) {
+      if (String(allRows[ri][0]).trim() === defaultPeriod) {
+        matchedRow = allRows[ri];
+        break;
+      }
+    }
+    var r = matchedRow || allRows[0];
+    if (r) {
+      period     = r[0] || defaultPeriod;
+      events     = Number(r[1]) || 0;
+      visitors   = Number(r[2]) || 0;
+      pageViews  = Number(r[3]) || 0;
+      quick      = Number(r[4]) || 0;
+      consult    = Number(r[5]) || 0;
+      audit      = Number(r[6]) || 0;
+      chat       = Number(r[7]) || 0;
+      leads      = Number(r[8]) || 0;
+      conversion = String(r[9] || "0.0%");
+      avg        = Number(r[10]) || 0;
+    }
   }
 
   var periodFormatted = intervalName === "Weekly" ? ("Week Starting " + period) : period;
+  var dateRange = getPeriodDateRange(intervalName, period, tz);
 
   var html = "";
   var emailSubject = "";
 
   if (intervalName === "Daily") {
     emailSubject = "☀️ [Daily Pulse] ProfitMachines Intelligence | " + periodFormatted + " | " + visitors + " Visitors, " + leads + " Leads (" + conversion + ")";
-    html = buildEnrichedDailyDigestHtml(ss, periodFormatted, visitors, leads, conversion, avg, quick, consult, audit, chat, pageViews, events);
+    html = buildEnrichedDailyDigestHtml(ss, periodFormatted, dateRange, visitors, leads, conversion, avg, quick, consult, audit, chat, pageViews, events);
   } else if (intervalName === "Weekly") {
     emailSubject = "📊 [Weekly Brief] ProfitMachines Executive Intelligence | " + periodFormatted + " | " + visitors + " Visitors, " + leads + " Leads";
-    html = buildEnrichedWeeklyDigestHtml(ss, periodFormatted, visitors, leads, conversion, avg, quick, consult, audit, chat, pageViews, events);
+    html = buildEnrichedWeeklyDigestHtml(ss, periodFormatted, dateRange, visitors, leads, conversion, avg, quick, consult, audit, chat, pageViews, events, period);
   } else {
-    emailSubject = "🏛️ [Monthly Dossier] ProfitMachines Executive Analytics Brief | " + periodFormatted + " | Pipeline & Performance";
-    html = buildEnrichedMonthlyDigestHtml(ss, periodFormatted, visitors, leads, conversion, avg, quick, consult, audit, chat, pageViews, events);
+    emailSubject = "🏛️ [Monthly Dossier] ProfitMachines Executive Analytics Brief | " + periodFormatted + " | " + visitors + " Visitors, " + leads + " Leads";
+    html = buildEnrichedMonthlyDigestHtml(ss, periodFormatted, dateRange, visitors, leads, conversion, avg, quick, consult, audit, chat, pageViews, events);
   }
 
   var reportRecipients = (EMAIL_CONFIG.reportEmails && EMAIL_CONFIG.reportEmails.length) ? EMAIL_CONFIG.reportEmails : ["asmitha.int2027g3@gmail.com"];
@@ -2257,36 +2609,54 @@ function sendPeriodicExecutiveDigest(intervalName) {
 }
 
 // -----------------------------------------------------------------------------------------
-// 13A. ENRICHED DAILY REPORT BUILDER
+// 13A. ENRICHED DAILY REPORT BUILDER (100% ORIGINAL LIVE DATA)
 // -----------------------------------------------------------------------------------------
-function buildEnrichedDailyDigestHtml(ss, period, visitors, leads, conversion, avg, quick, consult, audit, chat, pageViews, events) {
+function buildEnrichedDailyDigestHtml(ss, period, dateRange, visitors, leads, conversion, avg, quick, consult, audit, chat, pageViews, events) {
   var sheetUrl = ss ? ss.getUrl() : CONFIG.WEBSITE;
 
-  var recentLeadsHtml = "";
-  try {
-    var leadTab = ss.getSheetByName("Lead_Management") || ss.getSheetByName("Live_Traffic_Events");
-    if (leadTab && leadTab.getLastRow() >= 2) {
-      var rows = leadTab.getRange(Math.max(2, leadTab.getLastRow() - 4), 1, Math.min(5, leadTab.getLastRow() - 1), 10).getValues();
-      for (var i = rows.length - 1; i >= 0; i--) {
-        var r = rows[i];
-        var name = r[5] || r[4] || "Executive Lead";
-        var email = r[6] || r[5] || "Verified Inbound";
-        var comp = r[8] || r[6] || "B2B Enterprise";
-        var src = r[13] || r[7] || "Website Inbound";
-        recentLeadsHtml += '<tr style="border-bottom:1px solid #f1f5f9;font-size:12px;">' +
-          '<td style="padding:8px 10px;font-weight:600;color:#0f172a;">' + escapeHtml(name) + '</td>' +
-          '<td style="padding:8px 10px;color:#475569;">' + escapeHtml(comp) + '</td>' +
-          '<td style="padding:8px 10px;color:#0284c7;">' + escapeHtml(email) + '</td>' +
-          '<td style="padding:8px 10px;text-align:right;color:#64748b;">' + escapeHtml(src) + '</td>' +
-          '</tr>';
-      }
-    }
-  } catch (e) {}
+  // 1. Real CTA Stats
+  var cta = getRealCTAStats(ss, dateRange);
 
-  if (!recentLeadsHtml) {
-    recentLeadsHtml = '<tr style="border-bottom:1px solid #f1f5f9;font-size:12px;"><td style="padding:8px 10px;font-weight:600;color:#0f172a;">Rajesh Sharma</td><td style="padding:8px 10px;color:#475569;">CloudMatrix Systems</td><td style="padding:8px 10px;color:#0284c7;">rajesh@cloudmatrix.co</td><td style="padding:8px 10px;text-align:right;color:#64748b;">Quick Form</td></tr>' +
-      '<tr style="border-bottom:1px solid #f1f5f9;font-size:12px;"><td style="padding:8px 10px;font-weight:600;color:#0f172a;">Sarah Jenkins</td><td style="padding:8px 10px;color:#475569;">Beacon Digital Health</td><td style="padding:8px 10px;color:#0284c7;">sjenkins@beacondigital.com</td><td style="padding:8px 10px;text-align:right;color:#64748b;">Consultation</td></tr>' +
-      '<tr style="border-bottom:1px solid #f1f5f9;font-size:12px;"><td style="padding:8px 10px;font-weight:600;color:#0f172a;">Vikram Malhotra</td><td style="padding:8px 10px;color:#475569;">Apex Logistics Group</td><td style="padding:8px 10px;color:#0284c7;">vikram@apexlogistics.in</td><td style="padding:8px 10px;text-align:right;color:#64748b;">Audit Dossier</td></tr>';
+  // 2. Real Geo Stats
+  var geoList = getRealGeoStats(ss, dateRange);
+  var geoHtml = "";
+  if (geoList && geoList.length > 0) {
+    geoHtml = geoList.map(function(g) {
+      return escapeHtml(g.country) + ": <strong>" + g.count + "</strong> (" + g.pct + ")";
+    }).join("<br/>");
+  } else {
+    geoHtml = '<em style="color:#64748b;">No geographic telemetry recorded today yet.</em>';
+  }
+
+  // 3. Real Top Pages
+  var topPages = getRealTopPages(ss, dateRange, 5);
+  var topPagesRows = "";
+  if (topPages && topPages.length > 0) {
+    topPages.forEach(function(tp, idx) {
+      topPagesRows += '<tr>' +
+        '<td style="padding:8px 10px;color:#0f172a;border-bottom:1px solid #f1f5f9;">' + (idx + 1) + '. ' + escapeHtml(tp.path) + '</td>' +
+        '<td style="padding:8px 10px;text-align:right;border-bottom:1px solid #f1f5f9;">' + tp.views + '</td>' +
+        '<td style="padding:8px 10px;text-align:right;font-weight:700;color:#047857;border-bottom:1px solid #f1f5f9;">' + tp.leads + '</td>' +
+        '</tr>';
+    });
+  } else {
+    topPagesRows = '<tr><td colspan="3" style="padding:10px;text-align:center;color:#64748b;">No page views recorded for today yet.</td></tr>';
+  }
+
+  // 4. Real Recent Leads (Zero Fake Data)
+  var recentLeads = getRealRecentLeads(ss, dateRange, 5);
+  var recentLeadsHtml = "";
+  if (recentLeads && recentLeads.length > 0) {
+    recentLeads.forEach(function(lead) {
+      recentLeadsHtml += '<tr style="border-bottom:1px solid #f1f5f9;font-size:12px;">' +
+        '<td style="padding:8px 10px;font-weight:600;color:#0f172a;">' + escapeHtml(lead.name) + '</td>' +
+        '<td style="padding:8px 10px;color:#475569;">' + escapeHtml(lead.company) + '</td>' +
+        '<td style="padding:8px 10px;color:#0284c7;">' + escapeHtml(lead.email) + '</td>' +
+        '<td style="padding:8px 10px;text-align:right;color:#64748b;">' + escapeHtml(lead.source) + '</td>' +
+        '</tr>';
+    });
+  } else {
+    recentLeadsHtml = '<tr><td colspan="4" style="padding:14px;text-align:center;color:#64748b;font-style:italic;">No inbound leads recorded during this period.</td></tr>';
   }
 
   return [
@@ -2298,84 +2668,77 @@ function buildEnrichedDailyDigestHtml(ss, period, visitors, leads, conversion, a
     '<div style="background:linear-gradient(135deg,#047857 0%,#064e3b 100%);padding:26px 24px;color:#ffffff;">',
     '  <div style="display:inline-block;background:rgba(255,255,255,0.2);padding:4px 12px;border-radius:16px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">☀️ DAILY INTELLIGENCE PULSE</div>',
     '  <h1 style="margin:0 0 6px 0;font-size:22px;font-weight:800;color:#ffffff;">ProfitMachines Daily Performance</h1>',
-    '  <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.9);">📅 Date: ' + period + ' &bull; Target: asmitha.int2027g3@gmail.com</p>',
+    '  <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.9);">📅 Date: ' + escapeHtml(period) + ' &bull; Target: asmitha.int2027g3@gmail.com</p>',
     '</div>',
 
-    // Scorecard Cards
+    // Scorecard Cards (100% Real Live Metrics)
     '<div style="padding:20px 24px 10px 24px;">',
     '  <table width="100%" style="border-collapse:separate;border-spacing:8px;">',
     '    <tr>',
     '      <td style="background:#f8fafc;border:1px solid #e2e8f0;padding:14px;border-radius:8px;text-align:center;width:25%;">',
     '        <div style="font-size:10px;color:#64748b;font-weight:700;letter-spacing:0.5px;">VISITORS</div>',
-    '        <div style="font-size:22px;font-weight:800;color:#0f172a;margin-top:4px;">' + (visitors || 124).toLocaleString() + '</div>',
+    '        <div style="font-size:22px;font-weight:800;color:#0f172a;margin-top:4px;">' + Number(visitors || 0).toLocaleString() + '</div>',
     '      </td>',
     '      <td style="background:#f0fdf4;border:1px solid #bbf7d0;padding:14px;border-radius:8px;text-align:center;width:25%;">',
     '        <div style="font-size:10px;color:#166534;font-weight:700;letter-spacing:0.5px;">TOTAL LEADS</div>',
-    '        <div style="font-size:22px;font-weight:800;color:#047857;margin-top:4px;">' + (leads || 8).toLocaleString() + '</div>',
+    '        <div style="font-size:22px;font-weight:800;color:#047857;margin-top:4px;">' + Number(leads || 0).toLocaleString() + '</div>',
     '      </td>',
     '      <td style="background:#fffbeb;border:1px solid #fde68a;padding:14px;border-radius:8px;text-align:center;width:25%;">',
     '        <div style="font-size:10px;color:#92400e;font-weight:700;letter-spacing:0.5px;">CONVERSION</div>',
-    '        <div style="font-size:22px;font-weight:800;color:#b45309;margin-top:4px;">' + (conversion !== "0.0%" ? conversion : "6.45%") + '</div>',
+    '        <div style="font-size:22px;font-weight:800;color:#b45309;margin-top:4px;">' + escapeHtml(conversion) + '</div>',
     '      </td>',
     '      <td style="background:#f8fafc;border:1px solid #e2e8f0;padding:14px;border-radius:8px;text-align:center;width:25%;">',
     '        <div style="font-size:10px;color:#64748b;font-weight:700;letter-spacing:0.5px;">AVG ENGAGE</div>',
-    '        <div style="font-size:22px;font-weight:800;color:#0f172a;margin-top:4px;">' + (avg || 47) + 's</div>',
+    '        <div style="font-size:22px;font-weight:800;color:#0f172a;margin-top:4px;">' + Number(avg || 0) + 's</div>',
     '      </td>',
     '    </tr>',
     '  </table>',
     '</div>',
 
-    // Lead Pipeline Breakdown
+    // Lead Pipeline Breakdown (100% Real Live Counts)
     '<div style="padding:10px 24px;">',
     '  <h3 style="font-size:13px;font-weight:800;text-transform:uppercase;color:#0f172a;margin:0 0 10px 0;letter-spacing:0.5px;">🎯 Lead Pipeline Breakdown</h3>',
     '  <table width="100%" style="border-collapse:collapse;font-size:13px;background:#f8fafc;border-radius:8px;border:1px solid #e2e8f0;overflow:hidden;">',
-    '    <tr><td style="padding:9px 12px;color:#475569;border-bottom:1px solid #e2e8f0;">⚡ Quick Inquiry Forms</td><td style="padding:9px 12px;text-align:right;font-weight:700;color:#10b981;border-bottom:1px solid #e2e8f0;">' + (quick || 3) + '</td></tr>',
-    '    <tr><td style="padding:9px 12px;color:#475569;border-bottom:1px solid #e2e8f0;">📋 Enterprise Strategy Consultations</td><td style="padding:9px 12px;text-align:right;font-weight:700;color:#0284c7;border-bottom:1px solid #e2e8f0;">' + (consult || 2) + '</td></tr>',
-    '    <tr><td style="padding:9px 12px;color:#475569;border-bottom:1px solid #e2e8f0;">📁 Profit Pool Discovery Diagnostics</td><td style="padding:9px 12px;text-align:right;font-weight:700;color:#d97706;border-bottom:1px solid #e2e8f0;">' + (audit || 2) + '</td></tr>',
-    '    <tr><td style="padding:9px 12px;color:#475569;">💬 Virtual Assistant / Chat Leads</td><td style="padding:9px 12px;text-align:right;font-weight:700;color:#7c3aed;">' + (chat || 1) + '</td></tr>',
+    '    <tr><td style="padding:9px 12px;color:#475569;border-bottom:1px solid #e2e8f0;">⚡ Quick Inquiry Forms</td><td style="padding:9px 12px;text-align:right;font-weight:700;color:#10b981;border-bottom:1px solid #e2e8f0;">' + Number(quick || 0) + '</td></tr>',
+    '    <tr><td style="padding:9px 12px;color:#475569;border-bottom:1px solid #e2e8f0;">📋 Enterprise Strategy Consultations</td><td style="padding:9px 12px;text-align:right;font-weight:700;color:#0284c7;border-bottom:1px solid #e2e8f0;">' + Number(consult || 0) + '</td></tr>',
+    '    <tr><td style="padding:9px 12px;color:#475569;border-bottom:1px solid #e2e8f0;">📁 Profit Pool Discovery Diagnostics</td><td style="padding:9px 12px;text-align:right;font-weight:700;color:#d97706;border-bottom:1px solid #e2e8f0;">' + Number(audit || 0) + '</td></tr>',
+    '    <tr><td style="padding:9px 12px;color:#475569;">💬 Virtual Assistant / Chat Leads</td><td style="padding:9px 12px;text-align:right;font-weight:700;color:#7c3aed;">' + Number(chat || 0) + '</td></tr>',
     '  </table>',
     '</div>',
 
-    // CTA Activity & Geo
+    // CTA Activity & Geo (100% Real Live Counts)
     '<div style="padding:10px 24px;">',
     '  <table width="100%" style="border-collapse:separate;border-spacing:10px 0;">',
     '    <tr>',
     '      <td style="width:50%;vertical-align:top;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;">',
     '        <div style="font-size:12px;font-weight:800;color:#0f172a;margin-bottom:8px;">🔥 CTA ENGAGEMENT</div>',
     '        <div style="font-size:12px;color:#475569;line-height:1.8;">',
-    '          WhatsApp Inbound Clicks: <strong style="color:#047857;">14</strong><br/>',
-    '          Book Consultation: <strong style="color:#0284c7;">5</strong><br/>',
-    '          Discovery Diagnostic: <strong style="color:#d97706;">3</strong><br/>',
-    '          High-Intent Clicks: <strong style="color:#0f172a;">22</strong>',
+    '          WhatsApp Inbound Clicks: <strong style="color:#047857;">' + cta.whatsapp + '</strong><br/>',
+    '          Book Consultation: <strong style="color:#0284c7;">' + cta.consultation + '</strong><br/>',
+    '          Discovery Diagnostic: <strong style="color:#d97706;">' + cta.discovery + '</strong><br/>',
+    '          Total Interactive Clicks: <strong style="color:#0f172a;">' + cta.total + '</strong>',
     '        </div>',
     '      </td>',
     '      <td style="width:50%;vertical-align:top;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;">',
     '        <div style="font-size:12px;font-weight:800;color:#0f172a;margin-bottom:8px;">🌍 GEO PROFILE</div>',
     '        <div style="font-size:12px;color:#475569;line-height:1.8;">',
-    '          🇮🇳 India (IN): <strong>92</strong> (74.2%)<br/>',
-    '          🇺🇸 United States (US): <strong>16</strong> (12.9%)<br/>',
-    '          🇬🇧 United Kingdom (GB): <strong>8</strong> (6.5%)<br/>',
-    '          Other Global: <strong>8</strong> (6.4%)',
+    geoHtml,
     '        </div>',
     '      </td>',
     '    </tr>',
     '  </table>',
     '</div>',
 
-    // Top Pages
+    // Top Pages (100% Real Live Hits)
     '<div style="padding:10px 24px;">',
-    '  <h3 style="font-size:13px;font-weight:800;text-transform:uppercase;color:#0f172a;margin:0 0 8px 0;">📈 Top 5 Engaged Pages Today</h3>',
+    '  <h3 style="font-size:13px;font-weight:800;text-transform:uppercase;color:#0f172a;margin:0 0 8px 0;">📈 Top Engaged Pages Today</h3>',
     '  <table width="100%" style="border-collapse:collapse;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;">',
     '    <tr style="background:#f1f5f9;font-weight:700;color:#475569;"><th style="padding:8px 10px;text-align:left;">Route</th><th style="padding:8px 10px;text-align:right;">Views</th><th style="padding:8px 10px;text-align:right;">Leads</th></tr>',
-    '    <tr><td style="padding:8px 10px;color:#0f172a;border-bottom:1px solid #f1f5f9;">1. /solutions</td><td style="padding:8px 10px;text-align:right;border-bottom:1px solid #f1f5f9;">46</td><td style="padding:8px 10px;text-align:right;font-weight:700;color:#047857;border-bottom:1px solid #f1f5f9;">3</td></tr>',
-    '    <tr><td style="padding:8px 10px;color:#0f172a;border-bottom:1px solid #f1f5f9;">2. / (Home)</td><td style="padding:8px 10px;text-align:right;border-bottom:1px solid #f1f5f9;">41</td><td style="padding:8px 10px;text-align:right;font-weight:700;color:#047857;border-bottom:1px solid #f1f5f9;">2</td></tr>',
-    '    <tr><td style="padding:8px 10px;color:#0f172a;border-bottom:1px solid #f1f5f9;">3. /offerings</td><td style="padding:8px 10px;text-align:right;border-bottom:1px solid #f1f5f9;">25</td><td style="padding:8px 10px;text-align:right;font-weight:700;color:#047857;border-bottom:1px solid #f1f5f9;">2</td></tr>',
-    '    <tr><td style="padding:8px 10px;color:#0f172a;border-bottom:1px solid #f1f5f9;">4. /contact</td><td style="padding:8px 10px;text-align:right;border-bottom:1px solid #f1f5f9;">16</td><td style="padding:8px 10px;text-align:right;font-weight:700;color:#047857;border-bottom:1px solid #f1f5f9;">1</td></tr>',
-    '    <tr><td style="padding:8px 10px;color:#0f172a;">5. /industries</td><td style="padding:8px 10px;text-align:right;">9</td><td style="padding:8px 10px;text-align:right;color:#64748b;">0</td></tr>',
+    topPagesRows,
     '  </table>',
     '</div>',
 
-    // Recent Leads
+    // Recent Leads (100% Real Inbound Records)
     '<div style="padding:10px 24px;">',
     '  <h3 style="font-size:13px;font-weight:800;text-transform:uppercase;color:#0f172a;margin:0 0 8px 0;">📋 Recent Qualified Leads</h3>',
     '  <table width="100%" style="border-collapse:collapse;border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;">',
@@ -2397,10 +2760,61 @@ function buildEnrichedDailyDigestHtml(ss, period, visitors, leads, conversion, a
 }
 
 // -----------------------------------------------------------------------------------------
-// 13B. ENRICHED WEEKLY REPORT BUILDER
+// 13B. ENRICHED WEEKLY REPORT BUILDER (100% ORIGINAL LIVE DATA)
 // -----------------------------------------------------------------------------------------
-function buildEnrichedWeeklyDigestHtml(ss, period, visitors, leads, conversion, avg, quick, consult, audit, chat, pageViews, events) {
+function buildEnrichedWeeklyDigestHtml(ss, periodFormatted, dateRange, visitors, leads, conversion, avg, quick, consult, audit, chat, pageViews, events, weekStartStr) {
   var sheetUrl = ss ? ss.getUrl() : CONFIG.WEBSITE;
+
+  // 1. Real 7-Day Velocity
+  var vel = getReal7DayVelocity(ss, weekStartStr);
+  var velColumnsHtml = "";
+  vel.days.forEach(function(d) {
+    velColumnsHtml += '<td style="background:#ffffff;border:1px solid #e2e8f0;padding:8px 4px;border-radius:6px;">' +
+      '<div style="font-size:10px;color:#64748b;">' + d.day + '</div>' +
+      '<div style="font-size:16px;font-weight:800;color:#0284c7;">' + d.visitors + '</div>' +
+      '<div style="font-size:9px;color:' + (d.leads > 0 ? '#047857' : '#64748b') + ';font-weight:700;">' + (d.leads > 0 ? ('+' + d.leads + ' lead' + (d.leads > 1 ? 's' : '')) : '0 leads') + '</div>' +
+      '</td>';
+  });
+
+  // 2. Real Weekly Comparison (WoW)
+  var comp = getRealWeeklyComparison(ss, weekStartStr);
+
+  // 3. Dynamic Real Executive Insights
+  var insights = [];
+  if (leads > 0) {
+    insights.push("Qualified leads captured this week: <strong>" + leads + " lead" + (leads > 1 ? "s" : "") + "</strong>" + (comp.hasPrior ? (" (" + comp.changes.leads + " WoW)") : "") + ".");
+  } else {
+    insights.push("No inbound leads converted during this 7-day period. Pipeline nurture active.");
+  }
+
+  if (visitors > 0) {
+    insights.push("Total weekly traffic reached <strong>" + visitors.toLocaleString() + " unique visitors</strong> across <strong>" + pageViews.toLocaleString() + " page views</strong>.");
+  } else {
+    insights.push("Traffic tracking baseline active; waiting for inbound sessions.");
+  }
+
+  insights.push("Pipeline breakdown: Quick (" + quick + "), Consultations (" + consult + "), Diagnostics (" + audit + "), Chatbot (" + chat + ").");
+  insights.push("Average session engagement time: <strong>" + avg + " seconds</strong> with a conversion rate of <strong>" + conversion + "</strong>.");
+
+  var insightsHtml = insights.map(function(txt) {
+    return '<li>' + txt + '</li>';
+  }).join('');
+
+  // 4. Real Recent Leads for the week
+  var recentLeads = getRealRecentLeads(ss, dateRange, 5);
+  var recentLeadsHtml = "";
+  if (recentLeads && recentLeads.length > 0) {
+    recentLeads.forEach(function(lead) {
+      recentLeadsHtml += '<tr style="border-bottom:1px solid #f1f5f9;font-size:12px;">' +
+        '<td style="padding:8px 10px;font-weight:600;color:#0f172a;">' + escapeHtml(lead.name) + '</td>' +
+        '<td style="padding:8px 10px;color:#475569;">' + escapeHtml(lead.company) + '</td>' +
+        '<td style="padding:8px 10px;color:#0284c7;">' + escapeHtml(lead.email) + '</td>' +
+        '<td style="padding:8px 10px;text-align:right;color:#64748b;">' + escapeHtml(lead.source) + '</td>' +
+        '</tr>';
+    });
+  } else {
+    recentLeadsHtml = '<tr><td colspan="4" style="padding:14px;text-align:center;color:#64748b;font-style:italic;">No inbound leads recorded during this week.</td></tr>';
+  }
 
   return [
     '<!DOCTYPE html><html><head><meta charset="UTF-8"/></head>',
@@ -2411,38 +2825,32 @@ function buildEnrichedWeeklyDigestHtml(ss, period, visitors, leads, conversion, 
     '<div style="background:linear-gradient(135deg,#0284c7 0%,#0f172a 100%);padding:26px 24px;color:#ffffff;">',
     '  <div style="display:inline-block;background:rgba(255,255,255,0.2);padding:4px 12px;border-radius:16px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">📊 WEEKLY EXECUTIVE PERFORMANCE</div>',
     '  <h1 style="margin:0 0 6px 0;font-size:22px;font-weight:800;color:#ffffff;">ProfitMachines Weekly Analytics Brief</h1>',
-    '  <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.9);">Period: ' + period + ' &bull; Target: asmitha.int2027g3@gmail.com</p>',
+    '  <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.9);">Period: ' + escapeHtml(periodFormatted) + ' &bull; Target: asmitha.int2027g3@gmail.com</p>',
     '</div>',
 
-    // 7-Day Velocity Bar
+    // 7-Day Velocity Bar (100% Real Live Daily Aggregations)
     '<div style="padding:20px 24px 10px 24px;">',
     '  <div style="border:1px solid #e2e8f0;border-radius:8px;padding:16px;background:#f8fafc;">',
     '    <div style="font-size:12px;font-weight:800;color:#0f172a;margin-bottom:12px;">7-DAY TRAFFIC & LEAD VELOCITY</div>',
     '    <table width="100%" style="border-collapse:separate;border-spacing:4px;text-align:center;">',
     '      <tr>',
-    '        <td style="background:#ffffff;border:1px solid #e2e8f0;padding:8px 4px;border-radius:6px;"><div style="font-size:10px;color:#64748b;">Mon</div><div style="font-size:16px;font-weight:800;color:#0284c7;">28</div><div style="font-size:9px;color:#047857;font-weight:700;">+1 lead</div></td>',
-    '        <td style="background:#ffffff;border:1px solid #e2e8f0;padding:8px 4px;border-radius:6px;"><div style="font-size:10px;color:#64748b;">Tue</div><div style="font-size:16px;font-weight:800;color:#0284c7;">42</div><div style="font-size:9px;color:#047857;font-weight:700;">+2 leads</div></td>',
-    '        <td style="background:#ffffff;border:1px solid #e2e8f0;padding:8px 4px;border-radius:6px;"><div style="font-size:10px;color:#64748b;">Wed</div><div style="font-size:16px;font-weight:800;color:#0284c7;">55</div><div style="font-size:9px;color:#047857;font-weight:700;">+3 leads</div></td>',
-    '        <td style="background:#ffffff;border:1px solid #e2e8f0;padding:8px 4px;border-radius:6px;"><div style="font-size:10px;color:#64748b;">Thu</div><div style="font-size:16px;font-weight:800;color:#0284c7;">38</div><div style="font-size:9px;color:#047857;font-weight:700;">+1 lead</div></td>',
-    '        <td style="background:#ffffff;border:1px solid #e2e8f0;padding:8px 4px;border-radius:6px;"><div style="font-size:10px;color:#64748b;">Fri</div><div style="font-size:16px;font-weight:800;color:#0284c7;">49</div><div style="font-size:9px;color:#047857;font-weight:700;">+2 leads</div></td>',
-    '        <td style="background:#ffffff;border:1px solid #e2e8f0;padding:8px 4px;border-radius:6px;"><div style="font-size:10px;color:#64748b;">Sat</div><div style="font-size:16px;font-weight:800;color:#0284c7;">24</div><div style="font-size:9px;color:#64748b;">0 leads</div></td>',
-    '        <td style="background:#ffffff;border:1px solid #e2e8f0;padding:8px 4px;border-radius:6px;"><div style="font-size:10px;color:#64748b;">Sun</div><div style="font-size:16px;font-weight:800;color:#0284c7;">19</div><div style="font-size:9px;color:#64748b;">0 leads</div></td>',
+    velColumnsHtml,
     '      </tr>',
     '    </table>',
-    '    <div style="font-size:11px;color:#64748b;margin-top:10px;">7-Day Window Total: <strong>255 visitors</strong> &bull; Daily Avg: <strong>36 visitors/day</strong> &bull; Total Qualified Leads: <strong style="color:#047857;">9 leads</strong></div>',
+    '    <div style="font-size:11px;color:#64748b;margin-top:10px;">7-Day Window Total: <strong>' + vel.totalVisitors + ' visitors</strong> &bull; Daily Avg: <strong>' + vel.avgVisitors + ' visitors/day</strong> &bull; Total Qualified Leads: <strong style="color:#047857;">' + vel.totalLeads + ' leads</strong></div>',
     '  </div>',
     '</div>',
 
-    // Performance vs Previous Period Table
+    // Performance vs Previous Period Table (100% Real Comparison)
     '<div style="padding:10px 24px;">',
-    '  <h3 style="font-size:12px;font-weight:800;text-transform:uppercase;color:#0f172a;margin:0 0 8px 0;">Performance vs Previous Period (Current Week vs Prior Week)</h3>',
+    '  <h3 style="font-size:12px;font-weight:800;text-transform:uppercase;color:#0f172a;margin:0 0 8px 0;">Performance vs Previous Period (WoW)</h3>',
     '  <table width="100%" style="border-collapse:collapse;font-size:12px;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;">',
     '    <tr style="background:#f1f5f9;font-weight:700;color:#475569;"><th style="padding:8px 12px;text-align:left;">Metric</th><th style="padding:8px 12px;text-align:right;">Current</th><th style="padding:8px 12px;text-align:right;">Previous</th><th style="padding:8px 12px;text-align:right;">Change</th></tr>',
-    '    <tr><td style="padding:8px 12px;color:#0f172a;border-bottom:1px solid #f1f5f9;">Unique Visitors</td><td style="padding:8px 12px;text-align:right;font-weight:600;border-bottom:1px solid #f1f5f9;">1,180</td><td style="padding:8px 12px;text-align:right;color:#64748b;border-bottom:1px solid #f1f5f9;">1,040</td><td style="padding:8px 12px;text-align:right;color:#16a34a;font-weight:700;border-bottom:1px solid #f1f5f9;">+13.5%</td></tr>',
-    '    <tr><td style="padding:8px 12px;color:#0f172a;border-bottom:1px solid #f1f5f9;">Page Views</td><td style="padding:8px 12px;text-align:right;font-weight:600;border-bottom:1px solid #f1f5f9;">5,420</td><td style="padding:8px 12px;text-align:right;color:#64748b;border-bottom:1px solid #f1f5f9;">4,100</td><td style="padding:8px 12px;text-align:right;color:#16a34a;font-weight:700;border-bottom:1px solid #f1f5f9;">+32.2%</td></tr>',
-    '    <tr><td style="padding:8px 12px;color:#0f172a;border-bottom:1px solid #f1f5f9;">Verified Leads</td><td style="padding:8px 12px;text-align:right;font-weight:700;color:#047857;border-bottom:1px solid #f1f5f9;">9</td><td style="padding:8px 12px;text-align:right;color:#64748b;border-bottom:1px solid #f1f5f9;">3</td><td style="padding:8px 12px;text-align:right;color:#16a34a;font-weight:700;border-bottom:1px solid #f1f5f9;">+200.0%</td></tr>',
-    '    <tr><td style="padding:8px 12px;color:#0f172a;border-bottom:1px solid #f1f5f9;">Conversion Rate</td><td style="padding:8px 12px;text-align:right;font-weight:600;border-bottom:1px solid #f1f5f9;">0.76%</td><td style="padding:8px 12px;text-align:right;color:#64748b;border-bottom:1px solid #f1f5f9;">0.29%</td><td style="padding:8px 12px;text-align:right;color:#16a34a;font-weight:700;border-bottom:1px solid #f1f5f9;">+0.47%</td></tr>',
-    '    <tr><td style="padding:8px 12px;color:#0f172a;">Avg Engagement Time</td><td style="padding:8px 12px;text-align:right;font-weight:600;">44m 12s</td><td style="padding:8px 12px;text-align:right;color:#64748b;">38m 20s</td><td style="padding:8px 12px;text-align:right;color:#16a34a;font-weight:700;">+15.3%</td></tr>',
+    '    <tr><td style="padding:8px 12px;color:#0f172a;border-bottom:1px solid #f1f5f9;">Unique Visitors</td><td style="padding:8px 12px;text-align:right;font-weight:600;border-bottom:1px solid #f1f5f9;">' + comp.cur.visitors.toLocaleString() + '</td><td style="padding:8px 12px;text-align:right;color:#64748b;border-bottom:1px solid #f1f5f9;">' + (comp.hasPrior ? comp.prior.visitors.toLocaleString() : 'N/A') + '</td><td style="padding:8px 12px;text-align:right;color:' + (comp.changes.visitors.indexOf('+') === 0 ? '#16a34a' : '#64748b') + ';font-weight:700;border-bottom:1px solid #f1f5f9;">' + (comp.hasPrior ? comp.changes.visitors : 'Baseline') + '</td></tr>',
+    '    <tr><td style="padding:8px 12px;color:#0f172a;border-bottom:1px solid #f1f5f9;">Page Views</td><td style="padding:8px 12px;text-align:right;font-weight:600;border-bottom:1px solid #f1f5f9;">' + comp.cur.pageViews.toLocaleString() + '</td><td style="padding:8px 12px;text-align:right;color:#64748b;border-bottom:1px solid #f1f5f9;">' + (comp.hasPrior ? comp.prior.pageViews.toLocaleString() : 'N/A') + '</td><td style="padding:8px 12px;text-align:right;color:' + (comp.changes.pageViews.indexOf('+') === 0 ? '#16a34a' : '#64748b') + ';font-weight:700;border-bottom:1px solid #f1f5f9;">' + (comp.hasPrior ? comp.changes.pageViews : 'Baseline') + '</td></tr>',
+    '    <tr><td style="padding:8px 12px;color:#0f172a;border-bottom:1px solid #f1f5f9;">Verified Leads</td><td style="padding:8px 12px;text-align:right;font-weight:700;color:#047857;border-bottom:1px solid #f1f5f9;">' + comp.cur.leads + '</td><td style="padding:8px 12px;text-align:right;color:#64748b;border-bottom:1px solid #f1f5f9;">' + (comp.hasPrior ? comp.prior.leads : 'N/A') + '</td><td style="padding:8px 12px;text-align:right;color:' + (comp.changes.leads.indexOf('+') === 0 ? '#16a34a' : '#64748b') + ';font-weight:700;border-bottom:1px solid #f1f5f9;">' + (comp.hasPrior ? comp.changes.leads : 'Baseline') + '</td></tr>',
+    '    <tr><td style="padding:8px 12px;color:#0f172a;border-bottom:1px solid #f1f5f9;">Conversion Rate</td><td style="padding:8px 12px;text-align:right;font-weight:600;border-bottom:1px solid #f1f5f9;">' + comp.cur.conversion + '</td><td style="padding:8px 12px;text-align:right;color:#64748b;border-bottom:1px solid #f1f5f9;">' + (comp.hasPrior ? comp.prior.conversion : 'N/A') + '</td><td style="padding:8px 12px;text-align:right;color:' + (comp.changes.conversion.indexOf('+') === 0 ? '#16a34a' : '#64748b') + ';font-weight:700;border-bottom:1px solid #f1f5f9;">' + (comp.hasPrior ? comp.changes.conversion : 'Baseline') + '</td></tr>',
+    '    <tr><td style="padding:8px 12px;color:#0f172a;">Avg Engagement Time</td><td style="padding:8px 12px;text-align:right;font-weight:600;">' + comp.cur.avg + 's</td><td style="padding:8px 12px;text-align:right;color:#64748b;">' + (comp.hasPrior ? comp.prior.avg + 's' : 'N/A') + '</td><td style="padding:8px 12px;text-align:right;color:' + (comp.changes.avg.indexOf('+') === 0 ? '#16a34a' : '#64748b') + ';font-weight:700;">' + (comp.hasPrior ? comp.changes.avg : 'Baseline') + '</td></tr>',
     '  </table>',
     '</div>',
 
@@ -2451,12 +2859,18 @@ function buildEnrichedWeeklyDigestHtml(ss, period, visitors, leads, conversion, 
     '  <div style="border-left:4px solid #0284c7;background:#f0f9ff;padding:12px 16px;border-radius:4px;">',
     '    <div style="font-size:12px;font-weight:800;color:#0369a1;margin-bottom:6px;">KEY EXECUTIVE INSIGHTS</div>',
     '    <ul style="margin:0;padding-left:18px;font-size:12px;color:#0c4a6e;line-height:1.6;">',
-    '      <li>Qualified leads increased to 9 (+200.0% WoW), driven by the Enterprise Consultation flow.</li>',
-    '      <li>Direct / Organic traffic continues as primary acquisition pillar (68.4% share).</li>',
-    '      <li>The /solutions and /offerings pages generated 77% of all downstream form starts.</li>',
-    '      <li>WhatsApp direct channel continues converting with over 10% engagement velocity.</li>',
+    insightsHtml,
     '    </ul>',
     '  </div>',
+    '</div>',
+
+    // Recent Leads
+    '<div style="padding:10px 24px;">',
+    '  <h3 style="font-size:13px;font-weight:800;text-transform:uppercase;color:#0f172a;margin:0 0 8px 0;">📋 Recent Qualified Leads This Week</h3>',
+    '  <table width="100%" style="border-collapse:collapse;border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;">',
+    '    <tr style="background:#f1f5f9;font-weight:700;font-size:11px;color:#475569;"><th style="padding:8px 10px;text-align:left;">Name</th><th style="padding:8px 10px;text-align:left;">Company</th><th style="padding:8px 10px;text-align:left;">Email</th><th style="padding:8px 10px;text-align:right;">Source</th></tr>',
+    recentLeadsHtml,
+    '  </table>',
     '</div>',
 
     // Footer
@@ -2472,10 +2886,48 @@ function buildEnrichedWeeklyDigestHtml(ss, period, visitors, leads, conversion, 
 }
 
 // -----------------------------------------------------------------------------------------
-// 13C. ENRICHED MONTHLY REPORT BUILDER
+// 13C. ENRICHED MONTHLY REPORT BUILDER (100% ORIGINAL LIVE DATA)
 // -----------------------------------------------------------------------------------------
-function buildEnrichedMonthlyDigestHtml(ss, period, visitors, leads, conversion, avg, quick, consult, audit, chat, pageViews, events) {
+function buildEnrichedMonthlyDigestHtml(ss, periodFormatted, dateRange, visitors, leads, conversion, avg, quick, consult, audit, chat, pageViews, events) {
   var sheetUrl = ss ? ss.getUrl() : CONFIG.WEBSITE;
+
+  // 1. Pipeline Valuation (100% based on real lead volume)
+  var estPipeline = Number(leads || 0) > 0 ? ("$" + (Number(leads) * 25000).toLocaleString() + " USD") : "$0 USD";
+  var pipelineNote = Number(leads || 0) > 0
+    ? ("Based on " + leads + " qualified enterprise lead" + (leads > 1 ? "s" : "") + " captured this month &bull; Est. benchmark: $25,000/engagement")
+    : "No qualified enterprise leads recorded in this monthly billing cycle yet.";
+
+  // 2. Real Geography Breakdown
+  var mGeo = getRealMonthlyGeography(ss, dateRange);
+  var geoTableRows = "";
+  if (mGeo && mGeo.length > 0) {
+    mGeo.forEach(function(g) {
+      geoTableRows += '<tr>' +
+        '<td style="padding:8px 12px;color:#0f172a;border-bottom:1px solid #f1f5f9;">' + escapeHtml(g.city) + '</td>' +
+        '<td style="padding:8px 12px;text-align:right;font-weight:600;color:#0284c7;border-bottom:1px solid #f1f5f9;">' + g.views + '</td>' +
+        '<td style="padding:8px 12px;color:#475569;border-bottom:1px solid #f1f5f9;">' + escapeHtml(g.region) + '</td>' +
+        '<td style="padding:8px 12px;text-align:right;border-bottom:1px solid #f1f5f9;">' + g.views + '</td>' +
+        '</tr>';
+    });
+  } else {
+    geoTableRows = '<tr><td colspan="4" style="padding:12px;text-align:center;color:#64748b;">No regional traffic data recorded for this month yet.</td></tr>';
+  }
+
+  // 3. Real Recent Leads
+  var recentLeads = getRealRecentLeads(ss, dateRange, 5);
+  var recentLeadsHtml = "";
+  if (recentLeads && recentLeads.length > 0) {
+    recentLeads.forEach(function(lead) {
+      recentLeadsHtml += '<tr style="border-bottom:1px solid #f1f5f9;font-size:12px;">' +
+        '<td style="padding:8px 10px;font-weight:600;color:#0f172a;">' + escapeHtml(lead.name) + '</td>' +
+        '<td style="padding:8px 10px;color:#475569;">' + escapeHtml(lead.company) + '</td>' +
+        '<td style="padding:8px 10px;color:#0284c7;">' + escapeHtml(lead.email) + '</td>' +
+        '<td style="padding:8px 10px;text-align:right;color:#64748b;">' + escapeHtml(lead.source) + '</td>' +
+        '</tr>';
+    });
+  } else {
+    recentLeadsHtml = '<tr><td colspan="4" style="padding:14px;text-align:center;color:#64748b;font-style:italic;">No inbound leads recorded during this month.</td></tr>';
+  }
 
   return [
     '<!DOCTYPE html><html><head><meta charset="UTF-8"/></head>',
@@ -2486,74 +2938,80 @@ function buildEnrichedMonthlyDigestHtml(ss, period, visitors, leads, conversion,
     '<div style="background:linear-gradient(135deg,#7c3aed 0%,#0f172a 100%);padding:28px 24px;color:#ffffff;">',
     '  <div style="display:inline-block;background:rgba(255,255,255,0.2);padding:4px 12px;border-radius:16px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">🏛️ MONTHLY STRATEGIC DOSSIER</div>',
     '  <h1 style="margin:0 0 6px 0;font-size:22px;font-weight:800;color:#ffffff;">ProfitMachines Executive Analytics Brief</h1>',
-    '  <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.9);">Monthly Performance Report &bull; ' + period + ' &bull; Target: asmitha.int2027g3@gmail.com</p>',
+    '  <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.9);">Monthly Performance Report &bull; ' + escapeHtml(periodFormatted) + ' &bull; Target: asmitha.int2027g3@gmail.com</p>',
     '</div>',
 
-    // Executive Summary Scorecard (8 Cards)
+    // Executive Summary Scorecard (8 Real Live Cards)
     '<div style="padding:20px 24px 10px 24px;">',
     '  <div style="font-size:12px;font-weight:800;color:#0f172a;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px;">Executive Summary Scorecard</div>',
     '  <table width="100%" style="border-collapse:separate;border-spacing:8px;">',
     '    <tr>',
     '      <td style="background:#f8fafc;border:1px solid #e2e8f0;padding:12px;border-radius:8px;text-align:center;width:25%;">',
-    '        <div style="font-size:10px;color:#64748b;font-weight:700;">TOTAL VISITORS</div>',
-    '        <div style="font-size:20px;font-weight:800;color:#0f172a;margin-top:2px;">1,480</div>',
+    '        <div style="font-size:10px;color:#64748b;font-weight:700;">TOTAL EVENTS</div>',
+    '        <div style="font-size:20px;font-weight:800;color:#0f172a;margin-top:2px;">' + Number(events || 0).toLocaleString() + '</div>',
     '      </td>',
     '      <td style="background:#f8fafc;border:1px solid #e2e8f0;padding:12px;border-radius:8px;text-align:center;width:25%;">',
     '        <div style="font-size:10px;color:#64748b;font-weight:700;">UNIQUE VISITORS</div>',
-    '        <div style="font-size:20px;font-weight:800;color:#0284c7;margin-top:2px;">1,190</div>',
+    '        <div style="font-size:20px;font-weight:800;color:#0284c7;margin-top:2px;">' + Number(visitors || 0).toLocaleString() + '</div>',
     '      </td>',
     '      <td style="background:#f8fafc;border:1px solid #e2e8f0;padding:12px;border-radius:8px;text-align:center;width:25%;">',
     '        <div style="font-size:10px;color:#64748b;font-weight:700;">PAGE VIEWS</div>',
-    '        <div style="font-size:20px;font-weight:800;color:#7c3aed;margin-top:2px;">5,810</div>',
+    '        <div style="font-size:20px;font-weight:800;color:#7c3aed;margin-top:2px;">' + Number(pageViews || 0).toLocaleString() + '</div>',
     '      </td>',
     '      <td style="background:#f0fdf4;border:1px solid #bbf7d0;padding:12px;border-radius:8px;text-align:center;width:25%;">',
     '        <div style="font-size:10px;color:#166534;font-weight:700;">TOTAL LEADS</div>',
-    '        <div style="font-size:20px;font-weight:800;color:#15803d;margin-top:2px;">9</div>',
+    '        <div style="font-size:20px;font-weight:800;color:#15803d;margin-top:2px;">' + Number(leads || 0).toLocaleString() + '</div>',
     '      </td>',
     '    </tr>',
     '    <tr>',
     '      <td style="background:#fffbeb;border:1px solid #fde68a;padding:12px;border-radius:8px;text-align:center;width:25%;">',
-    '        <div style="font-size:10px;color:#92400e;font-weight:700;">TOTAL INQUIRIES</div>',
-    '        <div style="font-size:20px;font-weight:800;color:#b45309;margin-top:2px;">102</div>',
+    '        <div style="font-size:10px;color:#92400e;font-weight:700;">QUICK FORMS</div>',
+    '        <div style="font-size:20px;font-weight:800;color:#b45309;margin-top:2px;">' + Number(quick || 0).toLocaleString() + '</div>',
     '      </td>',
     '      <td style="background:#f8fafc;border:1px solid #e2e8f0;padding:12px;border-radius:8px;text-align:center;width:25%;">',
     '        <div style="font-size:10px;color:#64748b;font-weight:700;">CONVERSION RATE</div>',
-    '        <div style="font-size:20px;font-weight:800;color:#7c3aed;margin-top:2px;">0.76%</div>',
+    '        <div style="font-size:20px;font-weight:800;color:#7c3aed;margin-top:2px;">' + escapeHtml(conversion) + '</div>',
     '      </td>',
     '      <td style="background:#f8fafc;border:1px solid #e2e8f0;padding:12px;border-radius:8px;text-align:center;width:25%;">',
-    '        <div style="font-size:10px;color:#64748b;font-weight:700;">ENGAGEMENT RATE</div>',
-    '        <div style="font-size:20px;font-weight:800;color:#047857;margin-top:2px;">392.4%</div>',
+    '        <div style="font-size:10px;color:#64748b;font-weight:700;">CONSULTATIONS</div>',
+    '        <div style="font-size:20px;font-weight:800;color:#047857;margin-top:2px;">' + Number(consult || 0).toLocaleString() + '</div>',
     '      </td>',
     '      <td style="background:#f8fafc;border:1px solid #e2e8f0;padding:12px;border-radius:8px;text-align:center;width:25%;">',
-    '        <div style="font-size:10px;color:#64748b;font-weight:700;">RETURNING USERS</div>',
-    '        <div style="font-size:20px;font-weight:800;color:#0f172a;margin-top:2px;">194</div>',
+    '        <div style="font-size:10px;color:#64748b;font-weight:700;">AUDIT DOSSIERS</div>',
+    '        <div style="font-size:20px;font-weight:800;color:#0f172a;margin-top:2px;">' + Number(audit || 0).toLocaleString() + '</div>',
     '      </td>',
     '    </tr>',
     '  </table>',
     '</div>',
 
-    // Financial Pipeline & Opportunity
+    // Financial Pipeline & Opportunity (100% Real Live Calculation)
     '<div style="padding:10px 24px;">',
     '  <table width="100%" style="border-collapse:collapse;background:#fdf4ff;border:1px solid #f0abfc;border-radius:8px;overflow:hidden;">',
     '    <tr>',
     '      <td style="padding:14px 16px;">',
     '        <div style="font-size:12px;font-weight:800;color:#86198f;margin-bottom:4px;">💰 ESTIMATED PIPELINE VALUE</div>',
-    '        <div style="font-size:24px;font-weight:800;color:#701a75;">$225,000 USD</div>',
-    '        <div style="font-size:11px;color:#a21caf;margin-top:4px;">Based on 9 qualified enterprise leads &bull; Avg deal value: $25,000 &bull; Close-weighted: $78,750 USD</div>',
+    '        <div style="font-size:24px;font-weight:800;color:#701a75;">' + estPipeline + '</div>',
+    '        <div style="font-size:11px;color:#a21caf;margin-top:4px;">' + pipelineNote + '</div>',
     '      </td>',
     '    </tr>',
     '  </table>',
     '</div>',
 
-    // Geography Breakdown
+    // Geography Breakdown (100% Real Live Metros)
     '<div style="padding:10px 24px;">',
     '  <h3 style="font-size:12px;font-weight:800;text-transform:uppercase;color:#0f172a;margin:0 0 8px 0;">Geography Summary (Top Metros & Regions)</h3>',
     '  <table width="100%" style="border-collapse:collapse;font-size:12px;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;">',
     '    <tr style="background:#f1f5f9;font-weight:700;color:#475569;"><th style="padding:8px 12px;text-align:left;">City / Metro</th><th style="padding:8px 12px;text-align:right;">Views</th><th style="padding:8px 12px;text-align:left;">Region / State</th><th style="padding:8px 12px;text-align:right;">Sessions</th></tr>',
-    '    <tr><td style="padding:8px 12px;color:#0f172a;border-bottom:1px solid #f1f5f9;">Chennai</td><td style="padding:8px 12px;text-align:right;font-weight:600;color:#0284c7;border-bottom:1px solid #f1f5f9;">1,320</td><td style="padding:8px 12px;color:#475569;border-bottom:1px solid #f1f5f9;">Tamil Nadu</td><td style="padding:8px 12px;text-align:right;border-bottom:1px solid #f1f5f9;">3,340</td></tr>',
-    '    <tr><td style="padding:8px 12px;color:#0f172a;border-bottom:1px solid #f1f5f9;">Bengaluru</td><td style="padding:8px 12px;text-align:right;font-weight:600;color:#0284c7;border-bottom:1px solid #f1f5f9;">450</td><td style="padding:8px 12px;color:#475569;border-bottom:1px solid #f1f5f9;">Karnataka</td><td style="padding:8px 12px;text-align:right;border-bottom:1px solid #f1f5f9;">480</td></tr>',
-    '    <tr><td style="padding:8px 12px;color:#0f172a;border-bottom:1px solid #f1f5f9;">Coimbatore</td><td style="padding:8px 12px;text-align:right;font-weight:600;color:#0284c7;border-bottom:1px solid #f1f5f9;">310</td><td style="padding:8px 12px;color:#475569;border-bottom:1px solid #f1f5f9;">Tamil Nadu</td><td style="padding:8px 12px;text-align:right;border-bottom:1px solid #f1f5f9;">320</td></tr>',
-    '    <tr><td style="padding:8px 12px;color:#0f172a;">New York (US)</td><td style="padding:8px 12px;text-align:right;font-weight:600;color:#0284c7;">210</td><td style="padding:8px 12px;color:#475569;">United States</td><td style="padding:8px 12px;text-align:right;">210</td></tr>',
+    geoTableRows,
+    '  </table>',
+    '</div>',
+
+    // Recent Qualified Leads
+    '<div style="padding:10px 24px;">',
+    '  <h3 style="font-size:13px;font-weight:800;text-transform:uppercase;color:#0f172a;margin:0 0 8px 0;">📋 Recent Qualified Leads This Month</h3>',
+    '  <table width="100%" style="border-collapse:collapse;border:1px solid #e2e8f0;border-radius:6px;overflow:hidden;">',
+    '    <tr style="background:#f1f5f9;font-weight:700;font-size:11px;color:#475569;"><th style="padding:8px 10px;text-align:left;">Name</th><th style="padding:8px 10px;text-align:left;">Company</th><th style="padding:8px 10px;text-align:left;">Email</th><th style="padding:8px 10px;text-align:right;">Source</th></tr>',
+    recentLeadsHtml,
     '  </table>',
     '</div>',
 
@@ -2569,9 +3027,32 @@ function buildEnrichedMonthlyDigestHtml(ss, period, visitors, leads, conversion,
   ].join('');
 }
 
-function dailyReport() { sendPeriodicExecutiveDigest("Daily"); }
-function weeklyReport() { sendPeriodicExecutiveDigest("Weekly"); }
-function monthlyReport() { sendPeriodicExecutiveDigest("Monthly"); }
+function dailyReport() {
+  try {
+    BUILD_AGGREGATED_INTERVAL_SUMMARIES();
+    sendPeriodicExecutiveDigest("Daily");
+  } catch (e) {
+    console.error("dailyReport error: " + e);
+  }
+}
+
+function weeklyReport() {
+  try {
+    BUILD_AGGREGATED_INTERVAL_SUMMARIES();
+    sendPeriodicExecutiveDigest("Weekly");
+  } catch (e) {
+    console.error("weeklyReport error: " + e);
+  }
+}
+
+function monthlyReport() {
+  try {
+    BUILD_AGGREGATED_INTERVAL_SUMMARIES();
+    sendPeriodicExecutiveDigest("Monthly");
+  } catch (e) {
+    console.error("monthlyReport error: " + e);
+  }
+}
 
 /**
  * MASTER ACTION: Generates/Stores Daily, Weekly, and Monthly data in Google Sheet
@@ -2601,7 +3082,7 @@ function GENERATE_AND_SEND_ALL_REPORTS() {
       "1. 📅 Daily Digest → sent individually to asmitha.int2027g3@gmail.com\n" +
       "2. 📅 Weekly Digest → sent individually to asmitha.int2027g3@gmail.com\n" +
       "3. 📅 Monthly Digest → sent individually to asmitha.int2027g3@gmail.com\n\n" +
-      "All Google Sheet summary tabs (Daily_Summary, Weekly_Summary, Monthly_Summary) have been updated."
+      "All Google Sheet summary tabs (Daily_Summary, Weekly_Summary, Monthly_Summary) have been updated with 100% original live data."
     );
   } catch(e) {}
 }
@@ -2629,7 +3110,7 @@ function setupAllProfitMachinesTriggers() {
     }
   });
 
-  // Daily report every evening at 8:00 PM IST
+  // Daily report every evening at 8:00 PM IST (20:00)
   ScriptApp.newTrigger("dailyReport")
     .timeBased().everyDays(1).atHour(20).create();
 
@@ -2642,7 +3123,7 @@ function setupAllProfitMachinesTriggers() {
     .timeBased().onMonthDay(1).atHour(9).create();
 
   try {
-    SpreadsheetApp.getUi().alert("✅ Automated Email Report Triggers Activated (Daily, Weekly & Monthly) for Profit Machines!");
+    SpreadsheetApp.getUi().alert("✅ Automated Email Report Triggers Activated!\n\n• Daily Digest: Every day @ 8:00 PM IST\n• Weekly Brief: Every Monday @ 9:00 AM IST\n• Monthly Dossier: 1st of every month @ 9:00 AM IST\n\nTarget: asmitha.int2027g3@gmail.com");
   } catch (e) {}
 }
 

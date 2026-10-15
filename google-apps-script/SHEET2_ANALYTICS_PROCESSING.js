@@ -408,22 +408,11 @@ function buildHeatmapSheet(tData) {
   }
 
   if (totalEvents === 0) {
-    maxVal = 18;
-    mx[4][13] = 18; // Thursday 1:00 PM peak
-    mx[3][12] = 15; // Wednesday 12:00 PM peak
-    mx[2][12] = 11; // Tuesday 12:00 PM
-    mx[0][13] = 9;  // Sunday 1:00 PM
-    mx[6][9] = 7; mx[6][14] = 6; mx[6][18] = 5;
-    mx[5][9] = 6; mx[5][11] = 8; mx[5][14] = 7;
-    mx[4][9] = 8; mx[4][14] = 7; mx[4][18] = 6;
-    mx[3][9] = 7; mx[3][14] = 6; mx[3][18] = 5;
-    mx[2][9] = 6; mx[2][14] = 7;
-    mx[1][9] = 5; mx[1][14] = 6; mx[1][18] = 5;
-    totalEvents = 138;
+    maxVal = 1;
   }
 
-  var peakDayName = "Thursday";
-  var peakHourStr = "1:00 PM";
+  var peakDayName = "N/A";
+  var peakHourStr = "N/A";
   var peakCount = 0;
   var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   var hourLabels = [
@@ -447,9 +436,9 @@ function buildHeatmapSheet(tData) {
     sh.getRange(r, c, 1, 6).merge().setValue(title).setBackground("#0f172a").setFontColor("#ffffff").setFontWeight("bold").setHorizontalAlignment("center").setFontSize(9);
     sh.getRange(r + 1, c, 2, 6).merge().setValue(val).setBackground(color).setFontColor("#ffffff").setFontWeight("bold").setHorizontalAlignment("center").setVerticalAlignment("middle").setFontSize(15);
   };
-  drawKpi(4, 3, "🔥 HOTTEST ACTIVITY WINDOW", peakDayName + " @ " + peakHourStr, "#dc2626");
-  drawKpi(4, 9, "⚡ PEAK ENGAGEMENT DAY", peakDayName + " (" + peakCount + " Peak Hour)", "#ea580c");
-  drawKpi(4, 15, "🕒 PRIME BUSINESS WINDOW", "10:00 AM – 3:00 PM IST", "#0284c7");
+  drawKpi(4, 3, "🔥 HOTTEST ACTIVITY WINDOW", peakCount > 0 ? (peakDayName + " @ " + peakHourStr) : "No Activity Yet", "#dc2626");
+  drawKpi(4, 9, "⚡ PEAK ENGAGEMENT DAY", peakCount > 0 ? (peakDayName + " (" + peakCount + " Peak Hour)") : "No Peak Activity", "#ea580c");
+  drawKpi(4, 15, "🕒 PRIME BUSINESS WINDOW", totalEvents > 0 ? "10:00 AM – 3:00 PM IST" : "Awaiting Data", "#0284c7");
   drawKpi(4, 21, "📊 ANALYZED TELEMETRY", (totalEvents).toLocaleString() + " Events Logged", "#059669");
 
   var topHeaderRow = 7;
