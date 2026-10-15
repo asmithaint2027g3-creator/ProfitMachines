@@ -50,13 +50,13 @@ const topValueCards = [
 const capabilityCards = [
     {
         cardNum: 'CARD 1',
-        title: 'Digital Growth & Customer Acquisition',
+        title: 'Demand & Customer Acquisition',
         icon: Globe,
         bullets: [
-            'Attract potential customers through a stronger digital presence.',
-            'Improve visibility across relevant digital channels.',
-            'Identify pages and channels that generate valuable inquiries.',
-            'Turn website engagement into opportunities for business growth.',
+            'Attract high-intent buyers through targeted market positioning and outbound reach.',
+            'Improve visibility across the channels and markets that matter most commercially.',
+            'Identify offers, campaigns, and conversations that generate qualified inquiries.',
+            'Convert buyer engagement into measurable revenue opportunities.',
         ],
     },
     {
@@ -133,17 +133,17 @@ const verticalsData: VerticalItem[] = [
         attractionStrategy: 'Deploy targeted product-led landing pages and technical comparison assets that capture software buyers actively researching integrations, security compliance, and ROI benchmarks.',
         conversionStrategy: 'Route inbound demo requests and trial sign-ups instantly to dedicated account reps with firmographic context, preventing high-intent enterprise prospects from going cold.',
         costReductionStrategy: 'Automate inbound lead deduplication, CRM deal routing, and onboarding notifications to eliminate repetitive manual sales administration and reduce operational cost.',
-        retentionStrategy: 'Track digital adoption and feature usage milestones to identify expansion opportunities early and intervene proactively before account churn risks develop.',
+        retentionStrategy: 'Track product adoption, expansion signals, and account health to identify upsell opportunities early and reduce churn risk.',
         keyBusinessMetrics: [
             { name: 'Lead-to-Opportunity Rate', rationale: 'Tracks how effectively inbound tech inquiries advance to formal sales evaluations.' },
             { name: 'CAC Payback Period', rationale: 'Evaluates months required for gross margin from an account to recover its acquisition cost.' },
             { name: 'Trial-to-Paid Velocity', rationale: 'Measures median days from initial signup to paying customer conversion.' },
-            { name: 'Pipeline Value Attributed', rationale: 'Measures net new ARR influenced directly by tracked digital acquisition pages.' },
+            { name: 'Pipeline Value Attributed', rationale: 'Measures net new ARR influenced by documented lead sources, sales engagement, and commercial follow-up.' },
         ],
         implementedCapabilities: [
             'Automated inquiry capture & CRM synchronization (Jira / Webhooks)',
             'Intent-based lead prioritization and instant team notifications',
-            'Multi-touch digital attribution monitoring',
+            'Revenue and pipeline attribution monitoring',
             'Structured pipeline velocity and drop-off reports',
         ],
         nextSteps: [
@@ -175,7 +175,7 @@ const verticalsData: VerticalItem[] = [
         retentionStrategy: 'Systematize milestone reviews, quarterly advisory touchpoints, and retainer renewal workflows to expand engagement scope and increase client lifetime value.',
         keyBusinessMetrics: [
             { name: 'Inquiry-to-Consultation Rate', rationale: 'Assesses how many prospective client inquiries successfully schedule a billable or discovery consultation.' },
-            { name: 'Average Engagement Contract Value', rationale: 'Monitors whether digital positioning is attracting higher-margin advisory mandates.' },
+            { name: 'Average Engagement Contract Value', rationale: 'Monitors whether positioning and specialization attract higher-margin advisory mandates.' },
             { name: 'Intake Processing Time Saved', rationale: 'Measures administrative hours recovered per partner through automated inquiry collection.' },
             { name: 'Retainer & Repeat Rate', rationale: 'Tracks the percentage of clients expanding into ongoing advisory retainers.' },
         ],
@@ -186,7 +186,7 @@ const verticalsData: VerticalItem[] = [
             'Monthly advisory inquiry and activity performance summaries',
         ],
         nextSteps: [
-            'Standardize digital intake forms to capture engagement scope and budget criteria.',
+            'Standardize intake and qualification processes to capture scope, budget, and delivery requirements.',
             'Configure instant notification routing to appropriate practice-area leads.',
             'Set up automated follow-up cadences for outstanding advisory proposals.',
         ],
@@ -264,7 +264,7 @@ const verticalsData: VerticalItem[] = [
             'Monthly business activity and lead volume summary reports',
         ],
         nextSteps: [
-            'Audit all active digital touchpoints for unmonitored forms or broken contact links.',
+            'Audit customer contact points for missed inquiries, slow responses, and broken follow-ups.',
             'Configure instant mobile notifications for every incoming inquiry.',
             'Implement a mandatory 24-hour follow-up standard for all pending customer quotes.',
         ],
@@ -285,7 +285,7 @@ const verticalsData: VerticalItem[] = [
         icon: Building2,
         tagline: 'Eliminating cross-departmental lead leakage and enforcing sales SLA governance.',
         intro: 'Enterprise organizations lose millions in revenue to pipeline friction between global marketing, business development, and regional sales units. Establishing automated handoffs, SLA tracking, and audit-ready data flows unlocks trapped corporate profitability.',
-        attractionStrategy: 'Deploy account-based digital experiences tailored to multi-stakeholder buying committees across procurement, IT security, and executive champions with compliance-focused documentation.',
+        attractionStrategy: 'Build account-specific commercial engagement plans for multi-stakeholder buying committees across procurement, IT security, and executive champions, supported by compliance-focused documentation.',
         conversionStrategy: 'Enforce automated Service Level Agreements (SLAs) for lead response times, escalating high-value enterprise accounts if reps fail to initiate contact within contracted response windows.',
         costReductionStrategy: 'Eliminate duplicate data entry across enterprise CRM, Jira, and spreadsheets through standardized API integrations and automated workflow triggers.',
         retentionStrategy: 'Consolidate account health metrics, usage signals, and renewal milestones into central dashboards to support proactive enterprise account management and multi-year expansion.',
@@ -293,7 +293,7 @@ const verticalsData: VerticalItem[] = [
             { name: 'Pipeline Velocity ($ / Day)', rationale: 'Calculates the rate at which enterprise opportunities progress toward closed revenue.' },
             { name: 'SLA Handoff Compliance Rate', rationale: 'Measures percentage of enterprise inquiries contacted within strict corporate SLA limits.' },
             { name: 'Workflow Processing Time Saved', rationale: 'Quantifies administrative reduction across regional sales operations and support teams.' },
-            { name: 'Revenue Attributed to Digital Channels', rationale: 'Tracks verified closed enterprise contract value influenced by digital touchpoints.' },
+            { name: 'Revenue Attributed to Growth Channels', rationale: 'Tracks verified closed enterprise contract value influenced by tracked sales and marketing touchpoints.' },
         ],
         implementedCapabilities: [
             'Enterprise CRM & ERP webhook routing (Jira, Google Sheets, Custom APIs)',
@@ -336,7 +336,7 @@ const verticalsData: VerticalItem[] = [
         implementedCapabilities: [
             'High-intent visitor engagement & automated cart abandonment workflows',
             'Product-level inquiry routing and direct customer messaging',
-            'Channel attribution and digital sales conversion tracking',
+            'Inquiry channel attribution and revenue conversion tracking',
             'Automated post-purchase customer feedback and replenishment reminders',
         ],
         nextSteps: [
@@ -514,10 +514,10 @@ export default function Verticals() {
                             <span>Business Profitability Frameworks</span>
                         </div>
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-5">
-                            Turn Your Digital Presence Into a <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-[#38bdf8] to-blue-400 drop-shadow-[0_0_30px_rgba(56,189,248,0.3)]">Profit Engine</span>
+                            Turn Every Market Opportunity Into a <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-[#38bdf8] to-blue-400 drop-shadow-[0_0_30px_rgba(56,189,248,0.3)]">Profit Engine</span>
                         </h1>
                         <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
-                            Attract the right customers, convert more opportunities into sales, reduce operational waste, and build a more profitable business with intelligent digital growth strategies.
+                            Attract the right buyers, convert qualified opportunities into revenue, reduce operational waste, and build a more profitable business with disciplined growth and sales execution.
                         </p>
 
                         {/* Interactive Vertical Quick-Chips */}
@@ -602,7 +602,7 @@ export default function Verticals() {
                                 Capabilities Engineered for Commercial Impact
                             </h2>
                             <p className="text-slate-500 text-sm sm:text-base max-w-2xl mx-auto mt-2">
-                                Why these capabilities matter: they eliminate lost customer opportunities and convert digital traffic into high-margin revenue.
+                                Why these capabilities matter: they eliminate lost customer opportunities and convert qualified demand into high-margin revenue.
                             </p>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

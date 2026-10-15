@@ -44,7 +44,6 @@ const Outcomes = lazy(() => import('./pages/Outcomes'));
 const Solutions = lazy(() => import('./pages/Solutions'));
 const Capabilities = lazy(() => import('./pages/Capabilities'));
 const Industries = lazy(() => import('./pages/Industries'));
-const Verticals = lazy(() => import('./pages/Verticals'));
 const Offerings = lazy(() => import('./pages/Offerings'));
 const Resources = lazy(() => import('./pages/Resources'));
 const Company = lazy(() => import('./pages/Company'));
@@ -145,7 +144,7 @@ export default function App() {
                   <Route path="/solutions/:slug" element={<NavigateToSolutionsSection />} />
                   <Route path="/capabilities" element={<Navigate to="/solutions" replace />} />
                   <Route path="/industries" element={<Industries />} />
-                  <Route path="/verticals" element={<Verticals />} />
+
                   <Route path="/offerings" element={<Offerings />} />
                   <Route path="/resources" element={<Resources />} />
                   {/* ── New consolidated service routes ── */}

@@ -2213,63 +2213,6 @@ export const smNavItems = [
         }
     },
     {
-        "name": "Verticals",
-        "path": "/verticals",
-        "dropdown": {
-            "type": "verticals-mega",
-            "highlight": {
-                "title": "Need Help Choosing?",
-                "desc": "Not sure which vertical framework fits your operational model? Our growth architects can assess your workflows and recommend the right setup.",
-                "linkText": "Explore All Verticals",
-                "linkPath": "/verticals"
-            },
-            "items": [
-                {
-                    "id": "saas",
-                    "name": "SaaS & Technology",
-                    "desc": "Digital growth & lead workflows for software businesses",
-                    "path": "/verticals?industry=saas",
-                    "icon": "Cpu"
-                },
-                {
-                    "id": "services",
-                    "name": "Professional Services",
-                    "desc": "Organize client inquiries & consultation workflows",
-                    "path": "/verticals?industry=services",
-                    "icon": "Briefcase"
-                },
-                {
-                    "id": "agencies",
-                    "name": "Marketing & Consulting Agencies",
-                    "desc": "Campaign workflows, lead tracking & reporting processes",
-                    "path": "/verticals?industry=agencies",
-                    "icon": "Sparkles"
-                },
-                {
-                    "id": "smb",
-                    "name": "Small & Medium Businesses",
-                    "desc": "Strengthen digital presence & customer acquisition",
-                    "path": "/verticals?industry=smb",
-                    "icon": "Building"
-                },
-                {
-                    "id": "enterprise",
-                    "name": "Enterprise Organizations",
-                    "desc": "Structured workflows & reporting across teams",
-                    "path": "/verticals?industry=enterprise",
-                    "icon": "Building2"
-                },
-                {
-                    "id": "retail",
-                    "name": "E-commerce & Retail",
-                    "desc": "Organize multi-channel inquiries & customer engagement",
-                    "path": "/verticals?industry=retail",
-                    "icon": "ShoppingBag"
-                }
-            ]
-        }
-    },
-    {
         "name": "Solutions",
         "path": "/solutions",
         "dropdown": {
@@ -2420,15 +2363,10 @@ export const smNavItems = [
                     "title": "Connect",
                     "desc": "Careers, contact, and partnership",
                     "items": [
-                        { "name": "Careers", "path": "/careers", "icon": "Briefcase" },
-                        { "name": "Contact Us", "path": "/book-consultation", "icon": "Phone" }
+                        { "name": "Careers", "path": "/careers", "icon": "Briefcase" }
                     ]
                 }
             ]
         }
-    },
-    {
-        "name": "Contact Us",
-        "path": "/book-consultation"
     }
 ];

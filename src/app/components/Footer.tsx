@@ -9,7 +9,6 @@ export default function Footer() {
     const quickLinks: { [key: string]: string } = {
         'Home': '/',
         'Offerings': '/offerings',
-        'Verticals': '/verticals',
         'About Us': '/#about-us',
         'Case Studies': '/#case-studies',
         'Blogs': '/#blogs',

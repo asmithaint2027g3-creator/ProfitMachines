@@ -108,14 +108,6 @@ export default function Sitemap() {
                     ]
                 },
                 {
-                    name: "Verticals",
-                    path: "/verticals",
-                    sections: [
-                        "Target Market Segments",
-                        "Vertical-Specific Solutions"
-                    ]
-                },
-                {
                     name: "Crypto & Web3",
                     path: "/crypto",
                     sections: [
