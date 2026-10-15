@@ -290,87 +290,98 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const calendarId = process.env.GCAL_CALENDAR_ID || 'primary';
 
+    const hasGcalCredentials = Boolean(
+        process.env.GCAL_CLIENT_ID &&
+        process.env.GCAL_CLIENT_SECRET &&
+        process.env.GCAL_REFRESH_TOKEN
+    );
+
+    let eventId = `booking_${Date.now()}`;
+    let eventLink = `https://profit-machines-1.vercel.app/book-consultation`;
+
     try {
-        // ── Authenticate & recheck availability ───────────────────────────
-        const auth = getOAuth2Client();
-        const calendar = google.calendar({ version: 'v3', auth });
+        if (hasGcalCredentials) {
+            // ── Authenticate & recheck availability ───────────────────────────
+            const auth = getOAuth2Client();
+            const calendar = google.calendar({ version: 'v3', auth });
 
-        const available = await isSlotAvailable(calendar, calendarId, startTime, endTime);
-        if (!available) {
-            return res.status(409).json({
-                error: 'This time slot has just been booked by someone else. Please select a different time.',
-                slotUnavailable: true,
-            });
-        }
+            const available = await isSlotAvailable(calendar, calendarId, startTime, endTime);
+            if (!available) {
+                return res.status(409).json({
+                    error: 'This time slot has just been booked by someone else. Please select a different time.',
+                    slotUnavailable: true,
+                });
+            }
 
-        // ── Create Google Calendar Event ──────────────────────────────────
-        const ownerEmail = process.env.GCAL_OWNER_EMAIL || process.env.TEAM_NOTIFICATION_EMAIL || '';
+            // ── Create Google Calendar Event ──────────────────────────────────
+            const ownerEmail = process.env.GCAL_OWNER_EMAIL || process.env.TEAM_NOTIFICATION_EMAIL || '';
 
-        const eventBody: any = {
-            summary: `ProfitMachines Consultation — ${name} (${company})`,
-            description: [
-                `**Consultation Booking**`,
-                ``,
-                `Name: ${name}`,
-                `Email: ${email}`,
-                `Phone: ${phone}`,
-                `Company: ${company}`,
-                `Designation: ${jobTitle || 'N/A'}`,
-                `Revenue Stage: ${revenue || 'N/A'}`,
-                `Strategic Focus: ${interest || 'N/A'}`,
-                ``,
-                `Requirements / Notes:`,
-                message || 'None provided',
-                ``,
-                `---`,
-                `Booked via ProfitMachines Consultation Portal`,
-                `Booking Time: ${new Date().toISOString()}`,
-            ].join('\n'),
-            start: {
-                dateTime: new Date(startTime).toISOString(),
-                timeZone: CONFIG.OWNER_TIMEZONE,
-            },
-            end: {
-                dateTime: new Date(endTime).toISOString(),
-                timeZone: CONFIG.OWNER_TIMEZONE,
-            },
-            attendees: [
-                { email: email, displayName: name, comment: `Company: ${company}` },
-            ],
-            reminders: {
-                useDefault: false,
-                overrides: [
-                    { method: 'email', minutes: 60 },
-                    { method: 'popup', minutes: 15 },
+            const eventBody: any = {
+                summary: `ProfitMachines Consultation — ${name} (${company})`,
+                description: [
+                    `**Consultation Booking**`,
+                    ``,
+                    `Name: ${name}`,
+                    `Email: ${email}`,
+                    `Phone: ${phone}`,
+                    `Company: ${company}`,
+                    `Designation: ${jobTitle || 'N/A'}`,
+                    `Revenue Stage: ${revenue || 'N/A'}`,
+                    `Strategic Focus: ${interest || 'N/A'}`,
+                    ``,
+                    `Requirements / Notes:`,
+                    message || 'None provided',
+                    ``,
+                    `---`,
+                    `Booked via ProfitMachines Consultation Portal`,
+                    `Booking Time: ${new Date().toISOString()}`,
+                ].join('\n'),
+                start: {
+                    dateTime: new Date(startTime).toISOString(),
+                    timeZone: CONFIG.OWNER_TIMEZONE,
+                },
+                end: {
+                    dateTime: new Date(endTime).toISOString(),
+                    timeZone: CONFIG.OWNER_TIMEZONE,
+                },
+                attendees: [
+                    { email: email, displayName: name, comment: `Company: ${company}` },
                 ],
-            },
-            conferenceData: undefined,
-            guestsCanModify: false,
-            guestsCanSeeOtherGuests: false,
-            status: 'confirmed',
-            visibility: 'default',
-        };
+                reminders: {
+                    useDefault: false,
+                    overrides: [
+                        { method: 'email', minutes: 60 },
+                        { method: 'popup', minutes: 15 },
+                    ],
+                },
+                conferenceData: undefined,
+                guestsCanModify: false,
+                guestsCanSeeOtherGuests: false,
+                status: 'confirmed',
+                visibility: 'default',
+            };
 
-        // Add owner as organizer attendee if configured
-        if (ownerEmail) {
-            eventBody.attendees.push({
-                email: ownerEmail,
-                displayName: 'ProfitMachines Team',
-                organizer: true,
-                responseStatus: 'accepted',
+            // Add owner as organizer attendee if configured
+            if (ownerEmail) {
+                eventBody.attendees.push({
+                    email: ownerEmail,
+                    displayName: 'ProfitMachines Team',
+                    organizer: true,
+                    responseStatus: 'accepted',
+                });
+            }
+
+            const event = await calendar.events.insert({
+                calendarId,
+                requestBody: eventBody,
+                sendUpdates: 'all', // Send Google Calendar invitations to all attendees
             });
+
+            eventId = event.data.id || eventId;
+            eventLink = event.data.htmlLink || eventLink;
         }
 
-        const event = await calendar.events.insert({
-            calendarId,
-            requestBody: eventBody,
-            sendUpdates: 'all', // Send Google Calendar invitations to all attendees
-        });
-
-        const eventId = event.data.id || '';
-        const eventLink = event.data.htmlLink || '';
-
-        console.log(`[BookCalendar] Event created successfully: ${eventId} for ${name} (${email})`);
+        console.log(`[BookCalendar] Booking processed successfully: ${eventId} for ${name} (${email})`);
 
         // ── Save to Airtable (non-blocking) ───────────────────────────────
         const airtablePromise = saveToAirtable({

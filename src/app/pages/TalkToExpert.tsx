@@ -181,13 +181,13 @@ export default function TalkToExpert() {
                     {/* Left Column: Value Prop */}
                     <div className="lg:w-1/2 space-y-8">
                         <div>
-                            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-[#1E6297] font-bold text-xs uppercase tracking-wider mb-4 border border-emerald-100 shadow-sm">
-                                <Search className="w-3.5 h-3.5" />
+                            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E1EFF8] text-[#1E6297] font-bold text-xs uppercase tracking-wider mb-4 border border-[#BAE0F8] shadow-2xs">
+                                <Search className="w-3.5 h-3.5 text-[#2878B5]" />
                                 Direct Sector Practice Lead
                             </span>
-                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.08] mb-6">
+                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black font-heading text-[#0A2540] tracking-tight leading-[1.08] mb-6">
                                 Speak with a <br />
-                                <span className="bg-gradient-to-r from-[#2878B5] via-emerald-700 to-teal-700 bg-clip-text text-transparent">
+                                <span className="bg-gradient-to-r from-[#2878B5] via-emerald-600 to-teal-600 bg-clip-text text-transparent">
                                     Principal AI Architect
                                 </span>
                             </h1>
@@ -198,29 +198,29 @@ export default function TalkToExpert() {
 
                         {/* Capabilities Grid */}
                         <div className="space-y-4">
-                            <div className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex items-start gap-4">
-                                <div className="w-10 h-10 rounded-xl bg-emerald-50 text-[#2878B5] flex items-center justify-center shrink-0">
-                                    <Cpu className="w-5 h-5" />
+                            <div className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-card flex items-start gap-4">
+                                <div className="w-10 h-10 rounded-xl bg-[#E1EFF8] text-[#2878B5] flex items-center justify-center shrink-0">
+                                    <Cpu className="w-5 h-5 text-[#2878B5]" />
                                 </div>
                                 <div>
-                                    <div className="text-base font-bold text-slate-900 mb-1">Architecture Feasibility Review</div>
-                                    <div className="text-xs text-slate-600 leading-relaxed">Evaluate latency, API bandwidth, and security controls across your enterprise data stack.</div>
+                                    <div className="text-base font-bold font-heading text-[#0A2540] mb-1">Architecture Feasibility Review</div>
+                                    <div className="text-xs text-slate-600 leading-relaxed font-normal">Evaluate latency, API bandwidth, and security controls across your enterprise data stack.</div>
                                 </div>
                             </div>
 
-                            <div className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex items-start gap-4">
-                                <div className="w-10 h-10 rounded-xl bg-emerald-50 text-[#2878B5] flex items-center justify-center shrink-0">
-                                    <TrendingUp className="w-5 h-5" />
+                            <div className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-card flex items-start gap-4">
+                                <div className="w-10 h-10 rounded-xl bg-[#E1EFF8] text-[#2878B5] flex items-center justify-center shrink-0">
+                                    <TrendingUp className="w-5 h-5 text-[#2878B5]" />
                                 </div>
                                 <div>
-                                    <div className="text-base font-bold text-slate-900 mb-1">CAC & Conversion Modeling</div>
-                                    <div className="text-xs text-slate-600 leading-relaxed">Model out your expected payback period and pipeline acceleration trajectory.</div>
+                                    <div className="text-base font-bold font-heading text-[#0A2540] mb-1">CAC & Conversion Modeling</div>
+                                    <div className="text-xs text-slate-600 leading-relaxed font-normal">Model out your expected payback period and pipeline acceleration trajectory.</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="p-5 rounded-2xl bg-slate-900 text-white shadow-xl flex items-center gap-3">
-                            <Shield className="w-5 h-5 text-emerald-400 shrink-0" />
+                        <div className="p-5 rounded-2xl bg-gradient-to-br from-[#020F1E] via-[#0A2540] to-[#0F3560] text-white shadow-xl border border-white/10 flex items-center gap-3">
+                            <Shield className="w-5 h-5 text-[#5CAAE6] shrink-0" />
                             <div className="text-xs text-slate-300">
                                 <strong className="text-white">Strict Enterprise Confidentiality:</strong> All technical conversations are backed by corporate NDAs and ISO-27001 compliant workflows.
                             </div>

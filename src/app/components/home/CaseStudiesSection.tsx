@@ -90,14 +90,17 @@ export default function CaseStudiesSection() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        <div className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-white text-[#2878B5] font-bold text-xs uppercase tracking-wider mb-4 border border-slate-200 shadow-sm">
+                        <div className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E1EFF8] border border-[#BAE0F8] text-[#1E6297] font-bold text-xs uppercase tracking-wider mb-4 shadow-xs"
+                            style={{ fontFamily: 'Inter, sans-serif' }}>
                             <Sparkles className="w-3.5 h-3.5" />
                             Business Impact & Proof
                         </div>
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight font-heading">
-                            Measurable <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2878B5] via-emerald-700 to-teal-700">Enterprise Outcomes</span>
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0A2540] mb-5 tracking-tight leading-[1.08]"
+                            style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.025em' }}>
+                            Measurable <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2878B5] via-[#1E6297] to-[#0A2540]">Enterprise Outcomes</span>
                         </h2>
-                        <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+                        <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto"
+                            style={{ fontFamily: 'Inter, sans-serif' }}>
                             Verifiable case studies demonstrating substantial revenue acceleration, cost optimization, operational intelligence, and faster decision-making.
                         </p>
                     </motion.div>
@@ -111,11 +114,12 @@ export default function CaseStudiesSection() {
                                     setSelectedCategory(cat);
                                     trackEvent({ eventName: 'FILTER_CASE_STUDIES_CLICK', label: cat });
                                 }}
-                                className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
+                                className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
                                     selectedCategory === cat
-                                        ? 'bg-slate-900 text-white shadow-md'
-                                        : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                                        ? 'bg-[#0A2540] text-white shadow-md'
+                                        : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200/80 shadow-xs'
                                 }`}
+                                style={{ fontFamily: 'Inter, sans-serif' }}
                             >
                                 {cat === 'all' ? 'All Case Evidence (04)' : cat}
                             </button>
@@ -137,26 +141,28 @@ export default function CaseStudiesSection() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.95 }}
                                 transition={{ duration: 0.3 }}
-                                className="bg-white border border-slate-200/90 rounded-3xl p-7 sm:p-8 hover:shadow-2xl hover:shadow-blue-600/10 hover:border-emerald-400 transition-all duration-300 flex flex-col justify-between h-full group"
+                                className="bg-white border border-slate-200/80 rounded-2xl p-7 sm:p-8 shadow-card hover:shadow-card-hover hover:border-[#2878B5]/40 transition-all duration-300 flex flex-col justify-between h-full group"
                             >
                                 <div>
                                     {/* Client Header */}
                                     <div className="flex items-center justify-between mb-4">
-                                        <div className="text-xs font-bold text-[#2878B5] uppercase tracking-wider font-mono">
+                                        <div className="text-xs font-bold text-[#1E6297] uppercase tracking-wider font-mono">
                                             // {study.client}
                                         </div>
-                                        <span className="text-[10px] font-bold text-slate-400 uppercase bg-slate-50 px-2.5 py-1 rounded-md border border-slate-100">
+                                        <span className="text-[10px] font-bold text-slate-500 uppercase bg-[#F0F7FC] px-2.5 py-1 rounded-md border border-[#E1EFF8]">
                                             {study.category}
                                         </span>
                                     </div>
 
-                                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-6 group-hover:text-[#2878B5] transition-colors font-heading leading-snug">
+                                    <h3 className="text-xl sm:text-2xl font-bold text-[#0A2540] mb-6 group-hover:text-[#2878B5] transition-colors leading-snug"
+                                        style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.02em' }}>
                                         {study.title}
                                     </h3>
                                     
                                     {/* Problem & Solution Flow */}
                                     <div className="space-y-4 mb-8">
-                                        <div className="p-4 rounded-xl bg-red-50/60 border border-red-100 text-xs sm:text-sm text-slate-700">
+                                        <div className="p-4 rounded-xl bg-red-50/50 border border-red-100 text-xs sm:text-sm text-slate-700"
+                                            style={{ fontFamily: 'Inter, sans-serif' }}>
                                             <div className="flex items-center gap-1.5 font-bold text-red-700 mb-1">
                                                 <Layers className="w-3.5 h-3.5" />
                                                 <span>Operational Challenge</span>
@@ -164,15 +170,17 @@ export default function CaseStudiesSection() {
                                             <p className="text-slate-600 leading-relaxed font-normal">{study.problem}</p>
                                         </div>
 
-                                        <div className="p-4 rounded-xl bg-emerald-50/60 border border-emerald-100 text-xs sm:text-sm text-slate-700">
+                                        <div className="p-4 rounded-xl bg-[#F0F7FC] border border-[#BAE0F8] text-xs sm:text-sm text-slate-700"
+                                            style={{ fontFamily: 'Inter, sans-serif' }}>
                                             <div className="flex items-center gap-1.5 font-bold text-[#1E6297] mb-1">
-                                                <CheckCircle2 className="w-3.5 h-3.5" />
+                                                <CheckCircle2 className="w-3.5 h-3.5 text-[#2878B5]" />
                                                 <span>AI Architectural Solution</span>
                                             </div>
                                             <p className="text-slate-600 leading-relaxed font-normal">{study.solution}</p>
                                         </div>
 
-                                        <div className="flex items-center gap-2 text-xs font-medium text-slate-500 pt-1">
+                                        <div className="flex items-center gap-2 text-xs font-medium text-slate-500 pt-1"
+                                            style={{ fontFamily: 'Inter, sans-serif' }}>
                                             <BarChart3 className="w-3.5 h-3.5 text-[#2878B5] shrink-0" />
                                             <span><strong>Tech Architecture:</strong> {study.technologies}</span>
                                         </div>
@@ -180,16 +188,19 @@ export default function CaseStudiesSection() {
                                 </div>
 
                                 {/* Metric Strip */}
-                                <div className="grid grid-cols-3 gap-3 border-t border-slate-100 pt-6 bg-slate-50/80 -mx-7 sm:-mx-8 -mb-7 sm:-mb-8 p-6 sm:p-8 rounded-b-3xl">
+                                <div className="grid grid-cols-3 gap-3 border-t border-slate-100 pt-6 bg-[#F8FAFC] -mx-7 sm:-mx-8 -mb-7 sm:-mb-8 p-6 sm:p-8 rounded-b-2xl">
                                     {study.metrics.map((metric, i) => (
                                         <div key={i} className="text-left">
-                                            <div className="text-xl sm:text-2xl font-black text-slate-900 font-mono tracking-tight text-[#2878B5]">
+                                            <div className="text-xl sm:text-2xl font-black text-[#2878B5] tracking-tight"
+                                                style={{ fontFamily: 'Satoshi, Inter, sans-serif' }}>
                                                 {metric.value}
                                             </div>
-                                            <div className="text-xs font-bold text-slate-800 uppercase tracking-tight mt-0.5">
+                                            <div className="text-xs font-bold text-[#0A2540] uppercase tracking-tight mt-0.5"
+                                                style={{ fontFamily: 'Inter, sans-serif' }}>
                                                 {metric.label}
                                             </div>
-                                            <div className="text-[11px] text-slate-500 font-normal">
+                                            <div className="text-[11px] text-slate-500 font-normal"
+                                                style={{ fontFamily: 'Inter, sans-serif' }}>
                                                 {metric.sub}
                                             </div>
                                         </div>
@@ -203,7 +214,8 @@ export default function CaseStudiesSection() {
                 <div className="text-center mt-14">
                     <Link 
                         to="/outcomes" 
-                        className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-slate-300 shadow-sm text-sm font-bold rounded-full text-slate-800 bg-white hover:bg-slate-50 hover:border-emerald-300 transition-all group"
+                        className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-slate-300 shadow-xs text-sm font-bold rounded-xl text-[#0A2540] bg-white hover:bg-slate-50 hover:border-[#2878B5]/40 transition-all group"
+                        style={{ fontFamily: 'Inter, sans-serif' }}
                     >
                         <span>Explore All Verified Enterprise Case Studies</span>
                         <ArrowRight className="w-4 h-4 text-[#2878B5] group-hover:translate-x-1 transition-transform" />

@@ -112,10 +112,6 @@ function NavigateToExploreSection() {
 }
 
 function NavigateToOfferingSection() {
-  const { type, slug } = useParams<{ type: string; slug: string }>();
-  if (type === 'b2b' || type === 'b2c' || type === 'ai-growth' || type === 'sales-acceleration') {
-    return <Navigate to={`/offerings/${type}#${slug}`} replace />;
-  }
   return <DiscoveryPage />;
 }
 

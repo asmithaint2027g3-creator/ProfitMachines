@@ -1,4 +1,4 @@
-﻿import { motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
 const stats = [
@@ -44,32 +44,47 @@ function StatCard({ value, suffix, label, delay }: { value: number; suffix: stri
     return (
         <motion.div
             ref={ref}
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay }}
-            className="text-center px-6 py-8 group"
+            className="text-center px-8 py-10 relative group"
         >
-            <div className="text-4xl md:text-5xl font-extrabold text-white mb-2 font-heading tabular-nums">
+            {/* Vertical divider */}
+            <div className="absolute right-0 top-1/4 bottom-1/4 w-px bg-white/10 hidden sm:block last:hidden" />
+
+            <div
+                className="text-4xl md:text-5xl font-black text-white mb-2 tabular-nums tracking-tight"
+                style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.03em' }}
+            >
                 {count}{suffix}
             </div>
-            <div className="text-sm font-bold text-emerald-300 uppercase tracking-widest">{label}</div>
+            <div
+                className="text-[11px] font-bold text-[#BAE0F8] uppercase tracking-[0.15em]"
+                style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+                {label}
+            </div>
         </motion.div>
     );
 }
 
 export default function TrustSection() {
     return (
-        <section className="bg-gradient-to-r from-blue-700 via-emerald-700 to-indigo-700 relative overflow-hidden">
-            {/* Background pattern */}
-            <div className="absolute inset-0 opacity-10" style={{
+        <section className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #020F1E 0%, #0A2540 50%, #0F3560 100%)' }}>
+            {/* Subtle grid pattern */}
+            <div className="absolute inset-0 opacity-[0.04]" style={{
                 backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
                 backgroundSize: '3rem 3rem'
             }} />
-            <div className="absolute top-0 left-1/3 w-96 h-96 bg-emerald-500/30 rounded-full blur-3xl -translate-y-1/2" />
+            {/* Glow orb */}
+            <div className="absolute top-1/2 left-1/3 w-[600px] h-[400px] bg-[#2878B5]/20 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none" />
+            {/* Top/bottom accent lines */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2878B5]/40 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2878B5]/40 to-transparent" />
 
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-y sm:divide-y-0 divide-white/10 sm:divide-x sm:divide-white/20">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
                     {stats.map((stat, i) => (
                         <StatCard key={i} {...stat} delay={i * 0.08} />
                     ))}

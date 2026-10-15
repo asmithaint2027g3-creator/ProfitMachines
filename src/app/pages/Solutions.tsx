@@ -25,6 +25,7 @@ import SolutionsCarousel from '../components/SolutionsCarousel';
 import LeadCaptureSection from '../components/LeadCaptureSection';
 import { useLeadModal } from '../context/LeadModalContext';
 import ContextualCtaSection from '../components/forms/ContextualCtaSection';
+import VerticalsExplorer from '../components/VerticalsExplorer';
 
 export default function Solutions() {
     const location = useLocation();
@@ -56,7 +57,16 @@ export default function Solutions() {
                 'ai-demand-discovery': 'ai-market-strategy-demand-intelligence',
                 'hidden-revenue-capture': 'ai-revenue-acceleration-expansion',
                 'ai-brand-acceleration': 'ai-business-growth-strategy',
-                'ai-reputation-acceleration': 'ai-sales-process-optimization'
+                'ai-reputation-acceleration': 'ai-sales-process-optimization',
+                'verticals': 'verticals',
+                'vertical': 'verticals',
+                'b2b-growth-intelligence': 'verticals',
+                'sales-revenue-optimization': 'verticals',
+                'marketing-customer-acquisition': 'verticals',
+                'market-discovery-demand-intelligence': 'verticals',
+                'workflow-automation-operational-efficiency': 'verticals',
+                'customer-retention-expansion': 'verticals',
+                'business-intelligence-profitability': 'verticals'
             };
 
             const targetId = aliasMap[rawTarget.toLowerCase()] || rawTarget.toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -192,14 +202,14 @@ export default function Solutions() {
             {/* Solutions Grid - Symmetric 2-Column Responsive Layout */}
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 lg:py-24">
                 <div className="text-center max-w-3xl mx-auto mb-14">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-[#1B5E91] text-xs font-bold uppercase tracking-wider mb-4">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E1EFF8] border border-[#BAE0F8] text-[#1E6297] text-xs font-bold uppercase tracking-wider mb-4 shadow-2xs">
                         <span className="w-2 h-2 rounded-full bg-[#2878B5] animate-pulse"></span>
                         Modular Revenue Engines
                     </div>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-heading text-[#0A2540] tracking-tight mb-4 leading-[1.1]">
                         Engineered for High-Velocity Growth
                     </h2>
-                    <p className="text-lg text-slate-600 font-medium">
+                    <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed">
                         Explore our modular AI revenue architectures. Each system integrates seamlessly with your existing tech stack or deploys as an end-to-end autonomous engine.
                     </p>
                 </div>
@@ -227,12 +237,12 @@ export default function Solutions() {
                                 ))}
                                 <div id={mainId} className="group relative scroll-mt-32 h-full flex flex-col">
                                     <div className="absolute -inset-1 bg-gradient-to-r from-sky-100 to-blue-100 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                    <div className="relative bg-white border border-slate-200 rounded-2xl p-6 lg:p-8 hover:border-[#2878B5]/50 transition-all duration-300 shadow-sm hover:shadow-lg flex flex-col justify-between h-full">
+                                    <div className="relative bg-white border border-slate-200/80 rounded-2xl p-6 lg:p-8 hover:border-[#2878B5]/40 transition-all duration-300 shadow-card hover:shadow-card-hover flex flex-col justify-between h-full">
                                         
                                         {/* Top Info */}
                                         <div>
                                             <div className="flex items-center justify-between gap-4 mb-4">
-                                                <div className="w-12 h-12 rounded-xl bg-sky-50 flex items-center justify-center border border-sky-100 group-hover:bg-sky-100 transition-colors">
+                                                <div className="w-12 h-12 rounded-xl bg-[#E1EFF8] flex items-center justify-center border border-[#BAE0F8]/50 group-hover:bg-[#BAE0F8]/40 transition-colors">
                                                     <Icon className="w-6 h-6 text-[#2878B5]" />
                                                 </div>
                                                 <span className="text-xs font-mono font-bold uppercase tracking-wider px-3 py-1 bg-slate-100 rounded-full text-slate-700">
@@ -240,10 +250,10 @@ export default function Solutions() {
                                                 </span>
                                             </div>
 
-                                            <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                                            <h3 className="text-2xl font-black font-heading text-[#0A2540] mb-2 tracking-tight">
                                                 {solution.title}
                                             </h3>
-                                            <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed mb-6">
+                                            <p className="text-slate-600 text-sm sm:text-base font-normal leading-relaxed mb-6">
                                                 {solution.tagline}
                                             </p>
 
@@ -318,6 +328,9 @@ export default function Solutions() {
                     })}
                 </div>
             </div>
+
+            {/* ── INTERACTIVE VERTICALS SECTION (Inspired by ISI Security Verticals Architecture) ── */}
+            <VerticalsExplorer />
 
             {/* Detailed Solution Specification Modal */}
             {selectedModalSolution && (

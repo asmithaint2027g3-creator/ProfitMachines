@@ -21,14 +21,17 @@ export default function TechStack() {
             
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-                    <div className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-[#1E6297] font-bold text-xs tracking-wider uppercase mb-4 shadow-sm">
+                    <div className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E1EFF8] border border-[#BAE0F8] text-[#1E6297] font-bold text-xs tracking-wider uppercase mb-4 shadow-xs"
+                        style={{ fontFamily: 'Inter, sans-serif' }}>
                         <Sparkles className="w-3.5 h-3.5" />
                         Technology Infrastructure
                     </div>
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight font-heading">
-                        Enterprise-Grade <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2878B5] to-emerald-600">Technology Architecture</span>
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0A2540] mb-5 tracking-tight leading-[1.08]"
+                        style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.025em' }}>
+                        Enterprise-Grade <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2878B5] via-[#1E6297] to-[#0A2540]">Technology Architecture</span>
                     </h2>
-                    <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
+                    <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto"
+                        style={{ fontFamily: 'Inter, sans-serif' }}>
                         Built on scalable, secure, and modern infrastructure designed to handle millions of telemetry events and transactions autonomously.
                     </p>
                 </div>
@@ -44,10 +47,10 @@ export default function TechStack() {
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.4, delay: index * 0.05 }}
                                 whileHover={{ y: -4 }}
-                                className="group bg-slate-50/80 p-5 sm:p-6 rounded-2xl border border-slate-200/90 hover:border-emerald-300 hover:bg-white transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-xl hover:shadow-blue-600/5"
+                                className="group bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 hover:border-[#2878B5]/40 transition-all duration-300 flex flex-col justify-between shadow-card hover:shadow-card-hover"
                             >
                                 <div className="flex items-center justify-between mb-4">
-                                    <div className={`w-10 h-10 rounded-xl ${tech.bg} border ${tech.border} flex items-center justify-center ${tech.color} shadow-xs`}>
+                                    <div className="w-10 h-10 rounded-xl bg-[#E1EFF8] border border-[#BAE0F8]/60 flex items-center justify-center text-[#2878B5] group-hover:bg-[#2878B5] group-hover:text-white transition-all shadow-xs">
                                         <Icon className="w-5 h-5" />
                                     </div>
                                     <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">
@@ -56,10 +59,11 @@ export default function TechStack() {
                                 </div>
                                 
                                 <div>
-                                    <div className="text-[10px] font-bold text-slate-500 tracking-wider uppercase font-mono mb-1">
+                                    <div className="text-[10px] font-bold text-[#1E6297] tracking-wider uppercase font-mono mb-1">
                                         {tech.category}
                                     </div>
-                                    <div className="text-base font-bold text-slate-900 group-hover:text-[#2878B5] transition-colors">
+                                    <div className="text-base font-bold text-[#0A2540] group-hover:text-[#2878B5] transition-colors"
+                                        style={{ fontFamily: 'Satoshi, Inter, sans-serif' }}>
                                         {tech.name}
                                     </div>
                                 </div>

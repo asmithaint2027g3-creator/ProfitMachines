@@ -4,7 +4,9 @@ export type LeadModalType = 'quick' | 'long' | null;
 
 export interface LeadModalOptions {
     defaultService?: string;
+    service?: string;
     defaultIndustry?: string;
+    industry?: string;
     source?: string;
     title?: string;
 }

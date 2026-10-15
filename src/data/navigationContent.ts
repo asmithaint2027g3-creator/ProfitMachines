@@ -2060,69 +2060,57 @@ export const smNavItems = [
         "dropdown": {
             "categories": [
                 {
-                    "id": "profit-pools",
-                    "title": "Profit Pools",
-                    "desc": "Maximize industry profit share",
+                    "id": "discover-opportunities",
+                    "title": "Discover Opportunities",
+                    "desc": "Find markets, customer segments, competitors, and untapped demand.",
+                    "icon": "Search",
                     "items": [
-                        { "name": "Market Discovery", "path": "/offerings/profit-pool-discovery/market-discovery", "icon": "Search" },
-                        { "name": "Demand Discovery", "path": "/offerings/profit-pool-discovery/demand-discovery", "icon": "Target" },
-                        { "name": "Value Discovery", "path": "/offerings/profit-pool-discovery/value-discovery", "icon": "DollarSign" },
-                        { "name": "Channel Discovery", "path": "/offerings/profit-pool-discovery/channel-discovery", "icon": "Network" },
-                        { "name": "Competitive Discovery", "path": "/offerings/profit-pool-discovery/competitive-discovery", "icon": "ShieldCheck" },
-                        { "name": "Customer Discovery", "path": "/offerings/profit-pool-discovery/customer-discovery", "icon": "Users" },
-                        { "name": "Product-Market Fit Discovery", "path": "/offerings/profit-pool-discovery/product-market-fit-discovery", "icon": "Sparkles" }
-                    ],
-                    "b2bItems": [
-                        { "name": "B2B Market Discovery", "path": "/offerings/b2b/market-discovery", "icon": "Search" },
-                        { "name": "B2B Demand Discovery", "path": "/offerings/b2b/demand-discovery", "icon": "Target" },
-                        { "name": "B2B Value Discovery", "path": "/offerings/b2b/value-discovery", "icon": "DollarSign" },
-                        { "name": "B2B Channel Discovery", "path": "/offerings/b2b/channel-discovery", "icon": "Network" },
-                        { "name": "B2B Competitive Discovery", "path": "/offerings/b2b/competitive-discovery", "icon": "ShieldCheck" },
-                        { "name": "B2B Customer Discovery", "path": "/offerings/b2b/customer-discovery", "icon": "Users" },
-                        { "name": "B2B Product-Market Fit Discovery", "path": "/offerings/b2b/product-market-fit-discovery", "icon": "Sparkles" }
-                    ],
-                    "b2cItems": [
-                        { "name": "B2C Market Discovery", "path": "/offerings/b2c/market-discovery", "icon": "Search" },
-                        { "name": "B2C Demand Discovery", "path": "/offerings/b2c/demand-discovery", "icon": "Target" },
-                        { "name": "B2C Value Discovery", "path": "/offerings/b2c/value-discovery", "icon": "DollarSign" },
-                        { "name": "B2C Channel Discovery", "path": "/offerings/b2c/channel-discovery", "icon": "Network" },
-                        { "name": "B2C Competitive Discovery", "path": "/offerings/b2c/competitive-discovery", "icon": "ShieldCheck" },
-                        { "name": "B2C Customer Discovery", "path": "/offerings/b2c/customer-discovery", "icon": "Users" },
-                        { "name": "B2C Product-Market Fit Discovery", "path": "/offerings/b2c/product-market-fit-discovery", "icon": "Sparkles" }
+                        { "name": "B2B-1 Market Discovery", "path": "/offerings/b2b/market-discovery", "icon": "Search" },
+                        { "name": "B2B-2 Demand Discovery", "path": "/offerings/b2b/demand-discovery", "icon": "Target" },
+                        { "name": "B2B-5 Competitive Discovery", "path": "/offerings/b2b/competitive-discovery", "icon": "ShieldCheck" },
+                        { "name": "B2B-6 Customer Discovery", "path": "/offerings/b2b/customer-discovery", "icon": "Users" },
+                        { "name": "B2C-1 Market Discovery", "path": "/offerings/b2c/market-discovery", "icon": "ShoppingBag" },
+                        { "name": "B2C-2 Demand Discovery", "path": "/offerings/b2c/demand-discovery", "icon": "Target" },
+                        { "name": "B2C-5 Competitive Discovery", "path": "/offerings/b2c/competitive-discovery", "icon": "ShieldCheck" },
+                        { "name": "B2C-6 Customer Discovery", "path": "/offerings/b2c/customer-discovery", "icon": "Users" }
                     ]
                 },
                 {
-                    "id": "ai-growth",
-                    "title": "AI Growth Engines",
-                    "path": "/offerings/ai-growth",
-                    "desc": "Automated pipeline & market expansion",
+                    "id": "build-profitable-offers",
+                    "title": "Build Profitable Offers",
+                    "desc": "Validate customer value, pricing, and product-market fit before investing in growth.",
+                    "icon": "DollarSign",
                     "items": [
-                        { "name": "AI Demand Discovery", "path": "/offerings/ai-growth/ai-demand-discovery", "icon": "Search" },
-                        { "name": "AI-Driven Revenue Acceleration", "path": "/offerings/ai-growth/revenue-acceleration", "icon": "TrendingUp" },
-                        { "name": "AI-Driven Growth Hacking", "path": "/offerings/ai-growth/growth-hacking", "icon": "Rocket" },
-                        { "name": "AI-Driven Performance Marketing", "path": "/offerings/ai-growth/performance-marketing", "icon": "BarChart" }
+                        { "name": "B2B-3 Value Discovery", "path": "/offerings/b2b/value-discovery", "icon": "DollarSign" },
+                        { "name": "B2B-7 Product-Market Fit Discovery", "path": "/offerings/b2b/product-market-fit-discovery", "icon": "Sparkles" },
+                        { "name": "B2C-3 Value Discovery", "path": "/offerings/b2c/value-discovery", "icon": "DollarSign" },
+                        { "name": "B2C-7 Product-Market Fit Discovery", "path": "/offerings/b2c/product-market-fit-discovery", "icon": "Sparkles" }
                     ]
                 },
                 {
-                    "id": "sales-acceleration",
-                    "title": "Sales Acceleration",
-                    "path": "/offerings/sales-acceleration",
-                    "desc": "High-velocity sales execution",
+                    "id": "accelerate-growth",
+                    "title": "Accelerate Growth",
+                    "desc": "Improve acquisition efficiency, channel performance, conversion, and sales productivity.",
+                    "icon": "Rocket",
                     "items": [
-                        { "name": "Enterprise Sales Acceleration", "path": "/offerings/sales-acceleration/enterprise-sales", "icon": "Building2" },
-                        { "name": "Digital & Inside Sales", "path": "/offerings/sales-acceleration/digital-sales", "icon": "Layout" },
-                        { "name": "D2C & High-Velocity Sales", "path": "/offerings/sales-acceleration/d2c-sales", "icon": "ShoppingBag" },
-                        { "name": "BFSI Sales Acceleration", "path": "/offerings/sales-acceleration/bfsi-sales", "icon": "Landmark" }
+                        { "name": "B2B-4 Channel Discovery", "path": "/offerings/b2b/channel-discovery", "icon": "Network" },
+                        { "name": "B2C-4 Channel Discovery", "path": "/offerings/b2c/channel-discovery", "icon": "Network" },
+                        { "name": "AI Growth Engines", "path": "/offerings/ai-growth/ai-demand-discovery", "icon": "Bot" },
+                        { "name": "Sales Acceleration", "path": "/offerings/sales-acceleration/enterprise-sales", "icon": "TrendingUp" }
+                    ]
+                },
+                {
+                    "id": "optimize-profitability",
+                    "title": "Optimize Profitability",
+                    "desc": "Understand revenue potential, margins, acquisition economics, and growth efficiency.",
+                    "icon": "BarChart",
+                    "items": [
+                        { "name": "Revenue Forecasting", "path": "/offerings/ai-growth/revenue-acceleration", "icon": "TrendingUp" },
+                        { "name": "Growth Optimization", "path": "/offerings/ai-growth/growth-hacking", "icon": "Rocket" },
+                        { "name": "ROI & Unit Economics", "path": "/offerings/ai-growth/performance-marketing", "icon": "BarChart" }
                     ]
                 }
-            ],
-            "highlight": {
-                "title": "Enterprise Offerings",
-                "desc": "Turnkey AI sales engines and revenue intelligence.",
-                "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80",
-                "linkText": "View All Offerings",
-                "linkPath": "/offerings"
-            }
+            ]
         }
     },
     {
@@ -2217,12 +2205,29 @@ export const smNavItems = [
         "path": "/solutions",
         "dropdown": {
             "highlight": {
-                "title": "Comprehensive Solutions",
-                "desc": "End-to-end AI-driven growth capabilities & solutions for enterprises.",
-                "linkText": "View Solutions",
-                "linkPath": "/solutions"
+                "title": "Solutions & Industry Verticals",
+                "desc": "End-to-end AI revenue engines & 7 industry-specific growth verticals.",
+                "linkText": "Explore Verticals",
+                "linkPath": "/solutions#verticals"
             },
             "categories": [
+                {
+                    "id": "overview-verticals",
+                    "title": "Overview & Verticals",
+                    "desc": "Solutions overview and industry-specific growth verticals",
+                    "path": "/solutions",
+                    "items": [
+                        { "name": "Solutions Overview", "path": "/solutions", "icon": "Layers" },
+                        { "name": "Industry Growth Verticals", "path": "/solutions#verticals", "icon": "Compass" },
+                        { "name": "B2B Growth Intelligence", "path": "/solutions#b2b-growth-intelligence", "icon": "Target" },
+                        { "name": "Sales & Revenue Optimization", "path": "/solutions#sales-revenue-optimization", "icon": "Workflow" },
+                        { "name": "Marketing & Customer Acquisition", "path": "/solutions#marketing-customer-acquisition", "icon": "BarChart" },
+                        { "name": "Market Discovery & Demand", "path": "/solutions#market-discovery-demand-intelligence", "icon": "Search" },
+                        { "name": "Workflow Automation", "path": "/solutions#workflow-automation-operational-efficiency", "icon": "Zap" },
+                        { "name": "Retention & Expansion (NRR)", "path": "/solutions#customer-retention-expansion", "icon": "TrendingUp" },
+                        { "name": "BI & Profitability", "path": "/solutions#business-intelligence-profitability", "icon": "LineChart" }
+                    ]
+                },
                 {
                     "id": "strategy",
                     "title": "Strategy & Growth",

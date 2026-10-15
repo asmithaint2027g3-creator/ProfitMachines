@@ -144,6 +144,34 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         });
     }
 
+    const hasGcalCredentials = Boolean(
+        process.env.GCAL_CLIENT_ID &&
+        process.env.GCAL_CLIENT_SECRET &&
+        process.env.GCAL_REFRESH_TOKEN
+    );
+
+    if (!hasGcalCredentials) {
+        const candidates = getSlotCandidates(dateStr);
+        const minNoticeMs = CONFIG.MIN_NOTICE_HOURS * 60 * 60 * 1000;
+        const minAllowedStart = now.getTime() + minNoticeMs;
+
+        const availableSlots = candidates.filter(slot => {
+            const slotStart = new Date(`${slot.start}`).getTime();
+            return slotStart >= minAllowedStart;
+        });
+
+        return res.status(200).json({
+            date: dateStr,
+            timezone: CONFIG.OWNER_TIMEZONE,
+            durationMinutes: CONFIG.DURATION_MINUTES,
+            available: availableSlots.length > 0,
+            totalSlots: candidates.length,
+            availableCount: availableSlots.length,
+            slots: availableSlots,
+            setupRequired: false,
+        });
+    }
+
     try {
         // ── Authenticate with Google Calendar ─────────────────────────────
         const auth = getOAuth2Client();

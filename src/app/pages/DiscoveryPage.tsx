@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -8,11 +8,14 @@ import {
 } from 'lucide-react';
 import { Reveal } from '../components/ui/Reveal';
 import { submitToSheet } from '../../lib/sheets';
-import ProfitPoolDiscoveryDiagram from '../components/ProfitPoolDiscoveryDiagram';
 import { useLeadModal } from '../context/LeadModalContext';
 import ContextualCtaSection from '../components/forms/ContextualCtaSection';
+import OfferingTemplateSections from '../components/OfferingTemplateSections';
+import MarketDiscoveryStatCards from '../components/MarketDiscoveryStatCards';
+import { offeringsIntelligence } from '../data/offeringsIntelligenceData';
+import OfferingIntelligenceView from '../components/offerings/OfferingIntelligenceView';
 
-interface DiscoveryData {
+export interface DiscoveryData {
     title: string;
     route: string;
     question: string;
@@ -1842,6 +1845,23 @@ export default function DiscoveryPage() {
         return <ConsolidatedOfferingsView mode={slug as any} />;
     }
 
+    const normalizedKey = (() => {
+        if ((type === 'b2b' || type === 'b2c') && slug) {
+            return `${type}-${slug}`;
+        }
+        if (slug?.startsWith('b2b-') || slug?.startsWith('b2c-')) {
+            return slug;
+        }
+        if (slug && `b2b-${slug}` in offeringsIntelligence) {
+            return type === 'b2c' ? `b2c-${slug}` : `b2b-${slug}`;
+        }
+        return null;
+    })();
+
+    if (normalizedKey && offeringsIntelligence[normalizedKey]) {
+        return <OfferingIntelligenceView data={offeringsIntelligence[normalizedKey]} />;
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [slug, type]);
@@ -1932,12 +1952,6 @@ export default function DiscoveryPage() {
                             </button>
                         </div>
                     </div>
-
-                    {activePoolTab === 'overview' && (
-                        <div className="flex justify-center my-8">
-                            <ProfitPoolDiscoveryDiagram />
-                        </div>
-                    )}
                 </div>
 
                 {/* Sub-Offerings Grid */}
@@ -2139,6 +2153,10 @@ export default function DiscoveryPage() {
                 </Reveal>
             </div>
 
+            {(pageSlug === 'b2b-market-discovery' || (type === 'b2b' && slug === 'market-discovery')) && (
+                <MarketDiscoveryStatCards />
+            )}
+
             {/* SPIN Element Matrix */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                 <Reveal width="100%">
@@ -2305,6 +2323,8 @@ export default function DiscoveryPage() {
                     </div>
                 </Reveal>
             </div>
+
+            <OfferingTemplateSections data={data} pageSlug={pageSlug} />
 
             {/* Diagnostic Form Placement */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

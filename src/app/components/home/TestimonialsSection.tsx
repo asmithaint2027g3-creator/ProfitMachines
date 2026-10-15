@@ -66,10 +66,14 @@ export default function TestimonialsSection() {
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
                     <div>
-                        <div className="text-xs font-extrabold text-[#2878B5] uppercase tracking-widest mb-3">Client Success</div>
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-heading">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E1EFF8] border border-[#BAE0F8] text-[#1E6297] text-xs font-bold uppercase tracking-wider mb-3 shadow-xs"
+                            style={{ fontFamily: 'Inter, sans-serif' }}>
+                            Client Success
+                        </div>
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0A2540] tracking-tight leading-[1.08]"
+                            style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.025em' }}>
                             Proven by{' '}
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2878B5] to-emerald-600">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2878B5] via-[#1E6297] to-[#0A2540]">
                                 Enterprise Leaders
                             </span>
                         </h2>
@@ -77,11 +81,11 @@ export default function TestimonialsSection() {
 
                     {/* Pagination controls */}
                     <div className="flex items-center gap-3 shrink-0">
-                        <span className="text-sm font-medium text-slate-500">{page + 1} / {totalPages}</span>
+                        <span className="text-sm font-medium text-slate-500" style={{ fontFamily: 'Inter, sans-serif' }}>{page + 1} / {totalPages}</span>
                         <button
                             onClick={() => setPage(p => Math.max(0, p - 1))}
                             disabled={page === 0}
-                            className="w-10 h-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-emerald-50 hover:border-emerald-200 hover:text-[#2878B5] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                            className="w-10 h-10 rounded-xl border border-slate-200/80 bg-white flex items-center justify-center text-slate-600 hover:bg-[#F0F7FC] hover:border-[#BAE0F8] hover:text-[#1E6297] disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-xs cursor-pointer"
                             aria-label="Previous testimonials"
                         >
                             <ChevronLeft className="w-5 h-5" />
@@ -89,7 +93,7 @@ export default function TestimonialsSection() {
                         <button
                             onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
                             disabled={page === totalPages - 1}
-                            className="w-10 h-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-emerald-50 hover:border-emerald-200 hover:text-[#2878B5] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                            className="w-10 h-10 rounded-xl border border-slate-200/80 bg-white flex items-center justify-center text-slate-600 hover:bg-[#F0F7FC] hover:border-[#BAE0F8] hover:text-[#1E6297] disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-xs cursor-pointer"
                             aria-label="Next testimonials"
                         >
                             <ChevronRight className="w-5 h-5" />
@@ -110,36 +114,39 @@ export default function TestimonialsSection() {
                         {visible.map((testimonial, index) => (
                             <div
                                 key={index}
-                                className="bg-white rounded-[20px] p-8 border border-slate-200 relative group hover:border-emerald-200 hover:shadow-xl transition-all duration-300 flex flex-col"
+                                className="bg-white rounded-2xl p-8 border border-slate-200/80 relative group hover:border-[#2878B5]/40 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
                             >
-                                {/* Stars */}
-                                <div className="flex gap-1 mb-5">
-                                    {[...Array(testimonial.rating)].map((_, i) => (
-                                        <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                                    ))}
+                                <div>
+                                    {/* Stars */}
+                                    <div className="flex gap-1 mb-5">
+                                        {[...Array(testimonial.rating)].map((_, i) => (
+                                            <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                                        ))}
+                                    </div>
+
+                                    {/* Quote icon */}
+                                    <Quote className="w-8 h-8 text-[#BAE0F8]/80 group-hover:text-[#2878B5]/50 transition-colors mb-3 shrink-0" />
+
+                                    {/* Quote text */}
+                                    <p className="text-slate-700 font-normal leading-relaxed mb-6 text-sm"
+                                        style={{ fontFamily: 'Inter, sans-serif' }}>
+                                        "{testimonial.quote}"
+                                    </p>
                                 </div>
 
-                                {/* Quote icon */}
-                                <Quote className="w-8 h-8 text-emerald-100 group-hover:text-emerald-200 transition-colors mb-3 shrink-0" />
-
-                                {/* Quote text */}
-                                <p className="text-slate-700 font-medium leading-relaxed mb-6 text-sm flex-1">
-                                    "{testimonial.quote}"
-                                </p>
-
                                 {/* Author */}
-                                <div className="pt-5 border-t border-slate-100 group-hover:border-emerald-50 transition-colors">
+                                <div className="pt-5 border-t border-slate-100">
                                     <div className="flex items-center gap-3">
                                         {/* Avatar initials */}
-                                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#2878B5] to-emerald-600 flex items-center justify-center shrink-0">
-                                            <span className="text-white text-sm font-extrabold">
+                                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2878B5] to-[#0A2540] flex items-center justify-center shrink-0 shadow-xs">
+                                            <span className="text-white text-xs font-bold" style={{ fontFamily: 'Satoshi, sans-serif' }}>
                                                 {testimonial.author.split(' ').map(n => n[0]).join('')}
                                             </span>
                                         </div>
                                         <div>
-                                            <div className="font-bold text-slate-900 text-sm">{testimonial.author}</div>
-                                            <div className="text-xs text-slate-500">{testimonial.role}</div>
-                                            <div className="text-xs font-bold text-[#2878B5] mt-0.5">{testimonial.company} · {testimonial.industry}</div>
+                                            <div className="font-bold text-[#0A2540] text-sm" style={{ fontFamily: 'Satoshi, Inter, sans-serif' }}>{testimonial.author}</div>
+                                            <div className="text-xs text-slate-500" style={{ fontFamily: 'Inter, sans-serif' }}>{testimonial.role}</div>
+                                            <div className="text-xs font-bold text-[#1E6297] mt-0.5" style={{ fontFamily: 'Inter, sans-serif' }}>{testimonial.company} · {testimonial.industry}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +161,7 @@ export default function TestimonialsSection() {
                         <button
                             key={i}
                             onClick={() => setPage(i)}
-                            className={`rounded-full transition-all duration-300 ${i === page ? 'w-8 h-2.5 bg-[#2878B5]' : 'w-2.5 h-2.5 bg-slate-300 hover:bg-slate-400'}`}
+                            className={`rounded-full transition-all duration-300 cursor-pointer ${i === page ? 'w-8 h-2.5 bg-[#2878B5]' : 'w-2.5 h-2.5 bg-slate-300 hover:bg-slate-400'}`}
                             aria-label={`Go to page ${i + 1}`}
                         />
                     ))}

@@ -43,7 +43,8 @@ export default function Footer() {
     };
 
     return (
-        <footer className="bg-slate-900 pt-16 pb-8 border-t border-slate-800 font-sans text-slate-400 relative overflow-hidden">
+        <footer className="bg-[#020F1E] pt-16 pb-8 border-t border-white/10 text-slate-400 relative overflow-hidden"
+            style={{ fontFamily: 'Inter, sans-serif' }}>
             {/* Background Decoration */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-[#2878B5]/10 rounded-full blur-[140px] opacity-60"></div>
@@ -53,10 +54,15 @@ export default function Footer() {
             <div className="max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
                 {/* Footer CTA Section */}
-                <div className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 mb-16 text-center lg:text-left flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div className="bg-white/[0.04] border border-white/10 rounded-3xl p-8 md:p-12 mb-16 text-center lg:text-left flex flex-col lg:flex-row items-center justify-between gap-8 backdrop-blur-sm">
                     <div className="max-w-2xl">
-                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Ready to Build Your Next AI Product?</h2>
-                        <p className="text-slate-400 text-lg">Let's discuss your requirements and recommend the right AI solution.</p>
+                        <h2 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight"
+                            style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.02em' }}>
+                            Ready to Build Your Next AI Product?
+                        </h2>
+                        <p className="text-slate-400 text-base sm:text-lg font-normal">
+                            Let's discuss your requirements and recommend the right AI solution.
+                        </p>
                     </div>
                     <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full lg:w-auto">
                         <Link to="/book-consultation" className="btn-cta-primary w-full sm:w-auto">
@@ -75,28 +81,29 @@ export default function Footer() {
                     <div className="lg:col-span-4 space-y-6 lg:pr-8">
                         {/* Brand */}
                         <div>
-                            <Link to="/" className="inline-block mb-1">
+                            <Link to="/" className="inline-block mb-3">
                                 <div className="flex items-center gap-2">
-                                    <div className="text-xl md:text-2xl font-extrabold tracking-tight text-white flex items-center gap-0.5 font-heading">
+                                    <div className="text-xl md:text-2xl font-black tracking-tight text-white flex items-center gap-0.5"
+                                        style={{ fontFamily: 'Satoshi, Inter, sans-serif' }}>
                                         <span>Profit</span>
-                                        <span className="text-[#2878B5]">Machines</span>
+                                        <span className="text-[#5CAAE6]">Machines</span>
                                     </div>
                                 </div>
                             </Link>
-                            <p className="text-slate-400 leading-relaxed mb-8 font-medium text-sm max-w-sm">
+                            <p className="text-slate-400 leading-relaxed mb-8 font-normal text-sm max-w-sm">
                                 Building Enterprise AI Solutions for the Future. AI. Cloud. Automation. Software. Delivered End-to-End.
                             </p>
 
                             <div className="space-y-4 mb-8">
                                 <a href="mailto:connect@profitmachines.com" className="group flex items-center gap-4 text-slate-400 hover:text-white transition-colors duration-300">
-                                    <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-[#2878B5] group-hover:bg-[#2878B5] transition-all">
-                                        <Mail className="w-4 h-4" />
+                                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-[#2878B5] group-hover:bg-[#2878B5] transition-all">
+                                        <Mail className="w-4 h-4 text-[#5CAAE6] group-hover:text-white transition-colors" />
                                     </div>
                                     <span className="font-medium text-sm tracking-wide">connect@profitmachines.com</span>
                                 </a>
                                 <a href="tel:+919513288612" className="group flex items-center gap-4 text-slate-400 hover:text-white transition-colors duration-300">
-                                    <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-[#2878B5] group-hover:bg-[#2878B5] transition-all">
-                                        <Phone className="w-4 h-4" />
+                                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-[#2878B5] group-hover:bg-[#2878B5] transition-all">
+                                        <Phone className="w-4 h-4 text-[#5CAAE6] group-hover:text-white transition-colors" />
                                     </div>
                                     <span className="font-medium text-sm tracking-wide">+91 9513288612</span>
                                 </a>
@@ -104,7 +111,7 @@ export default function Footer() {
 
                             <div className="flex gap-4">
                                 {[Linkedin, Twitter, Facebook].map((Icon, i) => (
-                                    <a key={i} href="#" aria-label={['LinkedIn', 'Twitter', 'Facebook'][i]} title={['LinkedIn', 'Twitter', 'Facebook'][i]} className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-[#2878B5] hover:border-[#5CAAE6] transition-all hover:shadow-[0_0_15px_rgba(40,120,181,0.4)] hover:-translate-y-1">
+                                    <a key={i} href="#" aria-label={['LinkedIn', 'Twitter', 'Facebook'][i]} title={['LinkedIn', 'Twitter', 'Facebook'][i]} className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-[#2878B5] hover:border-[#5CAAE6] transition-all hover:shadow-[0_0_15px_rgba(40,120,181,0.4)] hover:-translate-y-1">
                                         <Icon className="w-4 h-4" />
                                         <span className="sr-only">{['LinkedIn', 'Twitter', 'Facebook'][i]}</span>
                                     </a>
@@ -118,7 +125,8 @@ export default function Footer() {
 
                         {/* Column 1: Quick Links */}
                         <div className="space-y-4">
-                            <h3 className="text-[11px] font-bold text-slate-300 uppercase tracking-widest border-b border-white/10 pb-3">Quick Links</h3>
+                            <h3 className="text-[11px] font-bold text-slate-300 uppercase tracking-widest border-b border-white/10 pb-3"
+                                style={{ fontFamily: 'Satoshi, Inter, sans-serif' }}>Quick Links</h3>
                             <ul className="space-y-3 text-[13px]">
                                 {Object.keys(quickLinks).map((item, i) => (
                                     <li key={i}>
@@ -132,7 +140,8 @@ export default function Footer() {
 
                         {/* Column 2: Solutions */}
                         <div className="space-y-4">
-                            <h3 className="text-[11px] font-bold text-slate-300 uppercase tracking-widest border-b border-white/10 pb-3">Solutions</h3>
+                            <h3 className="text-[11px] font-bold text-slate-300 uppercase tracking-widest border-b border-white/10 pb-3"
+                                style={{ fontFamily: 'Satoshi, Inter, sans-serif' }}>Solutions</h3>
                             <ul className="space-y-3 text-[13px]">
                                 {Object.keys(solutionsLinks).map((item, i) => (
                                     <li key={i}>
@@ -146,7 +155,8 @@ export default function Footer() {
 
                         {/* Column 3: Industries */}
                         <div className="space-y-4">
-                            <h3 className="text-[11px] font-bold text-slate-300 uppercase tracking-widest border-b border-white/10 pb-3">Industries</h3>
+                            <h3 className="text-[11px] font-bold text-slate-300 uppercase tracking-widest border-b border-white/10 pb-3"
+                                style={{ fontFamily: 'Satoshi, Inter, sans-serif' }}>Industries</h3>
                             <ul className="space-y-3 text-[13px]">
                                 {Object.keys(industriesLinks).map((item, i) => (
                                     <li key={i}>
@@ -160,7 +170,8 @@ export default function Footer() {
 
                         {/* Column 4: Technologies */}
                         <div className="space-y-4">
-                            <h3 className="text-[11px] font-bold text-slate-300 uppercase tracking-widest border-b border-white/10 pb-3">Technologies</h3>
+                            <h3 className="text-[11px] font-bold text-slate-300 uppercase tracking-widest border-b border-white/10 pb-3"
+                                style={{ fontFamily: 'Satoshi, Inter, sans-serif' }}>Technologies</h3>
                             <ul className="space-y-3 text-[13px]">
                                 {Object.keys(techLinks).map((item, i) => (
                                     <li key={i}>
@@ -216,12 +227,13 @@ export default function Footer() {
                             }
                         ].map((office, idx) => (
                             <div key={idx} className="group flex flex-col items-start w-full max-w-xs">
-                                <h4 className="flex items-center gap-3 font-bold text-slate-200 text-[13px] uppercase tracking-wide mb-4">
-                                    <MapPin className="w-4 h-4 text-emerald-400 shrink-0" />
+                                <h4 className="flex items-center gap-3 font-bold text-slate-200 text-[13px] uppercase tracking-wide mb-4"
+                                    style={{ fontFamily: 'Satoshi, Inter, sans-serif' }}>
+                                    <MapPin className="w-4 h-4 text-[#5CAAE6] shrink-0" />
                                     {office.title}
                                 </h4>
 
-                                <div className="mb-5 pl-7 border-l border-white/5 group-hover:border-emerald-600/50 transition-colors">
+                                <div className="mb-5 pl-7 border-l border-white/5 group-hover:border-[#2878B5]/50 transition-colors">
                                     {office.address.map((line, i) => (
                                         <p key={i} className="text-slate-400 text-[13px] leading-relaxed">
                                             {line}
@@ -230,12 +242,12 @@ export default function Footer() {
                                 </div>
 
                                 <div className="space-y-3 pl-7">
-                                    <a href={`mailto:${office.email}`} className="flex items-center gap-3 text-slate-400 hover:text-emerald-400 transition-colors text-[13px] group/item">
-                                        <Mail className="w-3.5 h-3.5" />
+                                    <a href={`mailto:${office.email}`} className="flex items-center gap-3 text-slate-400 hover:text-[#5CAAE6] transition-colors text-[13px] group/item">
+                                        <Mail className="w-3.5 h-3.5 text-[#5CAAE6]" />
                                         <span>{office.email}</span>
                                     </a>
-                                    <a href={`tel:${office.phone.replace(/ /g, '')}`} className="flex items-center gap-3 text-slate-400 hover:text-emerald-400 transition-colors text-[13px] group/item">
-                                        <Phone className="w-3.5 h-3.5" />
+                                    <a href={`tel:${office.phone.replace(/ /g, '')}`} className="flex items-center gap-3 text-slate-400 hover:text-[#5CAAE6] transition-colors text-[13px] group/item">
+                                        <Phone className="w-3.5 h-3.5 text-[#5CAAE6]" />
                                         <span>{office.phone}</span>
                                     </a>
                                 </div>
@@ -287,7 +299,7 @@ export default function Footer() {
                         {['Privacy Policy', 'Terms of Service', 'Security', 'Copyright', 'Cookies', 'Sitemap'].map((item, i) => {
                             const path = `/${item.toLowerCase().replace(/ /g, '-')}`;
                             return (
-                                <Link key={i} to={item === 'Privacy Policy' ? '/privacy' : item === 'Terms of Service' ? '/terms' : path} className="hover:text-emerald-400 transition-colors">
+                                <Link key={i} to={item === 'Privacy Policy' ? '/privacy' : item === 'Terms of Service' ? '/terms' : path} className="hover:text-[#5CAAE6] transition-colors">
                                     {item}
                                 </Link>
                             )

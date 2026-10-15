@@ -206,13 +206,13 @@ export default function BookConsultation() {
                     {/* Left Column: Strategic Positioning */}
                     <div className="lg:w-1/2 space-y-8">
                         <div>
-                            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-[#1E6297] font-bold text-xs uppercase tracking-wider mb-4 border border-emerald-100 shadow-sm">
-                                <Calendar className="w-3.5 h-3.5" />
+                            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E1EFF8] text-[#1E6297] font-bold text-xs uppercase tracking-wider mb-4 border border-[#BAE0F8] shadow-2xs">
+                                <Calendar className="w-3.5 h-3.5 text-[#2878B5]" />
                                 Executive Architecture Briefing
                             </span>
-                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.08] mb-6">
+                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black font-heading text-[#0A2540] tracking-tight leading-[1.08] mb-6">
                                 Architect Your <br />
-                                <span className="bg-gradient-to-r from-[#2878B5] via-emerald-700 to-teal-700 bg-clip-text text-transparent">
+                                <span className="bg-gradient-to-r from-[#2878B5] via-emerald-600 to-teal-600 bg-clip-text text-transparent">
                                     AI Revenue Engine
                                 </span>
                             </h1>
@@ -223,22 +223,22 @@ export default function BookConsultation() {
 
                         {/* Value Metric Pillars */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
-                                <div className="text-2xl font-bold text-slate-900 font-mono text-[#2878B5] mb-1">45-Minute</div>
-                                <div className="text-sm font-bold text-slate-800">Deep Architecture Review</div>
-                                <div className="text-xs text-slate-500 mt-1">Full audit of tech stack, pipeline velocity, and conversion blockers.</div>
+                            <div className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-card">
+                                <div className="text-2xl font-black font-heading text-[#2878B5] mb-1">45-Minute</div>
+                                <div className="text-sm font-bold text-[#0A2540]">Deep Architecture Review</div>
+                                <div className="text-xs text-slate-500 mt-1 font-normal">Full audit of tech stack, pipeline velocity, and conversion blockers.</div>
                             </div>
-                            <div className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
-                                <div className="text-2xl font-bold text-slate-900 font-mono text-emerald-600 mb-1">Tailored</div>
-                                <div className="text-sm font-bold text-slate-800">Custom Implementation Blueprint</div>
-                                <div className="text-xs text-slate-500 mt-1">Receive concrete projections on CAC reduction and speed to ARR.</div>
+                            <div className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-card">
+                                <div className="text-2xl font-black font-heading text-emerald-600 mb-1">Tailored</div>
+                                <div className="text-sm font-bold text-[#0A2540]">Custom Implementation Blueprint</div>
+                                <div className="text-xs text-slate-500 mt-1 font-normal">Receive concrete projections on CAC reduction and speed to ARR.</div>
                             </div>
                         </div>
 
                         {/* Trust Badges */}
-                        <div className="p-6 rounded-2xl bg-slate-900 text-white shadow-xl">
-                            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-400 mb-3">
-                                <Shield className="w-4 h-4" />
+                        <div className="p-6 rounded-2xl bg-gradient-to-br from-[#020F1E] via-[#0A2540] to-[#0F3560] text-white shadow-xl border border-white/10">
+                            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#5CAAE6] mb-3">
+                                <Shield className="w-4 h-4 text-[#5CAAE6]" />
                                 Enterprise Engagement Guarantee
                             </div>
                             <ul className="space-y-2.5 text-xs text-slate-300">

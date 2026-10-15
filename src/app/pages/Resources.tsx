@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {
     BookOpen,
@@ -98,14 +98,17 @@ export default function Resources() {
             {/* 2. Symmetrical Resources Grid */}
             <section id="resources-grid" className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 scroll-mt-28">
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-[#1E6297] text-xs font-bold uppercase tracking-wider mb-4">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E1EFF8] border border-[#BAE0F8] text-[#1E6297] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs"
+                        style={{ fontFamily: 'Inter, sans-serif' }}>
                         <Sparkles className="w-3.5 h-3.5 text-[#2878B5]" />
                         <span>Knowledge Architecture</span>
                     </div>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0A2540] tracking-tight mb-4 leading-[1.08]"
+                        style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.025em' }}>
                         Executive Revenue Knowledge Hub
                     </h2>
-                    <p className="text-lg text-slate-600 font-medium leading-relaxed">
+                    <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed"
+                        style={{ fontFamily: 'Inter, sans-serif' }}>
                         Curated intelligence, architecture blueprints, and empirical benchmarks engineered for founders, CROs, and revenue leaders.
                     </p>
                 </div>
@@ -113,14 +116,15 @@ export default function Resources() {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {categories.map((item, index) => (
                         <Reveal key={index} width="100%" delay={index * 0.05} className="h-full">
-                            <Card className="h-full hover:shadow-xl hover:shadow-blue-900/5 transition-all hover:-translate-y-1.5 border-slate-200 bg-white hover:border-emerald-300 group flex flex-col justify-between rounded-2xl p-6">
+                            <Card className="h-full shadow-card hover:shadow-card-hover transition-all hover:-translate-y-1.5 border border-slate-200/80 bg-white hover:border-[#2878B5]/40 group flex flex-col justify-between rounded-2xl p-6">
                                 <div>
                                     <div className="flex items-center justify-between gap-2 mb-6">
-                                        <div className="p-3 bg-slate-50 rounded-xl group-hover:bg-emerald-50 transition-colors border border-slate-100">
+                                        <div className="p-3 bg-[#E1EFF8] rounded-xl group-hover:bg-[#2878B5] transition-colors border border-[#BAE0F8]/60 text-[#2878B5] group-hover:text-white">
                                             {item.icon}
                                         </div>
                                         <div className="flex items-center gap-1.5">
-                                            <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 bg-slate-100 rounded-full text-slate-600">
+                                            <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 bg-[#F0F7FC] rounded-md text-[#1E6297] border border-[#E1EFF8]"
+                                                style={{ fontFamily: 'Inter, sans-serif' }}>
                                                 {item.badge}
                                             </span>
                                             <span className="text-[11px] font-mono font-semibold text-[#2878B5]">
@@ -128,15 +132,18 @@ export default function Resources() {
                                             </span>
                                         </div>
                                     </div>
-                                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#2878B5] transition-colors">
+                                    <h3 className="text-lg font-bold text-[#0A2540] mb-2 group-hover:text-[#2878B5] transition-colors leading-snug"
+                                        style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.02em' }}>
                                         {item.title}
                                     </h3>
-                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium mb-6">
+                                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal mb-6"
+                                        style={{ fontFamily: 'Inter, sans-serif' }}>
                                         {item.description}
                                     </p>
                                 </div>
 
-                                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <div className="pt-4 border-t border-slate-100 flex items-center justify-between"
+                                    style={{ fontFamily: 'Inter, sans-serif' }}>
                                     <Link
                                         to={item.link}
                                         className="inline-flex items-center gap-1.5 text-xs font-bold text-[#2878B5] hover:text-[#164E78] transition-colors"
@@ -153,12 +160,13 @@ export default function Resources() {
             </section>
 
             {/* 3. Designed For Section */}
-            <div className="bg-slate-50 py-20 lg:py-28 border-y border-slate-200">
+            <div className="bg-[#F8FAFC] py-20 lg:py-28 border-y border-slate-200/80">
                 <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
                     <Reveal width="100%">
                         <div className="text-center max-w-2xl mx-auto mb-14">
-                            <h2 className="text-3xl font-bold text-slate-900 mb-3">Engineered For Growth Leaders</h2>
-                            <p className="text-slate-600 font-medium">Every guide and playbook is battle-tested by enterprise practitioners.</p>
+                            <h2 className="text-3xl font-black text-[#0A2540] mb-3 leading-tight"
+                                style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.02em' }}>Engineered For Growth Leaders</h2>
+                            <p className="text-base text-slate-600 font-normal" style={{ fontFamily: 'Inter, sans-serif' }}>Every guide and playbook is battle-tested by enterprise practitioners.</p>
                         </div>
                         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
                             {[
@@ -167,12 +175,12 @@ export default function Resources() {
                                 { title: "Sales & Marketing Teams", desc: "High-conversion deal desks and buyer intent telemetry" },
                                 { title: "Growth & RevOps Leaders", desc: "Unified revenue data models and automated hygiene" }
                             ].map((role, index) => (
-                                <div key={index} className="p-6 bg-white rounded-2xl border border-slate-200 hover:border-emerald-400 transition-all shadow-sm hover:shadow-md">
-                                    <div className="bg-emerald-50 w-10 h-10 rounded-xl border border-emerald-100 flex items-center justify-center mb-4">
+                                <div key={index} className="p-6 bg-white rounded-2xl border border-slate-200/80 hover:border-[#2878B5]/40 transition-all shadow-card hover:shadow-card-hover">
+                                    <div className="bg-[#E1EFF8] w-10 h-10 rounded-xl border border-[#BAE0F8]/60 flex items-center justify-center mb-4 text-[#2878B5]">
                                         <Users className="w-5 h-5 text-[#2878B5]" />
                                     </div>
-                                    <h4 className="font-bold text-slate-900 text-base mb-1">{role.title}</h4>
-                                    <p className="text-xs text-slate-500 font-medium">{role.desc}</p>
+                                    <h4 className="font-bold text-[#0A2540] text-base mb-1" style={{ fontFamily: 'Satoshi, Inter, sans-serif' }}>{role.title}</h4>
+                                    <p className="text-xs text-slate-500 font-normal" style={{ fontFamily: 'Inter, sans-serif' }}>{role.desc}</p>
                                 </div>
                             ))}
                         </div>

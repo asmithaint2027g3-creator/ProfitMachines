@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Calendar, Clock, ChevronLeft, ChevronRight, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Calendar, Clock, ChevronLeft, ChevronRight, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 
 /**
  * CalendarBookingWidget
@@ -175,16 +175,6 @@ export default function CalendarBookingWidget({ onSlotSelected, selectedSlot }: 
 
     return (
         <div className="space-y-5">
-            {/* Setup notice for dev mode */}
-            {setupRequired && (
-                <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-800">
-                    <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
-                    <div className="text-[11px] leading-relaxed">
-                        <strong>Development Mode:</strong> Google Calendar API not connected. Showing sample slots.
-                        In production, real availability will be fetched from the owner's calendar.
-                    </div>
-                </div>
-            )}
 
             <div className="flex flex-col lg:flex-row gap-5">
                 {/* ── Calendar Date Picker ────────────────────────────────── */}

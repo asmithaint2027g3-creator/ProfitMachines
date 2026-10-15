@@ -6,7 +6,7 @@ import {
     FileCode2, Coins, Boxes, Server, Image, TrendingUp, PieChart, Settings, Smile, Layers, DollarSign,
     Brain, CloudRain, Building, AppWindow, Code2, ShieldCheck, Users, HeartPulse, Landmark, ShoppingBag,
     Factory, GraduationCap, Truck, Home, Radio, Wrench, CloudCog, UserPlus, Layout, Search, LifeBuoy, BookOpen,
-    Handshake, Info, Target, FileText, Phone, ChevronRight, Activity
+    Handshake, Info, Target, FileText, Phone, ChevronRight, Activity, LineChart, Compass
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { smNavItems } from '../../data/navigationContent';
@@ -17,14 +17,14 @@ const Icons: Record<string, any> = {
     Link: LinkIcon, Globe, FileCode2, Coins, Boxes, Server, Image, MessageSquare, TrendingUp, BarChart, PieChart, Settings,
     Smile, Layers, Cpu, DollarSign, Brain, CloudRain, Building, AppWindow, Zap, Code2, ShieldCheck, Users, HeartPulse,
     Landmark, ShoppingBag, Factory, GraduationCap, Truck, Home, Radio, Lightbulb, Wrench, CloudCog, UserPlus, Layout,
-    Search, LifeBuoy, BookOpen, Handshake, Info, Target, FileText, Phone, Rocket, Lock, MapPin, Activity
+    Search, LifeBuoy, BookOpen, Handshake, Info, Target, FileText, Phone, Rocket, Lock, MapPin, Activity, LineChart, Compass
 };
 
 export default function Navigation() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [hoveredItem, setHoveredItem] = useState<string | null>(null);
     const [expandedItems, setExpandedItems] = useState<string[]>([]);
-    const [activeOfferingGroup, setActiveOfferingGroup] = useState("profit-pools");
+    const [activeOfferingGroup, setActiveOfferingGroup] = useState("discover-opportunities");
     const [activeMenuCat, setActiveMenuCat] = useState<Record<string, string>>({});
     const [dropdownPos, setDropdownPos] = useState<Record<string, { left: number; width: number }>>({});
     
@@ -88,7 +88,7 @@ export default function Navigation() {
         }
         
         if (item.dropdown) {
-            const width = item.name === "Verticals" ? 820 : item.dropdown.categories ? (item.name === "Offerings" ? 820 : 760) : 340;
+            const width = (item.name === "Offerings" || item.name === "Solutions & Industries") ? 880 : item.dropdown.categories ? 760 : 340;
             calculateDropdownPos(item.name, triggerEl, width);
             setHoveredItem(item.name);
         } else {
@@ -172,103 +172,9 @@ export default function Navigation() {
                                             }`}
                                         >
                                             <div className="bg-card border border-border/60 shadow-2xl rounded-2xl overflow-hidden flex min-h-[380px] text-foreground">
-                                                {item.name === "Verticals" ? (
-                                                    <div className="flex flex-col md:flex-row w-full min-h-[380px]">
-                                                        {/* Left Column: 6 Industry Categories */}
-                                                        <div className="flex-1 p-6 bg-white border-r border-border/50 flex flex-col justify-between">
-                                                            <div>
-                                                                <div className="mb-4 pb-3 border-b border-border/40 flex items-center justify-between">
-                                                                    <div>
-                                                                        <h3 className="text-base font-bold text-foreground font-heading">Industry Verticals</h3>
-                                                                        <p className="text-xs text-muted-foreground mt-0.5">Explore structured frameworks tailored to your sector</p>
-                                                                    </div>
-                                                                    <Link
-                                                                        to="/verticals"
-                                                                        onClick={() => setHoveredItem(null)}
-                                                                        className="text-xs font-semibold text-primary hover:underline flex items-center gap-1"
-                                                                    >
-                                                                        View All Verticals
-                                                                        <ChevronRight className="w-3.5 h-3.5" />
-                                                                    </Link>
-                                                                </div>
-                                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                                                    {(item.dropdown as any)?.items?.map((ind: any, iIdx: number) => {
-                                                                        const IconComponent = Icons[ind.icon] || ArrowRight;
-                                                                        return (
-                                                                            <Link
-                                                                                key={iIdx}
-                                                                                to={ind.path}
-                                                                                onClick={() => setHoveredItem(null)}
-                                                                                className="group p-3 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-[#F0F7FC] hover:border-[#2878B5]/40 transition-all flex items-start gap-3 text-left"
-                                                                            >
-                                                                                <div className="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-primary group-hover:text-white transition-colors">
-                                                                                    <IconComponent className="w-4 h-4" />
-                                                                                </div>
-                                                                                <div className="min-w-0">
-                                                                                    <h4 className="text-sm font-bold text-slate-900 group-hover:text-primary transition-colors flex items-center gap-1">
-                                                                                        <span>{ind.name}</span>
-                                                                                        <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all text-primary" />
-                                                                                    </h4>
-                                                                                    <p className="text-xs text-slate-500 line-clamp-2 mt-0.5 leading-relaxed font-medium">
-                                                                                        {ind.desc}
-                                                                                    </p>
-                                                                                </div>
-                                                                            </Link>
-                                                                        );
-                                                                    })}
-                                                                </div>
-                                                            </div>
-                                                            
-                                                            <div className="mt-4 pt-3 border-t border-border/30 flex items-center justify-between text-xs text-muted-foreground">
-                                                                <span>Looking for multi-sector enterprise deployment?</span>
-                                                                <Link to="/verticals" onClick={() => setHoveredItem(null)} className="font-semibold text-primary hover:underline">
-                                                                    Compare All 6 Verticals &rarr;
-                                                                </Link>
-                                                            </div>
-                                                        </div>
-
-                                                        {/* Right Column: Highlighted panel titled "Need Help Choosing?" */}
-                                                        <div className="w-full md:w-[280px] bg-sky-50/60 p-6 flex flex-col justify-between shrink-0 border-t md:border-t-0 border-sky-100">
-                                                            <div>
-                                                                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-sky-200 text-primary text-[11px] font-bold uppercase tracking-wider mb-4 shadow-xs">
-                                                                    <Sparkles className="w-3 h-3" />
-                                                                    <span>Advisory</span>
-                                                                </div>
-                                                                <h3 className="text-lg font-bold text-slate-900 font-heading">
-                                                                    {(item.dropdown as any)?.highlight?.title || "Need Help Choosing?"}
-                                                                </h3>
-                                                                <p className="text-xs text-slate-600 mt-2.5 leading-relaxed font-medium">
-                                                                    {(item.dropdown as any)?.highlight?.desc || "Not sure which vertical framework fits your operational model? Our growth architects can assess your workflows and recommend the right setup."}
-                                                                </p>
-                                                            </div>
-
-                                                            <div className="pt-6 space-y-2.5">
-                                                                <button
-                                                                    onClick={() => {
-                                                                        setHoveredItem(null);
-                                                                        openLongForm({ defaultService: 'Industry Verticals Consultation', title: 'Consult with Industry Verticals Experts' });
-                                                                    }}
-                                                                    className="w-full py-2.5 px-4 rounded-xl bg-primary hover:bg-primary/90 active:bg-blue-700 text-white font-bold text-xs shadow-md shadow-primary/20 hover:shadow-primary/30 transition-all flex items-center justify-center gap-2 cursor-pointer"
-                                                                >
-                                                                    <span>Talk to Experts</span>
-                                                                    <ArrowRight className="w-3.5 h-3.5" />
-                                                                </button>
-                                                                <Link
-                                                                    to="/verticals"
-                                                                    onClick={() => setHoveredItem(null)}
-                                                                    className="w-full py-2 px-3 rounded-xl text-xs font-semibold text-primary hover:bg-sky-100/60 transition-colors flex items-center justify-center gap-1 text-center"
-                                                                >
-                                                                    <span>Explore All Verticals</span>
-                                                                    <ChevronRight className="w-3.5 h-3.5" />
-                                                                </Link>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                ) : (
-                                                    <>
-                                                        {/* Left Column: Categories List (ISI Multi-Column Layout) */}
-                                                        {item.dropdown.categories ? (
-                                                            <div className="w-[250px] bg-muted/20 border-r border-border/50 p-4 flex flex-col gap-1.5 shrink-0 justify-start">
+                                                {/* Left Column: Categories List (ISI Multi-Column Layout) */}
+                                                {item.dropdown.categories ? (
+                                                    <div className="w-[260px] bg-muted/20 border-r border-border/50 p-4 flex flex-col gap-1.5 shrink-0 justify-start">
                                                         <div className="mb-3 px-3">
                                                             <h3 className="text-base font-bold text-foreground font-heading">{item.name}</h3>
                                                             <p className="text-xs text-muted-foreground mt-0.5">Explore our {item.name.toLowerCase()}</p>
@@ -276,22 +182,8 @@ export default function Navigation() {
 
                                                         {item.name === "Offerings" ? (
                                                             <div className="flex flex-col gap-1.5">
-                                                                <Link
-                                                                    to="/offerings/profit-pool-discovery"
-                                                                    onClick={() => setHoveredItem(null)}
-                                                                    onMouseEnter={() => setActiveOfferingGroup("profit-pools")}
-                                                                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm transition-all text-left ${
-                                                                        activeOfferingGroup === 'profit-pools' || activeOfferingGroup === 'b2b' || activeOfferingGroup === 'b2c'
-                                                                            ? 'bg-card shadow-sm font-semibold text-primary border border-border/40' 
-                                                                            : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
-                                                                    }`}
-                                                                >
-                                                                    <span>Profit Pools</span>
-                                                                    <ChevronRight className="w-3.5 h-3.5 shrink-0 text-primary" />
-                                                                </Link>
-
-                                                                {item.dropdown.categories.filter((cat: any) => cat.id !== "profit-pools").map((cat: any, cIdx: number) => {
-                                                                    const targetPath = cat.path || `/offerings/${cat.id}`;
+                                                                {item.dropdown.categories.map((cat: any, cIdx: number) => {
+                                                                    const targetPath = cat.path || "/offerings";
                                                                     const isSelected = activeOfferingGroup === cat.id;
                                                                     return (
                                                                         <Link
@@ -365,109 +257,90 @@ export default function Navigation() {
                                                 <div className="flex-1 p-6 flex flex-col justify-between overflow-y-auto">
                                                     {item.name === "Offerings" ? (
                                                         (() => {
-                                                            if (activeOfferingGroup === "b2b" || activeOfferingGroup === "b2c" || activeOfferingGroup === "profit-pools") {
-                                                                const b2bItems = (item.dropdown.categories?.find((cat: any) => cat.id === "profit-pools") as any)?.b2bItems || [];
-                                                                const b2cItems = (item.dropdown.categories?.find((cat: any) => cat.id === "profit-pools") as any)?.b2cItems || [];
-                                                                
-                                                                return (
-                                                                    <div key={`offerings-${activeOfferingGroup}`} className="grid grid-cols-2 gap-6 w-full">
-                                                                        {/* B2B Column */}
-                                                                        <div className="flex flex-col gap-2 min-w-0">
-                                                                            <Link
-                                                                                to="/offerings/b2b"
-                                                                                onClick={() => setHoveredItem(null)}
-                                                                                className="text-xs font-bold uppercase tracking-wider text-primary border-b pb-2 border-border/50 flex items-center justify-between hover:text-primary/80 transition-colors"
-                                                                            >
-                                                                                <span>B2B Profit Pools</span>
-                                                                                <ChevronRight className="w-3 h-3 text-primary/70" />
-                                                                            </Link>
-                                                                            <div className="flex flex-col gap-1">
-                                                                                {b2bItems.map((sub: any, sIdx: number) => {
-                                                                                    const IconComponent = Icons[sub.icon] || ArrowRight;
-                                                                                    return (
-                                                                                        <Link
-                                                                                            key={sIdx}
-                                                                                            to={sub.path}
-                                                                                            onClick={() => setHoveredItem(null)}
-                                                                                            className="group flex items-center justify-between p-2 rounded-xl hover:bg-muted/50 transition-colors"
-                                                                                        >
-                                                                                            <div className="flex items-center gap-2.5 min-w-0">
-                                                                                                <div className="p-1.5 rounded-lg bg-primary/5 text-primary/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors shrink-0">
-                                                                                                    <IconComponent className="w-3.5 h-3.5" />
-                                                                                                </div>
-                                                                                                <span className="text-xs font-medium text-foreground group-hover:text-primary transition-colors truncate">
-                                                                                                    {sub.name}
-                                                                                                </span>
-                                                                                            </div>
-                                                                                            <ChevronRight className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200 shrink-0" />
-                                                                                        </Link>
-                                                                                    );
-                                                                                })}
-                                                                            </div>
-                                                                        </div>
+                                                            const currentCat = item.dropdown.categories?.find((cat: any) => cat.id === activeOfferingGroup) || item.dropdown.categories?.[0];
+                                                            const items = currentCat?.items || [];
+                                                            const highlight = item.dropdown.highlight;
 
-                                                                        {/* B2C Column */}
-                                                                        <div className="flex flex-col gap-2 min-w-0">
-                                                                            <Link
-                                                                                to="/offerings/b2c"
-                                                                                onClick={() => setHoveredItem(null)}
-                                                                                className="text-xs font-bold uppercase tracking-wider text-primary border-b pb-2 border-border/50 flex items-center justify-between hover:text-primary/80 transition-colors"
-                                                                            >
-                                                                                <span>B2C Profit Pools</span>
-                                                                                <ChevronRight className="w-3 h-3 text-primary/70" />
-                                                                            </Link>
-                                                                            <div className="flex flex-col gap-1">
-                                                                                {b2cItems.map((sub: any, sIdx: number) => {
-                                                                                    const IconComponent = Icons[sub.icon] || ArrowRight;
-                                                                                    return (
-                                                                                        <Link
-                                                                                            key={sIdx}
-                                                                                            to={sub.path}
-                                                                                            onClick={() => setHoveredItem(null)}
-                                                                                            className="group flex items-center justify-between p-2 rounded-xl hover:bg-muted/50 transition-colors"
-                                                                                        >
-                                                                                            <div className="flex items-center gap-2.5 min-w-0">
-                                                                                                <div className="p-1.5 rounded-lg bg-primary/5 text-primary/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors shrink-0">
-                                                                                                    <IconComponent className="w-3.5 h-3.5" />
-                                                                                                </div>
-                                                                                                <span className="text-xs font-medium text-foreground group-hover:text-primary transition-colors truncate">
-                                                                                                    {sub.name}
-                                                                                                </span>
-                                                                                            </div>
-                                                                                            <ChevronRight className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200 shrink-0" />
-                                                                                        </Link>
-                                                                                    );
-                                                                                })}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                );
-                                                            }
-
-                                                            const selectedItems = item.dropdown.categories?.find((cat: any) => cat.id === activeOfferingGroup)?.items || [];
                                                             return (
-                                                                <div key={`offerings-sel-${activeOfferingGroup}`} className="grid grid-cols-2 gap-3 w-full">
-                                                                    {selectedItems.map((sub: any, sIdx: number) => {
-                                                                        const IconComponent = Icons[sub.icon] || ArrowRight;
-                                                                        return (
-                                                                            <Link
-                                                                                key={sIdx}
-                                                                                to={sub.path}
-                                                                                onClick={() => setHoveredItem(null)}
-                                                                                className="group flex items-center justify-between p-2.5 rounded-xl hover:bg-muted/50 transition-colors"
-                                                                            >
-                                                                                <div className="flex items-center gap-3 min-w-0">
-                                                                                    <div className="p-2 rounded-lg bg-primary/5 text-primary/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors shrink-0">
-                                                                                        <IconComponent className="w-4 h-4" />
+                                                                <div key={`offerings-content-${currentCat?.id}`} className="flex flex-col gap-5 w-full">
+                                                                    <div className="flex items-center justify-between border-b pb-2 border-border/60">
+                                                                        <div>
+                                                                            <h4 className="text-sm font-bold text-foreground font-heading">{currentCat?.title}</h4>
+                                                                            <p className="text-xs text-muted-foreground">{currentCat?.desc}</p>
+                                                                        </div>
+                                                                        <Link
+                                                                            to="/offerings"
+                                                                            onClick={() => setHoveredItem(null)}
+                                                                            className="text-xs font-semibold text-primary hover:underline flex items-center gap-1"
+                                                                        >
+                                                                            All Offerings <ChevronRight className="w-3 h-3" />
+                                                                        </Link>
+                                                                    </div>
+
+                                                                    <div className="grid grid-cols-2 gap-2.5 w-full">
+                                                                        {items.map((sub: any, sIdx: number) => {
+                                                                            const IconComponent = Icons[sub.icon] || ArrowRight;
+                                                                            return (
+                                                                                <Link
+                                                                                    key={sIdx}
+                                                                                    to={sub.path}
+                                                                                    onClick={() => setHoveredItem(null)}
+                                                                                    className="group flex items-center justify-between p-2.5 rounded-xl hover:bg-muted/50 border border-transparent hover:border-border/40 transition-all"
+                                                                                >
+                                                                                    <div className="flex items-center gap-2.5 min-w-0">
+                                                                                        <div className="p-1.5 rounded-lg bg-primary/5 text-primary group-hover:bg-primary/10 transition-colors shrink-0">
+                                                                                            <IconComponent className="w-4 h-4" />
+                                                                                        </div>
+                                                                                        <span className="text-xs font-medium text-foreground group-hover:text-primary transition-colors truncate">
+                                                                                            {sub.name}
+                                                                                        </span>
                                                                                     </div>
-                                                                                    <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate">
-                                                                                        {sub.name}
+                                                                                    <ChevronRight className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all shrink-0" />
+                                                                                </Link>
+                                                                            );
+                                                                        })}
+                                                                    </div>
+
+                                                                    {highlight && (
+                                                                        <div className="p-3.5 bg-gradient-to-r from-primary/5 via-emerald-500/5 to-transparent rounded-xl border border-primary/15 flex flex-col gap-2 mt-1">
+                                                                            <div className="flex items-center justify-between">
+                                                                                <span className="text-[11px] font-bold uppercase tracking-wider text-primary">
+                                                                                    {highlight.title}
+                                                                                </span>
+                                                                                {(highlight as any).previewStats?.disclaimer && (
+                                                                                    <span className="text-[10px] text-muted-foreground italic">
+                                                                                        {(highlight as any).previewStats.disclaimer}
                                                                                     </span>
+                                                                                )}
+                                                                            </div>
+                                                                            {(highlight as any).previewStats && (
+                                                                                <div className="grid grid-cols-3 gap-2 py-1">
+                                                                                    <div className="bg-card/70 border border-border/50 rounded-lg p-2 text-center">
+                                                                                        <div className="text-xs font-bold text-foreground">{(highlight as any).previewStats.tam}</div>
+                                                                                        <div className="text-[10px] text-muted-foreground">Market Sizing</div>
+                                                                                    </div>
+                                                                                    <div className="bg-card/70 border border-border/50 rounded-lg p-2 text-center">
+                                                                                        <div className="text-xs font-bold text-emerald-700 dark:text-emerald-400">{(highlight as any).previewStats.icpFit}</div>
+                                                                                        <div className="text-[10px] text-muted-foreground">Target Match</div>
+                                                                                    </div>
+                                                                                    <div className="bg-card/70 border border-border/50 rounded-lg p-2 text-center">
+                                                                                        <div className="text-xs font-bold text-primary">{(highlight as any).previewStats.payback}</div>
+                                                                                        <div className="text-[10px] text-muted-foreground">Economics</div>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <ChevronRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200 shrink-0" />
-                                                                            </Link>
-                                                                        );
-                                                                    })}
+                                                                            )}
+                                                                            <div className="flex items-center justify-between pt-1">
+                                                                                <p className="text-[11px] text-muted-foreground line-clamp-1">{highlight.desc}</p>
+                                                                                <Link
+                                                                                    to={highlight.linkPath || "/offerings/b2b/market-discovery"}
+                                                                                    onClick={() => setHoveredItem(null)}
+                                                                                    className="text-xs font-bold text-primary hover:underline shrink-0 flex items-center gap-1"
+                                                                                >
+                                                                                    {highlight.linkText || "Explore Market Discovery"} <ChevronRight className="w-3 h-3" />
+                                                                                </Link>
+                                                                            </div>
+                                                                        </div>
+                                                                    )}
                                                                 </div>
                                                             );
                                                         })()
@@ -519,8 +392,6 @@ export default function Navigation() {
                                                         </Link>
                                                     </div>
                                                 </div>
-                                            </>
-                                            )}
                                         </div>
                                     </div>
                                 )}
@@ -591,41 +462,7 @@ export default function Navigation() {
                                 <div className="pl-4 sm:pl-6 bg-muted/20 border-l-2 border-primary/30 my-1 py-2 flex flex-col gap-2 rounded-r-lg">
                                     {item.name === "Offerings" ? (
                                         <div className="space-y-3">
-                                            <div>
-                                                <div className="text-[10px] font-bold text-primary/70 uppercase tracking-widest px-2 mb-1">
-                                                    B2B Profit Pools
-                                                </div>
-                                                <div className="flex flex-col gap-0.5">
-                                                    {((item.dropdown.categories?.find((c: any) => c.id === "profit-pools") as any)?.b2bItems || []).map((sub: any, sIdx: number) => (
-                                                        <Link
-                                                            key={sIdx}
-                                                            to={sub.path}
-                                                            onClick={() => setMobileMenuOpen(false)}
-                                                            className="text-xs text-muted-foreground hover:text-primary py-1.5 px-2 rounded-md hover:bg-muted/50 transition-colors block"
-                                                        >
-                                                            {sub.name}
-                                                        </Link>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div className="text-[10px] font-bold text-primary/70 uppercase tracking-widest px-2 mb-1">
-                                                    B2C Profit Pools
-                                                </div>
-                                                <div className="flex flex-col gap-0.5">
-                                                    {((item.dropdown.categories?.find((c: any) => c.id === "profit-pools") as any)?.b2cItems || []).map((sub: any, sIdx: number) => (
-                                                        <Link
-                                                            key={sIdx}
-                                                            to={sub.path}
-                                                            onClick={() => setMobileMenuOpen(false)}
-                                                            className="text-xs text-muted-foreground hover:text-primary py-1.5 px-2 rounded-md hover:bg-muted/50 transition-colors block"
-                                                        >
-                                                            {sub.name}
-                                                        </Link>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                            {item.dropdown.categories?.filter((c: any) => c.id !== "profit-pools").map((cat: any, cIdx: number) => (
+                                            {item.dropdown.categories?.map((cat: any, cIdx: number) => (
                                                 <div key={cIdx}>
                                                     <div className="text-[10px] font-bold text-primary/70 uppercase tracking-widest px-2 mb-1">
                                                         {cat.title}

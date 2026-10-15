@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
     Check,
@@ -17,14 +17,15 @@ import {
     AlertTriangle,
     ArrowRight,
     Layout,
-    Activity
+    Activity,
+    ChevronRight
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Reveal } from '../components/ui/Reveal';
 import OfferingsCarousel from '../components/OfferingsCarousel';
-import ProfitPoolDiscoveryDiagram from '../components/ProfitPoolDiscoveryDiagram';
+import ProfitJourneyNavigator from '../components/ProfitJourneyNavigator';
 import LeadCaptureSection from '../components/LeadCaptureSection';
 import { useLeadModal } from '../context/LeadModalContext';
 import ContextualCtaSection from '../components/forms/ContextualCtaSection';
@@ -1023,32 +1024,76 @@ export default function Offerings() {
 
     return (
         <div className="min-h-screen bg-slate-50 text-slate-900 overflow-hidden relative selection:bg-emerald-100">
-            {/* Premium Offerings Carousel - First Section */}
+            {/* Breadcrumb Navigation */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+                <nav className="flex items-center gap-2 text-sm text-slate-500 font-medium">
+                    <Link to="/" className="hover:text-[#2878B5] transition-colors">Home</Link>
+                    <ChevronRight className="w-4 h-4" />
+                    <span className="text-[#2878B5] font-bold">Offerings</span>
+                </nav>
+            </div>
+
+            {/* Hero Section per Section 7 */}
+            <section className="relative py-12 md:py-16 overflow-hidden">
+                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+                    <Reveal width="100%">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E1EFF8] border border-[#BAE0F8] text-[#1E6297] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs"
+                            style={{ fontFamily: 'Inter, sans-serif' }}>
+                            PROFITABILITY &amp; GROWTH INTELLIGENCE
+                        </div>
+                        <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-[#0A2540] mb-6 tracking-tight leading-[1.08]"
+                            style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.025em' }}>
+                            Discover Profitable Markets. Validate Demand. Accelerate Revenue.
+                        </h1>
+                        <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-normal max-w-3xl mx-auto mb-8"
+                            style={{ fontFamily: 'Inter, sans-serif' }}>
+                            ProfitMachines helps businesses identify attractive market opportunities, understand customer demand, build differentiated offers, select effective growth channels, and make evidence-based decisions that improve revenue potential and profitability.
+                        </p>
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <a
+                                href="#profit-journey"
+                                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#2878B5] text-white font-bold text-sm hover:bg-[#1E6297] transition-all shadow-md shadow-[#2878B5]/25"
+                                style={{ fontFamily: 'Inter, sans-serif' }}
+                            >
+                                Explore Our Offerings
+                                <ArrowRight className="w-4 h-4" />
+                            </a>
+                            <Link
+                                to="/book-consultation"
+                                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-slate-300 text-[#0A2540] font-bold text-sm hover:border-[#2878B5] hover:text-[#2878B5] transition-colors bg-white shadow-xs"
+                                style={{ fontFamily: 'Inter, sans-serif' }}
+                            >
+                                Discuss Your Growth Opportunity
+                                <ArrowRight className="w-4 h-4" />
+                            </Link>
+                        </div>
+                    </Reveal>
+                </div>
+            </section>
+
+            {/* Premium Offerings Carousel */}
             <div>
                 <OfferingsCarousel />
             </div>
 
+            <div id="profit-journey" className="scroll-mt-24">
+                <ProfitJourneyNavigator />
+            </div>
+
             <div className="relative z-10">
-                {/* 1. Static Intro Section (Replaces old Hero) */}
-                <section className="relative py-20 md:py-24 overflow-hidden">
-                    <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-                        <Reveal width="100%">
-                            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-5">Autonomous Revenue Engineering</h2>
-                            <p className="text-xl text-slate-600 leading-relaxed font-medium">
-                                ProfitMachines delivers a comprehensive suite of AI-native offerings designed to modernize the enterprise revenue stack. We transform manual, siloed processes into a unified, predictive engine that accelerates growth at every stage of the customer lifecycle.
-                            </p>
-                        </Reveal>
-                    </div>
-                </section>
 
                 {/* Platform Overview */}
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 md:mb-20 lg:mb-24">
-                    <div className="bg-white/80 border border-slate-200/60 rounded-[2.5rem] p-8 lg:p-12 shadow-2xl shadow-indigo-100/50 backdrop-blur-xl relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-gradient-to-br from-teal-50/30 via-transparent to-emerald-50/30 opacity-100 pointer-events-none"></div>
+                    <div className="bg-white border border-slate-200/80 rounded-3xl p-8 lg:p-12 shadow-card relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#E1EFF8]/30 via-transparent to-[#F0F7FC]/40 opacity-100 pointer-events-none"></div>
                         <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
                             <div>
-                                <h2 className="text-4xl font-bold text-slate-900 mb-6 tracking-tight">One Intelligence Platform. <br /> <span className="text-[#2878B5]">Infinite Growth.</span></h2>
-                                <p className="text-lg text-slate-600 mb-8 font-medium leading-relaxed">
+                                <h2 className="text-3xl sm:text-4xl font-black text-[#0A2540] mb-6 tracking-tight leading-[1.1]"
+                                    style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.025em' }}>
+                                    One Intelligence Platform. <br /> <span className="text-[#2878B5]">Infinite Growth.</span>
+                                </h2>
+                                <p className="text-base sm:text-lg text-slate-600 mb-8 font-normal leading-relaxed"
+                                    style={{ fontFamily: 'Inter, sans-serif' }}>
                                     ProfitMachines unifies marketing, sales, and customer success into a single intelligent revenue engine, replacing siloed tools with a unified nervous system.
                                 </p>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
@@ -1061,42 +1106,42 @@ export default function Offerings() {
                                         "Real-time revenue visibility"
                                     ].map((item, index) => (
                                         <div key={index} className="flex items-center gap-3 group/item">
-                                            <div className="min-w-[24px] min-h-[24px] rounded-full bg-emerald-50 flex items-center justify-center border border-emerald-100 group-hover/item:border-emerald-200 transition-colors">
+                                            <div className="min-w-[22px] min-h-[22px] rounded-full bg-[#E1EFF8] flex items-center justify-center border border-[#BAE0F8] transition-colors">
                                                 <Check className="w-3.5 h-3.5 text-[#2878B5]" />
                                             </div>
-                                            <span className="text-slate-700 font-medium">{item}</span>
+                                            <span className="text-slate-700 text-sm font-medium" style={{ fontFamily: 'Inter, sans-serif' }}>{item}</span>
                                         </div>
                                     ))}
                                 </div>
                             </div>
                             <div className="relative">
                                 {/* Abstract Icons Visual */}
-                                <div className="grid gap-5">
-                                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(79,70,229,0.1)] transition-all hover:-translate-y-1 flex items-center gap-5 group/card">
-                                        <div className="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center group-hover/card:bg-emerald-100 transition-colors">
-                                            <Brain className="w-6 h-6 text-[#2878B5]" />
+                                <div className="grid gap-4">
+                                    <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 shadow-xs hover:border-[#2878B5]/40 hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex items-center gap-4 group/card">
+                                        <div className="w-12 h-12 rounded-xl bg-[#E1EFF8] border border-[#BAE0F8]/60 flex items-center justify-center text-[#2878B5] group-hover/card:bg-[#2878B5] group-hover/card:text-white transition-colors shrink-0">
+                                            <Brain className="w-6 h-6" />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-slate-900 text-lg">AI Intelligence Layer</h4>
-                                            <p className="text-sm text-slate-500 font-medium">Predictive Modeling & Insights</p>
+                                            <h4 className="font-bold text-[#0A2540] text-base sm:text-lg" style={{ fontFamily: 'Satoshi, Inter, sans-serif' }}>AI Intelligence Layer</h4>
+                                            <p className="text-xs sm:text-sm text-slate-500 font-normal" style={{ fontFamily: 'Inter, sans-serif' }}>Predictive Modeling & Insights</p>
                                         </div>
                                     </div>
-                                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(79,70,229,0.1)] transition-all hover:-translate-y-1 ml-10 flex items-center gap-5 group/card">
-                                        <div className="w-12 h-12 rounded-xl bg-violet-50 flex items-center justify-center group-hover/card:bg-violet-100 transition-colors">
-                                            <Workflow className="w-6 h-6 text-violet-600" />
+                                    <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 shadow-xs hover:border-[#2878B5]/40 hover:shadow-card-hover transition-all hover:-translate-y-0.5 ml-0 sm:ml-8 flex items-center gap-4 group/card">
+                                        <div className="w-12 h-12 rounded-xl bg-[#E1EFF8] border border-[#BAE0F8]/60 flex items-center justify-center text-[#2878B5] group-hover/card:bg-[#2878B5] group-hover/card:text-white transition-colors shrink-0">
+                                            <Workflow className="w-6 h-6" />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-slate-900 text-lg">Unified Workflow</h4>
-                                            <p className="text-sm text-slate-500 font-medium">Orchestration & Automation</p>
+                                            <h4 className="font-bold text-[#0A2540] text-base sm:text-lg" style={{ fontFamily: 'Satoshi, Inter, sans-serif' }}>Unified Workflow</h4>
+                                            <p className="text-xs sm:text-sm text-slate-500 font-normal" style={{ fontFamily: 'Inter, sans-serif' }}>Orchestration & Automation</p>
                                         </div>
                                     </div>
-                                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(79,70,229,0.1)] transition-all hover:-translate-y-1 flex items-center gap-5 group/card">
-                                        <div className="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center group-hover/card:bg-emerald-100 transition-colors">
-                                            <BarChart3 className="w-6 h-6 text-[#2878B5]" />
+                                    <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 shadow-xs hover:border-[#2878B5]/40 hover:shadow-card-hover transition-all hover:-translate-y-0.5 flex items-center gap-4 group/card">
+                                        <div className="w-12 h-12 rounded-xl bg-[#E1EFF8] border border-[#BAE0F8]/60 flex items-center justify-center text-[#2878B5] group-hover/card:bg-[#2878B5] group-hover/card:text-white transition-colors shrink-0">
+                                            <BarChart3 className="w-6 h-6" />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-slate-900 text-lg">Revenue Growth</h4>
-                                            <p className="text-sm text-slate-500 font-medium">Predictable Scale</p>
+                                            <h4 className="font-bold text-[#0A2540] text-base sm:text-lg" style={{ fontFamily: 'Satoshi, Inter, sans-serif' }}>Revenue Growth</h4>
+                                            <p className="text-xs sm:text-sm text-slate-500 font-normal" style={{ fontFamily: 'Inter, sans-serif' }}>Predictable Scale</p>
                                         </div>
                                     </div>
                                 </div>
@@ -1110,64 +1155,63 @@ export default function Offerings() {
                     <div className="text-center mb-12 md:mb-16">
                         <Link 
                             to="/offerings/profit-pool-discovery"
-                            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-[#2878B5] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm hover:bg-emerald-100 transition-colors"
+                            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E1EFF8] border border-[#BAE0F8] text-[#1E6297] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs hover:bg-[#BAE0F8]/40 transition-colors"
+                            style={{ fontFamily: 'Inter, sans-serif' }}
                         >
                             Profit Pool Discovery Engine
                         </Link>
-                        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 font-heading">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0A2540] mb-5 tracking-tight leading-[1.08]"
+                            style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.025em' }}>
                             <Link to="/offerings/profit-pool-discovery" className="hover:text-[#2878B5] transition-colors">
                                 AI Driven Profit Pool Discovery
                             </Link>
                         </h2>
-                        <p className="text-xl text-slate-600 max-w-3xl mx-auto font-medium mb-12">
+                        <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto font-normal mb-8"
+                            style={{ fontFamily: 'Inter, sans-serif' }}>
                             Engineering intelligence to uncover revenue others cannot see across B2B and B2C stacks.
                         </p>
 
                         {/* Premium B2B/B2C Tabs */}
                         <div className="flex justify-center mb-8">
-                            <div className="flex gap-2 p-1.5 bg-slate-100/90 backdrop-blur-md rounded-2xl border border-slate-200/50 shadow-inner">
+                            <div className="flex gap-2 p-1.5 bg-white rounded-2xl border border-slate-200/80 shadow-xs">
                                 <button
                                     onClick={() => setActivePoolTab('overview')}
-                                    className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
+                                    className={`px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
                                         activePoolTab === 'overview'
-                                            ? 'bg-[#2878B5] text-white shadow-md'
-                                            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                                            ? 'bg-[#0A2540] text-white shadow-md'
+                                            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                                     }`}
+                                    style={{ fontFamily: 'Inter, sans-serif' }}
                                 >
                                     Overview
                                 </button>
                                 <button
                                     onClick={() => setActivePoolTab('b2b')}
-                                    className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
+                                    className={`px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
                                         activePoolTab === 'b2b'
-                                            ? 'bg-[#2878B5] text-white shadow-md'
-                                            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                                            ? 'bg-[#0A2540] text-white shadow-md'
+                                            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                                     }`}
+                                    style={{ fontFamily: 'Inter, sans-serif' }}
                                 >
                                     B2B Profit Pools
                                 </button>
                                 <button
                                     onClick={() => setActivePoolTab('b2c')}
-                                    className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
+                                    className={`px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
                                         activePoolTab === 'b2c'
-                                            ? 'bg-[#2878B5] text-white shadow-md'
-                                            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                                            ? 'bg-[#0A2540] text-white shadow-md'
+                                            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                                     }`}
+                                    style={{ fontFamily: 'Inter, sans-serif' }}
                                 >
                                     B2C Profit Pools
                                 </button>
                             </div>
                         </div>
-
-                        {/* Image Diagram */}
-                        {activePoolTab === 'overview' && (
-                            <div className="flex justify-center my-12">
-                                <ProfitPoolDiscoveryDiagram />
-                            </div>
-                        )}
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                         {(() => {
                             const overviewItems = [
                                 { name: "Market Discovery", slug: "market-discovery", question: "Where is the revenue we haven't mapped?", impact: "$300M unserved market identified" },
@@ -1208,28 +1252,32 @@ export default function Offerings() {
                                     : overviewItems;
 
                             return items.map((disc, idx) => (
-                                <div key={idx} className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-all duration-300 flex flex-col justify-between group">
+                                <div key={idx} className="bg-white rounded-2xl p-7 sm:p-8 border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-[#2878B5]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
                                     <div>
-                                        <div className="flex items-center justify-between mb-4">
-                                            <span className="text-xs font-bold uppercase tracking-wider text-[#2878B5] bg-emerald-50 px-3 py-1 rounded-full">
+                                        <div className="flex items-center justify-between gap-2 mb-4">
+                                            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#1E6297] bg-[#F0F7FC] px-2.5 py-1 rounded-md border border-[#E1EFF8]">
                                                 Layer 0{idx + 1}
                                             </span>
-                                            <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
+                                            <span className="text-[11px] font-semibold text-[#1E6297] bg-[#E1EFF8] px-2.5 py-1 rounded-md border border-[#BAE0F8] truncate">
                                                 {disc.impact}
                                             </span>
                                         </div>
-                                        <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-[#2878B5] transition-colors">
+                                        <h3 className="text-xl font-bold text-[#0A2540] mb-3 group-hover:text-[#2878B5] transition-colors leading-snug"
+                                            style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.02em' }}>
                                             {disc.name}
                                         </h3>
-                                        <p className="text-slate-600 text-sm font-medium italic mb-6">
+                                        <p className="text-slate-600 text-sm font-normal italic mb-6"
+                                            style={{ fontFamily: 'Inter, sans-serif' }}>
                                             "{disc.question}"
                                         </p>
                                     </div>
                                     <Link 
                                         to={`/offerings/profit-pool-discovery/${disc.slug}`}
-                                        className="inline-flex items-center gap-2 text-sm font-bold text-[#2878B5] hover:text-[#1E6297] transition-colors pt-4 border-t border-slate-100"
+                                        className="inline-flex items-center gap-2 text-xs font-bold text-[#2878B5] hover:text-[#1E6297] transition-colors pt-4 border-t border-slate-100"
+                                        style={{ fontFamily: 'Inter, sans-serif' }}
                                     >
-                                        Explore Discovery Layer <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                        <span>Explore Discovery Layer</span>
+                                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </Link>
                                 </div>
                             ));
@@ -1238,10 +1286,12 @@ export default function Offerings() {
                 </div>
 
                 {/* Core Offerings */}
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
+                <div id="core-offerings" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32 scroll-mt-28">
                     <div className="text-center mb-20">
-                        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Core Offerings</h2>
-                        <p className="text-xl text-slate-600 max-w-3xl mx-auto font-medium">
+                        <h2 className="text-3xl md:text-5xl font-black text-[#0A2540] mb-5 tracking-tight leading-[1.08]"
+                            style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.025em' }}>Core Offerings</h2>
+                        <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto font-normal"
+                            style={{ fontFamily: 'Inter, sans-serif' }}>
                             Comprehensive solutions powered by AI to transform every stage of your revenue cycle.
                         </p>
                     </div>
@@ -1250,20 +1300,23 @@ export default function Offerings() {
                         {offerings.map((offering, index) => (
                             <div key={index} id={offering.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')} className="scroll-mt-32">
                                 <Reveal width="100%" delay={0.1}>
-                                    <Card className="overflow-hidden border border-white/50 bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(79,70,229,0.06)] transition-all duration-500 group rounded-[2.5rem] p-8 md:p-14 relative z-0">
+                                    <Card className="overflow-hidden border border-slate-200/80 bg-white shadow-card hover:shadow-card-hover transition-all duration-300 group rounded-3xl p-8 md:p-14 relative z-0">
                                         {/* Subtle decorative background gradient */}
-                                        <div className="absolute top-0 right-0 -z-10 w-[600px] h-[600px] bg-gradient-to-b from-slate-50/80 to-transparent rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+                                        <div className="absolute top-0 right-0 -z-10 w-[600px] h-[600px] bg-gradient-to-b from-[#E1EFF8]/40 to-transparent rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
                                         {/* 1. Header Section: Title & Tag Line */}
                                         <div className="flex flex-col items-center text-center mb-16 relative">
-                                            <div className="mb-8 p-5 bg-white rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100/80 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-[0_10px_30px_rgba(79,70,229,0.1)] transition-all duration-500 relative z-10">
+                                            <div className="mb-6 p-4 bg-[#E1EFF8] border border-[#BAE0F8]/60 text-[#2878B5] rounded-2xl group-hover:scale-105 group-hover:bg-[#2878B5] group-hover:text-white transition-all duration-300 relative z-10 shadow-xs">
                                                 {offering.icon}
                                             </div>
-                                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-50 border border-slate-200/60 text-slate-500 text-[11px] font-bold uppercase tracking-[0.15em] mb-6 shadow-sm">
+                                            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F0F7FC] border border-[#E1EFF8] text-[#1E6297] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs"
+                                                style={{ fontFamily: 'Inter, sans-serif' }}>
                                                 Module {index + 1}
                                             </div>
-                                            <h3 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">{offering.title}</h3>
-                                            <p className="text-xl md:text-2xl text-[#2878B5]/90 font-medium max-w-3xl leading-relaxed">{offering.subtitle}</p>
+                                            <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#0A2540] mb-4 tracking-tight leading-[1.1]"
+                                                style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.025em' }}>{offering.title}</h3>
+                                            <p className="text-lg md:text-xl text-[#1E6297] font-medium max-w-3xl leading-relaxed"
+                                                style={{ fontFamily: 'Inter, sans-serif' }}>{offering.subtitle}</p>
                                         </div>
 
                                         {/* 2. Challenges & KPI Grid */}

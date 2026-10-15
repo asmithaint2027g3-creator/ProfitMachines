@@ -40,20 +40,24 @@ export default function BlogSection() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-12">
                     <div className="max-w-2xl">
-                        <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-[#2878B5] font-semibold text-xs tracking-widest uppercase mb-6 shadow-sm border border-emerald-100">
+                        <div className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E1EFF8] border border-[#BAE0F8] text-[#1E6297] font-bold text-xs tracking-wider uppercase mb-4 shadow-xs"
+                            style={{ fontFamily: 'Inter, sans-serif' }}>
                             Knowledge Base
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight drop-shadow-sm">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0A2540] mb-4 tracking-tight leading-[1.08]"
+                            style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.025em' }}>
                             Latest from ProfitMachines
                         </h2>
-                        <p className="text-xl text-slate-600 font-medium">
+                        <p className="text-base sm:text-lg text-slate-600 font-normal"
+                            style={{ fontFamily: 'Inter, sans-serif' }}>
                             Insights, trends, and thought leadership on enterprise AI and digital transformation.
                         </p>
                     </div>
-                    <div className="mt-8 md:mt-0">
-                        <Link to="/#blogs" className="btn-cta-secondary bg-white group">
-                            View All Articles
-                            <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+                    <div className="mt-6 md:mt-0">
+                        <Link to="/resources" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-200/80 text-sm font-bold text-[#0A2540] shadow-xs hover:border-[#2878B5]/40 transition-all group"
+                            style={{ fontFamily: 'Inter, sans-serif' }}>
+                            <span>View All Articles</span>
+                            <ArrowRight className="w-4 h-4 text-[#2878B5] transition-transform group-hover:translate-x-1" />
                         </Link>
                     </div>
                 </div>
@@ -66,33 +70,37 @@ export default function BlogSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-all duration-500 group flex flex-col h-full relative overflow-hidden"
+                            className="bg-white rounded-2xl p-7 sm:p-8 border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-[#2878B5]/40 transition-all duration-300 group flex flex-col justify-between h-full relative overflow-hidden"
                         >
                             {/* Decorative Gradient Bar */}
-                            <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${blog.color} opacity-80 group-hover:opacity-100 transition-opacity`}></div>
+                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#2878B5] via-[#5CAAE6] to-[#1E6297] opacity-80 group-hover:opacity-100 transition-opacity"></div>
                             
-                            <div className="mb-8">
-                                <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 group-hover:bg-emerald-50 group-hover:border-emerald-100 transition-colors">
-                                    <FileText className="w-5 h-5 text-slate-400 group-hover:text-emerald-600 transition-colors" />
+                            <div>
+                                <div className="w-11 h-11 rounded-xl bg-[#E1EFF8] border border-[#BAE0F8]/60 flex items-center justify-center mb-5 group-hover:bg-[#2878B5] text-[#2878B5] group-hover:text-white transition-all shadow-xs">
+                                    <FileText className="w-5 h-5 transition-colors" />
                                 </div>
-                                <div className="inline-block px-3 py-1 rounded-full bg-slate-100 text-[10px] font-bold text-slate-600 tracking-wider uppercase mb-4 group-hover:bg-emerald-50 group-hover:text-[#2878B5] transition-colors">
+                                <div className="inline-block px-2.5 py-1 rounded-md bg-[#F0F7FC] text-[10px] font-bold text-[#1E6297] tracking-wider uppercase mb-3 border border-[#E1EFF8]"
+                                    style={{ fontFamily: 'Inter, sans-serif' }}>
                                     {blog.category}
                                 </div>
-                                <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-[#1E6297] transition-colors line-clamp-3">
+                                <h3 className="text-xl font-bold text-[#0A2540] mb-3 group-hover:text-[#2878B5] transition-colors line-clamp-3 leading-snug"
+                                    style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.02em' }}>
                                     {blog.title}
                                 </h3>
-                                <p className="text-slate-600 text-base leading-relaxed line-clamp-3 font-medium">
+                                <p className="text-slate-600 text-sm leading-relaxed line-clamp-3 font-normal mb-6"
+                                    style={{ fontFamily: 'Inter, sans-serif' }}>
                                     {blog.excerpt}
                                 </p>
                             </div>
                                 
-                            <div className="mt-auto flex items-center justify-between border-t border-slate-100 pt-6">
-                                <div className="flex items-center gap-4 text-xs text-slate-500 font-bold uppercase tracking-wide">
+                            <div className="mt-auto flex items-center justify-between border-t border-slate-100 pt-5">
+                                <div className="flex items-center gap-4 text-xs text-slate-500 font-semibold"
+                                    style={{ fontFamily: 'Inter, sans-serif' }}>
                                     <div className="flex items-center gap-1.5">
-                                        <User className="w-4 h-4 text-slate-400" /> {blog.author}
+                                        <User className="w-3.5 h-3.5 text-[#2878B5]" /> {blog.author}
                                     </div>
                                     <div className="flex items-center gap-1.5">
-                                        <Calendar className="w-4 h-4 text-slate-400" /> {blog.date}
+                                        <Calendar className="w-3.5 h-3.5 text-slate-400" /> {blog.date}
                                     </div>
                                 </div>
                             </div>
