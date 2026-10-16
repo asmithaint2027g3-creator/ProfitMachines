@@ -2060,54 +2060,48 @@ export const smNavItems = [
         "dropdown": {
             "categories": [
                 {
-                    "id": "discover-opportunities",
-                    "title": "Discover Opportunities",
-                    "desc": "Find markets, customer segments, competitors, and untapped demand.",
-                    "icon": "Search",
-                    "items": [
-                        { "name": "B2B-1 Market Discovery", "path": "/offerings/b2b/market-discovery", "icon": "Search" },
-                        { "name": "B2B-2 Demand Discovery", "path": "/offerings/b2b/demand-discovery", "icon": "Target" },
-                        { "name": "B2B-5 Competitive Discovery", "path": "/offerings/b2b/competitive-discovery", "icon": "ShieldCheck" },
-                        { "name": "B2B-6 Customer Discovery", "path": "/offerings/b2b/customer-discovery", "icon": "Users" },
-                        { "name": "B2C-1 Market Discovery", "path": "/offerings/b2c/market-discovery", "icon": "ShoppingBag" },
-                        { "name": "B2C-2 Demand Discovery", "path": "/offerings/b2c/demand-discovery", "icon": "Target" },
-                        { "name": "B2C-5 Competitive Discovery", "path": "/offerings/b2c/competitive-discovery", "icon": "ShieldCheck" },
-                        { "name": "B2C-6 Customer Discovery", "path": "/offerings/b2c/customer-discovery", "icon": "Users" }
+                    "id": "profit-pools",
+                    "title": "Profit Pools",
+                    "path": "/offerings/b2b",
+                    "b2bItems": [
+                        { "name": "B2B Market Discovery", "path": "/offerings/b2b#market-discovery", "icon": "Search" },
+                        { "name": "B2B Demand Discovery", "path": "/offerings/b2b#demand-discovery", "icon": "Target" },
+                        { "name": "B2B Value Discovery", "path": "/offerings/b2b#value-discovery", "icon": "DollarSign" },
+                        { "name": "B2B Channel Discovery", "path": "/offerings/b2b#channel-discovery", "icon": "Network" },
+                        { "name": "B2B Competitive Discovery", "path": "/offerings/b2b#competitive-discovery", "icon": "ShieldCheck" },
+                        { "name": "B2B Customer Discovery", "path": "/offerings/b2b#customer-discovery", "icon": "Users" },
+                        { "name": "B2B Product-Market Fit Discovery", "path": "/offerings/b2b#product-market-fit-discovery", "icon": "Sparkles" }
+                    ],
+                    "b2cItems": [
+                        { "name": "B2C Market Discovery", "path": "/offerings/b2c#market-discovery", "icon": "Search" },
+                        { "name": "B2C Demand Discovery", "path": "/offerings/b2c#demand-discovery", "icon": "Target" },
+                        { "name": "B2C Value Discovery", "path": "/offerings/b2c#value-discovery", "icon": "DollarSign" },
+                        { "name": "B2C Channel Discovery", "path": "/offerings/b2c#channel-discovery", "icon": "Network" },
+                        { "name": "B2C Competitive Discovery", "path": "/offerings/b2c#competitive-discovery", "icon": "ShieldCheck" },
+                        { "name": "B2C Customer Discovery", "path": "/offerings/b2c#customer-discovery", "icon": "Users" },
+                        { "name": "B2C Product-Market Fit Discovery", "path": "/offerings/b2c#product-market-fit-discovery", "icon": "Sparkles" }
                     ]
                 },
                 {
-                    "id": "build-profitable-offers",
-                    "title": "Build Profitable Offers",
-                    "desc": "Validate customer value, pricing, and product-market fit before investing in growth.",
-                    "icon": "DollarSign",
+                    "id": "ai-growth",
+                    "title": "AI Growth Engines",
+                    "path": "/offerings/ai-growth",
                     "items": [
-                        { "name": "B2B-3 Value Discovery", "path": "/offerings/b2b/value-discovery", "icon": "DollarSign" },
-                        { "name": "B2B-7 Product-Market Fit Discovery", "path": "/offerings/b2b/product-market-fit-discovery", "icon": "Sparkles" },
-                        { "name": "B2C-3 Value Discovery", "path": "/offerings/b2c/value-discovery", "icon": "DollarSign" },
-                        { "name": "B2C-7 Product-Market Fit Discovery", "path": "/offerings/b2c/product-market-fit-discovery", "icon": "Sparkles" }
+                        { "name": "AI Demand Discovery Engine", "path": "/offerings/ai-growth#ai-demand-discovery", "icon": "Search" },
+                        { "name": "AI Revenue Acceleration", "path": "/offerings/ai-growth#revenue-acceleration", "icon": "TrendingUp" },
+                        { "name": "AI Growth Hacking", "path": "/offerings/ai-growth#growth-hacking", "icon": "Rocket" },
+                        { "name": "AI Performance Marketing", "path": "/offerings/ai-growth#performance-marketing", "icon": "BarChart" }
                     ]
                 },
                 {
-                    "id": "accelerate-growth",
-                    "title": "Accelerate Growth",
-                    "desc": "Improve acquisition efficiency, channel performance, conversion, and sales productivity.",
-                    "icon": "Rocket",
+                    "id": "sales-acceleration",
+                    "title": "Sales Acceleration",
+                    "path": "/offerings/sales-acceleration",
                     "items": [
-                        { "name": "B2B-4 Channel Discovery", "path": "/offerings/b2b/channel-discovery", "icon": "Network" },
-                        { "name": "B2C-4 Channel Discovery", "path": "/offerings/b2c/channel-discovery", "icon": "Network" },
-                        { "name": "AI Growth Engines", "path": "/offerings/ai-growth/ai-demand-discovery", "icon": "Bot" },
-                        { "name": "Sales Acceleration", "path": "/offerings/sales-acceleration/enterprise-sales", "icon": "TrendingUp" }
-                    ]
-                },
-                {
-                    "id": "optimize-profitability",
-                    "title": "Optimize Profitability",
-                    "desc": "Understand revenue potential, margins, acquisition economics, and growth efficiency.",
-                    "icon": "BarChart",
-                    "items": [
-                        { "name": "Revenue Forecasting", "path": "/offerings/ai-growth/revenue-acceleration", "icon": "TrendingUp" },
-                        { "name": "Growth Optimization", "path": "/offerings/ai-growth/growth-hacking", "icon": "Rocket" },
-                        { "name": "ROI & Unit Economics", "path": "/offerings/ai-growth/performance-marketing", "icon": "BarChart" }
+                        { "name": "Enterprise Sales Acceleration", "path": "/offerings/sales-acceleration#enterprise-sales", "icon": "Building2" },
+                        { "name": "Digital & Inside Sales Acceleration", "path": "/offerings/sales-acceleration#digital-sales", "icon": "Layers" },
+                        { "name": "D2C Sales Acceleration", "path": "/offerings/sales-acceleration#d2c-sales", "icon": "ShoppingBag" },
+                        { "name": "BFSI Sales Acceleration", "path": "/offerings/sales-acceleration#bfsi-sales", "icon": "Landmark" }
                     ]
                 }
             ]

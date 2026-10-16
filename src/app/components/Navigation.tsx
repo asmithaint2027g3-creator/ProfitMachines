@@ -24,7 +24,7 @@ export default function Navigation() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [hoveredItem, setHoveredItem] = useState<string | null>(null);
     const [expandedItems, setExpandedItems] = useState<string[]>([]);
-    const [activeOfferingGroup, setActiveOfferingGroup] = useState("discover-opportunities");
+    const [activeOfferingGroup, setActiveOfferingGroup] = useState("profit-pools");
     const [activeMenuCat, setActiveMenuCat] = useState<Record<string, string>>({});
     const [dropdownPos, setDropdownPos] = useState<Record<string, { left: number; width: number }>>({});
     
@@ -174,14 +174,16 @@ export default function Navigation() {
                                             <div className="bg-card border border-border/60 shadow-2xl rounded-2xl overflow-hidden flex min-h-[380px] text-foreground">
                                                 {/* Left Column: Categories List (ISI Multi-Column Layout) */}
                                                 {item.dropdown.categories ? (
-                                                    <div className="w-[260px] bg-muted/20 border-r border-border/50 p-4 flex flex-col gap-1.5 shrink-0 justify-start">
-                                                        <div className="mb-3 px-3">
-                                                            <h3 className="text-base font-bold text-foreground font-heading">{item.name}</h3>
-                                                            <p className="text-xs text-muted-foreground mt-0.5">Explore our {item.name.toLowerCase()}</p>
-                                                        </div>
+                                                    <div className="w-[260px] bg-slate-50/50 border-r border-border/50 p-4 flex flex-col gap-2 shrink-0 justify-start">
+                                                        {item.name !== "Offerings" && (
+                                                            <div className="mb-3 px-3">
+                                                                <h3 className="text-base font-bold text-foreground font-heading">{item.name}</h3>
+                                                                <p className="text-xs text-muted-foreground mt-0.5">Explore our {item.name.toLowerCase()}</p>
+                                                            </div>
+                                                        )}
 
                                                         {item.name === "Offerings" ? (
-                                                            <div className="flex flex-col gap-1.5">
+                                                            <div className="flex flex-col gap-2.5 pt-2">
                                                                 {item.dropdown.categories.map((cat: any, cIdx: number) => {
                                                                     const targetPath = cat.path || "/offerings";
                                                                     const isSelected = activeOfferingGroup === cat.id;
@@ -191,14 +193,14 @@ export default function Navigation() {
                                                                             to={targetPath}
                                                                             onClick={() => setHoveredItem(null)}
                                                                             onMouseEnter={() => setActiveOfferingGroup(cat.id)}
-                                                                            className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm transition-all text-left ${
+                                                                            className={`flex items-center justify-between px-5 py-3.5 rounded-2xl text-sm font-bold transition-all text-left ${
                                                                                 isSelected 
-                                                                                    ? 'bg-card shadow-sm font-semibold text-primary border border-border/40' 
-                                                                                    : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
+                                                                                    ? 'bg-[#1864FF] text-white shadow-md shadow-blue-500/25' 
+                                                                                    : 'text-slate-800 hover:bg-slate-100 hover:text-slate-900'
                                                                             }`}
                                                                         >
                                                                             <span>{cat.title}</span>
-                                                                            <ChevronRight className={`w-3.5 h-3.5 shrink-0 transition-opacity ${isSelected ? 'opacity-100 text-primary' : 'opacity-0'}`} />
+                                                                            <ChevronRight className={`w-4 h-4 shrink-0 transition-transform ${isSelected ? 'text-white translate-x-0.5' : 'text-slate-400'}`} />
                                                                         </Link>
                                                                     );
                                                                 })}
@@ -254,30 +256,79 @@ export default function Navigation() {
                                                 )}
 
                                                 {/* Right Area: Display Sub-Items (Clean 2-Column Grid matching ISI) */}
-                                                <div className="flex-1 p-6 flex flex-col justify-between overflow-y-auto">
+                                                <div className="flex-1 p-6 flex flex-col justify-start overflow-y-auto">
                                                     {item.name === "Offerings" ? (
                                                         (() => {
-                                                            const currentCat = item.dropdown.categories?.find((cat: any) => cat.id === activeOfferingGroup) || item.dropdown.categories?.[0];
-                                                            const items = currentCat?.items || [];
-                                                            const highlight = item.dropdown.highlight;
-
-                                                            return (
-                                                                <div key={`offerings-content-${currentCat?.id}`} className="flex flex-col gap-5 w-full">
-                                                                    <div className="flex items-center justify-between border-b pb-2 border-border/60">
-                                                                        <div>
-                                                                            <h4 className="text-sm font-bold text-foreground font-heading">{currentCat?.title}</h4>
-                                                                            <p className="text-xs text-muted-foreground">{currentCat?.desc}</p>
+                                                            const currentCat: any = item.dropdown.categories?.find((cat: any) => cat.id === activeOfferingGroup) || item.dropdown.categories?.[0];
+                                                            
+                                                            if (currentCat?.b2bItems && currentCat?.b2cItems) {
+                                                                return (
+                                                                    <div key="profit-pools-columns" className="grid grid-cols-2 gap-8 w-full">
+                                                                        {/* B2B PROFIT POOLS Column */}
+                                                                        <div className="flex flex-col">
+                                                                            <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#1864FF] pb-2 border-b border-blue-500/20 mb-4">
+                                                                                B2B PROFIT POOLS
+                                                                            </h3>
+                                                                            <div className="flex flex-col gap-1">
+                                                                                {currentCat.b2bItems.map((sub: any, sIdx: number) => {
+                                                                                    const IconComponent = Icons[sub.icon] || ArrowRight;
+                                                                                    return (
+                                                                                        <Link
+                                                                                            key={sIdx}
+                                                                                            to={sub.path}
+                                                                                            onClick={() => setHoveredItem(null)}
+                                                                                            className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-50/70 transition-colors"
+                                                                                        >
+                                                                                            <div className="text-slate-400 group-hover:text-[#1864FF] transition-colors shrink-0">
+                                                                                                <IconComponent className="w-4 h-4" />
+                                                                                            </div>
+                                                                                            <span className="text-[13.5px] font-semibold text-slate-800 group-hover:text-[#1864FF] transition-colors">
+                                                                                                {sub.name}
+                                                                                            </span>
+                                                                                        </Link>
+                                                                                    );
+                                                                                })}
+                                                                            </div>
                                                                         </div>
-                                                                        <Link
-                                                                            to="/offerings"
-                                                                            onClick={() => setHoveredItem(null)}
-                                                                            className="text-xs font-semibold text-primary hover:underline flex items-center gap-1"
-                                                                        >
-                                                                            All Offerings <ChevronRight className="w-3 h-3" />
-                                                                        </Link>
-                                                                    </div>
 
-                                                                    <div className="grid grid-cols-2 gap-2.5 w-full">
+                                                                        {/* B2C PROFIT POOLS Column */}
+                                                                        <div className="flex flex-col">
+                                                                            <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#1864FF] pb-2 border-b border-blue-500/20 mb-4">
+                                                                                B2C PROFIT POOLS
+                                                                            </h3>
+                                                                            <div className="flex flex-col gap-1">
+                                                                                {currentCat.b2cItems.map((sub: any, sIdx: number) => {
+                                                                                    const IconComponent = Icons[sub.icon] || ArrowRight;
+                                                                                    return (
+                                                                                        <Link
+                                                                                            key={sIdx}
+                                                                                            to={sub.path}
+                                                                                            onClick={() => setHoveredItem(null)}
+                                                                                            className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-50/70 transition-colors"
+                                                                                        >
+                                                                                            <div className="text-slate-400 group-hover:text-[#1864FF] transition-colors shrink-0">
+                                                                                                <IconComponent className="w-4 h-4" />
+                                                                                            </div>
+                                                                                            <span className="text-[13.5px] font-semibold text-slate-800 group-hover:text-[#1864FF] transition-colors">
+                                                                                                {sub.name}
+                                                                                            </span>
+                                                                                        </Link>
+                                                                                    );
+                                                                                })}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                );
+                                                            }
+
+                                                            // Single group view for AI Growth Engines / Sales Acceleration
+                                                            const items = currentCat?.items || [];
+                                                            return (
+                                                                <div key={`group-${currentCat?.id}`} className="w-full flex flex-col">
+                                                                    <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#1864FF] pb-2 border-b border-blue-500/20 mb-4">
+                                                                        {currentCat?.title?.toUpperCase()}
+                                                                    </h3>
+                                                                    <div className="grid grid-cols-2 gap-3">
                                                                         {items.map((sub: any, sIdx: number) => {
                                                                             const IconComponent = Icons[sub.icon] || ArrowRight;
                                                                             return (
@@ -285,62 +336,18 @@ export default function Navigation() {
                                                                                     key={sIdx}
                                                                                     to={sub.path}
                                                                                     onClick={() => setHoveredItem(null)}
-                                                                                    className="group flex items-center justify-between p-2.5 rounded-xl hover:bg-muted/50 border border-transparent hover:border-border/40 transition-all"
+                                                                                    className="group flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50/70 transition-colors"
                                                                                 >
-                                                                                    <div className="flex items-center gap-2.5 min-w-0">
-                                                                                        <div className="p-1.5 rounded-lg bg-primary/5 text-primary group-hover:bg-primary/10 transition-colors shrink-0">
-                                                                                            <IconComponent className="w-4 h-4" />
-                                                                                        </div>
-                                                                                        <span className="text-xs font-medium text-foreground group-hover:text-primary transition-colors truncate">
-                                                                                            {sub.name}
-                                                                                        </span>
+                                                                                    <div className="text-slate-400 group-hover:text-[#1864FF] transition-colors shrink-0">
+                                                                                        <IconComponent className="w-4 h-4" />
                                                                                     </div>
-                                                                                    <ChevronRight className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all shrink-0" />
+                                                                                    <span className="text-[13.5px] font-semibold text-slate-800 group-hover:text-[#1864FF] transition-colors">
+                                                                                        {sub.name}
+                                                                                    </span>
                                                                                 </Link>
                                                                             );
                                                                         })}
                                                                     </div>
-
-                                                                    {highlight && (
-                                                                        <div className="p-3.5 bg-gradient-to-r from-primary/5 via-emerald-500/5 to-transparent rounded-xl border border-primary/15 flex flex-col gap-2 mt-1">
-                                                                            <div className="flex items-center justify-between">
-                                                                                <span className="text-[11px] font-bold uppercase tracking-wider text-primary">
-                                                                                    {highlight.title}
-                                                                                </span>
-                                                                                {(highlight as any).previewStats?.disclaimer && (
-                                                                                    <span className="text-[10px] text-muted-foreground italic">
-                                                                                        {(highlight as any).previewStats.disclaimer}
-                                                                                    </span>
-                                                                                )}
-                                                                            </div>
-                                                                            {(highlight as any).previewStats && (
-                                                                                <div className="grid grid-cols-3 gap-2 py-1">
-                                                                                    <div className="bg-card/70 border border-border/50 rounded-lg p-2 text-center">
-                                                                                        <div className="text-xs font-bold text-foreground">{(highlight as any).previewStats.tam}</div>
-                                                                                        <div className="text-[10px] text-muted-foreground">Market Sizing</div>
-                                                                                    </div>
-                                                                                    <div className="bg-card/70 border border-border/50 rounded-lg p-2 text-center">
-                                                                                        <div className="text-xs font-bold text-emerald-700 dark:text-emerald-400">{(highlight as any).previewStats.icpFit}</div>
-                                                                                        <div className="text-[10px] text-muted-foreground">Target Match</div>
-                                                                                    </div>
-                                                                                    <div className="bg-card/70 border border-border/50 rounded-lg p-2 text-center">
-                                                                                        <div className="text-xs font-bold text-primary">{(highlight as any).previewStats.payback}</div>
-                                                                                        <div className="text-[10px] text-muted-foreground">Economics</div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            )}
-                                                                            <div className="flex items-center justify-between pt-1">
-                                                                                <p className="text-[11px] text-muted-foreground line-clamp-1">{highlight.desc}</p>
-                                                                                <Link
-                                                                                    to={highlight.linkPath || "/offerings/b2b/market-discovery"}
-                                                                                    onClick={() => setHoveredItem(null)}
-                                                                                    className="text-xs font-bold text-primary hover:underline shrink-0 flex items-center gap-1"
-                                                                                >
-                                                                                    {highlight.linkText || "Explore Market Discovery"} <ChevronRight className="w-3 h-3" />
-                                                                                </Link>
-                                                                            </div>
-                                                                        </div>
-                                                                    )}
                                                                 </div>
                                                             );
                                                         })()

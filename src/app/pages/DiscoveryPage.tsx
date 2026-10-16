@@ -14,6 +14,8 @@ import OfferingTemplateSections from '../components/OfferingTemplateSections';
 import MarketDiscoveryStatCards from '../components/MarketDiscoveryStatCards';
 import { offeringsIntelligence } from '../data/offeringsIntelligenceData';
 import OfferingIntelligenceView from '../components/offerings/OfferingIntelligenceView';
+import B2BRevenueIntelligencePlatform from '../components/offerings/B2BRevenueIntelligencePlatform';
+import B2CConsumerGrowthPlatform from '../components/offerings/B2CConsumerGrowthPlatform';
 
 export interface DiscoveryData {
     title: string;
@@ -1841,7 +1843,15 @@ export default function DiscoveryPage() {
     const { openLongForm, openQuickForm } = useLeadModal();
     const [activePoolTab, setActivePoolTab] = useState<'overview' | 'b2b' | 'b2c'>('overview');
 
-    if (slug === 'b2b' || slug === 'b2c' || slug === 'ai-growth' || slug === 'sales-acceleration') {
+    if (slug === 'b2b') {
+        return <B2BRevenueIntelligencePlatform />;
+    }
+
+    if (slug === 'b2c') {
+        return <B2CConsumerGrowthPlatform />;
+    }
+
+    if (slug === 'ai-growth' || slug === 'sales-acceleration') {
         return <ConsolidatedOfferingsView mode={slug as any} />;
     }
 
