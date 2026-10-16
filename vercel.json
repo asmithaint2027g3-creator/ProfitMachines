@@ -39,7 +39,7 @@
     },
     {
       "source": "/api/reports/trigger",
-      "destination": "/api/reports/trigger"
+      "destination": "/api/reports-trigger"
     },
     {
       "source": "/api/(.*)",
