@@ -38,6 +38,10 @@
       "destination": "/api/youtube-sync?action=publish"
     },
     {
+      "source": "/api/reports/trigger",
+      "destination": "/api/reports/trigger"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "/api/$1"
     },
