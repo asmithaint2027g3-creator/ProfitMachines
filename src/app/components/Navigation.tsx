@@ -270,7 +270,7 @@ export default function Navigation() {
                                                                                 B2B PROFIT POOLS
                                                                             </h3>
                                                                             <div className="flex flex-col gap-1">
-                                                                                {currentCat.b2bItems.map((sub: any, sIdx: number) => {
+                                                                                {(currentCat.b2bItems as any[]).map((sub: any, sIdx: number) => {
                                                                                     const IconComponent = Icons[sub.icon] || ArrowRight;
                                                                                     return (
                                                                                         <Link
@@ -297,7 +297,7 @@ export default function Navigation() {
                                                                                 B2C PROFIT POOLS
                                                                             </h3>
                                                                             <div className="flex flex-col gap-1">
-                                                                                {currentCat.b2cItems.map((sub: any, sIdx: number) => {
+                                                                                {(currentCat.b2cItems as any[]).map((sub: any, sIdx: number) => {
                                                                                     const IconComponent = Icons[sub.icon] || ArrowRight;
                                                                                     return (
                                                                                         <Link
