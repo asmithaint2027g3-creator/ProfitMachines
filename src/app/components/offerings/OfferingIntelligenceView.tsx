@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Search, Target, TrendingUp, BarChart3, ShieldCheck, Users, Rocket,
-    ArrowRight, CheckCircle2, AlertTriangle, Lightbulb, ChevronRight, HelpCircle, Layers,
+    ArrowRight, CheckCircle2, Lightbulb, ChevronRight, HelpCircle, Layers,
     DollarSign, Building2, ShoppingBag, Sparkles, Network, Globe, Clock, Zap,
     FileText, Check, ChevronDown, Info
 } from 'lucide-react';
@@ -101,48 +101,25 @@ export default function OfferingIntelligenceView({ data }: { data: OfferingDetai
                 </div>
             </div>
 
-            {/* 3. The Business Problem & Objectives */}
+            {/* 3. What This Offering Achieves */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-                <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-                    <div className="lg:col-span-5 bg-rose-50/60 border border-rose-200/70 rounded-3xl p-7 sm:p-9 flex flex-col justify-between">
-                        <div>
-                            <div className="inline-flex items-center gap-2 text-rose-700 text-xs font-bold uppercase tracking-wider mb-3">
-                                <AlertTriangle className="w-4 h-4 text-rose-600" />
-                                The Business Problem
-                            </div>
-                            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-4 font-heading">
-                                What Breaks Without This Intelligence
-                            </h2>
-                            <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
-                                {data.businessProblem}
-                            </p>
-                        </div>
-                        <div className="mt-6 pt-5 border-t border-rose-200/60 flex items-center justify-between text-xs text-rose-800 font-semibold">
-                            <span>Cost of Inaction:</span>
-                            <span>Eroded Margins & Misdirected Capital</span>
-                        </div>
+                <div className="bg-white border border-slate-200/80 rounded-3xl p-7 sm:p-9 shadow-xs">
+                    <div className="inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-wider mb-3">
+                        <Rocket className="w-4 h-4 text-primary" />
+                        What This Offering Achieves
                     </div>
-
-                    <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-3xl p-7 sm:p-9 shadow-xs flex flex-col justify-between">
-                        <div>
-                            <div className="inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-wider mb-3">
-                                <Rocket className="w-4 h-4 text-primary" />
-                                What This Offering Achieves
+                    <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-6 font-heading">
+                        Measurable Commercial Outcomes
+                    </h2>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {data.whatItAchieves.map((achieve, aIdx) => (
+                            <div key={aIdx} className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                                <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                                <p className="text-xs sm:text-sm text-slate-800 font-semibold leading-relaxed">
+                                    {achieve}
+                                </p>
                             </div>
-                            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-4 font-heading">
-                                Measurable Commercial Outcomes
-                            </h2>
-                            <div className="space-y-3">
-                                {data.whatItAchieves.map((achieve, aIdx) => (
-                                    <div key={aIdx} className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                                        <Check className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
-                                        <p className="text-xs sm:text-sm text-slate-800 font-semibold leading-relaxed">
-                                            {achieve}
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
