@@ -2,17 +2,21 @@
  * api/email-templates.ts
  *
  * Vercel Server-Side Endpoint for ProfitMachines Email Templates:
- * - GET: List available templates, inspect template details, or generate HTML preview
- * - POST: Generate customized email (using Cohere if available) and dispatch to TEST_EMAIL_RECIPIENT
+ * - GET: List available templates, inspect template details, live HTML preview, or generate test-suite results
+ * - POST: Generate customized email (using Cohere if available) or safely dispatch to TEST_EMAIL_RECIPIENT
  *
  * Query params (GET):
  * - ?action=list -> returns metadata for all 65 templates
- * - ?action=preview&templateId=saas-industry-campaign -> returns rendered HTML preview
- * - ?action=test-all -> dry-run or dispatch status for all 8 industries
+ * - ?action=preview&templateId=saas-new-lead-followup -> returns rendered HTML preview
+ * - ?action=test-suite -> dry-run evaluation of all 48 combinations (no emails sent)
+ * - ?action=test-status -> dry-run or dispatch status for all 8 industries
  *
  * Body (POST):
- * - { action: 'test-eight', confirmSend?: boolean } -> triggers the 8 industry test emails to TEST_EMAIL_RECIPIENT
- * - { action: 'send-single', templateId: string, recipient?: string }
+ * - { action: 'generate-only', templateId?: string, industry?: string, engagementType?: string, personalization?: {...} }
+ *   -> Generates copy with Cohere / static fallback, renders HTML & text, returns payload WITHOUT sending any email!
+ * - { action: 'test-eight', confirmSend: true, recipient?: string }
+ *   -> Triggers the 8 industry test emails to verified recipient only when confirmSend is true
+ * - { action: 'send-single', templateId: string, recipient?: string, confirmSend: true }
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
@@ -21,9 +25,15 @@ import {
   getTemplate,
   getTemplateById,
   getEightIndustryCampaignTemplates,
+  getAllFortyEightCombinations,
   EmailTemplateRenderer,
   CohereEmailService,
+  BUSINESS_CONFIG,
+  INDUSTRY_IMAGE_MAP,
+  getVerifiedDestinationUrl,
   type EmailPersonalization,
+  type IndustryId,
+  type EngagementType,
 } from './_lib/email-templates';
 import { EmailDispatchService } from './_lib/email-dispatch-service';
 
@@ -41,7 +51,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     process.env.TEAM_NOTIFICATION_EMAIL ||
     process.env.SMTP_USER ||
     process.env.GMAIL_USER ||
-    ''
+    'asmitha.int2027g3@gmail.com'
   ).trim();
 
   // ─────────────────────────────────────────────────────────────
@@ -63,6 +73,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         cohereConfigured: CohereEmailService.isConfigured(),
         testRecipientConfigured: Boolean(testRecipient),
         testRecipient: testRecipient ? `${testRecipient.slice(0, 3)}***@${testRecipient.split('@')[1] || ''}` : 'NOT_SET',
+        businessConfig: {
+          companyName: BUSINESS_CONFIG.companyName,
+          phone: BUSINESS_CONFIG.phone,
+          contactEmail: BUSINESS_CONFIG.contactEmail,
+          siteUrl: BUSINESS_CONFIG.siteUrl,
+          brandTheme: 'emerald-green',
+        },
         templates: allEmailTemplates.map(t => ({
           id: t.id,
           name: t.name,
@@ -79,7 +96,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // 2. Render live HTML preview
     if (action === 'preview') {
-      const templateId = (req.query.templateId as string) || 'saas-industry-campaign';
+      const templateId = (req.query.templateId as string) || 'saas-new-lead-followup';
       const template = getTemplateById(templateId);
       const personalization: EmailPersonalization = {
         recipientName: (req.query.name as string) || 'Alex Mercer',
@@ -92,7 +109,71 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(200).send(html);
     }
 
-    // 3. Status of the 8 Industry Campaign Tests
+    // 3. Dry-run test of all 48 industry-and-engagement combinations (NO EMAILS SENT)
+    if (action === 'test-suite') {
+      const combinations = getAllFortyEightCombinations();
+      const testReport = combinations.map(t => {
+        const destUrl = getVerifiedDestinationUrl(t.industry, t.engagementType);
+        const imageInfo = INDUSTRY_IMAGE_MAP[t.industry];
+        const personalization: EmailPersonalization = {
+          recipientName: 'Test Recipient',
+          companyName: 'Evaluation Corp',
+          jobTitle: 'Director',
+        };
+        const html = EmailTemplateRenderer.renderHtml(t, personalization);
+        const text = EmailTemplateRenderer.renderPlainText(t, personalization);
+
+        return {
+          id: t.id,
+          name: t.name,
+          industry: t.industry,
+          industryLabel: t.industryLabel,
+          engagementType: t.engagementType,
+          engagementLabel: t.engagementLabel,
+          defaultSubject: t.defaultSubject,
+          preheader: t.preheader,
+          heroImage: imageInfo.url,
+          heroImageAlt: imageInfo.alt,
+          destinationUrl: destUrl,
+          primaryCtaLabel: t.primaryCta.label,
+          senderName: t.closing.senderName,
+          senderTitle: t.closing.senderTitle,
+          htmlLengthBytes: html.length,
+          textLengthBytes: text.length,
+          hasBrandHeader: html.includes('PROFIT') && html.includes('MACHINES'),
+          hasEmeraldButton: html.includes('#059669'),
+          hasVerifiedPhone: html.includes(BUSINESS_CONFIG.phone),
+          hasVerifiedEmail: html.includes(BUSINESS_CONFIG.contactEmail),
+          passed: Boolean(
+            t.id &&
+            t.defaultSubject &&
+            t.preheader &&
+            imageInfo.url &&
+            destUrl &&
+            html.includes('#059669') &&
+            html.includes(BUSINESS_CONFIG.phone) &&
+            html.includes(BUSINESS_CONFIG.contactEmail)
+          ),
+        };
+      });
+
+      const totalPassed = testReport.filter(r => r.passed).length;
+      return res.status(200).json({
+        totalCombinations: combinations.length,
+        totalPassed,
+        totalFailed: combinations.length - totalPassed,
+        allPassed: totalPassed === combinations.length,
+        businessConfig: {
+          phone: BUSINESS_CONFIG.phone,
+          contactEmail: BUSINESS_CONFIG.contactEmail,
+          siteUrl: BUSINESS_CONFIG.siteUrl,
+          brandTheme: 'emerald-green (#059669)',
+        },
+        results: testReport,
+      });
+    }
+
+    // 4. Status of the 8 Industry Campaign Tests
     if (action === 'test-status' || action === 'test-eight') {
       const eightTemplates = getEightIndustryCampaignTemplates();
       return res.status(200).json({
@@ -105,12 +186,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           industryLabel: t.industryLabel,
           templateId: t.id,
           subject: t.defaultSubject,
-          heroImage: t.heroImage,
+          heroImage: INDUSTRY_IMAGE_MAP[t.industry]?.url || t.heroImage,
         })),
       });
     }
 
-    // 4. Lead notification diagnostic
+    // 5. Lead notification diagnostic
     if (action === 'notify-lead' || action === 'notify-diagnostic') {
       const targetRecipient = (process.env.TEAM_NOTIFICATION_EMAIL || 'asmitha.int2027g3@gmail.com').trim();
       return res.status(200).json({
@@ -132,48 +213,84 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const body = (req.body || {}) as {
       action?: string;
       templateId?: string;
+      industry?: string;
+      engagementType?: string;
       confirmSend?: boolean;
       recipient?: string;
       promptInstruction?: string;
       personalization?: EmailPersonalization;
     };
 
-    const action = body.action || 'test-eight';
+    const action = body.action || 'generate-only';
 
-    // Execution: Send 8 Industry Test Emails
+    // ─────────────────────────────────────────────────────────────
+    // POST Action 1: Generate Content & Render (SAFE: NEVER SENDS EMAIL)
+    // ─────────────────────────────────────────────────────────────
+    if (action === 'generate-only' || action === 'preview-generate') {
+      let template;
+      if (body.templateId) {
+        template = getTemplateById(body.templateId);
+      } else if (body.industry && body.engagementType) {
+        template = getTemplate(body.industry, body.engagementType);
+      } else {
+        template = getTemplateById('saas-new-lead-followup');
+      }
+
+      const personalization: EmailPersonalization = body.personalization || {
+        recipientName: 'Valued Partner',
+        companyName: 'Enterprise Partner',
+        jobTitle: 'Executive Leader',
+      };
+
+      const { content, source } = await CohereEmailService.generateContent(
+        template,
+        personalization,
+        body.promptInstruction
+      );
+
+      const html = EmailTemplateRenderer.renderHtml(template, personalization, content);
+      const text = EmailTemplateRenderer.renderPlainText(template, personalization, content);
+      const verifiedDest = getVerifiedDestinationUrl(template.industry, template.engagementType);
+
+      return res.status(200).json({
+        success: true,
+        templateId: template.id,
+        industry: template.industryLabel,
+        engagementType: template.engagementLabel,
+        contentSource: source,
+        verifiedDestinationUrl: verifiedDest,
+        heroImage: INDUSTRY_IMAGE_MAP[template.industry]?.url || template.heroImage,
+        heroImageAlt: INDUSTRY_IMAGE_MAP[template.industry]?.alt || template.heroImageAlt,
+        content: {
+          subject: content.subject,
+          preheader: content.preheader,
+          headline: content.headline,
+          introduction: content.introduction,
+          sections: content.sections,
+          ctaLabel: content.ctaLabel || template.primaryCta.label,
+        },
+        renderedHtml: html,
+        plainText: text,
+        sent: false,
+        note: 'Content generated successfully. No email was dispatched.',
+      });
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // POST Action 2: Send 8 Industry Test Emails (Requires confirmSend: true)
+    // ─────────────────────────────────────────────────────────────
     if (action === 'test-eight') {
-      const recipient = (body.recipient || testRecipient).trim();
-
-      if (!recipient || !recipient.includes('@')) {
+      if (!body.confirmSend) {
         return res.status(400).json({
-          success: false,
-          error: 'TEST_EMAIL_RECIPIENT is missing or invalid. Configure TEST_EMAIL_RECIPIENT or supply a valid email in request body.',
-          eightDraftsPrepared: true,
-          industryTemplates: getEightIndustryCampaignTemplates().map(t => ({
-            industry: t.industryLabel,
-            subject: t.defaultSubject,
-            templateId: t.id,
-          })),
+          error: 'Explicit confirmation required. Please set confirmSend: true to authorize test delivery.',
         });
       }
 
-      const hasSmtp = Boolean(
-        (process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD) &&
-        (process.env.SMTP_USER || process.env.GMAIL_USER)
-      );
-      const hasResend = Boolean(process.env.RESEND_API_KEY && process.env.RESEND_API_KEY.startsWith('re_'));
-      const hasGoogleScript = Boolean(process.env.GOOGLE_SCRIPT_URL);
-
-      if (!hasSmtp && !hasResend && !hasGoogleScript) {
+      const recipient = (body.recipient || testRecipient).trim();
+      if (!recipient || !recipient.includes('@')) {
         return res.status(400).json({
           success: false,
-          error: 'Email delivery credentials are missing. Configure GMAIL_USER and GMAIL_APP_PASSWORD in environment.',
-          recipient,
-          industryDraftsPrepared: getEightIndustryCampaignTemplates().map(t => ({
-            industry: t.industryLabel,
-            subject: t.defaultSubject,
-            templateId: t.id,
-          })),
+          error: 'TEST_EMAIL_RECIPIENT is missing or invalid.',
         });
       }
 
@@ -193,19 +310,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       for (const t of eightTemplates) {
         const personalization: EmailPersonalization = {
           recipientName: 'Valued Partner',
-          companyName: 'Your Enterprise',
+          companyName: 'ProfitMachines Partner',
           jobTitle: 'Executive Leader',
           ...body.personalization,
         };
 
-        // 1. Generate or load content (Cohere if available, otherwise high-grade static fallback)
-        const { content, source } = await CohereEmailService.generateContent(t, personalization, body.promptInstruction);
-
-        // 2. Render HTML & Plain text
+        const { content, source } = await CohereEmailService.generateContent(
+          t,
+          personalization,
+          body.promptInstruction
+        );
         const html = EmailTemplateRenderer.renderHtml(t, personalization, content);
         const text = EmailTemplateRenderer.renderPlainText(t, personalization, content);
 
-        // 3. Dispatch to TEST_EMAIL_RECIPIENT only
         try {
           const dispatchRes = await EmailDispatchService.dispatch({
             to: [recipient],
@@ -238,9 +355,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         }
       }
 
-      const allAccepted = results.every(r => r.accepted);
       return res.status(200).json({
-        success: allAccepted,
+        success: results.every(r => r.accepted),
         totalSent: results.filter(r => r.accepted).length,
         totalFailed: results.filter(r => !r.accepted).length,
         recipient,
@@ -248,8 +364,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-    // Execution: Send Single Template
+    // ─────────────────────────────────────────────────────────────
+    // POST Action 3: Send Single Template (Requires confirmSend: true)
+    // ─────────────────────────────────────────────────────────────
     if (action === 'send-single') {
+      if (!body.confirmSend) {
+        return res.status(400).json({
+          error: 'Explicit confirmation required. Please set confirmSend: true to authorize test delivery.',
+        });
+      }
+
       const templateId = body.templateId || 'saas-new-lead-followup';
       const template = getTemplateById(templateId);
       const recipient = (body.recipient || testRecipient).trim();
@@ -282,16 +406,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-    // 4. Inbound Lead Notification dispatcher (consolidated from notify-lead)
+    // ─────────────────────────────────────────────────────────────
+    // POST Action 4: Inbound Lead Notification
+    // ─────────────────────────────────────────────────────────────
     if (action === 'notify-lead') {
       const { leadType, fields } = body as any;
       if (!fields) {
         return res.status(400).json({ error: 'Missing lead fields payload' });
       }
 
-      const country = (req.headers['x-vercel-ip-country'] as string) || '';
-      const city = (req.headers['x-vercel-ip-city'] as string) || '';
-      const location = [city ? decodeURIComponent(city) : '', country].filter(Boolean).join(', ') || 'Unknown';
       const fullName = fields.name || `${fields.firstName || ''} ${fields.lastName || ''}`.trim() || 'Prospect';
       const company = fields.company ? ` (${fields.company})` : '';
       const targetRecipient = (process.env.TEAM_NOTIFICATION_EMAIL || 'asmitha.int2027g3@gmail.com').trim();
@@ -306,19 +429,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             <div style="padding: 24px;">
                 <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
                     <tr><td style="padding: 8px 0; font-weight: 600; color: #475569; width: 140px;">Name:</td><td style="color: #0f172a;">${fullName}</td></tr>
-                    <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Email:</td><td><a href="mailto:${fields.email}" style="color: #064e3b; text-decoration: none; font-weight: 600;">${fields.email || 'N/A'}</a></td></tr>
+                    <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Email:</td><td><a href="mailto:${fields.email}" style="color: #059669; text-decoration: none; font-weight: 600;">${fields.email || 'N/A'}</a></td></tr>
                     <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Phone:</td><td style="color: #0f172a;">${fields.phone || 'N/A'}</td></tr>
                     <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Company:</td><td style="color: #0f172a;">${fields.company || 'N/A'}</td></tr>
-                    <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Detected Location:</td><td style="color: #0f172a;">${location}</td></tr>
                     <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Service / Interest:</td><td style="color: #0f172a;">${fields.interest || fields.service || 'N/A'}</td></tr>
                     <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Message / Scope:</td><td style="color: #0f172a;">${fields.message || fields.requirement || 'None provided'}</td></tr>
-                    <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Source:</td><td style="color: #0f172a;">${fields.source || fields.lead_source || 'Website'}</td></tr>
                 </table>
             </div>
         </div>
       `;
 
-      const text = `New Lead Alert: ${fullName} (${fields.email || 'N/A'})\nCompany: ${fields.company || 'N/A'}\nLocation: ${location}\nMessage: ${fields.message || 'None'}`;
+      const text = `New Lead Alert: ${fullName} (${fields.email || 'N/A'})\nCompany: ${fields.company || 'N/A'}\nMessage: ${fields.message || 'None'}`;
 
       const dispatchRes = await EmailDispatchService.dispatch({
         to: [targetRecipient],

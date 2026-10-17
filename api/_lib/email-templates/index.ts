@@ -19,8 +19,10 @@ import { manufacturingTemplates } from './templates-manufacturing';
 import { servicesTemplates } from './templates-services';
 import { cryptoTemplates } from './templates-crypto';
 import { enterpriseTemplates } from './templates-enterprise';
+import { BUSINESS_CONFIG, INDUSTRY_IMAGE_MAP } from './config';
 
 export * from './types';
+export * from './config';
 export * from './renderer';
 export * from './cohere-service';
 
@@ -166,7 +168,7 @@ export function getTemplateById(templateId: string): EmailTemplateConfig {
 }
 
 /**
- * Returns all 8 Industry Campaign templates (for Phase 6 test emails)
+ * Returns all 8 Industry Campaign templates
  */
 export function getEightIndustryCampaignTemplates(): EmailTemplateConfig[] {
   const industries: IndustryId[] = [
@@ -181,4 +183,37 @@ export function getEightIndustryCampaignTemplates(): EmailTemplateConfig[] {
   ];
 
   return industries.map(ind => getTemplate(ind, 'industry-campaign'));
+}
+
+/**
+ * Returns all 48 Industry-and-Engagement combinations
+ */
+export function getAllFortyEightCombinations(): EmailTemplateConfig[] {
+  const industries: IndustryId[] = [
+    'saas',
+    'fintech',
+    'healthcare',
+    'ecommerce',
+    'manufacturing',
+    'professional-services',
+    'crypto',
+    'other-enterprise',
+  ];
+
+  const engagements: EngagementType[] = [
+    'new-lead-followup',
+    'consultation-demo-followup',
+    'resource-sharing',
+    'product-service-update',
+    're-engagement',
+    'industry-engagement',
+  ];
+
+  const list: EmailTemplateConfig[] = [];
+  for (const ind of industries) {
+    for (const eng of engagements) {
+      list.push(getTemplate(ind, eng));
+    }
+  }
+  return list;
 }

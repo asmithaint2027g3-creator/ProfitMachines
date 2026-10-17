@@ -48,7 +48,7 @@ export const enterpriseTemplates: EmailTemplateConfig[] = [
     },
     closing: {
       signoff: 'Best regards',
-      senderName: 'Pooja K.',
+      senderName: 'Asmitha V',
       senderTitle: 'Director of Enterprise Architecture',
       senderCompany: 'ProfitMachines',
     },
@@ -90,7 +90,7 @@ export const enterpriseTemplates: EmailTemplateConfig[] = [
     },
     closing: {
       signoff: 'Sincerely',
-      senderName: 'Pooja K.',
+      senderName: 'Asmitha V',
       senderTitle: 'Director of Enterprise Architecture',
       senderCompany: 'ProfitMachines',
     },
@@ -216,7 +216,7 @@ export const enterpriseTemplates: EmailTemplateConfig[] = [
     },
     closing: {
       signoff: 'Best regards',
-      senderName: 'Pooja K.',
+      senderName: 'Asmitha V',
       senderTitle: 'Director of Enterprise Architecture',
       senderCompany: 'ProfitMachines',
     },
@@ -351,7 +351,7 @@ export const enterpriseTemplates: EmailTemplateConfig[] = [
     },
     closing: {
       signoff: 'Best regards',
-      senderName: 'Pooja K.',
+      senderName: 'Asmitha V',
       senderTitle: 'Director of Enterprise Architecture',
       senderCompany: 'ProfitMachines',
     },

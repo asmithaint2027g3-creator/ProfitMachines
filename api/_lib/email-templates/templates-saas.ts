@@ -60,7 +60,7 @@ export const saasTemplates: EmailTemplateConfig[] = [
     },
     closing: {
       signoff: 'Best regards',
-      senderName: 'Pooja K.',
+      senderName: 'Asmitha V',
       senderTitle: 'Head of Enterprise SaaS Solutions',
       senderCompany: 'ProfitMachines',
     },
@@ -111,7 +111,7 @@ export const saasTemplates: EmailTemplateConfig[] = [
     },
     closing: {
       signoff: 'Warm regards',
-      senderName: 'Pooja K.',
+      senderName: 'Asmitha V',
       senderTitle: 'Head of Enterprise SaaS Solutions',
       senderCompany: 'ProfitMachines',
     },
@@ -251,7 +251,7 @@ export const saasTemplates: EmailTemplateConfig[] = [
     },
     closing: {
       signoff: 'Best regards',
-      senderName: 'Pooja K.',
+      senderName: 'Asmitha V',
       senderTitle: 'Head of Enterprise SaaS Solutions',
       senderCompany: 'ProfitMachines',
     },
@@ -390,7 +390,7 @@ export const saasTemplates: EmailTemplateConfig[] = [
     },
     closing: {
       signoff: 'Best regards',
-      senderName: 'Pooja K.',
+      senderName: 'Asmitha V',
       senderTitle: 'Head of Enterprise SaaS Solutions',
       senderCompany: 'ProfitMachines',
     },

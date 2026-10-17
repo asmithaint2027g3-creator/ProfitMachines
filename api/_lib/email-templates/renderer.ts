@@ -1,14 +1,17 @@
 /**
  * api/_lib/email-templates/renderer.ts
  *
- * Renders executive, responsive HTML emails with verified inline styling
- * compatible with Gmail, Apple Mail, Outlook, and mobile devices.
- * Also generates a clean plain-text fallback.
+ * Professional, Executive HTML & Plain-Text Email Renderer for ProfitMachines:
+ * - Enterprise Emerald-Green Brand Visuals (#059669)
+ * - True Responsive Table Layout with Microsoft Outlook & Mobile Client Safety
+ * - Industry-specific verified 2.5:1 Hero Images with Alt text and loading fallbacks
+ * - Verified Navigation Links, Telephone Links (tel:), and Mailto links
+ * - Compliant, transparent footer with Opt-Out & Privacy Policy links
+ * - Clean plain-text fallback mirroring all content and verified links
  */
 
 import type { EmailTemplateConfig, EmailPersonalization, GeneratedEmailContent } from './types';
-
-const SITE_URL = 'https://profit-machines-1.vercel.app';
+import { BUSINESS_CONFIG, INDUSTRY_IMAGE_MAP, getVerifiedDestinationUrl } from './config';
 
 export class EmailTemplateRenderer {
   public static escape(text: unknown): string {
@@ -36,7 +39,7 @@ export class EmailTemplateRenderer {
       return imgPath;
     }
     const clean = imgPath.startsWith('/') ? imgPath : `/${imgPath}`;
-    return `${SITE_URL}${clean}`;
+    return `${BUSINESS_CONFIG.siteUrl}${clean}`;
   }
 
   public static renderHtml(
@@ -50,12 +53,28 @@ export class EmailTemplateRenderer {
     const headline = esc(per(aiContent?.headline || template.headline));
     const introduction = esc(per(aiContent?.introduction || template.introduction));
     const preheader = esc(per(aiContent?.preheader || template.preheader));
-    const heroImgUrl = EmailTemplateRenderer.resolveImageUrl(template.heroImage);
+
+    // Resolve Industry Hero Image from central map or template
+    const imgInfo = INDUSTRY_IMAGE_MAP[template.industry] || {
+      url: template.heroImage,
+      alt: template.heroImageAlt,
+    };
+    const heroImgUrl = EmailTemplateRenderer.resolveImageUrl(imgInfo.url);
+    const heroImgAlt = esc(imgInfo.alt || template.heroImageAlt);
+
     const sections = aiContent?.sections || template.sections;
     const ctaLabel = esc(aiContent?.ctaLabel || template.primaryCta.label);
-    const ctaUrl = template.primaryCta.url.startsWith('http')
-      ? template.primaryCta.url
-      : `${SITE_URL}${template.primaryCta.url.startsWith('/') ? '' : '/'}${template.primaryCta.url}`;
+
+    // Verified Destination URL
+    const rawCtaUrl = template.primaryCta.url || getVerifiedDestinationUrl(template.industry, template.engagementType);
+    const ctaUrl = rawCtaUrl.startsWith('http')
+      ? rawCtaUrl
+      : `${BUSINESS_CONFIG.siteUrl}${rawCtaUrl.startsWith('/') ? '' : '/'}${rawCtaUrl}`;
+
+    // Emerald theme colors
+    const emeraldPrimary = BUSINESS_CONFIG.colors.primaryEmerald;
+    const emeraldDark = BUSINESS_CONFIG.colors.primaryEmeraldDark;
+    const darkNavy = BUSINESS_CONFIG.colors.darkNavy;
 
     // Render content sections
     const sectionsHtml = sections
@@ -70,8 +89,8 @@ export class EmailTemplateRenderer {
                 .map(
                   b => `
                 <tr>
-                  <td width="20" valign="top" style="padding-top: 4px; padding-bottom: 8px;">
-                    <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background-color: #2878b5;"></span>
+                  <td width="22" valign="top" style="padding-top: 5px; padding-bottom: 8px;">
+                    <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background-color: ${emeraldPrimary};"></span>
                   </td>
                   <td valign="top" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 22px; color: #334155; padding-bottom: 8px;">
                     ${esc(per(b))}
@@ -87,10 +106,10 @@ export class EmailTemplateRenderer {
         let calloutHtml = '';
         if (s.calloutBox) {
           calloutHtml = `
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin: 16px 0; background-color: #f0f7fc; border-left: 4px solid #2878b5; border-radius: 0 8px 8px 0;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin: 16px 0; background-color: #ecfdf5; border-left: 4px solid ${emeraldPrimary}; border-radius: 0 8px 8px 0;">
               <tr>
                 <td style="padding: 14px 18px;">
-                  <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; color: #1e6297; text-transform: uppercase; letter-spacing: 0.5px;">
+                  <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 700; color: #047857; text-transform: uppercase; letter-spacing: 0.5px;">
                     ${esc(per(s.calloutBox.title))}
                   </div>
                   <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; color: #0f172a; line-height: 20px; margin-top: 4px;">
@@ -99,7 +118,7 @@ export class EmailTemplateRenderer {
                   ${
                     s.calloutBox.metric
                       ? `
-                    <div style="margin-top: 8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 800; color: #2878b5;">
+                    <div style="margin-top: 8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 800; color: #059669;">
                       ${esc(per(s.calloutBox.metric))}
                     </div>
                   `
@@ -113,7 +132,7 @@ export class EmailTemplateRenderer {
 
         return `
           <div style="margin-bottom: 24px;">
-            <h3 style="margin: 0 0 10px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 17px; font-weight: 700; color: #0a2540; letter-spacing: -0.2px;">
+            <h3 style="margin: 0 0 10px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 17px; font-weight: 700; color: ${darkNavy}; letter-spacing: -0.2px;">
               ${sHeading}
             </h3>
             <p style="margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 23px; color: #475569;">
@@ -141,32 +160,32 @@ export class EmailTemplateRenderer {
 </head>
 <body style="margin: 0; padding: 0; background-color: #f1f5f9; -webkit-font-smoothing: antialiased;">
   <!-- Preheader preview text (hidden) -->
-  <div style="display: none; max-height: 0px; overflow: hidden;">
+  <div style="display: none; max-height: 0px; overflow: hidden; mso-hide: all;">
     ${preheader}
-    &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+    &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
   </div>
 
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #f1f5f9; padding: 24px 12px;">
     <tr>
       <td align="center">
         <!-- Main Card Container -->
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; background-color: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(10, 37, 64, 0.05);">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; background-color: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.06);">
           
-          <!-- Top Brand Header -->
+          <!-- Top Brand Header (Dark Navy + Emerald Border) -->
           <tr>
-            <td style="background-color: #0a2540; padding: 20px 32px; border-bottom: 3px solid #2878b5;">
+            <td style="background-color: #0a2540; padding: 20px 32px; border-bottom: 3px solid ${emeraldPrimary};">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td>
                     <span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 19px; font-weight: 800; color: #ffffff; letter-spacing: -0.3px;">
-                      PROFIT<span style="color: #60b5ff;">MACHINES</span>
+                      PROFIT<span style="color: #34d399;">MACHINES</span>
                     </span>
                     <span style="display: block; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px;">
-                      Enterprise Autonomous Revenue Systems
+                      ${esc(BUSINESS_CONFIG.brandTagline)}
                     </span>
                   </td>
                   <td align="right">
-                    <span style="display: inline-block; padding: 4px 10px; border-radius: 100px; background-color: rgba(40, 120, 181, 0.25); border: 1px solid rgba(96, 181, 255, 0.4); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; color: #60b5ff; text-transform: uppercase; letter-spacing: 0.5px;">
+                    <span style="display: inline-block; padding: 4px 12px; border-radius: 100px; background-color: rgba(5, 150, 105, 0.2); border: 1px solid rgba(52, 211, 153, 0.4); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; color: #34d399; text-transform: uppercase; letter-spacing: 0.5px;">
                       ${esc(template.industryLabel)}
                     </span>
                   </td>
@@ -175,10 +194,10 @@ export class EmailTemplateRenderer {
             </td>
           </tr>
 
-          <!-- Hero Image Banner -->
+          <!-- Hero Image Banner (Verified 2.5:1 Aspect Ratio) -->
           <tr>
-            <td style="padding: 0; background-color: #071526;">
-              <img src="${heroImgUrl}" alt="${esc(template.heroImageAlt)}" width="600" style="display: block; width: 100%; max-width: 600px; height: auto; border: 0; max-height: 260px; object-fit: cover;" />
+            <td style="padding: 0; background-color: #064e3b; text-align: center;">
+              <img src="${heroImgUrl}" alt="${heroImgAlt}" width="600" style="display: block; width: 100%; max-width: 600px; height: auto; border: 0; max-height: 240px; object-fit: cover;" />
             </td>
           </tr>
 
@@ -186,12 +205,12 @@ export class EmailTemplateRenderer {
           <tr>
             <td style="padding: 32px 32px 24px 32px;">
               <!-- Eyebrow label -->
-              <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; color: #2878b5; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+              <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; color: ${emeraldPrimary}; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
                 ${esc(template.engagementLabel)}
               </div>
 
               <!-- Main Headline -->
-              <h1 style="margin: 0 0 16px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 24px; font-weight: 800; color: #0a2540; line-height: 31px; letter-spacing: -0.5px;">
+              <h1 style="margin: 0 0 16px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 23px; font-weight: 800; color: ${darkNavy}; line-height: 30px; letter-spacing: -0.5px;">
                 ${headline}
               </h1>
 
@@ -206,23 +225,23 @@ export class EmailTemplateRenderer {
               <!-- Structured Content Sections -->
               ${sectionsHtml}
 
-              <!-- Primary CTA Button -->
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin: 28px 0 20px 0;">
+              <!-- Primary Emerald CTA Button -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin: 30px 0 22px 0;">
                 <tr>
                   <td align="center">
-                    <a href="${ctaUrl}" target="_blank" style="display: inline-block; background-color: #2878b5; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 700; text-decoration: none; padding: 14px 32px; border-radius: 8px; box-shadow: 0 4px 10px rgba(40, 120, 181, 0.35);">
+                    <a href="${ctaUrl}" target="_blank" style="display: inline-block; background-color: ${emeraldPrimary}; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 700; text-decoration: none; padding: 14px 32px; border-radius: 8px; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35);">
                       ${ctaLabel} &rarr;
                     </a>
                   </td>
                 </tr>
               </table>
 
-              <!-- Closing Signoff -->
+              <!-- Professional Closing Signoff -->
               <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #f1f5f9;">
                 <p style="margin: 0 0 4px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; color: #64748b;">
                   ${esc(template.closing.signoff)},
                 </p>
-                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 700; color: #0a2540;">
+                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 700; color: ${darkNavy};">
                   ${esc(template.closing.senderName)}
                 </div>
                 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13px; color: #64748b;">
@@ -233,19 +252,40 @@ export class EmailTemplateRenderer {
             </td>
           </tr>
 
-          <!-- Footer -->
+          <!-- Detailed, Compliant Executive Footer -->
           <tr>
-            <td style="background-color: #f8fafc; padding: 24px 32px; border-top: 1px solid #e2e8f0; text-align: center;">
-              <p style="margin: 0 0 8px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; color: #64748b; line-height: 18px;">
-                You are receiving this communication regarding enterprise autonomous revenue solutions and strategic transformation from ProfitMachines.
+            <td style="background-color: #f8fafc; padding: 28px 32px; border-top: 1px solid #e2e8f0; text-align: center;">
+              
+              <!-- Direct Contact Details (Phone & Email) -->
+              <div style="margin-bottom: 14px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13px; color: #334155;">
+                <span style="font-weight: 700; color: #0a2540;">Contact Team:</span>
+                &nbsp;
+                <a href="tel:${BUSINESS_CONFIG.phone}" style="color: ${emeraldPrimary}; text-decoration: none; font-weight: 600;">+91 ${BUSINESS_CONFIG.phone}</a>
+                &nbsp;·&nbsp;
+                <a href="mailto:${BUSINESS_CONFIG.contactEmail}" style="color: ${emeraldPrimary}; text-decoration: none; font-weight: 600;">${BUSINESS_CONFIG.contactEmail}</a>
+              </div>
+
+              <!-- Verified Website Navigation Links -->
+              <div style="margin-bottom: 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; color: #64748b;">
+                <a href="${BUSINESS_CONFIG.siteUrl}" style="color: #64748b; text-decoration: none; margin: 0 6px;">Home</a> ·
+                <a href="${BUSINESS_CONFIG.siteUrl}/solutions" style="color: #64748b; text-decoration: none; margin: 0 6px;">Solutions</a> ·
+                <a href="${BUSINESS_CONFIG.siteUrl}/industries" style="color: #64748b; text-decoration: none; margin: 0 6px;">Industries</a> ·
+                <a href="${BUSINESS_CONFIG.siteUrl}/offerings" style="color: #64748b; text-decoration: none; margin: 0 6px;">Offerings</a> ·
+                <a href="${BUSINESS_CONFIG.siteUrl}/resources" style="color: #64748b; text-decoration: none; margin: 0 6px;">Resources</a> ·
+                <a href="${BUSINESS_CONFIG.siteUrl}/book-consultation" style="color: ${emeraldPrimary}; text-decoration: none; font-weight: 600; margin: 0 6px;">Book Consultation</a>
+              </div>
+
+              <!-- Context & Compliance Notice -->
+              <p style="margin: 0 0 10px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; color: #94a3b8; line-height: 16px;">
+                You are receiving this communication regarding autonomous enterprise revenue systems, market intelligence, and strategic operations from ProfitMachines.
               </p>
-              <p style="margin: 0 0 12px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; color: #94a3b8;">
-                ProfitMachines AI · 100 Montgomery St, Suite 1900, San Francisco, CA · 
-                <a href="${SITE_URL}/privacy" style="color: #2878b5; text-decoration: underline;">Privacy Policy</a> · 
-                <a href="${SITE_URL}/terms" style="color: #2878b5; text-decoration: underline;">Terms of Service</a>
-              </p>
+
+              <!-- Legal & Privacy Policy -->
               <p style="margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; color: #94a3b8;">
-                To adjust your email preferences or opt out, please reply with "Unsubscribe" or visit our <a href="${SITE_URL}/unsubscribe" style="color: #2878b5; text-decoration: underline;">Preference Center</a>.
+                &copy; ${new Date().getFullYear()} ProfitMachines. All rights reserved. &nbsp;·&nbsp; 
+                <a href="${BUSINESS_CONFIG.siteUrl}/privacy" style="color: ${emeraldPrimary}; text-decoration: underline;">Privacy Policy</a> &nbsp;·&nbsp; 
+                <a href="${BUSINESS_CONFIG.siteUrl}/terms" style="color: ${emeraldPrimary}; text-decoration: underline;">Terms of Service</a> &nbsp;·&nbsp; 
+                <a href="mailto:${BUSINESS_CONFIG.contactEmail}?subject=Unsubscribe%20Request" style="color: #94a3b8; text-decoration: underline;">Unsubscribe</a>
               </p>
             </td>
           </tr>
@@ -268,12 +308,15 @@ export class EmailTemplateRenderer {
     const intro = per(aiContent?.introduction || template.introduction);
     const sections = aiContent?.sections || template.sections;
     const ctaLabel = aiContent?.ctaLabel || template.primaryCta.label;
-    const ctaUrl = template.primaryCta.url.startsWith('http')
-      ? template.primaryCta.url
-      : `${SITE_URL}${template.primaryCta.url.startsWith('/') ? '' : '/'}${template.primaryCta.url}`;
+
+    const rawCtaUrl = template.primaryCta.url || getVerifiedDestinationUrl(template.industry, template.engagementType);
+    const ctaUrl = rawCtaUrl.startsWith('http')
+      ? rawCtaUrl
+      : `${BUSINESS_CONFIG.siteUrl}${rawCtaUrl.startsWith('/') ? '' : '/'}${rawCtaUrl}`;
 
     let out = `====================================================\n`;
     out += `PROFITMACHINES — ${template.industryLabel.toUpperCase()}\n`;
+    out += `Autonomous Revenue Infrastructure\n`;
     out += `====================================================\n\n`;
     out += `${headline}\n\n`;
     out += `${intro}\n\n`;
@@ -300,8 +343,10 @@ export class EmailTemplateRenderer {
     out += `${template.closing.signoff},\n`;
     out += `${template.closing.senderName}\n`;
     out += `${template.closing.senderTitle} · ${template.closing.senderCompany}\n\n`;
-    out += `Unsubscribe: ${SITE_URL}/unsubscribe\n`;
-    out += `Privacy Policy: ${SITE_URL}/privacy\n`;
+    out += `Contact: +91 ${BUSINESS_CONFIG.phone} | ${BUSINESS_CONFIG.contactEmail}\n`;
+    out += `Website: ${BUSINESS_CONFIG.siteUrl}\n`;
+    out += `Privacy Policy: ${BUSINESS_CONFIG.siteUrl}/privacy\n`;
+    out += `To unsubscribe, reply directly with "Unsubscribe" or contact ${BUSINESS_CONFIG.contactEmail}\n`;
 
     return out;
   }
