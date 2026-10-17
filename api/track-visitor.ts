@@ -110,6 +110,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (req.method === 'OPTIONS') return res.status(200).end();
 
+  // ── Emergency / Dedicated Report Trigger Relay (Bypasses route rewrites) ──
+  if (req.query.action === 'trigger-report' || req.query.action === 'report') {
+    try {
+      const reportHandler = (await import('./reports-trigger.ts')).default;
+      return await reportHandler(req, res);
+    } catch (relayErr: any) {
+      console.error('[track-visitor relay error]:', relayErr);
+      return res.status(500).json({ error: relayErr?.message || String(relayErr) });
+    }
+  }
+
   // ── GET: Read all visitor records from Airtable OR Geo info ──
   if (req.method === 'GET') {
     if (req.query.action === 'geo') {
