@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import crypto from 'crypto';
-import { ReportDataCollector, type CollectedReportData } from './_lib/report-data-collector.ts';
-import { ReportEmailTemplate } from './_lib/report-email-template.ts';
-import { EmailDispatchService, type EmailSendResult } from './_lib/email-dispatch-service.ts';
+import { ReportDataCollector, type CollectedReportData } from './_lib/report-data-collector';
+import { ReportEmailTemplate } from './_lib/report-email-template';
+import { EmailDispatchService, type EmailSendResult } from './_lib/email-dispatch-service';
 
 /**
  * api/reports/trigger.ts

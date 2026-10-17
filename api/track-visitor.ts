@@ -113,7 +113,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // ── Emergency / Dedicated Report Trigger Relay (Bypasses route rewrites) ──
   if (req.query.action === 'trigger-report' || req.query.action === 'report') {
     try {
-      const reportHandler = (await import('./reports-trigger.ts')).default;
+      const reportHandler = (await import('./reports-trigger')).default;
       return await reportHandler(req, res);
     } catch (relayErr: any) {
       console.error('[track-visitor relay error]:', relayErr);

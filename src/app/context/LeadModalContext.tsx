@@ -15,8 +15,8 @@ interface LeadModalContextType {
     isOpen: boolean;
     modalType: LeadModalType;
     modalOptions: LeadModalOptions;
-    openQuickForm: (options?: LeadModalOptions) => void;
-    openLongForm: (options?: LeadModalOptions) => void;
+    openQuickForm: (options?: LeadModalOptions | string) => void;
+    openLongForm: (options?: LeadModalOptions | string) => void;
     closeModal: () => void;
 }
 
@@ -27,14 +27,16 @@ export const LeadModalProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     const [modalType, setModalType] = useState<LeadModalType>(null);
     const [modalOptions, setModalOptions] = useState<LeadModalOptions>({});
 
-    const openQuickForm = useCallback((options?: LeadModalOptions) => {
-        setModalOptions(options || {});
+    const openQuickForm = useCallback((options?: LeadModalOptions | string) => {
+        const normalized = typeof options === 'string' ? { defaultService: options, service: options } : (options || {});
+        setModalOptions(normalized);
         setModalType('quick');
         setIsOpen(true);
     }, []);
 
-    const openLongForm = useCallback((options?: LeadModalOptions) => {
-        setModalOptions(options || {});
+    const openLongForm = useCallback((options?: LeadModalOptions | string) => {
+        const normalized = typeof options === 'string' ? { defaultService: options, service: options } : (options || {});
+        setModalOptions(normalized);
         setModalType('long');
         setIsOpen(true);
     }, []);
