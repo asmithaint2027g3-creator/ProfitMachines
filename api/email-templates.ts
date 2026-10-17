@@ -110,6 +110,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
+    // 4. Lead notification diagnostic
+    if (action === 'notify-lead' || action === 'notify-diagnostic') {
+      const targetRecipient = (process.env.TEAM_NOTIFICATION_EMAIL || 'asmitha.int2027g3@gmail.com').trim();
+      return res.status(200).json({
+        status: 'READY',
+        targetRecipient,
+        smtpConfigured: Boolean(process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD),
+        resendConfigured: Boolean(process.env.RESEND_API_KEY && process.env.RESEND_API_KEY.startsWith('re_')),
+        message: 'Lead notification dispatcher active in consolidated email endpoint.',
+      });
+    }
+
     return res.status(400).json({ error: `Unknown action: ${action}` });
   }
 
@@ -267,6 +279,59 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         messageId: dispatchRes.messageId,
         contentSource: source,
         error: dispatchRes.error,
+      });
+    }
+
+    // 4. Inbound Lead Notification dispatcher (consolidated from notify-lead)
+    if (action === 'notify-lead') {
+      const { leadType, fields } = body as any;
+      if (!fields) {
+        return res.status(400).json({ error: 'Missing lead fields payload' });
+      }
+
+      const country = (req.headers['x-vercel-ip-country'] as string) || '';
+      const city = (req.headers['x-vercel-ip-city'] as string) || '';
+      const location = [city ? decodeURIComponent(city) : '', country].filter(Boolean).join(', ') || 'Unknown';
+      const fullName = fields.name || `${fields.firstName || ''} ${fields.lastName || ''}`.trim() || 'Prospect';
+      const company = fields.company ? ` (${fields.company})` : '';
+      const targetRecipient = (process.env.TEAM_NOTIFICATION_EMAIL || 'asmitha.int2027g3@gmail.com').trim();
+      const subject = `🚀 [New Lead Alert] ${leadType || 'Inquiry'} - ${fullName}${company}`;
+
+      const html = `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
+            <div style="background: #064e3b; padding: 24px; color: #ffffff;">
+                <h1 style="margin: 0; font-size: 20px; font-weight: 700;">New ProfitMachines Lead Alert</h1>
+                <p style="margin: 6px 0 0 0; font-size: 14px; opacity: 0.9;">Type: <strong>${leadType || 'Quick Inquiry'}</strong></p>
+            </div>
+            <div style="padding: 24px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                    <tr><td style="padding: 8px 0; font-weight: 600; color: #475569; width: 140px;">Name:</td><td style="color: #0f172a;">${fullName}</td></tr>
+                    <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Email:</td><td><a href="mailto:${fields.email}" style="color: #064e3b; text-decoration: none; font-weight: 600;">${fields.email || 'N/A'}</a></td></tr>
+                    <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Phone:</td><td style="color: #0f172a;">${fields.phone || 'N/A'}</td></tr>
+                    <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Company:</td><td style="color: #0f172a;">${fields.company || 'N/A'}</td></tr>
+                    <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Detected Location:</td><td style="color: #0f172a;">${location}</td></tr>
+                    <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Service / Interest:</td><td style="color: #0f172a;">${fields.interest || fields.service || 'N/A'}</td></tr>
+                    <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Message / Scope:</td><td style="color: #0f172a;">${fields.message || fields.requirement || 'None provided'}</td></tr>
+                    <tr><td style="padding: 8px 0; font-weight: 600; color: #475569;">Source:</td><td style="color: #0f172a;">${fields.source || fields.lead_source || 'Website'}</td></tr>
+                </table>
+            </div>
+        </div>
+      `;
+
+      const text = `New Lead Alert: ${fullName} (${fields.email || 'N/A'})\nCompany: ${fields.company || 'N/A'}\nLocation: ${location}\nMessage: ${fields.message || 'None'}`;
+
+      const dispatchRes = await EmailDispatchService.dispatch({
+        to: [targetRecipient],
+        subject,
+        html,
+        text,
+      });
+
+      return res.status(200).json({
+        success: true,
+        emailSent: dispatchRes.sent,
+        provider: dispatchRes.provider,
+        id: dispatchRes.messageId,
       });
     }
 

@@ -42,6 +42,10 @@
       "destination": "/api/track-visitor?action=trigger-report"
     },
     {
+      "source": "/api/notify-lead",
+      "destination": "/api/email-templates?action=notify-lead"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "/api/$1"
     },
