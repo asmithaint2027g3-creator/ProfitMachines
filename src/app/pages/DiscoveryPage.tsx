@@ -1846,7 +1846,7 @@ export default function DiscoveryPage() {
     const [activePoolTab, setActivePoolTab] = useState<'overview' | 'b2b' | 'b2c'>('overview');
 
     if (slug === 'b2b') {
-        return <B2BRevenueIntelligencePlatform />;
+        return <Navigate to="/offerings" replace />;
     }
 
     if (slug === 'b2c') {

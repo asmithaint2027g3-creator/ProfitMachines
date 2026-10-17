@@ -166,11 +166,12 @@ export default function App() {
                   <Route path="/partners" element={<Partners />} />
                   <Route path="/career" element={<Career />} />
                   <Route path="/talk-to-expert" element={<TalkToExpert />} />
+                  <Route path="/offerings/b2b" element={<Navigate to="/offerings" replace />} />
                   <Route path="/ai-demand-discovery" element={<Navigate to="/solutions#ai-demand-discovery" replace />} />
-                  <Route path="/ai-lead-generation" element={<Navigate to="/offerings/b2b#channel-discovery" replace />} />
-                  <Route path="/ai-lead-nurturing" element={<Navigate to="/offerings/b2b#demand-discovery" replace />} />
-                  <Route path="/ai-mvp-validation" element={<Navigate to="/offerings/b2b#product-market-fit-discovery" replace />} />
-                  <Route path="/ai-lead-sales-transformation" element={<Navigate to="/offerings/b2b#sales-acceleration" replace />} />
+                  <Route path="/ai-lead-generation" element={<Navigate to="/offerings#growth-engines" replace />} />
+                  <Route path="/ai-lead-nurturing" element={<Navigate to="/offerings#growth-engines" replace />} />
+                  <Route path="/ai-mvp-validation" element={<Navigate to="/offerings#growth-engines" replace />} />
+                  <Route path="/ai-lead-sales-transformation" element={<Navigate to="/offerings/sales-acceleration" replace />} />
                   <Route path="/ai-revenue-operations" element={<Navigate to="/solutions#ai-revenue-operations" replace />} />
                   <Route path="/ai-revenue-acceleration" element={<Navigate to="/solutions#ai-revenue-acceleration" replace />} />
                   <Route path="/behaviour-analytics" element={<BehaviourAnalytics />} />

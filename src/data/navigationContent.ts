@@ -2062,7 +2062,7 @@ export const smNavItems = [
                 {
                     "id": "profit-pools",
                     "title": "Profit Pools",
-                    "path": "/offerings/b2b",
+                    "path": "/offerings",
                     "b2bItems": [
                         { "name": "B2B Market Discovery", "path": "/offerings/b2b/market-discovery", "icon": "Search" },
                         { "name": "B2B Demand Discovery", "path": "/offerings/b2b/demand-discovery", "icon": "Target" },
