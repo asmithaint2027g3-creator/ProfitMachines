@@ -183,7 +183,7 @@ export default function Navigation() {
                                                         )}
 
                                                         {item.name === "Offerings" ? (
-                                                            <div className="flex flex-col gap-2.5 pt-2">
+                                                            <div className="flex flex-col gap-1.5 pt-1">
                                                                 {item.dropdown.categories.map((cat: any, cIdx: number) => {
                                                                     const targetPath = cat.path || "/offerings";
                                                                     const isSelected = activeOfferingGroup === cat.id;
@@ -193,14 +193,14 @@ export default function Navigation() {
                                                                             to={targetPath}
                                                                             onClick={() => setHoveredItem(null)}
                                                                             onMouseEnter={() => setActiveOfferingGroup(cat.id)}
-                                                                            className={`flex items-center justify-between px-5 py-3.5 rounded-2xl text-sm font-bold transition-all text-left ${
+                                                                            className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm transition-all text-left ${
                                                                                 isSelected 
-                                                                                    ? 'bg-[#1864FF] text-white shadow-md shadow-blue-500/25' 
-                                                                                    : 'text-slate-800 hover:bg-slate-100 hover:text-slate-900'
+                                                                                    ? 'bg-card shadow-sm font-semibold text-primary border border-border/40' 
+                                                                                    : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
                                                                             }`}
                                                                         >
                                                                             <span>{cat.title}</span>
-                                                                            <ChevronRight className={`w-4 h-4 shrink-0 transition-transform ${isSelected ? 'text-white translate-x-0.5' : 'text-slate-400'}`} />
+                                                                            <ChevronRight className={`w-3.5 h-3.5 shrink-0 transition-opacity ${isSelected ? 'opacity-100 text-primary' : 'opacity-0'}`} />
                                                                         </Link>
                                                                     );
                                                                 })}
@@ -266,8 +266,8 @@ export default function Navigation() {
                                                                     <div key="profit-pools-columns" className="grid grid-cols-2 gap-8 w-full">
                                                                         {/* B2B PROFIT POOLS Column */}
                                                                         <div className="flex flex-col">
-                                                                            <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#1864FF] pb-2 border-b border-blue-500/20 mb-4">
-                                                                                B2B PROFIT POOLS
+                                                                            <h3 className="text-xs font-bold uppercase tracking-wider text-primary pb-2 border-b border-border/60 mb-3">
+                                                                                B2B Profit Pools
                                                                             </h3>
                                                                             <div className="flex flex-col gap-1">
                                                                                 {(currentCat.b2bItems as any[]).map((sub: any, sIdx: number) => {
@@ -277,14 +277,17 @@ export default function Navigation() {
                                                                                             key={sIdx}
                                                                                             to={sub.path}
                                                                                             onClick={() => setHoveredItem(null)}
-                                                                                            className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-50/70 transition-colors"
+                                                                                            className="group flex items-center justify-between p-2.5 rounded-xl hover:bg-muted/50 transition-colors"
                                                                                         >
-                                                                                            <div className="text-slate-400 group-hover:text-[#1864FF] transition-colors shrink-0">
-                                                                                                <IconComponent className="w-4 h-4" />
+                                                                                            <div className="flex items-center gap-3 min-w-0">
+                                                                                                <div className="p-2 rounded-lg bg-primary/5 text-primary/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors shrink-0">
+                                                                                                    <IconComponent className="w-4 h-4" />
+                                                                                                </div>
+                                                                                                <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate">
+                                                                                                    {sub.name}
+                                                                                                </span>
                                                                                             </div>
-                                                                                            <span className="text-[13.5px] font-semibold text-slate-800 group-hover:text-[#1864FF] transition-colors">
-                                                                                                {sub.name}
-                                                                                            </span>
+                                                                                            <ChevronRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200 shrink-0" />
                                                                                         </Link>
                                                                                     );
                                                                                 })}
@@ -293,8 +296,8 @@ export default function Navigation() {
 
                                                                         {/* B2C PROFIT POOLS Column */}
                                                                         <div className="flex flex-col">
-                                                                            <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#1864FF] pb-2 border-b border-blue-500/20 mb-4">
-                                                                                B2C PROFIT POOLS
+                                                                            <h3 className="text-xs font-bold uppercase tracking-wider text-primary pb-2 border-b border-border/60 mb-3">
+                                                                                B2C Profit Pools
                                                                             </h3>
                                                                             <div className="flex flex-col gap-1">
                                                                                 {(currentCat.b2cItems as any[]).map((sub: any, sIdx: number) => {
@@ -304,14 +307,17 @@ export default function Navigation() {
                                                                                             key={sIdx}
                                                                                             to={sub.path}
                                                                                             onClick={() => setHoveredItem(null)}
-                                                                                            className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-50/70 transition-colors"
+                                                                                            className="group flex items-center justify-between p-2.5 rounded-xl hover:bg-muted/50 transition-colors"
                                                                                         >
-                                                                                            <div className="text-slate-400 group-hover:text-[#1864FF] transition-colors shrink-0">
-                                                                                                <IconComponent className="w-4 h-4" />
+                                                                                            <div className="flex items-center gap-3 min-w-0">
+                                                                                                <div className="p-2 rounded-lg bg-primary/5 text-primary/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors shrink-0">
+                                                                                                    <IconComponent className="w-4 h-4" />
+                                                                                                </div>
+                                                                                                <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate">
+                                                                                                    {sub.name}
+                                                                                                </span>
                                                                                             </div>
-                                                                                            <span className="text-[13.5px] font-semibold text-slate-800 group-hover:text-[#1864FF] transition-colors">
-                                                                                                {sub.name}
-                                                                                            </span>
+                                                                                            <ChevronRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200 shrink-0" />
                                                                                         </Link>
                                                                                     );
                                                                                 })}
@@ -325,8 +331,8 @@ export default function Navigation() {
                                                             const items = currentCat?.items || [];
                                                             return (
                                                                 <div key={`group-${currentCat?.id}`} className="w-full flex flex-col">
-                                                                    <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#1864FF] pb-2 border-b border-blue-500/20 mb-4">
-                                                                        {currentCat?.title?.toUpperCase()}
+                                                                    <h3 className="text-xs font-bold uppercase tracking-wider text-primary pb-2 border-b border-border/60 mb-3">
+                                                                        {currentCat?.title}
                                                                     </h3>
                                                                     <div className="grid grid-cols-2 gap-3">
                                                                         {items.map((sub: any, sIdx: number) => {
@@ -336,14 +342,17 @@ export default function Navigation() {
                                                                                     key={sIdx}
                                                                                     to={sub.path}
                                                                                     onClick={() => setHoveredItem(null)}
-                                                                                    className="group flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50/70 transition-colors"
+                                                                                    className="group flex items-center justify-between p-2.5 rounded-xl hover:bg-muted/50 transition-colors"
                                                                                 >
-                                                                                    <div className="text-slate-400 group-hover:text-[#1864FF] transition-colors shrink-0">
-                                                                                        <IconComponent className="w-4 h-4" />
+                                                                                    <div className="flex items-center gap-3 min-w-0">
+                                                                                        <div className="p-2 rounded-lg bg-primary/5 text-primary/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors shrink-0">
+                                                                                            <IconComponent className="w-4 h-4" />
+                                                                                        </div>
+                                                                                        <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate">
+                                                                                            {sub.name}
+                                                                                        </span>
                                                                                     </div>
-                                                                                    <span className="text-[13.5px] font-semibold text-slate-800 group-hover:text-[#1864FF] transition-colors">
-                                                                                        {sub.name}
-                                                                                    </span>
+                                                                                    <ChevronRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200 shrink-0" />
                                                                                 </Link>
                                                                             );
                                                                         })}
@@ -467,25 +476,64 @@ export default function Navigation() {
                             
                             {item.dropdown && expandedItems.includes(item.name) && (
                                 <div className="pl-4 sm:pl-6 bg-muted/20 border-l-2 border-primary/30 my-1 py-2 flex flex-col gap-2 rounded-r-lg">
-                                    {item.name === "Offerings" ? (
+                                     {item.name === "Offerings" ? (
                                         <div className="space-y-3">
                                             {item.dropdown.categories?.map((cat: any, cIdx: number) => (
-                                                <div key={cIdx}>
-                                                    <div className="text-[10px] font-bold text-primary/70 uppercase tracking-widest px-2 mb-1">
+                                                <div key={cIdx} className="space-y-1">
+                                                    <div className="text-[11px] font-bold text-primary uppercase tracking-wider px-2 py-1 bg-primary/5 rounded">
                                                         {cat.title}
                                                     </div>
-                                                    <div className="flex flex-col gap-0.5">
-                                                        {cat.items?.map((sub: any, sIdx: number) => (
-                                                            <Link
-                                                                key={sIdx}
-                                                                to={sub.path}
-                                                                onClick={() => setMobileMenuOpen(false)}
-                                                                className="text-xs text-muted-foreground hover:text-primary py-1.5 px-2 rounded-md hover:bg-muted/50 transition-colors block"
-                                                            >
-                                                                {sub.name}
-                                                            </Link>
-                                                        ))}
-                                                    </div>
+                                                    {cat.b2bItems && cat.b2cItems ? (
+                                                        <div className="space-y-3 pl-2 pt-1">
+                                                            <div>
+                                                                <div className="text-[10px] font-extrabold text-muted-foreground uppercase tracking-widest px-2 mb-1">
+                                                                    B2B Profit Pools
+                                                                </div>
+                                                                <div className="flex flex-col gap-0.5">
+                                                                    {cat.b2bItems.map((sub: any, sIdx: number) => (
+                                                                        <Link
+                                                                            key={sIdx}
+                                                                            to={sub.path}
+                                                                            onClick={() => setMobileMenuOpen(false)}
+                                                                            className="text-xs text-foreground/80 hover:text-primary py-1.5 px-2 rounded-md hover:bg-muted/50 transition-colors block font-medium"
+                                                                        >
+                                                                            {sub.name}
+                                                                        </Link>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div className="text-[10px] font-extrabold text-muted-foreground uppercase tracking-widest px-2 mb-1">
+                                                                    B2C Profit Pools
+                                                                </div>
+                                                                <div className="flex flex-col gap-0.5">
+                                                                    {cat.b2cItems.map((sub: any, sIdx: number) => (
+                                                                        <Link
+                                                                            key={sIdx}
+                                                                            to={sub.path}
+                                                                            onClick={() => setMobileMenuOpen(false)}
+                                                                            className="text-xs text-foreground/80 hover:text-primary py-1.5 px-2 rounded-md hover:bg-muted/50 transition-colors block font-medium"
+                                                                        >
+                                                                            {sub.name}
+                                                                        </Link>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        <div className="flex flex-col gap-0.5 pl-2">
+                                                            {cat.items?.map((sub: any, sIdx: number) => (
+                                                                <Link
+                                                                    key={sIdx}
+                                                                    to={sub.path}
+                                                                    onClick={() => setMobileMenuOpen(false)}
+                                                                    className="text-xs text-foreground/80 hover:text-primary py-1.5 px-2 rounded-md hover:bg-muted/50 transition-colors block font-medium"
+                                                                >
+                                                                    {sub.name}
+                                                                </Link>
+                                                            ))}
+                                                        </div>
+                                                    )}
                                                 </div>
                                             ))}
                                         </div>

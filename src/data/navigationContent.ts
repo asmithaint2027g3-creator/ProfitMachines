@@ -2064,22 +2064,22 @@ export const smNavItems = [
                     "title": "Profit Pools",
                     "path": "/offerings/b2b",
                     "b2bItems": [
-                        { "name": "B2B Market Discovery", "path": "/offerings/b2b#market-discovery", "icon": "Search" },
-                        { "name": "B2B Demand Discovery", "path": "/offerings/b2b#demand-discovery", "icon": "Target" },
-                        { "name": "B2B Value Discovery", "path": "/offerings/b2b#value-discovery", "icon": "DollarSign" },
-                        { "name": "B2B Channel Discovery", "path": "/offerings/b2b#channel-discovery", "icon": "Network" },
-                        { "name": "B2B Competitive Discovery", "path": "/offerings/b2b#competitive-discovery", "icon": "ShieldCheck" },
-                        { "name": "B2B Customer Discovery", "path": "/offerings/b2b#customer-discovery", "icon": "Users" },
-                        { "name": "B2B Product-Market Fit Discovery", "path": "/offerings/b2b#product-market-fit-discovery", "icon": "Sparkles" }
+                        { "name": "B2B Market Discovery", "path": "/offerings/b2b/market-discovery", "icon": "Search" },
+                        { "name": "B2B Demand Discovery", "path": "/offerings/b2b/demand-discovery", "icon": "Target" },
+                        { "name": "B2B Value Discovery", "path": "/offerings/b2b/value-discovery", "icon": "DollarSign" },
+                        { "name": "B2B Channel Discovery", "path": "/offerings/b2b/channel-discovery", "icon": "Network" },
+                        { "name": "B2B Competitive Discovery", "path": "/offerings/b2b/competitive-discovery", "icon": "ShieldCheck" },
+                        { "name": "B2B Customer Discovery", "path": "/offerings/b2b/customer-discovery", "icon": "Users" },
+                        { "name": "B2B Product-Market Fit Discovery", "path": "/offerings/b2b/product-market-fit-discovery", "icon": "Sparkles" }
                     ],
                     "b2cItems": [
-                        { "name": "B2C Market Discovery", "path": "/offerings/b2c#market-discovery", "icon": "Search" },
-                        { "name": "B2C Demand Discovery", "path": "/offerings/b2c#demand-discovery", "icon": "Target" },
-                        { "name": "B2C Value Discovery", "path": "/offerings/b2c#value-discovery", "icon": "DollarSign" },
-                        { "name": "B2C Channel Discovery", "path": "/offerings/b2c#channel-discovery", "icon": "Network" },
-                        { "name": "B2C Competitive Discovery", "path": "/offerings/b2c#competitive-discovery", "icon": "ShieldCheck" },
-                        { "name": "B2C Customer Discovery", "path": "/offerings/b2c#customer-discovery", "icon": "Users" },
-                        { "name": "B2C Product-Market Fit Discovery", "path": "/offerings/b2c#product-market-fit-discovery", "icon": "Sparkles" }
+                        { "name": "B2C Market Discovery", "path": "/offerings/b2c/market-discovery", "icon": "Search" },
+                        { "name": "B2C Demand Discovery", "path": "/offerings/b2c/demand-discovery", "icon": "Target" },
+                        { "name": "B2C Value Discovery", "path": "/offerings/b2c/value-discovery", "icon": "DollarSign" },
+                        { "name": "B2C Channel Discovery", "path": "/offerings/b2c/channel-discovery", "icon": "Network" },
+                        { "name": "B2C Competitive Discovery", "path": "/offerings/b2c/competitive-discovery", "icon": "ShieldCheck" },
+                        { "name": "B2C Customer Discovery", "path": "/offerings/b2c/customer-discovery", "icon": "Users" },
+                        { "name": "B2C Product-Market Fit Discovery", "path": "/offerings/b2c/product-market-fit-discovery", "icon": "Sparkles" }
                     ]
                 },
                 {

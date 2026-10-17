@@ -22,13 +22,13 @@ export default function Home() {
 
     return (
         <main className="bg-background min-h-screen overflow-hidden">
-            {/* 1. Redesigned Enterprise Homepage Hero */}
+            {/* 1. Redesigned Enterprise Homepage Hero with Integrated Slides & Telemetry Graphs */}
             <HomepageHero />
             {/* 2. Client Logos */}
             <TrustedBySection />
             {/* 3. Company Overview */}
             <WhyChooseSection />
-            {/* 4. Featured Capabilities & 5. Featured Solutions */}
+            {/* 4. Featured Capabilities & Solutions */}
             <ServicesOverview />
             {/* 6. Industry Expertise */}
             <IndustriesSection />

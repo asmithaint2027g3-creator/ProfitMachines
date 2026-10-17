@@ -16,6 +16,8 @@ import { offeringsIntelligence } from '../data/offeringsIntelligenceData';
 import OfferingIntelligenceView from '../components/offerings/OfferingIntelligenceView';
 import B2BRevenueIntelligencePlatform from '../components/offerings/B2BRevenueIntelligencePlatform';
 import B2CConsumerGrowthPlatform from '../components/offerings/B2CConsumerGrowthPlatform';
+import AIGrowthSuiteView from '../components/offerings/AIGrowthSuiteView';
+import SalesAccelerationSuiteView from '../components/offerings/SalesAccelerationSuiteView';
 
 export interface DiscoveryData {
     title: string;
@@ -1851,8 +1853,12 @@ export default function DiscoveryPage() {
         return <B2CConsumerGrowthPlatform />;
     }
 
-    if (slug === 'ai-growth' || slug === 'sales-acceleration') {
-        return <ConsolidatedOfferingsView mode={slug as any} />;
+    if (slug === 'ai-growth') {
+        return <AIGrowthSuiteView />;
+    }
+
+    if (slug === 'sales-acceleration') {
+        return <SalesAccelerationSuiteView />;
     }
 
     const normalizedKey = (() => {

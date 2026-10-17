@@ -4,40 +4,52 @@ import { ArrowRight, BarChart3, CheckCircle2, DollarSign, Search, Target, Users 
 
 const statCards = [
     {
+        sequenceNumber: '01',
+        category: 'MARKET SIZE',
         icon: Search,
         value: 'TAM / SAM / SOM',
-        label: 'Market Opportunity',
-        description: 'Quantify the total market, the serviceable opportunity, and the realistic share the business could capture.',
+        label: 'TAM / SAM / SOM',
+        description: 'Estimate the total market, serviceable market, and realistically obtainable market using defined market boundaries and commercial assumptions.',
     },
     {
+        sequenceNumber: '02',
+        category: 'ENTERPRISE SEGMENTATION',
         icon: Users,
-        value: 'ICP',
-        label: 'Ideal Customer Profiling',
-        description: 'Identify high-value accounts, buyer personas, decision-makers, and customer qualification criteria.',
+        value: '4 Tiers',
+        label: 'Enterprise Market Segmentation',
+        description: 'Categorize target enterprise sectors by industry, company scale, regulatory maturity, and commercial attractiveness to concentrate go-to-market resources.',
     },
     {
-        icon: CheckCircle2,
-        value: '20–30',
-        label: 'Customer Discovery Interviews',
-        description: 'Use a suggested initial interview target to investigate customer pain, demand, and buying behaviour. The appropriate sample depends on segment diversity, research quality, and evidence saturation.',
-    },
-    {
-        icon: DollarSign,
-        value: 'WTP',
-        label: 'Willingness to Pay',
-        description: 'Validate pricing expectations, budget availability, procurement requirements, and commercial viability.',
-    },
-    {
+        sequenceNumber: '03',
+        category: 'ICP FIT',
         icon: Target,
-        value: 'GTM',
-        label: 'Go-to-Market Readiness',
-        description: 'Define positioning, acquisition channels, sales motions, and market-entry priorities.',
+        value: '78.4 / 100',
+        label: 'ICP Fit Score',
+        description: 'Score target corporate accounts against weighted firmographic, operational, and technology criteria to isolate the highest-propensity buyers.',
     },
     {
+        sequenceNumber: '04',
+        category: 'MARKET VALIDATION',
+        icon: CheckCircle2,
+        value: '84.2% Confirmed',
+        label: 'Problem & Demand Validation',
+        description: 'Validate the urgency and severity of core business problems across target industries through structured stakeholder research.',
+    },
+    {
+        sequenceNumber: '05',
+        category: 'TARGET ACCOUNTS',
+        icon: DollarSign,
+        value: '8,450 Verified',
+        label: 'Target Account Universe',
+        description: 'Identify and verify the complete population of qualifying legal corporate entities that match the target market boundaries.',
+    },
+    {
+        sequenceNumber: '06',
+        category: 'REVENUE OPPORTUNITY',
         icon: BarChart3,
-        value: 'ROI',
-        label: 'Revenue and Growth Potential',
-        description: 'Model acquisition economics, pipeline conversion, contribution margin, and potential returns.',
+        value: '$280K Avg ACV',
+        label: 'Addressable Revenue Opportunity',
+        description: 'Model scenario-based addressable revenue potential using verified account counts, contract pricing, and historical qualification rates.',
     },
 ];
 
@@ -95,15 +107,29 @@ export default function MarketDiscoveryStatCards() {
                 {statCards.map((card) => {
                     const Icon = card.icon;
                     return (
-                        <div key={card.label} className="bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-lg hover:border-[#2878B5]/40 transition-all">
-                            <div className="flex items-center justify-between mb-4">
-                                <div className="w-10 h-10 rounded-xl bg-[#2878B5]/10 text-[#2878B5] flex items-center justify-center">
-                                    <Icon className="w-5 h-5" />
+                        <div key={card.label} className="bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-lg hover:border-[#2878B5]/40 transition-all flex flex-col justify-between">
+                            <div>
+                                <div className="flex items-center justify-between mb-3">
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-[11px] font-black tracking-wider text-[#2878B5] font-mono">
+                                            {card.sequenceNumber}
+                                        </span>
+                                        <span className="text-slate-300 font-bold">·</span>
+                                        <span className="text-[11px] font-extrabold uppercase tracking-widest text-slate-500">
+                                            {card.category}
+                                        </span>
+                                    </div>
+                                    <div className="w-8 h-8 rounded-lg bg-[#2878B5]/10 text-[#2878B5] flex items-center justify-center">
+                                        <Icon className="w-4 h-4" />
+                                    </div>
                                 </div>
-                                <span className="text-lg font-extrabold text-slate-900">{card.value}</span>
+                                <h3 className="text-base font-black text-[#0A2540] tracking-tight mb-2 font-heading">{card.label}</h3>
+                                <p className="text-xs text-slate-600 leading-relaxed font-normal mb-4">{card.description}</p>
                             </div>
-                            <h3 className="text-sm font-bold text-slate-900 mb-2">{card.label}</h3>
-                            <p className="text-xs text-slate-500 leading-relaxed">{card.description}</p>
+                            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                                <span className="font-semibold text-slate-700">Validated Model</span>
+                                <span className="text-xs font-black text-[#2878B5] font-mono">{card.value}</span>
+                            </div>
                         </div>
                     );
                 })}

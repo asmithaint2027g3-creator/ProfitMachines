@@ -24,7 +24,6 @@ import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Reveal } from '../components/ui/Reveal';
-import HomeFeatureSlider from '../components/home/HomeFeatureSlider';
 import ProfitJourneyNavigator from '../components/ProfitJourneyNavigator';
 import LeadCaptureSection from '../components/LeadCaptureSection';
 import { useLeadModal } from '../context/LeadModalContext';
@@ -1070,11 +1069,6 @@ export default function Offerings() {
                     </Reveal>
                 </div>
             </section>
-
-            {/* Premium Enterprise Offerings Slider */}
-            <div>
-                <HomeFeatureSlider />
-            </div>
 
             <div id="profit-journey" className="scroll-mt-24">
                 <ProfitJourneyNavigator />
