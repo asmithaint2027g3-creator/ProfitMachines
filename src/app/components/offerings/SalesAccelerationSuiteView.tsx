@@ -24,119 +24,107 @@ export default function SalesAccelerationSuiteView() {
     const [activeComplianceCheck, setActiveComplianceCheck] = useState<'identity' | 'audit' | 'data'>('audit');
 
     return (
-        <div className="min-h-screen bg-[#F8FAFC] text-slate-900 pt-24 lg:pt-32 pb-24 selection:bg-[#E1EFF8]" style={{ fontFamily: 'Inter, sans-serif' }}>
+        <div className="sales-acceleration-suite min-h-screen bg-slate-50 text-slate-900 overflow-hidden relative selection:bg-emerald-100" style={{ fontFamily: '"Times New Roman", Times, serif' }}>
             {/* Breadcrumb Navigation */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-                <nav className="flex items-center gap-2 text-sm text-slate-500 font-medium">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+                <nav className="flex items-center gap-2 text-sm text-slate-500 font-medium" aria-label="Breadcrumb">
                     <Link to="/" className="hover:text-[#2878B5] transition-colors">Home</Link>
                     <ChevronRight className="w-4 h-4 text-slate-400" />
                     <Link to="/offerings" className="hover:text-[#2878B5] transition-colors">Offerings</Link>
                     <ChevronRight className="w-4 h-4 text-slate-400" />
-                    <span className="text-[#2878B5] font-semibold">Sales Acceleration Suite</span>
+                    <span className="text-[#2878B5] font-bold">Sales Acceleration Suite</span>
                 </nav>
             </div>
 
-            {/* 3. SUITE HERO */}
-            <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-                <div className="relative rounded-3xl bg-gradient-to-br from-[#0F1E36] via-[#132A4F] to-[#1A3865] text-white p-8 sm:p-14 lg:p-16 overflow-hidden shadow-2xl border border-slate-800">
-                    {/* Background Subtle Mesh Accents */}
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-[#38BDF8]/20 via-[#2878B5]/15 to-transparent rounded-full blur-3xl pointer-events-none" />
-                    <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+            {/* 3. SUITE HERO — Matching Offerings Page Dark Aesthetic */}
+            <section className="relative pt-12 md:pt-16 pb-16 md:pb-24 bg-[#050D1A] border-b border-slate-800 text-white overflow-hidden mb-16 md:mb-20">
+                {/* Visual Ambient Glows */}
+                <div className="absolute inset-0 pointer-events-none opacity-30">
+                    <div className="absolute -top-24 right-1/4 w-[650px] h-[650px] bg-[#10B981]/15 rounded-full blur-[150px]" />
+                    <div className="absolute top-1/3 left-10 w-[500px] h-[500px] bg-[#0284C7]/20 rounded-full blur-[140px]" />
+                </div>
 
-                    <div className="relative z-10 grid lg:grid-cols-12 gap-12 items-center">
-                        {/* Hero Text */}
-                        <div className="lg:col-span-7">
-                            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-sky-300 text-xs font-bold tracking-widest uppercase mb-6">
-                                <Building2 className="w-3.5 h-3.5 text-sky-400" />
-                                SALES ACCELERATION SUITE
-                            </div>
-                            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6 font-heading text-white">
-                                Build a More Intelligent, Connected Sales Engine
-                            </h1>
-                            <p className="text-lg sm:text-xl text-slate-300 max-w-2xl leading-relaxed mb-10">
-                                Connect enterprise selling, inside sales execution, high-velocity commerce, and regulated sales workflows through a unified sales acceleration architecture.
-                            </p>
-                            <div className="flex flex-wrap items-center gap-4">
-                                <a
-                                    href="#enterprise-sales"
-                                    className="inline-flex items-center justify-center px-7 py-4 rounded-xl bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold text-base transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
-                                >
-                                    Explore Sales Engines
-                                    <ArrowRight className="ml-2.5 w-5 h-5" />
-                                </a>
-                                <button
-                                    onClick={() => openLongForm()}
-                                    className="inline-flex items-center justify-center px-7 py-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold text-base transition-all backdrop-blur-md"
-                                >
-                                    Schedule Strategic Audit
-                                </button>
-                            </div>
-                        </div>
+                {/* Background Sophisticated Glowing Sales Acceleration Pipeline Graph Visualization */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-35 overflow-hidden">
+                    <svg className="w-full h-full max-w-7xl min-h-[500px]" viewBox="0 0 1200 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="salesLineGlow" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stopColor="#0284C7" stopOpacity="0.1" />
+                                <stop offset="35%" stopColor="#38BDF8" stopOpacity="0.6" />
+                                <stop offset="70%" stopColor="#10B981" stopOpacity="0.95" />
+                                <stop offset="100%" stopColor="#34D399" stopOpacity="1" />
+                            </linearGradient>
+                            <linearGradient id="salesAreaGlow" x1="0" y1="0" x2="0" y2="450" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stopColor="#10B981" stopOpacity="0.18" />
+                                <stop offset="100%" stopColor="#10B981" stopOpacity="0.0" />
+                            </linearGradient>
+                            <linearGradient id="salesSecondary" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.1" />
+                                <stop offset="50%" stopColor="#0284C7" stopOpacity="0.4" />
+                                <stop offset="100%" stopColor="#60A5FA" stopOpacity="0.7" />
+                            </linearGradient>
+                        </defs>
 
-                        {/* Sales Execution Workflow Visual */}
-                        <div className="lg:col-span-5">
-                            <div className="bg-slate-900/80 border border-slate-700/80 rounded-2xl p-6 backdrop-blur-xl shadow-xl">
-                                <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-5">
-                                    <span className="text-xs font-mono font-bold tracking-wider text-slate-400 uppercase">Sales Execution Topology</span>
-                                    <span className="inline-flex items-center gap-1.5 text-xs text-sky-400 font-semibold">
-                                        <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
-                                        End-to-End Orchestration
-                                    </span>
-                                </div>
+                        {/* Baseline Grid Guides */}
+                        <line x1="60" y1="360" x2="1140" y2="360" stroke="#334155" strokeWidth="1" strokeDasharray="4 6" opacity="0.4" />
+                        <line x1="60" y1="280" x2="1140" y2="280" stroke="#334155" strokeWidth="1" strokeDasharray="4 6" opacity="0.3" />
+                        <line x1="60" y1="200" x2="1140" y2="200" stroke="#334155" strokeWidth="1" strokeDasharray="4 6" opacity="0.25" />
+                        <line x1="60" y1="120" x2="1140" y2="120" stroke="#334155" strokeWidth="1" strokeDasharray="4 6" opacity="0.2" />
 
-                                <div className="space-y-3">
-                                    <div className="p-3.5 rounded-xl bg-slate-800/70 border border-slate-700 flex items-center justify-between">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-9 h-9 rounded-lg bg-sky-500/20 border border-sky-500/40 flex items-center justify-center text-sky-400">
-                                                <Users className="w-4 h-4" />
-                                            </div>
-                                            <div>
-                                                <div className="text-sm font-bold text-white">Account Intelligence</div>
-                                                <div className="text-xs text-slate-400">Stakeholder mapping & coverage verification</div>
-                                            </div>
-                                        </div>
-                                        <span className="text-xs font-mono text-sky-400">Inbound / Target</span>
-                                    </div>
+                        {/* Pipeline Area Fill */}
+                        <path d="M 60 380 Q 220 370 340 310 T 620 250 T 880 140 T 1140 70 L 1140 420 L 60 420 Z" fill="url(#salesAreaGlow)" />
 
-                                    <div className="flex justify-center -my-1 text-slate-600">
-                                        <span className="text-xs font-mono">↓ Multi-Stakeholder Touch</span>
-                                    </div>
+                        {/* Funnel Velocity Trace */}
+                        <path d="M 60 400 Q 240 390 380 340 T 680 290 T 920 220 T 1140 150" stroke="url(#salesSecondary)" strokeWidth="2" strokeDasharray="5 5" fill="none" opacity="0.7" />
 
-                                    <div className="p-3.5 rounded-xl bg-slate-800/70 border border-slate-700 flex items-center justify-between">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-9 h-9 rounded-lg bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400">
-                                                <Mail className="w-4 h-4" />
-                                            </div>
-                                            <div>
-                                                <div className="text-sm font-bold text-white">Automated SDR Cadence</div>
-                                                <div className="text-xs text-slate-400">Contextual multi-touch outreach & booking</div>
-                                            </div>
-                                        </div>
-                                        <span className="text-xs font-mono text-indigo-400">SDR Co-Pilot</span>
-                                    </div>
+                        {/* Primary Closed-Won Acceleration Trajectory */}
+                        <path d="M 60 380 Q 220 370 340 310 T 620 250 T 880 140 T 1140 70" stroke="url(#salesLineGlow)" strokeWidth="3.5" fill="none" />
 
-                                    <div className="flex justify-center -my-1 text-slate-600">
-                                        <span className="text-xs font-mono">↓ Deal Validation</span>
-                                    </div>
+                        {/* Node Coordinates */}
+                        <circle cx="340" cy="310" r="4.5" fill="#38BDF8" />
+                        <circle cx="620" cy="250" r="5" fill="#10B981" />
+                        <circle cx="880" cy="140" r="6" fill="#10B981" />
+                        <circle cx="880" cy="140" r="14" stroke="#10B981" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.7" />
+                        <circle cx="1140" cy="70" r="7" fill="#34D399" />
+                        <circle cx="1140" cy="70" r="18" stroke="#34D399" strokeWidth="1.5" strokeOpacity="0.5" />
+                    </svg>
+                </div>
 
-                                    <div className="p-3.5 rounded-xl bg-slate-800/70 border border-slate-700 flex items-center justify-between">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-9 h-9 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
-                                                <ShieldCheck className="w-4 h-4" />
-                                            </div>
-                                            <div>
-                                                <div className="text-sm font-bold text-white">Commercial & Audit Review</div>
-                                                <div className="text-xs text-slate-400">EVC models, security questionnaires, compliance</div>
-                                            </div>
-                                        </div>
-                                        <span className="text-xs font-mono text-emerald-400">De-Risked Close</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#10B981]/15 border border-[#10B981]/30 text-emerald-300 text-xs font-bold uppercase tracking-wider mb-5 shadow-xs backdrop-blur-md">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        SALES ACCELERATION SUITE · REVENUE VELOCITY
+                    </div>
+
+                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-[1.08] drop-shadow-md"
+                        style={{ fontFamily: '"Times New Roman", Times, serif', letterSpacing: '-0.025em' }}>
+                        Build a More Intelligent, Connected Sales Engine
+                    </h1>
+
+                    <p className="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed font-normal max-w-3xl mx-auto mb-8"
+                        style={{ fontFamily: '"Times New Roman", Times, serif' }}>
+                        Connect enterprise selling, inside sales execution, high-velocity commerce, and regulated sales workflows through a unified sales acceleration architecture.
+                    </p>
+
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a
+                            href="#enterprise-sales"
+                            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#2878B5] text-white font-bold text-sm hover:bg-[#1E6297] transition-all shadow-lg shadow-[#2878B5]/30 hover:-translate-y-0.5"
+                        >
+                            <span>Explore Sales Engines</span>
+                            <ArrowRight className="w-4 h-4" />
+                        </a>
+                        <button
+                            type="button"
+                            onClick={() => openLongForm()}
+                            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-white/20 text-white font-bold text-sm hover:bg-white/10 hover:border-white/40 transition-all bg-white/5 backdrop-blur-md hover:-translate-y-0.5 cursor-pointer"
+                        >
+                            <span>Schedule Strategic Audit</span>
+                            <ArrowRight className="w-4 h-4" />
+                        </button>
                     </div>
                 </div>
-            </header>
+            </section>
 
             {/* QUICK ENGINE JUMP NAV */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">

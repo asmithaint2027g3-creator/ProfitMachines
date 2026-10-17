@@ -2134,14 +2134,14 @@ export default function DiscoveryPage() {
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 text-slate-900 pt-24 lg:pt-32 pb-24">
+        <div className="min-h-screen bg-slate-50 text-slate-900 pt-20 lg:pt-24 pb-24">
             {/* Breadcrumb Navigation */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-                <nav className="flex items-center gap-2 text-sm text-slate-500 font-medium">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+                <nav className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 font-medium" aria-label="Breadcrumb">
                     <Link to="/" className="hover:text-[#2878B5] transition-colors">Home</Link>
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
                     <Link to="/offerings" className="hover:text-[#2878B5] transition-colors">Offerings</Link>
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
                     <span className="text-[#2878B5] font-bold">{data.title}</span>
                 </nav>
             </div>

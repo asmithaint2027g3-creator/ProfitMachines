@@ -161,35 +161,37 @@ export default function Career() {
 
     return (
         <div className="min-h-screen bg-white font-sans text-slate-900">
-            {/* 1. Hero Section */}
-            <section className="relative bg-[#2878B5] text-white pt-32 pb-24 overflow-hidden">
-                <div className="absolute inset-0 pointer-events-none opacity-30">
-                    <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-emerald-400 rounded-full blur-[160px]" />
-                    <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-teal-600 rounded-full blur-[120px]" />
+            {/* 1. Hero Section (Dark Theme per user specification) */}
+            <section className="relative bg-gradient-to-b from-[#061524] via-[#0A2540] to-[#07172A] border-b border-slate-800/80 text-white pt-24 lg:pt-28 pb-16 lg:pb-24 overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none opacity-25">
+                    <div className="absolute -top-24 right-1/4 w-[600px] h-[600px] bg-[#2878B5] rounded-full blur-[160px]" />
+                    <div className="absolute bottom-0 left-1/4 w-[450px] h-[450px] bg-teal-500 rounded-full blur-[140px]" />
                 </div>
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none" />
 
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
                     <Reveal width="100%">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/60 border border-emerald-400/40 text-emerald-300 text-sm font-bold mb-8 backdrop-blur-sm animate-fade-in-up">
-                            <Briefcase className="w-4 h-4" />
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2878B5]/20 border border-[#2878B5]/40 text-[#7ec2f5] text-xs sm:text-sm font-bold mb-6 backdrop-blur-md shadow-xs">
+                            <Briefcase className="w-4 h-4 text-[#5CAAE6]" />
                             <span>We're Hiring</span>
                         </div>
 
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-8 tracking-tight leading-[1.1] text-white drop-shadow-lg">
+                        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black mb-6 tracking-tight leading-[1.08] text-white drop-shadow-md"
+                            style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.025em' }}>
                             Build the Future of <br className="hidden md:block" />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-300 to-emerald-200">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5CAAE6] via-teal-300 to-emerald-300">
                                 Revenue Intelligence
                             </span>
                         </h1>
 
-                        <p className="text-xl text-emerald-100/90 max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
+                        <p className="text-base sm:text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-normal"
+                            style={{ fontFamily: 'Inter, sans-serif' }}>
                             Join a team of world-class engineers, researchers, and operators building the next generation of AI-powered enterprise software.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row gap-5 justify-center">
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <a href="#open-roles">
-                                <Button className="bg-white text-[#2878B5] hover:bg-emerald-50 px-10 py-6 text-lg h-auto rounded-full font-bold shadow-lg transition-all hover:-translate-y-1">
+                                <Button className="bg-[#2878B5] hover:bg-[#1E6297] text-white px-8 py-4 text-base h-auto rounded-xl font-bold shadow-lg shadow-[#2878B5]/30 transition-all hover:-translate-y-0.5 cursor-pointer">
                                     View Open Roles
                                 </Button>
                             </a>

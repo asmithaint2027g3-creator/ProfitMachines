@@ -169,14 +169,10 @@ export default function HomepageHero() {
         trackEvent({ eventName: 'HERO_SLIDER_SELECT', label: heroSlides[index].title });
     };
 
-    // Autoplay timer
+    // Autoplay timer — slides continuously and automatically
     useEffect(() => {
-        if (!isPlaying) {
-            if (progressRef.current) clearInterval(progressRef.current);
-            return;
-        }
         const stepMs = 50;
-        const stepInc = (stepMs / SLIDE_DURATION) * 100;
+        const stepInc = (stepMs / 5500) * 100;
         progressRef.current = setInterval(() => {
             setProgress(prev => {
                 if (prev >= 100) {
@@ -190,7 +186,7 @@ export default function HomepageHero() {
         return () => {
             if (progressRef.current) clearInterval(progressRef.current);
         };
-    }, [isPlaying, nextSlide, currentIndex]);
+    }, [nextSlide, currentIndex]);
 
     // Keyboard navigation
     useEffect(() => {
@@ -207,8 +203,6 @@ export default function HomepageHero() {
     return (
         <section 
             className="relative w-full overflow-hidden bg-gradient-to-b from-[#F8FAFC] via-[#F4F8FC] to-white border-b border-slate-200/80 pt-28 pb-14 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20"
-            onMouseEnter={() => setIsPlaying(false)}
-            onMouseLeave={() => setIsPlaying(true)}
             aria-label="Enterprise AI and Digital Transformation Solutions"
         >
             {/* Subtle Enterprise Architectural Background Pattern (First Image Style) */}

@@ -137,8 +137,8 @@ export default function ResourcesCarousel() {
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40" />
 
                     {/* Content */}
-                    <div className="absolute inset-0 flex items-center justify-center z-10">
-                        <div className="max-w-7xl w-full px-4 sm:px-6 lg:px-8 text-center pt-8">
+                    <div className="absolute inset-0 flex items-center justify-center z-10 pt-16 lg:pt-20">
+                        <div className="max-w-7xl w-full px-4 sm:px-6 lg:px-8 text-center">
                             <motion.div
                                 initial={{ y: 25, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}

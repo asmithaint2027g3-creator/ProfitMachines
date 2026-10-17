@@ -195,7 +195,7 @@ export default function BookConsultation() {
     };
 
     return (
-        <div className="pt-24 lg:pt-32 pb-20 min-h-screen bg-slate-50 text-slate-900 relative overflow-hidden">
+        <div className="pt-20 lg:pt-24 pb-20 min-h-screen bg-slate-50 text-slate-900 relative overflow-hidden">
             {/* Ambient Enterprise Grid & Radial Accents */}
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#2878B5]/5 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#2878B5]/5 rounded-full blur-[120px] pointer-events-none" />

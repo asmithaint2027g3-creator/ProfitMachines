@@ -127,13 +127,21 @@ export default function Navigation() {
                     {/* Desktop Navigation Links */}
                     <div className="hidden lg:flex items-center h-full gap-1 xl:gap-2 2xl:gap-4">
                         {smNavItems.map((item) => {
-                            const isActive = location.pathname === item.path ||
-                                (item.dropdown?.categories && (item.dropdown.categories as any).some((cat: any) =>
-                                    cat.items?.some((sub: any) => sub.path === location.pathname) ||
-                                    cat.b2bItems?.some((sub: any) => sub.path === location.pathname) ||
-                                    cat.b2cItems?.some((sub: any) => sub.path === location.pathname)
-                                ));
+                            const isExact = location.pathname === item.path;
+                            const isChild = item.path !== '/' && location.pathname.startsWith(item.path);
+                            const isDropdownMatch = Boolean(item.dropdown?.categories && (item.dropdown.categories as any).some((cat: any) => {
+                                const checkSub = (sub: any) => {
+                                    if (!sub?.path) return false;
+                                    const cleanPath = sub.path.split('#')[0];
+                                    return location.pathname === cleanPath;
+                                };
+                                return checkSub(cat) ||
+                                    cat.items?.some(checkSub) ||
+                                    cat.b2bItems?.some(checkSub) ||
+                                    cat.b2cItems?.some(checkSub);
+                            }));
 
+                            const isActive = isExact || isChild || isDropdownMatch;
                             const isHovered = hoveredItem === item.name;
                             const pos = dropdownPos[item.name];
 

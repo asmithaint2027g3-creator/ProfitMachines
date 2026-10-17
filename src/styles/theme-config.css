@@ -108,8 +108,29 @@ p, span, a, button, input, textarea, select, li, td, th {
     font-family: 'Times New Roman', 'Tinos', Times, serif !important;
 }
 
-code, pre, .font-mono {
-    font-family: 'JetBrains Mono', monospace !important;
+/* Explicit full Times New Roman enforcement for AI Growth and Sales Acceleration pages */
+.ai-growth-suite,
+.ai-growth-suite *,
+.ai-growth-suite *::before,
+.ai-growth-suite *::after,
+.sales-acceleration-suite,
+.sales-acceleration-suite *,
+.sales-acceleration-suite *::before,
+.sales-acceleration-suite *::after {
+    font-family: 'Times New Roman', 'Tinos', Times, 'Nimbus Roman No9 L', serif !important;
+}
+
+.ai-growth-suite .font-mono,
+.ai-growth-suite code,
+.ai-growth-suite pre,
+.sales-acceleration-suite .font-mono,
+.sales-acceleration-suite code,
+.sales-acceleration-suite pre {
+    font-family: 'Times New Roman', 'Tinos', Times, 'Nimbus Roman No9 L', serif !important;
+}
+
+code, pre {
+    font-family: 'JetBrains Mono', monospace;
 }
 
 /* ═══ Dark Mode ════════════════════════════════════════════ */

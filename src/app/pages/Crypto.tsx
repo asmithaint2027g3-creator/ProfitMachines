@@ -36,7 +36,7 @@ export default function Crypto() {
             <div className="fixed inset-0 pointer-events-none z-0"></div>
 
             {/* ── HERO SECTION (Dark Background with Background Image) ── */}
-            <section className="relative pt-32 pb-20 md:pt-40 md:pb-24 bg-[#070D18] border-b border-slate-800/80 overflow-hidden text-white">
+            <section className="relative pt-24 lg:pt-28 pb-16 md:pb-20 bg-[#070D18] border-b border-slate-800/80 overflow-hidden text-white">
                 {/* Background Image with dark blend */}
                 <div 
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 mix-blend-luminosity pointer-events-none scale-105"

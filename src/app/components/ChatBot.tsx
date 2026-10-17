@@ -460,7 +460,7 @@ export default function ChatBot() {
         const paragraphs = text.split('\n');
 
         return (
-            <div className="space-y-1.5 text-xs sm:text-[13px] leading-relaxed" style={{ fontFamily: "'Inter', 'Satoshi', system-ui, sans-serif" }}>
+            <div className="space-y-1.5 text-[11px] sm:text-xs leading-relaxed" style={{ fontFamily: "'Inter', 'Satoshi', system-ui, sans-serif" }}>
                 {paragraphs.map((p, pIdx) => {
                     if (!p.trim()) return <div key={pIdx} className="h-1" />;
 
@@ -646,7 +646,7 @@ export default function ChatBot() {
                                         }`}
                                     >
                                         {msg.role === 'user' ? (
-                                            <p className="text-xs sm:text-[13px] leading-relaxed whitespace-pre-line font-medium">
+                                            <p className="text-[11px] sm:text-xs leading-relaxed whitespace-pre-line font-medium">
                                                 {msg.content}
                                             </p>
                                         ) : (
@@ -801,7 +801,7 @@ export default function ChatBot() {
                                     value={inputValue}
                                     onChange={(e) => setInputValue(e.target.value)}
                                     placeholder={`Ask about ${currentPageContext.title}...`}
-                                    className="flex-1 px-3 py-2 rounded-xl border border-slate-300 focus:border-[#2878B5] focus:ring-2 focus:ring-[#2878B5]/20 outline-none text-xs sm:text-sm text-slate-900 transition-all placeholder:text-slate-400 bg-white"
+                                    className="flex-1 px-3 py-2 rounded-xl border border-slate-300 focus:border-[#2878B5] focus:ring-2 focus:ring-[#2878B5]/20 outline-none text-[11px] sm:text-xs text-slate-900 transition-all placeholder:text-slate-400 bg-white"
                                 />
                                 <button
                                     type="submit"

@@ -1023,46 +1023,92 @@ export default function Offerings() {
 
     return (
         <div className="min-h-screen bg-slate-50 text-slate-900 overflow-hidden relative selection:bg-emerald-100">
-            {/* Breadcrumb Navigation */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
-                <nav className="flex items-center gap-2 text-sm text-slate-500 font-medium">
-                    <Link to="/" className="hover:text-[#2878B5] transition-colors">Home</Link>
-                    <ChevronRight className="w-4 h-4" />
-                    <span className="text-[#2878B5] font-bold">Offerings</span>
-                </nav>
-            </div>
+            {/* Breadcrumb & Hero Section per Section 7 (Dark Theme with sophisticated revenue graphs & analytics) */}
+            <section className="relative pt-24 lg:pt-28 pb-16 md:pb-24 bg-[#050D1A] border-b border-slate-800 text-white overflow-hidden">
+                {/* Visual Ambient Glows */}
+                <div className="absolute inset-0 pointer-events-none opacity-30">
+                    <div className="absolute -top-24 right-1/4 w-[650px] h-[650px] bg-[#10B981]/15 rounded-full blur-[150px]" />
+                    <div className="absolute top-1/3 left-10 w-[500px] h-[500px] bg-[#2878B5]/20 rounded-full blur-[140px]" />
+                </div>
 
-            {/* Hero Section per Section 7 */}
-            <section className="relative py-12 md:py-16 overflow-hidden">
+                {/* Background Sophisticated Glowing Revenue Analytics Graph Visualization */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-35 overflow-hidden">
+                    <svg className="w-full h-full max-w-7xl min-h-[500px]" viewBox="0 0 1200 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="offeringLineGlow" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stopColor="#2878B5" stopOpacity="0.1" />
+                                <stop offset="35%" stopColor="#0EA5E9" stopOpacity="0.6" />
+                                <stop offset="70%" stopColor="#10B981" stopOpacity="0.95" />
+                                <stop offset="100%" stopColor="#34D399" stopOpacity="1" />
+                            </linearGradient>
+                            <linearGradient id="offeringAreaGlow" x1="0" y1="0" x2="0" y2="450" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stopColor="#10B981" stopOpacity="0.18" />
+                                <stop offset="100%" stopColor="#10B981" stopOpacity="0.0" />
+                            </linearGradient>
+                            <linearGradient id="offeringSecondaryLine" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.1" />
+                                <stop offset="50%" stopColor="#2878B5" stopOpacity="0.4" />
+                                <stop offset="100%" stopColor="#60A5FA" stopOpacity="0.7" />
+                            </linearGradient>
+                        </defs>
+
+                        {/* Horizontal Grid Baseline Indicators */}
+                        <line x1="60" y1="360" x2="1140" y2="360" stroke="#334155" strokeWidth="1" strokeDasharray="4 6" opacity="0.4" />
+                        <line x1="60" y1="280" x2="1140" y2="280" stroke="#334155" strokeWidth="1" strokeDasharray="4 6" opacity="0.3" />
+                        <line x1="60" y1="200" x2="1140" y2="200" stroke="#334155" strokeWidth="1" strokeDasharray="4 6" opacity="0.25" />
+                        <line x1="60" y1="120" x2="1140" y2="120" stroke="#334155" strokeWidth="1" strokeDasharray="4 6" opacity="0.2" />
+
+                        {/* Revenue Curve Fill Area */}
+                        <path d="M 60 380 Q 220 370 340 310 T 620 250 T 880 140 T 1140 70 L 1140 420 L 60 420 Z" fill="url(#offeringAreaGlow)" />
+
+                        {/* Secondary Market Trajectory Curve */}
+                        <path d="M 60 400 Q 240 390 380 340 T 680 290 T 920 220 T 1140 150" stroke="url(#offeringSecondaryLine)" strokeWidth="2" strokeDasharray="5 5" fill="none" opacity="0.7" />
+
+                        {/* Primary Glowing Upward Revenue Curve */}
+                        <path d="M 60 380 Q 220 370 340 310 T 620 250 T 880 140 T 1140 70" stroke="url(#offeringLineGlow)" strokeWidth="3.5" fill="none" />
+
+                        {/* Data Keypoints & Pulse Coordinates */}
+                        <circle cx="340" cy="310" r="4.5" fill="#0EA5E9" />
+                        <circle cx="620" cy="250" r="5" fill="#10B981" />
+                        <circle cx="880" cy="140" r="6" fill="#10B981" />
+                        <circle cx="880" cy="140" r="14" stroke="#10B981" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.7" />
+                        <circle cx="1140" cy="70" r="7" fill="#34D399" />
+                        <circle cx="1140" cy="70" r="18" stroke="#34D399" strokeWidth="1.5" strokeOpacity="0.5" />
+                    </svg>
+                </div>
+
+
+
                 <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
                     <Reveal width="100%">
-                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E1EFF8] border border-[#BAE0F8] text-[#1E6297] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs"
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#10B981]/15 border border-[#10B981]/30 text-emerald-300 text-xs font-bold uppercase tracking-wider mb-5 shadow-xs backdrop-blur-md"
                             style={{ fontFamily: 'Inter, sans-serif' }}>
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                             PROFITABILITY &amp; GROWTH INTELLIGENCE
                         </div>
-                        <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-[#0A2540] mb-6 tracking-tight leading-[1.08]"
+                        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-[1.08] drop-shadow-md"
                             style={{ fontFamily: 'Satoshi, Inter, sans-serif', letterSpacing: '-0.025em' }}>
                             Discover Profitable Markets. Validate Demand. Accelerate Revenue.
                         </h1>
-                        <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-normal max-w-3xl mx-auto mb-8"
+                        <p className="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed font-normal max-w-3xl mx-auto mb-8"
                             style={{ fontFamily: 'Inter, sans-serif' }}>
                             ProfitMachines helps businesses identify attractive market opportunities, understand customer demand, build differentiated offers, select effective growth channels, and make evidence-based decisions that improve revenue potential and profitability.
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <a
                                 href="#profit-journey"
-                                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#2878B5] text-white font-bold text-sm hover:bg-[#1E6297] transition-all shadow-md shadow-[#2878B5]/25"
+                                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#2878B5] text-white font-bold text-sm hover:bg-[#1E6297] transition-all shadow-lg shadow-[#2878B5]/30 hover:-translate-y-0.5"
                                 style={{ fontFamily: 'Inter, sans-serif' }}
                             >
-                                Explore Our Offerings
+                                <span>Explore Our Offerings</span>
                                 <ArrowRight className="w-4 h-4" />
                             </a>
                             <Link
                                 to="/book-consultation"
-                                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-slate-300 text-[#0A2540] font-bold text-sm hover:border-[#2878B5] hover:text-[#2878B5] transition-colors bg-white shadow-xs"
+                                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-white/20 text-white font-bold text-sm hover:bg-white/10 hover:border-white/40 transition-all bg-white/5 backdrop-blur-md hover:-translate-y-0.5"
                                 style={{ fontFamily: 'Inter, sans-serif' }}
                             >
-                                Discuss Your Growth Opportunity
+                                <span>Discuss Your Growth Opportunity</span>
                                 <ArrowRight className="w-4 h-4" />
                             </Link>
                         </div>

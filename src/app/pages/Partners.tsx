@@ -125,7 +125,7 @@ export default function Partners() {
     return (
         <div className="min-h-screen bg-white font-sans text-slate-900">
             {/* 1. Hero Section (Dark Background with Background Image) */}
-            <section id="partner-hero" className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden bg-[#070D18] border-b border-slate-800/80 text-white">
+            <section id="partner-hero" className="relative pt-24 lg:pt-28 pb-16 lg:pb-24 overflow-hidden bg-[#070D18] border-b border-slate-800/80 text-white">
                 {/* Background Image with dark blend */}
                 <div 
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 mix-blend-luminosity pointer-events-none scale-105"
