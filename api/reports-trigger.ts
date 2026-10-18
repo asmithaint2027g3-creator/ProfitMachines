@@ -752,7 +752,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(401).json({
       status: 'error',
       code: 'UNAUTHORIZED',
-      message: 'Invalid or missing Authorization Bearer token.'
+      message: 'Invalid or missing Authorization Bearer token.',
+      debug: {
+        receivedHeaderLength: authHeader.length,
+        receivedTokenPreview: providedToken ? `${providedToken.substring(0, 4)}...${providedToken.slice(-4)}` : 'EMPTY',
+        validMatch: isSecretValid
+      }
     });
   }
 
