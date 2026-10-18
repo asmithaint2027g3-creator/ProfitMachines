@@ -39,7 +39,11 @@
     },
     {
       "source": "/api/reports/trigger",
-      "destination": "/api/track-visitor?action=trigger-report"
+      "destination": "/api/reports-trigger"
+    },
+    {
+      "source": "/api/submit",
+      "destination": "/api/analytics"
     },
     {
       "source": "/api/notify-lead",

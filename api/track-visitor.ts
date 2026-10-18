@@ -1,5 +1,4 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import triggerReportsHandler from './_lib/reports-trigger';
 
 /**
  * api/track-visitor.ts
@@ -110,11 +109,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
-
-  // ── Dedicated Report Trigger Relay ──
-  if (req.query.action === 'trigger-report' || req.query.action === 'report') {
-    return await triggerReportsHandler(req, res);
-  }
 
   // ── GET: Read all visitor records from Airtable OR Geo info ──
   if (req.method === 'GET') {

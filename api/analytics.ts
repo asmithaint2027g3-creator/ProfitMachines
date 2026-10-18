@@ -34,10 +34,27 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { events } = req.body;
+    const { events, table, fields } = req.body || {};
+
+    // Support single table submission (consolidated from submit.ts)
+    if (table && fields) {
+        try {
+            await submitToGoogleScript({
+                table,
+                fields: {
+                    ...fields,
+                    submitted_at: new Date().toISOString()
+                }
+            });
+            return res.status(200).json({ success: true });
+        } catch (error: any) {
+            console.error('Google Script Submission Error:', error);
+            return res.status(500).json({ error: 'Failed to submit', details: error.message });
+        }
+    }
 
     if (!events || !Array.isArray(events)) {
-        return res.status(400).json({ error: 'Invalid events payload' });
+        return res.status(400).json({ error: 'Invalid events or table payload' });
     }
 
     try {
