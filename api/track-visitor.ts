@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import triggerReportsHandler from './_lib/reports-trigger';
 
 /**
  * api/track-visitor.ts
@@ -110,15 +111,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  // ── Emergency / Dedicated Report Trigger Relay (Bypasses route rewrites) ──
+  // ── Dedicated Report Trigger Relay ──
   if (req.query.action === 'trigger-report' || req.query.action === 'report') {
-    try {
-      const reportHandler = (await import('./_lib/reports-trigger')).default;
-      return await reportHandler(req, res);
-    } catch (relayErr: any) {
-      console.error('[track-visitor relay error]:', relayErr);
-      return res.status(500).json({ error: relayErr?.message || String(relayErr) });
-    }
+    return await triggerReportsHandler(req, res);
   }
 
   // ── GET: Read all visitor records from Airtable OR Geo info ──
