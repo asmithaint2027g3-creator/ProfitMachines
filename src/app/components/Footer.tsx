@@ -290,8 +290,18 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* Bottom Bar */}
+                {/* TrustGrid & ISISecurity Enterprise Compliance & Telemetry Footprint */}
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-6 border-t border-white/10 mt-6">
+                    <div className="flex items-center gap-3">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        <span className="text-xs font-mono text-emerald-400 font-semibold tracking-wider">
+                            SYSTEMS OPERATIONAL • 99.99% UPTIME
+                        </span>
+                        <span className="hidden sm:inline text-xs text-slate-500">|</span>
+                        <span className="hidden sm:inline text-xs text-slate-400">
+                            SOC-2 TYPE II &amp; ISO 27001 COMPLIANT
+                        </span>
+                    </div>
                     <p className="text-xs text-slate-400 font-medium tracking-wide">
                         &copy; {new Date().getFullYear()} ProfitMachines. All rights reserved.
                     </p>

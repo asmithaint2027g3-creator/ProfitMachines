@@ -17,27 +17,44 @@ export default function HeroSection() {
       <div className="relative w-full max-w-[95%] lg:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
         <div className="space-y-10">
 
-          {/* Premium Badge */}
-          <motion.div className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/80 backdrop-blur-md border border-slate-200/60 rounded-full shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] hover:border-slate-300 hover:bg-white transition-all cursor-default group">
-            <Sparkles className="w-4 h-4 text-slate-800" />
-            <span className="text-xs text-slate-700 font-bold tracking-widest uppercase">
-              AI-Powered Revenue Operating System
+          {/* TrustGrid Live Telemetry Badge */}
+          <motion.div className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/90 backdrop-blur-md border border-[#2878B5]/30 rounded-full shadow-[0_2px_14px_-4px_rgba(40,120,181,0.15)] hover:border-[#2878B5]/60 hover:bg-white transition-all cursor-default group">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <Sparkles className="w-3.5 h-3.5 text-[#2878B5]" />
+            <span className="text-[11px] text-slate-800 font-bold tracking-widest uppercase font-mono">
+              ENTERPRISE AI GROWTH ARCHITECTURE • v2.6 ACTIVE
             </span>
           </motion.div>
 
           {/* Ultra-refined Headline */}
           <h1 className="text-5xl sm:text-7xl lg:text-[5.5rem] font-extrabold text-slate-900 leading-[1.05] tracking-tighter max-w-5xl mx-auto">
             Increase Revenue Velocity by{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 drop-shadow-sm border-b-4 border-slate-900/10">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2878B5] via-[#1E6297] to-[#0A2540] drop-shadow-sm border-b-4 border-[#2878B5]/20">
               5X in 12 Months
             </span>{' '}
             with AI Sales Ops
           </h1>
 
           {/* Subheadline with lighter contrast */}
-          <p className="text-lg sm:text-xl text-slate-500 leading-relaxed max-w-2xl mx-auto font-medium text-balance">
-            Propel your business on autopilot with <span className="text-slate-800 font-semibold">Artificial Intelligence (AI) & Machine Learning (ML)-Powered Sales Growth Automation</span> — from Demand Discovery to Revenue Management.
+          <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal text-balance">
+            Propel your business on autopilot with <span className="text-slate-900 font-semibold">Artificial Intelligence (AI) & Machine Learning (ML)-Powered Sales Growth Automation</span> — from Demand Discovery to Revenue Management.
           </p>
+
+          {/* TrustGrid Signature Metric Chips */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#2878B5]/10 border border-[#2878B5]/20 text-[#1E6297] text-xs font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2878B5]" />
+              30–60% TCO Reduction
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 text-xs font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+              99.98% Accuracy Engine
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-100 border border-slate-200 text-slate-700 text-xs font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-slate-500" />
+              SOC-2 Type II Certified
+            </span>
+          </div>
 
           {/* Minimalist CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">

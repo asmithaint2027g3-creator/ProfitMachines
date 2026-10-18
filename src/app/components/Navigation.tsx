@@ -424,11 +424,29 @@ export default function Navigation() {
                         })}
                     </div>
 
-                    {/* Right CTA Button (Matching ISI Security primary action button) */}
+                    {/* Right CTA Area: TrustGrid Telemetry Pill + Enterprise WhatsApp + Book Consultation */}
                     <div className="hidden lg:flex items-center gap-3 shrink-0 relative z-50">
+                        {/* Live Telemetry Pill */}
+                        <div className="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-700 text-[11px] font-semibold tracking-wider font-mono">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            <span>AI MESH ACTIVE</span>
+                        </div>
+
+                        {/* WhatsApp Advisor Direct Link */}
+                        <a
+                            href="https://wa.me/919513288612?text=Hello%20ProfitMachines%20team%2C%20I%20would%20like%20to%20learn%20more%20about%20your%20AI%20solutions."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Direct WhatsApp advisory"
+                            className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-slate-100 text-slate-700 hover:text-emerald-600 hover:bg-emerald-50 border border-slate-200/80 transition-all hover:scale-105"
+                            title="Chat with Solutions Engineer on WhatsApp"
+                        >
+                            <Phone className="w-4 h-4" />
+                        </a>
+
                         <Link
                             to="/book-consultation"
-                            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 active:bg-blue-700 text-primary-foreground px-5 py-2.5 rounded-full font-bold text-sm transition-all duration-200 shadow-md shadow-primary/20 hover:shadow-primary/35 hover:-translate-y-px group"
+                            className="inline-flex items-center gap-2 bg-[#2878B5] hover:bg-[#1E6297] text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all duration-200 shadow-md shadow-[#2878B5]/25 hover:shadow-[#2878B5]/40 hover:-translate-y-px group"
                         >
                             <span>Book Consultation</span>
                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
