@@ -1,10 +1,11 @@
-﻿
+
 
 import FeatureSection from '../components/demand-pulse/FeatureSection';
 import DemandPulseCarousel from '../components/demand-pulse/DemandPulseCarousel';
 import { Sparkles, ArrowRight, PlayCircle } from 'lucide-react';
 import { useLeadModal } from '../context/LeadModalContext';
 import ContextualCtaSection from '../components/forms/ContextualCtaSection';
+import OwnerYouTubeShowcase from '../components/OwnerYouTubeShowcase';
 
 export default function DemandPulse() {
     const { openQuickForm, openLongForm } = useLeadModal();
@@ -270,6 +271,15 @@ export default function DemandPulse() {
                     "24/7 Availability"
                 ]}
             />
+
+            {/* Owner-Managed Video Showcase with Attached Lead Form */}
+            <div className="bg-slate-50 py-8 border-t border-slate-200">
+                <OwnerYouTubeShowcase 
+                    targetPage="/demand-pulse"
+                    heading="DemandPulse AI™: Real-Time Dark Funnel Intent Briefing"
+                    subheading="Explore how autonomous buyer-intent models process dark social signals, technographic installations, and hiring triggers before inbound competitors reach out."
+                />
+            </div>
 
             {/* Configurable Contextual CTA Section */}
             <ContextualCtaSection

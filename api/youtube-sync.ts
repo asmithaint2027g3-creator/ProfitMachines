@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import publishHandler from './_lib/youtube-publish';
+import { handleYouTubeVideoLead } from './_lib/youtube-lead-service';
 
 /**
  * api/youtube-sync.ts
@@ -853,6 +854,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // ── Dispatch to YouTube Publishing Submodule if requested ───────────────
     if (req.query.action === 'publish' || req.body?.action === 'publish') {
         return publishHandler(req, res);
+    }
+
+    // ── Dispatch to Owner YouTube Video Lead Automation Handler ───────────────
+    if (req.query.action === 'video-lead' || req.body?.action === 'video-lead') {
+        return handleYouTubeVideoLead(req, res);
     }
 
     const cronSecret = (process.env.CRON_SECRET || 'profitmachines_secure_cron_2026').trim();

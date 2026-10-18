@@ -20,6 +20,7 @@ import ResourcesCarousel from '../components/ResourcesCarousel';
 import LeadCaptureSection from '../components/LeadCaptureSection';
 import { useLeadModal } from '../context/LeadModalContext';
 import ContextualCtaSection from '../components/forms/ContextualCtaSection';
+import OwnerYouTubeShowcase from '../components/OwnerYouTubeShowcase';
 
 export default function Resources() {
     const { openQuickForm, openLongForm } = useLeadModal();
@@ -187,6 +188,14 @@ export default function Resources() {
                     </Reveal>
                 </div>
             </div>
+
+            {/* 3.5. Owner-Managed Video Showcase with Attached Lead Attribution Form */}
+            <OwnerYouTubeShowcase 
+                targetPage="/resources"
+                heading="Autonomous Revenue Infrastructure: Executive Video Dossier"
+                subheading="Watch how ProfitMachines deploys multi-agent cognitive architecture to scale enterprise pipeline pacing and reduce sales cycle drag."
+                className="bg-[#F8FAFC]"
+            />
 
             {/* 4. Quick Diagnostic Lead Capture Form */}
             <LeadCaptureSection />

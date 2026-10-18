@@ -50,6 +50,10 @@
       "destination": "/api/email-templates?action=notify-lead"
     },
     {
+      "source": "/api/leads/youtube",
+      "destination": "/api/youtube-sync?action=video-lead"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "/api/$1"
     },

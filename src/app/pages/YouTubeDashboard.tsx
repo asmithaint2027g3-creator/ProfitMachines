@@ -4,8 +4,14 @@ import {
     ShieldCheck, Lock, Key, ExternalLink, AlertCircle, CheckCircle2, 
     FileSpreadsheet, Database, Calendar, Search, Filter, Sparkles, 
     ChevronRight, ChevronDown, Check, X, ShieldAlert, ArrowUpRight,
-    Upload, Plus, Tag, Share2, Video, Globe, Send, UserCheck
+    Upload, Plus, Tag, Share2, Video, Globe, Send, UserCheck, Trash2, Edit3, Power
 } from 'lucide-react';
+import { 
+    OwnerYouTubeVideo, 
+    getOwnerYouTubeVideos, 
+    saveOwnerYouTubeVideos, 
+    extractYouTubeVideoId 
+} from '../data/ownerVideosData';
 
 interface DiagnosticInfo {
     status: string;
@@ -85,10 +91,23 @@ export default function YouTubeDashboard() {
     const [syncMessage, setSyncMessage] = useState<{ type: 'success' | 'error' | 'info'; text: string } | null>(null);
 
     // ── Active Tabs ───────────────────────────────────────────────────────
-    const [activeTab, setActiveTab] = useState<'OVERVIEW' | 'LEADS' | 'POST_VIDEO' | 'SCAN_VIDEO' | 'VIDEOS' | 'LOGS'>('OVERVIEW');
+    const [activeTab, setActiveTab] = useState<'OVERVIEW' | 'OWNER_VIDEOS' | 'LEADS' | 'POST_VIDEO' | 'SCAN_VIDEO' | 'VIDEOS' | 'LOGS'>('OVERVIEW');
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedVideoFilter, setSelectedVideoFilter] = useState('ALL');
     const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('ALL');
+
+    // ── Owner-Managed Videos State ────────────────────────────────────────
+    const [ownerVideos, setOwnerVideos] = useState<OwnerYouTubeVideo[]>(() => getOwnerYouTubeVideos());
+    const [editingVideoId, setEditingVideoId] = useState<string | null>(null);
+    const [videoFormUrl, setVideoFormUrl] = useState('');
+    const [videoFormTitle, setVideoFormTitle] = useState('');
+    const [videoFormDescription, setVideoFormDescription] = useState('');
+    const [videoFormPage, setVideoFormPage] = useState('/resources');
+    const [videoFormService, setVideoFormService] = useState('Autonomous Revenue Infrastructure');
+    const [videoFormCta, setVideoFormCta] = useState('Book an Executive Architecture Briefing');
+    const [videoFormPublished, setVideoFormPublished] = useState(true);
+    const [videoFormFeatured, setVideoFormFeatured] = useState(false);
+    const [videoFormError, setVideoFormError] = useState<string | null>(null);
 
     // ── Video Publishing Form State ───────────────────────────────────────
     const [publishTitle, setPublishTitle] = useState('');
@@ -404,6 +423,114 @@ export default function YouTubeDashboard() {
         }
     };
 
+    // ── Owner Videos Management Handlers ────────────────────────────────
+    const handleSaveOwnerVideo = (e: React.FormEvent) => {
+        e.preventDefault();
+        setVideoFormError(null);
+
+        if (!videoFormUrl.trim()) {
+            setVideoFormError('Please enter a YouTube video URL.');
+            return;
+        }
+
+        const extractedId = extractYouTubeVideoId(videoFormUrl.trim());
+        if (!extractedId) {
+            setVideoFormError('Invalid YouTube URL or ID. Please provide a standard watch, youtu.be, or embed link.');
+            return;
+        }
+
+        if (!videoFormTitle.trim()) {
+            setVideoFormError('Please provide an executive video title.');
+            return;
+        }
+
+        const now = new Date().toISOString();
+
+        if (editingVideoId) {
+            // Update existing
+            const updated = ownerVideos.map(v => {
+                if (v.id === editingVideoId) {
+                    return {
+                        ...v,
+                        videoId: extractedId,
+                        youtubeUrl: videoFormUrl.trim(),
+                        title: videoFormTitle.trim(),
+                        description: videoFormDescription.trim(),
+                        targetPage: videoFormPage.trim() || '/resources',
+                        targetService: videoFormService.trim() || 'Autonomous Revenue Infrastructure',
+                        ctaLabel: videoFormCta.trim() || 'Request Consultation',
+                        published: videoFormPublished,
+                        featured: videoFormFeatured,
+                        updatedAt: now
+                    };
+                }
+                return v;
+            });
+            setOwnerVideos(updated);
+            saveOwnerYouTubeVideos(updated);
+            setSyncMessage({ type: 'success', text: `Updated video "${videoFormTitle}" successfully!` });
+        } else {
+            // Create new
+            const newEntry: OwnerYouTubeVideo = {
+                id: `pm-vid-${Date.now()}`,
+                videoId: extractedId,
+                youtubeUrl: videoFormUrl.trim(),
+                title: videoFormTitle.trim(),
+                description: videoFormDescription.trim(),
+                targetPage: videoFormPage.trim() || '/resources',
+                targetService: videoFormService.trim() || 'Autonomous Revenue Infrastructure',
+                ctaLabel: videoFormCta.trim() || 'Request Consultation',
+                ctaType: 'consultation',
+                published: videoFormPublished,
+                featured: videoFormFeatured,
+                createdAt: now,
+                updatedAt: now
+            };
+            const updated = [newEntry, ...ownerVideos];
+            setOwnerVideos(updated);
+            saveOwnerYouTubeVideos(updated);
+            setSyncMessage({ type: 'success', text: `Added new owner video "${videoFormTitle}" to website!` });
+        }
+
+        // Reset form
+        setEditingVideoId(null);
+        setVideoFormUrl('');
+        setVideoFormTitle('');
+        setVideoFormDescription('');
+        setVideoFormPage('/resources');
+        setVideoFormService('Autonomous Revenue Infrastructure');
+        setVideoFormCta('Book an Executive Architecture Briefing');
+        setVideoFormPublished(true);
+        setVideoFormFeatured(false);
+    };
+
+    const handleEditVideo = (video: OwnerYouTubeVideo) => {
+        setEditingVideoId(video.id);
+        setVideoFormUrl(video.youtubeUrl);
+        setVideoFormTitle(video.title);
+        setVideoFormDescription(video.description);
+        setVideoFormPage(video.targetPage);
+        setVideoFormService(video.targetService);
+        setVideoFormCta(video.ctaLabel);
+        setVideoFormPublished(video.published);
+        setVideoFormFeatured(video.featured || false);
+        setVideoFormError(null);
+    };
+
+    const handleTogglePublished = (id: string) => {
+        const updated = ownerVideos.map(v => v.id === id ? { ...v, published: !v.published, updatedAt: new Date().toISOString() } : v);
+        setOwnerVideos(updated);
+        saveOwnerYouTubeVideos(updated);
+    };
+
+    const handleDeleteVideo = (id: string) => {
+        if (!confirm('Are you sure you want to remove this video link from website pages?')) return;
+        const updated = ownerVideos.filter(v => v.id !== id);
+        setOwnerVideos(updated);
+        saveOwnerYouTubeVideos(updated);
+        setSyncMessage({ type: 'info', text: 'Video removed from owner registry.' });
+    };
+
     // ── Filtered Leads ────────────────────────────────────────────────────
     const filteredLeads = useMemo(() => {
         return leads.filter(lead => {
@@ -633,6 +760,7 @@ export default function YouTubeDashboard() {
                 <div className="flex items-center gap-2 border-b border-emerald-900/40 pb-4 overflow-x-auto">
                     {[
                         { id: 'OVERVIEW', label: 'Pipeline Overview', icon: Sparkles },
+                        { id: 'OWNER_VIDEOS', label: `🎬 Owner Video Links (${ownerVideos.length})`, icon: Video },
                         { id: 'LEADS', label: `Potential Leads (${leads.length})`, icon: UserCheck },
                         { id: 'POST_VIDEO', label: '🎥 Post Video to YouTube', icon: Video },
                         { id: 'SCAN_VIDEO', label: '🔍 Scan Specific Video', icon: Search },
@@ -792,7 +920,282 @@ export default function YouTubeDashboard() {
                     </div>
                 )}
 
-                {/* ── Tab 2: LEADS (Flagged) ─────────────────────────────────── */}
+                {/* ── Tab 2: OWNER_VIDEOS (Owner-Managed Video Links) ─────────── */}
+                {activeTab === 'OWNER_VIDEOS' && (
+                    <div className="mt-6 space-y-8">
+                        {/* Add / Edit Video Panel */}
+                        <div className="bg-[#081A28] border border-emerald-700/50 rounded-2xl p-6 shadow-xl">
+                            <div className="flex items-center justify-between pb-4 border-b border-emerald-900/40">
+                                <div>
+                                    <h3 className="text-base font-bold text-white flex items-center gap-2">
+                                        <Video className="w-5 h-5 text-emerald-400" />
+                                        {editingVideoId ? 'Edit Owner Video Link' : 'Add New Owner Video Link'}
+                                    </h3>
+                                    <p className="text-xs text-slate-400 mt-0.5">
+                                        Provide real YouTube video URLs to embed across ProfitMachines pages with customized descriptions and direct CTA lead forms.
+                                    </p>
+                                </div>
+                                {editingVideoId && (
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setEditingVideoId(null);
+                                            setVideoFormUrl('');
+                                            setVideoFormTitle('');
+                                            setVideoFormDescription('');
+                                            setVideoFormError(null);
+                                        }}
+                                        className="text-xs text-slate-400 hover:text-white px-3 py-1 rounded-lg bg-slate-800"
+                                    >
+                                        Cancel Edit
+                                    </button>
+                                )}
+                            </div>
+
+                            {videoFormError && (
+                                <div className="mt-4 p-3 rounded-xl bg-rose-950/50 border border-rose-600/50 text-rose-300 text-xs flex items-center gap-2">
+                                    <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+                                    <span>{videoFormError}</span>
+                                </div>
+                            )}
+
+                            <form onSubmit={handleSaveOwnerVideo} className="mt-5 space-y-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                            YouTube Video URL or ID *
+                                        </label>
+                                        <input
+                                            type="text"
+                                            required
+                                            value={videoFormUrl}
+                                            onChange={e => setVideoFormUrl(e.target.value)}
+                                            placeholder="https://www.youtube.com/watch?v=... or https://youtu.be/..."
+                                            className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"
+                                        />
+                                        <span className="text-[11px] text-slate-400 mt-1 block">
+                                            Supports watch URLs, youtu.be links, and embed links.
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                            Video Title / Executive Label *
+                                        </label>
+                                        <input
+                                            type="text"
+                                            required
+                                            value={videoFormTitle}
+                                            onChange={e => setVideoFormTitle(e.target.value)}
+                                            placeholder="e.g. Autonomous SDR Orchestration & Demand Architecture"
+                                            className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                        Video Description / Value Proposition
+                                    </label>
+                                    <textarea
+                                        rows={3}
+                                        value={videoFormDescription}
+                                        onChange={e => setVideoFormDescription(e.target.value)}
+                                        placeholder="Explain what executive visitors will learn from this briefing and how it relates to ProfitMachines solutions..."
+                                        className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 resize-none"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                    <div>
+                                        <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                            Related Website Page
+                                        </label>
+                                        <select
+                                            value={videoFormPage}
+                                            onChange={e => setVideoFormPage(e.target.value)}
+                                            className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-400"
+                                        >
+                                            <option value="/resources">/resources (Resources & Playbooks)</option>
+                                            <option value="/demand-pulse">/demand-pulse (DemandPulse AI™)</option>
+                                            <option value="/offerings">/offerings (Solutions & Architecture)</option>
+                                            <option value="/company">/company (About ProfitMachines)</option>
+                                            <option value="/outcomes">/outcomes (Client ROI & Metrics)</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                            Related Service / Solution
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={videoFormService}
+                                            onChange={e => setVideoFormService(e.target.value)}
+                                            placeholder="e.g. DemandPulse AI™ Intent Radar"
+                                            className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-400"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="text-xs font-semibold text-slate-300 block mb-1">
+                                            Attached CTA / Lead Form Button
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={videoFormCta}
+                                            onChange={e => setVideoFormCta(e.target.value)}
+                                            placeholder="e.g. Book an Executive Briefing"
+                                            className="w-full bg-[#02130d] border border-emerald-700/50 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-400"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-emerald-900/30">
+                                    <div className="flex items-center gap-6">
+                                        <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-300">
+                                            <input
+                                                type="checkbox"
+                                                checked={videoFormPublished}
+                                                onChange={e => setVideoFormPublished(e.target.checked)}
+                                                className="rounded border-slate-700 text-emerald-500 focus:ring-emerald-400"
+                                            />
+                                            <span>Active / Published on Website</span>
+                                        </label>
+
+                                        <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-300">
+                                            <input
+                                                type="checkbox"
+                                                checked={videoFormFeatured}
+                                                onChange={e => setVideoFormFeatured(e.target.checked)}
+                                                className="rounded border-slate-700 text-emerald-500 focus:ring-emerald-400"
+                                            />
+                                            <span>Featured Video</span>
+                                        </label>
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        className="px-5 py-2.5 rounded-xl text-xs font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 flex items-center gap-2 transition cursor-pointer shadow-md shadow-emerald-500/20"
+                                    >
+                                        <Plus className="w-4 h-4" />
+                                        <span>{editingVideoId ? 'Save Changes' : 'Publish Owner Video'}</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        {/* List of Owner-Managed Videos */}
+                        <div className="bg-[#081A28] border border-emerald-800/40 rounded-2xl p-6">
+                            <h3 className="text-base font-bold text-white flex items-center gap-2 mb-4">
+                                <span>Configured Owner Videos ({ownerVideos.length})</span>
+                                <span className="text-xs font-normal text-slate-400">
+                                    (Rendered dynamically on matching website pages)
+                                </span>
+                            </h3>
+
+                            <div className="space-y-4">
+                                {ownerVideos.map(vid => (
+                                    <div
+                                        key={vid.id}
+                                        className="p-5 rounded-xl bg-[#02130d] border border-emerald-900/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:border-emerald-600/40 transition"
+                                    >
+                                        <div className="flex items-start gap-4 flex-1 min-w-0">
+                                            <div className="w-32 h-20 bg-slate-900 rounded-lg overflow-hidden shrink-0 border border-slate-800 relative group">
+                                                <img
+                                                    src={`https://img.youtube.com/vi/${vid.videoId}/mqdefault.jpg`}
+                                                    alt={vid.title}
+                                                    className="w-full h-full object-cover"
+                                                    onError={e => {
+                                                        (e.target as any).src = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80';
+                                                    }}
+                                                />
+                                                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                                    <Play className="w-5 h-5 text-white" />
+                                                </div>
+                                            </div>
+
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex flex-wrap items-center gap-2">
+                                                    <h4 className="text-sm font-bold text-white truncate max-w-md">
+                                                        {vid.title}
+                                                    </h4>
+                                                    <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
+                                                        vid.published ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-700 text-slate-300'
+                                                    }`}>
+                                                        {vid.published ? 'PUBLISHED' : 'DRAFT'}
+                                                    </span>
+                                                    {vid.featured && (
+                                                        <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-amber-500/20 text-amber-300">
+                                                            FEATURED
+                                                        </span>
+                                                    )}
+                                                </div>
+
+                                                <p className="text-xs text-slate-400 line-clamp-2 mt-1">
+                                                    {vid.description}
+                                                </p>
+
+                                                <div className="mt-2 flex flex-wrap items-center gap-3 text-[11px] text-slate-500">
+                                                    <span>Page: <strong className="text-slate-300">{vid.targetPage}</strong></span>
+                                                    <span>•</span>
+                                                    <span>CTA: <strong className="text-slate-300">{vid.ctaLabel}</strong></span>
+                                                    <span>•</span>
+                                                    <span className="font-mono text-emerald-400">ID: {vid.videoId}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex items-center gap-2 shrink-0 self-end md:self-center">
+                                            <button
+                                                type="button"
+                                                onClick={() => handleTogglePublished(vid.id)}
+                                                className={`p-2 rounded-lg border text-xs flex items-center gap-1 transition cursor-pointer ${
+                                                    vid.published
+                                                        ? 'bg-emerald-950/40 border-emerald-600/40 text-emerald-300 hover:bg-emerald-900/60'
+                                                        : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-white'
+                                                }`}
+                                                title={vid.published ? 'Deactivate from website' : 'Activate on website'}
+                                            >
+                                                <Power className="w-3.5 h-3.5" />
+                                            </button>
+
+                                            <button
+                                                type="button"
+                                                onClick={() => handleEditVideo(vid)}
+                                                className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition cursor-pointer"
+                                                title="Edit Video Entry"
+                                            >
+                                                <Edit3 className="w-3.5 h-3.5" />
+                                            </button>
+
+                                            <a
+                                                href={vid.youtubeUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition"
+                                                title="Open on YouTube"
+                                            >
+                                                <ExternalLink className="w-3.5 h-3.5" />
+                                            </a>
+
+                                            <button
+                                                type="button"
+                                                onClick={() => handleDeleteVideo(vid.id)}
+                                                className="p-2 rounded-lg bg-rose-950/40 hover:bg-rose-900/60 text-rose-300 border border-rose-800/40 transition cursor-pointer"
+                                                title="Delete Video"
+                                            >
+                                                <Trash2 className="w-3.5 h-3.5" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* ── Tab 3: LEADS (Flagged) ─────────────────────────────────── */}
                 {activeTab === 'LEADS' && (
                     <div className="mt-6 space-y-6">
                         {/* Filters & Actions Bar */}
