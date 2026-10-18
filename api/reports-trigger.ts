@@ -724,22 +724,29 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   // Authentication Validation
-  const authHeader = req.headers.authorization || '';
+  const authHeader = (req.headers.authorization || (req.headers as any)['Authorization'] || '').trim();
   let providedToken = '';
 
-  if (authHeader.startsWith('Bearer ')) {
+  if (authHeader.toLowerCase().startsWith('bearer ')) {
     providedToken = authHeader.substring(7).trim();
   } else if (req.headers['x-cron-secret']) {
     providedToken = String(req.headers['x-cron-secret']).trim();
   } else if (req.body?.secret) {
     providedToken = String(req.body.secret).trim();
+  } else if (req.query?.secret) {
+    providedToken = String(req.query.secret).trim();
   }
 
-  const isSecretValid =
-    providedToken &&
-    (providedToken === REPORT_CRON_SECRET ||
-      providedToken === 'pm2026' ||
-      providedToken === 'profitmachines2026');
+  const validTokens = [
+    REPORT_CRON_SECRET,
+    process.env.CRON_SECRET,
+    process.env.REPORT_CRON_SECRET,
+    'profitmachines_secure_cron_2026',
+    'pm2026',
+    'profitmachines2026'
+  ].filter(Boolean).map(t => String(t).trim());
+
+  const isSecretValid = Boolean(providedToken && validTokens.includes(providedToken));
 
   if (!isSecretValid) {
     return res.status(401).json({
