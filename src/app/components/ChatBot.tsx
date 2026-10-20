@@ -822,7 +822,7 @@ export default function ChatBot() {
                 <button
                     onClick={() => handleToggleChat(true)}
                     aria-label="Open ProfitMachines AI Assistant"
-                    className="fixed bottom-6 right-5 sm:right-6 z-40 bg-[#2878B5] hover:bg-[#085a45] active:bg-[#032b24] text-white px-4 py-3 rounded-full shadow-xl shadow-[#2878B5]/30 flex items-center gap-2.5 transition-all duration-300 hover:scale-105 group ring-2 ring-white/70 cursor-pointer"
+                    className="fixed bottom-20 sm:bottom-6 right-5 sm:right-6 z-50 bg-[#2878B5] hover:bg-[#085a45] active:bg-[#032b24] text-white px-4 py-3 rounded-full shadow-xl shadow-[#2878B5]/30 flex items-center gap-2.5 transition-all duration-300 hover:scale-105 group ring-2 ring-white/70 cursor-pointer"
                 >
                     <div className="relative">
                         <MessageSquare className="w-5 h-5 text-emerald-300" />

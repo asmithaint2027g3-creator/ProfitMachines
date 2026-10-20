@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, X, MessageSquare, Zap, Calendar } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { useLeadModal } from '../context/LeadModalContext';
+import { trackConsultationCtaClick } from '../../lib/clarity';
 
 export default function StickyCtaBar() {
     const [visible, setVisible] = useState(false);
@@ -67,8 +68,11 @@ export default function StickyCtaBar() {
                         
                         {/* 1. Quick Inquiry Button */}
                         <button
-                            onClick={() => openQuickForm({ defaultService: getContextTitle(), source: 'Sticky CTA Bar' })}
-                            className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-[#2878B5]/20 hover:bg-[#2878B5]/30 text-[#BAE0F8] hover:text-white border border-[#2878B5]/40 rounded-lg text-xs sm:text-sm font-bold transition-all shrink-0"
+                            onClick={() => {
+                                trackConsultationCtaClick('Quick Inquiry', 'Sticky CTA Bar');
+                                openQuickForm({ defaultService: getContextTitle(), source: 'Sticky CTA Bar' });
+                            }}
+                            className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-[#2878B5]/20 hover:bg-[#2878B5]/30 text-[#BAE0F8] hover:text-white border border-[#2878B5]/40 rounded-lg text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer"
                         >
                             <Zap className="w-3.5 h-3.5 text-[#5CAAE6]" />
                             <span>Quick Inquiry</span>
@@ -76,7 +80,10 @@ export default function StickyCtaBar() {
 
                         {/* 2. Book Consultation Button */}
                         <button
-                            onClick={() => openLongForm({ defaultService: getContextTitle(), source: 'Sticky CTA Bar' })}
+                            onClick={() => {
+                                trackConsultationCtaClick('Book Consultation', 'Sticky CTA Bar');
+                                openLongForm({ defaultService: getContextTitle(), source: 'Sticky CTA Bar' });
+                            }}
                             className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold text-xs sm:text-sm rounded-lg transition-all shadow-md shrink-0 group border border-[#5CAAE6]/40 cursor-pointer"
                         >
                             <Calendar className="w-3.5 h-3.5 text-white" />

@@ -8,6 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { trackEvent } from '../../../lib/analytics';
+import { trackConsultationCtaClick } from '../../../lib/clarity';
 import { useLeadModal } from '../../context/LeadModalContext';
 
 export interface HeroSlideItem {
@@ -221,11 +222,11 @@ export default function HomepageHero() {
 
             <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
                 
-                {/* ── Main Two-Column Slide Area ── */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-14 items-center min-h-[580px] xl:min-h-[620px]">
+                {/* ── Main Two-Column Slide Area (Height-reserved to prevent CLS) ── */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-14 items-center min-h-[920px] sm:min-h-[820px] lg:min-h-[580px] xl:min-h-[620px]">
                     
                     {/* ── Left Column: Value Proposition, Features, Metrics & CTAs ── */}
-                    <div className="lg:col-span-7 flex flex-col justify-center">
+                    <div className="lg:col-span-7 flex flex-col justify-center min-h-[580px] sm:min-h-[520px] lg:min-h-[500px] xl:min-h-[520px]">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={slide.id + '-content'}
@@ -304,7 +305,10 @@ export default function HomepageHero() {
                                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-5 sm:mb-6">
                                     <Link
                                         to={slide.primaryCta.link}
-                                        onClick={() => trackEvent({ eventName: 'HERO_PRIMARY_CTA_CLICK', label: slide.primaryCta.text })}
+                                        onClick={() => {
+                                            trackEvent({ eventName: 'HERO_PRIMARY_CTA_CLICK', label: slide.primaryCta.text });
+                                            trackConsultationCtaClick(slide.primaryCta.text, 'Homepage Hero Primary');
+                                        }}
                                         className="inline-flex items-center justify-center gap-2.5 px-7 py-4 bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold text-sm sm:text-base rounded-xl shadow-lg shadow-[#2878B5]/25 hover:shadow-[#2878B5]/40 transition-all duration-200 hover:-translate-y-0.5 group focus:outline-none focus:ring-2 focus:ring-[#2878B5] focus:ring-offset-2"
                                     >
                                         <span>{slide.primaryCta.text}</span>
@@ -313,7 +317,10 @@ export default function HomepageHero() {
 
                                     <button
                                         type="button"
-                                        onClick={() => openQuickForm(slide.title)}
+                                        onClick={() => {
+                                            openQuickForm(slide.title);
+                                            trackConsultationCtaClick(slide.secondaryCta.text, 'Homepage Hero Secondary');
+                                        }}
                                         className="inline-flex items-center justify-center px-7 py-4 bg-white hover:bg-slate-50 text-[#0A2540] hover:text-[#2878B5] font-bold text-sm sm:text-base rounded-xl border border-slate-300 hover:border-[#2878B5]/50 shadow-sm transition-all duration-200 hover:-translate-y-0.5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#2878B5] focus:ring-offset-2"
                                     >
                                         <span>{slide.secondaryCta.text}</span>
@@ -344,6 +351,8 @@ export default function HomepageHero() {
                                             key={slide.id + '-img'}
                                             src={slide.image}
                                             alt={slide.imageAlt}
+                                            width={560}
+                                            height={420}
                                             className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500 ease-out"
                                             initial={{ opacity: 0, scale: 1.05 }}
                                             animate={{ opacity: 1, scale: 1 }}

@@ -2,17 +2,23 @@
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { submitToGoogleScript, fetchAnalyticsFromGoogleScript } from './_lib/google-sheets';
+import { SecurityController } from './_lib/security.ts';
 
 const ALLOWED_GET_ACTIONS = ['daily_analytics', 'weekly_analytics', 'dashboard_data', 'sheet2_dashboard', 'sheet2_tab'];
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
     if (req.method === 'OPTIONS') {
+        SecurityController.applySecurityHeaders(res);
         return res.status(200).end();
     }
+
+    const isPublicAllowed = await SecurityController.enforcePublic(req, res, {
+        allowedMethods: ['GET', 'POST'],
+        rateLimit: { windowMs: 60000, max: 90 },
+        maxPayloadBytes: 250 * 1024,
+        actionName: 'analytics:events',
+    });
+    if (!isPublicAllowed) return;
 
     if (req.method === 'GET') {
         const action = String(req.query.action || 'sheet2_dashboard');

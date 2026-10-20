@@ -58,6 +58,14 @@ export default function Solutions() {
                 'hidden-revenue-capture': 'ai-revenue-acceleration-expansion',
                 'ai-brand-acceleration': 'ai-business-growth-strategy',
                 'ai-reputation-acceleration': 'ai-sales-process-optimization',
+                'ai-solutions': 'ai-business-growth-strategy',
+                'enterprise-automation': 'ai-auto-sales-pilot-autonomous-sales-agents',
+                'custom-software': 'ai-revenue-operations-ai-revops',
+                'cloud-services': 'ai-revenue-operations-ai-revops',
+                'cyber-security': 'ai-business-growth-strategy',
+                'it-services': 'ai-revenue-operations-ai-revops',
+                'ai-agents': 'ai-auto-sales-pilot-autonomous-sales-agents',
+                'bpo-services': 'ai-auto-sales-pilot-autonomous-sales-agents',
                 'verticals': 'verticals',
                 'vertical': 'verticals',
                 'b2b-growth-intelligence': 'verticals',
@@ -219,13 +227,13 @@ export default function Solutions() {
                         const Icon = solution.icon;
                         const mainId = solution.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
                         const aliasMap: Record<number, string[]> = {
-                            0: ['strategy', 'strategy-anchor', 'ai-business-strategy', 'ai-brand-acceleration'],
+                            0: ['strategy', 'strategy-anchor', 'ai-business-strategy', 'ai-brand-acceleration', 'ai-solutions', 'cyber-security'],
                             1: ['intelligence', 'intelligence-anchor', 'ai-market-strategy', 'ai-demand-discovery'],
                             2: ['growth-hacking'],
                             3: ['performance-marketing'],
-                            4: ['sales-ops', 'sales-ops-anchor', 'ai-auto-sales-pilot'],
+                            4: ['sales-ops', 'sales-ops-anchor', 'ai-auto-sales-pilot', 'enterprise-automation', 'ai-agents', 'bpo-services'],
                             5: ['sales-optimization', 'ai-reputation-acceleration'],
-                            6: ['ai-revenue-operations'],
+                            6: ['ai-revenue-operations', 'custom-software', 'cloud-services', 'it-services'],
                             7: ['brand-reputation', 'brand-reputation-anchor', 'ai-revenue-acceleration', 'revenue-acceleration', 'hidden-revenue-capture']
                         };
                         const aliases = aliasMap[index] || [];

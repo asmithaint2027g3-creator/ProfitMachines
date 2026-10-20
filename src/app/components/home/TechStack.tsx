@@ -15,6 +15,8 @@ const technologies = [
 export default function TechStack() {
     return (
         <section className="py-20 md:py-28 bg-white relative overflow-hidden border-b border-slate-200" id="tech-stack">
+            {/* Anchors for both tech-stack and technologies links */}
+            <div id="technologies" className="scroll-mt-28 absolute -top-28 left-0 pointer-events-none" />
             {/* Background elements */}
             <div className="absolute inset-0 bg-dot-slate-200 opacity-40 pointer-events-none"></div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#2878B5]/5 rounded-full blur-[140px] pointer-events-none"></div>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Send, CheckCircle2, ShieldCheck, ArrowRight, Loader2, MessageSquare } from 'lucide-react';
 import { submitToSheet } from '../../../lib/sheets';
 import { captureLeadInJira } from '../../../lib/jira';
+import { trackFormSubmitAttempt, trackLeadSubmissionSuccess } from '../../../lib/clarity';
 import { validateBusinessEmail, FormErrorBanner, HoneypotField } from './FormFeedback';
 import { useVisitorEngagement } from '../../context/VisitorEngagementContext';
 
@@ -74,6 +75,7 @@ export default function QuickLeadForm({
 
         setEmailError(null);
         setSubmitError(null);
+        trackFormSubmitAttempt('Quick Inquiry Form');
 
         const emailValidation = validateBusinessEmail(formData.email);
         if (!emailValidation.valid) {
@@ -97,6 +99,7 @@ export default function QuickLeadForm({
             setSubmissionId(res.submissionId);
             setSubmitted(true);
             completeFormSubmission('quick');
+            trackLeadSubmissionSuccess('quick', res.submissionId);
             if (onSuccess) onSuccess(res.submissionId);
 
             // Capture Lead in Jira Space (Tasks + Subtasks)

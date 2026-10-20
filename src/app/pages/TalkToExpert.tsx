@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { submitToSheet } from '../../lib/sheets';
 import { captureLeadInJira } from '../../lib/jira';
 import { trackEvent } from '../../lib/analytics';
+import { trackFormSubmitAttempt, trackLeadSubmissionSuccess } from '../../lib/clarity';
 import {
     CheckCircle2,
     Search,
@@ -74,6 +75,17 @@ export default function TalkToExpert() {
             return;
         }
 
+        trackFormSubmitAttempt('Talk To Expert Form');
+
+        if (!selectedSlot) {
+            setSubmitError('Please select a preferred date and time slot from the calendar below to confirm your session.');
+            const calendarEl = document.getElementById('expert-calendar-booking-section');
+            if (calendarEl) {
+                calendarEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+        }
+
         setIsSubmitting(true);
         trackEvent({ eventName: 'FORM_SUBMIT_START', category: 'LEAD', label: 'Talk To Expert' });
 
@@ -103,6 +115,7 @@ export default function TalkToExpert() {
                     setSubmissionId(bookingData.eventId || 'GCAL-CONFIRMED');
                     setSubmitted(true);
                     trackEvent({ eventName: 'FORM_SUBMIT_SUCCESS', category: 'LEAD', label: bookingData.eventId });
+                    trackLeadSubmissionSuccess('expert', bookingData.eventId || 'GCAL-CONFIRMED');
                     return;
                 }
 
@@ -138,6 +151,7 @@ export default function TalkToExpert() {
             setSubmissionId(res.submissionId);
             setSubmitted(true);
             trackEvent({ eventName: 'FORM_SUBMIT_SUCCESS', category: 'LEAD', label: res.submissionId });
+            trackLeadSubmissionSuccess('expert', res.submissionId);
 
             // Capture Revenue & Diagnostic Audit Lead in Jira Space (Tasks + Subtasks)
             captureLeadInJira('audit', {
@@ -348,7 +362,7 @@ export default function TalkToExpert() {
                                 </div>
 
                                 {/* Calendar Booking Widget */}
-                                <div className="pt-2 pb-1">
+                                <div id="expert-calendar-booking-section" className="pt-2 pb-1 scroll-mt-28">
                                     <div className="mb-3 pb-3 border-b border-slate-100">
                                         <h4 className="text-sm font-bold text-slate-800 flex items-center gap-2">
                                             <Calendar className="w-4 h-4 text-[#2878B5]" />
@@ -367,8 +381,8 @@ export default function TalkToExpert() {
                                 <div className="pt-2">
                                     <Button
                                         type="submit"
-                                        disabled={isSubmitting || !selectedSlot}
-                                        className="w-full py-3.5 h-12 bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold rounded-xl shadow-lg shadow-blue-900/25 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
+                                        disabled={isSubmitting}
+                                        className="w-full py-3.5 h-12 bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold rounded-xl shadow-lg shadow-blue-900/25 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                                     >
                                         {isSubmitting ? (
                                             <div className="flex items-center gap-2">
@@ -378,7 +392,8 @@ export default function TalkToExpert() {
                                         ) : !selectedSlot ? (
                                             <span className="flex items-center gap-2">
                                                 <Calendar className="w-4 h-4" />
-                                                Select a Date & Time to Continue
+                                                Confirm Session (Select Slot)
+                                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                             </span>
                                         ) : (
                                             <>

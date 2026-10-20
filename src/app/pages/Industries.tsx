@@ -71,17 +71,28 @@ export default function Industries() {
         const params = new URLSearchParams(location.search);
         const categoryParam = params.get('category')?.toLowerCase();
         const industryParam = params.get('industry')?.toLowerCase();
+        const sectionParam = params.get('section')?.toLowerCase();
 
         if (categoryParam) {
             setSelectedCategory(categoryParam);
         }
 
-        const targetIdentifier = hash || industryParam;
+        const targetIdentifier = hash || industryParam || sectionParam;
         if (targetIdentifier) {
             // Check if matches a category
             const matchingCat = industryCategories.find(c => c.id === targetIdentifier);
             if (matchingCat) {
                 setSelectedCategory(matchingCat.id);
+            } else {
+                // Ensure target industry is visible even if filtered
+                const matchingInd = industriesData.find(ind =>
+                    ind.slugId === targetIdentifier ||
+                    ind.id === targetIdentifier ||
+                    ind.aliases.includes(targetIdentifier)
+                );
+                if (matchingInd) {
+                    setSelectedCategory('all');
+                }
             }
 
             // Scroll to element after render

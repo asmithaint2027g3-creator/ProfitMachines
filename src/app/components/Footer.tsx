@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { Facebook, Twitter, Linkedin, Mail, Phone, Cloud, Share2, LayoutGrid, Box, Server, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { trackConsultationCtaClick } from '../../lib/clarity';
 import logo from '../../assets/Trustgrid-logo.png';
 
 export default function Footer() {
@@ -65,7 +65,11 @@ export default function Footer() {
                         </p>
                     </div>
                     <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full lg:w-auto">
-                        <Link to="/book-consultation" className="btn-cta-primary w-full sm:w-auto">
+                        <Link 
+                            to="/book-consultation" 
+                            onClick={() => trackConsultationCtaClick('Book Free Consultation', 'Footer CTA')}
+                            className="btn-cta-primary w-full sm:w-auto"
+                        >
                             Book Free Consultation
                         </Link>
                         <a href="mailto:connect@profitmachines.com" className="btn-cta-secondary text-slate-300 border-white/20 hover:bg-white/10 hover:border-white/30 hover:text-white w-full sm:w-auto">
@@ -110,10 +114,22 @@ export default function Footer() {
                             </div>
 
                             <div className="flex gap-4">
-                                {[Linkedin, Twitter, Facebook].map((Icon, i) => (
-                                    <a key={i} href="#" aria-label={['LinkedIn', 'Twitter', 'Facebook'][i]} title={['LinkedIn', 'Twitter', 'Facebook'][i]} className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-[#2878B5] hover:border-[#5CAAE6] transition-all hover:shadow-[0_0_15px_rgba(40,120,181,0.4)] hover:-translate-y-1">
+                                {[
+                                    { Icon: Linkedin, name: 'LinkedIn', url: 'https://www.linkedin.com/company/profitmachines' },
+                                    { Icon: Twitter, name: 'Twitter', url: 'https://twitter.com/profitmachines' },
+                                    { Icon: Facebook, name: 'Facebook', url: 'https://www.facebook.com/profitmachines' }
+                                ].map(({ Icon, name, url }, i) => (
+                                    <a 
+                                        key={i} 
+                                        href={url} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        aria-label={name} 
+                                        title={name} 
+                                        className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-[#2878B5] hover:border-[#5CAAE6] transition-all hover:shadow-[0_0_15px_rgba(40,120,181,0.4)] hover:-translate-y-1"
+                                    >
                                         <Icon className="w-4 h-4" />
-                                        <span className="sr-only">{['LinkedIn', 'Twitter', 'Facebook'][i]}</span>
+                                        <span className="sr-only">{name}</span>
                                     </a>
                                 ))}
                             </div>
@@ -290,18 +306,8 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* TrustGrid & ISISecurity Enterprise Compliance & Telemetry Footprint */}
+                {/* Bottom Bar */}
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-6 border-t border-white/10 mt-6">
-                    <div className="flex items-center gap-3">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                        <span className="text-xs font-mono text-emerald-400 font-semibold tracking-wider">
-                            SYSTEMS OPERATIONAL • 99.99% UPTIME
-                        </span>
-                        <span className="hidden sm:inline text-xs text-slate-500">|</span>
-                        <span className="hidden sm:inline text-xs text-slate-400">
-                            SOC-2 TYPE II &amp; ISO 27001 COMPLIANT
-                        </span>
-                    </div>
                     <p className="text-xs text-slate-400 font-medium tracking-wide">
                         &copy; {new Date().getFullYear()} ProfitMachines. All rights reserved.
                     </p>

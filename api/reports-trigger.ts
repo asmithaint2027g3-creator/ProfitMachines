@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { SecurityController } from './_lib/security.ts';
 
 /**
  * api/reports-trigger.ts
@@ -750,12 +751,15 @@ async function logReportToJira(data: CollectedReportData, emailResult: EmailSend
 
 // ── MAIN SERVERLESS HANDLER ───────────────────────────────────────────────────
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-cron-secret');
+  const isAuthorized = await SecurityController.enforcePrivate(req, res, {
+    allowedMethods: ['GET', 'POST'],
+    requiredScope: 'automation:reports',
+    allowSafeDiagnosticsOnGet: true,
+    actionName: 'reports:trigger',
+  });
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+  if (!isAuthorized) {
+    return;
   }
 
   // Diagnostic GET (safe health check)
@@ -764,7 +768,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       status: 'online',
       service: 'ProfitMachines Automated Performance Reporting API',
       endpoint: '/api/reports/trigger',
-      usage: 'POST with Authorization: Bearer <REPORT_CRON_SECRET>',
+      usage: 'POST with Authorization: Bearer <API_SECURITY_SECRET>',
+      security: SecurityController.getDiagnosticStatus(),
       expectedBody: {
         reportId: 'profitmachines-jira-daily',
         period: 'daily | weekly | monthly',
@@ -773,52 +778,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       },
       configuredTimezone: 'Asia/Kolkata (IST)',
       supportedPeriods: ['daily', 'weekly', 'monthly']
-    });
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({
-      status: 'error',
-      code: 'METHOD_NOT_ALLOWED',
-      message: 'Only POST requests are accepted.'
-    });
-  }
-
-  // Authentication Validation
-  const authHeader = (req.headers.authorization || (req.headers as any)['Authorization'] || '').trim();
-  let providedToken = '';
-
-  if (authHeader.toLowerCase().startsWith('bearer ')) {
-    providedToken = authHeader.substring(7).trim();
-  } else if (req.headers['x-cron-secret']) {
-    providedToken = String(req.headers['x-cron-secret']).trim();
-  } else if (req.body?.secret) {
-    providedToken = String(req.body.secret).trim();
-  } else if (req.query?.secret) {
-    providedToken = String(req.query.secret).trim();
-  }
-
-  const validTokens = [
-    REPORT_CRON_SECRET,
-    process.env.CRON_SECRET,
-    process.env.REPORT_CRON_SECRET,
-    'profitmachines_secure_cron_2026',
-    'pm2026',
-    'profitmachines2026'
-  ].filter(Boolean).map(t => String(t).trim());
-
-  const isSecretValid = Boolean(providedToken && validTokens.includes(providedToken));
-
-  if (!isSecretValid) {
-    return res.status(401).json({
-      status: 'error',
-      code: 'UNAUTHORIZED',
-      message: 'Invalid or missing Authorization Bearer token.',
-      debug: {
-        receivedHeaderLength: authHeader.length,
-        receivedTokenPreview: providedToken ? `${providedToken.substring(0, 4)}...${providedToken.slice(-4)}` : 'EMPTY',
-        validMatch: isSecretValid
-      }
     });
   }
 

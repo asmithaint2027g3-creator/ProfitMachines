@@ -16,8 +16,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { GshService, type ReportInterval } from './gshService';
 import { JirService, type JirServiceResult } from './jirService';
 import { EmlService, type EmlServiceResult } from './emlService';
-
-const CRON_SECRET = process.env.CRON_SECRET || 'profitmachines_secure_cron_2026';
+import { SecurityController } from './security.ts';
 
 export class RptCtl {
   /**
@@ -27,20 +26,22 @@ export class RptCtl {
     req: VercelRequest,
     res: VercelResponse,
     fixedInterval?: ReportInterval
-  ): Promise<VercelResponse> {
-    // 1. Set standard CORS headers
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-cron-secret, x-vercel-cron');
+  ): Promise<VercelResponse | undefined> {
+    const isAuthorized = await SecurityController.enforcePrivate(req, res, {
+      allowedMethods: ['GET', 'POST'],
+      requiredScope: 'automation:reports',
+      allowSafeDiagnosticsOnGet: true,
+      actionName: 'rpt:ctl',
+    });
 
-    if (req.method === 'OPTIONS') {
-      return res.status(200).end();
+    if (!isAuthorized) {
+      return;
     }
 
-    // 2. Unauthenticated Diagnostic & Health Inspection (GET without secret & without cron header)
+    const { token: providedSecret } = SecurityController.extractIncomingToken(req);
     const isCronHeader = req.headers['x-vercel-cron'] === '1' || req.headers['x-vercel-cron'] === 'true';
-    const providedSecret = RptCtl.extractSecret(req);
 
+    // Diagnostic GET without secret & without cron header
     if (req.method === 'GET' && !providedSecret && !isCronHeader) {
       return res.status(200).json({
         status: 'online',
@@ -49,6 +50,7 @@ export class RptCtl {
         endpoint: req.url || `/api/rpt/${fixedInterval ? fixedInterval.toLowerCase() : 'daily'}`,
         targetInterval: fixedInterval || 'DAY',
         timezone: 'Asia/Kolkata',
+        security: SecurityController.getDiagnosticStatus(),
         scheduledExecutionIST: {
           DAY: 'Every day at 8:00 AM IST (02:30 UTC)',
           WEK: 'Every Monday at 8:00 AM IST (02:30 UTC)',
@@ -58,10 +60,10 @@ export class RptCtl {
           postTrigger: `POST /api/rpt/${fixedInterval ? fixedInterval.toLowerCase() : 'daily'}`,
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer YOUR_CRON_SECRET',
+            'Authorization': 'Bearer YOUR_API_SECURITY_SECRET',
           },
           body: {
-            secret: 'CRON_SECRET (optional if Authorization header is set)',
+            secret: 'API_SECURITY_SECRET (optional if Authorization header is set)',
             force: false,
             dryRun: false,
           },
@@ -74,24 +76,7 @@ export class RptCtl {
       });
     }
 
-    // 3. Authentication Validation
-    const isAuthed =
-      isCronHeader ||
-      (providedSecret &&
-        (providedSecret === CRON_SECRET ||
-          providedSecret === 'pm2026' ||
-          providedSecret === 'profitmachines2026'));
-    if (!isAuthed) {
-      console.warn('[RptCtl] Unauthorized report request rejected.');
-      return res.status(401).json({
-        status: 'error',
-        code: 'UNAUTHORIZED',
-        message: 'Invalid or missing authentication secret. Provide CRON_SECRET in header or body.',
-        timestamp: new Date().toISOString(),
-      });
-    }
-
-    // 4. Determine Target Report Interval (DAY, WEK, MON)
+    // Determine Target Report Interval (DAY, WEK, MON)
     const interval: ReportInterval = RptCtl.resolveInterval(req, fixedInterval);
 
     console.log(`[RptCtl] Executing ${interval} report pipeline (Method: ${req.method})...`);

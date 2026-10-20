@@ -1,5 +1,5 @@
-﻿import { useEffect, useState } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams, Link, Navigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     ArrowRight, CheckCircle2, AlertTriangle, ChevronRight,
@@ -7,6 +7,7 @@ import {
     Zap, Shield, Rocket, BarChart3, Target, Brain, Lightbulb, Clock
 } from 'lucide-react';
 import { servicesPageData } from '../../data/servicesPageData';
+import { trackConsultationCtaClick } from '../../lib/clarity';
 
 const iconMap: Record<string, any> = {
     Zap, Shield, Rocket, BarChart3, Target, Brain, Lightbulb,
@@ -14,16 +15,20 @@ const iconMap: Record<string, any> = {
 };
 
 export default function ServicePage() {
-    const { slug } = useParams<{ slug: string }>();
+    const params = useParams<{ slug?: string }>();
+    const location = useLocation();
     const [openFaq, setOpenFaq] = useState<number | null>(null);
     const [activeProcess, setActiveProcess] = useState(0);
+
+    // Extract slug from route params or fallback to pathname (e.g. /services/ai-growth-engine -> ai-growth-engine)
+    const slug = params.slug || location.pathname.split('/').filter(Boolean).pop() || '';
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [slug]);
 
     if (!slug || !servicesPageData[slug]) {
-        return <Navigate to="/services" replace />;
+        return <Navigate to="/offerings" replace />;
     }
 
     const data = servicesPageData[slug];
@@ -73,6 +78,7 @@ export default function ServicePage() {
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <Link
                                     to="/book-consultation"
+                                    onClick={() => trackConsultationCtaClick('Book Consultation', `Service: ${data.title}`)}
                                     className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#2878B5] text-white font-bold rounded-xl hover:bg-[#1E6297] transition-all duration-200 shadow-lg shadow-blue-900/25 hover:shadow-blue-900/35 hover:-translate-y-0.5 group"
                                 >
                                     Book Consultation
@@ -80,6 +86,7 @@ export default function ServicePage() {
                                 </Link>
                                 <Link
                                     to="/talk-to-expert"
+                                    onClick={() => trackConsultationCtaClick('Talk to an Expert', `Service: ${data.title}`)}
                                     className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-slate-800 font-bold rounded-xl border border-slate-200 hover:border-emerald-300 hover:text-[#2878B5] transition-all duration-200"
                                 >
                                     Talk to an Expert
@@ -513,6 +520,7 @@ export default function ServicePage() {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
                             to="/book-consultation"
+                            onClick={() => trackConsultationCtaClick('Book Free Consultation', `Service Bottom: ${data.title}`)}
                             className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-[#2878B5] text-white font-bold rounded-xl hover:bg-emerald-600 transition-all duration-200 shadow-lg shadow-emerald-900/40 hover:-translate-y-0.5 group"
                         >
                             Book Free Consultation
@@ -520,6 +528,7 @@ export default function ServicePage() {
                         </Link>
                         <Link
                             to="/talk-to-expert"
+                            onClick={() => trackConsultationCtaClick('Talk to an Expert', `Service Bottom: ${data.title}`)}
                             className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-white/10 text-white font-bold rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-200"
                         >
                             Talk to an Expert

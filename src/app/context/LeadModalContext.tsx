@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
+import { trackConsultationCtaClick } from '../../lib/clarity';
 
 export type LeadModalType = 'quick' | 'long' | null;
 
@@ -32,6 +33,7 @@ export const LeadModalProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         setModalOptions(normalized);
         setModalType('quick');
         setIsOpen(true);
+        trackConsultationCtaClick(normalized.title || normalized.defaultService || 'Quick Lead Form', normalized.source || 'Lead Modal');
     }, []);
 
     const openLongForm = useCallback((options?: LeadModalOptions | string) => {
@@ -39,6 +41,7 @@ export const LeadModalProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         setModalOptions(normalized);
         setModalType('long');
         setIsOpen(true);
+        trackConsultationCtaClick(normalized.title || normalized.defaultService || 'Executive Consultation Form', normalized.source || 'Lead Modal');
     }, []);
 
     const closeModal = useCallback(() => {

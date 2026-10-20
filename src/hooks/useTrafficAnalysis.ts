@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { trackPageView, trackEvent, captureCurrentUTMs } from '../lib/analytics';
-import { trackClarityPageView } from '../lib/clarity';
+import { trackClarityPageView, syncClarityCampaignAndReferral } from '../lib/clarity';
 
 export const useTrafficAnalysis = () => {
     const location = useLocation();
@@ -13,6 +13,7 @@ export const useTrafficAnalysis = () => {
         // Track SPA Route View in internal analytics and Microsoft Clarity
         trackPageView(location.pathname, document.title);
         trackClarityPageView(location.pathname, document.title);
+        syncClarityCampaignAndReferral();
 
         // Track Scroll Milestones (50% and 90%)
         let fired50 = false;

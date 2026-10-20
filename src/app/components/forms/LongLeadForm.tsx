@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Send, CheckCircle2, ShieldCheck, ArrowRight, Loader2, Sparkles } from 'lucide-react';
 import { submitToSheet } from '../../../lib/sheets';
 import { captureLeadInJira } from '../../../lib/jira';
+import { trackFormSubmitAttempt, trackLeadSubmissionSuccess } from '../../../lib/clarity';
 import { validateBusinessEmail, validatePhone, FormErrorBanner, HoneypotField } from './FormFeedback';
 import { useVisitorEngagement } from '../../context/VisitorEngagementContext';
 
@@ -118,6 +119,7 @@ export default function LongLeadForm({
         setEmailError(null);
         setPhoneError(null);
         setSubmitError(null);
+        trackFormSubmitAttempt('Detailed Enterprise Consultation Form');
 
         const emailValidation = validateBusinessEmail(formData.email);
         if (!emailValidation.valid) {
@@ -158,6 +160,7 @@ export default function LongLeadForm({
             setSubmissionId(res.submissionId);
             setSubmitted(true);
             completeFormSubmission('long');
+            trackLeadSubmissionSuccess('enterprise', res.submissionId);
             if (onSuccess) onSuccess(res.submissionId);
 
             // Capture Detailed Enterprise Lead in Jira Space (Tasks + Subtasks)

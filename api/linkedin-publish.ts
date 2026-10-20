@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { SecurityController } from './_lib/security.ts';
 
 /**
  * api/linkedin-publish.ts
@@ -94,13 +95,13 @@ async function getAuthenticatedUserUrn(accessToken: string): Promise<string | nu
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
+    const isAuthorized = await SecurityController.enforcePrivate(req, res, {
+        allowedMethods: ['GET', 'POST'],
+        requiredScope: 'automation:linkedin',
+        allowSafeDiagnosticsOnGet: true,
+        actionName: 'linkedin:publish',
+    });
+    if (!isAuthorized) return;
 
     const orgId = (process.env.LINKEDIN_ORG_ID || '143995988').trim();
     const rawToken = process.env.LINKEDIN_ACCESS_TOKEN || '';
@@ -129,28 +130,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             authenticatedPersonUrn: personUrn || 'NOT_DETECTED',
             tokenVerified,
             apiStatus,
+            security: SecurityController.getDiagnosticStatus(),
             capabilities: ['Text Posts', 'Rich Link Previews', 'Image Uploads (image_url)', 'Auto-Author Fallback (Company or Person)']
         });
     }
 
     // ── POST: Publish Post to LinkedIn ───────────────────────────────────────
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed. Use GET or POST.' });
-    }
-
-    const adminKey = (process.env.ADMIN_SECURITY_KEY || 'pm2026').trim();
-    const providedAuth = (req.headers['authorization'] || '').replace(/^Bearer\s+/i, '').trim();
-    const providedBodyKey = (req.body?.adminKey || '').trim();
-    const validKeys = [adminKey, 'profitmachines2026', process.env.ANALYTICS_API_KEY || 'profitmachines_analytics_secure_key_2026'];
-
-    if (!validKeys.includes(providedAuth) && !validKeys.includes(providedBodyKey) && process.env.NODE_ENV === 'production') {
-        return res.status(401).json({
-            success: false,
-            error: 'UNAUTHORIZED_ADMIN_ACCESS',
-            message: 'Access Denied: Valid Admin Security Key required to publish posts.'
-        });
-    }
-
     const { postId, fullPostText, title, targetUrl, imageUrl, author: requestedAuthor } = req.body || {};
 
     if (!fullPostText) {

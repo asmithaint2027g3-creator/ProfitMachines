@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import publishHandler from './_lib/youtube-publish';
 import { handleYouTubeVideoLead } from './_lib/youtube-lead-service';
+import { SecurityController } from './_lib/security.ts';
 
 /**
  * api/youtube-sync.ts
@@ -843,42 +844,48 @@ async function syncToSheetsAndWebhook(params: {
 // ── 8. MAIN REQUEST HANDLER ────────────────────────────────────────────────
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
     if (req.method === 'OPTIONS') {
+        SecurityController.applySecurityHeaders(res);
         return res.status(200).end();
     }
 
-    // ── Dispatch to YouTube Publishing Submodule if requested ───────────────
-    if (req.query.action === 'publish' || req.body?.action === 'publish') {
-        return publishHandler(req, res);
-    }
-
-    // ── Dispatch to Owner YouTube Video Lead Automation Handler ───────────────
+    // ── 1. Dispatch to Owner YouTube Video Lead Automation Handler (Public Website Form) ──
     if (req.query.action === 'video-lead' || req.body?.action === 'video-lead') {
+        const isPublicAllowed = await SecurityController.enforcePublic(req, res, {
+            allowedMethods: ['POST'],
+            enableHoneypot: true,
+            validateEmail: true,
+            actionName: 'youtube:video-lead',
+        });
+        if (!isPublicAllowed) return;
         return handleYouTubeVideoLead(req, res);
     }
 
-    const cronSecret = (process.env.CRON_SECRET || 'profitmachines_secure_cron_2026').trim();
-    const analyticsKey = (process.env.ANALYTICS_API_KEY || 'profitmachines_analytics_secure_key_2026').trim();
+    // ── 2. Dispatch to YouTube Publishing Submodule (Private Administrative Endpoint) ──
+    if (req.query.action === 'publish' || req.body?.action === 'publish') {
+        const isPublishAuthed = await SecurityController.enforcePrivate(req, res, {
+            allowedMethods: ['POST'],
+            requiredScope: 'automation:youtube',
+            actionName: 'youtube:publish',
+        });
+        if (!isPublishAuthed) return;
+        return publishHandler(req, res);
+    }
 
-    const authHeader = (req.headers.authorization || '').trim();
-    const token = authHeader.replace(/^Bearer\s+/i, '').trim();
-    const xCronHeader = (req.headers['x-cron-secret'] as string || '').trim();
-    const querySecret = (req.query.secret as string || '').trim();
-    const isCronQuery = req.query.cron === 'true';
+    // ── 3. YouTube Sync Automation Pipeline (Private Administrative Endpoint) ──
+    const isAuthorized = await SecurityController.enforcePrivate(req, res, {
+        allowedMethods: ['GET', 'POST'],
+        requiredScope: 'automation:youtube',
+        allowSafeDiagnosticsOnGet: true,
+        actionName: 'youtube:sync',
+    });
+    if (!isAuthorized) return;
 
-    // Verify whether this GET request is an authorized Vercel Cron or backend scheduler execution
-    const isCronExecution = 
-        token === cronSecret || 
-        xCronHeader === cronSecret || 
-        (isCronQuery && (querySecret === cronSecret || querySecret === 'pm2026')) ||
-        (token === 'pm2026' && isCronQuery);
+    const { token: providedToken } = SecurityController.extractIncomingToken(req);
+    const isCronHeader = Boolean(req.headers['x-vercel-cron']);
 
-    // ── A. Diagnostic & Monitoring Status Inspection (GET without Cron execution) ─
-    if (req.method === 'GET' && !isCronExecution) {
+    // ── A. Diagnostic & Monitoring Status Inspection (GET without secret & without cron execution) ─
+    if (req.method === 'GET' && !providedToken && !isCronHeader) {
         const hasApiKey = Boolean(process.env.YOUTUBE_API_KEY);
         const hasOAuth = Boolean(process.env.YOUTUBE_CLIENT_ID && process.env.YOUTUBE_CLIENT_SECRET && process.env.YOUTUBE_REFRESH_TOKEN);
         const hasChannelId = Boolean(process.env.YOUTUBE_CHANNEL_ID);
@@ -891,13 +898,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         return res.status(200).json({
             status: 'HEALTHY',
             mode: 'AUTONOMOUS_SCHEDULED_RUNNER',
+            security: SecurityController.getDiagnosticStatus(),
             scheduler: {
-                engine: 'Vercel Cron Jobs',
-                cronSchedule: '0 8 * * * (Daily at 08:00 UTC)',
+                engine: 'Backend Scheduler / Jira Automation',
                 endpoint: '/api/youtube-sync',
-                securedBy: 'CRON_SECRET',
+                securedBy: 'API_SECURITY_SECRET',
                 dependencyOnAdminPage: false,
-                triggerMethod: 'Scheduled GET with Bearer token'
+                triggerMethod: 'Scheduled GET/POST with Bearer token'
             },
             credentials: {
                 youtubeConnected: hasOAuth || hasApiKey,
@@ -925,20 +932,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         });
     }
 
-    // ── B. Verify Authorization for Sync Execution ────────────────────────────
-    const isAuthorized = 
-        isCronExecution || 
-        token === cronSecret || 
-        token === analyticsKey || 
-        token === 'pm2026' || 
-        req.body?.adminKey === 'pm2026' ||
-        req.body?.adminKey === cronSecret;
-
-    if (!isAuthorized) {
-        return res.status(401).json({ 
-            error: 'Unauthorized. Provide valid Authorization header (Bearer <CRON_SECRET>) or X-Cron-Secret.' 
-        });
-    }
+    const isCronExecution = isCronHeader;
 
     // ── C. Manual Single Lead Ingestion (Optional Admin Fallback) ─────────────
     if (req.body?.action === 'manual_lead') {

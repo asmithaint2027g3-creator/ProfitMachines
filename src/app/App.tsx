@@ -145,6 +145,7 @@ export default function App() {
                   <Route path="/resources" element={<Resources />} />
                   {/* ── New consolidated service routes ── */}
                   <Route path="/services" element={<Navigate to="/offerings" replace />} />
+                  <Route path="/services/:slug" element={<ServicePage />} />
                   <Route path="/services/ai-growth-engine" element={<ServicePage />} />
                   <Route path="/services/revenue-acceleration" element={<ServicePage />} />
                   <Route path="/services/lead-generation" element={<ServicePage />} />

@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { SecurityController } from './_lib/security.ts';
 
 export interface LeadFields {
     name?: string;
@@ -531,18 +532,15 @@ export async function syncLeadToAirtable(
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-    // CORS headers for browser requests
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
-
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed. Use POST.' });
-    }
+    const isPublicAllowed = await SecurityController.enforcePublic(req, res, {
+        allowedMethods: ['POST'],
+        enableHoneypot: true,
+        validateEmail: true,
+        rateLimit: { windowMs: 60000, max: 20 },
+        maxPayloadBytes: 50 * 1024,
+        actionName: 'lead:jira',
+    });
+    if (!isPublicAllowed) return;
 
     const { leadType, fields } = req.body || {};
 

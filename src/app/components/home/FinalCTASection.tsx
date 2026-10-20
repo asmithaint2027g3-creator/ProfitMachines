@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight, ShieldCheck, CheckCircle2, Lock, MessageSquare, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { trackEvent } from '../../../lib/analytics';
+import { trackConsultationCtaClick } from '../../../lib/clarity';
 import { useLeadModal } from '../../context/LeadModalContext';
 
 export default function FinalCTASection() {
@@ -60,6 +61,7 @@ export default function FinalCTASection() {
                         <button
                             onClick={() => {
                                 trackEvent({ eventName: 'FINAL_CTA_BOOK_CLICK' });
+                                trackConsultationCtaClick('Schedule Executive Consultation', 'Final CTA Section');
                                 openLongForm({ source: 'Final CTA Section', title: 'Schedule Executive Consultation' });
                             }}
                             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#2878B5] hover:bg-[#1E6297] text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:-translate-y-0.5 group cursor-pointer"
@@ -72,6 +74,7 @@ export default function FinalCTASection() {
                         <button
                             onClick={() => {
                                 trackEvent({ eventName: 'FINAL_CTA_QUICK_CLICK' });
+                                trackConsultationCtaClick('Quick Inquiry', 'Final CTA Section');
                                 openQuickForm({ source: 'Final CTA Section', title: 'Quick Architecture Inquiry' });
                             }}
                             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"

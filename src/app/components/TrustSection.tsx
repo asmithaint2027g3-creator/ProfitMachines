@@ -69,18 +69,10 @@ function StatCard({ value, suffix, label, delay }: { value: number; suffix: stri
 }
 
 export default function TrustSection() {
-    const complianceSeals = [
-        { label: "SOC-2 Type II", desc: "Certified Security", code: "SOC2" },
-        { label: "ISO 27001", desc: "Data Protection", code: "ISO" },
-        { label: "GDPR Compliant", desc: "EU Data Privacy", code: "GDPR" },
-        { label: "Zero-Trust Mesh", desc: "End-to-End Encryption", code: "ZT-AI" },
-        { label: "99.99% SLA", desc: "High-Availability", code: "SLA" }
-    ];
-
     return (
-        <section className="relative overflow-hidden bg-[#020F1E] border-y border-white/10" style={{ background: 'linear-gradient(135deg, #020F1E 0%, #0A2540 50%, #0F3560 100%)' }}>
+        <section className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #020F1E 0%, #0A2540 50%, #0F3560 100%)' }}>
             {/* Subtle grid pattern */}
-            <div className="absolute inset-0 opacity-[0.05]" style={{
+            <div className="absolute inset-0 opacity-[0.04]" style={{
                 backgroundImage: 'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
                 backgroundSize: '3rem 3rem'
             }} />
@@ -90,24 +82,8 @@ export default function TrustSection() {
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2878B5]/40 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2878B5]/40 to-transparent" />
 
-            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-6 pb-2">
-                {/* ISISecurity-style Compliance & Trust Seal Strip */}
-                <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 pb-8 border-b border-white/10">
-                    <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-bold flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                        ENTERPRISE VERIFICATION:
-                    </span>
-                    {complianceSeals.map((seal, i) => (
-                        <div key={i} className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/5 border border-white/10 hover:border-[#5CAAE6]/40 transition-colors">
-                            <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#2878B5]/30 text-[#BAE0F8]">{seal.code}</span>
-                            <span className="text-xs text-slate-200 font-medium">{seal.label}</span>
-                            <span className="hidden md:inline text-[11px] text-slate-400">• {seal.desc}</span>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Counter Statistics */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 pt-2">
+            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
                     {stats.map((stat, i) => (
                         <StatCard key={i} {...stat} delay={i * 0.08} />
                     ))}

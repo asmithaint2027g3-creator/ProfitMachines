@@ -1,13 +1,14 @@
-﻿import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { X, Zap, TrendingUp, ArrowRight, Building2, ShoppingBag, Landmark } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { trackConsultationCtaClick } from '../../lib/clarity';
 
 const MIN_TIME_MS = 1000; // 1s min time
 
 const HIGHLIGHTS = [
-    { icon: ShoppingBag, label: 'E-commerce & D2C', stat: '3.2X', desc: 'Repeat purchase growth' },
-    { icon: Landmark, label: 'BFSI & FinTech', stat: '66%', desc: 'Reduction in Sales Cycle' },
-    { icon: Building2, label: 'SaaS & Enterprise', stat: '6X', desc: 'More qualified leads' },
+    { icon: ShoppingBag, label: 'E-commerce & D2C', stat: '3.2X', desc: 'Repeat purchase growth', path: '/industries?section=d2c-companies' },
+    { icon: Landmark, label: 'BFSI & FinTech', stat: '66%', desc: 'Reduction in Sales Cycle', path: '/industries?section=fintech-lending' },
+    { icon: Building2, label: 'SaaS & Enterprise', stat: '6X', desc: 'More qualified leads', path: '/industries?section=saas-products' },
 ];
 
 export default function TabExitPopup() {
@@ -134,8 +135,13 @@ export default function TabExitPopup() {
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-                        {HIGHLIGHTS.map(({ icon: Icon, label, stat, desc }) => (
-                            <div key={label} className="bg-white rounded-2xl p-5 border border-slate-200/60 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all group relative overflow-hidden">
+                        {HIGHLIGHTS.map(({ icon: Icon, label, stat, desc, path }) => (
+                            <Link
+                                key={label}
+                                to={path}
+                                onClick={handleClose}
+                                className="bg-white rounded-2xl p-5 border border-slate-200/60 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all group relative overflow-hidden block text-left"
+                            >
                                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 <div className="relative z-10">
                                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -143,9 +149,12 @@ export default function TabExitPopup() {
                                     </div>
                                     <div className="text-3xl font-black text-slate-900 mb-1 group-hover:text-[#1E6297] transition-colors">{stat}</div>
                                     <div className="text-[12px] font-bold text-slate-800 uppercase tracking-tight mb-1.5 leading-tight">{desc}</div>
-                                    <div className="text-[11px] text-slate-500 font-medium">{label}</div>
+                                    <div className="text-[11px] text-slate-500 font-medium flex items-center gap-1">
+                                        <span>{label}</span>
+                                        <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#2878B5]" />
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
 
@@ -160,7 +169,10 @@ export default function TabExitPopup() {
                         </Link>
                         <Link
                             to="/book-consultation"
-                            onClick={handleClose}
+                            onClick={() => {
+                                handleClose();
+                                trackConsultationCtaClick('Book Consultation', 'Tab Exit Popup');
+                            }}
                             className="flex-1 bg-white border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-center py-4 px-6 rounded-xl transition-all active:scale-95 flex items-center justify-center"
                         >
                             Book Consultation

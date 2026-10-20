@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { google } from 'googleapis';
+import { SecurityController } from './security.ts';
 
 /**
  * api/cancel-calendar.ts
@@ -215,12 +216,12 @@ async function sendSyncEmails(params: {
 
 // ── Main Request Handler ────────────────────────────────────────────────────
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-    if (req.method === 'OPTIONS') return res.status(200).end();
-    if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed. Use POST.' });
+    const isAuthorized = await SecurityController.enforcePrivate(req, res, {
+        allowedMethods: ['POST'],
+        requiredScope: 'admin:calendar',
+        actionName: 'calendar:cancel',
+    });
+    if (!isAuthorized) return;
 
     const { eventId, email, action, reason, newStartTime, newEndTime } = req.body || {};
 

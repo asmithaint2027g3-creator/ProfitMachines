@@ -19,6 +19,7 @@ import { Label } from '../components/ui/label';
 import { submitToSheet } from '../../lib/sheets';
 import { captureLeadInJira } from '../../lib/jira';
 import { trackEvent } from '../../lib/analytics';
+import { trackFormSubmitAttempt, trackLeadSubmissionSuccess } from '../../lib/clarity';
 import { FormSuccessModal, validateBusinessEmail, validatePhone, FormErrorBanner, HoneypotField } from '../components/forms/FormFeedback';
 import CalendarBookingWidget from '../components/forms/CalendarBookingWidget';
 
@@ -65,6 +66,8 @@ export default function BookConsultation() {
         setPhoneError(null);
         setSubmitError(null);
 
+        trackFormSubmitAttempt('Book Consultation Form');
+
         const emailVal = validateBusinessEmail(formData.email);
         if (!emailVal.valid) {
             setEmailError(emailVal.message || 'Invalid email');
@@ -78,7 +81,11 @@ export default function BookConsultation() {
         }
 
         if (!selectedSlot) {
-            setSubmitError('Please select a preferred date and time slot for your consultation.');
+            setSubmitError('Please select a preferred date and time slot from the calendar below to confirm your consultation.');
+            const calendarEl = document.getElementById('calendar-booking-section');
+            if (calendarEl) {
+                calendarEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
             return;
         }
 
@@ -113,6 +120,7 @@ export default function BookConsultation() {
                 setCalendarEventLink(bookingData.eventLink || '');
                 setSubmitted(true);
                 trackEvent({ eventName: 'FORM_SUBMIT_SUCCESS', category: 'LEAD', label: bookingData.eventId });
+                trackLeadSubmissionSuccess('consultation', bookingData.eventId || 'GCAL-CONFIRMED');
                 return;
             }
 
@@ -164,6 +172,7 @@ export default function BookConsultation() {
             setSubmissionId(res.submissionId);
             setSubmitted(true);
             trackEvent({ eventName: 'FORM_SUBMIT_SUCCESS', category: 'LEAD', label: res.submissionId });
+            trackLeadSubmissionSuccess('consultation', res.submissionId);
 
             // Capture Strategic Consultation Lead in Jira Space (Tasks + Subtasks)
             captureLeadInJira('consultation', {
@@ -395,7 +404,7 @@ export default function BookConsultation() {
                                 </div>
 
                                 {/* ── Calendar Booking Widget ─────────────────────────── */}
-                                <div className="pt-2 pb-1">
+                                <div id="calendar-booking-section" className="pt-2 pb-1 scroll-mt-28">
                                     <div className="mb-3 pb-3 border-b border-slate-100">
                                         <h4 className="text-sm font-bold text-slate-800 flex items-center gap-2">
                                             <Calendar className="w-4 h-4 text-[#2878B5]" />
@@ -420,24 +429,25 @@ export default function BookConsultation() {
                                 <div className="pt-2">
                                     <Button
                                         type="submit"
-                                        disabled={isSubmitting || !selectedSlot}
-                                        className="w-full py-3.5 h-12 bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold rounded-xl shadow-lg shadow-blue-900/25 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
+                                        disabled={isSubmitting}
+                                        className="w-full py-3.5 h-12 bg-[#2878B5] hover:bg-[#1E6297] text-white font-bold rounded-xl shadow-lg shadow-blue-900/25 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                                     >
                                         {isSubmitting ? (
-                                            <div className="flex items-center gap-2">
-                                                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                                                <span>Booking Your Consultation...</span>
-                                            </div>
+                                             <div className="flex items-center gap-2">
+                                                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                                 <span>Booking Your Consultation...</span>
+                                             </div>
                                         ) : !selectedSlot ? (
-                                            <span className="flex items-center gap-2">
-                                                <Calendar className="w-4 h-4" />
-                                                Select a Date & Time to Continue
-                                            </span>
+                                             <span className="flex items-center gap-2">
+                                                 <Calendar className="w-4 h-4" />
+                                                 Confirm Consultation (Select Slot)
+                                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                             </span>
                                         ) : (
-                                            <>
-                                                <span>Confirm Consultation Request</span>
-                                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                            </>
+                                             <>
+                                                 <span>Confirm Consultation Request</span>
+                                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                             </>
                                         )}
                                     </Button>
                                 </div>

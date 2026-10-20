@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { SecurityController } from './_lib/security.ts';
 
 /**
  * api/linkedin-leads.ts
@@ -765,14 +766,31 @@ async function syncToJiraLead(lead: LinkedInCommentLeadRecord): Promise<string |
 
 // ── Main Request Handler ────────────────────────────────────────────────────
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-    if (req.method === 'OPTIONS') return res.status(200).end();
+    if (req.method === 'OPTIONS') {
+        SecurityController.applySecurityHeaders(res);
+        return res.status(200).end();
+    }
 
     const action = (req.query.action as string) || (req.body?.action as string) || 'status';
     const mode = (req.query.mode as string) || (req.body?.mode as string) || 'mock';
+
+    // Protect administrative modification actions with enforcePrivate
+    const adminActions = ['sync-all', 'qualify-lead', 'reject-lead'];
+    if (adminActions.includes(action) || req.method === 'POST') {
+        const isAuthorized = await SecurityController.enforcePrivate(req, res, {
+            allowedMethods: ['POST'],
+            requiredScope: 'admin:leads',
+            actionName: `linkedin-leads:${action}`,
+        });
+        if (!isAuthorized) return;
+    } else {
+        const isPublicAllowed = await SecurityController.enforcePublic(req, res, {
+            allowedMethods: ['GET'],
+            rateLimit: { windowMs: 60000, max: 60 },
+            actionName: `linkedin-leads:${action}`,
+        });
+        if (!isPublicAllowed) return;
+    }
 
     if (storedPosts.length === 0) {
         const { mockPosts, mockComments } = getMockData();

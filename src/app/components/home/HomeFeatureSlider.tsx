@@ -270,7 +270,7 @@ export default function HomeFeatureSlider() {
 
     return (
         <section
-            className="relative w-full overflow-hidden bg-white"
+            className="relative w-full overflow-hidden bg-white min-h-[920px] sm:min-h-[860px] lg:min-h-[680px] xl:min-h-[720px]"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
             onMouseEnter={() => setIsPlaying(false)}
@@ -401,6 +401,8 @@ export default function HomeFeatureSlider() {
                                             key={slide.id + '-img'}
                                             src={slide.image}
                                             alt={slide.imageAlt}
+                                            width={640}
+                                            height={520}
                                             className="w-full h-full object-cover object-center"
                                             initial={{ opacity: 0, scale: 1.05 }}
                                             animate={{ opacity: 1, scale: 1 }}
@@ -440,6 +442,8 @@ export default function HomeFeatureSlider() {
                             <img
                                 src={slide.image}
                                 alt={slide.imageAlt}
+                                width={720}
+                                height={288}
                                 className="w-full h-full object-cover object-center"
                                 loading="lazy"
                             />

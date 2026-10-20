@@ -36,13 +36,11 @@ import {
   type EngagementType,
 } from './_lib/email-templates';
 import { EmailDispatchService } from './_lib/email-dispatch-service';
+import { SecurityController } from './_lib/security.ts';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
   if (req.method === 'OPTIONS') {
+    SecurityController.applySecurityHeaders(res);
     return res.status(200).end();
   }
 
@@ -55,9 +53,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   ).trim();
 
   // ─────────────────────────────────────────────────────────────
-  // GET: Inspection, List, and Preview
+  // GET: Inspection, List, and Preview (Public / Diagnostic)
   // ─────────────────────────────────────────────────────────────
   if (req.method === 'GET') {
+    const isPublicAllowed = await SecurityController.enforcePublic(req, res, {
+      allowedMethods: ['GET'],
+      rateLimit: { windowMs: 60000, max: 60 },
+      actionName: 'email-templates:get',
+    });
+    if (!isPublicAllowed) return;
+
     const action = (req.query.action as string) || 'list';
 
     // 1. List all templates
@@ -280,6 +285,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // POST Action 2: Send 8 Industry Test Emails (Requires confirmSend: true)
     // ─────────────────────────────────────────────────────────────
     if (action === 'test-eight') {
+      const isAuthorized = await SecurityController.enforcePrivate(req, res, {
+        allowedMethods: ['POST'],
+        requiredScope: 'admin:email',
+        actionName: 'email:test-eight',
+      });
+      if (!isAuthorized) return;
+
       if (!body.confirmSend) {
         return res.status(400).json({
           error: 'Explicit confirmation required. Please set confirmSend: true to authorize test delivery.',
@@ -368,6 +380,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // POST Action 3: Send Single Template (Requires confirmSend: true)
     // ─────────────────────────────────────────────────────────────
     if (action === 'send-single') {
+      const isAuthorized = await SecurityController.enforcePrivate(req, res, {
+        allowedMethods: ['POST'],
+        requiredScope: 'admin:email',
+        actionName: 'email:send-single',
+      });
+      if (!isAuthorized) return;
+
       if (!body.confirmSend) {
         return res.status(400).json({
           error: 'Explicit confirmation required. Please set confirmSend: true to authorize test delivery.',
@@ -407,9 +426,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     // ─────────────────────────────────────────────────────────────
-    // POST Action 4: Inbound Lead Notification
+    // POST Action 4: Inbound Lead Notification (Public Website Form Alert)
     // ─────────────────────────────────────────────────────────────
     if (action === 'notify-lead') {
+      const isPublicAllowed = await SecurityController.enforcePublic(req, res, {
+        allowedMethods: ['POST'],
+        enableHoneypot: true,
+        validateEmail: true,
+        actionName: 'email:notify-lead',
+      });
+      if (!isPublicAllowed) return;
+
       const { leadType, fields } = body as any;
       if (!fields) {
         return res.status(400).json({ error: 'Missing lead fields payload' });

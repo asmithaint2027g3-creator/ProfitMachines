@@ -17,8 +17,18 @@ export default function Home() {
     const location = useLocation();
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [location]);
+        if (location.hash) {
+            const id = location.hash.replace('#', '');
+            setTimeout(() => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
+        } else {
+            window.scrollTo(0, 0);
+        }
+    }, [location.pathname, location.hash]);
 
     return (
         <main className="bg-background min-h-screen overflow-hidden">

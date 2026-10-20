@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { SecurityController } from './_lib/security.ts';
 
 /**
  * api/track-visitor.ts
@@ -104,33 +105,47 @@ async function saveToAirtable(visitor: VisitorRecord): Promise<void> {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') {
+    SecurityController.applySecurityHeaders(res);
+    return res.status(200).end();
+  }
 
-  if (req.method === 'OPTIONS') return res.status(200).end();
+  // ── 1. Public Geo info lookup ──
+  if (req.method === 'GET' && req.query.action === 'geo') {
+    const isAllowed = await SecurityController.enforcePublic(req, res, {
+      allowedMethods: ['GET'],
+      rateLimit: { windowMs: 60000, max: 60 },
+      actionName: 'visitor:geo',
+    });
+    if (!isAllowed) return;
 
-  // ── GET: Read all visitor records from Airtable OR Geo info ──
+    const country = (req.headers['x-vercel-ip-country'] as string) || 'Unknown';
+    const city = decodeURIComponent((req.headers['x-vercel-ip-city'] as string) || 'Unknown');
+    const region = (req.headers['x-vercel-ip-country-region'] as string) || 'Unknown';
+    const timezone = (req.headers['x-vercel-ip-timezone'] as string) || 'UTC';
+    const latitude = (req.headers['x-vercel-ip-latitude'] as string) || null;
+    const longitude = (req.headers['x-vercel-ip-longitude'] as string) || null;
+
+    return res.status(200).json({
+      success: true,
+      geo: {
+        country,
+        city,
+        region,
+        timezone,
+        coordinates: latitude && longitude ? { latitude, longitude } : null
+      }
+    });
+  }
+
+  // ── 2. Private: Read all visitor records from Airtable (Protected Database) ──
   if (req.method === 'GET') {
-    if (req.query.action === 'geo') {
-      const country = (req.headers['x-vercel-ip-country'] as string) || 'Unknown';
-      const city = decodeURIComponent((req.headers['x-vercel-ip-city'] as string) || 'Unknown');
-      const region = (req.headers['x-vercel-ip-country-region'] as string) || 'Unknown';
-      const timezone = (req.headers['x-vercel-ip-timezone'] as string) || 'UTC';
-      const latitude = (req.headers['x-vercel-ip-latitude'] as string) || null;
-      const longitude = (req.headers['x-vercel-ip-longitude'] as string) || null;
-
-      return res.status(200).json({
-        success: true,
-        geo: {
-          country,
-          city,
-          region,
-          timezone,
-          coordinates: latitude && longitude ? { latitude, longitude } : null
-        }
-      });
-    }
+    const isAuthorized = await SecurityController.enforcePrivate(req, res, {
+      allowedMethods: ['GET'],
+      requiredScope: 'admin:visitors',
+      actionName: 'visitors:list',
+    });
+    if (!isAuthorized) return;
 
     const pat = process.env.AIRTABLE_PAT;
     const baseId = process.env.AIRTABLE_BASE_ID;
@@ -171,7 +186,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   // ── POST: Track new visitor ──
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
+  const isPublicAllowed = await SecurityController.enforcePublic(req, res, {
+    allowedMethods: ['POST'],
+    rateLimit: { windowMs: 60000, max: 60 },
+    maxPayloadBytes: 20 * 1024,
+    actionName: 'visitor:record',
+  });
+  if (!isPublicAllowed) return;
 
   try {
     // Real IP from Vercel forwarded headers
